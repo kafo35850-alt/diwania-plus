@@ -48,9 +48,8 @@ new_sqlite_classes = ["GameHubDO", "RelayRoomDO", "BuzzerRoomDO"]
 [vars]
 # Main address of the site; other hosts (www, workers.dev) redirect here.
 CANONICAL_HOST = "diwaniyaplus.com"
-# Sender for login emails. "onboarding@resend.dev" only delivers to the Resend account's own email;
-# after verifying your domain in Resend, change it to e.g. "Diwaniya Plus <login@your-domain.com>".
-MAIL_FROM = "Diwaniya Plus <onboarding@resend.dev>"
+# Sender for login emails (diwaniyaplus.com is verified in Resend).
+MAIL_FROM = "ديوانية بلس <login@diwaniyaplus.com>"
 # Never "true" in production: with it and no RESEND_API_KEY, login codes are printed to the server log.
 DEV_MODE = "false"
 

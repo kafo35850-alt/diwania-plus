@@ -73,7 +73,7 @@ npm run db:migrate:remote   # فقط إذا أضفت ملف جديد في migrat
 | `MOYASAR_SECRET_KEY` | مفتاح Moyasar السري (لما تربط الدفع) |
 | `MOYASAR_WEBHOOK_SECRET` | كلمة سر إشعارات Moyasar |
 
-**المرسل:** حالياً `onboarding@resend.dev`، وهذا يوصل بس لإيميل صاحب حساب Resend. بعد ما تشتري دومين وتوثّقه في Resend، غيّر `MAIL_FROM` في `wrangler.toml` لعنوان على دومينك.
+**المرسل:** `login@diwaniyaplus.com` (الدومين موثّق في Resend)، ويتغير من `MAIL_FROM` في `wrangler.toml`.
 
 **ربط Moyasar:** في لوحة Moyasar ← Webhooks، أضف الرابط `https://دومينك/api/payments/webhook` مع نفس `MOYASAR_WEBHOOK_SECRET`، والأحداث `payment_paid` و `payment_failed`.
 
