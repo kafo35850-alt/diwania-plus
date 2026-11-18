@@ -2,22 +2,22 @@ name = "diwaniya-plus"
 main = "worker/src/index.js"
 compatibility_date = "2025-09-01"
 
-# The store page and other public files. /api/* and /play/* always go to the Worker first.
-[assets]
-directory = "./public"
-binding = "ASSETS"
-run_worker_first = ["/api/*", "/play/*", "/payments/*", "/rooms/*"]
-
-# Game files are bundled into the Worker as text so they are never publicly downloadable.
+# Everything is bundled into the Worker: the public site (public/, via scripts/build-static.mjs)
+# and the private game files (games/), so a deploy is a single upload.
 [[rules]]
 type = "Text"
 globs = ["**/*.html"]
 fallthrough = true
 
+[[rules]]
+type = "Data"
+globs = ["**/*.png"]
+fallthrough = true
+
 [[d1_databases]]
 binding = "DB"
 database_name = "diwaniya-plus"
-database_id = "00000000-0000-0000-0000-000000000000" # replace with the id printed by: npx wrangler d1 create diwaniya-plus
+database_id = "9310fd6c-c762-4c06-9570-efc59885429e"
 migrations_dir = "migrations"
 
 # Real-time rooms (WebSocket). SQLite-backed Durable Objects also work on the Workers Free plan.
@@ -38,14 +38,14 @@ tag = "v1-rooms"
 new_sqlite_classes = ["GameHubDO", "RelayRoomDO", "BuzzerRoomDO"]
 
 [vars]
-# Comma-separated emails that get the owner role (admin panel) when they log in.
-OWNER_EMAILS = ""
-# Sender for login emails. The domain must be verified in your Resend account.
-MAIL_FROM = "Diwaniya Plus <login@example.com>"
+# Sender for login emails. "onboarding@resend.dev" only delivers to the Resend account's own email;
+# after verifying your domain in Resend, change it to e.g. "Diwaniya Plus <login@your-domain.com>".
+MAIL_FROM = "Diwaniya Plus <onboarding@resend.dev>"
 # Never "true" in production: with it and no RESEND_API_KEY, login codes are printed to the server log.
 DEV_MODE = "false"
 
 # Secrets (set with: npx wrangler secret put NAME)
+#   OWNER_EMAILS            comma-separated owner emails (kept secret so it is not in the repository)
 #   AUTH_SECRET             long random string used to hash login codes
 #   RESEND_API_KEY          API key from resend.com
 #   MOYASAR_SECRET_KEY      secret API key from the Moyasar dashboard (sk_test_… or sk_live_…)

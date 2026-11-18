@@ -7,7 +7,7 @@
 
 | المسار | الوصف |
 |---|---|
-| `public/` | صفحة المتجر وملفاتها العامة (أي أحد يقدر يفتحها) |
+| `public/` | صفحة المتجر وملفاتها العامة (تتجمّع داخل الخادم وقت النشر) |
 | `games/` | ملفات الألعاب الـ24. **خاصة**، ما تنفتح إلا عن طريق الخادم بعد تشغيل مدفوع أو تجربة مجانية |
 | `worker/src/` | كود الخادم: الدخول، المحفظة، تشغيل الألعاب، لوحة الإدارة |
 | `worker/src/seed.json` | البيانات الافتراضية (الألعاب، الباقات، الفئات) قبل أي تعديل من لوحة الإدارة |
@@ -52,46 +52,30 @@
 
 **الاسترجاع:** يتم من لوحة Moyasar، وبعدها تخصم الأقيام يدوياً من لوحة المالك ← المستخدمين والأرصدة، مع كتابة السبب.
 
-## النشر لأول مرة
+## النشر
 
-تحتاج حساب [Cloudflare](https://dash.cloudflare.com) مجاني، وحساب [Resend](https://resend.com) مجاني لإرسال الإيميلات. Node.js لازم يكون الإصدار 20 أو أحدث.
+الموقع منشور على: **https://diwaniya-plus.kafo35850.workers.dev**
+
+كل شي (صفحة المتجر، الصور، صفحات السياسات، والألعاب) يتجمّع داخل الخادم نفسه، والنشر يصير بأمر واحد:
 
 ```bash
-npm install
-npx wrangler login
-
-# 1) إنشاء قاعدة البيانات، ثم انسخ database_id اللي يطلع لك وحطه في wrangler.toml
-npx wrangler d1 create diwaniya-plus
-
-# 2) إنشاء الجداول
-npm run db:migrate:remote
-
-# 3) الأسرار (كل أمر يطلب منك تلصق القيمة)
-npx wrangler secret put AUTH_SECRET      # نص عشوائي طويل، مثلاً ناتج: openssl rand -base64 48
-npx wrangler secret put RESEND_API_KEY   # من لوحة Resend
-npx wrangler secret put MOYASAR_SECRET_KEY      # المفتاح السري من لوحة Moyasar (ابدأ بـ sk_test_ للتجربة)
-npx wrangler secret put MOYASAR_WEBHOOK_SECRET  # كلمة سر تختارها أنت، وتكتبها نفسها في Moyasar (الخطوة 6)
-
-# 4) عدّل [vars] في wrangler.toml:
-#    OWNER_EMAILS = "your@email.com"
-#    MAIL_FROM    = "Diwaniya Plus <login@your-domain.com>"   (لازم الدومين يكون موثّق في Resend)
-
-# 5) النشر
-npm run deploy
+npm run deploy          # يجمّع ملفات public/ ثم ينشر
+npm run db:migrate:remote   # فقط إذا أضفت ملف جديد في migrations/
 ```
 
-بعد النشر، اربط الدومين من لوحة Cloudflare: **Workers & Pages ← diwaniya-plus ← Settings ← Domains & Routes**.
+**الإعدادات السرية** في Cloudflare (Workers & Pages ← diwaniya-plus ← Settings ← Variables and Secrets):
 
-```
-# 6) في لوحة Moyasar ← Settings ← Webhooks أضف:
-#    URL:          https://your-domain.com/api/payments/webhook
-#    Secret token: نفس قيمة MOYASAR_WEBHOOK_SECRET
-#    Events:       payment_paid و payment_failed
-```
+| الاسم | الوصف |
+|---|---|
+| `OWNER_EMAILS` | إيميل المالك (أو أكثر، تفصلهم فاصلة). المالك يضيف الأدمنز من لوحة الإدارة |
+| `AUTH_SECRET` | نص عشوائي طويل لتشفير رموز الدخول (لا تغيّره بعد التشغيل) |
+| `RESEND_API_KEY` | مفتاح Resend لإرسال رموز الدخول |
+| `MOYASAR_SECRET_KEY` | مفتاح Moyasar السري (لما تربط الدفع) |
+| `MOYASAR_WEBHOOK_SECRET` | كلمة سر إشعارات Moyasar |
 
-جرّب بمفاتيح الاختبار (`sk_test_`) وبطاقات Moyasar التجريبية أول. إذا كل شي زبط، بدّل للمفتاح الحقيقي (`sk_live_`) بنفس الأمر `wrangler secret put`.
+**المرسل:** حالياً `onboarding@resend.dev`، وهذا يوصل بس لإيميل صاحب حساب Resend. بعد ما تشتري دومين وتوثّقه في Resend، غيّر `MAIL_FROM` في `wrangler.toml` لعنوان على دومينك.
 
-> قبل التشغيل الحقيقي، عبّي الخانات المظللة في صفحات `public/legal/` (اسم المنشأة، السجل التجاري، التواصل) وراجعها مع مستشار قانوني.
+**ربط Moyasar:** في لوحة Moyasar ← Webhooks، أضف الرابط `https://دومينك/api/payments/webhook` مع نفس `MOYASAR_WEBHOOK_SECRET`، والأحداث `payment_paid` و `payment_failed`.
 
 ## التشغيل على جهازك للتجربة
 

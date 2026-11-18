@@ -7,6 +7,7 @@ import { createCheckout, handleReturn, handleWebhook, reconcileUserPending, paym
 import { getCatalog, getDoc, putDoc } from './catalog.js';
 import { adminData, adminAction, eightCategoryQuestions } from './admin.js';
 import { handleRooms } from './rooms/routes.js';
+import { STATIC } from './static.generated.js';
 export { GameHubDO, RelayRoomDO, BuzzerRoomDO } from './rooms/objects.js';
 
 const EMPTY_WALLET = { balance: 0, totalPurchased: 0, totalConsumed: 0, freeTrialsUsed: {}, transactions: [], payments: [] };
@@ -111,6 +112,30 @@ async function handleApi(env, request, url) {
   throw new HttpError(404, 'المسار غير موجود.');
 }
 
+// Public site files (bundled from public/ by scripts/build-static.mjs).
+const STATIC_HEADERS = {
+  'x-content-type-options': 'nosniff',
+  'referrer-policy': 'strict-origin-when-cross-origin',
+  'x-frame-options': 'SAMEORIGIN',
+  'permissions-policy': 'camera=(), geolocation=(), microphone=()'
+};
+function serveStatic(request, url) {
+  if (request.method !== 'GET' && request.method !== 'HEAD') return fail(405, 'Method not allowed');
+  let path = url.pathname;
+  if (path === '/' || path === '') path = '/index.html';
+  let file = STATIC[path] || STATIC[path + '.html'] || STATIC[path.replace(/\/$/, '') + '/index.html'];
+  if (!file) {
+    // Unknown paths fall back to the store page (e.g. /?room=… links), real files 404.
+    if (/\.[a-z0-9]{2,5}$/i.test(path)) return new Response('Not found', { status: 404, headers: STATIC_HEADERS });
+    file = STATIC['/index.html'];
+  }
+  const [body, type] = file;
+  const isHtml = type.startsWith('text/html');
+  return new Response(request.method === 'HEAD' ? null : body, {
+    headers: { ...STATIC_HEADERS, 'content-type': type, 'cache-control': isHtml ? 'no-cache' : 'public, max-age=3600' }
+  });
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -129,7 +154,7 @@ export default {
         return await servePlay(env, request, await currentSession(env, request), play[1]);
       }
 
-      return env.ASSETS.fetch(request);
+      return serveStatic(request, url);
     } catch (err) {
       if (err instanceof HttpError) return fail(err.status, err.message, err.extra);
       console.error('Unhandled error:', err && err.stack ? err.stack : err);
