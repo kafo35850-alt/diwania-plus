@@ -25,7 +25,10 @@ export async function sendLoginCode(env, to, code) {
     });
     if (!res.ok) {
       const detail = await res.text().catch(() => '');
-      throw new Error('Resend error ' + res.status + ': ' + detail.slice(0, 200));
+      const err = new Error('Resend error ' + res.status + ': ' + detail.slice(0, 200));
+      // Without a verified domain Resend only delivers to the account owner's own address.
+      if (/testing emails|verify a domain/i.test(detail) || /@resend\.dev/i.test(String(env.MAIL_FROM || ''))) err.code = 'SENDER_DOMAIN_NOT_VERIFIED';
+      throw err;
     }
     return;
   }

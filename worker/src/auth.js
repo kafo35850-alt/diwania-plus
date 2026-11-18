@@ -127,6 +127,9 @@ export async function sendOtp(env, request, body) {
     await sendLoginCode(env, email, code);
   } catch (e) {
     console.error('sendLoginCode failed:', e && e.message);
+    if (e && e.code === 'SENDER_DOMAIN_NOT_VERIFIED') {
+      throw new HttpError(503, 'التسجيل للحين مقفل لأن المنصة في مرحلة التجهيز. بيفتح للجميع قريباً إن شاء الله 🌙');
+    }
     throw new HttpError(503, 'تعذر إرسال رمز التحقق الآن. حاول بعد قليل.');
   }
 
