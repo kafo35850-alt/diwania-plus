@@ -190,6 +190,11 @@ canvas.draw-pad {
   cursor: crosshair; display: block; margin: 0 auto;
 }
 </style>
+<style>/*dw-tv-scale*/
+@media (min-width: 1280px) { .top-bar, .layout-wrap, .view-tabs { zoom: 1.18; } }
+@media (min-width: 1700px) { .top-bar, .layout-wrap, .view-tabs { zoom: 1.4; } }
+@media (min-width: 2400px) { .top-bar, .layout-wrap, .view-tabs { zoom: 1.8; } }
+</style>
 </head>
 <body>
 <script>/* qr.js */
@@ -451,7 +456,7 @@ window.GAME_CONFIG = {"slug":"vault50","title":"خزائن الديوانية","
       <button class="btn btn-sec btn-sm" id="closeQrBtn">إغلاق ✕</button>
     </div>
     <p style="margin:0;font-size:13.5px;color:var(--muted);line-height:1.6">
-      امسح رمز الـ QR بجوالك للانضمام الفوري إلى الغرفة كجهاز تحكم خاص بك، أو بدّل بين «جوالي» و«شاشة التلفزيون» من الشريط السفلي.
+      اعرض «الشاشة» على التلفزيون للكل، واستخدم «لوحة التحكم» لإدارة اللعب. تقدر تبدّل بينهم من الشريط تحت.
     </p>
     <div id="qrBox" style="background:#fff;padding:16px;border-radius:18px;width:210px;height:210px;margin:0 auto;display:grid;place-items:center"></div>
     <div class="room-pill" id="qrRoomCodeText" style="margin:0 auto"></div>
@@ -1108,13 +1113,11 @@ window.GAME_CONFIG = {"slug":"vault50","title":"خزائن الديوانية","
     root.innerHTML =
       '<div class="top-bar">' +
         '<div class="brand-Side">' +
-          '<span class="room-pill">غرفة: ' + esc(ST.roomCode) + '</span>' +
           '<div><b style="font-size:17px">' + esc(CFG.title) + '</b><div style="font-size:12px;color:var(--muted)">' + esc(CFG.subtitle) + '</div></div>' +
         '</div>' +
         '<div class="ctrl-group">' +
           '<span class="badge badge-gold">الجولة ' + arNum(ST.round) + '</span>' +
-          '<button class="btn btn-sec btn-sm" data-act="open-qr">📱 رمز QR للجوالات</button>' +
-          '<button class="btn btn-sec btn-sm" data-act="toggle-sfx">' + (SFX.enabled ? '🔊 الصوت: مفعّل' : '🔇 الصوت: صامت') + '</button>' +
+          '<button class="btn btn-sec btn-sm" data-act="toggle-sfx">' + (SFX.enabled ? '🔊' : '🔇') + '</button>' +
           '<button class="btn btn-gold btn-sm" data-act="next-round">🔄 جولة جديدة</button>' +
         '</div>' +
       '</div>' +
@@ -1122,7 +1125,7 @@ window.GAME_CONFIG = {"slug":"vault50","title":"خزائن الديوانية","
         (showBoard ? (
           '<section class="panel-box">' +
             '<div class="panel-head">' +
-              '<div><span class="badge">📺 شاشة التلفزيون / الطاولة المشتركة (16:9)</span><h2 style="margin:6px 0 0;font-size:20px">' + esc(ST.statusMsg) + '</h2></div>' +
+              '<div><span class="badge">📺 الشاشة</span><h2 style="margin:6px 0 0;font-size:20px">' + esc(ST.statusMsg) + '</h2></div>' +
             '</div>' +
             renderBoardHtml() +
           '</section>'
@@ -1130,16 +1133,16 @@ window.GAME_CONFIG = {"slug":"vault50","title":"خزائن الديوانية","
         (showPhone ? (
           '<aside class="panel-box">' +
             '<div class="panel-head">' +
-              '<div><span class="badge badge-gold">📱 شاشة جوال اللاعب (التحكم السري)</span><h3 style="margin:6px 0 0;font-size:17px">جهاز تحكم اللاعب</h3></div>' +
+              '<div><span class="badge badge-gold">🎮 لوحة التحكم (التحكم السري)</span><h3 style="margin:6px 0 0;font-size:17px">أزرار اللعب</h3></div>' +
             '</div>' +
             renderPhoneHtml() +
           '</aside>'
         ) : '') +
       '</div>' +
       '<div class="view-tabs">' +
-        '<button class="' + (ST.viewMode === 'phone' ? 'active' : '') + '" data-act="set-view" data-v="phone">📱 جوالي</button>' +
-        '<button class="' + (ST.viewMode === 'board' ? 'active' : '') + '" data-act="set-view" data-v="board">📺 التلفزيون</button>' +
-        '<button class="' + (ST.viewMode === 'both' ? 'active' : '') + '" data-act="set-view" data-v="both">🖥️ الاثنين معاً</button>' +
+        '<button class="' + (ST.viewMode === 'phone' ? 'active' : '') + '" data-act="set-view" data-v="phone">🎮 التحكم</button>' +
+        '<button class="' + (ST.viewMode === 'board' ? 'active' : '') + '" data-act="set-view" data-v="board">📺 الشاشة</button>' +
+        '<button class="' + (ST.viewMode === 'both' ? 'active' : '') + '" data-act="set-view" data-v="both">🖥️ الاثنين</button>' +
       '</div>';
 
     if (CFG.slug === 'fake_artist') {

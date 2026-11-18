@@ -499,17 +499,26 @@ button:disabled {
 }
 
 .dw-game-frame-bar {
-  height: 50px;
+  flex-shrink: 0;
+  min-height: 52px;
   background: #080C1D;
   border-bottom: 1px solid var(--border-subtle);
   display: flex;
   align-items: center;
-  padding: 0 16px;
-  gap: 12px;
+  padding: 6px max(12px, env(safe-area-inset-right)) 6px max(12px, env(safe-area-inset-left));
+  padding-top: max(6px, env(safe-area-inset-top));
+  gap: 10px;
 }
+.fb-title { font-size: 16px; font-weight: 700; flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.fb-actions { display: flex; gap: 6px; flex-shrink: 0; }
+.fb-btn { display: inline-flex; align-items: center; justify-content: center; gap: 4px; min-width: 40px; height: 40px; padding: 0 12px; border-radius: 12px; font-size: 15px; font-weight: 600; background: rgba(255,255,255,.08); border: 1px solid var(--border-subtle); white-space: nowrap; }
+.fb-btn.off { opacity: .55; }
+.fb-close { background: rgba(244,63,94,.18); border-color: rgba(244,63,94,.5); color: #fecdd3; }
+@media (max-width: 640px) { .fb-btn .lbl { display: none; } .fb-btn { padding: 0 10px; } .fb-title { font-size: 15px; } }
 
 .dw-game-frame {
   flex: 1;
+  min-height: 0;
   width: 100%;
   border: 0;
 }
@@ -677,6 +686,16 @@ html, body { font-family: "IBM Plex Sans Arabic", -apple-system, "SF Arabic", "S
 .g-tags:empty { display: none; }
 .g-art.g-poster { height: auto; aspect-ratio: 16 / 9; background: #0A0F24; }
 .g-art.g-poster > svg, .guide-poster svg { width: 100%; height: 100%; display: block; filter: none; }
+
+/* phones: guide steps stack, wide tables scroll sideways instead of squeezing */
+.dw-guide-step h5 { margin: 0 0 4px; font-size: 15px; }
+.dw-guide-step p { margin: 0; line-height: 1.75; }
+@media (max-width: 640px) {
+  .dw-guide-step { flex-direction: column; gap: 4px; }
+  .dw-table { min-width: 560px; }
+  .dw-table td, .dw-table th { white-space: nowrap; }
+  .dw-table td:nth-last-child(2) { white-space: normal; min-width: 180px; }
+}
 footer a { text-decoration: none; }
 </style>
 </head>
@@ -730,18 +749,13 @@ footer a { text-decoration: none; }
 <!-- Fullscreen Game Frame -->
 <div class="dw-game-frame-wrap" id="dwGameFrameWrap">
   <div class="dw-game-frame-bar">
-    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-      
-      <b id="dwGameFrameTitle" style="font-size:16px">ديوانية الثمانية</b>
-      <span id="dwGameFrameRoomChip" class="dw-chip teal" style="font-size:11.5px;cursor:pointer" data-act="open-room-hub">📱 غرفة QR والجرس الجماعي</span>
-    </div>
-    <div class="dw-spacer"></div>
-    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
-      <button class="dw-btn dw-btn-teal dw-btn-sm" data-act="open-room-hub">📱 غرفة الجرس (QR)</button>
-      <button class="dw-btn dw-btn-sec dw-btn-sm" id="dwFrameDemoBtn" data-act="toggle-frame-demo" style="display:none">🤖 تجربة مع بوتات</button>
-      <button class="dw-btn dw-btn-sec dw-btn-sm" id="dwFrameVoiceBtn" data-act="toggle-store-voice">🔊 الصوت: مفعّل</button>
-      <button class="dw-btn dw-btn-sec dw-btn-sm" id="dwFrameSfxBtn" data-act="toggle-store-sfx">🎵 المؤثرات: مفعّلة</button>
-      <button class="dw-btn dw-btn-danger dw-btn-sm" data-act="close-game-frame">✕ إغلاق</button>
+    <button class="fb-btn fb-close" data-act="close-game-frame" title="إغلاق اللعبة">✕<span class="lbl"> إغلاق</span></button>
+    <b id="dwGameFrameTitle" class="fb-title">ديوانية الثمانية</b>
+    <div class="fb-actions">
+      <button class="fb-btn" id="dwFrameDemoBtn" data-act="toggle-frame-demo" style="display:none" title="تجربة اللعبة مع لاعبين آليين">🤖<span class="lbl"> بوتات</span></button>
+      <button class="fb-btn" data-act="open-room-hub" title="غرفة الجرس والإجابات بالجوالات">📱<span class="lbl"> غرفة الجرس</span></button>
+      <button class="fb-btn" id="dwFrameVoiceBtn" data-act="toggle-store-voice" title="صوت الراوي">🔊</button>
+      <button class="fb-btn" id="dwFrameSfxBtn" data-act="toggle-store-sfx" title="المؤثرات">🎵</button>
     </div>
   </div>
   <iframe class="dw-game-frame" allow="autoplay" id="dwGameIframe" sandbox="allow-scripts allow-same-origin allow-forms allow-modals allow-popups" title="Diwaniya Game Frame"></iframe>
@@ -1766,7 +1780,8 @@ footer a { text-decoration: none; }
     el.textContent = msg;
     el.classList.add('show');
     clearTimeout(el._t);
-    el._t = setTimeout(function () { el.classList.remove('show'); }, 4200);
+    var inGame = document.getElementById('dwGameFrameWrap');
+    el._t = setTimeout(function () { el.classList.remove('show'); }, inGame && inGame.classList.contains('open') ? 2200 : 4200);
   }
 
   // Tell the running game whether the signed-in user is the owner (admin tools stay hidden otherwise)
@@ -1789,16 +1804,15 @@ footer a { text-decoration: none; }
     var show = ROOM_GAME_SLUGS.indexOf(STATE.activeGameSlug) !== -1 && !!ifr.getAttribute('src') && ifr.getAttribute('src') !== 'about:blank';
     btn.style.display = show ? '' : 'none';
     var demo = show && /[?&]demo=1/.test(ifr.getAttribute('src'));
-    btn.textContent = demo ? '🌐 رجوع للعب الحقيقي بالجوالات' : '🤖 تجربة مع بوتات';
+    btn.innerHTML = demo ? '🌐<span class="lbl"> لعب حقيقي</span>' : '🤖<span class="lbl"> بوتات</span>';
+    btn.title = demo ? 'رجوع للعب الحقيقي بالجوالات' : 'تجربة اللعبة مع لاعبين آليين';
   }
 
   function syncAudioButtonsUI() {
-    var vText = STATE.storeVoiceOn ? '🔊 الصوت: مفعّل' : '🔇 الصوت: مغلق';
-    var sText = STATE.storeSfxOn ? '🎵 المؤثرات: مفعّلة' : '🔕 المؤثرات: مغلقة';
     var fv = document.getElementById('dwFrameVoiceBtn');
     var fs = document.getElementById('dwFrameSfxBtn');
-    if (fv) fv.textContent = vText;
-    if (fs) fs.textContent = sText;
+    if (fv) { fv.textContent = STATE.storeVoiceOn ? '🔊' : '🔇'; fv.title = STATE.storeVoiceOn ? 'صوت الراوي: شغّال' : 'صوت الراوي: مقفل'; fv.classList.toggle('off', !STATE.storeVoiceOn); }
+    if (fs) { fs.textContent = STATE.storeSfxOn ? '🎵' : '🔕'; fs.title = STATE.storeSfxOn ? 'المؤثرات: شغّالة' : 'المؤثرات: مقفلة'; fs.classList.toggle('off', !STATE.storeSfxOn); }
     var ifr = document.getElementById('dwGameIframe');
     if (ifr && ifr.contentWindow) {
       try {
@@ -1960,8 +1974,8 @@ footer a { text-decoration: none; }
 
     return '<div class="dw-card">' +
       '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">' +
-        '<div><h3 style="margin:0;font-size:24px;font-weight:900">موسوعة الفئات الكاملة بملصقاتها المرسومة (' + arNum(visibleCats.length) + ' فئة)</h3>' +
-        '<p style="margin:4px 0 0;color:var(--text-muted);font-size:14px">جميع فئاتك الـ ١٥٢ وأسئلتها الـ ٢,٧٣٦ محفوظة بالكامل مع رسوماتها الكرتونية الخاصة (بدون ملامح وجه) وقابلة للمعاينة والتعديل</p></div>' +
+        '<div><h3 style="margin:0;font-size:24px;font-weight:900">فئات ديوانية الثمانية (' + arNum(visibleCats.length) + ' فئة)</h3>' +
+        '<p style="margin:4px 0 0;color:var(--text-muted);font-size:14px">كل فئة فيها ١٨ سؤال على ٣ مستويات. اختاروا ٨ فئات داخل اللعبة وابدؤوا التحدي.</p></div>' +
         '<input id="dwCatSearchInp" class="dw-input" style="max-width:300px" placeholder="ابحث عن أي فئة (مثال: السعودية، أنمي، ملاعب...)" value="' + esc(STATE.catSearch) + '">' +
       '</div>' +
       '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:6px">' +
@@ -1983,7 +1997,7 @@ footer a { text-decoration: none; }
                 '<b style="font-size:15px">' + esc(c.icon || '🎯') + ' ' + esc(c.name) + '</b>' +
               '</div>' +
               '<span style="font-size:12px;color:var(--text-muted);line-height:1.5;flex:1">' + esc(c.description || '١٨ سؤالاً متدرج الصعوبة (٢٠٠ / ٤٠٠ / ٦٠٠ نقطة)') + '</span>' +
-              '<button class="dw-btn dw-btn-sec dw-btn-sm" style="width:100%;margin-top:4px" data-act="preview-cat-questions" data-slug="' + esc(c.slug) + '">👁️ استعراض أسئلة الفئة (' + arNum(c.item_count || 18) + ')</button>' +
+              '<button class="dw-btn dw-btn-sec dw-btn-sm" style="width:100%;margin-top:4px" data-act="preview-cat-questions" data-slug="' + esc(c.slug) + '">👁️ تفاصيل الفئة (' + arNum(c.item_count || 18) + ')</button>' +
             '</div>' +
           '</div>';
         }).join('') +

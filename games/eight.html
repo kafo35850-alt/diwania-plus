@@ -1237,9 +1237,11 @@ body.board-mode-active .m8-board-unit .m8-point-pill { font-size: 13px !importan
 
 
 <!-- === SH_NAV_BTN_START === -->
+<div style="display:none" aria-hidden="true">
 <button id="navSecretChancellorBtn" type="button" class="px-3 py-1.5 rounded-full bg-gradient-to-r from-rose-600 via-red-600 to-amber-500 hover:opacity-95 border border-amber-300 text-xs font-black text-white shadow-md transition flex items-center gap-1">
 <span>🕵️‍♂️</span><span>لعبة مستشار الديوانية</span>
 </button>
+</div>
 <!-- === SH_NAV_BTN_END === -->
 <button id="navPlayerBuzzerBtn" type="button" class="px-2.5 py-1.5 rounded-full bg-white/15 hover:bg-white/25 border border-white/30 text-xs font-bold text-white transition">
 📱 شاشة جرس اللاعب
@@ -1281,6 +1283,7 @@ body.board-mode-active .m8-board-unit .m8-point-pill { font-size: 13px !importan
 <section id="viewSetup" class="space-y-4">
 <div id="m8ResumeBanner" class="hidden" role="status"></div>
 <!-- === SH_HUB_BANNER_START === -->
+<div style="display:none" aria-hidden="true">
 <div class="rounded-3xl p-3.5 sm:p-4 border-2 border-amber-400/60 bg-gradient-to-r from-slate-900/95 via-indigo-950/95 to-rose-950/90 shadow-xl flex flex-wrap items-center justify-between gap-3">
 <div class="flex items-center gap-3">
 <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-rose-600 to-amber-500 flex items-center justify-center text-2xl shadow-lg border border-amber-300 shrink-0">🕵️‍♂️</div>
@@ -1296,6 +1299,7 @@ body.board-mode-active .m8-board-unit .m8-point-pill { font-size: 13px !importan
 <button id="openSecretChancellorFromBannerBtn" type="button" class="px-5 py-2.5 rounded-full font-black text-xs sm:text-sm bg-gradient-to-r from-amber-400 to-orange-500 text-slate-950 shadow-lg hover:scale-105 transition shrink-0">
 🚀 العب مستشار الديوانية الآن ⬅
 </button>
+</div>
 </div>
 <!-- === SH_HUB_BANNER_END === -->
 
@@ -3168,7 +3172,7 @@ return { ok: false, error: 'تعذّر التحقق من صلاحية الكود
 } catch (networkErr) {
 return {
 ok: false,
-error: 'تعذّر الاتصال بخادم التحقق من الأكواد (تأكد من إعداد رابط السيرفر في firebase-service.js).'
+error: 'تعذّر الاتصال بخادم التحقق من الأكواد.'
 };
 }
 }
