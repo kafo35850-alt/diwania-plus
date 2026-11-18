@@ -13,7 +13,9 @@ const GAMES = {
   dakhil: { scripts: ['hub.js', 'kit/lobby.js', 'games/dakhil/words.js', 'games/dakhil/engine.js'], engine: 'self.MG.dakhil' },
   mafia: { scripts: ['hub.js', 'engine.js'], engine: 'self.MafiaEngine' },
   qaftah: { scripts: ['hub.js', 'qf/engine.js'], engine: 'self.QFEngine' },
-  chancellor: { scripts: ['hub.js', 'sh/engine.js'], engine: 'self.SHEngine' }
+  chancellor: { scripts: ['hub.js', 'sh/engine.js'], engine: 'self.SHEngine' },
+  harf: { scripts: ['hub.js', 'kit/lobby.js', 'games/harf/data.js', 'games/harf/engine.js'], engine: 'self.MG.harf' },
+  qaddirha: { scripts: ['hub.js', 'kit/lobby.js', 'games/qaddirha/data.js', 'games/qaddirha/engine.js'], engine: 'self.MG.qaddirha' }
 };
 
 function scriptBlock(html, name, file) {

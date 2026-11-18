@@ -8,7 +8,15 @@ export const DOC_KEYS = ['games', 'packages', 'categories', 'game_content', 'sug
 
 export async function getDoc(env, key) {
   const row = await env.DB.prepare('SELECT json FROM docs WHERE key = ?').bind(key).first();
-  if (row) return JSON.parse(row.json);
+  if (row) {
+    const stored = JSON.parse(row.json);
+    // Games shipped in a later release appear even if the owner already edited the game list.
+    if (key === 'games' && Array.isArray(stored)) {
+      const slugs = new Set(stored.map((g) => g.slug));
+      for (const g of SEED.games) if (!slugs.has(g.slug)) stored.push(structuredClone(g));
+    }
+    return stored;
+  }
   return structuredClone(SEED[key]);
 }
 

@@ -3,12 +3,14 @@
 import { HttpError, json, randomToken, sha256Hex, nowMs } from '../util.js';
 import { currentSession, requireSession } from '../auth.js';
 
-// The four games that ship their own room hub (see scripts/build-room-engines.mjs).
+// Games that ship their own room hub (see scripts/build-room-engines.mjs).
 export const ROOM_GAMES = {
   dakhil: { flag: 'DIWANIYA_DEMO', urlVar: 'DIWANIYA_WS_URL', urlIsFunction: true, demoScripts: ['kit/loopback.js', 'games/dakhil/bots.js'] },
   mafia: { flag: 'MAFIA_DEMO', urlVar: 'MAFIA_WS_URL', demoScripts: ['loopback.js'] },
   qaftah: { flag: 'QF_DEMO', urlVar: 'QF_WS_URL', demoScripts: ['qf/loopback.js'] },
-  chancellor: { flag: 'SH_DEMO', urlVar: 'SH_WS_URL', demoScripts: ['sh/loopback.js'] }
+  chancellor: { flag: 'SH_DEMO', urlVar: 'SH_WS_URL', demoScripts: ['sh/loopback.js'] },
+  harf: { flag: 'DIWANIYA_DEMO', urlVar: 'DIWANIYA_WS_URL', urlIsFunction: true, demoScripts: ['kit/loopback.js', 'games/harf/bots.js'] },
+  qaddirha: { flag: 'DIWANIYA_DEMO', urlVar: 'DIWANIYA_WS_URL', urlIsFunction: true, demoScripts: ['kit/loopback.js', 'games/qaddirha/bots.js'] }
 };
 
 const GAME_CODE_RE = /^\d{4}$/;

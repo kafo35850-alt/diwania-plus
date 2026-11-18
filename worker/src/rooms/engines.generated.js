@@ -2269,9 +2269,807 @@ function load_chancellor() {
   return { Hub: self.MafiaHub, E: self.SHEngine };
 }
 
+function load_harf() {
+  const self = {};
+/* hub.js */
+/* ديوانية بلس مافيا — مركز الغرف (hub): بروتوكول الرسائل + الغرف + المؤقتات، بدون أي شبكة.
+ * يشتغل في Node (server.js) وفي المتصفح (النسخة التجريبية) وفي Cloudflare Durable Object لاحقاً.
+ * الناقل (WebSocket أو غيره) يعطي كل اتصال كائن conn فيه: send(obj) و close(code).
+ *
+ * رسائل العميل -> الخادم (JSON):
+ *   {t:'create', name, dev?}          إنشاء غرفة (المنشئ هو المضيف)
+ *   {t:'join', code, name}            دخول بالرمز
+ *   {t:'resume', code, token}         رجوع بعد انقطاع / قفل الجوال
+ *   {t:'board', code}                 شاشة عرض عامة (بدون دور)
+ *   {t:'act', a, ...}                 a = ready | night{target,kind?} | confirm{on?} | task | vote | voteReady | start | skip | settings | kick | reset | leave
+ *                                     (الليل: المافيا تقترح بـnight ثم تؤكد بـconfirm · بقية اللاعبين اللي ما عندهم قدرة ينفذون مهمة ويبلّغون بـtask)
+ *                                     وضع المقدّم: hostPick{kind,target} | hostNext | hostTimer{sec}
+ *   {t:'ping'}
+ * الخادم -> العميل: {t:'joined',code,id,token} | {t:'view',view} | {t:'err',err} | {t:'pong'} | {t:'kicked'} | {t:'left'}
+ */
+(function (root, factory) {
+  if (typeof module === 'object' && module.exports) module.exports = factory();
+  else root.MafiaHub = factory();
+})(typeof self !== 'undefined' ? self : this, function () {
+  'use strict';
+  const LOBBY_GRACE_MS = 90 * 1000, ROOM_IDLE_MS = 6 * 3600 * 1000, EMPTY_ROOM_MS = 30 * 60 * 1000;
+
+  /* opts: { E (المحرك), rng(), randInt(min,max), token(), now(), wallet, allowDev, maxRooms } */
+  function createHub(opts) {
+    const E = opts.E, rng = opts.rng, now = opts.now || Date.now, maxRooms = opts.maxRooms || 500;
+    const wallet = opts.wallet || { async charge() { return true; } };   // مكان ربط الرصيد: يُخصم قيم واحد من المضيف عند البدء
+    const rooms = new Map();
+
+    const newCode = () => { for (let i = 0; i < 50; i++) { const c = String(opts.randInt(1000, 10000)); if (!rooms.has(c)) return c; } return null; };
+
+    function sendViews(room) {
+      const t = now();
+      room.conns.forEach((c) => { if (!c.closed) c.send({ t: 'view', view: E.viewFor(room.g, c.pid, t) }); });
+    }
+    function bind(room, conn, pid) {
+      // اتصال قديم لنفس اللاعب؟ نقفله
+      room.conns.forEach((c) => { if (c !== conn && pid && c.pid === pid) { c.pid = null; room.conns.delete(c); c.close(4000); } });
+      conn.code = room.g.code; conn.pid = pid; conn.board = !pid; room.conns.add(conn);
+      if (pid) { E.setConnected(room.g, pid, true); delete room.discAt[pid]; }
+    }
+    function closed(conn) {
+      const room = conn.code && rooms.get(conn.code); if (!room) return;
+      room.conns.delete(conn);
+      if (conn.pid && E.byId(room.g, conn.pid)) {
+        const still = [...room.conns].some((c) => c.pid === conn.pid);
+        if (!still) { E.setConnected(room.g, conn.pid, false); room.discAt[conn.pid] = now(); sendViews(room); }
+      }
+    }
+
+    function message(conn, m) {
+      const t0 = now();
+      const err = (e) => conn.send({ t: 'err', err: e });
+      switch (m.t) {
+        case 'ping': return conn.send({ t: 'pong' });
+        case 'create': {
+          if (rooms.size >= maxRooms) return err('server_busy');
+          const code = newCode(); if (!code) return err('server_busy');
+          const g = E.createGame(code, { minPlayers: m.dev && opts.allowDev ? 3 : 5 });
+          const room = { g, conns: new Set(), tokens: {}, discAt: {}, created: t0, last: t0 };
+          const r = E.join(g, m.name, t0); if (!r.ok) return err(r.err);
+          rooms.set(code, room); const tk = opts.token(); room.tokens[tk] = r.id;
+          bind(room, conn, r.id); conn.send({ t: 'joined', code, id: r.id, token: tk }); return sendViews(room);
+        }
+        case 'join': {
+          const room = rooms.get(String(m.code || '')); if (!room) return err('no_room');
+          const r = E.join(room.g, m.name, t0); if (!r.ok) return err(r.err);
+          const tk = opts.token(); room.tokens[tk] = r.id; room.last = t0;
+          bind(room, conn, r.id); conn.send({ t: 'joined', code: room.g.code, id: r.id, token: tk }); return sendViews(room);
+        }
+        case 'resume': {
+          const room = rooms.get(String(m.code || '')); if (!room) return err('no_room');
+          const pid = room.tokens[String(m.token || '')]; if (!pid || !E.byId(room.g, pid)) return err('bad_token');
+          bind(room, conn, pid); conn.send({ t: 'joined', code: room.g.code, id: pid, token: m.token, resumed: true }); return sendViews(room);
+        }
+        case 'board': {
+          const room = rooms.get(String(m.code || '')); if (!room) return err('no_room');
+          bind(room, conn, null); return conn.send({ t: 'view', view: E.viewFor(room.g, null, t0) });
+        }
+        case 'act': {
+          const room = conn.code && rooms.get(conn.code); if (!room || !conn.pid) return err('not_joined');
+          const g = room.g, id = conn.pid; let r = { ok: true }; room.last = t0;
+          // محرك عام (مثل المستشار السري): كل أفعال اللعب تروح لـ E.act، ما عدا الطرد والبدء والخروج (لها شغل اتصالات هنا)
+          if (E.act && m.a !== 'kick' && m.a !== 'start' && m.a !== 'leave') { const r0 = E.act(g, id, m, t0, rng); if (!r0.ok) err(r0.err); return sendViews(room); }
+          switch (m.a) {
+            case 'ready': r = E.ready(g, id, t0); break;
+            case 'night': r = E.nightAct(g, id, m.target === undefined ? null : m.target, t0, m.kind, rng); break;
+            case 'confirm': r = E.nightConfirm(g, id, t0, rng, m.on !== false); break;
+            case 'task': r = E.nightTask(g, id, t0, rng); break;
+            case 'vote': r = E.vote(g, id, m.target, t0); break;
+            case 'voteReady': r = E.voteReady(g, id, t0); break;
+            case 'settings': r = E.setSettings(g, id, m.patch || {}); break;
+            case 'skip': r = E.skip(g, id, t0, rng); break;
+            case 'hostPick': r = E.hostPick(g, id, m.kind, m.target === undefined ? null : m.target); break;
+            case 'hostNext': r = E.hostNext(g, id, t0); break;
+            case 'hostTimer': r = E.hostTimer(g, id, m.sec, t0); break;
+            case 'kick': { const victim = [...room.conns].find((c) => c.pid === m.target); r = E.kick(g, id, m.target); if (r.ok && victim) { victim.pid = null; room.conns.delete(victim); victim.send({ t: 'kicked' }); victim.close(4001); } break; }
+            case 'reset': r = E.reset(g, id); break;
+            case 'start': {
+              if (g.hostId !== id) { r = { ok: false, err: 'not_host' }; break; }
+              if (g.phase !== 'lobby') { r = { ok: false, err: 'already_started' }; break; }
+              if (E.need(g) > 0) { r = { ok: false, err: 'need_players' }; break; }
+              // هنا يُخصم قيم واحد من رصيد المضيف (من الخادم، مو من الجوال).
+              Promise.resolve(wallet.charge(room)).then((okc) => {
+                if (!okc) { conn.send({ t: 'err', err: 'no_credit' }); return; }
+                const rr = E.start(g, id, now(), rng); if (!rr.ok) conn.send({ t: 'err', err: rr.err });
+                sendViews(room);
+              }).catch(() => conn.send({ t: 'err', err: 'wallet_error' }));
+              return;
+            }
+            case 'leave': { r = E.leave(g, id); const tkn = Object.keys(room.tokens).find((k) => room.tokens[k] === id); if (tkn) delete room.tokens[tkn]; conn.pid = null; conn.send({ t: 'left' }); break; }
+            default: r = { ok: false, err: 'bad_action' };
+          }
+          if (!r.ok) err(r.err);
+          return sendViews(room);
+        }
+      }
+    }
+
+    // مؤقتات اللعبة + تنظيف الغرف (يُستدعى كل ~500ms)
+    function tick() {
+      const t = now();
+      rooms.forEach((room, code) => {
+        const g = room.g; let changed = false;
+        try { changed = E.tick(g, t, rng); } catch (e) { if (typeof console !== 'undefined') console.error('tick error', code, e); }
+        if (g.phase === 'lobby') Object.keys(room.discAt).forEach((pid) => { if (t - room.discAt[pid] > LOBBY_GRACE_MS) { E.leave(g, pid); delete room.discAt[pid]; changed = true; } });
+        if (changed) sendViews(room);
+        if ((room.conns.size === 0 && t - room.last > EMPTY_ROOM_MS) || t - room.last > ROOM_IDLE_MS) rooms.delete(code);
+      });
+    }
+
+    return { rooms, message, closed, tick, sendViews };
+  }
+
+  return { createHub };
+});
+
+
+/* kit/lobby.js */
+/* ديوانية بلس — أساس مشترك لمحركات الألعاب الجماعية: اللاعبين واللوبي والمضيف والمراحل.
+ * يشتغل في Node والمتصفح وCloudflare. كل لعبة تبني محركها فوقه وتعطي نفس واجهة hub.js
+ * (createGame, join, leave, kick, setConnected, need, start, tick, viewFor, act, byId). */
+(function (root, factory) {
+  if (typeof module === 'object' && module.exports) module.exports = factory();
+  else root.DiwaniyaLobby = factory();
+})(typeof self !== 'undefined' ? self : this, function () {
+  'use strict';
+  const COLORS = ['#f26538', '#38bdf8', '#a78bfa', '#34d399', '#fbbf24', '#f472b6', '#60a5fa', '#fb7185', '#2dd4bf', '#c084fc', '#facc15', '#4ade80', '#f97316', '#22d3ee', '#e879f9', '#94a3b8'];
+  const ok = (x) => Object.assign({ ok: true }, x || {});
+  const fail = (err) => ({ ok: false, err });
+  const cleanName = (s) => String(s == null ? '' : s).replace(/[\u0000-\u001f\u007f<>]/g, '').replace(/\s+/g, ' ').trim().slice(0, 14);
+  const cleanText = (s, n) => String(s == null ? '' : s).replace(/[\u0000-\u001f\u007f<>]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, n || 80);
+  const byId = (g, id) => g.players.find((p) => p.id === id) || null;
+  const shuffle = (a, rng) => { a = a.slice(); rng = rng || Math.random; for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(rng() * (i + 1)); const t = a[i]; a[i] = a[j]; a[j] = t; } return a; };
+
+  // opts: { min, max, settings }
+  function base(code, opts) {
+    return { code: String(code), min: opts.min, max: opts.max, settings: Object.assign({}, opts.settings || {}), players: [], hostId: null, nextId: 1, phase: 'lobby', round: 0, deadline: null, timerTotal: null, phaseSince: 0, events: [] };
+  }
+  function join(g, name) {
+    if (g.phase !== 'lobby') return fail('game_started');
+    if (g.players.length >= g.max) return fail('room_full');
+    let nm = cleanName(name); if (!nm) return fail('name_required');
+    const b = nm; let k = 2;
+    while (g.players.some((p) => p.name === nm)) { nm = b.slice(0, 12) + ' ' + k; k++; }
+    const used = new Set(g.players.map((p) => p.color));
+    const color = COLORS.find((c) => !used.has(c)) || COLORS[g.players.length % COLORS.length];
+    const p = { id: 'p' + (g.nextId++), name: nm, color, connected: true, score: 0 };
+    g.players.push(p); if (!g.hostId) g.hostId = p.id;
+    return ok({ id: p.id });
+  }
+  function passHost(g) { const n = g.players.find((p) => p.connected && p.id !== g.hostId); if (n) g.hostId = n.id; }
+  function leave(g, id) {
+    const p = byId(g, id); if (!p) return fail('no_player');
+    if (g.phase === 'lobby') { g.players = g.players.filter((x) => x.id !== id); if (g.hostId === id) g.hostId = g.players.length ? g.players[0].id : null; }
+    else { p.connected = false; if (g.hostId === id) passHost(g); }
+    return ok();
+  }
+  function setConnected(g, id, v) { const p = byId(g, id); if (p) p.connected = !!v; }
+  function kick(g, hostId, targetId) {
+    if (g.hostId !== hostId) return fail('not_host'); if (g.phase !== 'lobby') return fail('game_started');
+    if (targetId === hostId) return fail('cannot_kick_self');
+    return leave(g, targetId);
+  }
+  const need = (g) => Math.max(0, g.min - g.players.length);
+  function setPhase(g, ph, now, ms) { g.phase = ph; g.phaseSince = now; g.deadline = ms ? now + ms : null; g.timerTotal = ms || null; }
+  const ev = (g, e) => { e.round = g.round; g.events.push(e); if (g.events.length > 60) g.events.splice(0, g.events.length - 60); };
+  // إعداد من قائمة مسموحة: allowed = { key: [values...] }
+  function setSettings(g, hostId, patch, allowed) {
+    if (g.hostId !== hostId) return fail('not_host'); if (g.phase !== 'lobby') return fail('game_started');
+    for (const k in (patch || {})) { if (!allowed[k]) return fail('bad_setting'); const v = patch[k]; if (allowed[k].indexOf(v) < 0) return fail('bad_setting'); g.settings[k] = v; }
+    return ok();
+  }
+  // رجوع للوبي (يبقى المتصلين فقط)
+  function toLobby(g, hostId) {
+    if (g.hostId !== hostId) return fail('not_host');
+    g.players = g.players.filter((p) => p.connected);
+    if (!g.players.some((p) => p.id === g.hostId)) g.hostId = g.players.length ? g.players[0].id : null;
+    g.players.forEach((p) => { p.score = 0; });
+    g.phase = 'lobby'; g.round = 0; g.deadline = null; g.timerTotal = null; g.events = [];
+    return ok();
+  }
+  const pubPlayer = (g, p) => ({ id: p.id, name: p.name, color: p.color, connected: p.connected, host: p.id === g.hostId, score: p.score || 0 });
+  const baseView = (g, now) => ({ now, code: g.code, phase: g.phase, round: g.round, settings: g.settings, deadline: g.deadline, timerTotal: g.timerTotal, minPlayers: g.min, maxPlayers: g.max, need: need(g), players: g.players.map((p) => pubPlayer(g, p)), events: g.events.slice(-25) });
+  const timeUp = (g, now) => !!(g.deadline && now >= g.deadline && g.phase !== 'lobby');
+
+  return { COLORS, ok, fail, cleanName, cleanText, byId, shuffle, base, join, leave, kick, setConnected, need, setPhase, ev, setSettings, toLobby, pubPlayer, baseView, timeUp };
+});
+
+
+/* games/harf/data.js */
+/* حرف ونص — الحروف وقوائم الخانات */
+(function (root, factory) {
+  if (typeof module === 'object' && module.exports) module.exports = factory();
+  else { root.MG = root.MG || {}; root.MG.harfData = factory(); }
+})(typeof self !== 'undefined' ? self : this, function () {
+  'use strict';
+  // حروف تنفع للعب (استبعدنا الحروف الصعبة جداً مثل ث ذ ض ظ غ)
+  const LETTERS = ['ا', 'ب', 'ت', 'ج', 'ح', 'خ', 'د', 'ر', 'ز', 'س', 'ش', 'ص', 'ط', 'ع', 'ف', 'ق', 'ك', 'ل', 'م', 'ن', 'ه', 'و', 'ي'];
+  const SETS = {
+    classic: { name: 'الكلاسيكية', fields: ['إنسان', 'حيوان', 'نبات', 'جماد', 'بلاد'] },
+    gulf: { name: 'خليجية', fields: ['اسم', 'أكلة', 'حيوان', 'مدينة أو دولة', 'شي في البيت', 'مهنة'] },
+    fun: { name: 'سريعة', fields: ['اسم', 'حيوان', 'أكلة', 'بلاد'] }
+  };
+  const ORDER = ['classic', 'gulf', 'fun'];
+  const NAMES = {}; ORDER.forEach((k) => { NAMES[k] = SETS[k].name; });
+  // أمثلة صغيرة للبوتات في النسخة التجريبية فقط
+  const SAMPLES = {
+    'ا': ['أحمد', 'أسد', 'أرز', 'إبريق', 'الأردن', 'أرز', 'أريكة', 'إمام'],
+    'ب': ['بدر', 'بطة', 'بصل', 'باب', 'البحرين', 'برياني', 'بطانية', 'بائع'],
+    'ت': ['تركي', 'تمساح', 'تفاح', 'تلفزيون', 'تونس', 'تمر', 'تكييف', 'تاجر'],
+    'ج': ['جود', 'جمل', 'جزر', 'جوال', 'جدة', 'جريش', 'جرس', 'جندي'],
+    'م': ['محمد', 'ماعز', 'موز', 'مفتاح', 'مصر', 'مندي', 'مروحة', 'معلم'],
+    'س': ['سارة', 'سمكة', 'سبانخ', 'سيارة', 'السودان', 'سمبوسة', 'سرير', 'سباك'],
+    'ر': ['ريم', 'رنة', 'رمان', 'ريموت', 'روسيا', 'رز', 'رف', 'رسام'],
+    'ف': ['فهد', 'فيل', 'فراولة', 'فنجال', 'فرنسا', 'فول', 'فرن', 'فلاح']
+  };
+  return { LETTERS, SETS, ORDER, NAMES, SAMPLES };
+});
+
+/* games/harf/engine.js */
+/* ديوانية بلس — حرف ونص: محرك اللعبة (منطق صرف، يشتغل في Node والمتصفح وCloudflare).
+ * حرف عشوائي، وكل لاعب يكتب كلمة تبدأ فيه لكل خانة (إنسان، حيوان، نبات…).
+ * أول من يخلّص يوقف الكل بعد ١٠ ثواني. بعدها الكل يراجع ويرفض الإجابات الغلط بالتصويت.
+ * النقاط: إجابة صحيحة ما كتبها غيرك = ١٠، صحيحة ومكررة = ٥.
+ * المراحل: lobby → write → review → result → … → ended */
+(function (root, factory) {
+  if (typeof module === 'object' && module.exports) module.exports = factory(root.DiwaniyaLobby, root.MG.harfData);
+  else { root.MG = root.MG || {}; root.MG.harf = factory(root.DiwaniyaLobby, root.MG.harfData); }
+})(typeof self !== 'undefined' ? self : this, function (L, D) {
+  'use strict';
+  const MIN = 2, MAX = 40, STOP_MS = 10000, REVIEW_MS = 45000;
+  const ALLOWED = { rounds: [3, 5, 8], sec: [60, 90, 120], set: D.ORDER };
+  const PTS = { unique: 10, shared: 5 };
+  const ok = L.ok, fail = L.fail, byId = L.byId;
+  const live = (g) => g.players.filter((p) => p.connected);
+  const fields = (g) => D.SETS[g.settings.set].fields;
+
+  // توحيد الكلمة: بدون «ال» التعريف وبدون همزات على الألف وبدون تشكيل
+  function norm(s) {
+    let w = String(s || '').trim().replace(/[ً-ْـ]/g, '').replace(/[أإآ]/g, 'ا').replace(/ى/g, 'ي').replace(/ة/g, 'ه').replace(/\s+/g, ' ');
+    if (w.indexOf('ال') === 0 && w.length > 3) w = w.slice(2);
+    return w;
+  }
+  const startsWith = (word, letter) => { const w = norm(word); return !!w && w[0] === norm(letter)[0]; };
+
+  function createGame(code) {
+    const g = L.base(code, { min: MIN, max: MAX, settings: { rounds: 5, sec: 90, set: 'classic' } });
+    Object.assign(g, { letter: null, usedLetters: [], answers: {}, done: {}, stopBy: null, rejects: {}, result: null });
+    return g;
+  }
+  const join = (g, name) => L.join(g, name);
+
+  function start(g, hostId, now, rng) {
+    if (g.hostId !== hostId) return fail('not_host'); if (g.phase !== 'lobby') return fail('already_started');
+    if (L.need(g) > 0) return fail('need_players');
+    g.round = 0; g.usedLetters = []; g.players.forEach((p) => { p.score = 0; });
+    newRound(g, now, rng); return ok();
+  }
+  function newRound(g, now, rng) {
+    g.round++;
+    const fresh = D.LETTERS.filter((l) => g.usedLetters.indexOf(l) < 0), pool = fresh.length ? fresh : D.LETTERS;
+    g.letter = pool[Math.floor(rng() * pool.length)]; g.usedLetters.push(g.letter);
+    g.answers = {}; g.done = {}; g.stopBy = null; g.rejects = {}; g.result = null;
+    L.setPhase(g, 'write', now, g.settings.sec * 1000);
+    L.ev(g, { k: 'round', letter: g.letter });
+  }
+  function cleanAnswers(g, arr) {
+    const n = fields(g).length, out = [];
+    for (let i = 0; i < n; i++) out.push(L.cleanText(Array.isArray(arr) ? arr[i] : '', 30));
+    return out;
+  }
+  function save(g, id, arr) {
+    if (g.phase !== 'write') return fail('bad_phase');
+    g.answers[id] = cleanAnswers(g, arr); return ok();
+  }
+  function finishWriting(g, id, arr, now) {
+    const r = save(g, id, arr); if (!r.ok) return r;
+    g.done[id] = true;
+    if (!g.stopBy && g.answers[id].every((x) => x)) {
+      g.stopBy = id;
+      if (!g.deadline || g.deadline - now > STOP_MS) { g.deadline = now + STOP_MS; }
+      L.ev(g, { k: 'stop', by: id });
+    }
+    if (live(g).every((p) => g.done[p.id])) toReview(g, now);
+    return ok();
+  }
+  function toReview(g, now) {
+    L.setPhase(g, 'review', now, REVIEW_MS);
+    L.ev(g, { k: 'review' });
+  }
+  const cellKey = (pid, i) => pid + ':' + i;
+  function reject(g, id, target, i) {
+    if (g.phase !== 'review') return fail('bad_phase');
+    i = Number(i);
+    if (!byId(g, target) || target === id || !(i >= 0 && i < fields(g).length)) return fail('bad_target');
+    const k = cellKey(target, i); g.rejects[k] = g.rejects[k] || {};
+    if (g.rejects[k][id]) delete g.rejects[k][id]; else g.rejects[k][id] = true;
+    return ok();
+  }
+  // حالة كل خانة: empty | letter (ما تبدأ بالحرف) | rejected | ok
+  function cellStatus(g, pid, i) {
+    const a = (g.answers[pid] || [])[i] || '';
+    if (!a) return 'empty';
+    if (!startsWith(a, g.letter)) return 'letter';
+    const votes = Object.keys(g.rejects[cellKey(pid, i)] || {}).filter((v) => byId(g, v) && byId(g, v).connected).length;
+    const judges = Math.max(1, live(g).filter((p) => p.id !== pid).length);
+    if (votes * 2 > judges) return 'rejected';
+    return 'ok';
+  }
+  function score(g, now) {
+    const n = fields(g).length, delta = {}, cells = {};
+    g.players.forEach((p) => { delta[p.id] = 0; cells[p.id] = []; });
+    for (let i = 0; i < n; i++) {
+      const good = g.players.filter((p) => cellStatus(g, p.id, i) === 'ok');
+      const count = {}; good.forEach((p) => { const w = norm(g.answers[p.id][i]); count[w] = (count[w] || 0) + 1; });
+      g.players.forEach((p) => {
+        const st = cellStatus(g, p.id, i);
+        let pts = 0;
+        if (st === 'ok') pts = count[norm(g.answers[p.id][i])] > 1 ? PTS.shared : PTS.unique;
+        cells[p.id].push({ st, pts }); delta[p.id] += pts;
+      });
+    }
+    g.players.forEach((p) => { p.score += delta[p.id]; });
+    g.result = { delta, cells };
+    L.setPhase(g, 'result', now, 0); L.ev(g, { k: 'result' });
+  }
+  function next(g, id, now, rng) {
+    if (g.hostId !== id) return fail('not_host'); if (g.phase !== 'result') return fail('bad_phase');
+    if (g.round >= g.settings.rounds) { L.setPhase(g, 'ended', now, 0); return ok(); }
+    newRound(g, now, rng); return ok();
+  }
+  function skip(g, id, now, rng) {
+    if (g.hostId !== id) return fail('not_host');
+    if (g.phase === 'write') { toReview(g, now); return ok(); }
+    if (g.phase === 'review') { score(g, now); return ok(); }
+    if (g.phase === 'result') return next(g, id, now, rng);
+    return fail('bad_phase');
+  }
+  function tick(g, now, rng) {
+    if (!g.deadline || now < g.deadline) return false;
+    if (g.phase === 'write') { toReview(g, now); return true; }
+    if (g.phase === 'review') { score(g, now); return true; }
+    return false;
+  }
+  function act(g, id, m, now, rng) {
+    switch (m.a) {
+      case 'save': return save(g, id, m.answers);
+      case 'done': return finishWriting(g, id, m.answers, now);
+      case 'reject': return reject(g, id, m.target, m.i);
+      case 'skip': return skip(g, id, now, rng);
+      case 'next': return next(g, id, now, rng);
+      case 'again': { if (g.hostId !== id) return fail('not_host'); if (g.phase !== 'ended') return fail('bad_phase'); g.round = 0; g.usedLetters = []; g.players.forEach((p) => { p.score = 0; }); newRound(g, now, rng); return ok(); }
+      case 'lobby': return L.toLobby(g, id);
+      case 'settings': return L.setSettings(g, id, m.patch || {}, ALLOWED);
+      default: return fail('bad_action');
+    }
+  }
+
+  function viewFor(g, pid, now) {
+    const v = L.baseView(g, now), inGame = g.phase !== 'lobby';
+    v.rounds = g.settings.rounds; v.setNames = D.NAMES; v.setOrder = D.ORDER;
+    v.players.forEach((p) => { p.done = !!g.done[p.id]; });
+    if (inGame) {
+      v.letter = g.letter; v.fields = fields(g); v.stopBy = g.stopBy;
+      v.doneCount = live(g).filter((p) => g.done[p.id]).length; v.liveCount = live(g).length;
+      // الإجابات تنكشف للكل بعد ما ينتهي وقت الكتابة فقط
+      if (g.phase === 'review' || g.phase === 'result' || g.phase === 'ended') {
+        v.table = g.players.map((p) => ({
+          id: p.id,
+          answers: (g.answers[p.id] || []).slice(),
+          status: fields(g).map((_, i) => cellStatus(g, p.id, i)),
+          rejects: fields(g).map((_, i) => Object.keys(g.rejects[cellKey(p.id, i)] || {}).length)
+        }));
+      }
+      if (g.phase === 'result' || g.phase === 'ended') v.result = g.result;
+    }
+    const p = pid && byId(g, pid);
+    if (p) {
+      v.me = { id: p.id, name: p.name, host: g.hostId === p.id, done: !!g.done[p.id] };
+      if (inGame) {
+        v.me.answers = (g.answers[p.id] || []).slice();
+        if (g.phase === 'review') v.me.myRejects = Object.keys(g.rejects).filter((k) => g.rejects[k][p.id]);
+      }
+    }
+    return v;
+  }
+  return Object.assign({ MIN, MAX, ALLOWED, PTS, createGame, join, start, tick, act, viewFor, norm, startsWith }, { leave: L.leave, kick: L.kick, setConnected: L.setConnected, need: L.need, byId: L.byId });
+});
+
+  return { Hub: self.MafiaHub, E: self.MG.harf };
+}
+
+function load_qaddirha() {
+  const self = {};
+/* hub.js */
+/* ديوانية بلس مافيا — مركز الغرف (hub): بروتوكول الرسائل + الغرف + المؤقتات، بدون أي شبكة.
+ * يشتغل في Node (server.js) وفي المتصفح (النسخة التجريبية) وفي Cloudflare Durable Object لاحقاً.
+ * الناقل (WebSocket أو غيره) يعطي كل اتصال كائن conn فيه: send(obj) و close(code).
+ *
+ * رسائل العميل -> الخادم (JSON):
+ *   {t:'create', name, dev?}          إنشاء غرفة (المنشئ هو المضيف)
+ *   {t:'join', code, name}            دخول بالرمز
+ *   {t:'resume', code, token}         رجوع بعد انقطاع / قفل الجوال
+ *   {t:'board', code}                 شاشة عرض عامة (بدون دور)
+ *   {t:'act', a, ...}                 a = ready | night{target,kind?} | confirm{on?} | task | vote | voteReady | start | skip | settings | kick | reset | leave
+ *                                     (الليل: المافيا تقترح بـnight ثم تؤكد بـconfirm · بقية اللاعبين اللي ما عندهم قدرة ينفذون مهمة ويبلّغون بـtask)
+ *                                     وضع المقدّم: hostPick{kind,target} | hostNext | hostTimer{sec}
+ *   {t:'ping'}
+ * الخادم -> العميل: {t:'joined',code,id,token} | {t:'view',view} | {t:'err',err} | {t:'pong'} | {t:'kicked'} | {t:'left'}
+ */
+(function (root, factory) {
+  if (typeof module === 'object' && module.exports) module.exports = factory();
+  else root.MafiaHub = factory();
+})(typeof self !== 'undefined' ? self : this, function () {
+  'use strict';
+  const LOBBY_GRACE_MS = 90 * 1000, ROOM_IDLE_MS = 6 * 3600 * 1000, EMPTY_ROOM_MS = 30 * 60 * 1000;
+
+  /* opts: { E (المحرك), rng(), randInt(min,max), token(), now(), wallet, allowDev, maxRooms } */
+  function createHub(opts) {
+    const E = opts.E, rng = opts.rng, now = opts.now || Date.now, maxRooms = opts.maxRooms || 500;
+    const wallet = opts.wallet || { async charge() { return true; } };   // مكان ربط الرصيد: يُخصم قيم واحد من المضيف عند البدء
+    const rooms = new Map();
+
+    const newCode = () => { for (let i = 0; i < 50; i++) { const c = String(opts.randInt(1000, 10000)); if (!rooms.has(c)) return c; } return null; };
+
+    function sendViews(room) {
+      const t = now();
+      room.conns.forEach((c) => { if (!c.closed) c.send({ t: 'view', view: E.viewFor(room.g, c.pid, t) }); });
+    }
+    function bind(room, conn, pid) {
+      // اتصال قديم لنفس اللاعب؟ نقفله
+      room.conns.forEach((c) => { if (c !== conn && pid && c.pid === pid) { c.pid = null; room.conns.delete(c); c.close(4000); } });
+      conn.code = room.g.code; conn.pid = pid; conn.board = !pid; room.conns.add(conn);
+      if (pid) { E.setConnected(room.g, pid, true); delete room.discAt[pid]; }
+    }
+    function closed(conn) {
+      const room = conn.code && rooms.get(conn.code); if (!room) return;
+      room.conns.delete(conn);
+      if (conn.pid && E.byId(room.g, conn.pid)) {
+        const still = [...room.conns].some((c) => c.pid === conn.pid);
+        if (!still) { E.setConnected(room.g, conn.pid, false); room.discAt[conn.pid] = now(); sendViews(room); }
+      }
+    }
+
+    function message(conn, m) {
+      const t0 = now();
+      const err = (e) => conn.send({ t: 'err', err: e });
+      switch (m.t) {
+        case 'ping': return conn.send({ t: 'pong' });
+        case 'create': {
+          if (rooms.size >= maxRooms) return err('server_busy');
+          const code = newCode(); if (!code) return err('server_busy');
+          const g = E.createGame(code, { minPlayers: m.dev && opts.allowDev ? 3 : 5 });
+          const room = { g, conns: new Set(), tokens: {}, discAt: {}, created: t0, last: t0 };
+          const r = E.join(g, m.name, t0); if (!r.ok) return err(r.err);
+          rooms.set(code, room); const tk = opts.token(); room.tokens[tk] = r.id;
+          bind(room, conn, r.id); conn.send({ t: 'joined', code, id: r.id, token: tk }); return sendViews(room);
+        }
+        case 'join': {
+          const room = rooms.get(String(m.code || '')); if (!room) return err('no_room');
+          const r = E.join(room.g, m.name, t0); if (!r.ok) return err(r.err);
+          const tk = opts.token(); room.tokens[tk] = r.id; room.last = t0;
+          bind(room, conn, r.id); conn.send({ t: 'joined', code: room.g.code, id: r.id, token: tk }); return sendViews(room);
+        }
+        case 'resume': {
+          const room = rooms.get(String(m.code || '')); if (!room) return err('no_room');
+          const pid = room.tokens[String(m.token || '')]; if (!pid || !E.byId(room.g, pid)) return err('bad_token');
+          bind(room, conn, pid); conn.send({ t: 'joined', code: room.g.code, id: pid, token: m.token, resumed: true }); return sendViews(room);
+        }
+        case 'board': {
+          const room = rooms.get(String(m.code || '')); if (!room) return err('no_room');
+          bind(room, conn, null); return conn.send({ t: 'view', view: E.viewFor(room.g, null, t0) });
+        }
+        case 'act': {
+          const room = conn.code && rooms.get(conn.code); if (!room || !conn.pid) return err('not_joined');
+          const g = room.g, id = conn.pid; let r = { ok: true }; room.last = t0;
+          // محرك عام (مثل المستشار السري): كل أفعال اللعب تروح لـ E.act، ما عدا الطرد والبدء والخروج (لها شغل اتصالات هنا)
+          if (E.act && m.a !== 'kick' && m.a !== 'start' && m.a !== 'leave') { const r0 = E.act(g, id, m, t0, rng); if (!r0.ok) err(r0.err); return sendViews(room); }
+          switch (m.a) {
+            case 'ready': r = E.ready(g, id, t0); break;
+            case 'night': r = E.nightAct(g, id, m.target === undefined ? null : m.target, t0, m.kind, rng); break;
+            case 'confirm': r = E.nightConfirm(g, id, t0, rng, m.on !== false); break;
+            case 'task': r = E.nightTask(g, id, t0, rng); break;
+            case 'vote': r = E.vote(g, id, m.target, t0); break;
+            case 'voteReady': r = E.voteReady(g, id, t0); break;
+            case 'settings': r = E.setSettings(g, id, m.patch || {}); break;
+            case 'skip': r = E.skip(g, id, t0, rng); break;
+            case 'hostPick': r = E.hostPick(g, id, m.kind, m.target === undefined ? null : m.target); break;
+            case 'hostNext': r = E.hostNext(g, id, t0); break;
+            case 'hostTimer': r = E.hostTimer(g, id, m.sec, t0); break;
+            case 'kick': { const victim = [...room.conns].find((c) => c.pid === m.target); r = E.kick(g, id, m.target); if (r.ok && victim) { victim.pid = null; room.conns.delete(victim); victim.send({ t: 'kicked' }); victim.close(4001); } break; }
+            case 'reset': r = E.reset(g, id); break;
+            case 'start': {
+              if (g.hostId !== id) { r = { ok: false, err: 'not_host' }; break; }
+              if (g.phase !== 'lobby') { r = { ok: false, err: 'already_started' }; break; }
+              if (E.need(g) > 0) { r = { ok: false, err: 'need_players' }; break; }
+              // هنا يُخصم قيم واحد من رصيد المضيف (من الخادم، مو من الجوال).
+              Promise.resolve(wallet.charge(room)).then((okc) => {
+                if (!okc) { conn.send({ t: 'err', err: 'no_credit' }); return; }
+                const rr = E.start(g, id, now(), rng); if (!rr.ok) conn.send({ t: 'err', err: rr.err });
+                sendViews(room);
+              }).catch(() => conn.send({ t: 'err', err: 'wallet_error' }));
+              return;
+            }
+            case 'leave': { r = E.leave(g, id); const tkn = Object.keys(room.tokens).find((k) => room.tokens[k] === id); if (tkn) delete room.tokens[tkn]; conn.pid = null; conn.send({ t: 'left' }); break; }
+            default: r = { ok: false, err: 'bad_action' };
+          }
+          if (!r.ok) err(r.err);
+          return sendViews(room);
+        }
+      }
+    }
+
+    // مؤقتات اللعبة + تنظيف الغرف (يُستدعى كل ~500ms)
+    function tick() {
+      const t = now();
+      rooms.forEach((room, code) => {
+        const g = room.g; let changed = false;
+        try { changed = E.tick(g, t, rng); } catch (e) { if (typeof console !== 'undefined') console.error('tick error', code, e); }
+        if (g.phase === 'lobby') Object.keys(room.discAt).forEach((pid) => { if (t - room.discAt[pid] > LOBBY_GRACE_MS) { E.leave(g, pid); delete room.discAt[pid]; changed = true; } });
+        if (changed) sendViews(room);
+        if ((room.conns.size === 0 && t - room.last > EMPTY_ROOM_MS) || t - room.last > ROOM_IDLE_MS) rooms.delete(code);
+      });
+    }
+
+    return { rooms, message, closed, tick, sendViews };
+  }
+
+  return { createHub };
+});
+
+
+/* kit/lobby.js */
+/* ديوانية بلس — أساس مشترك لمحركات الألعاب الجماعية: اللاعبين واللوبي والمضيف والمراحل.
+ * يشتغل في Node والمتصفح وCloudflare. كل لعبة تبني محركها فوقه وتعطي نفس واجهة hub.js
+ * (createGame, join, leave, kick, setConnected, need, start, tick, viewFor, act, byId). */
+(function (root, factory) {
+  if (typeof module === 'object' && module.exports) module.exports = factory();
+  else root.DiwaniyaLobby = factory();
+})(typeof self !== 'undefined' ? self : this, function () {
+  'use strict';
+  const COLORS = ['#f26538', '#38bdf8', '#a78bfa', '#34d399', '#fbbf24', '#f472b6', '#60a5fa', '#fb7185', '#2dd4bf', '#c084fc', '#facc15', '#4ade80', '#f97316', '#22d3ee', '#e879f9', '#94a3b8'];
+  const ok = (x) => Object.assign({ ok: true }, x || {});
+  const fail = (err) => ({ ok: false, err });
+  const cleanName = (s) => String(s == null ? '' : s).replace(/[\u0000-\u001f\u007f<>]/g, '').replace(/\s+/g, ' ').trim().slice(0, 14);
+  const cleanText = (s, n) => String(s == null ? '' : s).replace(/[\u0000-\u001f\u007f<>]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, n || 80);
+  const byId = (g, id) => g.players.find((p) => p.id === id) || null;
+  const shuffle = (a, rng) => { a = a.slice(); rng = rng || Math.random; for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(rng() * (i + 1)); const t = a[i]; a[i] = a[j]; a[j] = t; } return a; };
+
+  // opts: { min, max, settings }
+  function base(code, opts) {
+    return { code: String(code), min: opts.min, max: opts.max, settings: Object.assign({}, opts.settings || {}), players: [], hostId: null, nextId: 1, phase: 'lobby', round: 0, deadline: null, timerTotal: null, phaseSince: 0, events: [] };
+  }
+  function join(g, name) {
+    if (g.phase !== 'lobby') return fail('game_started');
+    if (g.players.length >= g.max) return fail('room_full');
+    let nm = cleanName(name); if (!nm) return fail('name_required');
+    const b = nm; let k = 2;
+    while (g.players.some((p) => p.name === nm)) { nm = b.slice(0, 12) + ' ' + k; k++; }
+    const used = new Set(g.players.map((p) => p.color));
+    const color = COLORS.find((c) => !used.has(c)) || COLORS[g.players.length % COLORS.length];
+    const p = { id: 'p' + (g.nextId++), name: nm, color, connected: true, score: 0 };
+    g.players.push(p); if (!g.hostId) g.hostId = p.id;
+    return ok({ id: p.id });
+  }
+  function passHost(g) { const n = g.players.find((p) => p.connected && p.id !== g.hostId); if (n) g.hostId = n.id; }
+  function leave(g, id) {
+    const p = byId(g, id); if (!p) return fail('no_player');
+    if (g.phase === 'lobby') { g.players = g.players.filter((x) => x.id !== id); if (g.hostId === id) g.hostId = g.players.length ? g.players[0].id : null; }
+    else { p.connected = false; if (g.hostId === id) passHost(g); }
+    return ok();
+  }
+  function setConnected(g, id, v) { const p = byId(g, id); if (p) p.connected = !!v; }
+  function kick(g, hostId, targetId) {
+    if (g.hostId !== hostId) return fail('not_host'); if (g.phase !== 'lobby') return fail('game_started');
+    if (targetId === hostId) return fail('cannot_kick_self');
+    return leave(g, targetId);
+  }
+  const need = (g) => Math.max(0, g.min - g.players.length);
+  function setPhase(g, ph, now, ms) { g.phase = ph; g.phaseSince = now; g.deadline = ms ? now + ms : null; g.timerTotal = ms || null; }
+  const ev = (g, e) => { e.round = g.round; g.events.push(e); if (g.events.length > 60) g.events.splice(0, g.events.length - 60); };
+  // إعداد من قائمة مسموحة: allowed = { key: [values...] }
+  function setSettings(g, hostId, patch, allowed) {
+    if (g.hostId !== hostId) return fail('not_host'); if (g.phase !== 'lobby') return fail('game_started');
+    for (const k in (patch || {})) { if (!allowed[k]) return fail('bad_setting'); const v = patch[k]; if (allowed[k].indexOf(v) < 0) return fail('bad_setting'); g.settings[k] = v; }
+    return ok();
+  }
+  // رجوع للوبي (يبقى المتصلين فقط)
+  function toLobby(g, hostId) {
+    if (g.hostId !== hostId) return fail('not_host');
+    g.players = g.players.filter((p) => p.connected);
+    if (!g.players.some((p) => p.id === g.hostId)) g.hostId = g.players.length ? g.players[0].id : null;
+    g.players.forEach((p) => { p.score = 0; });
+    g.phase = 'lobby'; g.round = 0; g.deadline = null; g.timerTotal = null; g.events = [];
+    return ok();
+  }
+  const pubPlayer = (g, p) => ({ id: p.id, name: p.name, color: p.color, connected: p.connected, host: p.id === g.hostId, score: p.score || 0 });
+  const baseView = (g, now) => ({ now, code: g.code, phase: g.phase, round: g.round, settings: g.settings, deadline: g.deadline, timerTotal: g.timerTotal, minPlayers: g.min, maxPlayers: g.max, need: need(g), players: g.players.map((p) => pubPlayer(g, p)), events: g.events.slice(-25) });
+  const timeUp = (g, now) => !!(g.deadline && now >= g.deadline && g.phase !== 'lobby');
+
+  return { COLORS, ok, fail, cleanName, cleanText, byId, shuffle, base, join, leave, kick, setConnected, need, setPhase, ev, setSettings, toLobby, pubPlayer, baseView, timeUp };
+});
+
+
+/* games/qaddirha/data.js */
+/* قدّرها — بنك الأسئلة الرقمية (a = الجواب، u = الوحدة، i = معلومة بعد الكشف) */
+(function (root, factory) {
+  if (typeof module === 'object' && module.exports) module.exports = factory();
+  else { root.MG = root.MG || {}; root.MG.qaddirhaData = factory(); }
+})(typeof self !== 'undefined' ? self : this, function () {
+  'use strict';
+  const Q = [
+    { c: 'معالم', q: 'كم طول برج خليفة؟', a: 828, u: 'متر', i: 'أطول مبنى في العالم.' },
+    { c: 'معالم', q: 'كم عدد طوابق برج خليفة؟', a: 163, u: 'طابق', i: 'غير الطوابق الفنية فوق.' },
+    { c: 'معالم', q: 'كم ارتفاع برج المملكة في الرياض؟', a: 302, u: 'متر', i: 'افتُتح عام ٢٠٠٢.' },
+    { c: 'معالم', q: 'كم ارتفاع برج الساعة في مكة (أبراج البيت)؟', a: 601, u: 'متر', i: 'من أطول مباني العالم.' },
+    { c: 'معالم', q: 'كم ارتفاع برج إيفل تقريباً مع الهوائي؟', a: 330, u: 'متر', i: 'زاد طوله مع الهوائيات الجديدة.' },
+    { c: 'معالم', q: 'كم طول سور الصين العظيم بكل أجزائه حسب مسح ٢٠١٢؟', a: 21196, u: 'كم', i: 'أطول بكثير مما يتوقعه أغلب الناس.' },
+    { c: 'جغرافيا', q: 'كم ارتفاع قمة إيفرست؟', a: 8849, u: 'متر', i: 'أعلى قمة على سطح الأرض.' },
+    { c: 'جغرافيا', q: 'كم طول نهر النيل تقريباً؟', a: 6650, u: 'كم', i: 'من أطول أنهار العالم.' },
+    { c: 'جغرافيا', q: 'كم عمق خندق ماريانا تقريباً؟', a: 10935, u: 'متر', i: 'أعمق نقطة معروفة في المحيطات.' },
+    { c: 'جغرافيا', q: 'كم قطر الكرة الأرضية تقريباً؟', a: 12742, u: 'كم', i: 'متوسط القطر.' },
+    { c: 'جغرافيا', q: 'كم مساحة المملكة العربية السعودية تقريباً؟', a: 2150000, u: 'كم²', i: 'حوالي مليونين و١٥٠ ألف كيلو مربع.' },
+    { c: 'جغرافيا', q: 'كم عدد المناطق الإدارية في السعودية؟', a: 13, u: 'منطقة', i: 'من الرياض إلى الجوف.' },
+    { c: 'جغرافيا', q: 'كم عدد سكان السعودية حسب تعداد ٢٠٢٢ (بالمليون)؟', a: 32.2, u: 'مليون', i: 'تعداد ٢٠٢٢.' },
+    { c: 'جغرافيا', q: 'كم عدد الدول الأعضاء في الأمم المتحدة؟', a: 193, u: 'دولة', i: 'غير الدول المراقبة.' },
+    { c: 'جغرافيا', q: 'كم عدد الدول الأعضاء في جامعة الدول العربية؟', a: 22, u: 'دولة', i: '' },
+    { c: 'جغرافيا', q: 'كم مساحة دولة قطر تقريباً؟', a: 11600, u: 'كم²', i: 'حوالي ١١٫٦ ألف كيلو مربع.' },
+    { c: 'فضاء', q: 'كم المسافة بين الأرض والقمر تقريباً؟', a: 384400, u: 'كم', i: 'متوسط المسافة.' },
+    { c: 'فضاء', q: 'كم سرعة الضوء تقريباً في الثانية؟', a: 300000, u: 'كم/ث', i: 'بالضبط حوالي ٢٩٩٬٧٩٢ كم في الثانية.' },
+    { c: 'فضاء', q: 'كم درجة حرارة سطح الشمس تقريباً؟', a: 5500, u: '°م', i: 'وأحر بكثير في قلبها.' },
+    { c: 'فضاء', q: 'في أي سنة نزل الإنسان على القمر أول مرة؟', a: 1969, u: '', y: 1, i: 'رحلة أبولو ١١.' },
+    { c: 'جسم الإنسان', q: 'كم عدد عظام جسم الإنسان البالغ؟', a: 206, u: 'عظمة', i: 'الطفل يولد بعدد أكبر وتلتحم مع الوقت.' },
+    { c: 'جسم الإنسان', q: 'كم عدد أسنان الإنسان البالغ (مع أضراس العقل)؟', a: 32, u: 'سن', i: '' },
+    { c: 'جسم الإنسان', q: 'كم عدد كروموسومات الإنسان؟', a: 46, u: 'كروموسوم', i: '٢٣ زوج.' },
+    { c: 'جسم الإنسان', q: 'كم درجة حرارة جسم الإنسان الطبيعية تقريباً؟', a: 37, u: '°م', i: '' },
+    { c: 'علوم', q: 'كم سرعة الصوت في الهواء تقريباً؟', a: 343, u: 'م/ث', i: 'عند درجة حرارة الغرفة تقريباً.' },
+    { c: 'علوم', q: 'كم عدد قلوب الأخطبوط؟', a: 3, u: 'قلب', i: 'نعم، ثلاثة!' },
+    { c: 'علوم', q: 'كم ثانية في اليوم الواحد؟', a: 86400, u: 'ثانية', i: '٢٤ × ٦٠ × ٦٠' },
+    { c: 'علوم', q: 'كم دقيقة في الأسبوع؟', a: 10080, u: 'دقيقة', i: '٧ × ٢٤ × ٦٠' },
+    { c: 'علوم', q: 'كم عدد أيام السنة الهجرية تقريباً؟', a: 354, u: 'يوم', i: 'أقصر من الميلادية بحوالي ١١ يوم.' },
+    { c: 'تاريخ', q: 'في أي سنة تأسست الدولة السعودية الأولى (يوم التأسيس)؟', a: 1727, u: '', y: 1, i: 'على يد الإمام محمد بن سعود.' },
+    { c: 'تاريخ', q: 'في أي سنة توحّدت المملكة العربية السعودية باسمها الحالي؟', a: 1932, u: '', y: 1, i: 'اليوم الوطني ٢٣ سبتمبر.' },
+    { c: 'تاريخ', q: 'في أي سنة تأسس الاتحاد الدولي لكرة القدم (فيفا)؟', a: 1904, u: '', y: 1, i: 'في باريس.' },
+    { c: 'تاريخ', q: 'في أي سنة انقامت أول كأس عالم؟', a: 1930, u: '', y: 1, i: 'في الأوروغواي.' },
+    { c: 'تقنية', q: 'في أي سنة نزل أول آيفون؟', a: 2007, u: '', y: 1, i: '' },
+    { c: 'تقنية', q: 'في أي سنة تأسست شركة قوقل؟', a: 1998, u: '', y: 1, i: '' },
+    { c: 'تقنية', q: 'في أي سنة بدأ تشغيل مترو الرياض للركاب؟', a: 2024, u: '', y: 1, i: 'افتُتح في ديسمبر ٢٠٢٤.' },
+    { c: 'رياضة', q: 'كم طول سباق الماراثون؟', a: 42.195, u: 'كم', i: '' },
+    { c: 'رياضة', q: 'كم منتخب بيشارك في كأس العالم ٢٠٢٦؟', a: 48, u: 'منتخب', i: 'أول مرة بهالعدد.' },
+    { c: 'رياضة', q: 'كم ملعب استضاف مباريات كأس العالم ٢٠٢٢ في قطر؟', a: 8, u: 'ملاعب', i: '' },
+    { c: 'رياضة', q: 'كم ثانية رقم يوسين بولت العالمي في ١٠٠ متر؟', a: 9.58, u: 'ثانية', i: 'سجله في ٢٠٠٩.' },
+    { c: 'رياضة', q: 'كم لاعب في فريق الرجبي (الاتحاد) داخل الملعب؟', a: 15, u: 'لاعب', i: '' },
+    { c: 'منوعات', q: 'كم عدد مفاتيح البيانو العادي؟', a: 88, u: 'مفتاح', i: '٥٢ أبيض و٣٦ أسود.' },
+    { c: 'منوعات', q: 'كم عدد مربعات رقعة الشطرنج؟', a: 64, u: 'مربع', i: '٨ × ٨' },
+    { c: 'منوعات', q: 'كم عدد سور القرآن الكريم؟', a: 114, u: 'سورة', i: '' },
+    { c: 'منوعات', q: 'كم عدد حروف الإنجليزية؟', a: 26, u: 'حرف', i: '' }
+  ];
+  return { Q };
+});
+
+/* games/qaddirha/engine.js */
+/* ديوانية بلس — قدّرها: محرك اللعبة (منطق صرف، يشتغل في Node والمتصفح وCloudflare).
+ * سؤال جوابه رقم، وكل لاعب يكتب تقديره بجواله. الأقرب يفوز.
+ * النقاط: الأقرب ٣، الثاني ٢، الثالث ١ (المتعادلين ياخذون نفس النقاط)، والإصابة شبه الدقيقة (±١٪) +٢.
+ * المراحل: lobby → guess → reveal → … → ended */
+(function (root, factory) {
+  if (typeof module === 'object' && module.exports) module.exports = factory(root.DiwaniyaLobby, root.MG.qaddirhaData);
+  else { root.MG = root.MG || {}; root.MG.qaddirha = factory(root.DiwaniyaLobby, root.MG.qaddirhaData); }
+})(typeof self !== 'undefined' ? self : this, function (L, D) {
+  'use strict';
+  const MIN = 2, MAX = 60;
+  const ALLOWED = { rounds: [5, 8, 12], sec: [30, 45, 60] };
+  const RANK_PTS = [3, 2, 1], EXACT_BONUS = 2;
+  const ok = L.ok, fail = L.fail, byId = L.byId;
+  const live = (g) => g.players.filter((p) => p.connected);
+
+  function createGame(code) {
+    const g = L.base(code, { min: MIN, max: MAX, settings: { rounds: 8, sec: 45 } });
+    Object.assign(g, { q: null, used: [], guesses: {}, result: null });
+    return g;
+  }
+  const join = (g, name) => L.join(g, name);
+
+  function start(g, hostId, now, rng) {
+    if (g.hostId !== hostId) return fail('not_host'); if (g.phase !== 'lobby') return fail('already_started');
+    if (L.need(g) > 0) return fail('need_players');
+    g.round = 0; g.players.forEach((p) => { p.score = 0; });
+    newRound(g, now, rng); return ok();
+  }
+  function newRound(g, now, rng) {
+    g.round++;
+    const idx = D.Q.map((_, i) => i).filter((i) => g.used.indexOf(i) < 0);
+    if (!idx.length) g.used = [];
+    const pool = idx.length ? idx : D.Q.map((_, i) => i);
+    const pick = pool[Math.floor(rng() * pool.length)];
+    g.used.push(pick); g.q = D.Q[pick]; g.guesses = {}; g.result = null;
+    L.setPhase(g, 'guess', now, g.settings.sec * 1000);
+    L.ev(g, { k: 'round' });
+  }
+  function guess(g, id, value, now) {
+    if (g.phase !== 'guess') return fail('bad_phase');
+    const n = Number(String(value).replace(/[٠-٩]/g, (d) => '٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[,٬\s]/g, '').replace('٫', '.'));
+    if (!isFinite(n) || Math.abs(n) > 1e12) return fail('bad_number');
+    g.guesses[id] = n;
+    if (live(g).every((p) => g.guesses[p.id] !== undefined)) reveal(g, now);
+    return ok();
+  }
+  function reveal(g, now) {
+    const a = g.q.a, rows = Object.keys(g.guesses).filter((id) => byId(g, id)).map((id) => ({ id, value: g.guesses[id], dist: Math.abs(g.guesses[id] - a) }));
+    rows.sort((x, y) => x.dist - y.dist);
+    const delta = {}; g.players.forEach((p) => { delta[p.id] = 0; });
+    let rank = 0, prevDist = null;
+    rows.forEach((r, i) => {
+      if (prevDist === null || r.dist !== prevDist) rank = i;
+      prevDist = r.dist; r.rank = rank + 1;
+      let pts = RANK_PTS[rank] || 0;
+      r.exact = a === 0 ? r.dist === 0 : r.dist / Math.abs(a) <= 0.01;
+      if (r.exact) pts += EXACT_BONUS;
+      r.pts = pts; delta[r.id] = pts;
+    });
+    g.players.forEach((p) => { p.score += delta[p.id]; });
+    g.result = { answer: a, rows, delta };
+    L.setPhase(g, 'reveal', now, 0); L.ev(g, { k: 'reveal' });
+  }
+  function next(g, id, now, rng) {
+    if (g.hostId !== id) return fail('not_host'); if (g.phase !== 'reveal') return fail('bad_phase');
+    if (g.round >= g.settings.rounds) { L.setPhase(g, 'ended', now, 0); return ok(); }
+    newRound(g, now, rng); return ok();
+  }
+  function skip(g, id, now, rng) {
+    if (g.hostId !== id) return fail('not_host');
+    if (g.phase === 'guess') { reveal(g, now); return ok(); }
+    if (g.phase === 'reveal') return next(g, id, now, rng);
+    return fail('bad_phase');
+  }
+  function tick(g, now) {
+    if (g.phase === 'guess' && g.deadline && now >= g.deadline) { reveal(g, now); return true; }
+    return false;
+  }
+  function act(g, id, m, now, rng) {
+    switch (m.a) {
+      case 'guess': return guess(g, id, m.value, now);
+      case 'skip': return skip(g, id, now, rng);
+      case 'next': return next(g, id, now, rng);
+      case 'again': { if (g.hostId !== id) return fail('not_host'); if (g.phase !== 'ended') return fail('bad_phase'); g.round = 0; g.players.forEach((p) => { p.score = 0; }); newRound(g, now, rng); return ok(); }
+      case 'lobby': return L.toLobby(g, id);
+      case 'settings': return L.setSettings(g, id, m.patch || {}, ALLOWED);
+      default: return fail('bad_action');
+    }
+  }
+  function viewFor(g, pid, now) {
+    const v = L.baseView(g, now), inGame = g.phase !== 'lobby';
+    v.rounds = g.settings.rounds;
+    v.players.forEach((p) => { p.answered = g.guesses[p.id] !== undefined; });
+    if (inGame && g.q) {
+      v.question = { c: g.q.c, q: g.q.q, u: g.q.u, y: !!g.q.y };
+      v.answeredCount = live(g).filter((p) => g.guesses[p.id] !== undefined).length; v.liveCount = live(g).length;
+      if (g.phase === 'reveal' || g.phase === 'ended') { v.result = g.result; v.question.i = g.q.i; }
+    }
+    const p = pid && byId(g, pid);
+    if (p) {
+      v.me = { id: p.id, name: p.name, host: g.hostId === p.id };
+      if (inGame) v.me.guess = g.guesses[p.id] === undefined ? null : g.guesses[p.id];
+    }
+    return v;
+  }
+  return Object.assign({ MIN, MAX, ALLOWED, createGame, join, start, tick, act, viewFor }, { leave: L.leave, kick: L.kick, setConnected: L.setConnected, need: L.need, byId: L.byId });
+});
+
+  return { Hub: self.MafiaHub, E: self.MG.qaddirha };
+}
+
 export const ROOM_ENGINES = {
   dakhil: load_dakhil,
   mafia: load_mafia,
   qaftah: load_qaftah,
-  chancellor: load_chancellor
+  chancellor: load_chancellor,
+  harf: load_harf,
+  qaddirha: load_qaddirha
 };

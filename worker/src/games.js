@@ -1,5 +1,5 @@
 // Private game files, bundled into the Worker. They are never served as public static files;
-// players only receive them through /play/<slug> after a paid or free-trial launch.
+// players only receive them through /play/<slug> after a paid or free-trial launch, or as guests of a live room.
 import alibi_court from '../../games/alibi_court.html';
 import chancellor from '../../games/chancellor.html';
 import dakhil from '../../games/dakhil.html';
@@ -10,6 +10,7 @@ import fake_artist from '../../games/fake_artist.html';
 import fortune_wheel from '../../games/fortune_wheel.html';
 import friends_court from '../../games/friends_court.html';
 import golden_vault from '../../games/golden_vault.html';
+import harf from '../../games/harf.html';
 import how_much_price from '../../games/how_much_price.html';
 import last_one_standing from '../../games/last_one_standing.html';
 import liars_table from '../../games/liars_table.html';
@@ -17,6 +18,7 @@ import mafia from '../../games/mafia.html';
 import mazad30 from '../../games/mazad30.html';
 import mystery_button from '../../games/mystery_button.html';
 import pressure_seat from '../../games/pressure_seat.html';
+import qaddirha from '../../games/qaddirha.html';
 import qaftah from '../../games/qaftah.html';
 import radar_guess from '../../games/radar_guess.html';
 import shifra from '../../games/shifra.html';
@@ -36,6 +38,7 @@ export const GAMES = {
   fortune_wheel,
   friends_court,
   golden_vault,
+  harf,
   how_much_price,
   last_one_standing,
   liars_table,
@@ -43,6 +46,7 @@ export const GAMES = {
   mazad30,
   mystery_button,
   pressure_seat,
+  qaddirha,
   qaftah,
   radar_guess,
   shifra,

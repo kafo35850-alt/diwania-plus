@@ -663,6 +663,14 @@ button:disabled {
 
   // 5 Bespoke Luxury Metallic & Jewel SVG Crests (100% Faceless, No Posters)
   var LUXURY_LOGOS = {
+    harf: {
+      bg: 'radial-gradient(circle at 50% 35%, #1d3b6b 0%, #081226 75%)',
+      svg: '<svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg"><rect x="18" y="18" width="124" height="124" rx="28" fill="#0B1528" stroke="#F5B942" stroke-width="4.5"/><text x="80" y="104" text-anchor="middle" font-size="78" font-weight="900" fill="#F5B942" font-family="Tahoma,Arial">ح</text><rect x="44" y="118" width="72" height="8" rx="4" fill="#2DD4BF"/></svg>'
+    },
+    qaddirha: {
+      bg: 'radial-gradient(circle at 50% 35%, #0f4c5c 0%, #071923 75%)',
+      svg: '<svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg"><circle cx="80" cy="80" r="66" fill="#081C29" stroke="#F5B942" stroke-width="4.5"/><circle cx="80" cy="80" r="42" fill="none" stroke="#2DD4BF" stroke-width="5"/><circle cx="80" cy="80" r="18" fill="#F5B942"/><path d="M80 80 L122 38" stroke="#fff" stroke-width="6" stroke-linecap="round"/></svg>'
+    },
     eight: {
       bg: 'radial-gradient(circle at 50% 35%, #1e3a5f 0%, #091326 75%)',
       svg: '<svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">' +
@@ -872,6 +880,37 @@ button:disabled {
   // Detailed External Guides for all 5 games ("زر من برا يشرح اللعبه بالتفصيل")
 
   var GAME_GUIDES = {
+    harf: {
+      title: 'شرح لعبة: حرف ونص',
+      subtitle: 'إنسان، حيوان، نبات، جماد، بلاد… بالجوالات (من ٢ إلى ٤٠ لاعباً)',
+      tabs: [
+        { id: 'idea', label: 'فكرة اللعبة', lead: 'يطلع حرف على شاشة التلفزيون، وكل لاعب يكتب بجواله كلمة تبدأ بهالحرف لكل خانة.', steps: [
+          { h: 'اكتب بسرعة', t: 'الخانات الكلاسيكية: إنسان، حيوان، نبات، جماد، بلاد. وفيه خانات خليجية وسريعة تختارها من اللوبي.' },
+          { h: 'خلّصت!', t: 'أول واحد يعبّي كل الخانات ويضغط «خلّصت» يوقّف الكل بعد ١٠ ثواني.' },
+          { h: 'المراجعة', t: 'تنكشف إجابات الكل، وأي إجابة يرفضها أكثر من نص اللاعبين ما تنحسب.' }
+        ] },
+        { id: 'pts', label: 'النقاط', lead: 'كيف تنحسب النقاط؟', steps: [
+          { h: '١٠ نقاط', t: 'إجابة صحيحة ما كتبها أحد غيرك.' },
+          { h: '٥ نقاط', t: 'إجابة صحيحة كتبها لاعب ثاني بعد.' },
+          { h: 'صفر', t: 'الخانة الفاضية، أو اللي ما تبدأ بالحرف، أو المرفوضة.' }
+        ] }
+      ]
+    },
+    qaddirha: {
+      title: 'شرح لعبة: قدّرها',
+      subtitle: 'سؤال جوابه رقم… والأقرب ياخذها (من ٢ إلى ٦٠ لاعباً)',
+      tabs: [
+        { id: 'idea', label: 'فكرة اللعبة', lead: 'كل جولة سؤال جوابه رقم، وكل واحد يكتب تقديره بجواله قبل ما يخلص الوقت.', steps: [
+          { h: 'السؤال', t: 'مثل: كم طول برج خليفة؟ في أي سنة نزل أول آيفون؟ كم عظمة في جسم الإنسان؟' },
+          { h: 'التقدير', t: 'اكتب رقمك وتقدر تغيّره لين ينتهي الوقت.' },
+          { h: 'الكشف', t: 'ينكشف الجواب والترتيب على التلفزيون.' }
+        ] },
+        { id: 'pts', label: 'النقاط', lead: 'الأقرب يفوز', steps: [
+          { h: '٣ / ٢ / ١', t: 'للأقرب ثم الثاني ثم الثالث، والمتعادلين ياخذون نفس النقاط.' },
+          { h: 'بونص 🎯', t: 'إذا كان تقديرك قريب جداً (فرق ١٪ أو أقل) تاخذ نقطتين زيادة.' }
+        ] }
+      ]
+    },
     eight: {
       title: 'شرح لعبة: تحدي الثمانية — ديوانية بلس',
       subtitle: 'المسابقة الثقافية والتفاعلية الكبرى بين فريقين (١٥٢ فئة · ٢,٧٣٦ سؤالاً)',
@@ -1644,7 +1683,7 @@ button:disabled {
     } catch (e) {}
   }
 
-  var ROOM_GAME_SLUGS = ['dakhil', 'mafia', 'qaftah', 'chancellor'];
+  var ROOM_GAME_SLUGS = ['dakhil', 'mafia', 'qaftah', 'chancellor', 'harf', 'qaddirha'];
   function syncFrameDemoButton() {
     var btn = document.getElementById('dwFrameDemoBtn');
     var ifr = document.getElementById('dwGameIframe');
