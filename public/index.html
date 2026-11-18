@@ -2172,9 +2172,27 @@ footer a { text-decoration: none; }
     }
 
     if (st === 'users') {
+      var iAmOwner = STATE.user && STATE.user.role === 'owner';
+      var admins = STATE.usersList.filter(function (u) { return u.admin_role === 'owner' || u.admin_role === 'admin'; });
       return nav +
-        '<div class="dw-card">' +
-          '<h4 style="margin:0;font-size:19px">إدارة المستخدمين وتعديل أرصدة الأقيام في الخادم (مع تسجيل السبب الإلزامي)</h4>' +
+        (iAmOwner ? (
+          '<div class="dw-card">' +
+            '<h4 style="margin:0;font-size:19px">👥 الأدمنز</h4>' +
+            '<p style="margin:0;color:var(--text-muted);font-size:13.5px;line-height:1.7">الأدمن يقدر يدير الألعاب والباقات والأرصدة والمحتوى. إضافة الأدمنز وإزالتهم لك أنت بس كمالك. اكتب إيميل الشخص، ولما يسجّل دخول بنفس الإيميل بيلقى لوحة الإدارة.</p>' +
+            '<div style="display:flex;gap:8px;flex-wrap:wrap"><input id="admNewAdminEmail" class="dw-input" dir="ltr" type="email" placeholder="name@example.com" style="max-width:320px">' +
+              '<button class="dw-btn dw-btn-gold dw-btn-sm" data-act="adm-add-admin">+ إضافة أدمن</button></div>' +
+            '<div style="display:flex;flex-direction:column;gap:6px">' + admins.map(function (u) {
+              return '<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:rgba(255,255,255,0.04);padding:8px 12px;border-radius:12px">' +
+                '<b>' + esc(u.display_name) + '</b><span dir="ltr" style="color:var(--text-muted);font-size:13px">' + esc(u.email) + '</span>' +
+                '<span class="dw-chip ' + (u.admin_role === 'owner' ? 'gold' : 'teal') + '">' + (u.admin_role === 'owner' ? '👑 المالك' : 'أدمن') + '</span>' +
+                '<span style="flex:1"></span>' +
+                (u.admin_role === 'admin' ? '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="adm-remove-admin" data-email="' + esc(u.email) + '">إزالة الأدمن</button>' : '') +
+              '</div>';
+            }).join('') + '</div>' +
+          '</div>'
+        ) : '') +
+        '<div class="dw-card">'
+          '<h4 style="margin:0;font-size:19px">المستخدمين والأرصدة</h4>' +
           '<div class="dw-grid-3" style="background:rgba(0,0,0,0.25);padding:16px;border-radius:16px">' +
             '<div><label style="font-size:12.5px;color:var(--text-muted)">اختر المستخدم</label><select id="admUserSelect" class="dw-select">' +
               STATE.usersList.map(function (u) { return '<option value="' + esc(u.id) + '">' + esc(u.display_name) + ' (' + esc(u.email) + ') — الرصيد: ' + u.balance + '</option>'; }).join('') +
@@ -2183,7 +2201,7 @@ footer a { text-decoration: none; }
             '<div><label style="font-size:12.5px;color:var(--text-muted)">سبب التعديل الإداري (إلزامي للسجل)</label><input id="admCreditReason" class="dw-input" placeholder="مثال: تعويض عميل / شحن يدوي"></div>' +
           '</div>' +
           '<div style="display:flex;gap:8px;flex-wrap:wrap">' +
-            '<button class="dw-btn dw-btn-gold dw-btn-sm" data-act="adm-adjust-credit">تنفيذ تعديل الرصيد في الخادم وتسجيله في السجل</button>' +
+            '<button class="dw-btn dw-btn-gold dw-btn-sm" data-act="adm-adjust-credit">تعديل الرصيد</button>' +
             '<button class="dw-btn dw-btn-teal dw-btn-sm" data-act="adm-reset-trials">إعادة منح التجارب المجانية للمستخدم المختار</button>' +
           '</div>' +
           '<div class="dw-table-wrap"><table class="dw-table"><thead><tr><th>المستخدم</th><th>البريد الإلكتروني</th><th>الصلاحية</th><th>الحالة</th><th>الرصيد الحالي</th><th>المضافة</th><th>المستهلكة</th><th>إجراء</th></tr></thead><tbody>' +
@@ -2191,7 +2209,7 @@ footer a { text-decoration: none; }
               return '<tr>' +
                 '<td><b>' + esc(u.display_name) + '</b></td>' +
                 '<td dir="ltr">' + esc(u.email) + '</td>' +
-                '<td>' + (u.admin_role === 'owner' ? '<span class="dw-chip gold">👑 المالك (Owner)</span>' : '<span class="dw-chip">مستخدم</span>') + '</td>' +
+                '<td>' + (u.admin_role === 'owner' ? '<span class="dw-chip gold">👑 المالك</span>' : u.admin_role === 'admin' ? '<span class="dw-chip teal">أدمن</span>' : '<span class="dw-chip">مستخدم</span>') + '</td>' +
                 '<td><span class="dw-chip ' + (u.status === 'active' ? 'teal' : '') + '">' + (u.status === 'active' ? 'نشط' : 'موقوف') + '</span></td>' +
                 '<td style="font-weight:900;color:var(--gold)">' + arNum(u.balance) + '</td>' +
                 '<td>' + arNum(u.total_purchased) + '</td>' +
@@ -3212,6 +3230,14 @@ footer a { text-decoration: none; }
       }, function (adCatRes) {
         render();
         showToast(adCatRes.message);
+      });
+    } else if (act === 'adm-add-admin' || act === 'adm-remove-admin') {
+      var adminEmail = act === 'adm-add-admin' ? ((document.getElementById('admNewAdminEmail') || {}).value || '').trim() : actBtn.getAttribute('data-email');
+      if (!adminEmail) { showToast('اكتب الإيميل أول'); return; }
+      if (act === 'adm-remove-admin' && !window.confirm('تشيل صلاحية الأدمن من ' + adminEmail + '؟')) return;
+      adminCall('set_admin', { email: adminEmail, makeAdmin: act === 'adm-add-admin' }, function (aRes) {
+        render();
+        showToast(aRes.message);
       });
     } else if (act === 'adm-verify-payment') {
       adminCall('verify_payment', { orderId: actBtn.getAttribute('data-id') }, function (vRes) {

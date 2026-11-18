@@ -1,4 +1,5 @@
-// Email + one-time code login, cookie sessions and the owner role.
+// Email + one-time code login, cookie sessions and the owner/admin roles.
+// Owner: emails in the OWNER_EMAILS setting (can add/remove admins). Admin: granted by an owner, stored in D1.
 import {
   HttpError, nowMs, nowIso, randomToken, randomId, sha256Hex, sixDigitCode,
   constantTimeEqual, getCookie, clientIp, cleanText, underRateLimit
@@ -46,7 +47,9 @@ export function publicUser(user, csrfToken) {
     displayName: user.display_name,
     status: user.status,
     emailVerified: true,
-    adminRole: user.role === 'owner' ? 'owner' : null,
+    // adminRole opens the admin panel for owners and admins; role tells them apart.
+    adminRole: user.role === 'owner' || user.role === 'admin' ? 'owner' : null,
+    role: user.role === 'owner' || user.role === 'admin' ? user.role : null,
     csrfToken
   };
 }
@@ -85,7 +88,7 @@ export async function requireSession(env, request, { csrf = true, owner = false 
   if (csrf && !constantTimeEqual(request.headers.get('x-dw-csrf'), session.csrfToken)) {
     throw new HttpError(403, 'رمز الحماية غير صالح. أعد تحميل الصفحة.');
   }
-  if (owner && session.user.role !== 'owner') {
+  if (owner && session.user.role !== 'owner' && session.user.role !== 'admin') {
     throw new HttpError(403, 'هذه الصلاحية لمالك المنصة فقط.');
   }
   return session;
@@ -191,9 +194,9 @@ export async function verifyOtp(env, request, body) {
     ]);
   } else {
     if (user.status !== 'active') throw new HttpError(403, 'هذا الحساب موقوف حالياً من إدارة المنصة.');
-    // The owner list in the Worker settings is the single source of truth for the owner role.
-    const role = isOwnerEmail ? 'owner' : null;
-    const name = displayName && !isOwnerEmail ? displayName : user.display_name;
+    // Owner comes only from the Worker settings; admin is granted by an owner and kept in the database.
+    const role = isOwnerEmail ? 'owner' : (user.role === 'admin' ? 'admin' : null);
+    const name = displayName || user.display_name;
     if (role !== user.role || name !== user.display_name) {
       await env.DB.prepare('UPDATE users SET role = ?, display_name = ? WHERE id = ?').bind(role, name, user.id).run();
       user.role = role;

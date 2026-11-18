@@ -1,4 +1,5 @@
-// Owner-only operations. Every route here is reached through requireSession(..., { owner: true }).
+// Admin-panel operations (owners and admins). Every route here is reached through requireSession(..., { owner: true }).
+// Managing admins is reserved for owners.
 import { HttpError, nowIso, randomId, cleanText, toInt } from './util.js';
 import { getDoc, putDoc } from './catalog.js';
 import { GAMES } from './games.js';
@@ -92,9 +93,36 @@ export async function adminAction(env, session, action, payload) {
       return { ok: true, message: 'تمت إعادة تفعيل التجارب المجانية للمستخدم المختار.' };
     }
 
+    case 'set_admin': {
+      if (admin.role !== 'owner') throw new HttpError(403, 'إضافة الأدمن وإزالته للمالك فقط.');
+      const email = String(payload.email || '').trim().toLowerCase();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email) || email.length > 254) throw new HttpError(400, 'اكتب إيميل صحيح.');
+      const makeAdmin = payload.makeAdmin !== false;
+      let target = await env.DB.prepare('SELECT id, email, display_name, role FROM users WHERE email = ?').bind(email).first();
+      if (target && target.role === 'owner') throw new HttpError(400, 'هذا الحساب مالك أصلاً.');
+      if (!target) {
+        if (!makeAdmin) throw new HttpError(404, 'ما فيه حساب بهالإيميل.');
+        // The account is created now; the person logs in later with the same email and lands as admin.
+        target = { id: randomId('usr'), email, display_name: email.split('@')[0], role: 'admin' };
+        await env.DB.batch([
+          env.DB.prepare("INSERT INTO users (id, email, display_name, status, role, created_at) VALUES (?, ?, ?, 'active', 'admin', ?)").bind(target.id, email, target.display_name, nowIso()),
+          env.DB.prepare('INSERT INTO wallets (user_id) VALUES (?)').bind(target.id)
+        ]);
+      } else {
+        await env.DB.batch([
+          env.DB.prepare('UPDATE users SET role = ? WHERE id = ?').bind(makeAdmin ? 'admin' : null, target.id),
+          // Removing an admin ends their open sessions so access stops immediately.
+          ...(makeAdmin ? [] : [env.DB.prepare('DELETE FROM sessions WHERE user_id = ?').bind(target.id)])
+        ]);
+      }
+      await log(env, admin, makeAdmin ? 'grant_admin' : 'revoke_admin', 'user', email, makeAdmin ? 'إضافة أدمن' : 'إزالة أدمن');
+      return { ok: true, message: makeAdmin ? 'صار ' + email + ' أدمن. يدخل بنفس الإيميل ويلقى لوحة الإدارة.' : 'تمت إزالة صلاحية الأدمن من ' + email };
+    }
+
     case 'toggle_user': {
       const target = await env.DB.prepare('SELECT id, email, display_name, status, role FROM users WHERE id = ?').bind(payload.userId).first();
       if (!target || target.role === 'owner') throw new HttpError(400, 'لا يمكن إيقاف حساب المالك.');
+      if (target.role === 'admin' && admin.role !== 'owner') throw new HttpError(403, 'إيقاف حساب أدمن للمالك فقط.');
       const status = target.status === 'active' ? 'suspended' : 'active';
       await env.DB.batch([
         env.DB.prepare('UPDATE users SET status = ? WHERE id = ?').bind(status, target.id),
