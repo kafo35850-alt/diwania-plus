@@ -161,6 +161,7 @@ export async function servePlay(env, request, session, slug) {
   if (ROOM_GAMES[slug]) html = prepareRoomGame(html, slug, url, { token, demo: !guest && url.searchParams.get('demo') === '1' });
   if (slug === 'eight') html = prepareEight(html, url, { token, guest });
   html = html.replace(/<head([^>]*)>/i, (m) => m + '\n<script>window.__DW_CONTENT = ' + scriptJson(content) + ';</script>');
+  html = html.replace('</head>', '<style>@media (max-width:700px){.dw-FloatingAudioBar{display:none!important}}html.dw-in-frame .dw-FloatingAudioBar{display:none!important}</style><script>try{if(window.top!==window)document.documentElement.classList.add(\'dw-in-frame\')}catch(e){}</script></head>');
 
   return new Response(html, {
     headers: {

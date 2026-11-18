@@ -12603,7 +12603,7 @@ joinRoom(code, false);
 function initSecretChancellorApp() {
 const nameInp = document.getElementById('shPlayerNameInput');
 if (nameInp && !nameInp.value) {
-nameInp.value = shLocal.myName || ((typeof state !== 'undefined' && state.account && state.account.username !== 'حسابي الرئيسي') ? state.account.username : 'كريم');
+nameInp.value = shLocal.myName || ((typeof state !== 'undefined' && state.account && state.account.username !== 'حسابي الرئيسي') ? state.account.username : '');
 }
 bindEvents();
 renderAllSH();

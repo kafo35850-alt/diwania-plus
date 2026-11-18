@@ -532,7 +532,7 @@ window.GAME_CONFIG = {"slug":"mazad30","title":"مزاد الثلاثين — د
     round: 1,
     activePlayerIdx: 0,
     players: [
-      { id: 'p1', name: 'كريم (أنت)', score: 0, team: 1 },
+      { id: 'p1', name: 'أنت', score: 0, team: 1 },
       { id: 'p2', name: 'فهد (بوت)', score: 0, team: 2 },
       { id: 'p3', name: 'سلمان (بوت)', score: 0, team: 1 },
       { id: 'p4', name: 'نواف (بوت)', score: 0, team: 2 }
@@ -1131,7 +1131,7 @@ window.GAME_CONFIG = {"slug":"mazad30","title":"مزاد الثلاثين — د
         (showPhone ? (
           '<aside class="panel-box">' +
             '<div class="panel-head">' +
-              '<div><span class="badge badge-gold">📱 شاشة جوال اللاعب (التحكم السري)</span><h3 style="margin:6px 0 0;font-size:17px">جهاز تحكم: كريم محمد</h3></div>' +
+              '<div><span class="badge badge-gold">📱 شاشة جوال اللاعب (التحكم السري)</span><h3 style="margin:6px 0 0;font-size:17px">جهاز تحكم اللاعب</h3></div>' +
             '</div>' +
             renderPhoneHtml() +
           '</aside>'
@@ -1400,7 +1400,7 @@ window.GAME_CONFIG = {"slug":"mazad30","title":"مزاد الثلاثين — د
       var inp = document.getElementById('acAnsInp');
       var val = inp ? inp.value.trim() : '';
       if (!val) val = 'كنا مجتمعين في الاستراحة وقت الحادثة!';
-      gd.suspectAnswers.push({ player: 'كريم (المشتبه ١)', text: val });
+      gd.suspectAnswers.push({ player: 'المشتبه ١', text: val });
       gd.suspectAnswers.push({ player: 'فهد (المشتبه ٢)', text: gd.caze.botReply });
       SFX.play('click');
       renderAll();

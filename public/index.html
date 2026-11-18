@@ -2,9 +2,21 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0A0F24">
-<title>ديوانية بلس (Diwaniya+) — منصة الألعاب الجماعية التفاعلية</title>
+<title>ديوانية بلس — ألعاب جماعية بالجوال والتلفزيون</title>
+<meta name="description" content="ألعاب جماعية للسهرات والديوانيات: الشاشة للكل والجوال لك. مسابقات وتحديات وألعاب خداع تشتغل على التلفزيون والجوالات بدون تحميل أي تطبيق، وتجربة مجانية لكل لعبة.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ar_SA">
+<meta property="og:title" content="ديوانية بلس — ألعاب جماعية بالجوال والتلفزيون">
+<meta property="og:description" content="الشاشة للكل والجوال لك. ألعاب جماعية للسهرات بدون تحميل أي تطبيق — جرّب كل لعبة مجاناً.">
+<meta property="og:image" content="/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 /* ============================================================================
  * ديوانية بلس (Diwaniya+) — Luxury Royal Night Commercial Platform Stylesheet
@@ -454,7 +466,7 @@ button:disabled {
 
 .dw-toast {
   position: fixed;
-  top: 20px;
+  bottom: 24px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 120;
@@ -581,6 +593,86 @@ button:disabled {
   flex: none;
 }
 
+
+/* ===================== 2026 storefront refresh ===================== */
+html, body { font-family: "IBM Plex Sans Arabic", -apple-system, "SF Arabic", "Segoe UI", Tahoma, sans-serif; }
+.dw-container { max-width: 1240px; }
+/* header */
+.dw-nav-inner { gap: 14px; padding-top: 10px; padding-bottom: 10px; flex-wrap: nowrap; }
+.dw-brand-text p { display: none; }
+.dw-nav-links { gap: 4px; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
+.dw-nav-links::-webkit-scrollbar { display: none; }
+.dw-tab-btn { white-space: nowrap; padding: 8px 14px; font-size: 14.5px; font-weight: 600; border-radius: 999px; }
+.nav-side { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.nav-pill { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 999px; font-weight: 700; font-size: 14px; border: 1px solid var(--border-subtle); background: rgba(255,255,255,.06); white-space: nowrap; }
+.nav-pill.gold { background: linear-gradient(180deg, #ffd978, var(--gold)); color: #2b1c00; border: 0; }
+.nav-pill.ghost:hover { background: rgba(255,255,255,.12); }
+.nav-user { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; color: var(--text-muted); white-space: nowrap; }
+.nav-user .av { width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; background: rgba(245,185,66,.18); color: var(--gold); font-weight: 700; }
+@media (max-width: 900px) {
+  .dw-nav-inner { flex-wrap: wrap; row-gap: 8px; }
+  .dw-nav-links { order: 3; width: 100%; }
+  .nav-side { margin-inline-start: auto; }
+  .nav-hide-sm { display: none; }
+}
+/* hero */
+.hero2 { display: grid; grid-template-columns: 1.25fr 1fr; gap: 28px; align-items: center; padding: 36px 32px; border-radius: 28px; border: 1px solid var(--border-line);
+  background: radial-gradient(700px 360px at 85% 0%, rgba(245,185,66,.16), transparent 60%), radial-gradient(600px 400px at 0% 100%, rgba(45,212,191,.12), transparent 60%), rgba(17,25,54,.72); }
+.hero2 .eyebrow { display: inline-block; font-size: 13.5px; font-weight: 600; color: var(--teal); background: rgba(45,212,191,.1); border: 1px solid rgba(45,212,191,.3); padding: 5px 12px; border-radius: 999px; }
+.hero2 h2 { font-size: clamp(30px, 4.4vw, 52px); line-height: 1.25; margin: 14px 0 12px; font-weight: 700; }
+.hero2 h2 b { color: var(--gold); }
+.hero2 p { font-size: 17px; line-height: 1.85; color: #c9d2e6; margin: 0; max-width: 560px; }
+.hero2 .cta { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 22px; }
+.hero2 .cta .dw-btn { padding: 13px 22px; font-size: 16px; }
+.hero-points { list-style: none; padding: 0; margin: 22px 0 0; display: flex; gap: 18px; flex-wrap: wrap; color: #c9d2e6; font-size: 14.5px; }
+.hero-points li { display: flex; align-items: center; gap: 6px; }
+.hero-art { position: relative; height: 320px; }
+.hero-art .tile { position: absolute; width: 46%; aspect-ratio: 1; border-radius: 26px; display: grid; place-items: center; box-shadow: 0 24px 50px rgba(0,0,0,.45); border: 1px solid rgba(255,255,255,.08); }
+.hero-art .tile svg { width: 64%; height: 64%; }
+.hero-art .t1 { top: 0; right: 4%; transform: rotate(-6deg); }
+.hero-art .t2 { top: 8%; left: 2%; transform: rotate(7deg); }
+.hero-art .t3 { bottom: 0; right: 16%; transform: rotate(4deg); z-index: 2; }
+.hero-art .t4 { bottom: 6%; left: 14%; transform: rotate(-5deg); }
+@media (max-width: 860px) { .hero2 { grid-template-columns: 1fr; padding: 26px 18px; } .hero-art { display: none; } }
+/* how it works */
+.how { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.how > div { display: flex; gap: 12px; align-items: flex-start; padding: 16px; border-radius: 18px; background: rgba(255,255,255,.04); border: 1px solid var(--border-subtle); }
+.how .n { flex-shrink: 0; width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; font-weight: 700; background: rgba(245,185,66,.15); color: var(--gold); }
+.how b { display: block; font-size: 16px; margin-bottom: 2px; }
+.how span { color: var(--text-muted); font-size: 14px; line-height: 1.6; }
+@media (max-width: 760px) { .how { grid-template-columns: 1fr; } }
+/* games */
+.sec-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-top: 8px; }
+.sec-head h3 { margin: 0; font-size: 26px; font-weight: 700; }
+.sec-head p { margin: 4px 0 0; color: var(--text-muted); font-size: 14.5px; }
+.filters { display: flex; gap: 8px; flex-wrap: wrap; }
+.filters button { padding: 8px 14px; border-radius: 999px; font-size: 14px; font-weight: 600; border: 1px solid var(--border-subtle); background: rgba(255,255,255,.04); color: #c9d2e6; }
+.filters button.on { background: var(--gold); border-color: var(--gold); color: #2b1c00; }
+.games { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 18px; }
+.g-card { display: flex; flex-direction: column; border-radius: 22px; overflow: hidden; background: rgba(17,25,54,.85); border: 1px solid var(--border-subtle); transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease; }
+.g-card:hover { transform: translateY(-3px); border-color: rgba(245,185,66,.45); box-shadow: 0 18px 40px rgba(0,0,0,.35); }
+.g-art { position: relative; height: 150px; display: grid; place-items: center; }
+.g-art svg { width: 104px; height: 104px; filter: drop-shadow(0 10px 22px rgba(0,0,0,.45)); }
+.g-badges { position: absolute; top: 10px; right: 10px; left: 10px; display: flex; gap: 6px; flex-wrap: wrap; }
+.g-badge { font-size: 12px; font-weight: 600; padding: 4px 9px; border-radius: 999px; background: rgba(10,15,36,.72); border: 1px solid rgba(255,255,255,.14); backdrop-filter: blur(4px); }
+.g-badge.free { background: rgba(45,212,191,.9); color: #022c26; border: 0; }
+.g-badge.phones { background: rgba(245,185,66,.92); color: #2b1c00; border: 0; }
+.g-body { display: flex; flex-direction: column; gap: 8px; padding: 16px; flex: 1; }
+.g-body h4 { margin: 0; font-size: 19px; font-weight: 700; }
+.g-meta { font-size: 13px; color: var(--text-muted); display: flex; gap: 10px; flex-wrap: wrap; }
+.g-desc { margin: 0; color: #b6c0d6; font-size: 14px; line-height: 1.7; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; flex: 1; }
+.g-actions { display: flex; gap: 8px; margin-top: 6px; }
+.g-actions .dw-btn { padding: 10px 12px; font-size: 14.5px; }
+.g-actions .play { flex: 1.4; }
+.g-actions .how-btn { flex: 1; }
+/* suggestion */
+.suggest { display: grid; grid-template-columns: 1fr 1.4fr; gap: 20px; align-items: center; padding: 22px; border-radius: 22px; background: rgba(255,255,255,.035); border: 1px dashed rgba(245,185,66,.35); }
+.suggest h3 { margin: 0 0 6px; font-size: 20px; }
+.suggest p { margin: 0; color: var(--text-muted); font-size: 14px; line-height: 1.7; }
+.suggest .fields { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.suggest .fields .wide { grid-column: 1 / -1; }
+@media (max-width: 760px) { .suggest { grid-template-columns: 1fr; } .suggest .fields { grid-template-columns: 1fr; } }
+footer a { text-decoration: none; }
 </style>
 </head>
 <body>
@@ -591,12 +683,12 @@ button:disabled {
 <div class="dw-modal-backdrop" id="dwAuthModal">
   <div class="dw-modal">
     <div style="display:flex;align-items:center;justify-content:space-between">
-      <h3 style="margin:0;font-size:20px;font-weight:900">🔐 تسجيل الدخول الآمن عبر رمز التحقق (OTP)</h3>
+      <h3 style="margin:0;font-size:20px;font-weight:900">تسجيل الدخول</h3>
       <button class="dw-btn dw-btn-sec dw-btn-sm" data-act="close-auth">✕</button>
     </div>
-    <p style="margin:0;color:var(--text-muted);font-size:13.5px;line-height:1.65">أدخل بريدك الإلكتروني ليقوم الخادم بإرسال رمز تحقق لمرة واحدة (صالح لمدة ٥ دقائق). يحصل كل حساب جديد على <b>قيم مجاني تجريبي واحد في كل لعبة من الألعاب الـ ٢٤</b> مرتبط بحسابه على الخادم.</p>
+    <p style="margin:0;color:var(--text-muted);font-size:13.5px;line-height:1.65">اكتب بريدك ونرسل لك رمز دخول (صالح ٥ دقائق). ما تحتاج كلمة سر، وكل حساب جديد له <b>تجربة مجانية في كل لعبة</b>.</p>
     <div>
-      <label style="font-size:12.5px;color:var(--text-muted);display:block;margin-bottom:5px">الاسم أو اللقب في الديوانية</label>
+      <label style="font-size:12.5px;color:var(--text-muted);display:block;margin-bottom:5px">اسمك أو لقبك</label>
       <input id="authNameInp" class="dw-input" placeholder="مثال: أبو محمد / سارة" value="">
     </div>
     <div>
@@ -604,13 +696,13 @@ button:disabled {
       <input id="authEmailInp" type="email" class="dw-input" dir="ltr" placeholder="name@example.com" value="">
     </div>
     <div id="otpStepBox" style="display:none;background:rgba(45,212,191,0.08);border:1px solid rgba(45,212,191,0.3);padding:12px;border-radius:14px">
-      <div id="otpServerNotice" style="font-size:12.5px;color:var(--teal);margin-bottom:8px;line-height:1.6">تم إرسال رمز التحقق المكون من ٦ أرقام إلى بريدك الإلكتروني عبر الخادم.</div>
-      <input id="authOtpInp" class="dw-input" dir="ltr" maxlength="6" inputmode="numeric" placeholder="أدخل رمز الـ OTP المكون من 6 أرقام" style="text-align:center;font-size:20px;font-weight:900;letter-spacing:6px">
-      <button class="dw-btn dw-btn-teal" id="verifyOtpBtn" style="width:100%;margin-top:10px" data-act="verify-otp">تأكيد الرمز وتسجيل الدخول</button>
+      <div id="otpServerNotice" style="font-size:12.5px;color:var(--teal);margin-bottom:8px;line-height:1.6">أرسلنا رمز من ٦ أرقام لبريدك. إذا ما وصلك، شيّك على الرسائل غير المرغوبة.</div>
+      <input id="authOtpInp" class="dw-input" dir="ltr" maxlength="6" inputmode="numeric" placeholder="الرمز (٦ أرقام)" style="text-align:center;font-size:20px;font-weight:900;letter-spacing:6px">
+      <button class="dw-btn dw-btn-teal" id="verifyOtpBtn" style="width:100%;margin-top:10px" data-act="verify-otp">دخول</button>
     </div>
     <div id="authRateLimitNotice" style="display:none;font-size:12.5px;color:var(--rose);background:rgba(244,63,94,0.12);border:1px solid rgba(244,63,94,0.35);padding:10px;border-radius:12px"></div>
     <div style="display:flex;gap:8px;justify-content:flex-end">
-      <button class="dw-btn dw-btn-gold" id="sendOtpBtn" style="width:100%" data-act="send-otp">إرسال رمز التحقق (OTP) عبر الخادم</button>
+      <button class="dw-btn dw-btn-gold" id="sendOtpBtn" style="width:100%" data-act="send-otp">أرسل رمز الدخول</button>
     </div>
   </div>
 </div>
@@ -634,17 +726,17 @@ button:disabled {
 <div class="dw-game-frame-wrap" id="dwGameFrameWrap">
   <div class="dw-game-frame-bar">
     <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-      <span class="dw-badge" style="margin:0">🎮 جلسة لعب موثقة من الخادم</span>
+      
       <b id="dwGameFrameTitle" style="font-size:16px">تحدي الثمانية</b>
       <span id="dwGameFrameRoomChip" class="dw-chip teal" style="font-size:11.5px;cursor:pointer" data-act="open-room-hub">📱 غرفة QR والجرس الجماعي</span>
     </div>
     <div class="dw-spacer"></div>
     <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
-      <button class="dw-btn dw-btn-teal dw-btn-sm" data-act="open-room-hub">📱 ربط جوالات اللاعبين (QR)</button>
+      <button class="dw-btn dw-btn-teal dw-btn-sm" data-act="open-room-hub">📱 غرفة الجرس (QR)</button>
       <button class="dw-btn dw-btn-sec dw-btn-sm" id="dwFrameDemoBtn" data-act="toggle-frame-demo" style="display:none">🤖 تجربة مع بوتات</button>
       <button class="dw-btn dw-btn-sec dw-btn-sm" id="dwFrameVoiceBtn" data-act="toggle-store-voice">🔊 الصوت: مفعّل</button>
       <button class="dw-btn dw-btn-sec dw-btn-sm" id="dwFrameSfxBtn" data-act="toggle-store-sfx">🎵 المؤثرات: مفعّلة</button>
-      <button class="dw-btn dw-btn-danger dw-btn-sm" data-act="close-game-frame">✕ إغلاق اللعبة والعودة للمتجر</button>
+      <button class="dw-btn dw-btn-danger dw-btn-sm" data-act="close-game-frame">✕ إغلاق</button>
     </div>
   </div>
   <iframe class="dw-game-frame" allow="autoplay" id="dwGameIframe" sandbox="allow-scripts allow-same-origin allow-forms allow-modals allow-popups" title="Diwaniya Game Frame"></iframe>
@@ -1050,7 +1142,7 @@ button:disabled {
       tabs: [
         {
           id: 'idea', label: 'فكرة اللعبة',
-          lead: 'مستوحاة من تحديات الأزرار الغامضة في فالكونز وباور: يختار كل فريق زراً ليكتشف ما خلفه من نقاط أو مضاعفات أو تحديات سرعة أو فخاخ!',
+          lead: 'يختار كل فريق زراً ليكتشف ما خلفه من نقاط أو مضاعفات أو تحديات سرعة أو فخاخ!',
           steps: [
             { h: '١. أزرار نادرة ومضاعفات', t: 'بعض الأزرار تضاعف نقاط الجولة ×٢ أو تبدّل ترتيب النقاط بين الفريقين أو تمنح درع حماية.' },
             { h: '٢. تأمين النقاط في البنك', t: 'يمكنك في أي لحظة تأمين نقاط الجولة في بنك فريقك قبل أن تصطدم بزر الفخ!' }
@@ -1724,140 +1816,123 @@ button:disabled {
     return LUXURY_LOGOS[slug] || LUXURY_LOGOS.eight;
   }
 
+  // Store groupings (client-side presentation only).
+  var GAME_TAGS = {
+    phones: ['dakhil', 'mafia', 'qaftah', 'chancellor', 'harf', 'qaddirha'],
+    quiz: ['eight', 'stadium_esports', 'last_one_standing', 'radar_guess', 'golden_vault', 'how_much_price', 'mazad30', 'qaddirha', 'harf'],
+    party: ['silent_library', 'pressure_seat', 'draw_guess', 'fake_artist', 'fortune_wheel', 'mystery_button', 'diwaniya_auction', 'vault50', 'who_knows_friend'],
+    bluff: ['shifra', 'friends_court', 'alibi_court', 'liars_table', 'dakhil', 'mafia', 'chancellor', 'qaftah']
+  };
+  var GAME_FILTERS = [['all', 'الكل'], ['phones', '📱 بالجوالات'], ['quiz', '🧠 مسابقات'], ['party', '🎉 تحديات وضحك'], ['bluff', '🕵️ خداع وتحقيق']];
+  function cleanTitle(s) {
+    return String(s || '').replace(/\s*[—-]\s*ديوانية بلس\s*$/, '').replace(/^ديوانية بلس\s*[—-]\s*/, '').trim();
+  }
+  function isPhoneGame(slug) { return GAME_TAGS.phones.indexOf(slug) !== -1; }
+
   function renderNavbar() {
     var u = STATE.user;
-    var freeLeft = remainingFreeTrialsCount();
+    var link = function (tab, label, extra) {
+      return '<button class="dw-tab-btn ' + (extra || '') + (STATE.tab === tab ? ' active' : '') + '" data-nav="' + tab + '">' + label + '</button>';
+    };
     return '<header class="dw-nav"><div class="dw-nav-inner">' +
       '<a href="#store" class="dw-brand" data-nav="store">' +
         '<div class="dw-brand-logo">د+</div>' +
-        '<div class="dw-brand-text"><h1>ديوانية <span>بلس</span></h1><p>منصة الألعاب الجماعية التفاعلية</p></div>' +
+        '<div class="dw-brand-text"><h1>ديوانية <span>بلس</span></h1></div>' +
       '</a>' +
       '<nav class="dw-nav-links">' +
-        '<button class="dw-tab-btn ' + (STATE.tab === 'store' ? 'active' : '') + '" data-nav="store">الألعاب والمتجر (' + arNum(STATE.games.filter(function(g){return g.is_enabled;}).length) + ')</button>' +
-        '<button class="dw-tab-btn ' + (STATE.tab === 'categories' ? 'active' : '') + '" data-nav="categories">موسوعة الفئات (' + arNum(STATE.categories.filter(function(c){return c.is_visible;}).length) + ')</button>' +
-        '<button class="dw-tab-btn ' + (STATE.tab === 'packages' ? 'active' : '') + '" data-nav="packages">باقات الأقيام</button>' +
-        '<button class="dw-tab-btn ' + (STATE.tab === 'wallet' ? 'active' : '') + '" data-nav="wallet">محفظتي والعمليات</button>' +
-        (u && u.adminRole === 'owner' ? '<button class="dw-tab-btn admin-tab ' + (STATE.tab === 'admin' ? 'active' : '') + '" data-nav="admin">⚙️ لوحة الإدارة ومحرر الألعاب</button>' : '') +
+        link('store', 'الألعاب') +
+        link('categories', 'فئات الثمانية') +
+        link('packages', 'الباقات') +
+        (u ? link('wallet', 'محفظتي') : '') +
+        (u && u.adminRole === 'owner' ? link('admin', '⚙️ الإدارة', 'admin-tab') : '') +
       '</nav>' +
       '<div class="dw-spacer"></div>' +
-      '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="open-room-hub">📱 غرفة QR والجرس</button>' +
-      '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="toggle-store-voice">' + (STATE.storeVoiceOn ? '🔊 الصوت: مفعّل' : '🔇 الصوت: مغلق') + '</button>' +
-      '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="toggle-store-sfx">' + (STATE.storeSfxOn ? '🎵 المؤثرات: مفعّلة' : '🔕 المؤثرات: مغلقة') + '</button>' +
-      (u
-        ? (freeLeft > 0 ? '<span class="dw-chip teal">🎁 لك ' + arNum(freeLeft) + ' أقيام مجانية للتجربة</span>' : '<span class="dw-chip">استُهلكت التجارب المجانية</span>') +
-          '<button class="dw-wallet-pill" data-nav="wallet">💎 رصيدك: ' + arNum(STATE.wallet.balance) + ' أقيام</button>' +
-          '<span class="dw-chip">' + esc(u.displayName) + (u.adminRole === 'owner' ? ' 👑' : '') + '</span>' +
-          '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="logout">خروج</button>'
-        : '<button class="dw-btn dw-btn-gold dw-btn-sm" data-act="open-auth">🔐 دخول / حساب جديد (OTP)</button>') +
+      '<div class="nav-side">' +
+        '<button class="nav-pill ghost nav-hide-sm" data-act="open-room-hub">📱 غرفة QR</button>' +
+        (u
+          ? '<button class="nav-pill ghost" data-nav="wallet">💎 ' + arNum(STATE.wallet.balance) + ' أقيام</button>' +
+            '<span class="nav-user"><span class="av">' + esc((u.displayName || '؟').trim().charAt(0)) + '</span><span class="nav-hide-sm">' + esc(u.displayName) + '</span></span>' +
+            '<button class="nav-pill ghost" data-act="logout">خروج</button>'
+          : '<button class="nav-pill gold" data-act="open-auth">تسجيل الدخول</button>') +
+      '</div>' +
     '</div></header>';
+  }
+
+  function renderGameCard(g) {
+    var logo = getLogoForGame(g.slug);
+    var used = (STATE.wallet && STATE.wallet.freeTrialsUsed) || {};
+    var trialLeft = !STATE.user || !used[g.slug];
+    var players = 'من ' + arNum(g.min_players) + ' إلى ' + arNum(g.max_players) + ' لاعب';
+    var playLabel = !STATE.user ? '▶ جرّبها مجاناً' : (trialLeft ? '▶ العب مجاناً' : '▶ العب · ' + arNum(g.cost_credits) + ' قيم');
+    return '<article class="g-card" data-game-card="' + esc(g.slug) + '">' +
+      '<div class="g-art" style="background:' + logo.bg + '">' +
+        '<div class="g-badges">' +
+          (isPhoneGame(g.slug) ? '<span class="g-badge phones">📱 كل واحد بجواله</span>' : '') +
+          (trialLeft ? '<span class="g-badge free">🎁 تجربة مجانية</span>' : '') +
+        '</div>' +
+        logo.svg +
+      '</div>' +
+      '<div class="g-body">' +
+        '<h4>' + esc(cleanTitle(g.title)) + '</h4>' +
+        '<div class="g-meta"><span>👥 ' + players + '</span>' + (trialLeft ? '' : '<span>💎 ' + arNum(g.cost_credits) + ' قيم</span>') + '</div>' +
+        '<p class="g-desc">' + esc(g.description) + '</p>' +
+        '<div class="g-actions">' +
+          '<button class="dw-btn ' + (trialLeft ? 'dw-btn-teal' : 'dw-btn-gold') + ' play" data-act="launch-game" data-slug="' + esc(g.slug) + '"' + (STATE.launchInFlight ? ' disabled' : '') + '>' + playLabel + '</button>' +
+          '<button class="dw-btn dw-btn-sec how-btn" data-act="explain-game" data-slug="' + esc(g.slug) + '">طريقة اللعب</button>' +
+        '</div>' +
+      '</div>' +
+    '</article>';
   }
 
   function renderStoreTab() {
     var activeGames = STATE.games.filter(function (g) { return g.is_enabled; }).sort(function (a, b) { return a.sort_order - b.sort_order; });
-    var usedTrials = (STATE.wallet && STATE.wallet.freeTrialsUsed) || {};
-    var freeLeft = remainingFreeTrialsCount();
+    var filter = STATE.gameFilter || 'all';
+    var shown = filter === 'all' ? activeGames : activeGames.filter(function (g) { return (GAME_TAGS[filter] || []).indexOf(g.slug) !== -1; });
+    var n = arNum(activeGames.length || 26);
+    var art = ['eight', 'mafia', 'harf', 'qaftah'].map(function (s, i) {
+      var l = getLogoForGame(s);
+      return '<div class="tile t' + (i + 1) + '" style="background:' + l.bg + '">' + l.svg + '</div>';
+    }).join('');
 
-    var html = '<section class="dw-hero">' +
-      '<div class="dw-hero-content">' +
-        '<div class="dw-badge">🎁 هدية الترحيب لكل حساب موثق: قيم مجاني تجريبي في كل لعبة من الألعاب الـ ٢٤!</div>' +
-        '<h2>سهرة أصدقائك صارت <b>أفخم وأحمس</b> في <b>ديوانية بلس</b></h2>' +
-        '<p>٢٤ لعبة جماعية احترافية تعمل على التلفزيون والآيباد والجوالات عبر الـ QR Code بدون تحميل أي تطبيق. جرّب كل لعبة مجاناً لأول مرة بعد تسجيل دخولك، واقرأ شرحها المفصل من الخارج قبل البدء!</p>' +
-        '<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px">' +
-          (!STATE.user ? '<button class="dw-btn dw-btn-gold" data-act="open-auth">🔐 سجّل دخولك عبر OTP للحصول على ٢٤ تجربة مجانية</button>' : '<button class="dw-btn dw-btn-gold" data-nav="packages">شحن باقات الأقيام</button>') +
-          '<button class="dw-btn dw-btn-teal" data-act="open-room-hub">📱 فتح غرفة اللعب الجماعي (QR + الجرس الحي)</button>' +
-          '<button class="dw-btn dw-btn-sec" data-nav="categories">استعراض الـ ' + arNum(STATE.categories.length) + ' فئة بملصقاتها</button>' +
-          (STATE.user && STATE.user.adminRole === 'owner' ? '<button class="dw-btn dw-btn-teal" data-nav="admin">⚙️ لوحة المالك ومحرر الألعاب</button>' : '') +
+    var html = '<section class="hero2">' +
+      '<div>' +
+        '<span class="eyebrow">ألعاب جماعية للسهرات والديوانيات</span>' +
+        '<h2>الشاشة للكل…<br><b>والجوال لك</b></h2>' +
+        '<p>' + n + ' لعبة جماعية تشتغل على التلفزيون والجوالات بدون تحميل أي تطبيق. افتح اللعبة على الشاشة، خلّ الشلة يمسحون الرمز بجوالاتهم، وابدؤوا.</p>' +
+        '<div class="cta">' +
+          '<button class="dw-btn dw-btn-gold" data-act="scroll-games">تصفّح الألعاب</button>' +
+          (!STATE.user
+            ? '<button class="dw-btn dw-btn-sec" data-act="open-auth">سجّل وجرّب مجاناً</button>'
+            : '<button class="dw-btn dw-btn-sec" data-nav="packages">💎 رصيدك ' + arNum(STATE.wallet.balance) + ' · اشحن</button>') +
         '</div>' +
+        '<ul class="hero-points"><li>🎁 تجربة مجانية لكل لعبة</li><li>📱 بدون تطبيق</li><li>👥 من ٢ إلى ٦٠ لاعب</li></ul>' +
       '</div>' +
-      '<div class="dw-card" style="min-width:285px;text-align:center;border-color:var(--border-line)">' +
-        '<div style="font-size:13px;color:var(--text-muted)">' + (STATE.user ? 'رصيد محفظتك الموثق في الخادم' : 'حالة الحساب والمحفظة') + '</div>' +
-        (STATE.user
-          ? '<div style="font-size:38px;font-weight:900;color:var(--gold)">' + arNum(STATE.wallet.balance) + ' <span style="font-size:17px">أقيام</span></div>' +
-            '<div style="font-size:13px;color:var(--teal);font-weight:800;background:rgba(45,212,191,0.12);padding:6px 10px;border-radius:10px;border:1px solid rgba(45,212,191,0.35)">🎁 لك قيم مجاني واحد لكل لعبة (' + arNum(freeLeft) + ' من ' + arNum(activeGames.length) + ' متبقية)</div>' +
-            '<button class="dw-btn dw-btn-sec dw-btn-sm" data-nav="wallet">عرض سجل المحفظة الموثق</button>'
-          : '<div style="font-size:18px;font-weight:900;color:var(--gold);margin:8px 0">غير مسجل الدخول</div>' +
-            '<div style="font-size:12.5px;color:var(--text-muted);line-height:1.6">سجّل دخولك عبر رمز التحقق (OTP) لتفعيل محفظتك والحصول على قيم مجاني لمرة واحدة في كل لعبة.</div>' +
-            '<button class="dw-btn dw-btn-gold dw-btn-sm" data-act="open-auth">تسجيل الدخول الآن</button>') +
-      '</div>' +
+      '<div class="hero-art" aria-hidden="true">' + art + '</div>' +
     '</section>';
 
-    html += '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">' +
-      '<div><h3 style="margin:0;font-size:24px;font-weight:900">ألعاب منصة ديوانية بلس (' + arNum(activeGames.length) + ' لعبة كاملة بشعارات فخمة)</h3>' +
-      '<p style="margin:4px 0 0;color:var(--text-muted);font-size:14px">جميع المحركات الـ ٢٤ مربوطة بالكامل مع شرح خارجي مفصل، حماية عدم التكرار (Idempotency)، ودعم غرف الـ QR</p></div>' +
+    html += '<section class="how">' +
+      '<div><span class="n">١</span><div><b>اختر اللعبة</b><span>كل لعبة لها تجربة مجانية أول مرة.</span></div></div>' +
+      '<div><span class="n">٢</span><div><b>اعرضها على الشاشة</b><span>تلفزيون أو آيباد أو لابتوب — اللي عندك.</span></div></div>' +
+      '<div><span class="n">٣</span><div><b>الشلة تدخل بجوالاتها</b><span>يمسحون رمز الـ QR ويلعبون بدون حساب.</span></div></div>' +
+    '</section>';
+
+    html += '<div class="sec-head" id="dwGamesTop">' +
+      '<div><h3>الألعاب</h3><p>' + arNum(shown.length) + ' لعبة' + (filter === 'phones' ? ' — كل لاعب يلعب من جواله' : '') + '</p></div>' +
+      '<div class="filters">' + GAME_FILTERS.map(function (f) {
+        return '<button class="' + (filter === f[0] ? 'on' : '') + '" data-act="game-filter" data-f="' + f[0] + '">' + f[1] + '</button>';
+      }).join('') + '</div>' +
     '</div>';
+    html += '<div class="games">' + shown.map(renderGameCard).join('') + '</div>';
 
-    html += '<div class="dw-grid-3">' + activeGames.map(function (g) {
-      var logo = getLogoForGame(g.slug);
-      var hasFreeTrial = STATE.user ? !usedTrials[g.slug] : true;
-      var trialUsedByUser = STATE.user && !!usedTrials[g.slug];
-      return '<div class="dw-card" data-game-card="' + esc(g.slug) + '">' +
-        '<div class="dw-crest-banner" style="background:' + logo.bg + '">' +
-          (trialUsedByUser
-            ? '<span class="dw-used-ribbon">تم استهلاك التجربة · التكلفة: ' + arNum(g.cost_credits) + ' قيم</span>'
-            : '<span class="dw-free-ribbon">🎁 ' + (STATE.user ? 'لك قيم مجاني للتجربة!' : 'أول قيم مجاناً بعد الدخول!') + '</span>') +
-          logo.svg +
-        '</div>' +
-        '<div>' +
-          '<h4 style="margin:0;font-size:21px;font-weight:900">' + esc(g.title) + '</h4>' +
-          '<div style="color:var(--gold);font-size:13px;font-weight:800;margin-top:4px">' + esc(g.subtitle) + '</div>' +
-        '</div>' +
-        '<p style="margin:0;color:var(--text-muted);font-size:14px;line-height:1.75;flex:1">' + esc(g.description) + '</p>' +
-        '<div style="display:flex;gap:6px;flex-wrap:wrap">' +
-          (!trialUsedByUser
-            ? '<span class="dw-chip teal">أول قيم مجاناً 🎁</span>'
-            : '<span class="dw-chip gold">التكلفة: ' + arNum(g.cost_credits) + ' قيم</span>') +
-          '<span class="dw-chip">' + arNum(g.min_players) + ' إلى ' + arNum(g.max_players) + ' لاعب</span>' +
-          '<span class="dw-chip" dir="ltr">#' + arNum(g.sort_order) + '</span>' +
-        '</div>' +
-        '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px">' +
-          '<button class="dw-btn ' + (!trialUsedByUser ? 'dw-btn-teal' : 'dw-btn-gold') + '" style="flex:1.3" data-act="launch-game" data-slug="' + esc(g.slug) + '"' + (STATE.launchInFlight ? ' disabled' : '') + '>' +
-            (!STATE.user
-              ? '🔐 سجل دخولك والعب مجاناً'
-              : (!trialUsedByUser ? '▶ العب مجاناً (قيم التجربة)' : '▶ تشغيل اللعبة (' + arNum(g.cost_credits) + ' قيم)')) +
-          '</button>' +
-          '<button class="dw-btn dw-btn-sec" style="flex:1" data-act="explain-game" data-slug="' + esc(g.slug) + '">📖 شرح اللعبة بالتفصيل</button>' +
-        '</div>' +
-      '</div>';
-    }).join('') + '</div>';
-
-    html += '<section class="dw-card" style="margin-top:10px;border:1.5px solid var(--gold);background:linear-gradient(145deg,rgba(23,33,68,0.92),rgba(10,15,36,0.95))">' +
-      '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">' +
-        '<div>' +
-          '<span class="dw-badge">💡 فئة مقترحات الألعاب وتحديات اليوتيوب</span>' +
-          '<h3 style="margin:4px 0 6px;font-size:22px;font-weight:900">عندك فكرة لعبة جماعية أو شفت تحدي رهيب في يوتيوب؟ اقترحها الآن!</h3>' +
-          '<p style="margin:0;color:var(--gold-light);font-size:14.5px;font-weight:800;line-height:1.7">✨ اكتب فكرة اللعبة أو ضع رابط المقطع، وفريق العمل سيراجعها ويعمل على برمجتها وإضافتها في الصفحة الرئيسية للمنصة نفسها!</p>' +
-        '</div>' +
+    html += '<section class="suggest">' +
+      '<div><h3>💡 عندك فكرة لعبة؟</h3><p>اكتب الفكرة أو حط رابط مقطع شفته، وفريقنا يراجعها. أفضل الأفكار تنضاف للمنصة.</p></div>' +
+      '<div class="fields">' +
+        '<input id="sugTitleInp" class="dw-input" maxlength="120" placeholder="اسم اللعبة أو الفكرة">' +
+        '<input id="sugUrlInp" class="dw-input" dir="ltr" placeholder="رابط (اختياري)">' +
+        '<input id="sugNotesInp" class="dw-input wide" maxlength="600" placeholder="كيف تتخيلها تنلعب؟">' +
+        '<button class="dw-btn dw-btn-gold wide" data-act="submit-game-suggestion">أرسل الفكرة</button>' +
       '</div>' +
-      '<div class="dw-grid-3" style="margin-top:8px">' +
-        '<div><label style="font-size:12.5px;color:var(--text-muted)">اسم اللعبة المقترحة أو التحدي</label><input id="sugTitleInp" class="dw-input" placeholder="مثال: تحدي الصندوق الغامض أو لعبة حرامي الفريق"></div>' +
-        '<div><label style="font-size:12.5px;color:var(--text-muted)">رابط المقطع أو اللعبة (يوتيوب / تيك توك / موقع آمن https)</label><input id="sugUrlInp" class="dw-input" dir="ltr" placeholder="https://www.youtube.com/watch?v=..."></div>' +
-        '<div><label style="font-size:12.5px;color:var(--text-muted)">اسمك (اختياري)</label><input id="sugUserInp" class="dw-input" placeholder="مثال: عبدالله"></div>' +
-      '</div>' +
-      '<div><label style="font-size:12.5px;color:var(--text-muted)">تفاصيل الفكرة أو القواعد المميزة التي تريدها في اللعبة</label><input id="sugNotesInp" class="dw-input" placeholder="اشرح باختصار كيف تحب تكون طريقتها بالجوال والشاشة..."></div>' +
-      '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">' +
-        '<button class="dw-btn dw-btn-gold" data-act="submit-game-suggestion">🚀 إرسال اقتراح اللعبة لفريق العمل</button>' +
-        '<span style="font-size:12.5px;color:var(--teal);font-weight:800">✓ جميع المقترحات تُحفظ بشكل دائم وتصل مباشرة للوحة الإدارة</span>' +
-      '</div>' +
-      (STATE.suggestions && STATE.suggestions.length ? (
-        '<div style="margin-top:10px;border-top:1px solid var(--border-subtle);padding-top:12px">' +
-          '<b style="font-size:14px;color:var(--text-muted);display:block;margin-bottom:8px">📌 أحدث الألعاب المقترحة من اللاعبين:</b>' +
-          '<div class="dw-grid-3">' +
-            STATE.suggestions.slice(0, 6).map(function(s) {
-              var safeHref = sanitizeUrl(s.url);
-              return '<div style="background:rgba(255,255,255,0.04);border:1px solid var(--border-subtle);padding:12px;border-radius:14px;display:flex;flex-direction:column;gap:6px">' +
-                '<div style="display:flex;align-items:center;justify-content:space-between;gap:6px">' +
-                  '<b style="color:var(--gold)">' + esc(s.title) + '</b>' +
-                  '<span class="dw-chip teal" style="font-size:11px">' + esc(s.status) + '</span>' +
-                '</div>' +
-                '<div style="font-size:13px;color:var(--text-muted)">' + esc(s.notes || 'بدون ملاحظات إضافية') + '</div>' +
-                (safeHref ? '<a href="https://' + esc(safeHref.replace(/^https?:\/\//i, '')) + '" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:var(--teal);word-break:break-all" dir="ltr">🔗 ' + esc(safeHref) + '</a>' : '') +
-              '</div>';
-            }).join('') +
-          '</div>' +
-        '</div>'
-      ) : '') +
     '</section>';
-
     return html;
   }
 
@@ -1932,8 +2007,8 @@ button:disabled {
     return '<div class="dw-card">' +
       '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">' +
         '<div>' +
-          '<h3 style="margin:0;font-size:24px;font-weight:900">باقات شحن الأقيام (Credits)</h3>' +
-          '<p style="margin:4px 0 0;color:var(--text-muted);font-size:14.5px">يحصل كل مستخدم على <b>قيم مجاني تجريبي في كل لعبة من الألعاب الـ ٢٤</b>، وبعدها يمكن طلب شحن أي باقة من الباقات التالية:</p>' +
+          '<h3 style="margin:0;font-size:24px;font-weight:900">باقات الأقيام</h3>' +
+          '<p style="margin:4px 0 0;color:var(--text-muted);font-size:14.5px">يحصل كل مستخدم على <b>قيم مجاني تجريبي في كل لعبة</b>، وبعدها يمكن طلب شحن أي باقة من الباقات التالية:</p>' +
         '</div>' +
         (DiwaniyaServerKernel.loadDB().gatewayConnected
           ? '<span class="dw-chip teal" style="font-size:12.5px">🔒 دفع آمن عبر Moyasar · مدى · Apple Pay · بطاقات ائتمانية</span>'
@@ -1965,10 +2040,11 @@ button:disabled {
     '</div>';
   }
 
+  var TX_TYPES = { bonus: 'هدية', free_trial: 'تجربة مجانية', consume: 'تشغيل لعبة', purchase: 'شراء باقة', admin_add: 'إضافة من الإدارة', admin_deduct: 'خصم من الإدارة' };
   function renderWalletTab() {
     if (!STATE.user) {
       return '<div class="dw-card" style="text-align:center;padding:40px">' +
-        '<h3>🔐 سجّل دخولك عبر OTP للحصول على قيم مجاني في كل لعبة وعرض محفظتك الموثقة</h3>' +
+        '<h3>سجّل دخولك عشان تشوف محفظتك وتجاربك المجانية</h3>' +
         '<p style="color:var(--text-muted);font-size:14px">يتم حفظ رصيدك وسجل أقيامك المجانية والمدفوعة في قاعدة بيانات الخادم (D1) بشكل دائم لكل حساب.</p>' +
         '<div><button class="dw-btn dw-btn-gold" data-act="open-auth">تسجيل الدخول / إنشاء حساب</button></div>' +
       '</div>';
@@ -1976,8 +2052,8 @@ button:disabled {
     var w = STATE.wallet;
     var freeLeft = remainingFreeTrialsCount();
     return '<div class="dw-grid-4">' +
-      '<div class="dw-card"><div style="color:var(--text-muted);font-size:13px">رصيد الأقيام الأساسي (في الخادم)</div><div style="font-size:34px;font-weight:900;color:var(--gold)">' + arNum(w.balance) + ' أقيام</div></div>' +
-      '<div class="dw-card"><div style="color:var(--text-muted);font-size:13px">الأقيام المجانية المتبقية للحساب</div><div style="font-size:34px;font-weight:900;color:var(--teal)">' + arNum(freeLeft) + ' من ٢٤</div></div>' +
+      '<div class="dw-card"><div style="color:var(--text-muted);font-size:13px">رصيدك</div><div style="font-size:34px;font-weight:900;color:var(--gold)">' + arNum(w.balance) + ' أقيام</div></div>' +
+      '<div class="dw-card"><div style="color:var(--text-muted);font-size:13px">التجارب المجانية المتبقية</div><div style="font-size:34px;font-weight:900;color:var(--teal)">' + arNum(freeLeft) + ' من ' + arNum(STATE.games.filter(function (g) { return g.is_enabled; }).length) + '</div></div>' +
       '<div class="dw-card"><div style="color:var(--text-muted);font-size:13px">إجمالي الأقيام المضافة</div><div style="font-size:34px;font-weight:900">' + arNum(w.totalPurchased) + ' أقيام</div></div>' +
       '<div class="dw-card"><div style="color:var(--text-muted);font-size:13px">إجمالي الأقيام المستهلكة</div><div style="font-size:34px;font-weight:900;color:var(--coral)">' + arNum(w.totalConsumed) + ' أقيام</div></div>' +
     '</div>' +
@@ -2003,16 +2079,16 @@ button:disabled {
     ) : '') +
     '<div class="dw-card">' +
       '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">' +
-        '<h3 style="margin:0;font-size:20px;font-weight:900">سجل معاملات المحفظة الدائم (Wallet Transactions)</h3>' +
+        '<h3 style="margin:0;font-size:20px;font-weight:900">سجل العمليات</h3>' +
         '<button class="dw-btn dw-btn-gold dw-btn-sm" data-nav="packages">+ طلب شحن أقيام</button>' +
       '</div>' +
       '<div class="dw-table-wrap"><table class="dw-table">' +
-        '<thead><tr><th>النوع</th><th>المقدار</th><th>الرصيد قبل</th><th>الرصيد بعد</th><th>التفاصيل ومفتاح Idempotency</th><th>التاريخ</th></tr></thead>' +
+        '<thead><tr><th>النوع</th><th>المقدار</th><th>الرصيد قبل</th><th>الرصيد بعد</th><th>التفاصيل</th><th>التاريخ</th></tr></thead>' +
         '<tbody>' + w.transactions.map(function (tx) {
           var isPos = tx.amount > 0, isFree = tx.amount === 0;
           return '<tr>' +
-            '<td><span class="dw-chip ' + (isPos || isFree ? 'teal' : 'gold') + '">' + esc(tx.type) + '</span></td>' +
-            '<td style="font-weight:900;color:' + (isFree ? 'var(--teal)' : isPos ? 'var(--teal)' : 'var(--rose)') + '" dir="ltr">' + (isFree ? 'FREE (0)' : (isPos ? '+' : '') + tx.amount) + '</td>' +
+            '<td><span class="dw-chip ' + (isPos || isFree ? 'teal' : 'gold') + '">' + esc(TX_TYPES[tx.type] || tx.type) + '</span></td>' +
+            '<td style="font-weight:900;color:' + (isFree ? 'var(--teal)' : isPos ? 'var(--teal)' : 'var(--rose)') + '" dir="ltr">' + (isFree ? 'مجاني' : (isPos ? '+' : '') + tx.amount) + '</td>' +
             '<td>' + arNum(tx.balance_before) + '</td>' +
             '<td style="font-weight:900">' + arNum(tx.balance_after) + '</td>' +
             '<td>' + esc(tx.description) + '</td>' +
@@ -2049,18 +2125,18 @@ button:disabled {
     // Double check against server kernel so client-side console tampering with STATE.user.adminRole cannot reveal or use Admin
     var verifyAuth = DiwaniyaServerKernel.getSessionUser();
     if (!verifyAuth || !verifyAuth.user || verifyAuth.user.adminRole !== 'owner') {
-      return '<div class="dw-card" style="text-align:center;padding:40px"><h3>🚫 غير مصرح لك بالوصول إلى لوحة الإدارة (403 Server Role Check)</h3><p style="color:var(--text-muted)">يتم التحقق من صلاحية المالك (Owner) من قاعدة بيانات الخادم فقط.</p></div>';
+      return '<div class="dw-card" style="text-align:center;padding:40px"><h3>🚫 غير مصرح لك بالوصول إلى لوحة الإدارة </h3><p style="color:var(--text-muted)">يتم التحقق من صلاحية المالك (Owner) من قاعدة بيانات الخادم فقط.</p></div>';
     }
     var st = STATE.adminSubTab;
     var nav = '<div class="dw-card" style="padding:14px">' +
       '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">' +
-        '<div><span class="dw-badge">محمية بصلاحيات الخادم (Server-Enforced Owner Role)</span><h3 style="margin:4px 0 0;font-size:22px;font-weight:900">لوحة تحكم المالك ونظام إدارة الألعاب والـ ١٥٢ فئة</h3></div>' +
+        '<div><span class="dw-badge">لوحة المالك</span><h3 style="margin:4px 0 0;font-size:22px;font-weight:900">لوحة تحكم المالك ونظام إدارة الألعاب والـ ١٥٢ فئة</h3></div>' +
         '<div style="display:flex;gap:6px;flex-wrap:wrap">' +
           '<button class="dw-tab-btn ' + (st === 'overview' ? 'active' : '') + '" data-adm-tab="overview">📊 الإحصائيات</button>' +
           '<button class="dw-tab-btn ' + (st === 'users' ? 'active' : '') + '" data-adm-tab="users">👥 المستخدمين والأرصدة</button>' +
           '<button class="dw-tab-btn ' + (st === 'packages' ? 'active' : '') + '" data-adm-tab="packages">💎 إدارة الباقات</button>' +
           '<button class="dw-tab-btn ' + (st === 'games' ? 'active' : '') + '" data-adm-tab="games">🎮 إدارة الألعاب (' + arNum(STATE.games.length) + ')</button>' +
-          '<button class="dw-tab-btn ' + (st === 'editor' ? 'active' : '') + '" data-adm-tab="editor">✏️ محرر الأسئلة والفئات (١٥٢ فئة + ٢٤ لعبة)</button>' +
+          '<button class="dw-tab-btn ' + (st === 'editor' ? 'active' : '') + '" data-adm-tab="editor">✏️ محرر الأسئلة والفئات </button>' +
           '<button class="dw-tab-btn ' + (st === 'categories' ? 'active' : '') + '" data-adm-tab="categories">🗂️ إدارة الفئات (' + arNum(STATE.categories.length) + ')</button>' +
           '<button class="dw-tab-btn ' + (st === 'payments' ? 'active' : '') + '" data-adm-tab="payments">💳 المدفوعات</button>' +
           '<button class="dw-tab-btn ' + (st === 'logs' ? 'active' : '') + '" data-adm-tab="logs">🛡️ سجل الأمان</button>' +
@@ -2073,7 +2149,7 @@ button:disabled {
       var totalUsed = STATE.usersList.reduce(function (a, u) { return a + (u.total_consumed || 0); }, 0);
       return nav +
         '<div class="dw-grid-4">' +
-          '<div class="dw-card"><div style="color:var(--text-muted);font-size:13px">إجمالي المستخدمين في D1</div><div style="font-size:32px;font-weight:900">' + arNum(STATE.usersList.length) + '</div></div>' +
+          '<div class="dw-card"><div style="color:var(--text-muted);font-size:13px">إجمالي المستخدمين</div><div style="font-size:32px;font-weight:900">' + arNum(STATE.usersList.length) + '</div></div>' +
           '<div class="dw-card"><div style="color:var(--text-muted);font-size:13px">الألعاب المربوطة</div><div style="font-size:32px;font-weight:900;color:var(--gold)">' + arNum(STATE.games.length) + ' لعبة</div></div>' +
           '<div class="dw-card"><div style="color:var(--text-muted);font-size:13px">الأقيام المضافة / المستهلكة</div><div style="font-size:32px;font-weight:900;color:var(--teal)">' + arNum(totalSold) + ' / ' + arNum(totalUsed) + '</div></div>' +
           '<div class="dw-card"><div style="color:var(--text-muted);font-size:13px">إجمالي الفئات المحفوظة</div><div style="font-size:32px;font-weight:900">' + arNum(STATE.categories.length) + ' فئة</div></div>' +
@@ -2100,7 +2176,7 @@ button:disabled {
           '</div>' +
           '<div style="display:flex;gap:8px;flex-wrap:wrap">' +
             '<button class="dw-btn dw-btn-gold dw-btn-sm" data-act="adm-adjust-credit">تنفيذ تعديل الرصيد في الخادم وتسجيله في السجل</button>' +
-            '<button class="dw-btn dw-btn-teal dw-btn-sm" data-act="adm-reset-trials">إعادة منح الأقيام المجانية الـ ٢٤ للمستخدم المختار</button>' +
+            '<button class="dw-btn dw-btn-teal dw-btn-sm" data-act="adm-reset-trials">إعادة منح التجارب المجانية للمستخدم المختار</button>' +
           '</div>' +
           '<div class="dw-table-wrap"><table class="dw-table"><thead><tr><th>المستخدم</th><th>البريد الإلكتروني</th><th>الصلاحية</th><th>الحالة</th><th>الرصيد الحالي</th><th>المضافة</th><th>المستهلكة</th><th>إجراء</th></tr></thead><tbody>' +
             STATE.usersList.map(function (u) {
@@ -2192,7 +2268,7 @@ button:disabled {
       return nav +
         '<div class="dw-card">' +
           '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">' +
-            '<div><h4 style="margin:0;font-size:19px">محرر محتوى جميع الألعاب الـ ٢٤ والفئات الـ ١٥٢ (حفظ دائم في D1 + استيراد وتصدير JSON)</h4>' +
+            '<div><h4 style="margin:0;font-size:19px">محرر محتوى جميع الألعاب والفئات الـ ١٥٢ (حفظ دائم في D1 + استيراد وتصدير JSON)</h4>' +
             '<p style="margin:4px 0 0;color:var(--text-muted);font-size:13.5px">اختر أي لعبة أو أي فئة من الـ ١٥٢ فئة لعرض أسئلتها الحقيقية، إضافة سؤال جديد، تعديل سؤال حالي، أو الحذف والاستيراد والتصدير.</p></div>' +
             '<div style="display:flex;gap:8px;flex-wrap:wrap">' +
               '<label class="dw-btn dw-btn-sec dw-btn-sm" style="cursor:pointer">⬆️ استيراد JSON<input type="file" id="admImportJsonInp" accept=".json,application/json" style="display:none"></label>' +
@@ -2689,7 +2765,7 @@ button:disabled {
       return Promise.resolve({ ok: false, reason: 'launch_in_flight_locked' });
     }
     if (!STATE.user) {
-      showToast('🔐 يرجى تسجيل الدخول أولاً عبر رمز التحقق (OTP) للحصول على القيم المجاني وتشغيل اللعبة.');
+      showToast('سجّل دخولك أول عشان تجرّب اللعبة مجاناً.');
       var authMod = document.getElementById('dwAuthModal');
       if (authMod) authMod.classList.add('open');
       return Promise.resolve({ ok: false, status: 401, reason: 'not_authenticated' });
@@ -2736,7 +2812,7 @@ button:disabled {
       var frameTitle = document.getElementById('dwGameFrameTitle');
       var iframe = document.getElementById('dwGameIframe');
       if (frameWrap && iframe) {
-        frameTitle.textContent = res.gameTitle;
+        frameTitle.textContent = cleanTitle(res.gameTitle);
         iframe.onload = function () { syncGameRoleToFrame(); syncAudioButtonsUI(); };
         iframe.removeAttribute('srcdoc');
         iframe.src = res.playUrl;
@@ -2803,6 +2879,12 @@ button:disabled {
 
     if (act === 'launch-game' || act === 'launch-from-guide') {
       launchGameWithCreditCheck(actBtn.getAttribute('data-slug'));
+    } else if (act === 'game-filter') {
+      STATE.gameFilter = actBtn.getAttribute('data-f') || 'all';
+      render();
+    } else if (act === 'scroll-games') {
+      var gt = document.getElementById('dwGamesTop');
+      if (gt) gt.scrollIntoView({ behavior: 'smooth', block: 'start' });
     } else if (act === 'explain-game') {
       STATE.guideSlug = actBtn.getAttribute('data-slug');
       STATE.guideTabIdx = 0;
@@ -3010,7 +3092,7 @@ button:disabled {
         if (!sugRes.ok) { showToast(sugRes.error); return; }
         STORE_AUDIO.playSfx(720);
         render();
-        showToast('✅ شكرًا لك! تم حفظ اقتراحك في قاعدة البيانات ليتم العمل على إضافته في الصفحة الرئيسية.');
+        showToast('✅ شكراً! وصلت فكرتك لفريقنا.');
       });
     } else if (act === 'adm-save-game') {
       var gsSlug = ((document.getElementById('gmSlug') || {}).value || '').trim().toLowerCase().replace(/[^a-z0-9_]/g, '_');
@@ -3131,6 +3213,21 @@ button:disabled {
         showToast(tgCatRes.message);
       });
     }
+  });
+
+  // Esc or a click on the dark backdrop closes any open window.
+  function closeAllModals() {
+    STATE.guideSlug = null;
+    STATE.previewCatSlug = null;
+    document.querySelectorAll('.dw-modal-backdrop.open').forEach(function (m) { m.classList.remove('open'); });
+    renderGuideModal();
+    renderCategoryPreviewModal();
+  }
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && document.querySelector('.dw-modal-backdrop.open')) closeAllModals();
+  });
+  document.addEventListener('mousedown', function (e) {
+    if (e.target && e.target.classList && e.target.classList.contains('dw-modal-backdrop')) closeAllModals();
   });
 
   document.addEventListener('change', function (e) {

@@ -1807,7 +1807,7 @@ body.show-both .tabs{left:calc(50% - 215px)}
 
   function home() {
     var pre = params.get('room') || '';
-    var savedName = store.get('qf_name') || 'كريم';
+    var savedName = store.get('qf_name') || '';
     return '<div class="topbar"><span class="sp"></span>' + muteBtnHtml() + '</div>' +
       '<div class="logo"><div class="ic">' + I.svg('fox') + '</div><div class="t">ديوانية بلس <b>قفطة!</b></div><div class="s">ألّف كذبتك من راسك — وطيّحهم في الفخ! (حتى ٥٠+ لاعب)</div></div>' +
       '<div class="card col"><div class="big">أنشئ غرفة جديدة</div><div class="mut small">تصير أنت المضيف وتستوعب الغرفة حتى ٦٠ لاعباً بالراحة (ومعك بوتات جاهزة للتجربة فوراً).</div><input id="inName2" class="inp" maxlength="16" placeholder="اسمك (مثال: كريم)" autocomplete="off" value="' + esc(savedName) + '"><button class="btn gold" data-a="create">إنشاء الغرفة الآن</button></div>' +
@@ -1999,7 +1999,7 @@ body.show-both .tabs{left:calc(50% - 215px)}
       case 'mute': toggleMute(); break;
       case 'create': {
         if (!ST.muted) { try { if (window.MafiaAudio) window.MafiaAudio.unlock(); } catch (err) {} }
-        var n = val('inName2') || val('inName') || store.get('qf_name') || 'كريم';
+        var n = val('inName2') || val('inName') || store.get('qf_name') || '';
         store.set('qf_name', n);
         send({ t: 'create', name: n });
         break;

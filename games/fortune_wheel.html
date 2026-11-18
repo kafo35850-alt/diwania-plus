@@ -711,7 +711,7 @@ window.GAME_CONFIG = {"slug": "fortune_wheel", "title": "دائرة الحظ —
     viewMode: window.innerWidth >= 960 ? 'both' : 'board',
     round: 1,
     players: [
-      { id: 'p1', name: 'كريم (أنت)', score: 0, budget: 1000, alive: true, team: 1 },
+      { id: 'p1', name: 'أنت', score: 0, budget: 1000, alive: true, team: 1 },
       { id: 'p2', name: 'فهد', score: 0, budget: 1000, alive: true, team: 2 },
       { id: 'p3', name: 'سلمان', score: 0, budget: 1000, alive: true, team: 1 },
       { id: 'p4', name: 'نواف', score: 0, budget: 1000, alive: true, team: 2 }
@@ -847,7 +847,7 @@ window.GAME_CONFIG = {"slug": "fortune_wheel", "title": "دائرة الحظ —
         mode: 'public', // public | secret | reverse30
         lot: lot,
         currentBid: 200,
-        highestBidder: 'كريم (الفريق ١)',
+        highestBidder: 'الفريق ١',
         highestTeam: 1,
         secretBids: {},
         bidLog: ['🔔 افتتح المزاد على «' + lot.name + '» بسعر ٢٠٠ نقطة'],
@@ -1172,7 +1172,7 @@ window.GAME_CONFIG = {"slug": "fortune_wheel", "title": "دائرة الحظ —
         '<div class="score-box"><span>⏱️ وقت المرافعة</span><b id="liveTimerVal" style="color:var(--rose);font-size:20px">' + arNum(ST.timerSec) + ' ث</b></div>' +
       '</div>' +
       '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px">' +
-        '<span class="badge badge-gold">👨‍⚖️ القاضي: كريم</span>' +
+        '<span class="badge badge-gold">👨‍⚖️ القاضي</span>' +
         '<span class="badge badge-rose">🕵️ المتهم: فهد</span>' +
         '<span class="badge badge-blue">💼 المحامي: سلمان</span>' +
         '<span class="badge">👀 الشاهد والمحلفون: نواف والبقية</span>' +
@@ -1505,7 +1505,7 @@ window.GAME_CONFIG = {"slug": "fortune_wheel", "title": "دائرة الحظ —
         (showPhone ? (
           '<aside class="panel-box">' +
             '<div class="panel-head">' +
-              '<div><span class="badge badge-gold">📱 شاشة جوال اللاعب / السوبرفايزر</span><h3 style="margin:6px 0 0;font-size:16.5px">جهاز تحكم: كريم محمد</h3></div>' +
+              '<div><span class="badge badge-gold">📱 شاشة جوال اللاعب / السوبرفايزر</span><h3 style="margin:6px 0 0;font-size:16.5px">جهاز تحكم اللاعب</h3></div>' +
             '</div>' +
             renderPhoneHtml() +
           '</aside>'

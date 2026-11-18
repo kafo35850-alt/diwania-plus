@@ -2353,7 +2353,7 @@ body.board .hfab,body.board-only .hfab,body.show-board .hfab,body.show-both .hfa
     return '<div class="logo"><div class="t">ديوانية بلس <b>مافيا</b></div><div class="s">لعبة الخداع والذكاء — كل واحد بجواله</div></div>' +
       (hasSaved ? '<div class="card ctr mut">نرجّعك لغرفتك…</div>' : '') +
       '<div class="card col"><div class="big">ادخل غرفة</div><input id="inCode" class="inp code" inputmode="numeric" maxlength="4" placeholder="••••" value="' + esc(pre) + '" autocomplete="off"><input id="inName" class="inp" maxlength="14" placeholder="اسمك" autocomplete="off"><button class="btn" data-a="join">ادخل</button></div>' +
-      '<div class="card col"><div class="big">أنشئ غرفة جديدة</div><div class="mut small">تصير أنت المضيف. اللاعبين يدخلون بمسح الـQR بدون تسجيل.</div><input id="inName2" class="inp" maxlength="14" placeholder="اسمك" value="كريم" autocomplete="off"><button class="btn gold" data-a="create">أنشئ الغرفة</button></div>' +
+      '<div class="card col"><div class="big">أنشئ غرفة جديدة</div><div class="mut small">تصير أنت المضيف. اللاعبين يدخلون بمسح الـQR بدون تسجيل.</div><input id="inName2" class="inp" maxlength="14" placeholder="اسمك" value="" autocomplete="off"><button class="btn gold" data-a="create">أنشئ الغرفة</button></div>' +
       '<button class="btn sec" data-a="help">؟ كيف تلعب؟ (شرح اللعبة ومهام الليل)</button>' +
       '<div class="hint">عندك شاشة كبيرة؟ افتح الرابط مع <b>?board=رمز_الغرفة</b> لعرض اللعب للجميع.</div>';
   }
@@ -2830,7 +2830,7 @@ body.board .hfab,body.board-only .hfab,body.show-board .hfab,body.show-both .hfa
     var a = el.getAttribute('data-a'), v = ST.view, id = el.getAttribute('data-id');
     var val = function (i) { var x = document.getElementById(i); return x ? x.value.trim() : ''; };
     switch (a) {
-      case 'create': { try { if (window.MAFIA_DEMO && window.MafiaAudio) window.MafiaAudio.unlock(); } catch(e){} var n = val('inName2') || val('inName') || 'كريم'; send({ t: 'create', name: n, dev: params.get('dev') === '1' }) || toast('الاتصال مقطوع'); break; }
+      case 'create': { try { if (window.MAFIA_DEMO && window.MafiaAudio) window.MafiaAudio.unlock(); } catch(e){} var n = val('inName2') || val('inName') || 'المضيف'; send({ t: 'create', name: n, dev: params.get('dev') === '1' }) || toast('الاتصال مقطوع'); break; }
       case 'join': { var c = val('inCode'), n2 = val('inName'); if (!/^\d{4}$/.test(c)) return toast('اكتب رمز الغرفة (٤ أرقام)'); if (!n2) return toast(ERR.name_required); send({ t: 'join', code: c, name: n2 }) || toast('الاتصال مقطوع'); break; }
       case 'leave': act('leave'); break;
       case 'share': { var u = qrFor(v.code).link; if (navigator.share) navigator.share({ title: 'مافيا الديوانية', text: 'ادخل غرفة مافيا: ' + v.code, url: u }).catch(function () { }); else if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(u).then(function () { toast('انسخ الرابط ✓'); }, function () { toast(u); }); else toast(u); break; }

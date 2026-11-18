@@ -1336,8 +1336,8 @@ body.show-board .tabs{left:14px;transform:none;bottom:34px}
       const pre = params.get('room') || '';
       return '<div class="logo"><div class="ic">' + (cfg.icon || '') + '</div><div class="t">' + (cfg.nameHtml || esc(cfg.name)) + '</div><div class="s">' + esc(cfg.tagline || '') + '</div></div>' +
         (ST.me && !ST.view ? '<div class="card ctr mut">نرجّعك لغرفتك…</div>' : '') +
-        '<div class="card col"><div class="big">ادخل غرفة</div><input id="inCode" class="inp code" inputmode="numeric" maxlength="4" placeholder="••••" value="' + esc(pre) + '" autocomplete="off"><input id="inName" class="inp" maxlength="14" placeholder="اسمك" autocomplete="off" value="' + esc(store.get('diwaniya_name') || 'كريم') + '"><button class="btn" data-a="join">دخول</button></div>' +
-        '<div class="card col"><div class="big">أنشئ غرفة جديدة</div><div class="mut small">تصير أنت المضيف. الباقين يدخلون بمسح الـQR بدون تسجيل. من ' + AR(cfg.min) + ' إلى ' + AR(cfg.max) + ' لاعبين.</div><input id="inName2" class="inp" maxlength="14" placeholder="اسمك" autocomplete="off" value="' + esc(store.get('diwaniya_name') || 'كريم') + '"><button class="btn gold" data-a="create">إنشاء الغرفة</button></div>' +
+        '<div class="card col"><div class="big">ادخل غرفة</div><input id="inCode" class="inp code" inputmode="numeric" maxlength="4" placeholder="••••" value="' + esc(pre) + '" autocomplete="off"><input id="inName" class="inp" maxlength="14" placeholder="اسمك" autocomplete="off" value="' + esc(store.get('diwaniya_name') || '') + '"><button class="btn" data-a="join">دخول</button></div>' +
+        '<div class="card col"><div class="big">أنشئ غرفة جديدة</div><div class="mut small">تصير أنت المضيف. الباقين يدخلون بمسح الـQR بدون تسجيل. من ' + AR(cfg.min) + ' إلى ' + AR(cfg.max) + ' لاعبين.</div><input id="inName2" class="inp" maxlength="14" placeholder="اسمك" autocomplete="off" value="' + esc(store.get('diwaniya_name') || '') + '"><button class="btn gold" data-a="create">إنشاء الغرفة</button></div>' +
         '<button class="btn sec" data-a="help">؟ كيف تلعب؟</button>';
     }
     const qrFor = (code) => { const link = root.location.origin + root.location.pathname + '?room=' + code; let svg = ''; try { svg = QR.toSvg(link, { ecc: 'M', border: 1 }); } catch (e) { } return { link, svg }; };
@@ -1424,7 +1424,7 @@ body.show-board .tabs{left:14px;transform:none;bottom:34px}
       const val = (i) => { const x = doc.getElementById(i); return x ? x.value.trim() : ''; };
       if (cfg.click && cfg.click(a, el, K)) return;
       switch (a) {
-        case 'create': { try { if (root.MafiaAudio) root.MafiaAudio.unlock(); } catch(e){} const n = val('inName2') || val('inName') || 'كريم'; store.set('diwaniya_name', n); send({ t: 'create', name: n }) || toast('الاتصال مقطوع'); break; }
+        case 'create': { try { if (root.MafiaAudio) root.MafiaAudio.unlock(); } catch(e){} const n = val('inName2') || val('inName') || 'المضيف'; store.set('diwaniya_name', n); send({ t: 'create', name: n }) || toast('الاتصال مقطوع'); break; }
         case 'join': { const c = val('inCode'), n2 = val('inName'); if (!/^\d{4}$/.test(c)) return toast('اكتب رمز الغرفة (٤ أرقام)'); if (!n2) return toast(ERR.name_required); store.set('diwaniya_name', n2); send({ t: 'join', code: c, name: n2 }) || toast('الاتصال مقطوع'); break; }
         case 'leave': act('leave'); break;
         case 'share': { const u = qrFor(v.code).link; if (root.navigator.share) root.navigator.share({ title: cfg.name, text: 'ادخل غرفتنا: ' + v.code, url: u }).catch(() => { }); else if (root.navigator.clipboard) root.navigator.clipboard.writeText(u).then(() => toast('انسخ الرابط')); break; }
