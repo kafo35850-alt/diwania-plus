@@ -51,8 +51,9 @@ function forwardSocket(request, stub, doUrl, trusted) {
   return stub.fetch(new Request(doUrl, { method: 'GET', headers }));
 }
 
-function checkSocketRequest(request, url) {
+function checkSocketRequest(env, request, url) {
   if (request.headers.get('upgrade') !== 'websocket') throw new HttpError(426, 'WebSocket فقط.');
+  if (env.DEV_MODE === 'true') return; // local preview only
   const origin = request.headers.get('origin');
   if (!origin || origin !== url.origin) throw new HttpError(403, 'مصدر غير مسموح.');
 }
@@ -87,7 +88,7 @@ export async function handleRooms(env, request, url) {
 
   let m = path.match(/^\/rooms\/buzz\/([A-Z2-9]{6})\/ws$/);
   if (m) {
-    checkSocketRequest(request, url);
+    checkSocketRequest(env, request, url);
     const session = await currentSession(env, request);
     return forwardSocket(request, stubFor(env.BUZZER_ROOM, m[1]), 'https://room/ws', { 'x-dw-user': session ? session.user.id : '' });
   }
@@ -96,7 +97,7 @@ export async function handleRooms(env, request, url) {
   if (m) {
     const slug = m[1];
     if (!ROOM_GAMES[slug]) throw new HttpError(404, 'اللعبة ما تدعم الغرف.');
-    checkSocketRequest(request, url);
+    checkSocketRequest(env, request, url);
     const session = await currentSession(env, request);
     const token = url.searchParams.get('t') || '';
     const host = !!(session && token && await verifyPlayToken(env, session.user.id, slug, token));
@@ -106,7 +107,7 @@ export async function handleRooms(env, request, url) {
   if (path === '/rooms/relay/ws') {
     const code = String(url.searchParams.get('room') || '').toUpperCase();
     if (!RELAY_CODE_RE.test(code)) throw new HttpError(400, 'رمز غرفة غير صالح.');
-    checkSocketRequest(request, url);
+    checkSocketRequest(env, request, url);
     const session = await currentSession(env, request);
     const token = url.searchParams.get('t') || '';
     const host = !!(session && token && await verifyPlayToken(env, session.user.id, 'eight', token));
@@ -126,8 +127,9 @@ export async function handleRooms(env, request, url) {
 // ---------------------------------------------------------------------------
 // Page tweaks
 
-function wsOrigin(url) {
-  return url.origin.replace(/^http/, 'ws');
+// JS expression evaluated in the page: the socket goes to whatever address the page was opened from.
+function wsExpr(path) {
+  return "(location.protocol === 'https:' ? 'wss://' : 'ws://') + location.host + " + JSON.stringify(path);
 }
 
 function removeScriptBlock(html, name) {
@@ -142,8 +144,8 @@ function removeScriptBlock(html, name) {
 export function prepareRoomGame(html, slug, url, { token, demo }) {
   const cfg = ROOM_GAMES[slug];
   if (!cfg || demo) return html;
-  const ws = wsOrigin(url) + '/rooms/game/' + slug + '/ws' + (token ? '?t=' + encodeURIComponent(token) : '');
-  const value = cfg.urlIsFunction ? 'function () { return ' + JSON.stringify(ws) + '; }' : JSON.stringify(ws);
+  const ws = wsExpr('/rooms/game/' + slug + '/ws' + (token ? '?t=' + encodeURIComponent(token) : ''));
+  const value = cfg.urlIsFunction ? 'function () { return ' + ws + '; }' : ws;
   html = html.replace('<script>window.' + cfg.flag + '=true;</script>',
     '<script>window.' + cfg.flag + '=false;window.' + cfg.urlVar + '=' + value + ';</script>');
   for (const name of cfg.demoScripts) html = removeScriptBlock(html, name);
@@ -152,8 +154,8 @@ export function prepareRoomGame(html, slug, url, { token, demo }) {
 
 // Eight Challenge: phones join the buzzer through the relay; guests get the page without the question bank.
 export function prepareEight(html, url, { token, guest }) {
-  const ws = wsOrigin(url) + '/rooms/relay/ws' + (token ? '?t=' + encodeURIComponent(token) : '');
-  html = html.replace(/<head([^>]*)>/i, (m0) => m0 + '\n<script>window.DIWANIYA_WS_URL = ' + JSON.stringify(ws) + ';</script>');
+  const ws = wsExpr('/rooms/relay/ws' + (token ? '?t=' + encodeURIComponent(token) : ''));
+  html = html.replace(/<head([^>]*)>/i, (m0) => m0 + '\n<script>window.DIWANIYA_WS_URL = ' + ws + ';</script>');
   // Share links carry the room in the query too, so the server can let guests in.
   html = html.replace(
     'return `${root}#buzzer=${encodeURIComponent(state.buzzerRoom.roomCode)}`;',

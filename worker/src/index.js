@@ -11,7 +11,8 @@ export { GameHubDO, RelayRoomDO, BuzzerRoomDO } from './rooms/objects.js';
 
 const EMPTY_WALLET = { balance: 0, totalPurchased: 0, totalConsumed: 0, freeTrialsUsed: {}, transactions: [], payments: [] };
 
-function sameOrigin(request) {
+function sameOrigin(request, env) {
+  if (env && env.DEV_MODE === 'true') return true; // local preview only (proxies change the address)
   const origin = request.headers.get('origin');
   return !origin || origin === new URL(request.url).origin;
 }
@@ -51,7 +52,7 @@ async function handleApi(env, request, url) {
   // Server-to-server call from Moyasar (no browser origin); it only triggers a re-check with Moyasar.
   if (method === 'POST' && path === '/api/payments/webhook') return handleWebhook(env, request);
 
-  if (method !== 'GET' && !sameOrigin(request)) throw new HttpError(403, 'طلب من مصدر غير مسموح.');
+  if (method !== 'GET' && !sameOrigin(request, env)) throw new HttpError(403, 'طلب من مصدر غير مسموح.');
 
   if (method === 'GET' && path === '/api/catalog') return json({ ok: true, ...(await getCatalog(env)) });
   if (method === 'GET' && path === '/api/me') return json(await me(env, request));
@@ -115,7 +116,7 @@ export default {
     const url = new URL(request.url);
     try {
       if (url.pathname.startsWith('/rooms/') || url.pathname.startsWith('/api/rooms')) {
-        if (request.method !== 'GET' && !sameOrigin(request)) throw new HttpError(403, 'طلب من مصدر غير مسموح.');
+        if (request.method !== 'GET' && !sameOrigin(request, env)) throw new HttpError(403, 'طلب من مصدر غير مسموح.');
         const roomRes = await handleRooms(env, request, url);
         if (roomRes) return roomRes;
       }
