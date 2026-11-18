@@ -6,6 +6,8 @@ import { walletSnapshot, launchGame, servePlay } from './wallet.js';
 import { createCheckout, handleReturn, handleWebhook, reconcileUserPending, paymentStatusForUser } from './payments.js';
 import { getCatalog, getDoc, putDoc } from './catalog.js';
 import { adminData, adminAction, eightCategoryQuestions } from './admin.js';
+import { handleRooms } from './rooms/routes.js';
+export { GameHubDO, RelayRoomDO, BuzzerRoomDO } from './rooms/objects.js';
 
 const EMPTY_WALLET = { balance: 0, totalPurchased: 0, totalConsumed: 0, freeTrialsUsed: {}, transactions: [], payments: [] };
 
@@ -112,6 +114,11 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
     try {
+      if (url.pathname.startsWith('/rooms/') || url.pathname.startsWith('/api/rooms')) {
+        if (request.method !== 'GET' && !sameOrigin(request)) throw new HttpError(403, 'طلب من مصدر غير مسموح.');
+        const roomRes = await handleRooms(env, request, url);
+        if (roomRes) return roomRes;
+      }
       if (url.pathname.startsWith('/api/')) return await handleApi(env, request, url);
 
       if (url.pathname === '/payments/return' && request.method === 'GET') return await handleReturn(env, request);

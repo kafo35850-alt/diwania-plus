@@ -641,6 +641,7 @@ button:disabled {
     <div class="dw-spacer"></div>
     <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
       <button class="dw-btn dw-btn-teal dw-btn-sm" data-act="open-room-hub">📱 ربط جوالات اللاعبين (QR)</button>
+      <button class="dw-btn dw-btn-sec dw-btn-sm" id="dwFrameDemoBtn" data-act="toggle-frame-demo" style="display:none">🤖 تجربة مع بوتات</button>
       <button class="dw-btn dw-btn-sec dw-btn-sm" id="dwFrameVoiceBtn" data-act="toggle-store-voice">🔊 الصوت: مفعّل</button>
       <button class="dw-btn dw-btn-sec dw-btn-sm" id="dwFrameSfxBtn" data-act="toggle-store-sfx">🎵 المؤثرات: مفعّلة</button>
       <button class="dw-btn dw-btn-danger dw-btn-sm" data-act="close-game-frame">✕ إغلاق اللعبة والعودة للمتجر</button>
@@ -650,6 +651,7 @@ button:disabled {
 </div>
 
 <script src="/m8p.js"></script>
+<script src="/qr.js"></script>
 <script>
 /* ============================================================================
  * ديوانية بلس (Diwaniya+) — Frontend Storefront, Wallet, Auth, Guides & Admin
@@ -1451,6 +1453,9 @@ button:disabled {
           return d;
         });
       },
+      createRoom: function (gameSlug) {
+        return api('POST', '/api/rooms', { gameSlug: gameSlug || '' });
+      },
       paymentStatus: function (orderId) {
         return api('GET', '/api/payments/orders/' + encodeURIComponent(orderId)).then(function (d) {
           if (d.wallet && ME) ME.wallet = d.wallet;
@@ -1547,8 +1552,8 @@ button:disabled {
       code: '',
       gameSlug: 'eight',
       hostName: 'شاشة الديوانية الرئيسية',
-      workerWsUrl: (window.localStorage && window.localStorage.getItem('dw_worker_ws_url')) || '',
-      wsStatus: 'local_preview', // 'connected_cloud' | 'local_preview' | 'reconnecting'
+      isHost: false,
+      wsStatus: 'idle', // idle | creating | reconnecting | connected_cloud | needs_login | gone
       wsConn: null,
       players: [], // { id, name, team, isBot, connected, score, lastAnswer, lastVote, resumeToken }
       buzzerLockedBy: null,
@@ -1637,6 +1642,17 @@ button:disabled {
         isOwner: !!(STATE.user && STATE.user.adminRole === 'owner')
       }, '*');
     } catch (e) {}
+  }
+
+  var ROOM_GAME_SLUGS = ['dakhil', 'mafia', 'qaftah', 'chancellor'];
+  function syncFrameDemoButton() {
+    var btn = document.getElementById('dwFrameDemoBtn');
+    var ifr = document.getElementById('dwGameIframe');
+    if (!btn || !ifr) return;
+    var show = ROOM_GAME_SLUGS.indexOf(STATE.activeGameSlug) !== -1 && !!ifr.getAttribute('src') && ifr.getAttribute('src') !== 'about:blank';
+    btn.style.display = show ? '' : 'none';
+    var demo = show && /[?&]demo=1/.test(ifr.getAttribute('src'));
+    btn.textContent = demo ? '🌐 رجوع للعب الحقيقي بالجوالات' : '🤖 تجربة مع بوتات';
   }
 
   function syncAudioButtonsUI() {
@@ -2372,243 +2388,128 @@ button:disabled {
   // 4. REAL CROSS-DEVICE MULTIPLAYER ROOM HUB (QR + WEBSOCKET DURABLE OBJECTS + RECONNECT)
   // ============================================================================
   function generateQrSvg(textStr) {
-    // Deterministic crisp QR-style matrix SVG for scanning / room code display
-    var s = String(textStr || 'DIWANIYA');
-    var size = 21;
-    var cells = [];
-    for (var r = 0; r < size; r++) {
-      cells[r] = [];
-      for (var c = 0; c < size; c++) cells[r][c] = 0;
-    }
-    function finder(r0, c0) {
-      for (var r = 0; r < 7; r++) {
-        for (var c = 0; c < 7; c++) {
-          var border = (r === 0 || r === 6 || c === 0 || c === 6);
-          var inner = (r >= 2 && r <= 4 && c >= 2 && c <= 4);
-          cells[r0 + r][c0 + c] = (border || inner) ? 1 : 0;
-        }
-      }
-    }
-    finder(0, 0); finder(0, size - 7); finder(size - 7, 0);
-    var hash = 2166136261;
-    for (var i = 0; i < s.length; i++) {
-      hash ^= s.charCodeAt(i);
-      hash = Math.imul(hash, 16777619);
-    }
-    for (var rr = 0; rr < size; rr++) {
-      for (var cc = 0; cc < size; cc++) {
-        if ((rr < 8 && cc < 8) || (rr < 8 && cc >= size - 8) || (rr >= size - 8 && cc < 8)) continue;
-        hash ^= (rr * 31 + cc * 17);
-        hash = Math.imul(hash, 16777619);
-        cells[rr][cc] = (Math.abs(hash) % 10) < 5 ? 1 : 0;
-      }
-    }
-    var rects = '';
-    for (var y = 0; y < size; y++) {
-      for (var x = 0; x < size; x++) {
-        if (cells[y][x]) rects += '<rect x="' + (x * 6 + 7) + '" y="' + (y * 6 + 7) + '" width="5.2" height="5.2" rx="1" fill="#0A0F24"/>';
-      }
-    }
-    return '<svg viewBox="0 0 140 140" width="150" height="150" style="background:#fff;border-radius:14px;padding:6px">' + rects + '</svg>';
+    try {
+      if (window.M8QR) return '<div style="background:#fff;border-radius:14px;padding:8px;width:170px;height:170px;margin:0 auto">' + window.M8QR.toSvg(String(textStr), { ecc: 'M', border: 1 }) + '</div>';
+    } catch (e) {}
+    return '<div style="font-size:12px;color:var(--text-muted)">تعذر رسم الرمز — استخدم الرابط</div>';
   }
 
+  // Store room: one shared buzzer + answers for any game. The server (BuzzerRoomDO) owns the state;
+  // this client only sends actions and renders the snapshots it receives.
   var ROOM_SYNC = {
-    bc: null,
+    ws: null,
+    retry: 0,
+    timer: null,
+    wanted: false,
+    creating: false,
     init: function () {
       var self = this;
-      if (!STATE.room.code) {
-        var savedCode = null;
-        try { savedCode = window.sessionStorage.getItem('dw_active_room_code'); } catch (e) {}
-        STATE.room.code = savedCode || ('DW' + Math.floor(1000 + Math.random() * 9000));
-        try { window.sessionStorage.setItem('dw_active_room_code', STATE.room.code); } catch (e) {}
+      if (STATE.room.code) { self.connect(); return; }
+      if (STATE.room.mobileControllerMode) return; // guest without a code: nothing to do
+      if (!STATE.user) {
+        STATE.room.wsStatus = 'needs_login';
+        renderRoomModal();
+        return;
       }
-      var db = DiwaniyaServerKernel.loadDB();
-      if (!db.rooms[STATE.room.code]) {
-        db.rooms[STATE.room.code] = {
-          code: STATE.room.code,
-          gameSlug: STATE.activeGameSlug || 'eight',
-          players: [],
-          buzzerLockedBy: null,
-          buzzerOrder: [],
-          currentPrompt: STATE.room.currentPrompt,
-          updatedAt: Date.now()
-        };
-        DiwaniyaServerKernel.saveDB(db);
-      } else {
-        var rm = db.rooms[STATE.room.code];
-        STATE.room.players = rm.players || [];
-        STATE.room.buzzerLockedBy = rm.buzzerLockedBy || null;
-        STATE.room.buzzerOrder = rm.buzzerOrder || [];
-      }
-      if (typeof BroadcastChannel !== 'undefined' && !this.bc) {
-        try {
-          this.bc = new BroadcastChannel('diwaniya_room_sync_v3');
-          this.bc.onmessage = function (ev) {
-            if (ev && ev.data && ev.data.roomCode === STATE.room.code) {
-              self.pullFromDB();
-              renderRoomModal();
-            }
-          };
-        } catch (e) {}
-      }
-      // If a live Cloudflare Worker WebSocket URL is configured, connect to Durable Object room
-      if (STATE.room.workerWsUrl) {
-        this.connectCloudWebSocket(STATE.room.workerWsUrl);
-      }
+      var saved = null;
+      try { saved = window.sessionStorage.getItem('dw_host_room_code'); } catch (e) {}
+      if (saved) { STATE.room.code = saved; self.connect(); return; }
+      if (self.creating) return;
+      self.creating = true;
+      STATE.room.wsStatus = 'creating';
+      renderRoomModal();
+      DiwaniyaServerKernel.createRoom(STATE.activeGameSlug || STATE.room.gameSlug || '').then(function (d) {
+        self.creating = false;
+        if (!d.ok) { STATE.room.wsStatus = 'error'; showToast(d.error || 'تعذر إنشاء الغرفة.'); renderRoomModal(); return; }
+        STATE.room.code = d.code;
+        try { window.sessionStorage.setItem('dw_host_room_code', d.code); } catch (e) {}
+        self.connect();
+      });
     },
-    connectCloudWebSocket: function (wsBaseUrl) {
+    connect: function () {
       var self = this;
-      try {
-        if (STATE.room.wsConn) {
-          try { STATE.room.wsConn.close(); } catch (e) {}
+      self.wanted = true;
+      if (self.ws && (self.ws.readyState === 0 || self.ws.readyState === 1)) return;
+      var url = (location.protocol === 'https:' ? 'wss://' : 'ws://') + location.host + '/rooms/buzz/' + encodeURIComponent(STATE.room.code) + '/ws';
+      var ws;
+      try { ws = new WebSocket(url); } catch (e) { self.later(); return; }
+      self.ws = ws;
+      STATE.room.wsStatus = 'reconnecting';
+      ws.onopen = function () {
+        self.retry = 0;
+        STATE.room.wsStatus = 'connected_cloud';
+        var tok = null;
+        try { tok = window.localStorage.getItem('dw_buzz_token_' + STATE.room.code); } catch (e) {}
+        if (tok) self.send({ t: 'resume', token: tok });
+        self.ping = setInterval(function () { self.send({ t: 'ping' }); }, 25000);
+        renderRoomModal();
+      };
+      ws.onmessage = function (ev) {
+        var m;
+        try { m = JSON.parse(ev.data); } catch (e) { return; }
+        if (m.t === 'hello') {
+          STATE.room.isHost = !!m.host;
+        } else if (m.t === 'state' && m.room) {
+          STATE.room.players = m.room.players || [];
+          STATE.room.buzzerOrder = m.room.buzzerOrder || [];
+          STATE.room.buzzerLockedBy = m.room.buzzerLockedBy || null;
+          STATE.room.currentPrompt = m.room.currentPrompt || '';
+          STATE.room.gameSlug = m.room.gameSlug || STATE.room.gameSlug;
+          var first = STATE.room.buzzerLockedBy;
+          if (first && first.timestampMs !== self.lastFirst) { self.lastFirst = first.timestampMs; STORE_AUDIO.playSfx(840); }
+        } else if (m.t === 'me') {
+          STATE.room.myPlayerId = m.id;
+          STATE.room.myResumeToken = m.token;
+          try { window.localStorage.setItem('dw_buzz_token_' + STATE.room.code, m.token); } catch (e) {}
+        } else if (m.t === 'kicked' || m.t === 'left') {
+          STATE.room.myPlayerId = '';
+          try { window.localStorage.removeItem('dw_buzz_token_' + STATE.room.code); } catch (e) {}
+          showToast(m.t === 'kicked' ? 'أخرجك المضيف من الغرفة.' : 'طلعت من الغرفة.');
+        } else if (m.t === 'err') {
+          if (m.err === 'bad_token') { try { window.localStorage.removeItem('dw_buzz_token_' + STATE.room.code); } catch (e) {} }
+          else showToast(m.err);
         }
-        var cleanUrl = wsBaseUrl.replace(/\/+$/, '') + '/api/rooms/' + encodeURIComponent(STATE.room.code) + '/ws';
+        renderRoomModal();
+      };
+      ws.onclose = function () {
+        clearInterval(self.ping);
+        if (self.ws === ws) self.ws = null;
         STATE.room.wsStatus = 'reconnecting';
-        var ws = new WebSocket(cleanUrl);
-        STATE.room.wsConn = ws;
-        ws.onopen = function () {
-          STATE.room.wsStatus = 'connected_cloud';
-          ws.send(JSON.stringify({
-            type: 'HOST_OR_PLAYER_SYNC',
-            roomCode: STATE.room.code,
-            resumeToken: STATE.room.myResumeToken || null
-          }));
-          renderRoomModal();
-        };
-        ws.onmessage = function (ev) {
-          try {
-            var msg = JSON.parse(ev.data);
-            if (msg.room) {
-              STATE.room.players = msg.room.players || [];
-              STATE.room.buzzerLockedBy = msg.room.buzzerLockedBy || null;
-              STATE.room.buzzerOrder = msg.room.buzzerOrder || [];
-              renderRoomModal();
-            }
-          } catch (e) {}
-        };
-        ws.onclose = function () {
-          STATE.room.wsStatus = 'local_preview';
-          renderRoomModal();
-        };
-      } catch (e) {
-        STATE.room.wsStatus = 'local_preview';
-      }
-    },
-    pullFromDB: function () {
-      var db = DiwaniyaServerKernel.loadDB();
-      var rm = db.rooms[STATE.room.code];
-      if (rm) {
-        STATE.room.players = rm.players || [];
-        STATE.room.buzzerLockedBy = rm.buzzerLockedBy || null;
-        STATE.room.buzzerOrder = rm.buzzerOrder || [];
-        STATE.room.currentPrompt = rm.currentPrompt || STATE.room.currentPrompt;
-      }
-    },
-    commitToDB: function () {
-      var db = DiwaniyaServerKernel.loadDB();
-      db.rooms[STATE.room.code] = {
-        code: STATE.room.code,
-        gameSlug: STATE.activeGameSlug || STATE.room.gameSlug || 'eight',
-        players: STATE.room.players,
-        buzzerLockedBy: STATE.room.buzzerLockedBy,
-        buzzerOrder: STATE.room.buzzerOrder,
-        currentPrompt: STATE.room.currentPrompt,
-        updatedAt: Date.now()
+        renderRoomModal();
+        self.later();
       };
-      DiwaniyaServerKernel.saveDB(db);
-      if (this.bc) {
-        try { this.bc.postMessage({ roomCode: STATE.room.code, ts: Date.now() }); } catch (e) {}
-      }
-      if (STATE.room.wsConn && STATE.room.wsConn.readyState === 1) {
-        try {
-          STATE.room.wsConn.send(JSON.stringify({
-            type: 'STATE_UPDATE',
-            roomCode: STATE.room.code,
-            room: db.rooms[STATE.room.code]
-          }));
-        } catch (e) {}
-      }
+      ws.onerror = function () { try { ws.close(); } catch (e) {} };
     },
-    joinPlayer: function (name, team, isBot, existingResumeToken) {
-      this.pullFromDB();
-      var cleanName = String(name || '').trim() || 'لاعب الديوانية';
-      // Support reconnect via resumeToken without losing player state
-      if (existingResumeToken) {
-        var found = STATE.room.players.find(function (p) { return p.resumeToken === existingResumeToken; });
-        if (found) {
-          found.connected = true;
-          found.name = cleanName;
-          this.commitToDB();
-          return found;
-        }
-      }
-      var pid = (isBot ? 'bot_' : 'plr_') + Date.now() + '_' + Math.floor(Math.random() * 1000);
-      var rToken = 'res_' + pid + '_' + Math.random().toString(36).slice(2, 9);
-      var pObj = {
-        id: pid,
-        name: cleanName,
-        team: team || 'الفريق الأول 🔵',
-        isBot: !!isBot,
-        connected: true,
-        score: 0,
-        lastAnswer: '',
-        lastVote: '',
-        resumeToken: rToken
-      };
-      STATE.room.players.push(pObj);
-      if (!isBot) {
-        STATE.room.myPlayerId = pid;
-        STATE.room.myResumeToken = rToken;
-        try { window.localStorage.setItem('dw_player_resume_' + STATE.room.code, rToken); } catch (e) {}
-      }
-      this.commitToDB();
-      return pObj;
+    later: function () {
+      var self = this;
+      if (!self.wanted) return;
+      clearTimeout(self.timer);
+      var wait = Math.min(1000 * Math.pow(2, self.retry++), 10000);
+      self.timer = setTimeout(function () {
+        // A room that no longer exists stops the retries.
+        fetch('/api/rooms/status?code=' + encodeURIComponent(STATE.room.code)).then(function (r) { return r.json(); }).then(function (d) {
+          if (d && d.exists) self.connect();
+          else {
+            self.wanted = false;
+            STATE.room.wsStatus = 'gone';
+            try { window.sessionStorage.removeItem('dw_host_room_code'); } catch (e) {}
+            renderRoomModal();
+          }
+        }).catch(function () { self.later(); });
+      }, wait);
     },
-    pressBuzzer: function (playerId) {
-      this.pullFromDB();
-      var p = STATE.room.players.find(function (x) { return x.id === playerId; });
-      if (!p || !p.connected) return { ok: false, reason: 'اللاعب غير متصل' };
-      if (STATE.room.buzzerOrder.some(function (b) { return b.playerId === playerId; })) {
-        return { ok: false, reason: 'تم تسجيل ضغطة الجرس مسبقاً' };
-      }
-      var entry = {
-        playerId: p.id,
-        name: p.name,
-        team: p.team,
-        isBot: p.isBot,
-        rank: STATE.room.buzzerOrder.length + 1,
-        timestampMs: Date.now()
-      };
-      STATE.room.buzzerOrder.push(entry);
-      if (!STATE.room.buzzerLockedBy) {
-        STATE.room.buzzerLockedBy = entry;
-      }
-      STORE_AUDIO.playSfx(840);
-      this.commitToDB();
-      return { ok: true, entry: entry, first: STATE.room.buzzerLockedBy.playerId === p.id };
+    send: function (o) {
+      if (this.ws && this.ws.readyState === 1) { this.ws.send(JSON.stringify(o)); return true; }
+      showToast('الاتصال بالغرفة مقطوع، جاري إعادة الاتصال…');
+      return false;
     },
-    resetBuzzer: function () {
-      this.pullFromDB();
-      STATE.room.buzzerLockedBy = null;
-      STATE.room.buzzerOrder = [];
-      this.commitToDB();
-    },
-    submitPlayerResponse: function (playerId, answerText, voteText) {
-      this.pullFromDB();
-      var p = STATE.room.players.find(function (x) { return x.id === playerId; });
-      if (!p) return false;
-      if (answerText != null) p.lastAnswer = String(answerText).trim();
-      if (voteText != null) p.lastVote = String(voteText).trim();
-      this.commitToDB();
-      return true;
-    },
-    simulateDisconnectReconnect: function (playerId, makeConnected) {
-      this.pullFromDB();
-      var p = STATE.room.players.find(function (x) { return x.id === playerId; });
-      if (!p) return false;
-      p.connected = !!makeConnected;
-      this.commitToDB();
-      return true;
+    newRoom: function () {
+      this.wanted = false;
+      if (this.ws) { try { this.ws.close(); } catch (e) {} }
+      try { window.sessionStorage.removeItem('dw_host_room_code'); } catch (e) {}
+      STATE.room.code = '';
+      STATE.room.players = []; STATE.room.buzzerOrder = []; STATE.room.buzzerLockedBy = null;
+      this.init();
     }
   };
 
@@ -2618,107 +2519,100 @@ button:disabled {
     var modal = document.getElementById('dwRoomModal');
     var inner = document.getElementById('dwRoomModalInner');
     if (!modal || !inner || !modal.classList.contains('open')) return;
-    ROOM_SYNC.pullFromDB();
-
-    var joinUrl = (window.location.origin && window.location.origin !== 'null' ? window.location.origin + window.location.pathname : 'https://diwaniyaplus.com/play') + '?room=' + encodeURIComponent(STATE.room.code) + '&game=' + encodeURIComponent(STATE.activeGameSlug || 'eight');
-    var qrSvg = generateQrSvg(joinUrl);
-    var humanPlayers = STATE.room.players.filter(function (p) { return !p.isBot; });
-    var botPlayers = STATE.room.players.filter(function (p) { return p.isBot; });
-
-    inner.innerHTML =
+    var R = STATE.room;
+    var st = R.wsStatus;
+    var statusHtml = st === 'connected_cloud'
+      ? '<span class="dw-chip teal">🟢 متصل بخادم الغرف</span>'
+      : st === 'creating' ? '<span class="dw-chip gold">⏳ جاري إنشاء الغرفة…</span>'
+      : st === 'gone' ? '<span class="dw-chip">انتهت هذه الغرفة</span>'
+      : st === 'needs_login' ? '<span class="dw-chip gold">سجّل دخولك لإنشاء غرفة</span>'
+      : '<span class="dw-chip gold">⏳ جاري الاتصال…</span>';
+    var head =
       '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">' +
-        '<div>' +
-          '<span class="dw-badge">📱 نظام الغرف الجماعية الحقيقية (TV/iPad Host + Mobile QR + Durable Objects WebSocket)</span>' +
-          '<h3 style="margin:4px 0 0;font-size:21px;font-weight:900">غرفة الديوانية التفاعلية · رمز الغرفة: <span style="color:var(--gold)" dir="ltr">' + esc(STATE.room.code) + '</span></h3>' +
-        '</div>' +
-        '<div style="display:flex;gap:8px">' +
-          '<button class="dw-btn dw-btn-teal dw-btn-sm" data-act="room-toggle-mobile-view">' + (STATE.room.mobileControllerMode ? '🖥️ عرض شاشة التلفزيون / الآيباد الرئيسية' : '📱 فتح شاشة جوال اللاعب (Controller)') + '</button>' +
-          '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="close-room-hub">✕ إغلاق</button>' +
-        '</div>' +
-      '</div>' +
-      '<div style="background:' + (STATE.room.wsStatus === 'connected_cloud' ? 'rgba(16,185,129,0.12)' : 'rgba(245,185,66,0.10)') + ';border:1px solid ' + (STATE.room.wsStatus === 'connected_cloud' ? 'rgba(16,185,129,0.4)' : 'rgba(245,185,66,0.35)') + ';padding:10px 14px;border-radius:12px;font-size:12.5px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">' +
-        '<div>' +
-          (STATE.room.wsStatus === 'connected_cloud'
-            ? '🟢 <b>متصل بخادم الغرف السحابي (Cloudflare Durable Objects WebSocket):</b> اللعب متزامن لحظياً عبر الإنترنت بين جميع الجوالات.'
-            : '📡 <b>وضع الشبكة الحالي (معاينة محلية / Local Multi-Tab Sync):</b> لتفعيل اللعب عبر الإنترنت بين أجهزة مختلفة، اربط عنوان Cloudflare Worker الخاص بك:') +
-        '</div>' +
-        '<div style="display:flex;gap:6px;align-items:center">' +
-          '<input id="roomWorkerUrlInp" class="dw-input" dir="ltr" style="max-width:250px;padding:6px 10px;font-size:12px" placeholder="wss://diwaniya-worker.subdomain.workers.dev" value="' + esc(STATE.room.workerWsUrl) + '">' +
-          '<button class="dw-btn dw-btn-gold dw-btn-sm" data-act="room-connect-ws">ربط الخادم</button>' +
-        '</div>' +
-      '</div>' +
-      (STATE.room.mobileControllerMode
-        ? (
-          '<div class="dw-card" style="border:2px solid var(--teal);background:rgba(10,15,36,0.95)">' +
-            '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">' +
-              '<h4 style="margin:0;font-size:18px;color:var(--teal)">📱 شاشة جوال اللاعب (Mobile Controller — الغرفة ' + esc(STATE.room.code) + ')</h4>' +
-              '<span class="dw-chip teal">متصل بالغرفة · Resume Token نشط</span>' +
+        '<div><span class="dw-badge">📱 غرفة الجرس والإجابات</span>' +
+        '<h3 style="margin:4px 0 0;font-size:21px;font-weight:900">' + (R.code ? 'رمز الغرفة: <span style="color:var(--gold)" dir="ltr">' + esc(R.code) + '</span>' : 'غرفة اللعب الجماعي') + '</h3></div>' +
+        '<div style="display:flex;gap:8px;align-items:center">' + statusHtml +
+          '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="close-room-hub">✕ إغلاق</button></div>' +
+      '</div>';
+
+    if (st === 'needs_login') {
+      inner.innerHTML = head + '<div class="dw-card" style="text-align:center"><p>إنشاء غرفة يحتاج تسجيل دخول المضيف. اللاعبين يدخلون من جوالاتهم بدون حساب.</p>' +
+        '<button class="dw-btn dw-btn-gold" data-act="open-auth">تسجيل الدخول</button></div>';
+      return;
+    }
+    if (st === 'gone') {
+      inner.innerHTML = head + '<div class="dw-card" style="text-align:center"><p>الغرفة انتهت أو انحذفت.</p>' +
+        (R.mobileControllerMode ? '<p style="color:var(--text-muted)">اطلب من المضيف رمز جديد.</p>' : '<button class="dw-btn dw-btn-gold" data-act="room-new">إنشاء غرفة جديدة</button>') + '</div>';
+      return;
+    }
+
+    var players = R.players || [];
+    var order = R.buzzerOrder || [];
+    var orderHtml = order.length
+      ? order.map(function (b, i) {
+          return '<span class="dw-chip ' + (i === 0 ? 'gold' : '') + '" style="font-size:' + (i === 0 ? '15px' : '12.5px') + '">' + (i === 0 ? '⚡ ' : '#' + arNum(i + 1) + ' ') + esc(b.name) + ' · ' + esc(b.team) + '</span>';
+        }).join(' ')
+      : '<span class="dw-chip teal">الجرس مفتوح — بانتظار أسرع لاعب</span>';
+
+    // ---- phone (player) view
+    if (R.mobileControllerMode && !R.isHost) {
+      var me = players.find(function (p) { return p.id === R.myPlayerId; });
+      var body;
+      if (!me) {
+        body = '<div class="dw-card">' +
+          '<label style="font-size:13px;color:var(--text-muted)">اسمك</label><input id="mobPlayerName" class="dw-input" maxlength="30" placeholder="مثال: فهد / نورة">' +
+          '<label style="font-size:13px;color:var(--text-muted)">الفريق</label><select id="mobPlayerTeam" class="dw-select"><option value="الفريق الأول 🔵">الفريق الأول 🔵</option><option value="الفريق الثاني 🟠">الفريق الثاني 🟠</option></select>' +
+          '<button class="dw-btn dw-btn-gold" style="width:100%;margin-top:8px" data-act="room-join-human">ادخل الغرفة</button>' +
+        '</div>';
+      } else {
+        var myRank = order.findIndex(function (b) { return b.playerId === me.id; });
+        body = '<div class="dw-card" style="border:2px solid var(--teal)">' +
+          '<div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px"><b>' + esc(me.name) + ' · ' + esc(me.team) + '</b><span class="dw-chip gold">النقاط: ' + arNum(me.score) + '</span></div>' +
+          (R.currentPrompt ? '<div style="font-size:15px;line-height:1.7;background:rgba(255,255,255,0.05);padding:10px 12px;border-radius:12px">' + esc(R.currentPrompt) + '</div>' : '') +
+          '<button class="dw-btn dw-btn-danger" style="width:100%;padding:34px 12px;font-size:26px;font-weight:900" data-act="room-buzz-now"' + (myRank !== -1 ? ' disabled' : '') + '>' +
+            (myRank === 0 ? '⚡ أنت الأسرع!' : myRank > 0 ? 'ترتيبك #' + arNum(myRank + 1) : '🔔 اضغط الجرس') + '</button>' +
+          '<div style="display:flex;gap:6px;flex-wrap:wrap">' + orderHtml + '</div>' +
+          '<input id="mobAnswerInp" class="dw-input" maxlength="200" placeholder="اكتب إجابتك هنا…">' +
+          '<div style="display:flex;gap:8px"><button class="dw-btn dw-btn-teal" style="flex:1" data-act="room-send-answer">✍️ أرسل الإجابة</button>' +
+          '<button class="dw-btn dw-btn-sec" style="flex:1" data-act="room-send-vote">🗳️ أرسل كتصويت</button></div>' +
+          '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="room-leave">الخروج من الغرفة</button>' +
+        '</div>';
+      }
+      inner.innerHTML = head + body;
+      return;
+    }
+
+    // ---- host (TV / iPad) view
+    var joinUrl = window.location.origin + '/?room=' + encodeURIComponent(R.code || '');
+    inner.innerHTML = head +
+      (R.code ? (
+        '<div style="display:grid;grid-template-columns:minmax(0,190px) 1fr;gap:16px;align-items:center;background:rgba(0,0,0,0.28);padding:16px;border-radius:16px">' +
+          '<div style="text-align:center">' + generateQrSvg(joinUrl) +
+            '<div style="font-size:12px;color:var(--gold);font-weight:800;margin-top:6px">امسح الرمز بكاميرا الجوال</div></div>' +
+          '<div style="display:flex;flex-direction:column;gap:8px;min-width:0">' +
+            '<div style="font-size:13.5px;color:var(--text-muted)">أو افتح الرابط واكتب الرمز:</div>' +
+            '<code style="background:rgba(255,255,255,0.06);padding:8px 12px;border-radius:10px;color:var(--teal);font-size:13px;word-break:break-all" dir="ltr">' + esc(joinUrl) + '</code>' +
+            '<div style="display:flex;gap:8px;flex-wrap:wrap">' +
+              '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="room-copy-link">📋 نسخ الرابط</button>' +
+              '<button class="dw-btn dw-btn-gold dw-btn-sm" data-act="room-reset-buzzer">🔄 تصفير الجرس</button>' +
+              '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="room-new">غرفة جديدة</button>' +
             '</div>' +
-            '<div class="dw-grid-3">' +
-              '<div><label style="font-size:12px;color:var(--text-muted)">اسم اللاعب في الجوال</label><input id="mobPlayerName" class="dw-input" placeholder="مثال: فهد / نورة" value=""></div>' +
-              '<div><label style="font-size:12px;color:var(--text-muted)">الفريق</label><select id="mobPlayerTeam" class="dw-select"><option value="الفريق الأول 🔵">الفريق الأول 🔵</option><option value="الفريق الثاني 🟠">الفريق الثاني 🟠</option><option value="الفريق الثالث 🟢">الفريق الثالث 🟢</option><option value="الفريق الرابع 🟣">الفريق الرابع 🟣</option></select></div>' +
-              '<div style="display:flex;align-items:flex-end"><button class="dw-btn dw-btn-gold" style="width:100%" data-act="room-join-human">+ انضمام كلاعب حقيقي من الجوال</button></div>' +
-            '</div>' +
-            (STATE.room.players.length ? (
-              '<div style="border-top:1px solid var(--border-subtle);padding-top:12px;display:flex;flex-direction:column;gap:10px">' +
-                '<div><label style="font-size:12px;color:var(--text-muted)">اختر اللاعب النشط للإجابة أو ضغط الجرس</label><select id="mobActivePlayerSel" class="dw-select">' +
-                  STATE.room.players.map(function (p) {
-                    return '<option value="' + esc(p.id) + '"' + (p.id === STATE.room.myPlayerId ? ' selected' : '') + '>' + esc(p.name) + ' (' + esc(p.team) + ')' + (p.isBot ? ' [🤖 بوت آلي]' : ' [📱 لاعب حقيقي]') + '</option>';
-                  }).join('') +
-                '</select></div>' +
-                '<div style="display:flex;gap:10px;flex-wrap:wrap">' +
-                  '<button class="dw-btn dw-btn-danger" style="flex:1;padding:18px;font-size:18px" data-act="room-buzz-now">🔔 اضغط الجرس السريع الآن!</button>' +
-                '</div>' +
-                '<div class="dw-grid-3">' +
-                  '<input id="mobAnswerInp" class="dw-input" placeholder="اكتب إجابتك أو كذبتك السرية هنا...">' +
-                  '<button class="dw-btn dw-btn-teal" data-act="room-send-answer">✍️ إرسال الإجابة لشاشة التلفزيون</button>' +
-                  '<button class="dw-btn dw-btn-sec" data-act="room-send-vote">🗳️ إرسال تصويت سري</button>' +
-                '</div>' +
-              '</div>'
-            ) : '<div style="color:var(--text-muted);font-size:13px">أدخل اسمك واضغط «انضمام كلاعب حقيقي من الجوال» لتفعيل الجرس وإرسال الإجابات.</div>') +
-          '</div>'
-        )
-        : (
-          '<div style="display:grid;grid-template-columns:190px 1fr;gap:16px;align-items:center;background:rgba(0,0,0,0.28);padding:16px;border-radius:16px">' +
-            '<div style="text-align:center">' +
-              qrSvg +
-              '<div style="font-size:11.5px;color:var(--gold);font-weight:800;margin-top:6px">امسح الـ QR من جوالك</div>' +
-            '</div>' +
-            '<div style="display:flex;flex-direction:column;gap:8px">' +
-              '<div style="font-size:13.5px;color:var(--text-muted)">رابط انضمام الجوالات المباشر:</div>' +
-              '<code style="background:rgba(255,255,255,0.06);padding:8px 12px;border-radius:10px;color:var(--teal);font-size:12.5px;word-break:break-all" dir="ltr">' + esc(joinUrl) + '</code>' +
-              '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px">' +
-                '<input id="hostQuickPlayerName" class="dw-input" style="max-width:210px" placeholder="اسم لاعب من الجوال...">' +
-                '<button class="dw-btn dw-btn-teal dw-btn-sm" data-act="room-quick-add-human">+ تسجيل لاعب حقيقي</button>' +
-                '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="room-add-bot">🤖 + إضافة بوت آلي للتجربة الفردية</button>' +
-                '<button class="dw-btn dw-btn-gold dw-btn-sm" data-act="room-reset-buzzer">🔄 تصفير الجرس لجولة جديدة</button>' +
-              '</div>' +
-            '</div>' +
-          '</div>'
-        )
-      ) +
+            '<div style="display:flex;gap:8px"><input id="roomPromptInp" class="dw-input" maxlength="300" placeholder="نص يظهر على جوالات اللاعبين (اختياري)" value="' + esc(R.currentPrompt || '') + '">' +
+              '<button class="dw-btn dw-btn-teal dw-btn-sm" data-act="room-set-prompt">إرسال</button></div>' +
+          '</div>' +
+        '</div>'
+      ) : '') +
       '<div class="dw-card" style="padding:14px">' +
-        '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">' +
-          '<b>🔔 حالة الجرس السريع الموحد بين الأجهزة:</b>' +
-          (STATE.room.buzzerLockedBy
-            ? '<span class="dw-chip gold" style="font-size:13.5px">⚡ الأسرع: ' + esc(STATE.room.buzzerLockedBy.name) + ' (' + esc(STATE.room.buzzerLockedBy.team) + ')</span>'
-            : '<span class="dw-chip teal">الجرس متاح — بانتظار أسرع لاعب يضغط من جواله!</span>') +
-        '</div>' +
-        '<div style="font-size:13px;color:var(--text-muted);margin-top:6px">اللاعبون المتصلون: <b>' + arNum(humanPlayers.length) + ' لاعب حقيقي</b> · <b>' + arNum(botPlayers.length) + ' بوت آلي</b></div>' +
-        '<div class="dw-table-wrap" style="max-height:240px;overflow-y:auto;margin-top:8px"><table class="dw-table"><thead><tr><th>اللاعب</th><th>النوع</th><th>الفريق</th><th>الحالة</th><th>آخر إجابة / تصويت</th><th>إجراءات الغرفة</th></tr></thead><tbody>' +
-          (STATE.room.players.length ? STATE.room.players.map(function (p) {
-            return '<tr>' +
-              '<td><b>' + esc(p.name) + '</b></td>' +
-              '<td>' + (p.isBot ? '<span class="dw-chip">🤖 بوت آلي</span>' : '<span class="dw-chip teal">📱 لاعب حقيقي</span>') + '</td>' +
-              '<td>' + esc(p.team) + '</td>' +
-              '<td>' + (p.connected ? '<span class="dw-chip teal">🟢 متصل</span>' : '<span class="dw-chip">🔴 انقطع (محفوظ)</span>') + '</td>' +
-              '<td style="font-size:12.5px;color:var(--gold)">' + esc(p.lastAnswer || p.lastVote || '—') + '</td>' +
-              '<td style="display:flex;gap:6px">' +
-                '<button class="dw-btn dw-btn-gold dw-btn-sm" data-act="room-player-buzz" data-id="' + esc(p.id) + '">🔔 جرس</button>' +
-                '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="room-toggle-conn" data-id="' + esc(p.id) + '">' + (p.connected ? 'محاكاة انقطاع' : '🔄 إعادة اتصال') + '</button>' +
-              '</td>' +
-            '</tr>';
-          }).join('') : '<tr><td colspan="6" style="text-align:center;color:var(--text-muted)">لا يوجد لاعبون في الغرفة بعد — امسح الـ QR أو أضف لاعباً للبدء.</td></tr>') +
+        '<div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center"><b>🔔 الجرس:</b> ' + orderHtml + '</div>' +
+        '<div class="dw-table-wrap" style="max-height:300px;overflow-y:auto;margin-top:10px"><table class="dw-table"><thead><tr><th>اللاعب</th><th>الفريق</th><th>الحالة</th><th>النقاط</th><th>آخر إجابة / تصويت</th><th></th></tr></thead><tbody>' +
+          (players.length ? players.map(function (p) {
+            return '<tr><td><b>' + esc(p.name) + '</b></td><td>' + esc(p.team) + '</td>' +
+              '<td>' + (p.connected ? '<span class="dw-chip teal">🟢 متصل</span>' : '<span class="dw-chip">🔴 منقطع</span>') + '</td>' +
+              '<td style="white-space:nowrap"><button class="dw-btn dw-btn-sec dw-btn-sm" data-act="room-score" data-id="' + esc(p.id) + '" data-delta="-100">−</button> ' + arNum(p.score) +
+                ' <button class="dw-btn dw-btn-sec dw-btn-sm" data-act="room-score" data-id="' + esc(p.id) + '" data-delta="100">+</button></td>' +
+              '<td style="font-size:13px;color:var(--gold)">' + esc(p.lastAnswer || '') + (p.lastVote ? ' 🗳️ ' + esc(p.lastVote) : '') + (p.lastAnswer || p.lastVote ? '' : '—') + '</td>' +
+              '<td><button class="dw-btn dw-btn-sec dw-btn-sm" data-act="room-kick" data-id="' + esc(p.id) + '">إخراج</button></td></tr>';
+          }).join('') : '<tr><td colspan="6" style="text-align:center;color:var(--text-muted)">ما فيه لاعبين بعد — خلهم يمسحون الرمز.</td></tr>') +
         '</tbody></table></div>' +
       '</div>';
   }
@@ -2808,6 +2702,7 @@ button:disabled {
         iframe.removeAttribute('srcdoc');
         iframe.src = res.playUrl;
         frameWrap.classList.add('open');
+        syncFrameDemoButton();
       }
       return res;
     });
@@ -2821,8 +2716,8 @@ button:disabled {
       var params = new URLSearchParams(window.location.search);
       var rCode = params.get('room');
       var gSlug = params.get('game');
-      if (rCode) {
-        STATE.room.code = rCode;
+      if (rCode && /^[A-Za-z2-9]{6}$/.test(rCode)) {
+        STATE.room.code = rCode.toUpperCase();
         STATE.room.mobileControllerMode = true;
         if (gSlug) STATE.room.gameSlug = gSlug;
         setTimeout(function () {
@@ -2886,86 +2781,51 @@ button:disabled {
       STATE.previewCatSlug = null;
       renderCategoryPreviewModal();
     } else if (act === 'open-room-hub') {
-      ROOM_SYNC.init();
       var rmMod = document.getElementById('dwRoomModal');
       if (rmMod) rmMod.classList.add('open');
+      ROOM_SYNC.init();
       renderRoomModal();
     } else if (act === 'close-room-hub') {
       var rmMod2 = document.getElementById('dwRoomModal');
       if (rmMod2) rmMod2.classList.remove('open');
-    } else if (act === 'room-toggle-mobile-view') {
-      STATE.room.mobileControllerMode = !STATE.room.mobileControllerMode;
-      renderRoomModal();
-    } else if (act === 'room-connect-ws') {
-      var wsInp = document.getElementById('roomWorkerUrlInp');
-      var wsVal = wsInp ? wsInp.value.trim() : '';
-      STATE.room.workerWsUrl = wsVal;
-      try { window.localStorage.setItem('dw_worker_ws_url', wsVal); } catch (err) {}
-      if (wsVal) {
-        ROOM_SYNC.connectCloudWebSocket(wsVal);
-        showToast('جاري الاتصال بخادم الغرف السحابي (Durable Objects WebSocket)...');
-      } else {
-        STATE.room.wsStatus = 'local_preview';
-        renderRoomModal();
-        showToast('تم التبديل إلى وضع المعاينة المحلية.');
-      }
+    } else if (act === 'room-new') {
+      ROOM_SYNC.newRoom();
+    } else if (act === 'room-copy-link') {
+      var link = window.location.origin + '/?room=' + encodeURIComponent(STATE.room.code);
+      if (navigator.clipboard) navigator.clipboard.writeText(link).then(function () { showToast('تم نسخ الرابط'); });
     } else if (act === 'room-join-human') {
-      var pName = (document.getElementById('mobPlayerName') || {}).value || 'لاعب الجوال';
+      var pName = ((document.getElementById('mobPlayerName') || {}).value || '').trim();
       var pTeam = (document.getElementById('mobPlayerTeam') || {}).value || 'الفريق الأول 🔵';
-      var savedRes = null;
-      try { savedRes = window.localStorage.getItem('dw_player_resume_' + STATE.room.code); } catch (err) {}
-      var joined = ROOM_SYNC.joinPlayer(pName, pTeam, false, savedRes);
-      renderRoomModal();
-      showToast('📱 تم انضمام «' + joined.name + '» للغرفة بنجاح!');
-    } else if (act === 'room-quick-add-human') {
-      var qName = (document.getElementById('hostQuickPlayerName') || {}).value || ('لاعب ' + (STATE.room.players.length + 1));
-      var joined2 = ROOM_SYNC.joinPlayer(qName, 'الفريق الأول 🔵', false, null);
-      renderRoomModal();
-      showToast('📱 تم تسجيل اللاعب «' + joined2.name + '» في الغرفة!');
-    } else if (act === 'room-add-bot') {
-      var botObj = ROOM_SYNC.joinPlayer('بوت آلي #' + (STATE.room.players.length + 1), 'الفريق الثاني 🟠', true, null);
-      renderRoomModal();
-      showToast('🤖 تمت إضافة «' + botObj.name + '» بعلامة بوت واضحة للتجربة الفردية.');
+      if (!pName) { showToast('اكتب اسمك أولاً'); return; }
+      ROOM_SYNC.send({ t: 'join', name: pName, team: pTeam });
     } else if (act === 'room-buzz-now') {
-      var selEl = document.getElementById('mobActivePlayerSel');
-      var pid = selEl ? selEl.value : STATE.room.myPlayerId;
-      var bz = ROOM_SYNC.pressBuzzer(pid);
-      renderRoomModal();
-      if (bz.ok) {
-        showToast(bz.first ? '🔔 أنت الأسرع! تم قفل الجرس باسمك على شاشة التلفزيون!' : '🔔 تم تسجيل ضغطة الجرس في الترتيب #' + bz.entry.rank);
-      } else {
-        showToast(bz.reason || 'الجرس مقفل.');
-      }
-    } else if (act === 'room-player-buzz') {
-      var pid2 = actBtn.getAttribute('data-id');
-      ROOM_SYNC.pressBuzzer(pid2);
-      renderRoomModal();
+      if (navigator.vibrate) { try { navigator.vibrate(60); } catch (e2) {} }
+      ROOM_SYNC.send({ t: 'buzz' });
     } else if (act === 'room-reset-buzzer') {
-      ROOM_SYNC.resetBuzzer();
-      renderRoomModal();
-      showToast('🔄 تم تصفير الجرس وفتحه للجولة الجديدة!');
-    } else if (act === 'room-send-answer') {
-      var selEl2 = document.getElementById('mobActivePlayerSel');
-      var pid3 = selEl2 ? selEl2.value : STATE.room.myPlayerId;
-      var ansTxt = (document.getElementById('mobAnswerInp') || {}).value || '';
-      if (!ansTxt.trim()) { showToast('اكتب إجابتك أولاً.'); return; }
-      ROOM_SYNC.submitPlayerResponse(pid3, ansTxt, null);
-      renderRoomModal();
-      showToast('✍️ وصلت إجابتك فوراً إلى شاشة العرض الرئيسية!');
-    } else if (act === 'room-send-vote') {
-      var selEl3 = document.getElementById('mobActivePlayerSel');
-      var pid4 = selEl3 ? selEl3.value : STATE.room.myPlayerId;
-      var voteTxt = (document.getElementById('mobAnswerInp') || {}).value || 'تصويت مؤكد ✓';
-      ROOM_SYNC.submitPlayerResponse(pid4, null, '🗳️ ' + voteTxt);
-      renderRoomModal();
-      showToast('🗳️ تم تسجيل تصويتك السري في الغرفة!');
-    } else if (act === 'room-toggle-conn') {
-      var pid5 = actBtn.getAttribute('data-id');
-      var targetP = STATE.room.players.find(function (x) { return x.id === pid5; });
-      if (targetP) {
-        ROOM_SYNC.simulateDisconnectReconnect(pid5, !targetP.connected);
-        renderRoomModal();
-        showToast(targetP.connected ? '🔄 تمت استعادة اتصال «' + targetP.name + '» مع كامل نقاطه وحالته!' : '🔴 تم محاكاة انقطاع «' + targetP.name + '» مع حفظ مقعده.');
+      if (ROOM_SYNC.send({ t: 'reset' })) showToast('🔄 الجرس مفتوح لجولة جديدة');
+    } else if (act === 'room-set-prompt') {
+      ROOM_SYNC.send({ t: 'prompt', text: (document.getElementById('roomPromptInp') || {}).value || '' });
+    } else if (act === 'room-score') {
+      ROOM_SYNC.send({ t: 'score', id: actBtn.getAttribute('data-id'), delta: parseInt(actBtn.getAttribute('data-delta'), 10) });
+    } else if (act === 'room-kick') {
+      ROOM_SYNC.send({ t: 'kick', id: actBtn.getAttribute('data-id') });
+    } else if (act === 'room-leave') {
+      ROOM_SYNC.send({ t: 'leave' });
+    } else if (act === 'room-send-answer' || act === 'room-send-vote') {
+      var ansInp = document.getElementById('mobAnswerInp');
+      var ansTxt = ((ansInp || {}).value || '').trim();
+      if (!ansTxt) { showToast('اكتب شي أولاً'); return; }
+      if (ROOM_SYNC.send({ t: act === 'room-send-answer' ? 'answer' : 'vote', text: ansTxt })) {
+        if (ansInp) ansInp.value = '';
+        showToast(act === 'room-send-answer' ? '✍️ وصلت إجابتك للشاشة' : '🗳️ وصل تصويتك');
+      }
+    } else if (act === 'toggle-frame-demo') {
+      var dIfr = document.getElementById('dwGameIframe');
+      if (dIfr && dIfr.src) {
+        var dUrl = new URL(dIfr.src, window.location.href);
+        if (dUrl.searchParams.get('demo') === '1') dUrl.searchParams.delete('demo'); else dUrl.searchParams.set('demo', '1');
+        dIfr.src = dUrl.pathname + dUrl.search;
+        syncFrameDemoButton();
       }
     } else if (act === 'close-game-frame') {
       var fw = document.getElementById('dwGameFrameWrap');

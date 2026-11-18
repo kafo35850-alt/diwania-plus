@@ -2,6 +2,7 @@
 import { HttpError, nowMs, nowIso, randomToken, randomId, sha256Hex } from './util.js';
 import { getDoc } from './catalog.js';
 import { GAMES } from './games.js';
+import { ROOM_GAMES, verifyPlayToken, gameRoomExists, relayHostConnected, prepareRoomGame, prepareEight } from './rooms/routes.js';
 
 const PLAY_TOKEN_TTL_MS = 12 * 60 * 60 * 1000;
 const IDEM_RE = /^[A-Za-z0-9_.:-]{8,120}$/;
@@ -122,15 +123,25 @@ function htmlPage(status, message) {
   );
 }
 
-// GET /play/<slug>?t=<token> — only the user who launched (and paid for) the game gets its code.
+// GET /play/<slug>?t=<token> — the host who launched (and paid for) the game.
+// GET /play/<slug>?room=CODE | ?board=CODE | ?buzzer=CODE — guests joining a live room from their phone
+// (only while that room exists, so a room link never unlocks a game on its own).
 export async function servePlay(env, request, session, slug) {
-  if (!session) return htmlPage(401, 'سجّل دخولك من المتجر لتشغيل اللعبة.');
-  const token = new URL(request.url).searchParams.get('t') || '';
-  if (!token || token.length > 200) return htmlPage(403, 'افتح اللعبة من المتجر.');
-  const row = await env.DB.prepare('SELECT user_id, game_slug, expires_at FROM play_tokens WHERE token_hash = ?')
-    .bind(await sha256Hex(token)).first();
-  if (!row || row.user_id !== session.user.id || row.game_slug !== slug || row.expires_at < nowMs()) {
-    return htmlPage(403, 'انتهت صلاحية جلسة اللعب. افتح اللعبة من المتجر مرة ثانية.');
+  const url = new URL(request.url);
+  const token = url.searchParams.get('t') || '';
+  let guest = false;
+  if (token) {
+    if (!session) return htmlPage(401, 'سجّل دخولك من المتجر لتشغيل اللعبة.');
+    if (!(await verifyPlayToken(env, session.user.id, slug, token))) {
+      return htmlPage(403, 'انتهت صلاحية جلسة اللعب. افتح اللعبة من المتجر مرة ثانية.');
+    }
+  } else {
+    const code = url.searchParams.get('room') || url.searchParams.get('board') || '';
+    const buzz = url.searchParams.get('buzzer') || '';
+    if (ROOM_GAMES[slug] && code && await gameRoomExists(env, slug, code)) guest = true;
+    else if (slug === 'eight' && buzz && await relayHostConnected(env, buzz)) guest = true;
+    else if (code || buzz) return htmlPage(404, 'الغرفة غير موجودة أو انتهت. اطلب من المضيف رابط جديد.');
+    else return htmlPage(403, 'افتح اللعبة من المتجر.');
   }
 
   const games = await getDoc(env, 'games');
@@ -141,12 +152,14 @@ export async function servePlay(env, request, session, slug) {
   let html = resolved.html;
   if (resolved.retitle) html = html.replace(/ديوانية بلس — [^<]+/g, 'ديوانية بلس — ' + game.title.replace(/[<>&]/g, ''));
 
-  // Owner-edited content the games read at start-up.
+  // Owner-edited content the games read at start-up (guests of the Eight buzzer never get questions).
   const [overrides, gameContent] = await Promise.all([getDoc(env, 'catQuestionsOverrides'), getDoc(env, 'game_content')]);
   const content = {
-    catQuestionsOverrides: overrides,
+    catQuestionsOverrides: slug === 'eight' && guest ? {} : overrides,
     qaftah: gameContent.filter((x) => x.game_id === 'game_qaftah' && x.is_active !== 0)
   };
+  if (ROOM_GAMES[slug]) html = prepareRoomGame(html, slug, url, { token, demo: !guest && url.searchParams.get('demo') === '1' });
+  if (slug === 'eight') html = prepareEight(html, url, { token, guest });
   html = html.replace(/<head([^>]*)>/i, (m) => m + '\n<script>window.__DW_CONTENT = ' + scriptJson(content) + ';</script>');
 
   return new Response(html, {

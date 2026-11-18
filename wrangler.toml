@@ -6,7 +6,7 @@ compatibility_date = "2025-09-01"
 [assets]
 directory = "./public"
 binding = "ASSETS"
-run_worker_first = ["/api/*", "/play/*", "/payments/*"]
+run_worker_first = ["/api/*", "/play/*", "/payments/*", "/rooms/*"]
 
 # Game files are bundled into the Worker as text so they are never publicly downloadable.
 [[rules]]
@@ -19,6 +19,23 @@ binding = "DB"
 database_name = "diwaniya-plus"
 database_id = "00000000-0000-0000-0000-000000000000" # replace with the id printed by: npx wrangler d1 create diwaniya-plus
 migrations_dir = "migrations"
+
+# Real-time rooms (WebSocket). SQLite-backed Durable Objects also work on the Workers Free plan.
+[[durable_objects.bindings]]
+name = "GAME_HUB"
+class_name = "GameHubDO"
+
+[[durable_objects.bindings]]
+name = "RELAY_ROOM"
+class_name = "RelayRoomDO"
+
+[[durable_objects.bindings]]
+name = "BUZZER_ROOM"
+class_name = "BuzzerRoomDO"
+
+[[migrations]]
+tag = "v1-rooms"
+new_sqlite_classes = ["GameHubDO", "RelayRoomDO", "BuzzerRoomDO"]
 
 [vars]
 # Comma-separated emails that get the owner role (admin panel) when they log in.
