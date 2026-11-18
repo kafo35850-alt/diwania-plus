@@ -2,6 +2,14 @@ name = "diwaniya-plus"
 main = "worker/src/index.js"
 compatibility_date = "2025-09-01"
 
+workers_dev = true
+
+# The site's own domain (the zone lives in the same Cloudflare account). workers.dev keeps working too.
+routes = [
+  { pattern = "diwaniyaplus.com", custom_domain = true },
+  { pattern = "www.diwaniyaplus.com", custom_domain = true }
+]
+
 # Everything is bundled into the Worker: the public site (public/, via scripts/build-static.mjs)
 # and the private game files (games/), so a deploy is a single upload.
 [[rules]]
@@ -38,6 +46,8 @@ tag = "v1-rooms"
 new_sqlite_classes = ["GameHubDO", "RelayRoomDO", "BuzzerRoomDO"]
 
 [vars]
+# Main address of the site; other hosts (www, workers.dev) redirect here.
+CANONICAL_HOST = "diwaniyaplus.com"
 # Sender for login emails. "onboarding@resend.dev" only delivers to the Resend account's own email;
 # after verifying your domain in Resend, change it to e.g. "Diwaniya Plus <login@your-domain.com>".
 MAIL_FROM = "Diwaniya Plus <onboarding@resend.dev>"

@@ -139,6 +139,13 @@ function serveStatic(request, url) {
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+    // One address for the whole site (sessions are per host): www and workers.dev go to the main domain.
+    // Payment webhooks are left alone in case Moyasar was set up with an older address.
+    const canonical = env.CANONICAL_HOST;
+    if (canonical && url.hostname !== canonical && url.hostname !== 'localhost' && url.hostname !== '127.0.0.1' &&
+        url.pathname !== '/api/payments/webhook' && (request.method === 'GET' || request.method === 'HEAD')) {
+      return Response.redirect('https://' + canonical + url.pathname + url.search, 301);
+    }
     try {
       if (url.pathname.startsWith('/rooms/') || url.pathname.startsWith('/api/rooms')) {
         if (request.method !== 'GET' && !sameOrigin(request, env)) throw new HttpError(403, 'طلب من مصدر غير مسموح.');
