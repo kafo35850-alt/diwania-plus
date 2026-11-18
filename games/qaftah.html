@@ -1,0 +1,2230 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#0b0a2e">
+<title>ديوانية بلس — قفطة! (أكمل الكذبة)</title>
+<style>
+:root{--bg1:#111936;--bg2:#0A0F24;--ink:#fff;--mut:#aab0d8;--card:rgba(255,255,255,.07);--line:rgba(255,255,255,.14);--org:#f26538;--gold:#F5B942;--red:#e5484d;--blue:#38bdf8;--green:#34d399;--vio:#a78bfa;--stk:0px}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;min-height:100%;background:var(--bg2);color:var(--ink);font-family:-apple-system,"SF Arabic","Segoe UI",Tajawal,Cairo,system-ui,sans-serif;-webkit-text-size-adjust:100%}
+body{background:radial-gradient(1200px 600px at 80% -10%,#2b2290 0%,transparent 60%),linear-gradient(180deg,var(--bg1),var(--bg2) 60%);min-height:100vh;min-height:100dvh}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;touch-action:manipulation}
+button:disabled{opacity:.45;cursor:not-allowed}
+input,textarea{font:inherit;color:var(--ink)}
+#app{max-width:520px;margin:0 auto;padding:max(14px,env(safe-area-inset-top)) 16px max(80px,calc(env(safe-area-inset-bottom) + 64px));min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;gap:14px}
+h1,h2,h3,p{margin:0}
+.logo{text-align:center;padding-top:4px}.logo .ic{width:84px;height:84px;margin:0 auto 6px}
+.logo .t{font-size:32px;font-weight:900}.logo .t b{color:var(--gold)}
+.logo .s{color:var(--mut);font-size:14px;margin-top:4px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:16px;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.row{display:flex;align-items:center;gap:10px}.col{display:flex;flex-direction:column;gap:10px}.sp{flex:1}.wrap{flex-wrap:wrap}.ctr{text-align:center}
+.mut{color:var(--mut)}.small{font-size:13px}.big{font-size:21px;font-weight:800}.huge{font-size:28px;font-weight:900}
+.btn{display:block;width:100%;padding:14px 16px;border-radius:16px;font-weight:800;font-size:17px;text-align:center;background:linear-gradient(180deg,#ff7a4a,var(--org));box-shadow:0 6px 18px rgba(242,101,56,.35);transition:transform .12s}
+.btn:active:not(:disabled){transform:scale(.97)}
+.btn.sec{background:rgba(255,255,255,.1);box-shadow:none;border:1px solid var(--line)}
+.btn.gold{background:linear-gradient(180deg,#ffd978,var(--gold));color:#2b1c00;box-shadow:0 6px 18px rgba(242,193,78,.3)}
+.btn.red{background:linear-gradient(180deg,#ff6b6f,var(--red))}.btn.blue{background:linear-gradient(180deg,#5fd0ff,#1b8fd0)}
+.btn.green{background:linear-gradient(180deg,#4ade80,#0f9a6c)}
+.btn.sm{padding:8px 13px;font-size:13.5px;border-radius:12px;width:auto;display:inline-block}
+.inp{width:100%;padding:14px 16px;border-radius:14px;background:rgba(0,0,0,.28);border:1px solid var(--line);font-size:18px;outline:none}.inp:focus{border-color:var(--gold)}
+.inp.code{letter-spacing:10px;text-align:center;font-size:28px;font-weight:900}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.1);font-size:13px;font-weight:700;border:1px solid var(--line)}
+.chip.on{background:var(--gold);border-color:var(--gold);color:#2b1c00}
+.chip.lib{background:rgba(56,189,248,.18);border-color:rgba(56,189,248,.55)}.chip.fas{background:rgba(229,72,77,.22);border-color:rgba(229,72,77,.6)}
+.chip.ok{background:rgba(52,211,153,.22);border-color:rgba(52,211,153,.6);color:#b6ffe1}
+.toast{position:fixed;left:50%;top:max(12px,env(safe-area-inset-top));transform:translateX(-50%);background:#1d2150;border:1px solid var(--gold);padding:10px 16px;border-radius:14px;z-index:95;max-width:90vw;font-weight:700;box-shadow:0 8px 24px rgba(0,0,0,.5)}
+.conn{position:fixed;inset:0 0 auto 0;background:#b4232a;text-align:center;padding:6px;font-size:13px;font-weight:700;z-index:60}
+.topbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.pill{background:rgba(255,255,255,.1);border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-weight:800;font-size:13.5px}
+.mutebtn{background:rgba(255,255,255,.12);border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-weight:800;font-size:13px;display:inline-flex;align-items:center;gap:6px;color:#fff}
+.mutebtn.off{background:rgba(229,72,77,.22);border-color:rgba(229,72,77,.6);color:#ffb3b5}
+.timer{font-variant-numeric:tabular-nums;font-weight:900;font-size:20px}
+.bar{height:6px;border-radius:6px;background:rgba(255,255,255,.12);overflow:hidden}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--org));width:100%;transition:width .3s linear}
+.plist{display:flex;flex-direction:column;gap:8px;max-height:310px;overflow-y:auto;padding-left:2px}
+.pl{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid var(--line)}
+.pl.off{opacity:.55}
+.av{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-weight:900;color:#10122e;flex:none;font-size:18px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.grid>*{min-width:0}
+.grid1{display:grid;grid-template-columns:1fr;gap:10px}
+.pick{display:flex;align-items:center;gap:10px;padding:14px;border-radius:16px;background:rgba(255,255,255,.07);border:2px solid var(--line);text-align:right;font-weight:800;font-size:16px;line-height:1.5;transition:all .15s}
+.pick.sel{border-color:var(--gold);background:rgba(242,193,78,.18);box-shadow:0 0 0 3px rgba(242,193,78,.2)}
+.pick.mine{border-style:dashed;border-color:rgba(242,193,78,.5);background:rgba(242,193,78,.08);opacity:.6;pointer-events:none}
+.pick .nm{font-weight:800;flex:1}
+.tag{font-size:11.5px;font-weight:800;padding:2px 8px;border-radius:999px;background:rgba(255,255,255,.12);white-space:nowrap}
+.tag.g{background:var(--gold);color:#2b1c00}.tag.b{background:#38bdf8;color:#04243a}.tag.r{background:var(--red)}.tag.ok{background:rgba(52,211,153,.25);color:#b6ffe1}
+.ann{border-radius:22px;padding:18px;text-align:center;background:linear-gradient(160deg,rgba(255,255,255,.12),rgba(255,255,255,.04));border:1px solid var(--line)}
+.ann.lib{background:linear-gradient(160deg,rgba(56,189,248,.28),rgba(10,47,77,.4));border-color:rgba(56,189,248,.6)}
+.ann.fas{background:linear-gradient(160deg,rgba(229,72,77,.3),rgba(58,10,18,.5));border-color:rgba(229,72,77,.6)}
+.ann.gold{background:linear-gradient(160deg,rgba(242,193,78,.28),rgba(60,40,8,.5));border-color:rgba(242,193,78,.7)}
+.ann.ok{background:linear-gradient(160deg,rgba(52,211,153,.28),rgba(8,50,36,.5));border-color:rgba(52,211,153,.7)}
+.qtxt{font-size:20px;font-weight:900;line-height:1.75;text-align:center}
+.qblank{display:inline-block;padding:1px 14px;margin:0 4px;border-radius:10px;background:rgba(242,193,78,.2);border:2px dashed var(--gold);color:var(--gold);font-weight:900}
+.qrbox{background:#fff;border-radius:18px;padding:10px;width:min(62vw,230px);margin:0 auto;line-height:0}.qrbox svg{width:100%;height:auto}
+.code{font-size:46px;font-weight:900;letter-spacing:12px;text-align:center}
+.hint{font-size:13px;color:var(--mut);text-align:center;line-height:1.7}
+.untimed{border-radius:14px;padding:9px 12px;background:rgba(56,189,248,.12);border:1px solid rgba(56,189,248,.45);text-align:center;line-height:1.7;font-size:13.5px}
+.stick{position:sticky;bottom:10px;z-index:5;padding-top:12px;background:linear-gradient(rgba(11,10,46,0),rgba(11,10,46,.92) 38%);display:flex;flex-direction:column;gap:8px}
+#help{position:fixed;inset:0;z-index:90;background:radial-gradient(1200px 600px at 80% -10%,#2b2290 0%,transparent 60%),linear-gradient(180deg,var(--bg1),var(--bg2) 60%);overflow-y:auto;display:none}
+#help.on{display:block}
+.hp{max-width:520px;margin:0 auto;padding:max(12px,env(safe-area-inset-top)) 16px max(30px,env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:14px}
+.hp .htabs{display:flex;gap:8px;overflow-x:auto;margin:0 -16px;padding:0 16px 4px;scrollbar-width:none}.hp .htabs::-webkit-scrollbar{display:none}
+.hp .htabs .chip{flex:none;padding:9px 14px;font-size:14px}
+.hp .lead{line-height:1.9;font-size:16px}.hp .pts{margin:0;padding:0 20px 0 0;line-height:1.9;font-size:15px}
+.hp .stp{display:flex;gap:12px;align-items:flex-start}.hp .stp .n{flex:none;width:30px;height:30px;border-radius:50%;background:var(--org);display:grid;place-items:center;font-weight:900}
+.hp .stp .tx{line-height:1.8;font-size:15px}.hp .stp .tx b{display:block;font-size:16px}
+.hp .note{border-radius:16px;padding:12px 14px;background:rgba(242,193,78,.14);border:1px solid rgba(242,193,78,.55);line-height:1.8;font-size:14px}
+.hfab{position:fixed;left:14px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:45;width:42px;height:42px;border-radius:50%;background:rgba(10,10,46,.82);border:1px solid rgba(255,255,255,.28);font-weight:900;font-size:19px;color:#fff}
+.demo{position:fixed;bottom:0;left:0;right:0;text-align:center;font-size:12px;padding:5px;background:rgba(242,193,78,.92);color:#2b1c00;font-weight:800;z-index:70;pointer-events:none}
+body.is-demo #app{padding-bottom:130px}body.is-demo .hfab{bottom:84px}
+.bd-host{visibility:hidden;pointer-events:none}
+body.board-only #app,body.board-only .hfab{display:none}
+body.show-board #app,body.show-board .hfab{visibility:hidden}
+body.show-board .bd-host{visibility:visible;pointer-events:auto;z-index:60}
+body.show-both #app{position:fixed;top:0;bottom:0;right:0;width:430px;max-width:430px;overflow-y:auto;z-index:70;background:#0b0a2e;padding-bottom:90px;border-left:1px solid rgba(255,255,255,.2)}
+body.show-both .bd-host{visibility:visible;pointer-events:auto;z-index:60;right:430px}
+body.show-both .hfab{display:none}
+.tabs{position:fixed;bottom:30px;left:50%;transform:translateX(-50%);z-index:80;display:flex;gap:5px;background:rgba(10,10,46,.94);border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:5px;max-width:96vw;overflow-x:auto}
+.tabs button{padding:8px 14px;border-radius:999px;font-weight:800;font-size:13.5px;color:#fff;white-space:nowrap}.tabs button.on{background:var(--org)}
+.tabs button.mute-pill{background:rgba(255,255,255,.12)}.tabs button.mute-pill.off{background:rgba(229,72,77,.35);color:#ffb3b5}
+body.show-both .tabs{left:calc(50% - 215px)}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div id="overlay"></div>
+<div id="help"></div>
+<div id="board"></div>
+<button class="hfab" data-a="help" aria-label="شرح اللعبة">؟</button>
+<script>window.QF_DEMO=true;</script>
+<script>/* qr.js */
+/* M8QR — compact ISO 18004 QR encoder (byte mode, ECC L/M/Q/H, versions 1-20). */
+(function (g) {
+  'use strict';
+  var ECC_PER_BLOCK = [
+    [-1, 7, 10, 15, 20, 26, 18, 20, 24, 30, 18, 20, 24, 26, 30, 22, 24, 28, 30, 28, 28],
+    [-1, 10, 16, 26, 18, 24, 16, 18, 22, 22, 26, 30, 22, 22, 24, 24, 28, 28, 26, 26, 26],
+    [-1, 13, 22, 18, 26, 18, 24, 18, 22, 20, 24, 28, 26, 24, 20, 30, 24, 28, 28, 26, 30],
+    [-1, 17, 28, 22, 16, 22, 28, 26, 26, 24, 28, 24, 28, 22, 24, 24, 30, 28, 28, 26, 28]
+  ];
+  var NUM_BLOCKS = [
+    [-1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 4, 4, 4, 4, 4, 6, 6, 6, 6, 7, 8],
+    [-1, 1, 1, 1, 2, 2, 4, 4, 4, 5, 5, 5, 8, 9, 9, 10, 10, 11, 13, 14, 16],
+    [-1, 1, 1, 2, 2, 4, 4, 6, 6, 8, 8, 8, 10, 12, 16, 12, 17, 16, 18, 21, 20],
+    [-1, 1, 1, 2, 4, 4, 4, 5, 6, 8, 8, 11, 11, 16, 16, 18, 16, 19, 21, 25, 25]
+  ];
+  var ECL_INDEX = { L: 0, M: 1, Q: 2, H: 3 };
+  var FORMAT_BITS = [1, 0, 3, 2];
+
+  function rawModules(ver) {
+    var r = (16 * ver + 128) * ver + 64;
+    if (ver >= 2) {
+      var na = Math.floor(ver / 7) + 2;
+      r -= (25 * na - 10) * na - 55;
+      if (ver >= 7) r -= 36;
+    }
+    return r;
+  }
+  function dataCodewords(ver, e) {
+    return Math.floor(rawModules(ver) / 8) - ECC_PER_BLOCK[e][ver] * NUM_BLOCKS[e][ver];
+  }
+  function gfMul(x, y) {
+    var z = 0;
+    for (var i = 7; i >= 0; i--) { z = (z << 1) ^ ((z >>> 7) * 0x11D); z ^= ((y >>> i) & 1) * x; }
+    return z & 0xFF;
+  }
+  function rsDivisor(deg) {
+    var res = []; for (var i = 0; i < deg - 1; i++) res.push(0); res.push(1);
+    var root = 1;
+    for (var i2 = 0; i2 < deg; i2++) {
+      for (var j = 0; j < deg; j++) {
+        res[j] = gfMul(res[j], root);
+        if (j + 1 < deg) res[j] ^= res[j + 1];
+      }
+      root = gfMul(root, 0x02);
+    }
+    return res;
+  }
+  function rsRemainder(data, div) {
+    var res = div.map(function () { return 0; });
+    data.forEach(function (b) {
+      var f = b ^ res.shift(); res.push(0);
+      div.forEach(function (c, i) { res[i] ^= gfMul(c, f); });
+    });
+    return res;
+  }
+  function utf8(str) {
+    if (typeof TextEncoder !== 'undefined') return Array.prototype.slice.call(new TextEncoder().encode(str));
+    var s = unescape(encodeURIComponent(str)), out = [];
+    for (var i = 0; i < s.length; i++) out.push(s.charCodeAt(i));
+    return out;
+  }
+  function alignPositions(ver, size) {
+    if (ver === 1) return [];
+    var n = Math.floor(ver / 7) + 2;
+    var step = ver === 32 ? 26 : Math.ceil((ver * 4 + 4) / (n * 2 - 2)) * 2;
+    var r = [6];
+    for (var pos = size - 7; r.length < n; pos -= step) r.splice(1, 0, pos);
+    return r;
+  }
+
+  function encode(text, eccName) {
+    var e = ECL_INDEX[eccName || 'M'];
+    var bytes = utf8(text);
+    var ver, capBits;
+    for (ver = 1; ver <= 20; ver++) {
+      capBits = dataCodewords(ver, e) * 8;
+      var need = 4 + (ver <= 9 ? 8 : 16) + bytes.length * 8;
+      if (need <= capBits) break;
+    }
+    if (ver > 20) throw new Error('QR: text too long');
+    var bits = [];
+    function put(v, n) { for (var i = n - 1; i >= 0; i--) bits.push((v >>> i) & 1); }
+    put(4, 4); put(bytes.length, ver <= 9 ? 8 : 16);
+    bytes.forEach(function (b) { put(b, 8); });
+    put(0, Math.min(4, capBits - bits.length));
+    put(0, (8 - bits.length % 8) % 8);
+    for (var pad = 0xEC; bits.length < capBits; pad ^= 0xEC ^ 0x11) put(pad, 8);
+    var data = [];
+    for (var i = 0; i < bits.length; i += 8) {
+      var v = 0; for (var j = 0; j < 8; j++) v = (v << 1) | bits[i + j]; data.push(v);
+    }
+    // ECC + interleave
+    var nb = NUM_BLOCKS[e][ver], eccLen = ECC_PER_BLOCK[e][ver];
+    var raw = Math.floor(rawModules(ver) / 8);
+    var nShort = nb - raw % nb, shortLen = Math.floor(raw / nb);
+    var blocks = [], div = rsDivisor(eccLen);
+    for (var bi = 0, k = 0; bi < nb; bi++) {
+      var dat = data.slice(k, k + shortLen - eccLen + (bi < nShort ? 0 : 1));
+      k += dat.length;
+      var ecc = rsRemainder(dat, div);
+      if (bi < nShort) dat.push(0);
+      blocks.push(dat.concat(ecc));
+    }
+    var all = [];
+    for (var ii = 0; ii < blocks[0].length; ii++) {
+      for (var jj = 0; jj < blocks.length; jj++) {
+        if (ii !== shortLen - eccLen || jj >= nShort) all.push(blocks[jj][ii]);
+      }
+    }
+    // matrix
+    var size = ver * 4 + 17;
+    var mod = [], fn = [];
+    for (var y = 0; y < size; y++) { mod.push(new Array(size).fill(false)); fn.push(new Array(size).fill(false)); }
+    function setFn(x, y, d) { mod[y][x] = d; fn[y][x] = true; }
+    function bit(x, i) { return ((x >>> i) & 1) !== 0; }
+    for (var t = 0; t < size; t++) { setFn(6, t, t % 2 === 0); setFn(t, 6, t % 2 === 0); }
+    function finder(cx, cy) {
+      for (var dy = -4; dy <= 4; dy++) for (var dx = -4; dx <= 4; dx++) {
+        var d = Math.max(Math.abs(dx), Math.abs(dy)), xx = cx + dx, yy = cy + dy;
+        if (xx >= 0 && xx < size && yy >= 0 && yy < size) setFn(xx, yy, d !== 2 && d !== 4);
+      }
+    }
+    finder(3, 3); finder(size - 4, 3); finder(3, size - 4);
+    var ap = alignPositions(ver, size), na = ap.length;
+    for (var a = 0; a < na; a++) for (var b = 0; b < na; b++) {
+      if ((a === 0 && b === 0) || (a === 0 && b === na - 1) || (a === na - 1 && b === 0)) continue;
+      for (var dy2 = -2; dy2 <= 2; dy2++) for (var dx2 = -2; dx2 <= 2; dx2++)
+        setFn(ap[a] + dx2, ap[b] + dy2, Math.max(Math.abs(dx2), Math.abs(dy2)) !== 1);
+    }
+    function drawFormat(mask) {
+      var d = (FORMAT_BITS[e] << 3) | mask, rem = d;
+      for (var i = 0; i < 10; i++) rem = (rem << 1) ^ ((rem >>> 9) * 0x537);
+      var bs = ((d << 10) | rem) ^ 0x5412;
+      for (var i1 = 0; i1 <= 5; i1++) setFn(8, i1, bit(bs, i1));
+      setFn(8, 7, bit(bs, 6)); setFn(8, 8, bit(bs, 7)); setFn(7, 8, bit(bs, 8));
+      for (var i2 = 9; i2 < 15; i2++) setFn(14 - i2, 8, bit(bs, i2));
+      for (var i3 = 0; i3 < 8; i3++) setFn(size - 1 - i3, 8, bit(bs, i3));
+      for (var i4 = 8; i4 < 15; i4++) setFn(8, size - 15 + i4, bit(bs, i4));
+      setFn(8, size - 8, true);
+    }
+    drawFormat(0);
+    if (ver >= 7) {
+      var rem = ver;
+      for (var q = 0; q < 12; q++) rem = (rem << 1) ^ ((rem >>> 11) * 0x1F25);
+      var vb = (ver << 12) | rem;
+      for (var q2 = 0; q2 < 18; q2++) {
+        var c = bit(vb, q2), aa = size - 11 + q2 % 3, bb = Math.floor(q2 / 3);
+        setFn(aa, bb, c); setFn(bb, aa, c);
+      }
+    }
+    // codewords
+    var idx = 0;
+    for (var right = size - 1; right >= 1; right -= 2) {
+      if (right === 6) right = 5;
+      for (var vert = 0; vert < size; vert++) {
+        for (var jx = 0; jx < 2; jx++) {
+          var x = right - jx, upward = ((right + 1) & 2) === 0, yy2 = upward ? size - 1 - vert : vert;
+          if (!fn[yy2][x] && idx < all.length * 8) { mod[yy2][x] = bit(all[idx >>> 3], 7 - (idx & 7)); idx++; }
+        }
+      }
+    }
+    function applyMask(m) {
+      for (var y = 0; y < size; y++) for (var x = 0; x < size; x++) {
+        var inv;
+        switch (m) {
+          case 0: inv = (x + y) % 2 === 0; break;
+          case 1: inv = y % 2 === 0; break;
+          case 2: inv = x % 3 === 0; break;
+          case 3: inv = (x + y) % 3 === 0; break;
+          case 4: inv = (Math.floor(x / 3) + Math.floor(y / 2)) % 2 === 0; break;
+          case 5: inv = x * y % 2 + x * y % 3 === 0; break;
+          case 6: inv = (x * y % 2 + x * y % 3) % 2 === 0; break;
+          default: inv = ((x + y) % 2 + x * y % 3) % 2 === 0;
+        }
+        if (!fn[y][x] && inv) mod[y][x] = !mod[y][x];
+      }
+    }
+    function penalty() {
+      var res = 0, x, y, i, run, color;
+      var P1 = [true, false, true, true, true, false, true, false, false, false, false];
+      var P2 = [false, false, false, false, true, false, true, true, true, false, true];
+      function lines(get) {
+        for (var a = 0; a < size; a++) {
+          run = 1; color = get(a, 0);
+          for (var b = 1; b < size; b++) {
+            var cur = get(a, b);
+            if (cur === color) { run++; if (run === 5) res += 3; else if (run > 5) res++; }
+            else { color = cur; run = 1; }
+          }
+          for (var s = 0; s + 11 <= size; s++) {
+            var m1 = true, m2 = true;
+            for (var k = 0; k < 11; k++) {
+              var v = get(a, s + k);
+              if (v !== P1[k]) m1 = false;
+              if (v !== P2[k]) m2 = false;
+              if (!m1 && !m2) break;
+            }
+            if (m1) res += 40; if (m2) res += 40;
+          }
+        }
+      }
+      lines(function (a, b) { return mod[a][b]; });
+      lines(function (a, b) { return mod[b][a]; });
+      for (y = 0; y < size - 1; y++) for (x = 0; x < size - 1; x++) {
+        var c0 = mod[y][x];
+        if (c0 === mod[y][x + 1] && c0 === mod[y + 1][x] && c0 === mod[y + 1][x + 1]) res += 3;
+      }
+      var dark = 0; for (y = 0; y < size; y++) for (x = 0; x < size; x++) if (mod[y][x]) dark++;
+      var total = size * size, kk = Math.ceil(Math.abs(dark * 20 - total * 10) / total) - 1;
+      res += kk * 10;
+      return res;
+    }
+    var best = -1, bestPen = Infinity;
+    for (var m = 0; m < 8; m++) {
+      applyMask(m); drawFormat(m);
+      var p = penalty();
+      if (p < bestPen) { bestPen = p; best = m; }
+      applyMask(m);
+    }
+    applyMask(best); drawFormat(best);
+    return { version: ver, size: size, mask: best, modules: mod };
+  }
+
+  function toSvg(text, opts) {
+    opts = opts || {};
+    var qr = encode(text, opts.ecc || 'M'), border = opts.border == null ? 4 : opts.border;
+    var fg = opts.fg || '#000', bg = opts.bg || '#fff', n = qr.size + border * 2, d = [];
+    for (var y = 0; y < qr.size; y++) {
+      var x = 0;
+      while (x < qr.size) {
+        if (qr.modules[y][x]) {
+          var x0 = x; while (x < qr.size && qr.modules[y][x]) x++;
+          d.push('M' + (x0 + border) + ',' + (y + border) + 'h' + (x - x0) + 'v1h-' + (x - x0) + 'z');
+        } else x++;
+      }
+    }
+    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + n + ' ' + n + '" shape-rendering="crispEdges">' +
+      '<rect width="' + n + '" height="' + n + '" fill="' + bg + '"/><path d="' + d.join('') + '" fill="' + fg + '"/></svg>';
+  }
+  function toDataUrl(text, opts) {
+    return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(toSvg(text, opts));
+  }
+  g.M8QR = { encode: encode, toSvg: toSvg, toDataUrl: toDataUrl };
+  if (typeof module !== 'undefined' && module.exports) module.exports = g.M8QR;
+})(typeof window !== 'undefined' ? window : globalThis);
+
+</script>
+<script>/* audio.js */
+/* ديوانية بلس مافيا — الصوت: مؤثرات مولّدة بـWebAudio (بدون أي ملف) + راوي بالعربي (speechSynthesis).
+ * ما يحتاج إنترنت. تقدر تبدّل أي مؤثر أو سطر راوي بتسجيل حقيقي لاحقاً: MafiaAudio.useFiles({ wolf: 'wolf.mp3', n_night: 'night.mp3' }).
+ *
+ * الاستخدام:
+ *   MafiaAudio.unlock()                 // لازم من لمسة المستخدم (قيد المتصفحات)
+ *   MafiaAudio.play('wolf')             // مؤثر
+ *   MafiaAudio.ambient('night')         // أجواء مستمرة (جداجد + ريح + بومة وذيب بعيد) / ambient(null) توقفها
+ *   MafiaAudio.say('حلّ الليل', {key:'n_night'})
+ *   MafiaAudio.render('wolf')           // Promise<Float32Array> للفحص بدون سماعات
+ */
+(function (root, factory) {
+  if (typeof module === 'object' && module.exports) module.exports = factory(root);
+  else root.MafiaAudio = factory(root);
+})(typeof self !== 'undefined' ? self : this, function (root) {
+  'use strict';
+  const AC = root.AudioContext || root.webkitAudioContext || null;
+  const OAC = root.OfflineAudioContext || root.webkitOfflineAudioContext || null;
+  const rnd = (a, b) => a + Math.random() * (b - a);
+
+  // ------------------------------------------------------------ أدوات بناء الصوت
+  function noiseBuf(ctx) {
+    if (ctx.__nb) return ctx.__nb;
+    const len = Math.floor(ctx.sampleRate * 2), b = ctx.createBuffer(1, len, ctx.sampleRate), d = b.getChannelData(0);
+    for (let i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
+    return (ctx.__nb = b);
+  }
+  function envGain(ctx, t0, peak, att, dur, rel) {
+    const g = ctx.createGain(), p = g.gain, pk = Math.max(peak, 0.0002);
+    att = Math.min(att, dur * 0.8); rel = Math.min(rel, dur - att);
+    p.setValueAtTime(0.0001, t0); p.exponentialRampToValueAtTime(pk, t0 + att);
+    p.setValueAtTime(pk, t0 + Math.max(att, dur - rel)); p.exponentialRampToValueAtTime(0.0001, t0 + dur);
+    return g;
+  }
+  // نغمة: نوع الموجة، تردد يبدأ f وينزلق لـf2، اهتزاز vib، فلتر lp
+  function tone(ctx, out, t0, dur, o) {
+    o = o || {};
+    const osc = ctx.createOscillator(); osc.type = o.type || 'sine';
+    const f0 = o.f || 440, f1 = o.f2 || f0;
+    osc.frequency.setValueAtTime(f0, t0);
+    if (f1 !== f0) osc.frequency.exponentialRampToValueAtTime(f1, t0 + (o.glide || dur));
+    osc.detune.value = (o.detune || 0) + (o.human === false ? 0 : rnd(-6, 6));   // انحراف بسيط عشان ما يتكرر نفس الصوت بالضبط
+    if (o.vib) {
+      const l = ctx.createOscillator(), lg = ctx.createGain(); l.frequency.value = o.vib;
+      lg.gain.setValueAtTime(0, t0); lg.gain.linearRampToValueAtTime(o.vibDepth || f0 * 0.01, t0 + (o.vibDelay || dur * 0.3));
+      l.connect(lg); lg.connect(osc.frequency); l.start(t0); l.stop(t0 + dur + 0.1);
+    }
+    let node = osc;
+    if (o.lp) { const f = ctx.createBiquadFilter(); f.type = 'lowpass'; f.frequency.value = o.lp; node.connect(f); node = f; }
+    const g = envGain(ctx, t0, o.gain == null ? 0.3 : o.gain, o.att || 0.01, dur, o.rel || dur * 0.5);
+    node.connect(g); g.connect(out); osc.start(t0); osc.stop(t0 + dur + 0.05);
+    return g;
+  }
+  // ضجيج مفلتر
+  function noise(ctx, out, t0, dur, o) {
+    o = o || {};
+    const src = ctx.createBufferSource(); src.buffer = noiseBuf(ctx); src.loop = true;
+    const f = ctx.createBiquadFilter(); f.type = o.type || 'bandpass'; f.Q.value = o.q || 1;
+    f.frequency.setValueAtTime(o.f || 1000, t0); if (o.f2) f.frequency.exponentialRampToValueAtTime(o.f2, t0 + dur);
+    const g = envGain(ctx, t0, o.gain == null ? 0.3 : o.gain, o.att || 0.005, dur, o.rel || 0.05);
+    src.connect(f); f.connect(g); g.connect(out); src.start(t0, Math.random()); src.stop(t0 + dur + 0.05);
+    return g;
+  }
+  // صدى: يرجّع عقدة الدخول
+  function echo(ctx, out, time, fb, wet) {
+    const input = ctx.createGain(), d = ctx.createDelay(1), f = ctx.createGain(), w = ctx.createGain();
+    d.delayTime.value = time; f.gain.value = fb; w.gain.value = wet;
+    input.connect(out); input.connect(d); d.connect(f); f.connect(d); d.connect(w); w.connect(out);
+    return input;
+  }
+
+  // نقرة خشبية (بدل صفّارات الألعاب) + نغمة جرس بأجزاء غير متناسقة (أقرب للمعدن الحقيقي)
+  function wood(ctx, out, t0, f, gain, dur) {
+    dur = dur || 0.09;
+    noise(ctx, out, t0, 0.02, { type: 'bandpass', f: f * 2.2, q: 1.5, gain: gain * 0.9, att: 0.0008, rel: 0.018 });
+    tone(ctx, out, t0, dur, { f: f, f2: f * 0.86, gain: gain, att: 0.0008, rel: dur * 0.9, human: false });
+    tone(ctx, out, t0, dur * 0.6, { f: f * 2.4, f2: f * 2.1, gain: gain * 0.35, att: 0.0008, rel: 0.05, human: false });
+  }
+  function bellTone(ctx, out, t0, f, gain, dur) {
+    [[1, 1], [2.76, 0.5], [5.4, 0.22], [8.9, 0.1]].forEach(([r, a], i) => tone(ctx, out, t0, Math.max(0.2, dur - i * dur * 0.2), { f: f * r, gain: gain * a, att: 0.002, rel: Math.max(0.15, dur - i * dur * 0.2) * 0.95 }));
+  }
+
+  // ------------------------------------------------------------ المؤثرات (كل واحد: (ctx, out, t0, params))
+  const R = {}, DUR = {};
+
+  // عواء ذيب: نغمة تطلع وتنزل مع اهتزاز وصدى وفلتر "فم"
+  R.wolf = function (ctx, out, t0, p) {
+    p = p || {}; const k = (p.pitch || 1) * rnd(0.95, 1.05), gain = p.gain == null ? 0.42 : p.gain, dur = 3.4;
+    const bus = echo(ctx, out, 0.3, 0.38, 0.45);
+    const mix = ctx.createGain(); mix.gain.value = 1;
+    const lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = p.dark ? 1500 : 2600;
+    const fm = ctx.createBiquadFilter(); fm.type = 'peaking'; fm.Q.value = 2.2; fm.gain.value = 9;
+    fm.frequency.setValueAtTime(650, t0); fm.frequency.linearRampToValueAtTime(1050, t0 + 1.4); fm.frequency.linearRampToValueAtTime(700, t0 + dur);
+    const env = envGain(ctx, t0, gain, 0.45, dur, 1.2);
+    mix.connect(lp); lp.connect(fm); fm.connect(env); env.connect(bus);
+    ['sawtooth', 'triangle'].forEach((type, i) => {
+      const o = ctx.createOscillator(); o.type = type;
+      o.frequency.setValueAtTime(240 * k, t0); o.frequency.exponentialRampToValueAtTime(460 * k, t0 + 0.8);
+      o.frequency.exponentialRampToValueAtTime(545 * k, t0 + 1.9); o.frequency.exponentialRampToValueAtTime(310 * k, t0 + dur);
+      const l = ctx.createOscillator(), lg = ctx.createGain(); l.frequency.value = rnd(4.8, 5.9);
+      lg.gain.setValueAtTime(0, t0); lg.gain.setValueAtTime(0, t0 + 0.7); lg.gain.linearRampToValueAtTime(9 * k, t0 + 1.4);
+      l.connect(lg); lg.connect(o.frequency); l.start(t0); l.stop(t0 + dur + 0.1);
+      const w = ctx.createOscillator(), wg = ctx.createGain(); w.frequency.value = rnd(1.7, 2.6); wg.gain.value = 4 * k; w.connect(wg); wg.connect(o.frequency); w.start(t0); w.stop(t0 + dur + 0.1);
+      const og = ctx.createGain(); og.gain.value = i ? 0.55 : 0.45; o.connect(og); og.connect(mix); o.start(t0); o.stop(t0 + dur + 0.1);
+    });
+    noise(ctx, bus, t0, dur, { type: 'bandpass', f: 1700, q: 0.8, gain: gain * 0.2, att: 0.5, rel: 1.2 });
+    noise(ctx, bus, t0 + 0.2, dur - 0.4, { type: 'bandpass', f: 520, q: 1.2, gain: gain * 0.1, att: 0.6, rel: 1.1 });
+  };
+  DUR.wolf = 5.2;
+
+  R.owl = function (ctx, out, t0, p) {
+    const g = (p && p.gain) || 0.22;
+    [0, 0.62].forEach((dt, i) => tone(ctx, out, t0 + dt, 0.42, { f: 430 - i * 25, f2: 380 - i * 25, gain: g, att: 0.09, rel: 0.25, lp: 900 }));
+  };
+  DUR.owl = 1.3;
+
+  R.heart = function (ctx, out, t0, p) {
+    const bpm = (p && p.bpm) || 70, n = (p && p.beats) || 4, per = 60 / bpm, g = (p && p.gain) || 0.9;
+    for (let i = 0; i < n; i++) {
+      const t = t0 + i * per;
+      tone(ctx, out, t, 0.16, { f: 62, f2: 36, gain: g, att: 0.004, rel: 0.13 });
+      tone(ctx, out, t + 0.17, 0.13, { f: 52, f2: 34, gain: g * 0.65, att: 0.004, rel: 0.1 });
+    }
+  };
+  DUR.heart = 3.8;
+
+  R.tick = function (ctx, out, t0, p) { wood(ctx, out, t0, p && p.high ? 1700 : 1250, 0.2, 0.05); };
+  DUR.tick = 0.15;
+
+  R.blip = function (ctx, out, t0) { wood(ctx, out, t0, 720, 0.17, 0.08); };
+  DUR.blip = 0.2;
+  R.pop = function (ctx, out, t0) { wood(ctx, out, t0, 520, 0.2, 0.08); wood(ctx, out, t0 + 0.07, 780, 0.15, 0.08); };
+  DUR.pop = 0.3;
+
+  // ديك + عصافير: الصباح
+  R.rooster = function (ctx, out, t0) {
+    const bp = ctx.createBiquadFilter(); bp.type = 'bandpass'; bp.frequency.value = 1500; bp.Q.value = 1.1;
+    const hp = ctx.createBiquadFilter(); hp.type = 'peaking'; hp.frequency.value = 2600; hp.gain.value = 6; hp.Q.value = 1.5;
+    bp.connect(hp); hp.connect(out);
+    [[0, 430, 700, 0.2], [0.26, 520, 820, 0.2], [0.52, 640, 950, 0.26], [0.86, 860, 520, 1.0]].forEach(([dt, a, b, d]) =>
+      { tone(ctx, bp, t0 + dt, d, { type: 'sawtooth', f: a, f2: b, gain: 0.36, att: 0.02, rel: d * 0.5, vib: dt > 0.8 ? 7 : 0, vibDepth: 18, vibDelay: 0.25 }); noise(ctx, bp, t0 + dt, d, { type: 'bandpass', f: (a + b) / 2 * 2.2, q: 0.9, gain: 0.07, att: 0.02, rel: d * 0.5 }); });
+  };
+  DUR.rooster = 2.0;
+  R.birds = function (ctx, out, t0, p) {
+    const n = (p && p.n) || 10, span = (p && p.span) || 3.2;
+    for (let i = 0; i < n; i++) {
+      const f = rnd(2800, 4300), tt = t0 + rnd(0, span), up = Math.random() < 0.5 ? 1.3 : 0.75;
+      tone(ctx, out, tt, rnd(0.07, 0.15), { f, f2: f * up, gain: 0.07, att: 0.01, rel: 0.08 });
+      if (Math.random() < 0.6) tone(ctx, out, tt + 0.11, 0.09, { f: f * 1.1, f2: f * up * 1.1, gain: 0.05, att: 0.01, rel: 0.06 });
+    }
+  };
+  DUR.birds = 3.6;
+
+  // قتل بالسكين: شقّ + ضربة ثقيلة + رنّة معدن (بدون ألحان مصطنعة)
+  R.stab = function (ctx, out, t0) {
+    const e = echo(ctx, out, 0.21, 0.28, 0.3);
+    noise(ctx, e, t0, 0.22, { type: 'bandpass', f: 2600, f2: 6800, q: 0.9, gain: 0.34, att: 0.002, rel: 0.17 });
+    noise(ctx, e, t0 + 0.03, 0.2, { type: 'lowpass', f: 900, f2: 200, q: 0.8, gain: 0.3, att: 0.003, rel: 0.16 });
+    tone(ctx, e, t0 + 0.02, 0.5, { f: 92, f2: 40, gain: 0.5, att: 0.004 });
+    [1, 2.32, 4.1, 5.6].forEach((r, i) => tone(ctx, e, t0 + 0.04, 1.2 - i * 0.2, { f: 600 * r, gain: 0.05 / (1 + i * 0.4), att: 0.002, rel: 1.1 - i * 0.2 }));
+  };
+  DUR.stab = 1.4;
+  // رصاصة القنّاص: طقّة حادة + دويّ + ذيل بالصدى
+  R.gun = function (ctx, out, t0) {
+    const e = echo(ctx, out, 0.17, 0.3, 0.35);
+    noise(ctx, e, t0, 0.4, { type: 'lowpass', f: 7000, f2: 250, q: 0.7, gain: 0.29, att: 0.002, rel: 0.35 });
+    tone(ctx, e, t0, 0.55, { f: 140, f2: 32, gain: 0.3, att: 0.002 });
+    noise(ctx, e, t0, 0.05, { type: 'highpass', f: 2500, gain: 0.25, att: 0.001, rel: 0.04 });
+    noise(ctx, e, t0 + 0.05, 0.9, { type: 'bandpass', f: 320, q: 0.9, gain: 0.1, att: 0.01, rel: 0.8 });
+  };
+  DUR.gun = 1.6;
+  // ليلة هادية / إنقاذ: جرس ناعم
+  R.chime = function (ctx, out, t0) {
+    [784, 988, 1175, 1568].forEach((f, i) => { const t = t0 + i * 0.13; tone(ctx, out, t, 1.8, { f, gain: 0.15, att: 0.005, rel: 1.7 }); tone(ctx, out, t, 1.0, { f: f * 2.01, gain: 0.04, att: 0.005, rel: 0.9 }); });
+  };
+  DUR.chime = 2.5;
+  R.bell = function (ctx, out, t0) { [1, 2.76, 5.4].forEach((r, i) => tone(ctx, out, t0, 1.6 - i * 0.35, { f: 392 * r, gain: 0.22 / (1 + i), att: 0.003, rel: 1.5 - i * 0.35 })); };
+  DUR.bell = 1.8;
+  // مطرقة خشب: طقّة + رنين خشب + ثقل
+  R.gavel = function (ctx, out, t0) {
+    const e = echo(ctx, out, 0.12, 0.22, 0.25);
+    [0, 0.3].forEach((dt, i) => {
+      const g = i ? 0.75 : 1;
+      noise(ctx, e, t0 + dt, 0.04, { type: 'bandpass', f: 1400, q: 1, gain: 0.3 * g, att: 0.001, rel: 0.035 });
+      tone(ctx, e, t0 + dt, 0.16, { f: 330, f2: 210, gain: 0.34 * g, att: 0.001, rel: 0.14, human: false });
+      tone(ctx, e, t0 + dt, 0.1, { f: 820, f2: 560, gain: 0.15 * g, att: 0.001, rel: 0.09, human: false });
+      tone(ctx, e, t0 + dt, 0.12, { f: 120, f2: 70, gain: 0.28 * g, att: 0.001, rel: 0.1, human: false });
+    });
+  };
+  DUR.gavel = 0.8;
+  R.drum = function (ctx, out, t0) {
+    const hits = 32;
+    for (let i = 0; i < hits; i++) noise(ctx, out, t0 + i * 0.047, 0.07, { type: 'bandpass', f: 190, q: 1.2, gain: 0.08 + 0.28 * (i / hits), att: 0.003, rel: 0.06 });
+    tone(ctx, out, t0 + 1.55, 0.5, { f: 110, f2: 40, gain: 0.6, att: 0.003 });
+    noise(ctx, out, t0 + 1.55, 0.2, { type: 'bandpass', f: 400, q: 0.8, gain: 0.35, att: 0.002, rel: 0.18 });
+  };
+  DUR.drum = 2.2;
+  R.fanfare = function (ctx, out, t0) {
+    const e = echo(ctx, out, 0.26, 0.3, 0.35);
+    [[523.25, 0], [659.25, 0.16], [783.99, 0.32], [1046.5, 0.5]].forEach(([f, dt]) => bellTone(ctx, e, t0 + dt, f, 0.16, 1.5));
+    [261.63, 329.63, 392, 523.25].forEach((f) => [-9, 9].forEach((dc) => tone(ctx, e, t0 + 0.45, 1.9, { type: 'triangle', f, gain: 0.05, att: 0.25, rel: 1.3, detune: dc, lp: 2200 })));
+  };
+  DUR.fanfare = 2.4;
+  R.evil = function (ctx, out, t0) {
+    [110, 130.81, 155.56].forEach((f) => tone(ctx, out, t0, 3, { type: 'sawtooth', f, f2: f * 0.94, gain: 0.09, att: 0.3, rel: 1.4, lp: 700, vib: 5.5, vibDepth: 3, vibDelay: 0.5 }));
+    tone(ctx, out, t0, 0.9, { f: 55, f2: 35, gain: 0.7, att: 0.01, rel: 0.8 });
+    noise(ctx, out, t0, 2.6, { type: 'lowpass', f: 220, q: 0.7, gain: 0.14, att: 0.4, rel: 1.6 });
+    bellTone(ctx, out, t0 + 0.05, 233, 0.12, 2.6);
+  };
+  DUR.evil = 3.2;
+  R.jester = function (ctx, out, t0) {
+    [392, 523.25, 659.25, 523.25, 784, 659.25, 1046.5].forEach((f, i) => bellTone(ctx, out, t0 + i * 0.13, f, 0.18, 0.5));
+    tone(ctx, out, t0 + 1.05, 0.4, { f: 220, f2: 760, gain: 0.2, att: 0.02, rel: 0.2 });
+  };
+  DUR.jester = 2.0;
+  R.gong = function (ctx, out, t0) {
+    [1, 1.47, 2.09, 2.57, 3.2, 4.1].forEach((r, i) => tone(ctx, out, t0, 3.2 - i * 0.3, { f: 98 * r, gain: 0.28 / (1 + i * 0.6), att: 0.004, rel: 3 - i * 0.3 }));
+    noise(ctx, out, t0, 0.12, { type: 'bandpass', f: 1800, q: 0.6, gain: 0.25, att: 0.001, rel: 0.1 });
+  };
+  DUR.gong = 3.4;
+
+  // أجواء الليل المستمرة: ريح + همهمة منخفضة + جداجد. ترجّع { stop() }
+  R.ambNight = function (ctx, out, t0) {
+    const bus = ctx.createGain(); bus.gain.setValueAtTime(0.0001, t0); bus.gain.linearRampToValueAtTime(1, t0 + 1.5); bus.connect(out);
+    const stops = [];
+    // ريح
+    const ws = ctx.createBufferSource(); ws.buffer = noiseBuf(ctx); ws.loop = true;
+    const wf = ctx.createBiquadFilter(); wf.type = 'lowpass'; wf.frequency.value = 420; wf.Q.value = 0.7;
+    const wg = ctx.createGain(); wg.gain.value = 0.13;
+    const wl = ctx.createOscillator(), wlg = ctx.createGain(); wl.frequency.value = 0.13; wlg.gain.value = 0.07; wl.connect(wlg); wlg.connect(wg.gain);
+    ws.connect(wf); wf.connect(wg); wg.connect(bus); ws.start(t0); wl.start(t0); stops.push(ws, wl);
+    // همهمة
+    [[55, 'sawtooth', 0.05], [82.4, 'sine', 0.06]].forEach(([f, ty, gg]) => {
+      const o = ctx.createOscillator(); o.type = ty; o.frequency.value = f; const lf = ctx.createBiquadFilter(); lf.type = 'lowpass'; lf.frequency.value = 180;
+      const g = ctx.createGain(); g.gain.value = gg; o.connect(lf); lf.connect(g); g.connect(bus); o.start(t0); stops.push(o);
+    });
+    // جداجد: موجة حاملة عالية، مضمّنة بنبضات سريعة وبمجموعات
+    [[4200, 27, 2.1, 0.022], [4650, 31, 1.7, 0.016]].forEach(([f, rate, grp, amp]) => {
+      const o = ctx.createOscillator(); o.frequency.value = f;
+      const g1 = ctx.createGain(); g1.gain.value = amp * 0.5;
+      const l1 = ctx.createOscillator(); l1.type = 'square'; l1.frequency.value = rate; const d1 = ctx.createGain(); d1.gain.value = amp * 0.5; l1.connect(d1); d1.connect(g1.gain);
+      const g2 = ctx.createGain(); g2.gain.value = 0.5;
+      const l2 = ctx.createOscillator(); l2.type = 'square'; l2.frequency.value = grp; const d2 = ctx.createGain(); d2.gain.value = 0.5; l2.connect(d2); d2.connect(g2.gain);
+      o.connect(g1); g1.connect(g2); g2.connect(bus); o.start(t0); l1.start(t0); l2.start(t0); stops.push(o, l1, l2);
+    });
+    return { stop(t) { t = t == null ? ctx.currentTime : t; bus.gain.cancelScheduledValues(t); bus.gain.setValueAtTime(bus.gain.value, t); bus.gain.linearRampToValueAtTime(0.0001, t + 1.0); stops.forEach((s) => { try { s.stop(t + 1.1); } catch (e) { } }); } };
+  };
+  DUR.ambNight = 4;
+
+  // ------------------------------------------------------------ المحرك الحي
+  const S = { ctx: null, master: null, sfx: null, amb: null, comp: null, enabled: { sfx: true, voice: true }, vol: 0.85, unlocked: false, buffers: {}, files: {}, narr: {}, ambient: null, ambTimers: [], speaking: 0 };
+  function ensure() {
+    if (S.ctx) return S.ctx; if (!AC) return null;
+    let c; try { c = new AC(); } catch (e) { return null; } S.ctx = c;
+    S.comp = c.createDynamicsCompressor(); S.comp.threshold.value = -14; S.comp.knee.value = 20; S.comp.ratio.value = 4;
+    S.master = c.createGain(); S.master.gain.value = S.vol;
+    S.sfx = c.createGain(); S.amb = c.createGain(); S.amb.gain.value = 0.7;
+    S.sfx.connect(S.comp); S.amb.connect(S.comp);
+    // صدى غرفة واسعة: يلصّق كل المؤثرات بمكان واحد ويخفّف طابعها الجاف
+    try { const cv = c.createConvolver(); cv.buffer = roomIR(c, 1.7); const wet = c.createGain(); wet.gain.value = 0.2; S.sfx.connect(cv); S.amb.connect(cv); cv.connect(wet); wet.connect(S.comp); } catch (e) { } S.comp.connect(S.master); S.master.connect(c.destination);
+    return c;
+  }
+  function roomIR(ctx, sec) {
+    const sr = ctx.sampleRate, len = Math.floor(sr * sec), b = ctx.createBuffer(2, len, sr);
+    for (let ch = 0; ch < 2; ch++) { const d = b.getChannelData(ch); let lp = 0; for (let i = 0; i < len; i++) { const t = i / len, a = 0.35 + 0.6 * t; lp += a * ((Math.random() * 2 - 1) - lp); d[i] = lp * Math.pow(1 - t, 3.2) * (i < sr * 0.012 ? i / (sr * 0.012) : 1); } }
+    return b;
+  }
+  function hasVoiceApi() { return !!(root.speechSynthesis && root.SpeechSynthesisUtterance); }
+  function pickVoice() {
+    if (!hasVoiceApi()) return null;
+    const vs = root.speechSynthesis.getVoices() || [], ar = vs.filter((v) => /^ar/i.test(v.lang) || /arab|عرب/i.test(v.name));
+    return ar.find((v) => /majed|maged|tarik|hamed|male/i.test(v.name)) || ar.find((v) => /SA/i.test(v.lang)) || ar[0] || null;
+  }
+  function unlock() {
+    const c = ensure(); S.unlocked = true;
+    if (c) { try { if (c.state === 'suspended') c.resume(); const b = c.createBuffer(1, 1, 22050), s = c.createBufferSource(); s.buffer = b; s.connect(c.destination); s.start(0); } catch (e) { } }
+    if (hasVoiceApi()) { try { root.speechSynthesis.getVoices(); const u = new root.SpeechSynthesisUtterance(' '); u.volume = 0; root.speechSynthesis.speak(u); } catch (e) { } }
+    return !!c;
+  }
+  function play(name, p) {
+    if (!S.enabled.sfx) return false; const c = ensure(); if (!c) return false;
+    try { if (c.state === 'suspended') c.resume(); } catch (e) { }
+    const t = c.currentTime + 0.03;
+    if (S.buffers[name]) { const s = c.createBufferSource(); s.buffer = S.buffers[name]; const g = c.createGain(); g.gain.value = (p && p.gain) || 1; s.connect(g); g.connect(S.sfx); s.start(t); return true; }
+    if (!R[name]) return false;
+    try { R[name](c, S.sfx, t, p); } catch (e) { if (root.console) console.error('sfx', name, e); return false; }
+    return true;
+  }
+  function clearAmbTimers() { S.ambTimers.forEach(clearTimeout); S.ambTimers = []; }
+  function ambient(kind) {
+    const c = ensure(); if (!c) return;
+    if (S.ambient) { try { S.ambient.stop(); } catch (e) { } S.ambient = null; } clearAmbTimers();
+    if (!kind || !S.enabled.sfx) return;
+    if (kind === 'night') {
+      try { if (c.state === 'suspended') c.resume(); S.ambient = R.ambNight(c, S.amb, c.currentTime + 0.03); } catch (e) { return; }
+      const loop = (fn, a, b) => { S.ambTimers.push(setTimeout(() => { if (!S.ambient) return; fn(); loop(fn, a, b); }, rnd(a, b) * 1000)); };
+      loop(() => play('owl'), 9, 16);
+      loop(() => play('wolf', { pitch: 0.85, gain: 0.16, dark: true }), 22, 34);
+    }
+  }
+  function duck(on) {
+    const c = S.ctx; if (!c) return; S.speaking = Math.max(0, S.speaking + (on ? 1 : -1));
+    const to = S.speaking > 0 ? 0.3 : 0.7; S.amb.gain.cancelScheduledValues(c.currentTime); S.amb.gain.setValueAtTime(S.amb.gain.value, c.currentTime); S.amb.gain.linearRampToValueAtTime(to, c.currentTime + 0.3);
+  }
+  // الراوي: لو فيه تسجيل بنفس المفتاح نشغّله، وإلا نقرأ النص بصوت عربي من الجهاز (لو متوفر)
+  function say(text, o) {
+    o = o || {};
+    if (!S.enabled.voice) return false;
+    if (o.key && S.narr[o.key] && S.ctx) { const c = S.ctx, s = c.createBufferSource(); s.buffer = S.narr[o.key]; s.connect(S.sfx); duck(true); s.onended = () => duck(false); s.start(); return true; }
+    if (!hasVoiceApi()) return false; const v = pickVoice(); if (!v) return false;
+    try {
+      if (o.interrupt !== false) root.speechSynthesis.cancel();
+      const u = new root.SpeechSynthesisUtterance(text); u.voice = v; u.lang = v.lang; u.rate = o.rate || 0.92; u.pitch = o.pitch || 0.85; u.volume = 1;
+      u.onstart = () => duck(true); u.onend = u.onerror = () => duck(false);
+      root.speechSynthesis.speak(u); return true;
+    } catch (e) { return false; }
+  }
+  function shutUp() { try { if (hasVoiceApi()) root.speechSynthesis.cancel(); } catch (e) { } }
+  function stopAll() { ambient(null); shutUp(); }
+  function setVolume(v) { S.vol = Math.max(0, Math.min(1, v)); if (S.master) S.master.gain.value = S.vol; }
+  function setEnabled(k, v) { S.enabled[k] = !!v; if (!v && k === 'sfx') ambient(null); if (!v && k === 'voice') shutUp(); }
+  // تبديل مؤثرات/سطور راوي بملفات حقيقية: { wolf:'url', n_night:'url' }  (n_ = راوي)
+  function useFiles(map) {
+    const c = ensure(); if (!c || !root.fetch) return Promise.resolve(0);
+    return Promise.all(Object.keys(map).map((k) => root.fetch(map[k]).then((r) => r.arrayBuffer()).then((ab) => new Promise((res, rej) => c.decodeAudioData(ab, res, rej))).then((buf) => { (k.indexOf('n_') === 0 ? S.narr : S.buffers)[k] = buf; return 1; }).catch(() => 0))).then((a) => a.reduce((x, y) => x + y, 0));
+  }
+  // نفس useFiles لكن من بيانات مضمّنة داخل الملف (data:audio/...;base64,...) — للنسخة اللي تشتغل بدون إنترنت
+  function useData(map) {
+    const c = ensure(); if (!c) return Promise.resolve(0);
+    const toBuf = (d) => { const bin = root.atob(d.slice(d.indexOf(',') + 1)), u = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i); return u.buffer; };
+    return Promise.all(Object.keys(map).map((k) => new Promise((res, rej) => { try { c.decodeAudioData(toBuf(map[k]), res, rej); } catch (e) { rej(e); } }).then((buf) => { (k.indexOf('n_') === 0 ? S.narr : S.buffers)[k] = buf; return 1; }).catch(() => 0))).then((a) => a.reduce((x, y) => x + y, 0));
+  }
+  // فحص بدون سماعات: يرجّع Float32Array
+  function render(name, p, sr) {
+    if (!OAC) return Promise.reject(new Error('no OfflineAudioContext'));
+    sr = sr || 22050; const d = (DUR[name] || 2) + 0.2;
+    const oc = new OAC(1, Math.ceil(sr * d), sr), dest = oc.createGain(); dest.connect(oc.destination);
+    const h = R[name](oc, dest, 0, p); if (h && h.stop) h.stop(d - 1.2);
+    return oc.startRendering().then((b) => b.getChannelData(0));
+  }
+
+  return { unlock, play, ambient, say, shutUp, stopAll, setVolume, setEnabled, useFiles, useData, hasPack: () => Object.keys(S.narr).length > 0, render, names: Object.keys(R), DUR, state: S, hasVoice: () => !!pickVoice(), hasVoiceApi, supported: !!AC };
+});
+
+</script>
+<script>/* hub.js */
+/* ديوانية بلس مافيا — مركز الغرف (hub): بروتوكول الرسائل + الغرف + المؤقتات، بدون أي شبكة.
+ * يشتغل في Node (server.js) وفي المتصفح (النسخة التجريبية) وفي Cloudflare Durable Object لاحقاً.
+ * الناقل (WebSocket أو غيره) يعطي كل اتصال كائن conn فيه: send(obj) و close(code).
+ *
+ * رسائل العميل -> الخادم (JSON):
+ *   {t:'create', name, dev?}          إنشاء غرفة (المنشئ هو المضيف)
+ *   {t:'join', code, name}            دخول بالرمز
+ *   {t:'resume', code, token}         رجوع بعد انقطاع / قفل الجوال
+ *   {t:'board', code}                 شاشة عرض عامة (بدون دور)
+ *   {t:'act', a, ...}                 a = ready | night{target,kind?} | confirm{on?} | task | vote | voteReady | start | skip | settings | kick | reset | leave
+ *                                     (الليل: المافيا تقترح بـnight ثم تؤكد بـconfirm · بقية اللاعبين اللي ما عندهم قدرة ينفذون مهمة ويبلّغون بـtask)
+ *                                     وضع المقدّم: hostPick{kind,target} | hostNext | hostTimer{sec}
+ *   {t:'ping'}
+ * الخادم -> العميل: {t:'joined',code,id,token} | {t:'view',view} | {t:'err',err} | {t:'pong'} | {t:'kicked'} | {t:'left'}
+ */
+(function (root, factory) {
+  if (typeof module === 'object' && module.exports) module.exports = factory();
+  else root.MafiaHub = factory();
+})(typeof self !== 'undefined' ? self : this, function () {
+  'use strict';
+  const LOBBY_GRACE_MS = 90 * 1000, ROOM_IDLE_MS = 6 * 3600 * 1000, EMPTY_ROOM_MS = 30 * 60 * 1000;
+
+  /* opts: { E (المحرك), rng(), randInt(min,max), token(), now(), wallet, allowDev, maxRooms } */
+  function createHub(opts) {
+    const E = opts.E, rng = opts.rng, now = opts.now || Date.now, maxRooms = opts.maxRooms || 500;
+    const wallet = opts.wallet || { async charge() { return true; } };   // مكان ربط الرصيد: يُخصم قيم واحد من المضيف عند البدء
+    const rooms = new Map();
+
+    const newCode = () => { for (let i = 0; i < 50; i++) { const c = String(opts.randInt(1000, 10000)); if (!rooms.has(c)) return c; } return null; };
+
+    function sendViews(room) {
+      const t = now();
+      room.conns.forEach((c) => { if (!c.closed) c.send({ t: 'view', view: E.viewFor(room.g, c.pid, t) }); });
+    }
+    function bind(room, conn, pid) {
+      // اتصال قديم لنفس اللاعب؟ نقفله
+      room.conns.forEach((c) => { if (c !== conn && pid && c.pid === pid) { c.pid = null; room.conns.delete(c); c.close(4000); } });
+      conn.code = room.g.code; conn.pid = pid; conn.board = !pid; room.conns.add(conn);
+      if (pid) { E.setConnected(room.g, pid, true); delete room.discAt[pid]; }
+    }
+    function closed(conn) {
+      const room = conn.code && rooms.get(conn.code); if (!room) return;
+      room.conns.delete(conn);
+      if (conn.pid && E.byId(room.g, conn.pid)) {
+        const still = [...room.conns].some((c) => c.pid === conn.pid);
+        if (!still) { E.setConnected(room.g, conn.pid, false); room.discAt[conn.pid] = now(); sendViews(room); }
+      }
+    }
+
+    function message(conn, m) {
+      const t0 = now();
+      const err = (e) => conn.send({ t: 'err', err: e });
+      switch (m.t) {
+        case 'ping': return conn.send({ t: 'pong' });
+        case 'create': {
+          if (rooms.size >= maxRooms) return err('server_busy');
+          const code = newCode(); if (!code) return err('server_busy');
+          const g = E.createGame(code, { minPlayers: m.dev && opts.allowDev ? 3 : 5 });
+          const room = { g, conns: new Set(), tokens: {}, discAt: {}, created: t0, last: t0 };
+          const r = E.join(g, m.name, t0); if (!r.ok) return err(r.err);
+          rooms.set(code, room); const tk = opts.token(); room.tokens[tk] = r.id;
+          bind(room, conn, r.id); conn.send({ t: 'joined', code, id: r.id, token: tk }); return sendViews(room);
+        }
+        case 'join': {
+          const room = rooms.get(String(m.code || '')); if (!room) return err('no_room');
+          const r = E.join(room.g, m.name, t0); if (!r.ok) return err(r.err);
+          const tk = opts.token(); room.tokens[tk] = r.id; room.last = t0;
+          bind(room, conn, r.id); conn.send({ t: 'joined', code: room.g.code, id: r.id, token: tk }); return sendViews(room);
+        }
+        case 'resume': {
+          const room = rooms.get(String(m.code || '')); if (!room) return err('no_room');
+          const pid = room.tokens[String(m.token || '')]; if (!pid || !E.byId(room.g, pid)) return err('bad_token');
+          bind(room, conn, pid); conn.send({ t: 'joined', code: room.g.code, id: pid, token: m.token, resumed: true }); return sendViews(room);
+        }
+        case 'board': {
+          const room = rooms.get(String(m.code || '')); if (!room) return err('no_room');
+          bind(room, conn, null); return conn.send({ t: 'view', view: E.viewFor(room.g, null, t0) });
+        }
+        case 'act': {
+          const room = conn.code && rooms.get(conn.code); if (!room || !conn.pid) return err('not_joined');
+          const g = room.g, id = conn.pid; let r = { ok: true }; room.last = t0;
+          // محرك عام (مثل المستشار السري): كل أفعال اللعب تروح لـ E.act، ما عدا الطرد والبدء والخروج (لها شغل اتصالات هنا)
+          if (E.act && m.a !== 'kick' && m.a !== 'start' && m.a !== 'leave') { const r0 = E.act(g, id, m, t0, rng); if (!r0.ok) err(r0.err); return sendViews(room); }
+          switch (m.a) {
+            case 'ready': r = E.ready(g, id, t0); break;
+            case 'night': r = E.nightAct(g, id, m.target === undefined ? null : m.target, t0, m.kind, rng); break;
+            case 'confirm': r = E.nightConfirm(g, id, t0, rng, m.on !== false); break;
+            case 'task': r = E.nightTask(g, id, t0, rng); break;
+            case 'vote': r = E.vote(g, id, m.target, t0); break;
+            case 'voteReady': r = E.voteReady(g, id, t0); break;
+            case 'settings': r = E.setSettings(g, id, m.patch || {}); break;
+            case 'skip': r = E.skip(g, id, t0, rng); break;
+            case 'hostPick': r = E.hostPick(g, id, m.kind, m.target === undefined ? null : m.target); break;
+            case 'hostNext': r = E.hostNext(g, id, t0); break;
+            case 'hostTimer': r = E.hostTimer(g, id, m.sec, t0); break;
+            case 'kick': { const victim = [...room.conns].find((c) => c.pid === m.target); r = E.kick(g, id, m.target); if (r.ok && victim) { victim.pid = null; room.conns.delete(victim); victim.send({ t: 'kicked' }); victim.close(4001); } break; }
+            case 'reset': r = E.reset(g, id); break;
+            case 'start': {
+              if (g.hostId !== id) { r = { ok: false, err: 'not_host' }; break; }
+              if (g.phase !== 'lobby') { r = { ok: false, err: 'already_started' }; break; }
+              if (E.need(g) > 0) { r = { ok: false, err: 'need_players' }; break; }
+              // هنا يُخصم قيم واحد من رصيد المضيف (من الخادم، مو من الجوال).
+              Promise.resolve(wallet.charge(room)).then((okc) => {
+                if (!okc) { conn.send({ t: 'err', err: 'no_credit' }); return; }
+                const rr = E.start(g, id, now(), rng); if (!rr.ok) conn.send({ t: 'err', err: rr.err });
+                sendViews(room);
+              }).catch(() => conn.send({ t: 'err', err: 'wallet_error' }));
+              return;
+            }
+            case 'leave': { r = E.leave(g, id); const tkn = Object.keys(room.tokens).find((k) => room.tokens[k] === id); if (tkn) delete room.tokens[tkn]; conn.pid = null; conn.send({ t: 'left' }); break; }
+            default: r = { ok: false, err: 'bad_action' };
+          }
+          if (!r.ok) err(r.err);
+          return sendViews(room);
+        }
+      }
+    }
+
+    // مؤقتات اللعبة + تنظيف الغرف (يُستدعى كل ~500ms)
+    function tick() {
+      const t = now();
+      rooms.forEach((room, code) => {
+        const g = room.g; let changed = false;
+        try { changed = E.tick(g, t, rng); } catch (e) { if (typeof console !== 'undefined') console.error('tick error', code, e); }
+        if (g.phase === 'lobby') Object.keys(room.discAt).forEach((pid) => { if (t - room.discAt[pid] > LOBBY_GRACE_MS) { E.leave(g, pid); delete room.discAt[pid]; changed = true; } });
+        if (changed) sendViews(room);
+        if ((room.conns.size === 0 && t - room.last > EMPTY_ROOM_MS) || t - room.last > ROOM_IDLE_MS) rooms.delete(code);
+      });
+    }
+
+    return { rooms, message, closed, tick, sendViews };
+  }
+
+  return { createHub };
+});
+
+</script>
+<script>/* qf/icons.js */
+/* ديوانية بلس — قفطة!: أيقونات مرسومة بدون إيموجي وبدون ملامح وجوه */
+(function (root) {
+  'use strict';
+  const S = (vb, inner) => '<svg viewBox="' + vb + '" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' + inner + '</svg>';
+  const I = {
+    fox: (c) => S('0 0 100 100',
+      '<circle cx="50" cy="50" r="46" fill="' + (c || '#2b1b54') + '" stroke="#f2c14e" stroke-width="3"/>' +
+      '<polygon points="22,46 28,16 46,34" fill="#f26538"/><polygon points="78,46 72,16 54,34" fill="#f26538"/>' +
+      '<polygon points="26,42 30,22 42,34" fill="#ffd978"/><polygon points="74,42 70,22 58,34" fill="#ffd978"/>' +
+      '<path d="M20,46 Q50,28 80,46 L68,78 Q50,86 32,78 Z" fill="#f26538"/>' +
+      '<path d="M22,52 L50,78 L32,78 Z" fill="#fff"/><path d="M78,52 L50,78 L68,78 Z" fill="#fff"/>' +
+      '<circle cx="50" cy="76" r="5.5" fill="#10122e"/>'),
+    trap: () => S('0 0 100 100',
+      '<circle cx="50" cy="50" r="44" fill="#4a1220" stroke="#e5484d" stroke-width="3"/>' +
+      '<path d="M18,64 L28,44 L38,64 L50,42 L62,64 L72,44 L82,64 Z" fill="#ffd978" stroke="#f26538" stroke-width="2.5" stroke-linejoin="round"/>' +
+      '<rect x="16" y="64" width="68" height="10" rx="4" fill="#e5484d"/>'),
+    truth: () => S('0 0 100 100',
+      '<circle cx="50" cy="50" r="44" fill="#0d4a3a" stroke="#34d399" stroke-width="3"/>' +
+      '<path d="M28,52 L44,68 L74,34" fill="none" stroke="#b6ffe1" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>'),
+    trophy: () => S('0 0 100 100',
+      '<path d="M28,18 H72 V38 C72,56 60,66 50,68 C40,66 28,56 28,38 Z" fill="#f2c14e"/>' +
+      '<path d="M28,24 H16 C16,40 22,48 30,50 M72,24 H84 C84,40 78,48 70,50" fill="none" stroke="#f2c14e" stroke-width="6" stroke-linecap="round"/>' +
+      '<rect x="44" y="66" width="12" height="14" fill="#d9a21e"/><rect x="30" y="80" width="40" height="10" rx="4" fill="#f2c14e"/>')
+  };
+  root.QFIcons = { svg: (n, c) => (I[n] ? I[n](c) : '') };
+})(typeof self !== 'undefined' ? self : this);
+</script>
+<script>/* qf/help.js */
+/* ديوانية بلس — قفطة!: شرح اللعبة بنفس أسلوب المستشار السري */
+(function (root) {
+  'use strict';
+  const SECTIONS = [
+    { id: 'idea', short: 'الفكرة', title: 'فكرة قفطة!', kind: 'list',
+      lead: 'سؤال حقيقي غريب ينقصه فراغ واحد. مهمتك تألّف كذبة مقنعة من راسك وتخلي الباقين يصدقونها ويصوتون لها!',
+      points: [
+        'الكل يكتب كذبته بجواله بسرية تامة — ما فيه أي مساعدات جاهزة، اعتمد على خيالك وذكاءك!',
+        'لو كتبت الجواب الحقيقي بالصدفة، الجوال ينبّهك فوراً ويقول لك: هذي الحقيقة، اكتب كذبة غيرها.',
+        'بعد ما الكل يكتب، تطلع كل الكذبات مخلوطة مع الجواب الحقيقي الواحد على الشاشة بدون أسماء.',
+        'كل لاعب يصوّت للجواب اللي يظنه هو الحقيقة الصحيحة.',
+        'تظهر الإجابة الصحيحة والقفطات وترتيب النقاط فوراً (أو بالتدريج مع زر تخطي فوري)!'
+      ] },
+    { id: 'round', short: 'الجولة', title: 'كيف تمشي الجولة؟', kind: 'steps',
+      steps: [
+        { h: 'اقرأ السؤال والفراغ', t: 'يطلع خبر حقيقي عجيب على التلفزيون وفي جوالك، وفيه كلمة ناقصة مكان الفراغ.' },
+        { h: 'اكتب كذبتك السرية', t: 'اكتب من جوالك كذبة تحس إنها تركب على السالفة عشان تطيّح أخوياك فيها.' },
+        { h: 'صوّت للحقيقة', t: 'تطلع كل الخيارات قدّامك. اختار الجواب اللي تتوقع إنه هو الحقيقة (ما تقدر تصوّت لكذبتك).' },
+        { h: 'النتيجة والنقاط بلمحة وحدة', t: 'تظهر الحقيقة المؤكدة، والقفطات اللي طاحوا فيها اللاعبين، وترتيب النقاط في شاشة واحدة واضحة.' },
+        { h: 'وسام أظرف كذبة', t: 'تقدر تضغط «أظرف كذبة» على أي كذبة ضحكتك وتعطي صاحبها +١٠٠ نقطة بونص.' }
+      ] },
+    { id: 'points', short: 'النقاط', title: 'حسبة النقاط والتدبيل', kind: 'list',
+      lead: 'النقاط تزيد وتشتعل كل ما قربتوا من الجولة الأخيرة:',
+      points: [
+        'الجولات العادية: كشف الحقيقة = +١٠٠٠ نقطة · كل لاعب يطيح في كذبتك = +٥٠٠ نقطة.',
+        'جولة الدبل (قبل الأخيرة): كشف الحقيقة = +٢٠٠٠ نقطة · كل لاعب يطيح في كذبتك = +١٠٠٠ نقطة.',
+        'القفطة الكبرى (الجولة الأخيرة ×٣): كشف الحقيقة = +٣٠٠٠ نقطة · كل لاعب يطيح في كذبتك = +١٥٠٠ نقطة!',
+        'وسام أظرف كذبة: +١٠٠ نقطة بونص عن كل لاعب يعطي كذبتك إعجاب.'
+      ],
+      note: 'يعني حتى لو كنت متأخر في البداية، قفطة وحدة في الجولة الأخيرة تقلب الطاولة وتخليك الأول!' },
+    { id: 'phones', short: 'الجوالات والصوت', title: 'الجوالات، الشاشة، والتحكم بالصوت', kind: 'steps',
+      steps: [
+        { h: 'المضيف ينشئ الغرفة بضغطة زر', t: 'يختار الفئة وعدد الجولات وطريقة عرض النتيجة (فوري أو تدريجي مع تخطي).' },
+        { h: 'سعة ضخمة حتى ٦٠ لاعباً', t: 'اللاعبون يدخلون بالـQR أو الرمز، وفي النسخة التجريبية تقدر تضيف حتى ٥٠ لاعب بضغطة زر.' },
+        { h: 'كتم الصوت بضغطة زر', t: 'تقدر تقفل أو تشغل الصوت والراوي في أي لحظة من زر الصوت أعلى الشاشة أو في الشريط السفلي.' }
+      ] }
+  ];
+  root.QFHelp = { SECTIONS };
+})(typeof self !== 'undefined' ? self : this);
+</script>
+<script>/* qf/engine.js */
+/* ديوانية بلس — قفطة!: محرك اللعبة متوافق ١٠٠٪ مع MafiaHub (hub.js) ويدعم حتى 60 لاعباً */
+(function (root, factory) {
+  if (typeof module === 'object' && module.exports) module.exports = factory();
+  else root.QFEngine = factory();
+})(typeof self !== 'undefined' ? self : this, function () {
+  'use strict';
+  const MIN_PLAYERS = 2, MAX_PLAYERS = 60;
+  const ACT_OPTIONS = [0, 45, 60, 90];
+  const ROUND_OPTIONS = [3, 5, 7];
+  const REVEAL_OPTIONS = [
+    { id: 'instant', label: 'فوري (الإجابة والنقاط معاً)' },
+    { id: 'step', label: 'تدريجي (مع زر تخطي)' }
+  ];
+  const CAT_OPTIONS = ['الكل', 'سوالف ومواقف', 'غرائب العالم', 'عجائب الحيوانات', 'اختراعات شاطحة', 'كواليس الملاعب', 'طرائف التاريخ'];
+  const STEP_MS = 4200;
+  const COLORS = [
+    '#f26538', '#38bdf8', '#a78bfa', '#34d399', '#fbbf24', '#f472b6', '#60a5fa', '#fb7185',
+    '#2dd4bf', '#c084fc', '#facc15', '#4ade80', '#38ef7d', '#ff9f43', '#00d2d3', '#ff6b6b',
+    '#54a0ff', '#5f27cd', '#ff9ff3', '#1dd1a1'
+  ];
+  const QUESTIONS = [{"id": "w1", "cat": "غرائب العالم", "q": "في عام 2013، اضطرت فرقة إطفاء في ألمانيا للتدخل لإنقاذ رجل علقت يده داخل _____ أثناء محاولته تنظيفها.", "truth": "حمّاصة خبز كهربائية", "info": "حاول الرجل تنظيف الحمّاصة بسكين وهي موصولة، فعلقت يده واضطر الإطفاء لتفكيكها قطعة قطعة.", "decoys": ["ماكينة بيع مشروبات", "غسالة صحون صغيرة", "حصالة نقود معدنية", "فتحة مكيف السيارة"]}, {"id": "w2", "cat": "غرائب العالم", "q": "يمنع القانون المحلي في مدينة «ميلان» الإيطالية المواطنين من _____ في الأماكن العامة، باستثناء المستشفيات والجنازات.", "truth": "العبوس والتجهم", "info": "صدر هذا القانون القديم ليفرض على السكان الابتسام دائماً في الشوارع تحت طائلة الغرامة.", "decoys": ["لبس النظارات الشمسية", "التحدث بصوت مرتفع", "حمل المظلات السوداء", "الأكل أثناء المشي"]}, {"id": "w3", "cat": "غرائب العالم", "q": "في عام 2018، توقفت حركة القطارات في مدينة يابانية لعدة ساعات بعد أن تبيّن أن سبب العطل الكهربائي هو _____ دخل إلى المحول الرئيسي.", "truth": "بزّاقة (حلزون بدون قوقعة)", "info": "تسللت بزّاقة صغيرة إلى لوحة الكهرباء في شركة JR Kyushu وتسببت في تأخير 12 ألف مسافر.", "decoys": ["طلب بيتزا منسي", "سروال طار من حبل غسيل", "روبوت تنظيف ضائع", "عش حمامة من الأسلاك"]}, {"id": "w4", "cat": "غرائب العالم", "q": "في سويسرا، ينص قانون حماية الحيوان الرسمي على أنه يُمنع منعاً باتاً اقتناء _____ واحد فقط بمفرده في المنزل حتى لا يصاب بالاكتئاب.", "truth": "خنزير غينيا (الوبر)", "info": "لأنها كائنات اجتماعية جداً، توجد شركات سويسرية تؤجر رفيقاً مؤقتاً إذا مات أحد الزوجين.", "decoys": ["ببغاء ناطق", "سمكة ذهبية", "أرنب بري", "سلحفاة برية"]}, {"id": "w5", "cat": "غرائب العالم", "q": "في عام 2016، اتصل رجل في بريطانيا برقم الطوارئ 999 للشكوى من أمر طارئ جداً وهو أن _____ كان أصغر مما توقع.", "truth": "فطيرة البطاطس التي اشتراها", "info": "نشر مركز الشرطة التسجيل الصوتي لتنبيه الناس بعدم إشغال خط الطوارئ ببلاغات المطاعم.", "decoys": ["مقاس حذائه الجديد", "تلفزيون غرفته في الفندق", "كرسي الحلاق", "موقف سيارته"]}, {"id": "w6", "cat": "غرائب العالم", "q": "في عام 2020، أعلنت حديقة حيوان في بريطانيا عزل 5 ببغاوات عن الزوار لأنها تعلّمت _____ وتردده بصوت عالٍ وتضحك معاً.", "truth": "شتم الزوار وعبارات بذيئة", "info": "كلما ضحك الزوار زادت الببغاوات الخمسة في تشجيع بعضها، فاضطرت الإدارة لتفريقها.", "decoys": ["تقليد صوت إنذار الحريق", "طلب أكل مجاني من الأطفال", "إفشاء أسرار الحراس", "الغناء بصوت مزعج الفجر"]}, {"id": "w7", "cat": "غرائب العالم", "q": "في فنلندا، تُقام بطولة عالمية سنوية غريبة يتنافس فيها المتسابقون على رمي _____ لأبعد مسافة ممكنة.", "truth": "الهواتف المحمولة القديمة", "info": "انطلقت البطولة عام 2000 في مدينة سافونلينا كطريقة طريفة للتخلص من إجهاد التكنولوجيا.", "decoys": ["أكياس القمامة الفارغة", "أحذية المطر المطاطية", "البطيخ الفاسد", "كراسي المكاتب الدوارة"]}, {"id": "w8", "cat": "غرائب العالم", "q": "في عام 2019، اكتشف رجل أمريكي أن سبب الأصوات الغريبة في سقف منزله ليلاً هو أن سنجاباً خبأ أكثر من 70 كيلوغراماً من _____ داخل الهوائي.", "truth": "حبوب الجوز والبلوط", "info": "عندما فتح الفني الهوائي انهارت شلالات من آلاف حبات البلوط التي جمعها السنجاب طوال الخريف.", "decoys": ["كرات الجولف المسروقة", "أغطية قوارير الماء", "قطع الليغو الملونة", "أكياس الشيبس الصغيرة"]}, {"id": "w9", "cat": "غرائب العالم", "q": "ابتكرت شركة طيران في نيوزيلندا حلاً غريباً لتقليل وزن الركاب عبر تقديم وجبات خفيفة مع بسكويت قهوة _____ بعد شرب القهوة.", "truth": "فنجان القهوة نفسه قابل للأكل", "info": "صنعت الشركة الفنجان من بسكويت الفانيليا السميك المقاوم للحرارة ليأكله الراكب بعد شرب قهوته.", "decoys": ["يذوب في الماء الساخن", "بنكهة الفلفل الحار", "بدون أي سعرات حرارية", "مربوط بخيط في المقعد"]}, {"id": "w10", "cat": "غرائب العالم", "q": "في عام 2015، استدعت الشرطة الأسترالية عدة دوريات بعد بلاغات الجيران عن صراخ وتهديد بالقتل، ليكتشفوا أن الرجل كان يصرخ على _____ في مطبخه.", "truth": "عنكبوت ضخم", "info": "سمع الجيران الرجل يصرخ «سأقتلك الآن!» مع تكسير الأثاث، ففتحوا الباب ووجدوه يطارد عنكبوتاً.", "decoys": ["برطمان مخلل عالق", "لعبة فيديو خسر فيها", "مكنسة ذكية عالقة", "قطة سرقت عشاءه"]}, {"id": "g1", "cat": "سوالف ومواقف", "q": "في عام 2021، تفاجأ صاحب مزرعة في القصيم بأن جرس الباب الذكي يرن كل فجر، وعند مراجعة الكاميرا اكتشف أن الفاعل هو _____ يضغط الجرس بانتظام.", "truth": "تيس المزرعة", "info": "تعوّد التيس على الوقوف أمام الكاميرا ونطح زر الجرس بقرنه كل صباح حتى يخرج له العامل العلف.", "decoys": ["طائر غراب ذكي", "قطة الجيران", "عامل التوصيل بالخطأ", "فرع شجرة سدر"]}, {"id": "g2", "cat": "سوالف ومواقف", "q": "قصة حقيقية طريفة: تأخر عريس عن موعد زفافه في القاعة لأكثر من ساعتين لأن أصدقاءه أقنعوه بالذهاب قبل الزفة مباشرة لـ _____.", "truth": "لعب مباراة بلايستيشن حاسمة", "info": "تحولت «مباراة واحدة سريعة» في الاستراحة إلى بطولة مصغرة كادت تلغي الزفة لولا اتصال والد العروس.", "decoys": ["غسيل سيارته في مغسلة مزدحمة", "شراء شاورما من حي بعيد", "تجربة حلاقة جديدة", "تغيير كفرات السيارة"]}, {"id": "g3", "cat": "سوالف ومواقف", "q": "في مزاد علني للإبل والطيور، بيع ببغاء ناطق بسعر مرتفع جداً لأن صاحبه درّبه على قول جملة واحدة للضيوف وهي _____.", "truth": "«صب القهوة يا ولد»", "info": "كان الببغاء يرددها بنفس نبرة صوت راعي المجلس كلما دخل ضيف جديد من الباب.", "decoys": ["«العشاء جاهز تفضلوا»", "«لا تنسون القطة»", "«أهلاً وسهلاً نورتونا»", "«وين ريموت المكيف؟»"]}, {"id": "g4", "cat": "سوالف ومواقف", "q": "في إحدى البطولات الرمضانية بالحواري، أوقف الحكم المباراة لمدة 20 دقيقة ليس بسبب مشاجرة، بل لأن _____ جلس في وسط خط المرمى ورفض التحرك.", "truth": "جمل هارب من شبك قريب", "info": "برك الجمل أمام المرمى بكل هدوء واضطر اللاعبون لانتظار راعيه ليقوده خارج الملعب.", "decoys": ["صاحب البقالة المجاورة", "طفل يبحث عن نعاله", "قطيع من الأغنام", "بائع بليلة متجول"]}, {"id": "g5", "cat": "سوالف ومواقف", "q": "اشترى شاب جهاز مشي رياضي (سير كهربائي) للبيت، وبعد 6 أشهر اكتشف والده أن الاستخدام الوحيد للجهاز في المنزل هو _____.", "truth": "تعليق الملابس والشماغ عليه", "info": "وهي أشهر ظاهرة عالمية ومحلية لأجهزة المشي المنزلية بعد انتهاء حماس الأسبوع الأول.", "decoys": ["تنشيف السجاد الصغير", "وضع كراتين الماء فوقه", "نوم القطط عليه", "ترتيب الأحذية تحته"]}, {"id": "g6", "cat": "سوالف ومواقف", "q": "في رحلة برية (كشتة) شتوية، اكتشف الشباب بعد وصولهم بـ 100 كم في النفود أن المسؤول عن عزبة الطبخ جلب كل شيء ما عدا _____.", "truth": "قدر الضغط نفسه", "info": "أحضر اللحم والرز والبهارات والبصل والحطب، ونسي قدر الضغط في مطبخ بيتهم.", "decoys": ["ملح الطعام", "أعواد الكبريت والولاعة", "الماء الحلو للطبخ", "ملاعق الأكل"]}, {"id": "g7", "cat": "سوالف ومواقف", "q": "في موقف طريف بأحد البنوك، طلب الموظف من عميل كبير في السن كتابة «سبب التحويل» في الاستمارة، فكتب العميل بكل صراحة: _____.", "truth": "«عشان تسكت أم العيال»", "info": "اضطر الموظف بابتسامة أن يطلب منه تغيير العبارة إلى «مصاريف عائلية» ليقبلها النظام.", "decoys": ["«سلفة وما أظن بترجع»", "«قطة استراحة الشباب»", "«هدية نجاح بدون مناسبة»", "«فلوس زايدة بالحساب»"]}, {"id": "g8", "cat": "سوالف ومواقف", "q": "في اختبار جامعي صباحي، برر طالب تأخره عن القاعة لمدة ساعة كاملة للدكتور بأن _____ أغلق عليه باب الشقة من الخارج.", "truth": "أخوه الصغير بالمفتاح", "info": "قفل الطفل الباب وأخذ المفتاح معه للروضة، فانتظر الطالب الدفاع المدني لفتح الباب.", "decoys": ["عامل الدهان", "قط الجيران الضخم", "سائق التوصيل", "حارس العمارة النائم"]}, {"id": "g9", "cat": "سوالف ومواقف", "q": "وضع صاحب بقالة لوحة تنبيه غريبة عند الكاشير كتب عليها: «ممنوع السلف نهائياً حتى لو كنت _____».", "truth": "أخوي من أمي وأبوي", "info": "انتشرت صورة اللوحة كأظرف إعلان لحسم موضوع الديون المسجلة في الدفتر القديم.", "decoys": ["صديقي من أيام الابتدائي", "جاري الباب بالباب", "عميلنا من عشر سنين", "حافظ رقم السجل التجاري"]}, {"id": "g10", "cat": "سوالف ومواقف", "q": "في تحدي تخفيض الوزن بين أصدقاء الاستراحة، اتفقوا على غرامة على من يزيد وزنه وهي أن يتكفل بـ _____ لمدة شهر كامل.", "truth": "غسيل المواعين وتجهيز الشاهي", "info": "التزم الجميع بالدايت خوفاً من غسيل قدور العشاء كل خميس وجمعة.", "decoys": ["دفع فاتورة الكهرباء", "توصيل أبعد واحد لبيته", "شراء العشاء كل أسبوع", "الوقوف حارس مرمى دائماً"]}, {"id": "a1", "cat": "عجائب الحيوانات", "q": "تمتلك ثعالب البحر (القضاعات) جيباً جلدياً صغيراً تحت إبطها تستخدمه طوال حياتها للاحتفاظ بـ _____.", "truth": "صخرتها المفضلة لكسر المحار", "info": "يختار ثعلب البحر حجراً مميزاً منذ صغره ويحتفظ به في هذا الجيب طوال عمره.", "decoys": ["طعام احتياطي لليل", "أصداف ملونة للزينة", "أعشاب بحرية ناعمة", "أسماك صغيرة حية"]}, {"id": "a2", "cat": "عجائب الحيوانات", "q": "لاحظ العلماء أن الأبقار تنتج كمية حليب أكبر بكثير عندما يقوم المزارعون بـ _____ داخل الحظيرة.", "truth": "مناداتها بأسماء شخصية خاصة بها", "info": "أثبتت دراسة جامعة نيوكاسل أن البقرة التي لها اسم ويعاملها المزارع كفرد تنتج 258 لتراً إضافياً سنوياً.", "decoys": ["طلاء الجدران باللون الأزرق", "تشغيل أصوات أمواج البحر", "وضع مرايا كبيرة أمامها", "تقديم الماء الدافئ لها"]}, {"id": "a3", "cat": "عجائب الحيوانات", "q": "حيوان «الومبت» الأسترالي هو الكائن الوحيد في العالم الذي يتميز بأن فضلاته تخرج على شكل _____ بدلاً من الشكل الدائري.", "truth": "مكعبات هندسية مربعة", "info": "تساعده هذه المكعبات على تكديسها فوق الصخور لتحديد منطقته دون أن تتدحرج وتسقط.", "decoys": ["كرات ثلجية بيضاء", "أقراص مسطحة كالعملات", "حبيبات رملية ناعمة", "خيوط طويلة متصلة"]}, {"id": "a4", "cat": "عجائب الحيوانات", "q": "عندما يشعر طائر «البطريق» بالإعجاب بأنثى ويريد طلب الزواج منها، فإنه يبحث طويلاً على الشاطئ ليقدم لها _____.", "truth": "أملس وأجمل حصاة يجدها", "info": "إذا قبلت الأنثى الحصاة ووضعتها في عشها فهذا يعني الموافقة الرسمية على الزواج.", "decoys": ["أكبر سمكة يصطادها", "ريشة من جناحه الأيمن", "قطعة جليد شفافة", "صدفة بحرية مكسورة"]}, {"id": "a5", "cat": "عجائب الحيوانات", "q": "يمتلك «الأخطبوط» ثلاثة قلوب ودم أزرق اللون، وعندما يتعرض للتوتر الشديد في الأسر فإنه قد يقوم بـ _____.", "truth": "أكل أذرعه الخاصة", "info": "تُعرف هذه الحالة علمياً باسم الالتهام الذاتي الناتج عن اضطراب الجهاز العصبي عند الأخطبوط.", "decoys": ["تغيير لونه إلى الوردي الفاقع", "السباحة بالمقلوب لعدة أيام", "رش الحبر على نفسه", "النوم لمدة شهر متواصل"]}, {"id": "a6", "cat": "عجائب الحيوانات", "q": "تستطيع صغار «الماعز» أن تتعلم وتقلّد _____ الخاصة بالماعز الأخرى إذا انتقلت للعيش مع قطيع جديد.", "truth": "اللهجة ونبرة الثغاء", "info": "أثبتت دراسة في جامعة لندن أن للماعز لهجات صوتية تختلف باختلاف القطيع والمنطقة.", "decoys": ["طريقة القفز فوق الصخور", "ساعات النوم والقيلولة", "نوع الأعشاب المفضلة", "مشية قائد القطيع"]}, {"id": "a7", "cat": "عجائب الحيوانات", "q": "على عكس معظم الثدييات، لا يستطيع حيوان «الكسلان» أن _____ أبداً مهما شعر بالبرد الشديد.", "truth": "يرتجف لتدفئة جسمه", "info": "لأن معدل الأيض والعضلات لديه بطيء جداً، فإنه يعتمد كلياً على أشعة الشمس لتدفئة نفسه.", "decoys": ["يعطس أو يسعل", "يغمض عينيه أثناء النوم", "يشرب الماء بلسانه", "يتنفس من فمه"]}, {"id": "a8", "cat": "عجائب الحيوانات", "q": "تنام «الدلافين» بطريقة عجيبة جداً حتى لا تغرق، حيث تقوم بإبقاء _____ مستيقظاً ومفتوحاً أثناء النوم.", "truth": "نصف دماغها وإحدى عينيها", "info": "ينام النصف الأيمن من الدماغ ساعتين بينما يراقب النصف الأيسر التنفس والخطر، ثم يتبادلان الأدوار.", "decoys": ["ذيلها يتحرك للأعلى", "فمها مفتوحاً للهواء", "زعنفتها الظهرية فوق الماء", "صغيرها مستيقظاً لحراستها"]}, {"id": "a9", "cat": "عجائب الحيوانات", "q": "يمتلك «فرس النهر» إفرازاً جلدياً طبيعياً غريباً لونه أحمر يعمل كـ _____ في نفس الوقت.", "truth": "واقي شمس ومضاد حيوي", "info": "كان الناس قديماً يظنون أن فرس النهر يتعرق دماً، لكنه سائل يحميه من حروق الشمس والجراثيم.", "decoys": ["طارد للتماسيح والأسود", "عطر لجذب الإناث", "مادة عازلة للماء البارد", "سم خفيف ضد الحشرات"]}, {"id": "a10", "cat": "عجائب الحيوانات", "q": "يستطيع طائر «الغراب» أن يتذكر وجوه البشر الذين أزعجوه لمدة تصل إلى _____ ويحذر بقية الغربان منهم.", "truth": "أكثر من 5 سنوات", "info": "أثبتت تجارب جامعة واشنطن أن الغربان تصف ملامح الشخص المؤذي لأبنائها وللغربان الجديدة.", "decoys": ["أسبوع واحد فقط", "ثلاثة أيام بالضبط", "فصل الصيف فقط", "حتى يهطل المطر"]}, {"id": "i1", "cat": "اختراعات شاطحة", "q": "اخترع العالم «ألكسندر غراهام بيل» الهاتف، لكنه اقترح أن تكون كلمة التحية الرسمية عند الرد على المكالمة هي _____ بدلاً من «ألو».", "truth": "«آهوي» (Ahoy)", "info": "وهي تحية البحارة، لكن توماس إديسون هو من اقترح كلمة «Hello» فانتشرت عالمياً.", "decoys": ["«اسمعني» (Hear me)", "«مرحباً بالبرق»", "«أنا حاضر»", "«تكلم فوراً»"]}, {"id": "i2", "cat": "اختراعات شاطحة", "q": "تم اختراع «ورق التغليف ذي الفقاعات» (Bubble Wrap) عام 1957 لغرض مختلف تماماً، حيث صممه المخترعان ليكون _____.", "truth": "ورق جدران عصري ثلاثي الأبعاد", "info": "فشل كديكور للجدران، ثم حاولوا بيعه كعازل للبيوت الزجاجية قبل أن تستخدمه IBM لتغليف الحواسيب.", "decoys": ["مفرش طاولة مقاوم للماء", "سجادة تمارين رياضية", "بطانة داخلية لمعاطف الشتاء", "لعبة لتهدئة الأطفال"]}, {"id": "i3", "cat": "اختراعات شاطحة", "q": "اكتُشف «فرن الميكروويف» بالصدفة التامة عام 1945 عندما لاحظ المهندس بيرسي سبنسر أن _____ ذاب في جيبه أثناء وقوفه بجانب رادار عسكري.", "truth": "لوح شوكولاتة وفول سوداني", "info": "بعد أن ذاب لوح الشوكولاتة، جلب حبوب ذرة ففرقعت في المختبر وصنع أول ميكروويف.", "decoys": ["قلم شمع ملون", "مكعب زبدة صغير", "قرص دواء للصداع", "غراء أوراق بلاستيكي"]}, {"id": "i4", "cat": "اختراعات شاطحة", "q": "في عام 1963، حصل مخترع أمريكي على براءة اختراع رسمية لجهاز طبي غريب يساعد النساء على الولادة عن طريق _____.", "truth": "ربط الأم بطاولة تدور بسرعة عالية", "info": "كان يظن أن قوة الطرد المركزي ستسهل خروج المولود، وبالطبع لم يُستخدم الجهاز في أي مستشفى.", "decoys": ["تشغيل موسيقى الأوبرا الصاخبة", "إمالة السرير بزاوية 70 درجة", "نفخ بدلة هوائية ضاغطة", "تبريد الغرفة إلى الصفر"]}, {"id": "i5", "cat": "اختراعات شاطحة", "q": "قبل اختراع الممحاة المطاطية عام 1770، كان الرسامون والكتّاب يمسحون آثار قلم الرصاص عن الورق باستخدام _____.", "truth": "لبّ الخبز الطري المبلل", "info": "حتى اكتشف المهندس الإنجليزي إدوارد نايرن بالصدفة أن قطعة المطاط تمسح الرصاص أفضل من الخبز.", "decoys": ["قشر البطاطس النيئة", "رماد الفحم البارد", "ورق الشجر المجفف", "شمع العسل الدافئ"]}, {"id": "i6", "cat": "اختراعات شاطحة", "q": "الطبيب الذي اخترع جهاز «غزل البنات» (حلاوة القطن) عام 1897 كان يعمل في الأصل _____، وباع اختراعه في المعارض.", "truth": "طبيب أسنان", "info": "المفارقة أن طبيب الأسنان ويليام موريسون اخترع الحلوى الأكثر تسبباً في تسوس الأسنان.", "decoys": ["جراح عيون", "صيدلي أعشاب", "طبيب بيطري", "أخصائي تغذية"]}, {"id": "i7", "cat": "اختراعات شاطحة", "q": "في ثلاثينيات القرن الماضي، صُنع في بريطانيا «قفص حديدي معلق» يُثبّت خارج نافذة الشقة في الطوابق العليا لوضع _____ بداخله.", "truth": "الأطفال الرضع للتعرض للشمس", "info": "كانت الجمعيات الصحية في لندن توصي به للشقق التي لا تملك حديقة حتى يحصل الرضيع على هواء نقي.", "decoys": ["الحليب والجبن للتبريد", "أحذية العائلة للتهوية", "الطيور المغردة", "سلة الغسيل المبلل"]}, {"id": "i8", "cat": "اختراعات شاطحة", "q": "أول «كاميرا ويب» (Webcam) في التاريخ تم اختراعها في جامعة كامبريدج عام 1991 لغرض واحد فقط وهو مراقبة _____.", "truth": "إبريق القهوة في غرفة الاستراحة", "info": "ركّب الباحثون الكاميرا حتى لا يتعنى الموظفون من الطوابق البعيدة ويجدوا إبريق القهوة فارغاً.", "decoys": ["باب المختبر الرئيسي", "حالة الطقس والمطر بالخارج", "موقف دراجات الأساتذة", "طابور مطعم الجامعة"]}, {"id": "i9", "cat": "اختراعات شاطحة", "q": "اخترعت شركة يابانية وسادة مكتب ذكية على شكل _____ ليضع الموظف رأسه داخلها ويأخذ قيلولة دون إزعاج.", "truth": "رأس نعامة يغطي الوجه والأذنين", "info": "تُسمى Ostrich Pillow ولها فتحتان لليدين وفتحة للتنفس لعزل الضوء والصوت تماماً.", "decoys": ["كتاب موسوعة ضخم مفتوح", "شاشة كمبيوتر قديمة", "حقيبة ظهر منتفخة", "خوذة دراجة نارية ناعمة"]}, {"id": "i10", "cat": "اختراعات شاطحة", "q": "صُممت «الأحذية ذات الكعب العالي» في الأصل في القرن العاشر الميلادي ليرتديها _____ وليس النساء.", "truth": "فرسان الخيول والجنود الرجال", "info": "استخدمها الفرسان لتثبيت أقدامهم بقوة داخل ركاب السرج أثناء الرماية بالقوس فوق الخيل.", "decoys": ["عمال المناجم لحمايتهم من الماء", "الطباخون في قصور الملوك", "قضاة المحاكم لزيادة هيبتهم", "الممثلون على خشبة المسرح"]}, {"id": "s1", "cat": "كواليس الملاعب", "q": "في عام 1998، اشترى نادي كروي في رومانيا لاعباً جديداً من نادٍ آخر، وكانت قيمة الصفقة الرسمية هي _____ بدلاً من المال.", "truth": "15 كيلوغراماً من اللحم والسجق", "info": "انتقل المدافع ماريوس تشيوارا مقابل 15 كيلو سجق، فاعتزل الكرة في اليوم التالي من الإحراج.", "decoys": ["باص قديم بدون محرك", "100 كرة قدم مستعملة", "دهان غرف ملابس النادي", "عشب صناعي لملعب التدريب"]}, {"id": "s2", "cat": "كواليس الملاعب", "q": "في كأس العالم 1966 بإنجلترا، سُرقت الكأس الذهبية قبل البطولة، وعثر عليها كلب صغير اسمه «بيكلز» مخبأة تحت _____ في حديقة عامة.", "truth": "شجيرة ملفوفة بورق جرائد", "info": "نال الكلب بيكلز ميدالية شرفية ودُعي لحفل عشاء تتويج المنتخب الإنجليزي.", "decoys": ["مقعد خشبي مكسور", "عربة آيس كريم متوقفة", "صندوق بريد أحمر", "كومة من أوراق الخريف"]}, {"id": "s3", "cat": "كواليس الملاعب", "q": "أطول مباراة تنس في تاريخ بطولة ويمبلدون (بين إيسنر وماهو عام 2010) استمرت لدرجة أنها استُكملت على مدار _____.", "truth": "ثلاثة أيام متتالية (11 ساعة لعب)", "info": "انتهت المجموعة الأخيرة بنتيجة خيالية (70–68) وتعطلت لوحة النتائج الإلكترونية لأنها لم تُبرمج لأكثر من 50.", "decoys": ["يومين مع تغيير الملعب", "أربع فترات بسبب المطر", "ست ساعات بدون استراحة", "أسبوع كامل بسبب الظلام"]}, {"id": "s4", "cat": "كواليس الملاعب", "q": "في مشهد شهير من فيلم «العراب» (The Godfather)، القطة التي كان يحملها مارلون براندو في حجره كانت في الحقيقة _____.", "truth": "قطة ضالة وجدها المخرج في الاستوديو", "info": "لم تكن القطة مكتوبة في السيناريو أصلاً، وكانت خرخرتها عالية لدرجة أنهم أعادوا تسجيل صوت براندو لاحقاً.", "decoys": ["قطة آلية محنطة", "أغلى قطة مستأجرة في هوليوود", "قطة المنتج الشخصي للفيلم", "مدربة لمدة ستة أشهر"]}, {"id": "s5", "cat": "كواليس الملاعب", "q": "مُنع لاعب كرة قدم نرويجي من المشاركة في مباراة مهمة عام 2002 بعد أن تعرض لإصابة غريبة في ساقه بسبب _____ أثناء التسوق.", "truth": "اصطدام عربة تسوق مسرعة به", "info": "وهناك إصابات أغرب في تاريخ الكرة مثل إصابة الحارس كانيزاريس بسبب سقوط زجاجة عطر على قدمه.", "decoys": ["تزحلقه على قشرة موز", "سقوط كرتون حليب ثقيل", "محاولته القفز فوق الرصيف", "عضة كلب حراسة صغير"]}, {"id": "s6", "cat": "كواليس الملاعب", "q": "في عام 2014، طُرد حكم كرة قدم في مباراة رسمية بعد أن اكتشف المراقب أن الحكم نسي صافرته في البيت واستخدم _____ بدلاً منها.", "truth": "جرس بقرة نحاسي صغير", "info": "وفي واقعة أخرى استخدم حكم تطبيق صافرة على جواله أثناء الجري في الملعب.", "decoys": ["تطبيق نغمات على جواله", "غطاء قلم بلاستيكي", "الصراخ بكلمة «توقف!»", "التصفيق بيديه بقوة"]}, {"id": "s7", "cat": "كواليس الملاعب", "q": "في أولمبياد باريس عام 1900، كانت إحدى المسابقات الرسمية المعترف بها دولياً هي سباق _____ فوق نهر السين.", "truth": "صيد السمك بالصنارة", "info": "كما شملت تلك الدورة مسابقات غريبة مثل الطيران بالمناطيد وسباق السباحة فوق الحواجز.", "decoys": ["التجديف بملابس السهرة", "رمي البطيخ من القوارب", "القفز بالخيول في الماء", "نفخ القوارب المطاطية"]}, {"id": "s8", "cat": "كواليس الملاعب", "q": "في فيلم «تيتانيك» الشهير، اليدان اللتان ظهرتا في المشهد القريب وهما ترسمان اللوحة بالقلم الفحمي كانتا في الحقيقة يدي _____.", "truth": "مخرج الفيلم جيمس كاميرون نفسه", "info": "لأن كاميرون رسام ماهر، رسم اللوحة بنفسه باليد اليسرى ثم قلب اللقطة في المونتاج لأن ديكابريو أيمن.", "decoys": ["رسام شوارع فرنسي مسن", "شقيق ليوناردو ديكابريو", "مساعد الإضاءة في الفيلم", "أستاذ فنون من لندن"]}, {"id": "s9", "cat": "كواليس الملاعب", "q": "في الدوري الإنجليزي عام 2009، سجل نادي ليفربول هدفاً غريباً في مرمى سندرلاند بعد أن اصطدمت التسديدة بـ _____ داخل منطقة الجزاء وغيرت اتجاهها.", "truth": "بالون شاطئ أحمر كبير رماه مشجع", "info": "انخدع حارس سندرلاند بالبالون الأحمر وظنه الكرة فدخلت التسديدة في الشباك واحتُسب الهدف.", "decoys": ["حمامة هبطت أمام المرمى", "حذاء خُلع من قدم المدافع", "قارورة ماء بلاستيكية", "قبعة الحكم المساعد"]}, {"id": "s10", "cat": "كواليس الملاعب", "q": "لإنتاج صوت خطوات الديناصورات الضخمة في فيلم Jurassic Park، قام مهندسو الصوت بتسجيل صوت _____ وتكبيره.", "truth": "سقوط أشجار السيكويا العملاقة", "info": "أما صوت زئير التيرانوصور فكان مزيجاً من أصوات فيل صغير ونمر وتمساح.", "decoys": ["دق الطبول داخل نفق", "تفجير بالونات تحت الماء", "سير شاحنة فوق الثلج", "إغلاق أبواب خزنة بنك"]}, {"id": "h1", "cat": "طرائف التاريخ", "q": "في عام 1807، نظم نابليون بونابرت رحلة صيد أرانب كبرى للاحتفال، لكن الأرانب المدجنة بدلاً من الهرب قامت بـ _____.", "truth": "الهجوم على نابليون ومطاردته حتى عربته", "info": "أحضر مساعده 3000 أرنب أليف من المزارع، فظنت الأرانب أن نابليون سيطعمها فهجمت عليه كجيش جرار.", "decoys": ["النوم في وسط ساحة الصيد", "أكل خيام الجنود", "الاختباء تحت خيول الحرس", "القفز في النهر المجاور"]}, {"id": "h2", "cat": "طرائف التاريخ", "q": "في القرن التاسع عشر في أمريكا، تم الترويج لـ «الكاتشب» وبيعه في الصيدليات لعدة سنوات على أنه _____.", "truth": "دواء طبي لعلاج عسر الهضم والصلع", "info": "أطلق الطبيب جون كوك بينيت عام 1834 حبوب الطماطم والكاتشب كعلاج سحري للأمراض.", "decoys": ["صبغة طبيعية لتلميع الأحذية", "طارد للبعوض والحشرات", "منظف للأواني النحاسية", "شراب منشط للخيول"]}, {"id": "h3", "cat": "طرائف التاريخ", "q": "في أولمبياد عام 1904 بمدينة سانت لويس، فاز العداء الأمريكي فريد لورز بسباق الماراثون قبل أن يُكتشف أنه قطع معظم المسافة _____.", "truth": "راكباً في سيارة مدربه", "info": "أصابه التعب عند الميل التاسع فركب السيارة 11 ميلاً، ثم نزل قبل خط النهاية ودخل الملعب يهرول.", "decoys": ["على ظهر بغل سريع", "عبر نفق قطار مختصر", "ممسكاً بعربة توزيع الحليب", "في اليوم السابق للسباق"]}, {"id": "h4", "cat": "طرائف التاريخ", "q": "في عام 1932، أعلن الجيش الأسترالي عملية عسكرية رسمية بالرشاشات ضد عدو غير متوقع دمر مزارع القمح، وهو _____.", "truth": "20 ألف طائر إيمو (شبيه بالنعام)", "info": "عُرفت تاريخياً باسم «حرب الإيمو العظمى»، وانتهت بانتصار الطيور بسبب سرعتها ومناورتها.", "decoys": ["أسراب الجراد الصحراوي", "الجمال البرية الهائجة", "الأرانب البرية السريعة", "الكنغر الأحمر الضخم"]}, {"id": "h5", "cat": "طرائف التاريخ", "q": "أقصر حرب في التاريخ المسجل وقعت عام 1896 بين بريطانيا وزنجبار، واستمرت من بدايتها حتى إعلان الاستسلام لمدة _____.", "truth": "38 دقيقة فقط", "info": "بدأت الساعة 9:02 صباحاً وانتهت الساعة 9:40 صباحاً بعد تعطل يخت السلطان.", "decoys": ["ثلاث ساعات ونصف", "يوم واحد وليلة", "أسبوع كامل", "عشر دقائق بالضبط"]}, {"id": "h6", "cat": "طرائف التاريخ", "q": "في أوروبا خلال القرن السابع عشر، كانت ثمار «الأناناس» نادرة وغاليه لدرجة أن الأثرياء كانوا لا يأكلونها، بل يقومون بـ _____.", "truth": "استئجارها لليلة واحدة لحملها في الحفلات", "info": "كان حمل ثمرة أناناس تحت الإبط في السهرة رمزاً للثراء الفاحش مثل الساعات الفاخرة اليوم.", "decoys": ["تحنيطها بالذهب والفضة", "تقديمها كمهر للزواج", "وضعها في خزائن البنوك", "استخدام قشورها كعطر"]}, {"id": "h7", "cat": "طرائف التاريخ", "q": "كان الرئيس الأمريكي «أبراهام لينكولن» قبل دخوله السياسة مسجلاً رسمياً في قاعة المشاهير كبطل في رياضة _____ حيث فاز بـ 299 نزالاً من أصل 300.", "truth": "المصارعة الحرة", "info": "بفضل طوله الفارع (193 سم) وقوته البدنية، كان بطل المصارعة الأول في مقاطعته لمدة 12 عاماً.", "decoys": ["رمي الفأس الخشبية", "سباق التجديف النهري", "رفع الحجارة الثقيلة", "المبارزة بالسيف"]}, {"id": "h8", "cat": "طرائف التاريخ", "q": "في عام 1788، خاض الجيش النمساوي معركة طاحنة ليلاً سقط فيها آلاف الجرحى، وفي الصباح اكتشفوا أنهم كانوا يقاتلون _____.", "truth": "فرقة أخرى من جيشهم النمساوي نفسه", "info": "حدثت «معركة كارانسيبيش» بسبب الضباب والظلام واختلاف لغات الجنود داخل الجيش الواحد.", "decoys": ["أشجار الغابة المتحركة بالرياح", "قطيعاً من الخيول البرية", "فزاعات المزارع المجاورة", "ظلالهم المنعكسة على النهر"]}, {"id": "h9", "cat": "طرائف التاريخ", "q": "كان البحارة القدامى يرتدون «أقراطاً ذهبية» في آذانهم ليس للزينة، بل لكي تُستخدم قيمة الذهب في _____ إذا غرق البحار وجرفته الأمواج للشاطئ.", "truth": "دفع تكاليف دفنه وجنازته", "info": "كما كانوا ينقشون اسم مينائهم الأصلي داخل القرط الذهبي ليعرف من يعثر عليه من أين أتى.", "decoys": ["شراء قارب نجاة صغير", "رشوة القراصنة عند الأسر", "علاج دوار البحر الشديد", "تحديد اتجاه الرياح"]}, {"id": "h10", "cat": "طرائف التاريخ", "q": "في عام 1325، اندلعت حرب حقيقية بين مدينتي «مودينا» و«بولونيا» في إيطاليا لأن جنود مودينا تسللوا وسرقوا _____ من وسط بولونيا.", "truth": "دلواً خشبياً من بئر الماء", "info": "عُرفت باسم «حرب الدلو الخشبي»، ولا يزال الدلو معلقاً في متحف مدينة مودينا حتى اليوم.", "decoys": ["جرس الكنيسة النحاسي", "وصفة المعكرونة السرية", "حصان حاكم المدينة", "مفتاح البوابة الشرقية"]}, {"id": "g11", "cat": "سوالف ومواقف", "q": "في واقعة طريفة بأحد المطاعم، طلب زبون من الكاشير فاتورة منفصلة لـ _____ حتى لا تدخل في قطّة أصدقائه.", "truth": "علبة الشطة الإضافية", "info": "أصرّ الزبون على أنه الوحيد الذي لم يأكل من الشطة ورفض دفع ريال واحد إضافي في القطة.", "decoys": ["كأس الماء البارد", "مناديل الطاولة", "شريحة الليمون", "ملعقة البلاستيك"]}, {"id": "g12", "cat": "سوالف ومواقف", "q": "اشترى رجل ببغاءً بمبلغ كبير لأنه يحفظ القصائد، لكنه تفاجأ في أول عزيمة أن الببغاء لا يردد إلا جملة _____.", "truth": "«اطلع برا يا كذاب»", "info": "اتضح أن البائع السابق كان يتشاجر مع جاره يومياً فحفظ الببغاء الجملة وأحرج الضيوف.", "decoys": ["«خلص الغاز يا ولد»", "«طفي اللمبة ونام»", "«ما عندنا عشاء اليوم»", "«سدد الفاتورة أول»"]}, {"id": "w11", "cat": "غرائب العالم", "q": "في عام 2017، اضطرت طائرة ركاب للهبوط الاضطراري لأن أحد المسافرين أشعل عود كبريت ليخفي رائحة _____.", "truth": "الغازات البطنية المحرجة", "info": "أجبرت الرائحة وصوت الكبريت الطيار على الهبوط في مطار قريب وتم إنزال جميع الركاب للتفتيش.", "decoys": ["شراباته المبللة بالماء", "سندوتش تونة بالبصل", "عطر رخيص انكسر بجيبه", "حذاء رياضي قديم"]}, {"id": "w12", "cat": "غرائب العالم", "q": "في عام 2022، تسلل لص في أمريكا إلى منزل ليسرق، لكن صاحب البيت استيقظ صباحاً ووجد اللص قد قام بـ _____ قبل أن يهرب.", "truth": "غسل الصحون وترتيب الصالة وقص العشب", "info": "ترك اللص ملاحظة غريبة يقول فيها إنه شعر بالأسف لفوضى المنزل فقرر تنظيفه بالكامل.", "decoys": ["طبخ وجبة فطور كاملة", "إصلاح صنبور المطبخ المكسور", "شحن جوالات العائلة كلها", "كيّ الملابس المعلقة"]}, {"id": "a11", "cat": "عجائب الحيوانات", "q": "تستخدم «الغربان» في اليابان حيلة ذكية جداً لكسر الجوز الصلب، حيث تقوم بـ _____ ثم تنتظر إشارة المرور الحمراء لتأكله.", "truth": "رميه أمام السيارات المسرعة لتدهسه", "info": "تراقب الغربان تقاطعات المشاة وتضع الجوز أمام الإطارات ثم تنزل لأكله عندما تقف السيارات للمشاة.", "decoys": ["وضعه فوق قضبان القطار", "رميه من فوق أبراج الكهرباء", "دفنه في الرمل الساخن", "ضربه بمناقيرها جماعياً"]}, {"id": "a12", "cat": "عجائب الحيوانات", "q": "تستطيع «الضفادع» أن تبتلع طعامها بصعوبة، ولذلك فإنها تستخدم _____ لدفع الطعام إلى بلعومها عند البلع.", "truth": "مقلتي عينيها بسحبهما للداخل", "info": "لهذا السبب يرمش الضفدع ويغلق عينيه بقوة في كل مرة يبتلع فيها حشرة.", "decoys": ["أصابع قدميها الأماميتين", "لسانها الطويل الملتف", "فقاعات هواء من أنفها", "هز رأسها يميناً ويساراً"]}, {"id": "i11", "cat": "اختراعات شاطحة", "q": "في عشرينيات القرن الماضي، اخترع رجل أعمال في نيويورك خوذة معدنية غريبة سمّاها «المعزول» تُلبس على الرأس لمنع الموظفين من _____.", "truth": "التشتت والتحدث مع الزملاء", "info": "كانت الخوذة تحجب الرؤية الجانبية والصوت وتزود الموظف بأنبوب أكسجين ليركز في الورقة أمامه فقط.", "decoys": ["النوم على المكتب", "أكل الحلويات أثناء العمل", "النظر إلى الساعة", "التثاؤب بصوت مسموع"]}, {"id": "i12", "cat": "اختراعات شاطحة", "q": "اخترع العالم الشهير «إسحاق نيوتن» أبواب القطط الصغيرة في أسفل الباب الخشبي لأن قطته كانت تطفئ شموع تجاربه بـ _____.", "truth": "فتح الباب الكبير بمخالبها", "info": "صنع نيوتن فتحتين في باب غرفته بجامعة كامبريدج: واحدة كبيرة للقطة الأم وواحدة صغيرة لصغارها.", "decoys": ["القفز فوق طاولة المختبر", "المواء المستمر خلف الباب", "نفض ذيلها المبلل", "مطاردة الفئران في الغرفة"]}, {"id": "s11", "cat": "كواليس الملاعب", "q": "في عام 2019، قرر نادي كروي في إسكتلندا استبدال المصور البشري بكاميرا ذكاء اصطناعي تتبع الكرة، لكن الكاميرا ظلت طوال المباراة تلاحق _____.", "truth": "رأس حكم الراية الأصلع", "info": "ظن الذكاء الاصطناعي أن صلعة الحكم اللامعة تحت الكشافات هي كرة القدم فترك اللعب وتابع الحكم 90 دقيقة.", "decoys": ["طائر نورس أبيض فوق الملعب", "كيس بلاستيك يطير بالهواء", "الحذاء الأبيض لحارس المرمى", "لوحة الإعلانات المضيئة"]}, {"id": "s12", "cat": "كواليس الملاعب", "q": "في سباق درّاجات دولي، خسر المتصدر المركز الأول قبل خط النهاية بمترين فقط لأنه رفع يديه للاحتفال مبكراً فاصطدم بـ _____.", "truth": "مصور السباق الواقف عند الخط", "info": "انحرفت الدراجة وسقط المتسابق على الأرض ليتجاوزه صاحب المركز الثاني ويفوز بالسباق.", "decoys": ["قارورة ماء رماها زميله", "لوحة إعلانية سقطت بالرياح", "كلب دخل مضمار السباق", "علم الحكم النهائي"]}, {"id": "h11", "cat": "طرائف التاريخ", "q": "في القرن الثامن عشر، فرض القيصر الروسي بطرس الأكبر ضريبة مالية غريبة على كل رجل يرفض _____، وكان يعطيه عملة نحاسية كإيصال.", "truth": "حلق لحيته", "info": "كان من يدفع الضريبة يحمل قلادة نحاسية مكتوباً عليها «تم دفع ضريبة اللحية».", "decoys": ["لبس القبعة الصوفية", "ركوب الخيل يوم الأحد", "شرب الشاي الساخن", "تعلم السباحة في النهر"]}, {"id": "h12", "cat": "طرائف التاريخ", "q": "في مصر القديمة، كان العاملون في بناء المقابر الملكية يحصلون على إجازة رسمية مدفوعة الأجر لسبب مسجل في الألواح الطينية وهو _____.", "truth": "تحضير مشروب شعير في المنزل أو لدغة عقرب", "info": "عثر علماء الآثار على سجل غياب حقيقي عمره 3200 سنة في دير المدينة يوثق أغرب أعذار العمال.", "decoys": ["ضياع الحمار في الصحراء", "حلاقة شعر الرأس", "تنظيف السقف من الرمل", "زيارة العراف في المعبد"]}];
+
+  const ok = (x) => Object.assign({ ok: true }, x || {});
+  const fail = (err) => ({ ok: false, err });
+  const cleanName = (s) => String(s == null ? '' : s).replace(/[\u0000-\u001f\u007f<>]/g, '').replace(/\s+/g, ' ').trim().slice(0, 16);
+  const cleanLie = (s) => String(s == null ? '' : s).replace(/[\u0000-\u001f\u007f<>]/g, '').replace(/\s+/g, ' ').trim().slice(0, 65);
+  const norm = (s) => String(s || '').trim().toLowerCase().replace(/[\u064B-\u065F\u0640.!؟?,،"«»]/g, '').replace(/[أإآ]/g, 'ا').replace(/ة/g, 'ه').replace(/ى/g, 'ي').replace(/^ال/, '').replace(/\s+/g, ' ');
+  const byId = (g, id) => g.players.find((p) => p.id === id) || null;
+  const shuffle = (a, rng) => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(rng() * (i + 1)); const t = a[i]; a[i] = a[j]; a[j] = t; } return a; };
+  const RNG = Math.random;
+
+  function createGame(code) {
+    return {
+      code: String(code),
+      settings: { actSec: 60, rounds: 5, cat: 'الكل', revealMode: 'instant' },
+      players: [], hostId: null, nextId: 1,
+      phase: 'lobby', round: 0, totalRounds: 5, mult: 1,
+      deadline: null, timerTotal: null, phaseSince: 0,
+      usedIds: [], q: null,
+      lies: {}, choices: [], votes: {}, likes: {},
+      revealSteps: [], revealIdx: 0,
+      events: [], winner: null
+    };
+  }
+
+  function join(g, name) {
+    if (g.phase !== 'lobby') return fail('game_started');
+    if (g.players.length >= MAX_PLAYERS) return fail('room_full');
+    let nm = cleanName(name); if (!nm) nm = 'لاعب';
+    const base = nm; let k = 2;
+    while (g.players.some((p) => p.name === nm)) { nm = base.slice(0, 12) + ' ' + k; k++; }
+    const color = COLORS[g.players.length % COLORS.length];
+    const p = { id: 'p' + (g.nextId++), name: nm, color, alive: true, connected: true, score: 0, fooled: 0, truths: 0, likes: 0 };
+    g.players.push(p); if (!g.hostId) g.hostId = p.id;
+    return ok({ id: p.id });
+  }
+
+  function passHost(g) {
+    const next = g.players.find((p) => p.connected && p.id !== g.hostId) || g.players.find((p) => p.id !== g.hostId);
+    if (next) g.hostId = next.id;
+  }
+
+  function leave(g, id) {
+    const p = byId(g, id); if (!p) return fail('no_player');
+    if (g.phase === 'lobby') {
+      g.players = g.players.filter((x) => x.id !== id);
+      if (g.hostId === id) g.hostId = g.players.length ? g.players[0].id : null;
+    } else { p.connected = false; if (g.hostId === id) passHost(g); }
+    return ok();
+  }
+
+  function setConnected(g, id, v) { const p = byId(g, id); if (p) p.connected = !!v; }
+
+  function kick(g, hostId, targetId) {
+    if (g.hostId !== hostId) return fail('not_host'); if (g.phase !== 'lobby') return fail('game_started');
+    if (targetId === hostId) return fail('cannot_kick_self');
+    return leave(g, targetId);
+  }
+
+  function setSettings(g, hostId, patch) {
+    if (g.hostId !== hostId) return fail('not_host'); if (g.phase !== 'lobby') return fail('game_started');
+    if (!patch) return ok();
+    if (patch.actSec !== undefined) { const v = Number(patch.actSec); if (ACT_OPTIONS.indexOf(v) < 0) return fail('bad_setting'); g.settings.actSec = v; }
+    if (patch.rounds !== undefined) { const r = Number(patch.rounds); if (ROUND_OPTIONS.indexOf(r) < 0) return fail('bad_setting'); g.settings.rounds = r; g.totalRounds = r; }
+    if (patch.cat !== undefined) { const c = String(patch.cat); if (CAT_OPTIONS.indexOf(c) < 0) return fail('bad_setting'); g.settings.cat = c; }
+    if (patch.revealMode !== undefined) { const m = String(patch.revealMode); if (m !== 'instant' && m !== 'step') return fail('bad_setting'); g.settings.revealMode = m; }
+    return ok();
+  }
+
+  const need = (g) => Math.max(0, MIN_PLAYERS - g.players.length);
+  const actMs = (g) => (g.settings.actSec ? g.settings.actSec * 1000 : 0);
+  const ev = (g, e) => { e.round = g.round; g.events.push(e); if (g.events.length > 80) g.events.splice(0, g.events.length - 80); };
+
+  function setPhase(g, ph, now, ms) {
+    g.phase = ph; g.phaseSince = now;
+    g.deadline = ms ? now + ms : null; g.timerTotal = ms || null;
+  }
+
+  function pickQuestion(g, rng) {
+    const cat = g.settings.cat || 'الكل';
+    const used = new Set(g.usedIds);
+    let pool = QUESTIONS.filter((q) => (cat === 'الكل' || q.cat === cat) && !used.has(q.id));
+    if (!pool.length) pool = QUESTIONS.filter((q) => !used.has(q.id));
+    if (!pool.length) { g.usedIds = []; pool = QUESTIONS.slice(); }
+    const q = pool[Math.floor((rng || RNG)() * pool.length)];
+    g.usedIds.push(q.id);
+    return q;
+  }
+
+  function roundMult(round, total) {
+    if (round >= total) return 3;
+    if (round === total - 1 && total >= 3) return 2;
+    return 1;
+  }
+
+  function beginRound(g, now, rng) {
+    g.round++;
+    g.totalRounds = g.settings.rounds || 5;
+    g.mult = roundMult(g.round, g.totalRounds);
+    g.q = pickQuestion(g, rng);
+    g.lies = {}; g.choices = []; g.votes = {}; g.likes = {};
+    g.revealSteps = []; g.revealIdx = 0;
+    setPhase(g, 'write', now, actMs(g));
+  }
+
+  function start(g, id, now, rng) {
+    rng = rng || RNG;
+    if (g.hostId !== id) return fail('not_host'); if (g.phase !== 'lobby') return fail('already_started');
+    if (g.players.length < MIN_PLAYERS) return fail('need_players');
+    g.players.forEach((p) => { p.score = 0; p.fooled = 0; p.truths = 0; p.likes = 0; p.alive = true; });
+    g.round = 0; g.events = []; g.winner = null;
+    ev(g, { k: 'start', n: g.players.length });
+    beginRound(g, now, rng);
+    return ok();
+  }
+
+  // ---------------------------------------------------------------- كتابة الكذبة
+  function submitLie(g, id, rawText, now, rng) {
+    if (g.phase !== 'write') return fail('bad_phase');
+    const p = byId(g, id); if (!p) return fail('no_player');
+    const txt = cleanLie(rawText);
+    if (!txt) return fail('lie_required');
+    const nt = norm(txt);
+    if (!nt) return fail('lie_required');
+    if (nt === norm(g.q.truth)) return fail('is_truth');
+    const dup = Object.keys(g.lies).find((pid) => pid !== id && norm(g.lies[pid]) === nt);
+    if (dup && g.players.length <= 15) return fail('duplicate_lie');
+    g.lies[id] = txt;
+    if (g.players.filter((x) => x.connected).every((x) => g.lies[x.id])) startVotePhase(g, now, rng);
+    return ok();
+  }
+
+  function startVotePhase(g, now, rng) {
+    rng = rng || RNG;
+    const q = g.q;
+    const usedNorms = new Set([norm(q.truth)]);
+    const byNorm = new Map();
+    const list = [{ id: 'c_truth', text: q.truth, truth: true, authors: [], decoy: false }];
+
+    Object.keys(g.lies).forEach((pid) => {
+      const t = g.lies[pid], nt = norm(t);
+      if (byNorm.has(nt)) {
+        byNorm.get(nt).authors.push(pid);
+      } else {
+        usedNorms.add(nt);
+        const ch = { id: 'c_' + pid, text: t, truth: false, authors: [pid], decoy: false };
+        byNorm.set(nt, ch);
+        list.push(ch);
+      }
+    });
+
+    const decoys = shuffle(q.decoys || [], rng);
+    for (let i = 0; i < decoys.length && list.length < 4; i++) {
+      const dn = norm(decoys[i]);
+      if (!usedNorms.has(dn)) {
+        usedNorms.add(dn);
+        list.push({ id: 'c_decoy_' + i, text: decoys[i], truth: false, authors: [], decoy: true });
+      }
+    }
+    g.choices = shuffle(list, rng);
+    g.votes = {};
+    setPhase(g, 'vote', now, actMs(g));
+  }
+
+  // ---------------------------------------------------------------- التصويت
+  function submitVote(g, id, choiceId, now) {
+    if (g.phase !== 'vote') return fail('bad_phase');
+    const p = byId(g, id); if (!p) return fail('no_player');
+    const ch = g.choices.find((c) => c.id === choiceId);
+    if (!ch) return fail('bad_choice');
+    if (ch.authors.indexOf(id) >= 0) return fail('own_lie');
+    g.votes[id] = choiceId;
+    if (g.players.filter((x) => x.connected).every((x) => g.votes[x.id])) resolveVotes(g, now);
+    return ok();
+  }
+
+  function resolveVotes(g, now) {
+    const truthPts = 1000 * g.mult, liePts = 500 * g.mult;
+    const steps = [];
+    const fooledChoices = g.choices.filter((c) => !c.truth && g.players.some((p) => g.votes[p.id] === c.id));
+    fooledChoices.sort((a, b) => {
+      const va = g.players.filter((p) => g.votes[p.id] === a.id).length;
+      const vb = g.players.filter((p) => g.votes[p.id] === b.id).length;
+      return vb - va; // Most victims first when shown in unified summary!
+    });
+
+    fooledChoices.forEach((ch) => {
+      const victims = g.players.filter((p) => g.votes[p.id] === ch.id).map((p) => p.id);
+      const pts = ch.decoy ? 0 : victims.length * liePts;
+      if (!ch.decoy) {
+        ch.authors.forEach((aid) => {
+          const ap = byId(g, aid);
+          if (ap) { ap.score += pts; ap.fooled += victims.length; }
+        });
+      }
+      steps.push({
+        id: ch.id, text: ch.text, truth: false, decoy: ch.decoy,
+        authors: ch.authors, victims, pts
+      });
+      if (!ch.decoy && ch.authors.length) {
+        ev(g, { k: 'trap', author: ch.authors[0], victims, text: ch.text, pts });
+      }
+    });
+
+    const cappedTraps = steps.length > 8 ? steps.slice(0, 8) : steps;
+
+    // The Real Truth!
+    const truthCh = g.choices.find((c) => c.truth);
+    const winners = g.players.filter((p) => g.votes[p.id] === truthCh.id).map((p) => p.id);
+    winners.forEach((wid) => {
+      const wp = byId(g, wid);
+      if (wp) { wp.score += truthPts; wp.truths++; }
+    });
+    const truthStep = {
+      id: truthCh.id, text: truthCh.text, truth: true, decoy: false,
+      authors: [], victims: winners, pts: truthPts, info: g.q.info
+    };
+    ev(g, { k: 'truth', text: truthCh.text, winners, pts: truthPts });
+
+    // For step-by-step mode, traps come first then truth last; for instant mode, truth is shown right at the top with all traps and scores!
+    const stepList = cappedTraps.slice().reverse().concat([truthStep]);
+    g.revealSteps = stepList;
+    g.revealIdx = 0;
+
+    if (g.settings.revealMode === 'step' && stepList.length > 1) {
+      setPhase(g, 'reveal', now, STEP_MS);
+    } else {
+      g.revealIdx = stepList.length - 1;
+      setPhase(g, 'scores', now, 0);
+    }
+  }
+
+  function likeLie(g, id, choiceId) {
+    if (g.phase !== 'reveal' && g.phase !== 'scores') return fail('bad_phase');
+    if (g.likes[id]) return fail('already_liked');
+    const ch = g.choices.find((c) => c.id === choiceId);
+    if (!ch || ch.truth || ch.decoy || ch.authors.indexOf(id) >= 0) return fail('bad_choice');
+    g.likes[id] = choiceId;
+    ch.authors.forEach((aid) => {
+      const ap = byId(g, aid);
+      if (ap) { ap.score += 100; ap.likes++; }
+    });
+    return ok();
+  }
+
+  function skipToScores(g, now) {
+    g.revealIdx = Math.max(0, g.revealSteps.length - 1);
+    setPhase(g, 'scores', now, 0);
+  }
+
+  function advanceRevealOrNext(g, now, rng) {
+    if (g.phase === 'reveal') {
+      if (g.revealIdx < g.revealSteps.length - 1) {
+        g.revealIdx++;
+        setPhase(g, 'reveal', now, STEP_MS);
+        return;
+      }
+      setPhase(g, 'scores', now, 0);
+      return;
+    }
+    if (g.phase === 'scores') {
+      if (g.round >= g.totalRounds) {
+        const sorted = g.players.slice().sort((a, b) => b.score - a.score);
+        g.winner = { id: sorted[0] ? sorted[0].id : null };
+        ev(g, { k: 'end', winner: g.winner.id });
+        setPhase(g, 'ended', now, 0);
+      } else {
+        beginRound(g, now, rng);
+      }
+    }
+  }
+
+  function auto(g, now, rng) {
+    rng = rng || RNG;
+    if (g.phase === 'write') return startVotePhase(g, now, rng);
+    if (g.phase === 'vote') return resolveVotes(g, now);
+    if (g.phase === 'reveal' || g.phase === 'scores') return advanceRevealOrNext(g, now, rng);
+  }
+
+  function tick(g, now, rng) {
+    if (g.deadline && now >= g.deadline && g.phase !== 'lobby' && g.phase !== 'ended') {
+      auto(g, now, rng);
+      return true;
+    }
+    return false;
+  }
+
+  function skip(g, id, now, rng) {
+    if (g.hostId !== id) return fail('not_host');
+    if (g.phase === 'lobby' || g.phase === 'ended') return fail('bad_phase');
+    if (g.phase === 'reveal') { skipToScores(g, now); return ok(); }
+    auto(g, now, rng);
+    return ok();
+  }
+
+  function reset(g, id) {
+    if (g.hostId !== id) return fail('not_host'); if (g.phase !== 'ended') return fail('bad_phase');
+    g.players = g.players.filter((p) => p.connected);
+    if (!g.players.some((p) => p.id === g.hostId)) g.hostId = g.players.length ? g.players[0].id : null;
+    g.players.forEach((p) => { p.score = 0; p.fooled = 0; p.truths = 0; p.likes = 0; });
+    Object.assign(g, { phase: 'lobby', round: 0, deadline: null, timerTotal: null, winner: null, q: null, lies: {}, choices: [], votes: {}, likes: {}, revealSteps: [], revealIdx: 0 });
+    return ok();
+  }
+
+  function act(g, id, m, now, rng) {
+    switch (m.a) {
+      case 'lie': return submitLie(g, id, m.text, now, rng);
+      case 'vote': return submitVote(g, id, m.target, now);
+      case 'like': return likeLie(g, id, m.target);
+      case 'skipReveal': if (g.hostId !== id) return fail('not_host'); skipToScores(g, now); return ok();
+      case 'next': if (g.hostId !== id) return fail('not_host'); advanceRevealOrNext(g, now, rng); return ok();
+      case 'settings': return setSettings(g, id, m.patch || {});
+      case 'skip': return skip(g, id, now, rng);
+      case 'reset': return reset(g, id);
+      case 'again': { const r = reset(g, id); if (!r.ok) return r; return start(g, id, now, rng); }
+    }
+    return fail('bad_action');
+  }
+
+  function viewFor(g, pid, now) {
+    const me = pid ? byId(g, pid) : null;
+    const players = g.players.map((p) => ({
+      id: p.id, name: p.name, color: p.color, connected: p.connected, host: p.id === g.hostId,
+      score: p.score, fooled: p.fooled, truths: p.truths, likes: p.likes,
+      wrote: g.phase === 'write' ? !!g.lies[p.id] : undefined,
+      voted: g.phase === 'vote' ? !!g.votes[p.id] : undefined
+    }));
+
+    const publicChoices = (g.phase === 'vote' || g.phase === 'reveal' || g.phase === 'scores')
+      ? g.choices.map((c) => ({
+          id: c.id, text: c.text,
+          mine: me ? c.authors.indexOf(me.id) >= 0 : false,
+          canLike: (g.phase === 'reveal' || g.phase === 'scores') && !c.truth && !c.decoy && (!me || c.authors.indexOf(me.id) < 0)
+        }))
+      : [];
+
+    const curStep = (g.phase === 'reveal' && g.revealSteps[g.revealIdx]) ? g.revealSteps[g.revealIdx] : null;
+    const shownSteps = (g.phase === 'reveal') ? g.revealSteps.slice(0, g.revealIdx + 1) : (g.phase === 'scores' ? g.revealSteps : []);
+
+    const v = {
+      now, code: g.code, phase: g.phase, round: g.round, totalRounds: g.totalRounds, mult: g.mult,
+      settings: g.settings, untimed: !g.settings.actSec, deadline: g.deadline, timerTotal: g.timerTotal,
+      minPlayers: MIN_PLAYERS, maxPlayers: MAX_PLAYERS, need: need(g), players,
+      wroteCount: g.phase === 'write' ? Object.keys(g.lies).length : 0,
+      votedCount: g.phase === 'vote' ? Object.keys(g.votes).length : 0,
+      q: g.q ? { id: g.q.id, cat: g.q.cat, q: g.q.q } : null,
+      choices: publicChoices,
+      curStep, shownSteps,
+      revealIdx: g.revealIdx, revealTotal: g.revealSteps.length,
+      events: g.events.slice(-30), winner: g.winner
+    };
+
+    if (me) {
+      v.me = {
+        id: me.id, host: me.id === g.hostId, score: me.score,
+        myLie: g.lies[me.id] || null,
+        myVote: g.votes[me.id] || null,
+        myLike: g.likes[me.id] || null
+      };
+    }
+    return v;
+  }
+
+  return {
+    ACT_OPTIONS, ROUND_OPTIONS, REVEAL_OPTIONS, CAT_OPTIONS, MIN_PLAYERS, MAX_PLAYERS, QUESTIONS,
+    createGame, join, leave, kick, setConnected, setSettings, need, start,
+    submitLie, submitVote, likeLie, skip, reset, tick, act, viewFor, byId, norm
+  };
+});
+</script>
+<script>/* qf/board.js */
+/* ديوانية بلس — قفطة!: شاشة الطاولة (التلفزيون 16:9) مع الراوي والمؤثرات الصوتية وتدعم 50+ لاعب */
+(function (root) {
+  'use strict';
+  const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const AR = (n) => String(n).replace(/\d/g, (d) => '٠١٢٣٤٥٦٧٨٩'[d]);
+  const W = 160;
+  const CSS = `
+.shb{position:fixed;inset:0;overflow:hidden;color:#fff;direction:rtl;font-family:-apple-system,"SF Arabic","Segoe UI",Tajawal,Cairo,system-ui,sans-serif;background:radial-gradient(120% 90% at 70% 0%,#2b2290,#0b0a2e 70%);transition:background .8s;-webkit-user-select:none;user-select:none}
+.shb[data-tone=trap]{background:radial-gradient(120% 90% at 50% 0%,#6b1424,#12040a 75%)}
+.shb[data-tone=truth]{background:radial-gradient(120% 90% at 50% 0%,#0f5a4a,#061814 75%)}
+.shb[data-tone=vote]{background:radial-gradient(120% 90% at 50% 0%,#4a2a8a,#120a30 75%)}
+.shb .stage{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%)}
+.shb .hd{position:absolute;left:3em;right:3em;top:2.2em;height:7em;display:flex;align-items:center;gap:1.6em}
+.shb .ttl{font-size:3.6em;font-weight:900}.shb .ttl b{color:#f2c14e}
+.shb .pill{font-size:2.1em;font-weight:800;padding:.3em .9em;border-radius:99em;background:rgba(255,255,255,.1);border:.06em solid rgba(255,255,255,.2)}
+.shb .pill.g{background:#f2c14e;color:#2b1c00;border-color:#f2c14e}
+.shb .sp{flex:1}
+.shb .tmr{font-size:3.4em;font-weight:900;font-variant-numeric:tabular-nums;color:#ffd978}
+.shb .mq{display:flex;align-items:center;gap:1em;background:rgba(255,255,255,.08);border-radius:1.2em;padding:.5em .9em}
+.shb .mq .q{width:6em;height:6em;background:#fff;border-radius:.6em;padding:.3em}.shb .mq .q svg{width:100%;height:100%}
+.shb .mq b{font-size:3em;letter-spacing:.15em}
+.shb .qcard{position:absolute;left:5em;right:5em;top:10.5em;padding:1.8em 2.8em;border-radius:2em;background:linear-gradient(160deg,rgba(255,255,255,.11),rgba(255,255,255,.04));border:.14em solid rgba(242,193,78,.5);text-align:center;box-shadow:0 1.4em 3.4em rgba(0,0,0,.45)}
+.shb .qcard .qtx{font-size:3.1em;font-weight:900;line-height:1.5}
+.shb .qcard .blk{display:inline-block;padding:.05em .6em;margin:0 .15em;border-radius:.35em;background:rgba(242,193,78,.22);border:.09em dashed #f2c14e;color:#ffd978}
+.shb .core{position:absolute;left:5em;right:5em;top:30em;bottom:22em;display:flex;align-items:center;justify-content:center;text-align:center;flex-direction:column;gap:1.1em;overflow:hidden}
+.shb .big{font-size:4.4em;font-weight:900;line-height:1.2;text-shadow:0 .1em .6em rgba(0,0,0,.5)}
+.shb .sub{font-size:2.3em;color:#cfd6ff;font-weight:700}
+.shb .gold{color:#ffd978}.shb .red{color:#ff8a8e}.shb .blue{color:#7dd3fc}.shb .green{color:#6ee7b7}
+.shb .cgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2em;width:100%;max-height:28em;overflow:hidden}
+.shb .cgrid.dense{grid-template-columns:repeat(4,1fr);gap:.9em}
+.shb .cbox{padding:1em 1.2em;border-radius:1.2em;background:rgba(255,255,255,.09);border:.14em solid rgba(255,255,255,.22);font-size:2.2em;font-weight:900;line-height:1.35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.shb .cgrid.dense .cbox{font-size:1.75em;padding:.75em .9em}
+.shb .revbox{width:100%;max-width:110em;padding:1.8em 2.6em;border-radius:2em;background:rgba(20,16,64,.9);border:.22em solid #f2c14e;box-shadow:0 1.6em 4em rgba(0,0,0,.6);animation:drop .45s cubic-bezier(.2,1.3,.4,1) both}
+.shb .revbox.truth{background:linear-gradient(160deg,#0d4a3a,#07221c);border-color:#34d399}
+.shb .revbox.trap{background:linear-gradient(160deg,#5a1222,#1e0710);border-color:#ff6b6f}
+.shb .sumgrid{display:grid;grid-template-columns:1.35fr 1fr;gap:2em;width:100%;height:100%;align-items:stretch;text-align:right}
+.shb .sumpanel{background:rgba(255,255,255,.06);border:.12em solid rgba(255,255,255,.18);border-radius:1.8em;padding:1.5em 2em;display:flex;flex-direction:column;gap:1em;overflow:hidden}
+.shb .sumpanel.truthp{background:linear-gradient(160deg,rgba(13,74,58,.85),rgba(7,34,28,.9));border-color:#34d399}
+.shb .trapmini{display:flex;align-items:center;gap:1em;padding:.7em 1.1em;border-radius:1.1em;background:rgba(229,72,77,.2);border:.08em solid rgba(255,107,111,.45);font-size:1.85em;font-weight:800}
+@keyframes drop{0%{transform:translateY(-2em) scale(.9);opacity:0}100%{transform:none;opacity:1}}
+.shb .seats{position:absolute;left:3em;right:3em;bottom:3em;height:17.5em;display:flex;align-items:flex-end;justify-content:center;gap:1.4em}
+.shb .seat{width:13.4em;text-align:center;position:relative}
+.shb .seat .av{width:6.8em;height:6.8em;margin:0 auto;border-radius:50%;display:grid;place-items:center;color:#10122e;font-size:1em;box-shadow:0 .4em 1.2em rgba(0,0,0,.5),0 0 0 .35em rgba(255,255,255,.16)}
+.shb .seat .av b{font-size:3.6em}
+.shb .seat .nm{font-size:2.1em;font-weight:800;margin-top:.25em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.shb .seat .sc{font-size:1.95em;font-weight:900;color:#ffd978;font-variant-numeric:tabular-nums}
+.shb .seat .tg{display:inline-block;margin-top:.2em;font-size:1.45em;font-weight:900;padding:.1em .6em;border-radius:99em;background:rgba(255,255,255,.12)}
+.shb .seat .tg.ok{background:#0f9a6c;color:#fff}
+.shb .lobby{position:absolute;left:5em;right:5em;top:12em;bottom:5em;display:flex;gap:5em;align-items:center}
+.shb .lobby .qr{width:42em;height:42em;background:#fff;border-radius:2em;padding:1.4em;flex:none}.shb .lobby .qr svg{width:100%;height:100%}
+.shb .lobby .code{font-size:10.5em;font-weight:900;letter-spacing:.12em;line-height:1;color:#ffd978}
+.shb .chips{display:flex;flex-wrap:wrap;gap:.8em;margin-top:1.5em;max-height:28em;overflow-y:auto;padding-left:.5em}
+.shb .chip{font-size:2.2em;font-weight:800;padding:.28em .75em;border-radius:99em;display:flex;align-items:center;gap:.4em;background:rgba(255,255,255,.1)}
+.shb .chips.dense .chip{font-size:1.65em;padding:.22em .6em}
+.shb .chip i{width:.8em;height:.8em;border-radius:50%}
+.shb .ctl{position:absolute;left:2em;bottom:21em;display:flex;flex-direction:column;gap:.8em;z-index:4}
+.shb .ctl button{width:4.4em;height:4.4em;border-radius:50%;background:rgba(10,10,46,.75);border:.12em solid rgba(255,255,255,.3);color:#fff;font-size:1.6em;font-weight:900;cursor:pointer}
+.shb .ctl button.off{opacity:.4}
+.shb .err{position:absolute;inset:0;display:grid;place-items:center;font-size:4em;font-weight:900}
+`;
+
+  function mount(el, opts) {
+    opts = opts || {};
+    const QR = root.M8QR, A = root.MafiaAudio;
+    const initMuted = !!(root.__qfMuted);
+    const ST = { ws: null, open: false, view: null, prev: null, offset: 0, retry: 0, code: /^\d{4}$/.test(String(opts.code || '')) ? String(opts.code) : '', started: false, sfxOn: !initMuted, voiceOn: !initMuted && !!(A && A.hasVoiceApi && A.hasVoiceApi()), pend: [], tickAt: -1, destroyed: false, err: '' };
+    if (!root.document.getElementById('qfb-css')) { const s = root.document.createElement('style'); s.id = 'qfb-css'; s.textContent = CSS; root.document.head.appendChild(s); }
+    el.innerHTML = '<div class="shb"><div class="stage"></div></div>';
+    const box = el.firstChild, stage = box.firstChild;
+    const wsUrl = () => root.QF_WS_URL || ((root.location.protocol === 'https:' ? 'wss://' : 'ws://') + root.location.host + '/qf/ws');
+    let retryT = 0;
+
+    function connect() {
+      if (!ST.code || ST.destroyed) { draw(); return; }
+      clearTimeout(retryT); let ws; try { ws = new (opts.WS || root.QFWS || root.WebSocket)(wsUrl()); } catch (e) { return later(); }
+      ST.ws = ws;
+      ws.onopen = () => { if (ST.ws !== ws) return; ST.open = true; ST.retry = 0; ws.send(JSON.stringify({ t: 'board', code: ST.code })); };
+      ws.onmessage = (ev) => { if (ST.ws !== ws) return; let m; try { m = JSON.parse(ev.data); } catch (e) { return; } if (m.t === 'view') { ST.err = ''; ST.prev = ST.view; ST.view = m.view; ST.offset = m.view.now - Date.now(); cues(ST.prev, ST.view); draw(); } else if (m.t === 'err' && m.err === 'no_room') { ST.err = 'ما لقيت الغرفة ' + ST.code; draw(); } };
+      ws.onclose = () => { if (ST.ws !== ws) return; ST.open = false; later(); };
+    }
+    function setCode(newCode) {
+      if (!/^\d{4}$/.test(String(newCode || ''))) return;
+      if (ST.code === String(newCode) && ST.open) return;
+      ST.code = String(newCode); ST.view = null; ST.prev = null;
+      if (ST.ws) { try { ST.ws.close(); } catch (e) {} ST.ws = null; }
+      connect();
+    }
+    function setMuted(m) {
+      ST.sfxOn = !m;
+      ST.voiceOn = !m && !!(A && A.hasVoiceApi && A.hasVoiceApi());
+      if (m) clearPend();
+      draw();
+    }
+    function later() { clearTimeout(retryT); retryT = setTimeout(connect, Math.min(4000, 400 * Math.pow(1.6, ST.retry++))); }
+
+    const later_ = (ms, fn) => { ST.pend.push(setTimeout(() => { if (!ST.destroyed) fn(); }, ms)); };
+    const clearPend = () => { ST.pend.forEach(clearTimeout); ST.pend = []; };
+    const sfx = (n, p) => { try { if (ST.started && ST.sfxOn && !root.__qfMuted && A) A.play(n, p); } catch (e) {} };
+    const say = (t) => { try { if (ST.started && ST.voiceOn && !root.__qfMuted && A) A.say(t); } catch (e) {} };
+    const N = (v, id) => { const p = v.players.find((x) => x.id === id); return p ? p.name : ''; };
+
+    function cues(prev, v) {
+      if (!ST.started || root.__qfMuted) return;
+      const ph = v.phase, pph = prev && prev.phase, fresh = !prev || pph !== ph || prev.round !== v.round || (ph === 'reveal' && prev.revealIdx !== v.revealIdx);
+      if (!fresh) {
+        if (ph === 'lobby' && prev && v.players.length > prev.players.length) sfx('pop');
+        if (ph === 'write' && prev && v.wroteCount > prev.wroteCount) sfx('blip');
+        if (ph === 'vote' && prev && v.votedCount > prev.votedCount) sfx('blip');
+        return;
+      }
+      clearPend(); try { if (A) A.shutUp(); } catch (e) {}
+      if (ph === 'write') {
+        sfx('bell');
+        later_(400, () => say('الجولة ' + AR(v.round) + (v.mult > 1 ? '، والنقاط مضروبة في ' + AR(v.mult) : '') + '. ألّفوا كذباتكم السرية في الجوال!'));
+      } else if (ph === 'vote') {
+        sfx('gavel');
+        later_(400, () => say('الكل كتب كذبته! الحين دوركم تصيدون الجواب الحقيقي من بين الفخاخ.'));
+      } else if (ph === 'reveal' && v.curStep) {
+        const st = v.curStep;
+        if (st.truth) {
+          sfx('fanfare');
+          const wn = st.victims.slice(0, 5).map((id) => N(v, id)).join(' و');
+          later_(500, () => say('والحقيقة المؤكدة هي: ' + st.text + '. ' + (wn ? 'كشفها ' + wn : 'ولا أحد قدر يكشفها!')));
+        } else {
+          sfx('jester');
+          const an = st.decoy ? 'فخ النظام' : st.authors.slice(0, 3).map((id) => N(v, id)).join(' و');
+          const vn = st.victims.slice(0, 4).map((id) => N(v, id)).join(' و');
+          later_(450, () => say('قفطة! ' + st.text + ' طلعت كذبة من تأليف ' + an + '، وطاح فيها ' + vn + '!'));
+        }
+      } else if (ph === 'scores' && pph !== 'reveal') {
+        sfx('fanfare');
+        const tStep = (v.shownSteps || []).find((s) => s.truth);
+        if (tStep) {
+          const wn = tStep.victims.slice(0, 5).map((id) => N(v, id)).join(' و');
+          later_(450, () => say('الإجابة الصحيحة هي: ' + tStep.text + '. ' + (wn ? 'كشفها ' + wn : 'ولا أحد لقط الحقيقة!')));
+        }
+      } else if (ph === 'ended') {
+        sfx('fanfare');
+        const w = v.winner && N(v, v.winner.id);
+        later_(600, () => say('انتهت اللعبة! بطل قفطة هو ' + (w || '') + '!'));
+      }
+    }
+
+    const remaining = (v) => (v.deadline ? Math.max(0, v.deadline - (Date.now() + ST.offset)) : 0);
+    const fmt = (ms) => { const s = Math.ceil(ms / 1000); return AR(Math.floor(s / 60)) + ':' + AR(String(s % 60).padStart(2, '0')); };
+    function qrSvg(v) { const link = (root.location.origin && root.location.origin !== 'null' ? root.location.origin + root.location.pathname : 'https://diwaniyaplus.com/play') + '?room=' + v.code; try { return QR.toSvg(link, { ecc: 'M', border: 1 }); } catch (e) { return ''; } }
+
+    function header(v) {
+      const timer = v.deadline && ['write', 'vote'].indexOf(v.phase) >= 0 ? '<span class="tmr" data-t>' + fmt(remaining(v)) + '</span>' : '';
+      const multTag = v.mult > 1 ? '<span class="pill g">النقاط ×' + AR(v.mult) + '</span>' : '';
+      return '<div class="hd"><div class="ttl">ديوانية بلس <b>قفطة!</b></div>' + (v.round ? '<span class="pill">الجولة ' + AR(v.round) + ' من ' + AR(v.totalRounds) + '</span>' : '') + multTag + (v.q ? '<span class="pill">' + esc(v.q.cat) + '</span>' : '') + '<span class="sp"></span>' + timer + '<div class="mq"><div class="q">' + qrSvg(v) + '</div><b dir="ltr">' + esc(v.code) + '</b></div></div>';
+    }
+
+    function qCard(v) {
+      if (!v.q) return '';
+      const qh = esc(v.q.q).replace('_____', '<span class="blk">؟ ؟ ؟ ؟</span>');
+      return '<div class="qcard"><div class="qtx">' + qh + '</div></div>';
+    }
+
+    function seats(v) {
+      const sorted = v.players.slice().sort((a, b) => b.score - a.score);
+      const top = sorted.slice(0, 10);
+      const extra = sorted.length - top.length;
+      return '<div class="seats">' + top.map((p) => {
+        const done = (v.phase === 'write' && p.wrote) || (v.phase === 'vote' && p.voted);
+        return '<div class="seat"><div class="av" style="background:' + p.color + '"><b>' + esc(p.name.charAt(0)) + '</b></div><div class="nm">' + esc(p.name) + '</div><div class="sc">' + AR(p.score) + '</div>' + (done ? '<span class="tg ok">جاهز ✓</span>' : '') + '</div>';
+      }).join('') + (extra > 0 ? '<div class="seat"><div class="av" style="background:rgba(255,255,255,.15);color:#ffd978"><b>+' + AR(extra) + '</b></div><div class="nm">لاعبين آخرين</div><div class="sc">في الغرفة</div></div>' : '') + '</div>';
+    }
+
+    function core(v) {
+      const ph = v.phase;
+      if (ph === 'write') {
+        return '<div class="big gold">ألّفوا كذباتكم السرية في الجوال!</div><div class="sub">كتبوا حتى الآن: ' + AR(v.wroteCount) + ' من ' + AR(v.players.length) + '</div>';
+      }
+      if (ph === 'vote') {
+        const shown = v.choices.slice(0, 16);
+        const dense = shown.length > 6 ? ' dense' : '';
+        return '<div class="sub">واحدة بس هي الحقيقة والباقي فخاخ — صوّتوا بجوالاتكم! (' + AR(v.votedCount) + ' من ' + AR(v.players.length) + ')</div><div class="cgrid' + dense + '">' + shown.map((c) => '<div class="cbox">' + esc(c.text) + '</div>').join('') + '</div>';
+      }
+      if (ph === 'reveal' && v.curStep) {
+        const s = v.curStep;
+        if (s.truth) {
+          const wn = s.victims.slice(0, 8).map((id) => esc(N(v, id))).join(' ، ') + (s.victims.length > 8 ? ' و+' + AR(s.victims.length - 8) : '');
+          return '<div class="revbox truth"><div class="sub green">الحقيقة المؤكدة (+' + AR(s.pts) + ' نقطة)</div><div class="big" style="margin-top:.15em">' + esc(s.text) + '</div><div class="sub" style="margin-top:.3em">' + (wn ? 'كشفها: ' + wn : 'ولا أحد لقط الحقيقة!') + '</div>' + (s.info ? '<div class="sub gold" style="font-size:2em;margin-top:.4em">' + esc(s.info) + '</div>' : '') + '</div>';
+        }
+        const an = s.decoy ? 'فخ النظام' : s.authors.map((id) => esc(N(v, id))).join(' ، ');
+        const vn = s.victims.slice(0, 8).map((id) => esc(N(v, id))).join(' ، ') + (s.victims.length > 8 ? ' و+' + AR(s.victims.length - 8) : '');
+        return '<div class="revbox trap"><div class="sub red">قفطة! كذبة من تأليف: <b class="gold">' + an + '</b> (+' + AR(s.pts) + ' نقطة)</div><div class="big" style="margin-top:.15em">«' + esc(s.text) + '»</div><div class="sub" style="margin-top:.3em">طاح في الفخ (' + AR(s.victims.length) + '): ' + vn + '</div></div>';
+      }
+      if (ph === 'scores') {
+        const steps = v.shownSteps || [];
+        const tStep = steps.find((s) => s.truth);
+        const traps = steps.filter((s) => !s.truth).slice().reverse();
+        const wn = tStep ? (tStep.victims.slice(0, 8).map((id) => esc(N(v, id))).join(' ، ') + (tStep.victims.length > 8 ? ' و+' + AR(tStep.victims.length - 8) : '')) : '';
+        const truthHtml = tStep
+          ? '<div class="sumpanel truthp"><div class="sub green" style="font-size:2em">✓ الإجابة الصحيحة (+' + AR(tStep.pts) + ' نقطة)</div><div class="big" style="font-size:3.6em">' + esc(tStep.text) + '</div><div class="sub" style="font-size:1.95em">' + (wn ? 'لقطها: ' + wn : 'ولا أحد لقط الحقيقة!') + '</div>' + (tStep.info ? '<div class="sub gold" style="font-size:1.7em;line-height:1.45">' + esc(tStep.info) + '</div>' : '') + '</div>'
+          : '';
+        const trapsHtml = '<div class="sumpanel"><div class="sub gold" style="font-size:2em">أبرز القفطات في الجولة (' + AR(traps.length) + ')</div>' +
+          (traps.length ? traps.slice(0, 4).map((s) => {
+            const an = s.decoy ? 'فخ النظام' : s.authors.map((id) => esc(N(v, id))).join(' ، ');
+            return '<div class="trapmini"><span style="color:#ffd978">«' + esc(s.text) + '»</span><span class="sp"></span><span>تأليف: ' + an + ' (خدع ' + AR(s.victims.length) + ')</span></div>';
+          }).join('') : '<div class="sub" style="font-size:1.9em;margin:auto">ما أحد طاح في أي فخ هذي الجولة!</div>') + '</div>';
+        return '<div class="sumgrid">' + truthHtml + trapsHtml + '</div>';
+      }
+      return '';
+    }
+
+    function lobbyView(v) {
+      const n = v.players.length;
+      const dense = n > 14 ? ' dense' : '';
+      return '<div class="hd"><div class="ttl">ديوانية بلس <b>قفطة!</b></div><span class="sp"></span><span class="pill">حتى ' + AR(v.maxPlayers || 60) + ' لاعباً</span></div><div class="lobby"><div class="qr">' + qrSvg(v) + '</div><div style="flex:1;min-width:0"><div class="sub">امسحوا الرمز بكاميرا الجوال، أو ادخلوا بالرمز</div><div class="code" dir="ltr">' + esc(v.code) + '</div>' +
+        '<div class="sub" style="margin-top:.6em">المتسابقين في الغرفة: ' + AR(n) + (v.need ? ' — ينقصكم ' + AR(v.need) : ' — جاهزين! المضيف يبدأ') + '</div><div class="chips' + dense + '">' + v.players.map((p) => '<span class="chip"><i style="background:' + p.color + '"></i>' + esc(p.name) + '</span>').join('') + '</div></div></div>';
+    }
+
+    function endView(v) {
+      const w = v.winner && N(v, v.winner.id);
+      return header(v) + '<div class="core" style="top:18em"><div class="big gold">بطل قفطة!: ' + esc(w || '—') + '</div><div class="sub">انتهت الـ' + AR(v.totalRounds) + ' جولات!</div></div>' + seats(v);
+    }
+
+    function draw() {
+      const v = ST.view; let h = '';
+      if (!ST.code) h = '<div class="err">افتح الشاشة من رابط الغرفة (?board=الرمز)</div>';
+      else if (ST.err) h = '<div class="err">' + esc(ST.err) + '</div>';
+      else if (!v) h = '<div class="err">نتصل بالغرفة…</div>';
+      else {
+        const tone = v.phase === 'vote' ? 'vote' : v.phase === 'scores' ? 'truth' : (v.phase === 'reveal' && v.curStep) ? (v.curStep.truth ? 'truth' : 'trap') : '';
+        box.setAttribute('data-tone', tone);
+        if (v.phase === 'lobby') h = lobbyView(v);
+        else if (v.phase === 'ended') h = endView(v);
+        else h = header(v) + qCard(v) + '<div class="core">' + core(v) + '</div>' + seats(v);
+        if (ST.started) h += '<div class="ctl"><button data-act="sfx" class="' + (ST.sfxOn && !root.__qfMuted ? '' : 'off') + '" title="المؤثرات">♪</button><button data-act="voice" class="' + (ST.voiceOn && !root.__qfMuted ? '' : 'off') + '" title="الراوي">ر</button></div>';
+      }
+      stage.innerHTML = h; fit();
+    }
+
+    function fit() {
+      const bw = el.clientWidth || root.innerWidth, bh = el.clientHeight || root.innerHeight, w = Math.min(bw, bh * 16 / 9);
+      stage.style.width = w + 'px'; stage.style.height = (w * 9 / 16) + 'px'; stage.style.fontSize = (w / W) + 'px';
+    }
+    const timer = setInterval(() => {
+      const v = ST.view; if (!v || !v.deadline) return; const t = stage.querySelector('[data-t]'); if (t) t.textContent = fmt(remaining(v));
+      const s = Math.ceil(remaining(v) / 1000);
+      if (ST.started && !root.__qfMuted && s <= 5 && s > 0 && s !== ST.tickAt && ['write', 'vote'].indexOf(v.phase) >= 0) { ST.tickAt = s; sfx('tick'); }
+    }, 250);
+
+    function enableSound() { ST.started = true; if (!root.__qfMuted) { try { if (A) { A.unlock(); A.setEnabled('sfx', ST.sfxOn); A.setEnabled('voice', ST.voiceOn); } } catch (e) {} if (ST.view) cues(null, ST.view); } draw(); }
+    box.addEventListener('click', (e) => {
+      const t = e.target && e.target.closest ? e.target.closest('[data-act]') : null; if (!t) return; const a = t.getAttribute('data-act');
+      if (a === 'sfx') { ST.sfxOn = !ST.sfxOn; try { if (A) A.setEnabled('sfx', ST.sfxOn); } catch (e) {} }
+      if (a === 'voice') { ST.voiceOn = !ST.voiceOn; try { if (A) A.setEnabled('voice', ST.voiceOn); } catch (e) {} }
+      draw();
+    });
+    root.addEventListener('resize', fit);
+    draw(); connect();
+    return { state: ST, fit, setCode, setMuted, enableSound, destroy() { ST.destroyed = true; clearInterval(timer); clearTimeout(retryT); clearPend(); try { ST.ws && ST.ws.close(); } catch (e) {} } };
+  }
+  root.QFBoard = { mount };
+})(typeof self !== 'undefined' ? self : this);
+</script>
+<script>/* qf/loopback.js */
+/* ديوانية بلس — قفطة!: النسخة التجريبية بدون إنترنت — خادم محلي فوري + دعم إضافة حتى 50+ بوت */
+(function (g) {
+  'use strict';
+  var E = g.QFEngine, H = g.MafiaHub, rnd = Math.random;
+  var hub = H.createHub({
+    E: E, rng: rnd, allowDev: true,
+    randInt: function (a, b) { return a + Math.floor(rnd() * (b - a)); },
+    token: function () { var s = ''; for (var i = 0; i < 24; i++) s += Math.floor(rnd() * 16).toString(16); return s; }
+  });
+  g.QFHub = hub;
+  setInterval(function () { hub.tick(); }, 450);
+
+  function Sock(url) {
+    var self = this; self.readyState = 1; self.url = url;
+    self.conn = { closed: false, pid: null, code: null, board: false, send: function (o) { self._deliver(o); }, close: function () { self._shut(); } };
+    setTimeout(function () { if (!self.conn.closed && self.onopen) self.onopen({}); }, 0);
+  }
+  Sock.prototype.send = function (text) {
+    var self = this; if (self.conn.closed) return;
+    var m = JSON.parse(text);
+    setTimeout(function () { if (!self.conn.closed) hub.message(self.conn, m); }, 0);
+  };
+  Sock.prototype._deliver = function (o) {
+    var self = this; if (self.conn.closed) return;
+    var data = JSON.stringify(o);
+    setTimeout(function () { if (!self.conn.closed && self.onmessage) self.onmessage({ data: data }); }, 0);
+  };
+  Sock.prototype.close = function () { this._shut(); };
+  Sock.prototype._shut = function () {
+    var self = this; if (self.conn.closed) return;
+    self.conn.closed = true; self.readyState = 3; hub.closed(self.conn);
+    setTimeout(function () { if (self.onclose) self.onclose({}); }, 0);
+  };
+  g.QFWS = Sock;
+
+  var NAMES = [
+    'بدر', 'لمى', 'سلطان', 'هند', 'ياسر', 'جود', 'تركي', 'أروى', 'نواف', 'ريم',
+    'فهد', 'سارة', 'ماجد', 'دانة', 'طلال', 'غادة', 'وليد', 'مها', 'فيصل', 'نورة',
+    'راشد', 'العنود', 'سعود', 'حصة', 'زياد', 'مرام', 'عمر', 'ليان', 'خالد', 'شهد',
+    'عادل', 'وجدان', 'مهند', 'رغد', 'بندر', 'أمل', 'منصور', 'بيان', 'مشعل', 'ربى',
+    'نايف', 'سلمى', 'عبدالله', 'ديما', 'فارس', 'لولوة', 'ريان', 'مي', 'سلمان', 'يارا',
+    'حمزة', 'أسماء', 'تميم', 'وفاء', 'أنس', 'رهف', 'ثامر', 'حلا', 'معاذ', 'نجلاء'
+  ];
+  var FALLBACK_LIES = [
+    'قطة الجيران السريعة', 'سروال طار من السطح', 'تيس المزرعة الكبير', 'قدر ضغط منسي',
+    'كرتون برتقال فاضي', 'ببغاء يقلد الجرس', 'حذاء فردة واحدة', 'بطيخة مقسومة بالنص',
+    'دفاية زيت قديمة', 'ترمس قهوة مرة', 'مروحة سقف تدور عكس', 'مفتاح عجل مصدي',
+    'كيس خبز صامولي', 'ساعة خراش صوتها عالي', 'تلفزيون أبيض وأسود', 'جالون موية زمزم',
+    'سجادة صلاة مطوية', 'علبة مناديل مبللة', 'شاحن جوال مقطوع', 'ريموت رسيفر ضايع',
+    'طاسة لبن باردة', 'مكنسة كهربائية قديمة', 'كرسي بلاستيك مكسور', 'قلم حبر ناشف',
+    'كشاف طوارئ شاحن', 'ميدالية مفاتيح ثقيلة', 'شنطة سفر بعجلة وحدة', 'مظلة مطر مقلوبة',
+    'صحن كنافة دافئ', 'إبريق شاي على الجمر', 'دفتر أبو أربعين ورقة', 'سبورة طباشير خضراء',
+    'دراجة هوائية بدون فرامل', 'نظارة شمسية مكسورة', 'قبعة قش كبيرة', 'صفارة حكم بلاستيك',
+    'كيس فحم للشوي', 'ثلاجة قهوة ذهبية', 'مبخرة خشب تراثية', 'ساعة حائط تدق بالعكس',
+    'كاميرا فورية قديمة', 'راديو ترانزستور صغير', 'لوحة سيارة قديمة', 'جرس باب لاسلكي',
+    'طفاية حريق صغيرة', 'حقيبة إسعافات أولية', 'ميزان حرارة زئبقي', 'بوصلة نحاسية عتيقة',
+    'منظار ليلي عسكري', 'خريطة ورقية مقطوعة', 'فانوس غاز قديم', 'مكبر صوت يدوي'
+  ];
+  var delay = function (a, b) { return a + rnd() * (b - a); };
+  var FAST = /[?&]fast=1/.test(g.location && g.location.search || '');
+  var D = function (a, b) { return FAST ? delay(200, 600) : delay(a, b); };
+
+  function Bot(code, name, idx) {
+    var b = this; b.name = name; b.idx = idx; b.view = null; b.sentFor = '';
+    b.sock = new Sock('bot');
+    b.sock.onopen = function () { b.sock.send(JSON.stringify({ t: 'join', code: code, name: name })); };
+    b.sock.onmessage = function (ev) { var m = JSON.parse(ev.data); if (m.t === 'view') { b.view = m.view; b.think(); } };
+  }
+  Bot.prototype.act = function (o) { try { this.sock.send(JSON.stringify(Object.assign({ t: 'act' }, o))); } catch (e) {} };
+  Bot.prototype.think = function () {
+    var b = this, v = b.view, me = v && v.me; if (!me) return;
+    if (v.phase === 'lobby') { b.sentFor = ''; return; }
+    var key = v.phase + ':' + v.round;
+    if (b.sentFor === key) return;
+
+    if (v.phase === 'write' && !me.myLie && v.q) {
+      b.sentFor = key;
+      var qObj = E.QUESTIONS.find(function (x) { return x.id === v.q.id; });
+      var decoys = (qObj && qObj.decoys) || [];
+      var lie = b.idx < decoys.length ? decoys[b.idx] : FALLBACK_LIES[(b.idx + v.round * 7) % FALLBACK_LIES.length];
+      setTimeout(function () {
+        b.act({ a: 'lie', text: lie });
+      }, D(700, 2200));
+    } else if (v.phase === 'vote' && !me.myVote && v.choices && v.choices.length) {
+      b.sentFor = key;
+      var valid = v.choices.filter(function (c) { return !c.mine; });
+      if (!valid.length) return;
+      var pick = valid[Math.floor(rnd() * valid.length)];
+      setTimeout(function () {
+        b.act({ a: 'vote', target: pick.id });
+      }, D(800, 2400));
+    }
+  };
+
+  var roomBotCount = {};
+  function spawnBots(code, count) {
+    var r = hub.rooms.get(String(code));
+    if (!r || r.g.phase !== 'lobby') return 0;
+    var curIdx = roomBotCount[code] || 0;
+    var roomCap = (E.MAX_PLAYERS || 60) - r.g.players.length;
+    var toAdd = Math.max(0, Math.min(count, roomCap));
+    for (var i = 0; i < toAdd; i++) {
+      (function (botIndex, delayStep) {
+        setTimeout(function () {
+          var rm = hub.rooms.get(String(code));
+          if (rm && rm.g.phase === 'lobby' && rm.g.players.length < (E.MAX_PLAYERS || 60)) {
+            var nm = NAMES[botIndex % NAMES.length];
+            new Bot(String(code), nm, botIndex);
+          }
+        }, delayStep);
+      })(curIdx + i, Math.min(1800, 80 + i * 65));
+    }
+    roomBotCount[code] = curIdx + toAdd;
+    return toAdd;
+  }
+  g.QFSpawnBots = spawnBots;
+
+  var seen = {};
+  function wantBots() { var m = /[?&]bots=(\d+)/.exec(g.location && g.location.search || ''); return m ? Math.max(1, Math.min(55, Number(m[1]))) : 4; }
+  setInterval(function () {
+    hub.rooms.forEach(function (room, code) {
+      if (seen[code]) return; seen[code] = true;
+      setTimeout(function () { spawnBots(code, wantBots()); }, 350);
+    });
+  }, 300);
+})(typeof window !== 'undefined' ? window : globalThis);
+</script>
+<script>/* qf/app.js */
+(function () {
+  'use strict';
+  var E = window.QFEngine, QR = window.M8QR, I = window.QFIcons, HELP = window.QFHelp;
+  var params = new URLSearchParams(location.search);
+  var $app = document.getElementById('app'), $ov = document.getElementById('overlay'), $help = document.getElementById('help');
+  if (params.has('board')) {
+    document.body.classList.add('board-only'); var bh = document.getElementById('board'); bh.className = 'bd-host'; bh.style.visibility = 'visible'; bh.style.pointerEvents = 'auto';
+    window.QFBoard.mount(bh, { code: params.get('board') }); return;
+  }
+  var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
+  var store = { get: function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set: function (k, v) { try { localStorage.setItem(k, v); } catch (e) {} }, del: function (k) { try { localStorage.removeItem(k); } catch (e) {} } };
+  var ST = { ws: null, open: false, view: null, me: null, offset: 0, retry: 0, queue: [], muted: store.get('qf_muted') === '1', ui: { sel: null, kick: null, board: false, log: false }, toast: '' };
+  window.__qfMuted = ST.muted;
+  function syncAudioState() {
+    window.__qfMuted = ST.muted;
+    try {
+      if (window.MafiaAudio) {
+        window.MafiaAudio.setEnabled('sfx', !ST.muted);
+        window.MafiaAudio.setEnabled('voice', !ST.muted);
+        if (ST.muted) window.MafiaAudio.stopAll();
+      }
+    } catch (e) {}
+    if (DB && DB.board && DB.board.setMuted) DB.board.setMuted(ST.muted);
+    var mp = document.querySelector('.mute-pill');
+    if (mp) {
+      mp.className = 'mute-pill' + (ST.muted ? ' off' : '');
+      mp.textContent = ST.muted ? 'الصوت: مقفول ✕' : 'الصوت: شغال ♪';
+    }
+  }
+  function toggleMute() {
+    ST.muted = !ST.muted;
+    store.set('qf_muted', ST.muted ? '1' : '0');
+    syncAudioState();
+    render();
+    toast(ST.muted ? 'تم إيقاف الصوت والراوي' : 'تم تشغيل الصوت والراوي');
+  }
+
+  try { var s0 = JSON.parse(store.get('qf_session') || 'null'); if (s0 && s0.code && s0.token) ST.me = s0; } catch (e) {}
+
+  var ERR = {
+    no_room: 'الرمز غلط أو الغرفة انتهت', game_started: 'اللعبة بدأت، ما تقدر تدخل الحين', room_full: 'الغرفة ممتلئة (٦٠ لاعباً)', name_required: 'اكتب اسمك أول',
+    need_players: 'لازم لاعبين على الأقل', not_host: 'هذا الخيار للمضيف فقط', bad_token: 'انتهت جلستك، ادخل من جديد',
+    lie_required: 'اكتب كذبتك من راسك أول!', is_truth: 'أوه! هذي هي الإجابة الحقيقية فعلاً! اكتب كذبة من راسك عشان تخدعهم!',
+    duplicate_lie: 'أحد غيرك سبقك وكتب نفس هذي الكذبة! غيّرها شوي عشان تكسب نقاطها!',
+    own_lie: 'ما تقدر تصوّت لكذبتك الخاصة!', already_liked: 'عطيت إعجابك في هذي الجولة خلاص'
+  };
+  var PHASE = { lobby: 'اللوبي', write: 'تأليف الكذبة', vote: 'اصطد الحقيقة', reveal: 'كشف القفطات', scores: 'الإجابة والنقاط', ended: 'النهاية' };
+  var AR = function (n) { return String(n).replace(/\d/g, function (d) { return '٠١٢٣٤٥٦٧٨٩'[d]; }); };
+
+  function muteBtnHtml() {
+    return '<button class="mutebtn ' + (ST.muted ? 'off' : '') + '" data-a="mute">' + (ST.muted ? 'الصوت: مقفول ✕' : 'الصوت: شغال ♪') + '</button>';
+  }
+
+  function url() { return window.QF_WS_URL || ((location.protocol === 'https:' ? 'wss://' : 'ws://') + location.host + '/qf/ws'); }
+  function send(o) {
+    if (ST.open && ST.ws && ST.ws.readyState === 1) {
+      try { ST.ws.send(JSON.stringify(o)); return true; } catch (e) {}
+    }
+    ST.queue.push(o);
+    connect();
+    return true;
+  }
+  function flushQueue() {
+    while (ST.queue.length && ST.open && ST.ws && ST.ws.readyState === 1) {
+      var msg = ST.queue.shift();
+      try { ST.ws.send(JSON.stringify(msg)); } catch (e) {}
+    }
+  }
+  function hello() { if (ST.me && !ST.queue.length) send({ t: 'resume', code: ST.me.code, token: ST.me.token }); }
+  var pingT = 0, retryT = 0;
+
+  function connect() {
+    if (ST.ws && ST.ws.readyState <= 1) { if (ST.open) flushQueue(); return; }
+    clearTimeout(retryT);
+    var ws; try { ws = new (window.QFWS || WebSocket)(url()); } catch (e) { return later(); }
+    ST.ws = ws;
+    ws.onopen = function () { if (ST.ws !== ws) return; ST.open = true; ST.retry = 0; hello(); flushQueue(); clearInterval(pingT); pingT = setInterval(function () { send({ t: 'ping' }); }, 20000); renderOverlay(); };
+    ws.onmessage = function (ev) { if (ST.ws !== ws) return; var m; try { m = JSON.parse(ev.data); } catch (e) { return; } onMsg(m); };
+    ws.onclose = function () { if (ST.ws !== ws) return; ST.open = false; clearInterval(pingT); renderOverlay(); later(); };
+    ws.onerror = function () {};
+    if (ws.readyState === 1 && !ST.open) { ST.open = true; ST.retry = 0; hello(); flushQueue(); }
+  }
+  function later() { clearTimeout(retryT); var d = Math.min(4000, 400 * Math.pow(1.6, ST.retry++)); retryT = setTimeout(connect, d); }
+
+  var toastT = 0;
+  function toast(t) { ST.toast = t; renderOverlay(); clearTimeout(toastT); toastT = setTimeout(function () { ST.toast = ''; renderOverlay(); }, 3400); }
+
+  function onMsg(m) {
+    if (m.t === 'joined') {
+      ST.me = { code: m.code, id: m.id, token: m.token };
+      store.set('qf_session', JSON.stringify(ST.me));
+      if (window.QF_DEMO) demoBoard(m.code);
+    } else if (m.t === 'view') {
+      var prev = ST.view; ST.view = m.view; ST.offset = m.view.now - Date.now();
+      if (!prev || prev.phase !== m.view.phase || prev.round !== m.view.round) { ST.ui.sel = null; }
+      render();
+    } else if (m.t === 'err') {
+      if ((m.err === 'bad_token' || m.err === 'no_room') && ST.me && !ST.view) { store.del('qf_session'); ST.me = null; render(); }
+      toast(ERR[m.err] || ('تعذّر: ' + m.err));
+    } else if (m.t === 'kicked' || m.t === 'left') {
+      store.del('qf_session'); ST.me = null; ST.view = null; render();
+    }
+  }
+
+  function act(a, extra) { var o = { t: 'act', a: a }; if (extra) for (var k in extra) o[k] = extra[k]; send(o); }
+  var byId = function (v, id) { return v.players.filter(function (p) { return p.id === id; })[0] || null; };
+  var av = function (p, s) { return '<span class="av" style="background:' + p.color + (s ? ';width:' + s + 'px;height:' + s + 'px;font-size:' + Math.round(s / 2.1) + 'px' : '') + '">' + esc((p.name || '?').charAt(0)) + '</span>'; };
+  var nm = function (v, id) { var p = byId(v, id); return p ? esc(p.name) : '؟'; };
+  function remaining(v) { return v.deadline ? Math.max(0, v.deadline - (Date.now() + ST.offset)) : 0; }
+  function fmt(ms) { var s = Math.ceil(ms / 1000), m = Math.floor(s / 60); s = s % 60; return m + ':' + (s < 10 ? '0' : '') + s; }
+
+  function timerHtml(v) {
+    if (!v.deadline || ['reveal', 'scores'].indexOf(v.phase) >= 0) {
+      return v.untimed && ['write', 'vote'].indexOf(v.phase) >= 0 ? '<div class="untimed">∞ بدون وقت — خذوا راحتكم</div>' : '';
+    }
+    return '<div class="col" style="gap:6px"><div class="row"><span class="mut small">الوقت المتبقي</span><span class="sp"></span><span class="timer" data-timer>' + fmt(remaining(v)) + '</span></div><div class="bar"><i data-bar style="width:' + Math.round(100 * remaining(v) / (v.timerTotal || 1)) + '%"></i></div></div>';
+  }
+
+  function topbar(v) {
+    var me = v.me;
+    return '<div class="topbar"><span class="pill">الجولة ' + AR(Math.max(1, v.round)) + ' / ' + AR(v.totalRounds) + '</span>' +
+      (v.mult > 1 ? '<span class="pill" style="background:var(--gold);color:#2b1c00;border-color:var(--gold)">دبل ×' + AR(v.mult) + '</span>' : '') +
+      '<span class="pill" style="background:rgba(242,193,78,.18);border-color:rgba(242,193,78,.5)">' + (PHASE[v.phase] || '') + '</span><span class="sp"></span>' +
+      muteBtnHtml() +
+      (me ? '<span class="pill">' + AR(me.score) + ' نقطة</span>' : '') + '</div>';
+  }
+
+  function home() {
+    var pre = params.get('room') || '';
+    var savedName = store.get('qf_name') || 'كريم';
+    return '<div class="topbar"><span class="sp"></span>' + muteBtnHtml() + '</div>' +
+      '<div class="logo"><div class="ic">' + I.svg('fox') + '</div><div class="t">ديوانية بلس <b>قفطة!</b></div><div class="s">ألّف كذبتك من راسك — وطيّحهم في الفخ! (حتى ٥٠+ لاعب)</div></div>' +
+      '<div class="card col"><div class="big">أنشئ غرفة جديدة</div><div class="mut small">تصير أنت المضيف وتستوعب الغرفة حتى ٦٠ لاعباً بالراحة (ومعك بوتات جاهزة للتجربة فوراً).</div><input id="inName2" class="inp" maxlength="16" placeholder="اسمك (مثال: كريم)" autocomplete="off" value="' + esc(savedName) + '"><button class="btn gold" data-a="create">إنشاء الغرفة الآن</button></div>' +
+      '<div class="card col"><div class="big">أو ادخل غرفة برمز</div><input id="inCode" class="inp code" inputmode="numeric" maxlength="4" placeholder="••••" value="' + esc(pre) + '" autocomplete="off"><input id="inName" class="inp" maxlength="16" placeholder="اسمك" autocomplete="off" value="' + esc(savedName) + '"><button class="btn" data-a="join">دخول الغرفة</button></div>' +
+      '<button class="btn sec" data-a="help">؟ كيف تلعب؟</button>';
+  }
+
+  function qrFor(code) {
+    var base = (location.origin && location.origin !== 'null') ? (location.origin + location.pathname) : 'https://diwaniyaplus.com/play';
+    var link = base + '?room=' + code, svg = '';
+    try { svg = QR.toSvg(link, { ecc: 'M', border: 1 }); } catch (e) {}
+    return { link: link, svg: svg };
+  }
+
+  function lobby(v) {
+    var me = v.me, host = me && me.host, q = qrFor(v.code), n = v.players.length;
+    var out = '<div class="topbar"><span class="pill">غرفة <b>' + esc(v.code) + '</b></span><span class="pill">اللاعبين: ' + AR(n) + ' / ' + AR(v.maxPlayers || 60) + '</span><span class="sp"></span>' + muteBtnHtml() + (me ? '<button class="btn sec sm" data-a="leave">خروج</button>' : '') + '</div>';
+    out += '<div class="card col"><div class="ctr mut small">امسحوا الرمز من الكاميرا أو ادخلوا بالرمز</div><div class="qrbox">' + q.svg + '</div><div class="code" dir="ltr">' + esc(v.code) + '</div><div class="row"><button class="btn sec sm sp" data-a="share">نسخ / مشاركة الرابط</button><button class="btn sec sm sp" data-a="boardlink">شاشة التلفزيون</button></div></div>';
+    if (ST.ui.board) { var bl = qrFor(v.code).link.replace('?room=', '?board='); out += '<div class="card col"><div class="big">شاشة الطاولة (التلفزيون)</div><div class="mut small" style="line-height:1.8">افتح هذا الرابط على التلفزيون أو الآيباد، أو اضغط زر «التلفزيون» في الشريط السفلي لمعاينتها فوراً.</div><div class="hint" dir="ltr" style="word-break:break-all">' + esc(bl) + '</div><button class="btn sec sm" data-a="copyboard" data-u="' + esc(bl) + '">نسخ رابط الشاشة</button></div>'; }
+
+    if (window.QF_DEMO && host) {
+      out += '<div class="card col"><div class="row"><div class="big">إضافة بوتات للتجربة</div><span class="sp"></span><span class="tag g">سعة ٦٠ لاعب</span></div><div class="mut small">زيد عدد البوتات في الغرفة مثل ما تحب وجرّب اللعب مع ٥٠ لاعب بالراحة:</div><div class="row wrap">' +
+        '<button class="chip on" data-a="addbots" data-n="1">+ بوت واحد</button>' +
+        '<button class="chip on" data-a="addbots" data-n="5">+ ٥ بوتات</button>' +
+        '<button class="chip on" data-a="addbots" data-n="10">+ ١٠ بوتات</button>' +
+        '<button class="chip ok" data-a="fill50">ملء ٥٠ لاعب دفعة واحدة!</button>' +
+        '</div></div>';
+    }
+
+    out += '<div class="card col"><div class="row"><div class="big">اللاعبين المتصلين (' + AR(n) + ')</div><span class="sp"></span><span class="mut small">من ٢ إلى ' + AR(v.maxPlayers || 60) + '</span></div><div class="plist">' + v.players.map(function (p) {
+      var kick = host && me.id !== p.id ? '<button class="btn sec sm" data-a="kick" data-id="' + p.id + '">' + (ST.ui.kick === p.id ? 'تأكيد الطرد' : '✕') + '</button>' : '';
+      return '<div class="pl ' + (p.connected ? '' : 'off') + '">' + av(p) + '<b>' + esc(p.name) + '</b>' + (p.host ? '<span class="tag g">المضيف</span>' : '') + (me && p.id === me.id ? '<span class="tag">أنت</span>' : '') + '<span class="sp"></span>' + kick + '</div>';
+    }).join('') + '</div></div>';
+
+    if (host) {
+      out += '<div class="card col"><div class="big">طريقة عرض النتيجة</div><div class="row wrap">' + E.REVEAL_OPTIONS.map(function (rm) {
+        return '<button class="chip ' + ((v.settings.revealMode || 'instant') === rm.id ? 'on' : '') + '" data-a="setrev" data-m="' + rm.id + '">' + esc(rm.label) + '</button>';
+      }).join('') + '</div></div>';
+      out += '<div class="card col"><div class="big">فئة الأسئلة</div><div class="row wrap">' + E.CAT_OPTIONS.map(function (c) { return '<button class="chip ' + (v.settings.cat === c ? 'on' : '') + '" data-a="setcat" data-c="' + esc(c) + '">' + esc(c) + '</button>'; }).join('') + '</div></div>';
+      out += '<div class="card col"><div class="big">عدد الجولات</div><div class="row wrap">' + E.ROUND_OPTIONS.map(function (r) { return '<button class="chip ' + (v.settings.rounds === r ? 'on' : '') + '" data-a="setrounds" data-r="' + r + '">' + AR(r) + ' جولات</button>'; }).join('') + '</div></div>';
+      out += '<div class="card col"><div class="big">الوقت لكل قرار</div><div class="row wrap">' + E.ACT_OPTIONS.map(function (s) { return '<button class="chip ' + (v.settings.actSec === s ? 'on' : '') + '" data-a="actsec" data-s="' + s + '">' + (s ? AR(s) + ' ثانية' : '∞ بدون وقت') + '</button>'; }).join('') + '</div></div>';
+    }
+    out += '<button class="btn sec" data-a="help">؟ كيف تلعب؟</button>';
+    if (host) out += '<div class="stick"><button class="btn gold" data-a="start" ' + (v.need ? 'disabled' : '') + '>' + (v.need ? 'ينقصكم ' + AR(v.need) + ' لاعب' : 'ابدأ اللعبة الآن! (' + AR(n) + ' لاعب)') + '</button></div>';
+    else if (me) out += '<div class="card ctr mut">ننتظر المضيف يبدأ اللعبة…</div>';
+    return out;
+  }
+
+  function qBoxHtml(v) {
+    if (!v.q) return '';
+    var qh = esc(v.q.q).replace('_____', '<span class="qblank">؟ ؟ ؟ ؟</span>');
+    return '<div class="card col"><div class="row"><span class="chip on">' + esc(v.q.cat) + '</span><span class="sp"></span>' + (v.mult > 1 ? '<span class="tag g">النقاط ×' + AR(v.mult) + '</span>' : '') + '</div><div class="qtxt">' + qh + '</div></div>';
+  }
+
+  function stepCardHtml(v, s, me) {
+    if (s.truth) {
+      var wn = s.victims.slice(0, 12).map(function (id) { return nm(v, id); }).join(' ، ') + (s.victims.length > 12 ? ' و+' + AR(s.victims.length - 12) : '');
+      return '<div class="ann ok"><span class="tag ok">✓ الإجابة الصحيحة (+' + AR(s.pts) + ' نقطة)</span><div class="huge" style="margin-top:8px">' + esc(s.text) + '</div><div class="mut" style="margin-top:6px">' + (wn ? 'كشفها: ' + wn : 'ولا أحد لقط الحقيقة!') + '</div>' + (s.info ? '<div class="card small" style="margin-top:10px;text-align:right">' + esc(s.info) + '</div>' : '') + '</div>';
+    }
+    var an = s.decoy ? 'فخ النظام' : s.authors.map(function (id) { return nm(v, id); }).join(' ، ');
+    var vn = s.victims.slice(0, 12).map(function (id) { return nm(v, id); }).join(' ، ') + (s.victims.length > 12 ? ' و+' + AR(s.victims.length - 12) : '');
+    var canLike = !s.decoy && me && !me.myLike && s.authors.indexOf(me.id) < 0;
+    return '<div class="ann fas"><span class="tag g">قفطة من تأليف: ' + an + ' (+' + AR(s.pts) + ')</span><div class="huge" style="margin-top:8px">«' + esc(s.text) + '»</div><div class="mut" style="margin-top:6px">طاح في الفخ (' + AR(s.victims.length) + '): ' + vn + '</div>' +
+      (canLike ? '<div style="margin-top:10px"><button class="btn sec sm" data-a="like" data-id="' + s.id + '">أظرف كذبة (+١٠٠ لصاحبها)</button></div>' : '') + '</div>';
+  }
+
+  function game(v) {
+    var me = v.me, out = topbar(v) + qBoxHtml(v), ph = v.phase;
+    var hostSkip = me && me.host ? '<button class="btn sec sm" data-a="skip">تخطّي المرحلة وإظهار النتيجة (المضيف)</button>' : '';
+
+    if (ph === 'write') {
+      if (me && !me.myLie) {
+        out += '<div class="card col"><div class="big">ألّف كذبتك السرية</div><div class="mut small">اكتب كذبة مقنعة من خيالك مكان الفراغ عشان يصدقونها الباقين ويصوتون لها!</div>' +
+          '<input id="inLie" class="inp" maxlength="65" placeholder="اكتب كذبتك هنا..." autocomplete="off">' +
+          '<button class="btn gold" data-a="sendlie">اعتمد الكذبة</button></div>';
+      } else {
+        out += '<div class="ann ok"><div class="big">اعتمدنا كذبتك ✓</div><div class="huge" style="margin-top:6px">«' + esc(me ? me.myLie : '') + '»</div><div class="mut" style="margin-top:8px">ننتظر الباقين يكتبون كذباتهم (' + AR(v.wroteCount) + ' من ' + AR(v.players.length) + ')…</div></div>';
+      }
+      out += timerHtml(v) + hostSkip;
+    } else if (ph === 'vote') {
+      out += '<div class="ctr big">واحدة بس حقيقة والباقي فخاخ — صوّت للحقيقة!</div>';
+      if (me && !me.myVote) {
+        out += '<div class="grid1">' + v.choices.map(function (c) {
+          return '<button class="pick ' + (c.mine ? 'mine ' : '') + (ST.ui.sel === c.id ? 'sel' : '') + '" data-a="sel" data-id="' + c.id + '"><span class="nm">' + esc(c.text) + '</span>' + (c.mine ? '<span class="tag g">كذبتك</span>' : '') + '</button>';
+        }).join('') + '</div>';
+        out += '<div class="stick"><button class="btn gold" data-a="vote" ' + (ST.ui.sel ? '' : 'disabled') + '>' + (ST.ui.sel ? 'صوّت لهذا الجواب' : 'اختر الجواب الصحيح') + '</button></div>';
+      } else {
+        out += '<div class="ann lib"><div class="big">صوّتّ ✓</div><div class="mut" style="margin-top:6px">ننتظر الباقين يصوتون (' + AR(v.votedCount) + ' من ' + AR(v.players.length) + ')…</div></div>';
+      }
+      out += timerHtml(v) + hostSkip;
+    } else if (ph === 'reveal') {
+      var steps = v.shownSteps || [];
+      out += '<div class="ctr big">كشف القفطات (' + AR(v.revealIdx + 1) + ' / ' + AR(v.revealTotal) + ')</div>';
+      out += steps.slice().reverse().map(function (s) { return stepCardHtml(v, s, me); }).join('');
+      if (me && me.host) {
+        out += '<div class="stick">' +
+          '<button class="btn gold" data-a="skipReveal">تخطي الكل وإظهار الإجابة والنقاط فوراً ⏭</button>' +
+          '<button class="btn sec" data-a="next">اكشف اللي بعده</button>' +
+          '</div>';
+      }
+    } else if (ph === 'scores') {
+      var allSteps = v.shownSteps || [];
+      var truthStep = allSteps.filter(function (s) { return s.truth; })[0];
+      var trapSteps = allSteps.filter(function (s) { return !s.truth; }).slice().reverse();
+      var sorted = v.players.slice().sort(function (a, b) { return b.score - a.score; });
+
+      out += '<div class="ctr big">الإجابة الصحيحة وترتيب النقاط — الجولة ' + AR(v.round) + '</div>';
+      if (truthStep) out += stepCardHtml(v, truthStep, me);
+
+      out += '<div class="card col"><div class="row"><div class="big">ترتيب النقاط (' + AR(sorted.length) + ' لاعب)</div><span class="sp"></span><span class="tag g">محدث</span></div><div class="plist">' + sorted.map(function (p, idx) {
+        return '<div class="pl">' + av(p) + '<b>' + AR(idx + 1) + '. ' + esc(p.name) + '</b><span class="sp"></span><span class="tag g">' + AR(p.score) + ' نقطة</span></div>';
+      }).join('') + '</div></div>';
+
+      if (trapSteps.length) {
+        out += '<div class="ctr big" style="font-size:18px;margin-top:4px">القفطات اللي طاحوا فيها اللاعبين (' + AR(trapSteps.length) + ')</div>';
+        out += trapSteps.map(function (s) { return stepCardHtml(v, s, me); }).join('');
+      }
+
+      if (me && me.host) {
+        out += '<div class="stick"><button class="btn gold" data-a="next">' + (v.round >= v.totalRounds ? 'إعلان الفائز النهائي' : 'ابدأ الجولة الجاية ⏭') + '</button></div>';
+      }
+    }
+    return out;
+  }
+
+  function ended(v) {
+    var sorted = v.players.slice().sort(function (a, b) { return b.score - a.score; });
+    var top = sorted[0], me = v.me;
+    var topFox = v.players.slice().sort(function (a, b) { return b.fooled - a.fooled; })[0];
+    var topDet = v.players.slice().sort(function (a, b) { return b.truths - a.truths; })[0];
+    var out = '<div class="topbar"><span class="pill">نهاية اللعبة</span><span class="sp"></span>' + muteBtnHtml() + '</div>';
+    out += '<div class="ann gold"><div style="width:96px;height:96px;margin:0 auto">' + I.svg('trophy') + '</div><div class="huge" style="margin-top:8px">بطل قفطة!: ' + (top ? esc(top.name) : '—') + '</div><div class="big" style="margin-top:6px;color:var(--gold)">' + AR(top ? top.score : 0) + ' نقطة</div></div>';
+    out += '<div class="grid"><div class="card ctr"><div class="mut small">ملك الفخاخ</div><div class="big" style="margin-top:4px">' + (topFox ? esc(topFox.name) : '—') + '</div><div class="small" style="color:var(--gold)">خدع ' + AR(topFox ? topFox.fooled : 0) + ' لاعبين</div></div><div class="card ctr"><div class="mut small">صائد الحقيقة</div><div class="big" style="margin-top:4px">' + (topDet ? esc(topDet.name) : '—') + '</div><div class="small" style="color:var(--green)">كشف ' + AR(topDet ? topDet.truths : 0) + ' حقائق</div></div></div>';
+    out += '<div class="card col"><div class="big">الترتيب النهائي (' + AR(sorted.length) + ' لاعب)</div><div class="plist">' + sorted.map(function (p, i) {
+      return '<div class="pl">' + av(p) + '<b>' + AR(i + 1) + '. ' + esc(p.name) + '</b><span class="sp"></span><span class="chip on">' + AR(p.score) + ' نقطة</span></div>';
+    }).join('') + '</div></div>';
+    if (me && me.host) out += '<button class="btn gold" data-a="again">لعبة جديدة بنفس اللاعبين</button><button class="btn sec" data-a="reset">رجوع للوبي</button>';
+    return out;
+  }
+
+  function render() {
+    var v = ST.view, html;
+    if (!v) html = home();
+    else if (v.phase === 'lobby') html = lobby(v);
+    else if (v.phase === 'ended') html = ended(v);
+    else html = game(v);
+    var focus = document.activeElement && document.activeElement.id, keep = {};
+    ['inCode', 'inName', 'inName2', 'inLie'].forEach(function (k) { var x = document.getElementById(k); if (x) keep[k] = x.value; });
+    $app.innerHTML = html;
+    Object.keys(keep).forEach(function (k) { var x = document.getElementById(k); if (x && keep[k]) x.value = keep[k]; });
+    if (focus) { var f = document.getElementById(focus); if (f) f.focus(); }
+    renderOverlay();
+  }
+
+  function renderOverlay() {
+    var out = '';
+    if (ST.me && !ST.open) out += '<div class="conn">الاتصال مقطوع… نحاول نرجّعه</div>';
+    if (ST.toast) out += '<div class="toast">' + esc(ST.toast) + '</div>';
+    $ov.innerHTML = out;
+  }
+
+  setInterval(function () {
+    var v = ST.view; if (!v || !v.deadline) return;
+    var t = document.querySelector('[data-timer]'), b = document.querySelector('[data-bar]');
+    if (t) t.textContent = fmt(remaining(v)); if (b) b.style.width = Math.round(100 * remaining(v) / (v.timerTotal || 1)) + '%';
+  }, 250);
+
+  var HS = { sec: 'idea' };
+  function openHelp(s) { HS.sec = s || HS.sec; $help.classList.add('on'); renderHelp(); }
+  function renderHelp() {
+    var S = HELP.SECTIONS.filter(function (x) { return x.id === HS.sec; })[0] || HELP.SECTIONS[0], body = '';
+    if (S.lead) body += '<div class="lead">' + esc(S.lead) + '</div>';
+    if (S.kind === 'list') body += '<ul class="pts">' + S.points.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('') + '</ul>';
+    if (S.kind === 'steps') body += S.steps.map(function (st, i) { return '<div class="stp"><span class="n">' + AR(i + 1) + '</span><div class="tx"><b>' + esc(st.h) + '</b>' + esc(st.t) + '</div></div>'; }).join('');
+    if (S.note) body += '<div class="note">' + esc(S.note) + '</div>';
+    var i = HELP.SECTIONS.indexOf(S), nx = HELP.SECTIONS[i + 1];
+    $help.innerHTML = '<div class="hp"><div class="row"><div class="big sp">شرح اللعبة</div><button class="btn sec sm" data-a="helpclose">إغلاق ✕</button></div><div class="htabs">' + HELP.SECTIONS.map(function (x) { return '<button class="chip ' + (x.id === S.id ? 'on' : '') + '" data-a="helptab" data-s="' + x.id + '">' + esc(x.short) + '</button>'; }).join('') + '</div><div class="big">' + esc(S.title) + '</div>' + body +
+      (nx ? '<button class="btn" data-a="helptab" data-s="' + nx.id + '">التالي: ' + esc(nx.short) + '</button>' : '<button class="btn gold" data-a="helpclose">فهمت، يلا نلعب</button>') + '</div>';
+    $help.scrollTop = 0;
+  }
+
+  document.addEventListener('click', function (e) {
+    var raw = e.target;
+    var baseEl = raw && raw.nodeType === 1 ? raw : (raw && raw.parentElement ? raw.parentElement : null);
+    var el = baseEl && baseEl.closest ? baseEl.closest('[data-a]') : null; if (!el) return;
+    var a = el.getAttribute('data-a'), v = ST.view, id = el.getAttribute('data-id');
+    var val = function (i) { var x = document.getElementById(i); return x ? x.value.trim() : ''; };
+    switch (a) {
+      case 'mute': toggleMute(); break;
+      case 'create': {
+        if (!ST.muted) { try { if (window.MafiaAudio) window.MafiaAudio.unlock(); } catch (err) {} }
+        var n = val('inName2') || val('inName') || store.get('qf_name') || 'كريم';
+        store.set('qf_name', n);
+        send({ t: 'create', name: n });
+        break;
+      }
+      case 'join': {
+        if (!ST.muted) { try { if (window.MafiaAudio) window.MafiaAudio.unlock(); } catch (err) {} }
+        var c = val('inCode'), n2 = val('inName') || val('inName2') || store.get('qf_name') || 'لاعب';
+        if (!/^\d{4}$/.test(c)) return toast('اكتب رمز الغرفة (٤ أرقام)');
+        store.set('qf_name', n2);
+        send({ t: 'join', code: c, name: n2 });
+        break;
+      }
+      case 'addbots': {
+        if (v && window.QFSpawnBots) {
+          var cnt = Number(el.getAttribute('data-n') || 1);
+          var added = window.QFSpawnBots(v.code, cnt);
+          if (added > 0) toast('أضفنا ' + AR(added) + ' بوت للغرفة!');
+          else toast('الغرفة وصلت للحد الأقصى (' + AR(v.maxPlayers || 60) + ' لاعب)');
+        }
+        break;
+      }
+      case 'fill50': {
+        if (v && window.QFSpawnBots) {
+          var need50 = Math.max(0, 50 - v.players.length);
+          if (need50 <= 0) { toast('في الغرفة الحين ' + AR(v.players.length) + ' لاعب!'); break; }
+          var added50 = window.QFSpawnBots(v.code, need50);
+          if (added50 > 0) toast('جاري دخول ' + AR(added50) + ' بوت ليصل العدد إلى ٥٠ لاعباً!');
+        }
+        break;
+      }
+      case 'leave': act('leave'); break;
+      case 'share': { var u = qrFor(v.code).link; if (navigator.share) navigator.share({ title: 'قفطة!', text: 'ادخل غرفتنا: ' + v.code, url: u }).catch(function () {}); else if (navigator.clipboard) navigator.clipboard.writeText(u).then(function () { toast('نسخنا الرابط'); }); break; }
+      case 'boardlink': ST.ui.board = !ST.ui.board; render(); break;
+      case 'copyboard': if (navigator.clipboard) navigator.clipboard.writeText(el.getAttribute('data-u')).then(function () { toast('نسخنا رابط الشاشة'); }); break;
+      case 'kick': if (ST.ui.kick === id) { ST.ui.kick = null; act('kick', { target: id }); } else { ST.ui.kick = id; render(); setTimeout(function () { if (ST.ui.kick === id) { ST.ui.kick = null; render(); } }, 3000); } break;
+      case 'actsec': act('settings', { patch: { actSec: Number(el.getAttribute('data-s')) } }); break;
+      case 'setrounds': act('settings', { patch: { rounds: Number(el.getAttribute('data-r')) } }); break;
+      case 'setcat': act('settings', { patch: { cat: el.getAttribute('data-c') } }); break;
+      case 'setrev': act('settings', { patch: { revealMode: el.getAttribute('data-m') } }); break;
+      case 'start': act('start'); break;
+      case 'skip': act('skip'); break;
+      case 'skipReveal': act('skipReveal'); break;
+      case 'sendlie': { var lt = val('inLie'); act('lie', { text: lt }); break; }
+      case 'sel': ST.ui.sel = ST.ui.sel === id ? null : id; render(); break;
+      case 'vote': if (ST.ui.sel) act('vote', { target: ST.ui.sel }); break;
+      case 'like': act('like', { target: id }); break;
+      case 'next': act('next'); break;
+      case 'again': act('again'); break;
+      case 'reset': act('reset'); break;
+      case 'help': openHelp(el.getAttribute('data-s')); break;
+      case 'helpclose': $help.classList.remove('on'); break;
+      case 'helptab': HS.sec = el.getAttribute('data-s'); renderHelp(); break;
+    }
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') {
+      var t = e.target;
+      if (t && t.id === 'inName') { var b = document.querySelector('[data-a="join"]'); b && b.click(); }
+      if (t && t.id === 'inName2') { var b2 = document.querySelector('[data-a="create"]'); b2 && b2.click(); }
+      if (t && t.id === 'inLie') { var b3 = document.querySelector('[data-a="sendlie"]'); b3 && b3.click(); }
+    }
+  });
+
+  var DB = { board: null };
+  function setTab(t) {
+    document.body.classList.toggle('show-board', t === 'board');
+    document.body.classList.toggle('show-both', t === 'both');
+    var bs = document.querySelectorAll('.tabs button[data-tab]');
+    for (var i = 0; i < bs.length; i++) bs[i].classList.toggle('on', bs[i].getAttribute('data-tab') === t);
+    if (DB.board && DB.board.fit) setTimeout(DB.board.fit, 30);
+  }
+  function demoBoard(code) {
+    if (!window.QF_DEMO || !window.QFBoard) return;
+    if (DB.board) {
+      if (DB.board.setCode) DB.board.setCode(code);
+      return;
+    }
+    var bh = document.getElementById('board'); bh.className = 'bd-host';
+    DB.board = window.QFBoard.mount(bh, { code: code });
+    if (!ST.muted) DB.board.enableSound();
+    var t = document.createElement('div'); t.className = 'tabs';
+    t.innerHTML = '<button class="on" data-tab="phone">جوالي</button><button data-tab="board">التلفزيون</button>' + (window.innerWidth >= 900 ? '<button data-tab="both">الاثنين معاً</button>' : '') + '<button class="mute-pill' + (ST.muted ? ' off' : '') + '" data-act-mute="1">' + (ST.muted ? 'الصوت: مقفول ✕' : 'الصوت: شغال ♪') + '</button>';
+    document.body.appendChild(t);
+    t.addEventListener('click', function (e) {
+      var raw = e.target;
+      var baseEl = raw && raw.nodeType === 1 ? raw : (raw && raw.parentElement ? raw.parentElement : null);
+      var b = baseEl && baseEl.closest ? baseEl.closest('button') : null;
+      if (!b) return;
+      if (b.hasAttribute('data-act-mute')) { toggleMute(); return; }
+      if (b.hasAttribute('data-tab')) setTab(b.getAttribute('data-tab'));
+    });
+  }
+  window.__qf = ST; window.__setTab = setTab;
+  if (window.QF_DEMO) {
+    document.body.classList.add('is-demo');
+    var db = document.createElement('div'); db.className = 'demo';
+    db.textContent = 'نسخة تجريبية بدون إنترنت — باقي اللاعبين بوتات (تستوعب حتى ٦٠ لاعباً)';
+    document.body.appendChild(db);
+  }
+  syncAudioState();
+  connect(); render();
+})();
+</script>
+
+<script>
+(function(){
+  function mergeCustomQaftah(items) {
+    if (!window.QFEngine || !Array.isArray(items) || !items.length) return;
+    items.forEach(function(it) {
+      var qText = it.prompt_text || it.q;
+      var aText = it.answer_text || it.truth;
+      if (!qText || !aText) return;
+      if (qText.indexOf('_____') === -1) qText = qText + ' _____';
+      var existing = window.QFEngine.QUESTIONS.find(function(x){ return x.id === it.id; });
+      var decoys = it.options || it.decoys || ['خيار مموه ١', 'خيار مموه ٢', 'خيار مموه ٣', 'خيار مموه ٤'];
+      if (existing) {
+        existing.q = qText; existing.truth = aText; existing.info = it.extra_info || it.info || ''; existing.decoys = decoys;
+      } else {
+        window.QFEngine.QUESTIONS.unshift({
+          id: String(it.id),
+          cat: it.cat || 'سوالف ومواقف',
+          q: qText,
+          truth: aText,
+          info: it.extra_info || it.info || '',
+          decoys: decoys
+        });
+      }
+    });
+  }
+  try {
+    var localItems = (window.__DW_CONTENT && window.__DW_CONTENT.qaftah) || [];
+    mergeCustomQaftah(localItems);
+  } catch (e) {}
+  if (typeof fetch !== 'undefined' && location.protocol.indexOf('http') === 0) {
+    Promise.resolve({ json: function(){ return {}; } }).then(function(r){ return r.json(); }).then(function(d){
+      if (d && d.ok && Array.isArray(d.items)) mergeCustomQaftah(d.items);
+    }).catch(function(){});
+  }
+})();
+</script>
+
+
+<style>
+.dw-FloatingAudioBar {
+  position: fixed; bottom: 12px; left: 12px; z-index: 9999;
+  display: inline-flex; gap: 6px; background: rgba(10, 15, 36, 0.92);
+  border: 1px solid rgba(245, 185, 66, 0.45); border-radius: 999px;
+  padding: 5px 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.55);
+  font-family: -apple-system, "Tajawal", "Cairo", sans-serif;
+}
+.dw-FloatingAudioBar button {
+  padding: 5px 11px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.08); color: #F8FAFC; font-size: 12px; font-weight: 800;
+  cursor: pointer;
+}
+.dw-FloatingAudioBar button.off {
+  opacity: 0.55; background: rgba(244, 63, 94, 0.18); border-color: rgba(244, 63, 94, 0.45);
+}
+</style>
+<script>
+(function(){
+  window.__DW_VOICE_ON = true;
+  window.__DW_SFX_ON = true;
+  var AudioCtx = window.AudioContext || window.webkitAudioContext;
+  var sfxCtx = null;
+  function playPremiumClick(freq) {
+    if (!window.__DW_SFX_ON || !AudioCtx) return;
+    try {
+      if (!sfxCtx) sfxCtx = new AudioCtx();
+      if (sfxCtx.state === 'suspended') sfxCtx.resume();
+      var o = sfxCtx.createOscillator(), g = sfxCtx.createGain();
+      o.type = 'triangle'; o.frequency.setValueAtTime(freq || 560, sfxCtx.currentTime);
+      g.gain.setValueAtTime(0.06, sfxCtx.currentTime);
+      g.gain.exponentialRampToValueAtTime(0.001, sfxCtx.currentTime + 0.075);
+      o.connect(g); g.connect(sfxCtx.destination);
+      o.start(); o.stop(sfxCtx.currentTime + 0.075);
+    } catch(e){}
+  }
+  document.addEventListener('DOMContentLoaded', function(){
+    var bar = document.createElement('div');
+    bar.className = 'dw-FloatingAudioBar';
+    bar.innerHTML =
+      '<button id="dwFlVoiceBtn" type="button">🔊 الصوت: مفعّل</button>' +
+      '<button id="dwFlSfxBtn" type="button">🎵 المؤثرات: مفعّلة</button>';
+    document.body.appendChild(bar);
+    var vBtn = document.getElementById('dwFlVoiceBtn');
+    var sBtn = document.getElementById('dwFlSfxBtn');
+    vBtn.addEventListener('click', function(){
+      window.__DW_VOICE_ON = !window.__DW_VOICE_ON;
+      vBtn.textContent = window.__DW_VOICE_ON ? '🔊 الصوت: مفعّل' : '🔇 الصوت: مغلق';
+      vBtn.classList.toggle('off', !window.__DW_VOICE_ON);
+      if (window.DiwaniyaAudio && window.DiwaniyaAudio.setEnabled) window.DiwaniyaAudio.setEnabled('voice', window.__DW_VOICE_ON);
+      if (!window.__DW_VOICE_ON && window.speechSynthesis) { try { window.speechSynthesis.cancel(); } catch(e){} }
+    });
+    sBtn.addEventListener('click', function(){
+      window.__DW_SFX_ON = !window.__DW_SFX_ON;
+      sBtn.textContent = window.__DW_SFX_ON ? '🎵 المؤثرات: مفعّلة' : '🔕 المؤثرات: مغلقة';
+      sBtn.classList.toggle('off', !window.__DW_SFX_ON);
+      if (window.DiwaniyaAudio && window.DiwaniyaAudio.setEnabled) window.DiwaniyaAudio.setEnabled('sfx', window.__DW_SFX_ON);
+      if (window.__DW_SFX_ON) playPremiumClick(660);
+    });
+    document.addEventListener('click', function(ev){
+      if (ev.target && ev.target.closest && ev.target.closest('button')) playPremiumClick(540);
+    }, true);
+  });
+})();
+</script>
+
+
+<script>
+(function(){
+  window.addEventListener('message', function(ev) {
+    var d = ev && ev.data;
+    if (!d || typeof d !== 'object') return;
+    if (d.type === 'DW_AUDIO_SYNC') {
+      window.__DW_VOICE_ON = !!d.voiceOn;
+      window.__DW_SFX_ON = !!d.sfxOn;
+      if (!d.voiceOn && window.speechSynthesis) {
+        try { window.speechSynthesis.cancel(); } catch(e){}
+      }
+    }
+  });
+})();
+</script>
+
+</body>
+</html>

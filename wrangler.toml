@@ -1,0 +1,33 @@
+name = "diwaniya-plus"
+main = "worker/src/index.js"
+compatibility_date = "2025-09-01"
+
+# The store page and other public files. /api/* and /play/* always go to the Worker first.
+[assets]
+directory = "./public"
+binding = "ASSETS"
+run_worker_first = ["/api/*", "/play/*"]
+
+# Game files are bundled into the Worker as text so they are never publicly downloadable.
+[[rules]]
+type = "Text"
+globs = ["**/*.html"]
+fallthrough = true
+
+[[d1_databases]]
+binding = "DB"
+database_name = "diwaniya-plus"
+database_id = "00000000-0000-0000-0000-000000000000" # replace with the id printed by: npx wrangler d1 create diwaniya-plus
+migrations_dir = "migrations"
+
+[vars]
+# Comma-separated emails that get the owner role (admin panel) when they log in.
+OWNER_EMAILS = ""
+# Sender for login emails. The domain must be verified in your Resend account.
+MAIL_FROM = "Diwaniya Plus <login@example.com>"
+# Never "true" in production: with it and no RESEND_API_KEY, login codes are printed to the server log.
+DEV_MODE = "false"
+
+# Secrets (set with: npx wrangler secret put NAME)
+#   AUTH_SECRET     long random string used to hash login codes
+#   RESEND_API_KEY  API key from resend.com

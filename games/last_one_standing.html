@@ -1,0 +1,1955 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>ديوانية بلس — آخر واحد يصمد — ديوانية بلس</title>
+<style>
+:root {
+  --bg-deep: #070B1A;
+  --bg-panel: #101733;
+  --bg-card: rgba(20, 30, 62, 0.90);
+  --gold: #F5B942;
+  --gold-light: #FFE08A;
+  --teal: #2DD4BF;
+  --coral: #F97316;
+  --rose: #F43F5E;
+  --emerald: #10B981;
+  --accent: #F43F5E;
+  --text: #F8FAFC;
+  --muted: #94A3B8;
+  --border: rgba(245, 185, 66, 0.28);
+  /* Shifra Palette */
+  --cn-red: #D92D20;
+  --cn-red-dark: #912018;
+  --cn-red-light: #FEE4E2;
+  --cn-blue: #1570EF;
+  --cn-blue-dark: #1849A9;
+  --cn-blue-light: #D1E9FF;
+  --cn-bystander: #D4B886;
+  --cn-bystander-dark: #8C6D3F;
+  --cn-assassin: #111827;
+  --cn-card-cream: #F7F1E3;
+  --cn-card-ink: #1E293B;
+}
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body {
+  margin: 0; padding: 0; min-height: 100vh;
+  background:
+    radial-gradient(950px 500px at 85% 0%, rgba(245, 185, 66, 0.15), transparent 65%),
+    radial-gradient(850px 480px at 10% 100%, rgba(45, 212, 191, 0.12), transparent 65%),
+    linear-gradient(180deg, #0E1530 0%, #070B1A 100%);
+  color: var(--text);
+  font-family: -apple-system, "SF Arabic", "Tajawal", "Cairo", system-ui, sans-serif;
+  overflow-x: hidden;
+}
+button, input, select, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; border: none; background: none; touch-action: manipulation; }
+button:disabled { opacity: 0.45; cursor: not-allowed; }
+
+.top-bar {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(7, 11, 26, 0.92);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+  padding: 10px 16px;
+  display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;
+}
+.brand-Side { display: flex; align-items: center; gap: 10px; }
+.room-pill {
+  background: rgba(245, 185, 66, 0.18);
+  border: 1px solid var(--gold);
+  color: var(--gold-light);
+  padding: 5px 12px; border-radius: 999px; font-weight: 900; font-size: 13px;
+}
+.ctrl-group { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 10px 15px; border-radius: 12px; font-weight: 800; font-size: 14px;
+  transition: transform 0.12s, filter 0.12s, box-shadow 0.12s;
+}
+.btn:active:not(:disabled) { transform: scale(0.96); }
+.btn-gold { background: linear-gradient(180deg, var(--gold-light), var(--gold)); color: #1B1100; box-shadow: 0 5px 16px rgba(245,185,66,0.3); }
+.btn-teal { background: linear-gradient(180deg, #5EEAD4, #0D9488); color: #042F2E; box-shadow: 0 5px 16px rgba(45,212,191,0.25); }
+.btn-rose { background: linear-gradient(180deg, #FB7185, #E11D48); color: #fff; box-shadow: 0 5px 16px rgba(225,29,72,0.35); }
+.btn-blue { background: linear-gradient(180deg, #60A5FA, #1D4ED8); color: #fff; box-shadow: 0 5px 16px rgba(29,78,216,0.35); }
+.btn-sec { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.16); color: var(--text); }
+.btn-sec.off { background: rgba(244,63,94,0.16); border-color: rgba(244,63,94,0.45); color: #FECDD3; }
+.btn-sm { padding: 6px 11px; font-size: 12.5px; border-radius: 9px; }
+
+.layout-wrap {
+  max-width: 1360px; margin: 0 auto; padding: 16px 14px 92px;
+  display: grid; gap: 16px;
+}
+.layout-wrap.mode-both {
+  grid-template-columns: 1.42fr 0.92fr;
+  align-items: start;
+}
+@media (max-width: 960px) {
+  .layout-wrap.mode-both { grid-template-columns: 1fr; }
+}
+.panel-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  padding: 18px;
+  box-shadow: 0 18px 45px rgba(0,0,0,0.5);
+}
+.panel-head {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  padding-bottom: 12px; margin-bottom: 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.09);
+  flex-wrap: wrap;
+}
+.badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 800;
+  background: rgba(45,212,191,0.15); border: 1px solid rgba(45,212,191,0.4); color: #99F6E4;
+}
+.badge-gold { background: rgba(245,185,66,0.18); border-color: rgba(245,185,66,0.5); color: var(--gold-light); }
+.badge-rose { background: rgba(244,63,94,0.2); border-color: rgba(244,63,94,0.5); color: #FECDD3; }
+.badge-blue { background: rgba(59,130,246,0.22); border-color: rgba(96,165,250,0.55); color: #BFDBFE; }
+
+/* ============================================================================
+ * AUTHENTIC SHIFRA TACTICAL BOARD & AGENT CARD OVERLAYS
+ * ============================================================================ */
+.cn-board-surface {
+  background: radial-gradient(circle at 50% 40%, #1E293B 0%, #090D16 100%);
+  border: 2px solid rgba(245, 185, 66, 0.35);
+  border-radius: 20px;
+  padding: 14px;
+  box-shadow: inset 0 0 40px rgba(0,0,0,0.75);
+}
+.cn-grid-5 {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: clamp(6px, 1.1vw, 12px);
+}
+.cn-card {
+  position: relative;
+  min-height: 82px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #FBF8F1 0%, #DFD3BC 100%);
+  border: 2px solid #B8A47E;
+  box-shadow: 0 5px 0 #7C6A46, 0 8px 16px rgba(0,0,0,0.45);
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.15s cubic-bezier(0.2, 1.2, 0.4, 1), box-shadow 0.15s;
+  overflow: hidden;
+  user-select: none;
+}
+.cn-card:hover:not(:disabled) {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 0 #7C6A46, 0 14px 24px rgba(0,0,0,0.6);
+}
+.cn-card:active:not(:disabled) {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 #7C6A46;
+}
+.cn-card-top {
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 9.5px; font-weight: 800; color: #786648;
+  border-bottom: 1px dashed rgba(120, 102, 72, 0.35);
+  padding-bottom: 3px;
+}
+.cn-card-dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: #C8B796; border: 1px solid #8C7853;
+}
+.cn-card-word {
+  background: #FFFFFF;
+  border: 1.5px solid #C5B492;
+  border-radius: 7px;
+  padding: 7px 4px;
+  text-align: center;
+  font-weight: 900;
+  font-size: clamp(12px, 1.65vw, 16.5px);
+  color: #1E293B;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+  margin-top: 4px;
+}
+
+/* Supervisor / Spymaster Unmistakable Color Coding directly on the 5x5 cards */
+.cn-card.spy-red {
+  background: linear-gradient(180deg, #FEE4E2 0%, #FCA5A5 100%);
+  border: 3px solid #EF4444;
+  box-shadow: 0 5px 0 #991B1B, 0 0 18px rgba(239, 68, 68, 0.45);
+}
+.cn-card.spy-red .cn-card-top { color: #991B1B; border-color: rgba(153,27,27,0.35); }
+.cn-card.spy-red .cn-card-dot { background: #DC2626; border-color: #7F1D1D; }
+.cn-card.spy-red .cn-card-word { border-color: #EF4444; color: #7F1D1D; background: #FFF5F5; }
+
+.cn-card.spy-blue {
+  background: linear-gradient(180deg, #DBEAFE 0%, #93C5FD 100%);
+  border: 3px solid #2563EB;
+  box-shadow: 0 5px 0 #1E40AF, 0 0 18px rgba(37, 99, 235, 0.45);
+}
+.cn-card.spy-blue .cn-card-top { color: #1E40AF; border-color: rgba(30,64,175,0.35); }
+.cn-card.spy-blue .cn-card-dot { background: #2563EB; border-color: #1E3A8A; }
+.cn-card.spy-blue .cn-card-word { border-color: #3B82F6; color: #1E3A8A; background: #F0F7FF; }
+
+.cn-card.spy-neutral {
+  background: linear-gradient(180deg, #FEF3C7 0%, #D6BC8B 100%);
+  border: 2.5px dashed #A16207;
+  box-shadow: 0 5px 0 #713F12;
+}
+.cn-card.spy-neutral .cn-card-top { color: #713F12; }
+
+.cn-card.spy-bomb {
+  background: linear-gradient(180deg, #374151 0%, #111827 100%);
+  border: 3px solid #F43F5E;
+  box-shadow: 0 5px 0 #000000, 0 0 24px rgba(244, 63, 94, 0.75);
+}
+.cn-card.spy-bomb .cn-card-top { color: #FDA4AF; border-color: rgba(244,63,94,0.4); }
+.cn-card.spy-bomb .cn-card-dot { background: #F43F5E; }
+.cn-card.spy-bomb .cn-card-word { background: #1F2937; color: #FECDD3; border-color: #F43F5E; }
+
+/* Placed Agent Card Overlay when a card is revealed! ("الكلمة الي تجي صح تنحط عليها بطاقة") */
+@keyframes cn-drop-card {
+  0% { transform: scale(1.28) rotate(-6deg); opacity: 0; }
+  70% { transform: scale(0.97) rotate(1.5deg); opacity: 1; }
+  100% { transform: scale(1) rotate(-1deg); opacity: 1; }
+}
+.cn-agent-overlay {
+  position: absolute;
+  inset: 3px;
+  border-radius: 10px;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 6px;
+  animation: cn-drop-card 0.32s cubic-bezier(0.2, 1.2, 0.4, 1) forwards;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.65), inset 0 1px 0 rgba(255,255,255,0.35);
+}
+.cn-agent-overlay.ov-red {
+  background:
+    radial-gradient(circle at 80% 20%, rgba(255,255,255,0.22), transparent 55%),
+    linear-gradient(145deg, #EF4444 0%, #B91C1C 55%, #7F1D1D 100%);
+  border: 2px solid #FCA5A5;
+  color: #FFFFFF;
+}
+.cn-agent-overlay.ov-blue {
+  background:
+    radial-gradient(circle at 80% 20%, rgba(255,255,255,0.22), transparent 55%),
+    linear-gradient(145deg, #3B82F6 0%, #1D4ED8 55%, #1E3A8A 100%);
+  border: 2px solid #93C5FD;
+  color: #FFFFFF;
+}
+.cn-agent-overlay.ov-neutral {
+  background:
+    radial-gradient(circle at 80% 20%, rgba(255,255,255,0.18), transparent 55%),
+    linear-gradient(145deg, #D6BC8B 0%, #A3834C 60%, #785C2A 100%);
+  border: 2px solid #FDE68A;
+  color: #1C1917;
+}
+.cn-agent-overlay.ov-bomb {
+  background:
+    radial-gradient(circle at 50% 30%, rgba(244,63,94,0.35), transparent 60%),
+    linear-gradient(145deg, #1F2937 0%, #090D16 100%);
+  border: 2px solid #F43F5E;
+  color: #FECDD3;
+}
+.cn-agent-stamp {
+  font-size: 10.5px; font-weight: 900; padding: 2px 7px; border-radius: 999px;
+  background: rgba(0,0,0,0.32); border: 1px solid rgba(255,255,255,0.3);
+  letter-spacing: 0.2px;
+}
+.cn-agent-peek-word {
+  font-size: 10.5px; font-weight: 800; opacity: 0.92;
+  background: rgba(0,0,0,0.26); padding: 1px 6px; border-radius: 6px;
+  max-width: 96%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+
+/* General Grids & Controls */
+.grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+.grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+.grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+
+.vault-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(66px, 1fr)); gap: 8px;
+}
+.vault-btn {
+  height: 58px; border-radius: 13px; font-weight: 900; font-size: 15px;
+  background: linear-gradient(160deg, #1E293B, #0F172A);
+  border: 1.5px solid rgba(245,185,66,0.38); color: var(--gold-light);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  transition: transform 0.14s, border-color 0.14s;
+}
+.vault-btn:hover:not(:disabled) { transform: scale(1.05); border-color: var(--gold); }
+.vault-btn.opened-gold { background: linear-gradient(145deg, #F5B942, #B45309); color: #1A1000; }
+.vault-btn.opened-teal { background: linear-gradient(145deg, #2DD4BF, #0F766E); color: #042F2E; }
+.vault-btn.opened-bomb { background: linear-gradient(145deg, #E11D48, #881337); color: #fff; }
+.vault-btn.opened-rare { background: linear-gradient(145deg, #A855F7, #4C1D95); color: #fff; border-color: #FDE047; }
+
+.score-strip { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; }
+.score-box {
+  flex: 1; min-width: 135px; background: rgba(0,0,0,0.34);
+  border: 1px solid rgba(255,255,255,0.12); border-radius: 14px; padding: 10px 14px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.score-box.active-turn { border-color: var(--gold); box-shadow: 0 0 18px rgba(245,185,66,0.28); }
+
+.timer-ring {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 68px; height: 42px; padding: 0 14px; border-radius: 999px;
+  background: rgba(244,63,94,0.18); border: 2px solid var(--rose);
+  color: #FECDD3; font-weight: 900; font-size: 20px;
+}
+
+.inp, .txtarea {
+  width: 100%; padding: 10px 13px; border-radius: 11px;
+  background: rgba(5,9,22,0.78); border: 1px solid rgba(255,255,255,0.18);
+  color: var(--text); outline: none;
+}
+.inp:focus, .txtarea:focus { border-color: var(--gold); }
+
+.view-tabs {
+  position: fixed; bottom: 14px; left: 50%; transform: translateX(-50%);
+  z-index: 60; background: rgba(8, 12, 28, 0.95);
+  border: 1px solid var(--border); border-radius: 999px;
+  padding: 5px; display: flex; gap: 6px;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.65);
+}
+.view-tabs button {
+  padding: 8px 15px; border-radius: 999px; font-weight: 800; font-size: 13px;
+  color: var(--muted);
+}
+.view-tabs button.active {
+  background: linear-gradient(135deg, var(--gold), #D97706);
+  color: #1A1000;
+}
+
+.modal-bg {
+  position: fixed; inset: 0; z-index: 80; background: rgba(4, 7, 18, 0.85);
+  backdrop-filter: blur(8px); display: none; place-items: center; padding: 16px;
+}
+.modal-bg.open { display: grid; }
+.modal-card {
+  width: 100%; max-width: 480px; background: #101733;
+  border: 1px solid var(--border); border-radius: 22px; padding: 22px;
+  display: flex; flex-direction: column; gap: 14px;
+}
+canvas.draw-pad {
+  width: 100%; max-width: 540px; height: 320px; background: #0B1024;
+  border: 2px solid var(--gold); border-radius: 16px; touch-action: none;
+  cursor: crosshair; display: block; margin: 0 auto;
+}
+</style>
+</head>
+<body>
+<script>/* qr.js */
+/* M8QR — compact ISO 18004 QR encoder (byte mode, ECC L/M/Q/H, versions 1-20). */
+(function (g) {
+  'use strict';
+  var ECC_PER_BLOCK = [
+    [-1, 7, 10, 15, 20, 26, 18, 20, 24, 30, 18, 20, 24, 26, 30, 22, 24, 28, 30, 28, 28],
+    [-1, 10, 16, 26, 18, 24, 16, 18, 22, 22, 26, 30, 22, 22, 24, 24, 28, 28, 26, 26, 26],
+    [-1, 13, 22, 18, 26, 18, 24, 18, 22, 20, 24, 28, 26, 24, 20, 30, 24, 28, 28, 26, 30],
+    [-1, 17, 28, 22, 16, 22, 28, 26, 26, 24, 28, 24, 28, 22, 24, 24, 30, 28, 28, 26, 28]
+  ];
+  var NUM_BLOCKS = [
+    [-1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 4, 4, 4, 4, 4, 6, 6, 6, 6, 7, 8],
+    [-1, 1, 1, 1, 2, 2, 4, 4, 4, 5, 5, 5, 8, 9, 9, 10, 10, 11, 13, 14, 16],
+    [-1, 1, 1, 2, 2, 4, 4, 6, 6, 8, 8, 8, 10, 12, 16, 12, 17, 16, 18, 21, 20],
+    [-1, 1, 1, 2, 4, 4, 4, 5, 6, 8, 8, 11, 11, 16, 16, 18, 16, 19, 21, 25, 25]
+  ];
+  var ECL_INDEX = { L: 0, M: 1, Q: 2, H: 3 };
+  var FORMAT_BITS = [1, 0, 3, 2];
+
+  function rawModules(ver) {
+    var r = (16 * ver + 128) * ver + 64;
+    if (ver >= 2) {
+      var na = Math.floor(ver / 7) + 2;
+      r -= (25 * na - 10) * na - 55;
+      if (ver >= 7) r -= 36;
+    }
+    return r;
+  }
+  function dataCodewords(ver, e) {
+    return Math.floor(rawModules(ver) / 8) - ECC_PER_BLOCK[e][ver] * NUM_BLOCKS[e][ver];
+  }
+  function gfMul(x, y) {
+    var z = 0;
+    for (var i = 7; i >= 0; i--) { z = (z << 1) ^ ((z >>> 7) * 0x11D); z ^= ((y >>> i) & 1) * x; }
+    return z & 0xFF;
+  }
+  function rsDivisor(deg) {
+    var res = []; for (var i = 0; i < deg - 1; i++) res.push(0); res.push(1);
+    var root = 1;
+    for (var i2 = 0; i2 < deg; i2++) {
+      for (var j = 0; j < deg; j++) {
+        res[j] = gfMul(res[j], root);
+        if (j + 1 < deg) res[j] ^= res[j + 1];
+      }
+      root = gfMul(root, 0x02);
+    }
+    return res;
+  }
+  function rsRemainder(data, div) {
+    var res = div.map(function () { return 0; });
+    data.forEach(function (b) {
+      var f = b ^ res.shift(); res.push(0);
+      div.forEach(function (c, i) { res[i] ^= gfMul(c, f); });
+    });
+    return res;
+  }
+  function utf8(str) {
+    if (typeof TextEncoder !== 'undefined') return Array.prototype.slice.call(new TextEncoder().encode(str));
+    var s = unescape(encodeURIComponent(str)), out = [];
+    for (var i = 0; i < s.length; i++) out.push(s.charCodeAt(i));
+    return out;
+  }
+  function alignPositions(ver, size) {
+    if (ver === 1) return [];
+    var n = Math.floor(ver / 7) + 2;
+    var step = ver === 32 ? 26 : Math.ceil((ver * 4 + 4) / (n * 2 - 2)) * 2;
+    var r = [6];
+    for (var pos = size - 7; r.length < n; pos -= step) r.splice(1, 0, pos);
+    return r;
+  }
+
+  function encode(text, eccName) {
+    var e = ECL_INDEX[eccName || 'M'];
+    var bytes = utf8(text);
+    var ver, capBits;
+    for (ver = 1; ver <= 20; ver++) {
+      capBits = dataCodewords(ver, e) * 8;
+      var need = 4 + (ver <= 9 ? 8 : 16) + bytes.length * 8;
+      if (need <= capBits) break;
+    }
+    if (ver > 20) throw new Error('QR: text too long');
+    var bits = [];
+    function put(v, n) { for (var i = n - 1; i >= 0; i--) bits.push((v >>> i) & 1); }
+    put(4, 4); put(bytes.length, ver <= 9 ? 8 : 16);
+    bytes.forEach(function (b) { put(b, 8); });
+    put(0, Math.min(4, capBits - bits.length));
+    put(0, (8 - bits.length % 8) % 8);
+    for (var pad = 0xEC; bits.length < capBits; pad ^= 0xEC ^ 0x11) put(pad, 8);
+    var data = [];
+    for (var i = 0; i < bits.length; i += 8) {
+      var v = 0; for (var j = 0; j < 8; j++) v = (v << 1) | bits[i + j]; data.push(v);
+    }
+    // ECC + interleave
+    var nb = NUM_BLOCKS[e][ver], eccLen = ECC_PER_BLOCK[e][ver];
+    var raw = Math.floor(rawModules(ver) / 8);
+    var nShort = nb - raw % nb, shortLen = Math.floor(raw / nb);
+    var blocks = [], div = rsDivisor(eccLen);
+    for (var bi = 0, k = 0; bi < nb; bi++) {
+      var dat = data.slice(k, k + shortLen - eccLen + (bi < nShort ? 0 : 1));
+      k += dat.length;
+      var ecc = rsRemainder(dat, div);
+      if (bi < nShort) dat.push(0);
+      blocks.push(dat.concat(ecc));
+    }
+    var all = [];
+    for (var ii = 0; ii < blocks[0].length; ii++) {
+      for (var jj = 0; jj < blocks.length; jj++) {
+        if (ii !== shortLen - eccLen || jj >= nShort) all.push(blocks[jj][ii]);
+      }
+    }
+    // matrix
+    var size = ver * 4 + 17;
+    var mod = [], fn = [];
+    for (var y = 0; y < size; y++) { mod.push(new Array(size).fill(false)); fn.push(new Array(size).fill(false)); }
+    function setFn(x, y, d) { mod[y][x] = d; fn[y][x] = true; }
+    function bit(x, i) { return ((x >>> i) & 1) !== 0; }
+    for (var t = 0; t < size; t++) { setFn(6, t, t % 2 === 0); setFn(t, 6, t % 2 === 0); }
+    function finder(cx, cy) {
+      for (var dy = -4; dy <= 4; dy++) for (var dx = -4; dx <= 4; dx++) {
+        var d = Math.max(Math.abs(dx), Math.abs(dy)), xx = cx + dx, yy = cy + dy;
+        if (xx >= 0 && xx < size && yy >= 0 && yy < size) setFn(xx, yy, d !== 2 && d !== 4);
+      }
+    }
+    finder(3, 3); finder(size - 4, 3); finder(3, size - 4);
+    var ap = alignPositions(ver, size), na = ap.length;
+    for (var a = 0; a < na; a++) for (var b = 0; b < na; b++) {
+      if ((a === 0 && b === 0) || (a === 0 && b === na - 1) || (a === na - 1 && b === 0)) continue;
+      for (var dy2 = -2; dy2 <= 2; dy2++) for (var dx2 = -2; dx2 <= 2; dx2++)
+        setFn(ap[a] + dx2, ap[b] + dy2, Math.max(Math.abs(dx2), Math.abs(dy2)) !== 1);
+    }
+    function drawFormat(mask) {
+      var d = (FORMAT_BITS[e] << 3) | mask, rem = d;
+      for (var i = 0; i < 10; i++) rem = (rem << 1) ^ ((rem >>> 9) * 0x537);
+      var bs = ((d << 10) | rem) ^ 0x5412;
+      for (var i1 = 0; i1 <= 5; i1++) setFn(8, i1, bit(bs, i1));
+      setFn(8, 7, bit(bs, 6)); setFn(8, 8, bit(bs, 7)); setFn(7, 8, bit(bs, 8));
+      for (var i2 = 9; i2 < 15; i2++) setFn(14 - i2, 8, bit(bs, i2));
+      for (var i3 = 0; i3 < 8; i3++) setFn(size - 1 - i3, 8, bit(bs, i3));
+      for (var i4 = 8; i4 < 15; i4++) setFn(8, size - 15 + i4, bit(bs, i4));
+      setFn(8, size - 8, true);
+    }
+    drawFormat(0);
+    if (ver >= 7) {
+      var rem = ver;
+      for (var q = 0; q < 12; q++) rem = (rem << 1) ^ ((rem >>> 11) * 0x1F25);
+      var vb = (ver << 12) | rem;
+      for (var q2 = 0; q2 < 18; q2++) {
+        var c = bit(vb, q2), aa = size - 11 + q2 % 3, bb = Math.floor(q2 / 3);
+        setFn(aa, bb, c); setFn(bb, aa, c);
+      }
+    }
+    // codewords
+    var idx = 0;
+    for (var right = size - 1; right >= 1; right -= 2) {
+      if (right === 6) right = 5;
+      for (var vert = 0; vert < size; vert++) {
+        for (var jx = 0; jx < 2; jx++) {
+          var x = right - jx, upward = ((right + 1) & 2) === 0, yy2 = upward ? size - 1 - vert : vert;
+          if (!fn[yy2][x] && idx < all.length * 8) { mod[yy2][x] = bit(all[idx >>> 3], 7 - (idx & 7)); idx++; }
+        }
+      }
+    }
+    function applyMask(m) {
+      for (var y = 0; y < size; y++) for (var x = 0; x < size; x++) {
+        var inv;
+        switch (m) {
+          case 0: inv = (x + y) % 2 === 0; break;
+          case 1: inv = y % 2 === 0; break;
+          case 2: inv = x % 3 === 0; break;
+          case 3: inv = (x + y) % 3 === 0; break;
+          case 4: inv = (Math.floor(x / 3) + Math.floor(y / 2)) % 2 === 0; break;
+          case 5: inv = x * y % 2 + x * y % 3 === 0; break;
+          case 6: inv = (x * y % 2 + x * y % 3) % 2 === 0; break;
+          default: inv = ((x + y) % 2 + x * y % 3) % 2 === 0;
+        }
+        if (!fn[y][x] && inv) mod[y][x] = !mod[y][x];
+      }
+    }
+    function penalty() {
+      var res = 0, x, y, i, run, color;
+      var P1 = [true, false, true, true, true, false, true, false, false, false, false];
+      var P2 = [false, false, false, false, true, false, true, true, true, false, true];
+      function lines(get) {
+        for (var a = 0; a < size; a++) {
+          run = 1; color = get(a, 0);
+          for (var b = 1; b < size; b++) {
+            var cur = get(a, b);
+            if (cur === color) { run++; if (run === 5) res += 3; else if (run > 5) res++; }
+            else { color = cur; run = 1; }
+          }
+          for (var s = 0; s + 11 <= size; s++) {
+            var m1 = true, m2 = true;
+            for (var k = 0; k < 11; k++) {
+              var v = get(a, s + k);
+              if (v !== P1[k]) m1 = false;
+              if (v !== P2[k]) m2 = false;
+              if (!m1 && !m2) break;
+            }
+            if (m1) res += 40; if (m2) res += 40;
+          }
+        }
+      }
+      lines(function (a, b) { return mod[a][b]; });
+      lines(function (a, b) { return mod[b][a]; });
+      for (y = 0; y < size - 1; y++) for (x = 0; x < size - 1; x++) {
+        var c0 = mod[y][x];
+        if (c0 === mod[y][x + 1] && c0 === mod[y + 1][x] && c0 === mod[y + 1][x + 1]) res += 3;
+      }
+      var dark = 0; for (y = 0; y < size; y++) for (x = 0; x < size; x++) if (mod[y][x]) dark++;
+      var total = size * size, kk = Math.ceil(Math.abs(dark * 20 - total * 10) / total) - 1;
+      res += kk * 10;
+      return res;
+    }
+    var best = -1, bestPen = Infinity;
+    for (var m = 0; m < 8; m++) {
+      applyMask(m); drawFormat(m);
+      var p = penalty();
+      if (p < bestPen) { bestPen = p; best = m; }
+      applyMask(m);
+    }
+    applyMask(best); drawFormat(best);
+    return { version: ver, size: size, mask: best, modules: mod };
+  }
+
+  function toSvg(text, opts) {
+    opts = opts || {};
+    var qr = encode(text, opts.ecc || 'M'), border = opts.border == null ? 4 : opts.border;
+    var fg = opts.fg || '#000', bg = opts.bg || '#fff', n = qr.size + border * 2, d = [];
+    for (var y = 0; y < qr.size; y++) {
+      var x = 0;
+      while (x < qr.size) {
+        if (qr.modules[y][x]) {
+          var x0 = x; while (x < qr.size && qr.modules[y][x]) x++;
+          d.push('M' + (x0 + border) + ',' + (y + border) + 'h' + (x - x0) + 'v1h-' + (x - x0) + 'z');
+        } else x++;
+      }
+    }
+    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + n + ' ' + n + '" shape-rendering="crispEdges">' +
+      '<rect width="' + n + '" height="' + n + '" fill="' + bg + '"/><path d="' + d.join('') + '" fill="' + fg + '"/></svg>';
+  }
+  function toDataUrl(text, opts) {
+    return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(toSvg(text, opts));
+  }
+  g.M8QR = { encode: encode, toSvg: toSvg, toDataUrl: toDataUrl };
+  if (typeof module !== 'undefined' && module.exports) module.exports = g.M8QR;
+})(typeof window !== 'undefined' ? window : globalThis);
+
+</script>
+<script>
+window.GAME_CONFIG = {"slug": "last_one_standing", "title": "آخر واحد يصمد — ديوانية بلس", "subtitle": "٧ مراحل إقصائية (سرعة، ذاكرة، تركيز، تخمين، ترتيب) حتى يبقى بطل واحد", "accent": "#F43F5E", "stages": [{"type": "المرحلة ١: سرعة البديهة", "prompt": "كم عدد أضلاع الشكل السداسي منتظم الأضلاع؟", "options": ["٦ أضلاع", "٥ أضلاع", "٨ أضلاع", "٧ أضلاع"], "answer": "٦ أضلاع"}, {"type": "المرحلة ٢: التركيز والحساب", "prompt": "إذا تجاوزت صاحب المركز الثاني في سباق جري، في أي مركز تصبح الآن؟", "options": ["المركز الثاني", "المركز الأول", "المركز الثالث", "المركز الرابع"], "answer": "المركز الثاني"}]};
+</script>
+<div id="gameRoot"></div>
+<div id="qrModal" class="modal-bg">
+  <div class="modal-card" style="text-align:center">
+    <div style="display:flex;align-items:center;justify-content:space-between">
+      <b style="font-size:18px;color:var(--gold)">📱 ربط جوالات اللاعبين عبر الـ QR</b>
+      <button class="btn btn-sec btn-sm" id="closeQrBtn">إغلاق ✕</button>
+    </div>
+    <p style="margin:0;font-size:13.5px;color:var(--muted);line-height:1.6">
+      امسح رمز الـ QR بجوالك للانضمام الفوري إلى الغرفة كجهاز تحكم خاص بك، أو بدّل بين «جوالي» و«شاشة التلفزيون» من الشريط السفلي.
+    </p>
+    <div id="qrBox" style="background:#fff;padding:16px;border-radius:18px;width:210px;height:210px;margin:0 auto;display:grid;place-items:center"></div>
+    <div class="room-pill" id="qrRoomCodeText" style="margin:0 auto"></div>
+  </div>
+</div>
+
+<script>
+(function() {
+  'use strict';
+  var CFG = window.GAME_CONFIG;
+
+  // Dual Independent Sound & Sound Effects System (🔊 الصوت/الراوي منفصل تماماً عن 🎵 المؤثرات الصوتية SFX)
+  var AUDIO = {
+    voiceOn: true,
+    sfxOn: true,
+    ctx: null,
+    speak: function(text) {
+      if (!this.voiceOn) return;
+      try {
+        if ('speechSynthesis' in window) {
+          window.speechSynthesis.cancel();
+          var u = new SpeechSynthesisUtterance(text);
+          u.lang = 'ar-SA';
+          u.rate = 1.02;
+          window.speechSynthesis.speak(u);
+        }
+      } catch (e) {}
+    },
+    sfx: function(type) {
+      if (!this.sfxOn) return;
+      try {
+        var AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) return;
+        if (!this.ctx) this.ctx = new AudioCtx();
+        var ctx = this.ctx;
+        if (ctx.state === 'suspended') ctx.resume();
+        var now = ctx.currentTime;
+        var osc = ctx.createOscillator();
+        var gain = ctx.createGain();
+        osc.connect(gain); gain.connect(ctx.destination);
+
+        if (type === 'click') {
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(580, now);
+          gain.gain.setValueAtTime(0.08, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.07);
+          osc.start(now); osc.stop(now + 0.07);
+        } else if (type === 'card_flip') {
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(320, now);
+          osc.frequency.exponentialRampToValueAtTime(740, now + 0.11);
+          gain.gain.setValueAtTime(0.14, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
+          osc.start(now); osc.stop(now + 0.12);
+        } else if (type === 'win') {
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(440, now);
+          osc.frequency.setValueAtTime(554.37, now + 0.09);
+          osc.frequency.setValueAtTime(659.25, now + 0.18);
+          osc.frequency.setValueAtTime(880, now + 0.27);
+          gain.gain.setValueAtTime(0.16, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.45);
+          osc.start(now); osc.stop(now + 0.45);
+        } else if (type === 'alarm' || type === 'bomb') {
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(240, now);
+          osc.frequency.linearRampToValueAtTime(110, now + 0.35);
+          gain.gain.setValueAtTime(0.18, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.4);
+          osc.start(now); osc.stop(now + 0.4);
+        } else if (type === 'gavel' || type === 'buzz') {
+          osc.type = 'square';
+          osc.frequency.setValueAtTime(720, now);
+          osc.frequency.setValueAtTime(480, now + 0.08);
+          gain.gain.setValueAtTime(0.14, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.22);
+          osc.start(now); osc.stop(now + 0.22);
+        } else if (type === 'wheel') {
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(820, now);
+          gain.gain.setValueAtTime(0.09, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.045);
+          osc.start(now); osc.stop(now + 0.045);
+        }
+      } catch (e) {}
+    }
+  };
+
+  function arNum(n) {
+    return String(n == null ? 0 : n).replace(/\d/g, function(d) { return '٠١٢٣٤٥٦٧٨٩'[d]; });
+  }
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function(c) {
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+  function shuffle(arr) {
+    var a = arr.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+    }
+    return a;
+  }
+
+  var ST = {
+    roomCode: 'DW-' + Math.floor(1000 + Math.random() * 9000),
+    viewMode: window.innerWidth >= 960 ? 'both' : 'board',
+    round: 1,
+    players: [
+      { id: 'p1', name: 'كريم (أنت)', score: 0, budget: 1000, alive: true, team: 1 },
+      { id: 'p2', name: 'فهد', score: 0, budget: 1000, alive: true, team: 2 },
+      { id: 'p3', name: 'سلمان', score: 0, budget: 1000, alive: true, team: 1 },
+      { id: 'p4', name: 'نواف', score: 0, budget: 1000, alive: true, team: 2 }
+    ],
+    teamScores: [0, 0],
+    timerSec: 0,
+    timerHandle: null,
+    statusMsg: '',
+    gameData: {}
+  };
+
+  function stopTimer() {
+    if (ST.timerHandle) { clearInterval(ST.timerHandle); ST.timerHandle = null; }
+  }
+  function startTimer(sec, onExpire) {
+    stopTimer();
+    ST.timerSec = sec;
+    ST.timerHandle = setInterval(function() {
+      ST.timerSec = Math.max(0, ST.timerSec - 1);
+      var el = document.getElementById('liveTimerVal');
+      if (el) el.textContent = arNum(ST.timerSec) + ' ث';
+      if (ST.timerSec <= 5 && ST.timerSec > 0) AUDIO.sfx('wheel');
+      if (ST.timerSec <= 0) {
+        stopTimer();
+        AUDIO.sfx('alarm');
+        if (onExpire) onExpire();
+      }
+    }, 1000);
+  }
+
+  // Master dictionary for Shifra auto-complete & random all-in-one pack
+  function getAllShifraWords() {
+    var all = [];
+    (CFG.wordPacks || []).forEach(function(pk) {
+      (pk.words || []).forEach(function(w) {
+        if (all.indexOf(w) === -1) all.push(w);
+      });
+    });
+    return all;
+  }
+
+  function buildShifraBoardFromWords(words25, packLabel) {
+    var roles = [];
+    for (var i = 0; i < 9; i++) roles.push('red');
+    for (var j = 0; j < 8; j++) roles.push('blue');
+    for (var k = 0; k < 7; k++) roles.push('neutral');
+    roles.push('bomb');
+    roles = shuffle(roles);
+    ST.gameData.phase = 'play';
+    ST.gameData.packName = packLabel;
+    ST.gameData.turnTeam = 'red';
+    ST.gameData.spymasterBoardOverlay = false;
+    ST.gameData.spymasterPhoneOverlay = true;
+    ST.gameData.clueWord = '';
+    ST.gameData.clueCount = 2;
+    ST.gameData.guessesLeft = 0;
+    ST.gameData.gameOver = false;
+    ST.gameData.winnerText = '';
+    ST.gameData.cards = words25.slice(0, 25).map(function(w, idx) {
+      return {
+        idx: idx,
+        serial: 'DW-' + String(101 + idx),
+        word: w,
+        role: roles[idx],
+        revealed: false
+      };
+    });
+    ST.statusMsg = 'دور السوبرفايزر (قائد الفريق الأحمر 🔴) لإعطاء شفرة من كلمة واحدة وعدد البطاقات المرتبطة.';
+  }
+
+  function initGameEngine() {
+    stopTimer();
+    var slug = CFG.slug;
+
+    if (slug === 'shifra') {
+      var prevCustom = (ST.gameData && ST.gameData.customInputText) || '';
+      ST.gameData = {
+        phase: 'setup', // Starts in Pre-Game Pack Selector Lobby ("اختار الحزمة قبل ما ادخل")!
+        selectedPackId: 'random_all',
+        customInputText: prevCustom,
+        customWordsList: [],
+        packName: 'حزمة عشوائية شاملة (كل شيء)',
+        turnTeam: 'red',
+        spymasterBoardOverlay: false,
+        spymasterPhoneOverlay: true,
+        clueWord: '',
+        clueCount: 2,
+        guessesLeft: 0,
+        gameOver: false,
+        winnerText: '',
+        cards: []
+      };
+      ST.statusMsg = 'اختر حزمة الكلمات قبل دخول الطاولة (حزمة عشوائية شاملة، حزم جاهزة، أو حزمة مفتوحة من كتابتكم مع ميزة إكمال الـ ٢٥ كلمة تلقائياً).';
+    } else if (slug === 'mystery_button') {
+      var items = [];
+      var pool = [
+        { kind: 'gold', icon: '💰', label: '+٤٠٠ نقطة', pts: 400 },
+        { kind: 'gold', icon: '💎', label: '+٧٠٠ نقطة نادرة!', pts: 700, rare: true },
+        { kind: 'mult', icon: '✨', label: 'مضاعفة نقاط الفريق ×٢!', mult: 2, rare: true },
+        { kind: 'steal', icon: '🧲', label: 'سرقة ٣٠٠ نقطة من الخصم!', steal: 300 },
+        { kind: 'swap', icon: '🔄', label: 'تبديل النقاط مع الفريق المتصدر!', swap: true, rare: true },
+        { kind: 'challenge', icon: '⚡', label: 'تحدي سرعة إضافي (+٥٠٠ نقطة)', pts: 500, challenge: 'سمِّ ٣ دول عربية تبدأ بحرف الميم في ١٠ ثوانٍ!' },
+        { kind: 'shield', icon: '🛡️', label: 'درع واقٍ من الفخ القادم +٢٠٠', pts: 200, shield: true },
+        { kind: 'loss', icon: '📉', label: 'خصم -٢٥٠ نقطة!', pts: -250 },
+        { kind: 'bomb', icon: '💣', label: 'فخ الانفجار! تصفير نقاط الجولة', bomb: true }
+      ];
+      for (var i = 0; i < 36; i++) {
+        items.push({ num: i + 1, opened: false, info: pool[i % pool.length] });
+      }
+      items = shuffle(items).map(function(x, idx) { x.num = idx + 1; return x; });
+      ST.gameData = {
+        turnTeam: 1,
+        roundPot: 0,
+        shields: [0, 0],
+        activeChallenge: '',
+        buttons: items
+      };
+      ST.statusMsg = 'الزر الغامض — الجولات والأزرار النادرة: اختر زراً لتربح أو تضاعف أو تسرق أو تواجه الفخ!';
+    } else if (slug === 'golden_vault') {
+      var lockSet = CFG.vaultLocks[(ST.round - 1) % CFG.vaultLocks.length];
+      ST.gameData = {
+        locks: lockSet.locks,
+        teamProgress: [0, 0], // Lock 0, 1, 2, 3 -> 4 unlocks vault!
+        teamFrozen: [false, false],
+        extraKeys: [1, 1],
+        activeTeam: 1,
+        vaultOpenedBy: null
+      };
+      ST.statusMsg = 'سباق الخزنة الذهبية: فك الأقفال الأربعة المتتالية قبل الفريق المنافس أو عطّله مؤقتاً!';
+    } else if (slug === 'diwaniya_auction') {
+      var lot = CFG.lots[(ST.round - 1) % CFG.lots.length];
+      ST.gameData = {
+        mode: 'public', // public | secret | reverse30
+        lot: lot,
+        currentBid: 200,
+        highestBidder: 'كريم (الفريق ١)',
+        highestTeam: 1,
+        secretBids: {},
+        bidLog: ['🔔 افتتح المزاد على «' + lot.name + '» بسعر ٢٠٠ نقطة'],
+        revealed: false,
+        resultText: '',
+        namedCount: 0
+      };
+      ST.statusMsg = 'مزاد الديوانية: اختر نمط المزاد (علني، سري بالظرف، أو عكسي ٣٠ ثانية) ونافس بميزانيتك!';
+    } else if (slug === 'fortune_wheel') {
+      ST.gameData = {
+        turnTeam: 1,
+        spinning: false,
+        angle: 0,
+        lastSegment: null,
+        riskMode: false,
+        segments: CFG.segments
+      };
+      ST.statusMsg = 'دائرة الحظ المتعددة: أدر العجلة أو فعّل «وضع المخاطرة المضاعفة» لمضاعفة الجوائز والفخاخ!';
+    } else if (slug === 'friends_court') {
+      var caze = CFG.cases[(ST.round - 1) % CFG.cases.length];
+      ST.gameData = {
+        caze: caze,
+        revealedEvidenceCount: 1,
+        showSecretAlibi: false,
+        statements: [],
+        juryVotes: { innocent: 0, guilty: 0 },
+        verdictText: ''
+      };
+      ST.statusMsg = 'محكمة الأصدقاء: القاضي يدير الجلسة، المحامي والمتهم يدافعان، والأدلة تكشف الحقيقة!';
+      startTimer(90);
+    } else if (slug === 'last_one_standing') {
+      var stg = CFG.stages[(ST.round - 1) % CFG.stages.length];
+      ST.gameData = {
+        stageIdx: 0,
+        stage: stg,
+        survivors: ST.players.map(function(p) { return { name: p.name, pts: 0, out: false }; }),
+        champion: ''
+      };
+      ST.statusMsg = 'آخر واحد يصمد: ٧ مراحل إقصائية سريعة — الأقل نقاطاً في كل مرحلة يغادر الحلبة!';
+    } else if (slug === 'silent_library') {
+      var ch = CFG.challenges[(ST.round - 1) % CFG.challenges.length];
+      ST.gameData = {
+        challenge: ch,
+        decibelWarnings: 0,
+        laughCaught: false,
+        completed: false
+      };
+      ST.statusMsg = 'المكتبة الصامتة ولا تضحك: نفّذ التحدي بصمت تام ودون ابتسامة — أي صوت يرصده عداد الضجيج يخصم النقاط!';
+    } else if (slug === 'who_knows_friend') {
+      ST.gameData = {
+        questions: CFG.questions.slice(),
+        qIdx: 0,
+        votes: {},
+        revealed: false,
+        targetPlayer: ST.players[0].name
+      };
+      ST.statusMsg = 'من يعرف صاحبه؟ صوّتوا لأكثر شخص ينطبق عليه السؤال أو أضف سؤالاً مخصصاً عن شلتكم!';
+    } else if (slug === 'draw_guess') {
+      var item = CFG.prompts[(ST.round - 1) % CFG.prompts.length];
+      ST.gameData = {
+        mode: 'draw_guess', // draw_guess | fake_artist | hard_one_line
+        category: item.cat,
+        secretWord: item.word,
+        options: item.options,
+        fakeIdx: Math.floor(Math.random() * ST.players.length),
+        revealRole: false,
+        brushColor: '#F5B942',
+        brushSize: 5,
+        eraser: false,
+        strokes: [],
+        winnerText: ''
+      };
+      ST.statusMsg = 'ارسم وخمّن (مع طور الرسام المندس وتحدي الرسم الصعب): لوحة رسم حية بألوان وممحاة ومؤقت!';
+    } else if (slug === 'stadium_esports') {
+      var q = CFG.questions[(ST.round - 1) % CFG.questions.length];
+      ST.gameData = {
+        q: q,
+        clueStep: 1,
+        answered: false,
+        winnerText: ''
+      };
+      ST.statusMsg = 'تحدي الملاعب والرياضات الإلكترونية: كرة قدم، ملاعب، شعارات، EA FC، Valorant، وRocket League!';
+    } else if (slug === 'how_much_price') {
+      var prod = CFG.products[(ST.round - 1) % CFG.products.length];
+      ST.gameData = {
+        prod: prod,
+        teamGuesses: [0, 0],
+        revealed: false,
+        winnerText: ''
+      };
+      ST.statusMsg = 'كم سعرها؟ خمّن السعر الحقيقي بالريال السعودي دون تجاوز السقف، أو قارن أغلى وأرخص!';
+    } else if (slug === 'pressure_seat') {
+      ST.gameData = {
+        qIdx: 0,
+        questions: shuffle(CFG.questions),
+        streak: 0,
+        roundPoints: 0,
+        running: false
+      };
+      ST.statusMsg = 'كرسي الضغط (الاستفزاز): ٦٠ ثانية من الأسئلة المباغتة بدون قول (نعم / لا / أبيض / أسود)!';
+    }
+    renderAll();
+  }
+
+  function renderBoardHtml() {
+    var slug = CFG.slug;
+    var gd = ST.gameData;
+
+    // 1. SHIFRA (شفرة الديوانية)
+    if (slug === 'shifra') {
+      if (gd.phase === 'setup') {
+        var allPacks = [
+          { id: 'random_all', name: '🎲 حزمة عشوائية شاملة (تضم كل شيء)', desc: 'تخلط تلقائياً بين جميع الحزم: السعودية، الكرة، المسلسلات، والثقافة العامة.' }
+        ].concat((CFG.wordPacks || []).map(function(p, idx) {
+          return { id: 'pack_' + idx, name: p.name, desc: 'تضم ' + arNum(p.words.length) + ' كلمة منتقاة جاهزة للعب.' };
+        })).concat([
+          { id: 'custom_open', name: '✍️ حزمة مفتوحة (يكتبها اللاعبون + إكمال تلقائي)', desc: 'اكتب كلماتكم الخاصة أو أسماء شلتكم، وبضغطة زر يكمل النظام باقي الـ ٢٥ كلمة!' }
+        ]);
+
+        return '<div style="display:flex;flex-direction:column;gap:14px">' +
+          '<div style="background:rgba(245,185,66,0.12);border:1px solid var(--gold);padding:14px 16px;border-radius:16px">' +
+            '<h3 style="margin:0 0 6px;font-size:19px;color:var(--gold)">📦 الخطوة ١: اختر حزمة الكلمات قبل دخول الطاولة</h3>' +
+            '<p style="margin:0;font-size:13.5px;color:var(--muted)">يمكنك اختيار الحزمة العشوائية الشاملة، أو حزمة متخصصة، أو الحزمة المفتوحة مع خيار إكمال باقي الكلمات تلقائياً.</p>' +
+          '</div>' +
+          '<div class="grid-3">' +
+            allPacks.map(function(pk) {
+              var active = gd.selectedPackId === pk.id;
+              return '<button type="button" class="panel-box" style="text-align:right;padding:14px;border:2px solid ' + (active ? 'var(--gold)' : 'rgba(255,255,255,0.12)') + ';background:' + (active ? 'rgba(245,185,66,0.16)' : 'rgba(15,23,42,0.75)') + '" data-act="cn-select-pack" data-pack="' + esc(pk.id) + '">' +
+                '<div style="font-weight:900;font-size:15.5px;color:' + (active ? 'var(--gold-light)' : '#fff') + '">' + (active ? '✓ ' : '') + esc(pk.name) + '</div>' +
+                '<div style="font-size:12.5px;color:var(--muted);margin-top:6px;line-height:1.5">' + esc(pk.desc) + '</div>' +
+              '</button>';
+            }).join('') +
+          '</div>' +
+          (gd.selectedPackId === 'custom_open' ? (
+            '<div style="background:rgba(0,0,0,0.35);border:1px solid var(--teal);padding:16px;border-radius:16px;display:flex;flex-direction:column;gap:10px">' +
+              '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">' +
+                '<b style="color:var(--teal)">✍️ أدخل كلماتكم الخاصة (افصل بينها بفاصلة أو سطر جديد):</b>' +
+                '<button type="button" class="btn btn-teal btn-sm" data-act="cn-autofill-custom">✨ أكمل باقي الكلمات للـ ٢٥ تلقائياً</button>' +
+              '</div>' +
+              '<textarea id="cnCustomWordsTxt" class="txtarea" rows="4" placeholder="مثال: استراحة العارض، شاورما كلاسيك، كبسة حاشي، دوري روشن... (ثم اضغط زر أكمل باقي الكلمات تلقائياً)">' + esc(gd.customInputText) + '</textarea>' +
+            '</div>'
+          ) : '') +
+          '<div style="display:flex;justify-content:center;margin-top:6px">' +
+            '<button type="button" class="btn btn-gold" style="padding:14px 28px;font-size:16.5px" data-act="cn-start-board">🚀 توزيع الـ ٢٥ بطاقة وبدء شفرة الديوانية</button>' +
+          '</div>' +
+        '</div>';
+      }
+
+      var redLeft = gd.cards.filter(function(c){ return c.role === 'red' && !c.revealed; }).length;
+      var blueLeft = gd.cards.filter(function(c){ return c.role === 'blue' && !c.revealed; }).length;
+
+      return '<div class="score-strip">' +
+        '<div class="score-box ' + (gd.turnTeam === 'red' ? 'active-turn' : '') + '" style="background:linear-gradient(135deg,rgba(217,45,32,0.28),rgba(15,23,42,0.85));border-color:#EF4444">' +
+          '<span>🔴 عملاء الفريق الأحمر</span><b style="font-size:24px;color:#FCA5A5">' + arNum(redLeft) + '</b>' +
+        '</div>' +
+        '<div class="score-box ' + (gd.turnTeam === 'blue' ? 'active-turn' : '') + '" style="background:linear-gradient(135deg,rgba(21,112,239,0.28),rgba(15,23,42,0.85));border-color:#3B82F6">' +
+          '<span>🔵 عملاء الفريق الأزرق</span><b style="font-size:24px;color:#93C5FD">' + arNum(blueLeft) + '</b>' +
+        '</div>' +
+        '<div class="score-box">' +
+          '<span>📦 الحزمة: <b style="color:var(--gold)">' + esc(gd.packName) + '</b></span>' +
+          '<button type="button" class="btn btn-sec btn-sm" data-act="cn-back-setup">تغيير الحزمة ⚙️</button>' +
+        '</div>' +
+      '</div>' +
+      '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:12px;background:rgba(0,0,0,0.35);padding:10px 14px;border-radius:14px;border:1px solid rgba(255,255,255,0.1)">' +
+        '<div>' +
+          (gd.clueWord
+            ? '<span>📢 شفرة القائد: <b style="color:var(--gold);font-size:18px">' + esc(gd.clueWord) + ' — ' + arNum(gd.clueCount) + '</b> (محاولات متبقية: ' + arNum(gd.guessesLeft) + ')</span>'
+            : '<span style="color:var(--muted)">بانتظار السوبرفايزر لإرسال الشفرة... (' + (gd.turnTeam === 'red' ? '🔴 الدور للأحمر' : '🔵 الدور للأزرق') + ')</span>') +
+        '</div>' +
+        '<div style="display:flex;gap:8px;flex-wrap:wrap">' +
+          '<button type="button" class="btn ' + (gd.spymasterBoardOverlay ? 'btn-rose' : 'btn-gold') + ' btn-sm" data-act="cn-toggle-board-spy">' +
+            (gd.spymasterBoardOverlay ? '🙈 إخفاء ألوان السوبرفايزر عن اللوحة' : '🕵️ وضع السوبرفايزر (إظهار ألوان البطاقات بوضوح)') +
+          '</button>' +
+          '<button type="button" class="btn btn-sec btn-sm" data-act="cn-end-turn">إنهاء الدور وتمرير اللعب ⏭️</button>' +
+        '</div>' +
+      '</div>' +
+      (gd.gameOver ? '<div style="background:rgba(16,185,129,0.22);border:2px solid var(--emerald);padding:14px;border-radius:14px;margin-bottom:12px;text-align:center;font-weight:900;font-size:18px">' + esc(gd.winnerText) + '</div>' : '') +
+      '<div class="cn-board-surface">' +
+        '<div class="cn-grid-5">' +
+          gd.cards.map(function(c) {
+            var spyClass = gd.spymasterBoardOverlay ? (' spy-' + c.role) : '';
+            var roleBadge = '';
+            if (gd.spymasterBoardOverlay) {
+              roleBadge = c.role === 'red' ? '🔴 أحمر' : (c.role === 'blue' ? '🔵 أزرق' : (c.role === 'bomb' ? '💀 قاتل' : '🟡 محايد'));
+            }
+            var overlayHtml = '';
+            if (c.revealed) {
+              var ovTitle = c.role === 'red' ? '🕵️ عميل أحمر' : (c.role === 'blue' ? '🕵️ عميل أزرق' : (c.role === 'bomb' ? '💀 الفخ الأسود!' : '🚶 مدني محايد'));
+              var ovIcon = c.role === 'red' ? '🔴' : (c.role === 'blue' ? '🔵' : (c.role === 'bomb' ? '💣' : '🟡'));
+              overlayHtml = '<div class="cn-agent-overlay ov-' + c.role + '">' +
+                '<div style="display:flex;align-items:center;justify-content:space-between;width:100%">' +
+                  '<span class="cn-agent-stamp">' + ovTitle + '</span>' +
+                  '<span style="font-size:16px">' + ovIcon + '</span>' +
+                '</div>' +
+                '<div class="cn-agent-peek-word">الكلمة: ' + esc(c.word) + '</div>' +
+              '</div>';
+            }
+            return '<button type="button" class="cn-card' + spyClass + '" data-act="cn-pick" data-idx="' + c.idx + '" ' + (c.revealed || gd.gameOver ? 'disabled' : '') + '>' +
+              '<div class="cn-card-top">' +
+                '<span>' + esc(c.serial) + '</span>' +
+                (roleBadge ? '<span style="font-weight:900">' + roleBadge + '</span>' : '<span class="cn-card-dot"></span>') +
+              '</div>' +
+              '<div class="cn-card-word">' + esc(c.word) + '</div>' +
+              overlayHtml +
+            '</button>';
+          }).join('') +
+        '</div>' +
+      '</div>';
+    }
+
+    // 2. MYSTERY BUTTON (الزر الغامض)
+    if (slug === 'mystery_button') {
+      return '<div class="score-strip">' +
+        '<div class="score-box ' + (gd.turnTeam === 1 ? 'active-turn' : '') + '"><span>🟡 الفريق الأول</span><b style="font-size:22px;color:var(--gold)">' + arNum(ST.teamScores[0]) + ' (🛡️' + arNum(gd.shields[0]) + ')</b></div>' +
+        '<div class="score-box ' + (gd.turnTeam === 2 ? 'active-turn' : '') + '"><span>🟢 الفريق الثاني</span><b style="font-size:22px;color:var(--teal)">' + arNum(ST.teamScores[1]) + ' (🛡️' + arNum(gd.shields[1]) + ')</b></div>' +
+        '<div class="score-box"><span>🔥 نقاط الجولة المعلّقة</span><b style="font-size:22px;color:var(--coral)">' + arNum(gd.roundPot) + '</b></div>' +
+      '</div>' +
+      (gd.activeChallenge ? (
+        '<div style="background:rgba(168,85,247,0.22);border:2px solid #C084FC;padding:14px;border-radius:14px;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">' +
+          '<span>⚡ <b>تحدي إضافي خاص:</b> ' + esc(gd.activeChallenge) + '</span>' +
+          '<button type="button" class="btn btn-teal btn-sm" data-act="mb-complete-ch">✓ أنجزنا التحدي (+٥٠٠)</button>' +
+        '</div>'
+      ) : '') +
+      '<div style="display:flex;gap:10px;justify-content:center;margin-bottom:12px;flex-wrap:wrap">' +
+        '<button type="button" class="btn btn-gold" data-act="mb-bank" ' + (gd.roundPot <= 0 ? 'disabled' : '') + '>🏦 تأمين نقاط الجولة (' + arNum(gd.roundPot) + ') وتمرير الدور</button>' +
+      '</div>' +
+      '<div class="vault-grid">' +
+        gd.buttons.map(function(b) {
+          var cls = 'vault-btn';
+          if (b.opened) {
+            cls += b.info.bomb ? ' opened-bomb' : (b.info.rare ? ' opened-rare' : (b.info.shield ? ' opened-teal' : ' opened-gold'));
+          }
+          return '<button type="button" class="' + cls + '" data-act="mb-press" data-num="' + b.num + '" ' + (b.opened ? 'disabled' : '') + '>' +
+            (b.opened ? '<span style="font-size:10.5px;line-height:1.2">' + esc(b.info.icon + ' ' + b.info.label) + '</span>' : '🔘 ' + arNum(b.num)) +
+          '</button>';
+        }).join('') +
+      '</div>';
+    }
+
+    // 3. GOLDEN VAULT (الخزنة الذهبية)
+    if (slug === 'golden_vault') {
+      var tIdx = gd.activeTeam - 1;
+      var curLockIdx = gd.teamProgress[tIdx];
+      var curLock = gd.locks[curLockIdx] || null;
+      return '<div class="score-strip">' +
+        '<div class="score-box ' + (gd.activeTeam === 1 ? 'active-turn' : '') + '"><span>🟡 أقفال الفريق ١</span><b style="color:var(--gold);font-size:20px">' + arNum(gd.teamProgress[0]) + ' / ٤ (🗝️' + arNum(gd.extraKeys[0]) + ')</b></div>' +
+        '<div class="score-box ' + (gd.activeTeam === 2 ? 'active-turn' : '') + '"><span>🟢 أقفال الفريق ٢</span><b style="color:var(--teal);font-size:20px">' + arNum(gd.teamProgress[1]) + ' / ٤ (🗝️' + arNum(gd.extraKeys[1]) + ')</b></div>' +
+        '<div class="score-box"><button type="button" class="btn btn-sec btn-sm" data-act="gv-switch-team">تبديل الفريق النشط 🔄</button></div>' +
+      '</div>' +
+      (gd.vaultOpenedBy ? (
+        '<div style="padding:26px;background:linear-gradient(145deg,rgba(245,185,66,0.28),rgba(16,185,129,0.22));border:2px solid var(--gold);border-radius:20px;text-align:center">' +
+          '<div style="font-size:44px">🏆🔓💰</div>' +
+          '<h3 style="margin:8px 0;font-size:24px;color:var(--gold-light)">انفتحت الخزنة الذهبية الكبرى لصالح الفريق ' + arNum(gd.vaultOpenedBy) + '!</h3>' +
+          '<button type="button" class="btn btn-gold" data-act="next-round">خزنة جديدة بأقفال جديدة ⬅</button>' +
+        '</div>'
+      ) : curLock ? (
+        '<div style="background:rgba(0,0,0,0.35);border:1.5px solid var(--gold);padding:18px;border-radius:18px;text-align:center">' +
+          '<span class="badge badge-gold">القفل رقم ' + arNum(curLockIdx + 1) + ' من ٤ — ' + esc(curLock.typeLabel) + '</span>' +
+          '<h3 style="margin:10px 0;font-size:21px">' + esc(curLock.prompt) + '</h3>' +
+          '<p style="margin:0 0 14px;font-size:13.5px;color:var(--teal)">💡 الدليل المخفي: ' + esc(curLock.clue) + '</p>' +
+          '<div class="grid-2" style="margin-bottom:14px">' +
+            curLock.options.map(function(opt) {
+              return '<button type="button" class="btn btn-sec" data-act="gv-try-code" data-ans="' + esc(opt) + '">🔐 ' + esc(opt) + '</button>';
+            }).join('') +
+          '</div>' +
+          '<div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">' +
+            '<button type="button" class="btn btn-gold btn-sm" data-act="gv-use-key" ' + (gd.extraKeys[tIdx] <= 0 ? 'disabled' : '') + '>🗝️ استخدام المفتاح الإضافي لتخطي القفل (' + arNum(gd.extraKeys[tIdx]) + ')</button>' +
+            '<button type="button" class="btn btn-rose btn-sm" data-act="gv-sabotage">❄️ تعطيل الفريق المنافس مؤقتاً</button>' +
+          '</div>' +
+        '</div>'
+      ) : '');
+    }
+
+    // 4. DIWANIYA AUCTION (مزاد الديوانية — علني، سري، وعكسي ٣٠ ثانية)
+    if (slug === 'diwaniya_auction') {
+      return '<div class="score-strip">' +
+        '<div class="score-box"><span>🟡 ميزانية الفريق ١</span><b style="color:var(--gold);font-size:20px">' + arNum(1500 + ST.teamScores[0]) + ' نقطة</b></div>' +
+        '<div class="score-box"><span>🟢 ميزانية الفريق ٢</span><b style="color:var(--teal);font-size:20px">' + arNum(1500 + ST.teamScores[1]) + ' نقطة</b></div>' +
+        '<div class="score-box active-turn"><span>🔨 السعر الحالي</span><b style="color:var(--coral);font-size:20px">' + arNum(gd.currentBid) + ' نقطة</b></div>' +
+      '</div>' +
+      '<div style="display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap">' +
+        '<button type="button" class="btn ' + (gd.mode === 'public' ? 'btn-gold' : 'btn-sec') + ' btn-sm" data-act="da-mode" data-m="public">📢 مزاد علني</button>' +
+        '<button type="button" class="btn ' + (gd.mode === 'secret' ? 'btn-gold' : 'btn-sec') + ' btn-sm" data-act="da-mode" data-m="secret">✉️ مزاد سري (بالظرف)</button>' +
+        '<button type="button" class="btn ' + (gd.mode === 'reverse30' ? 'btn-gold' : 'btn-sec') + ' btn-sm" data-act="da-mode" data-m="reverse30">⏱️ مزاد التسمية العكسي (٣٠ ثانية)</button>' +
+      '</div>' +
+      '<div style="background:rgba(255,255,255,0.05);border:1px solid var(--border);padding:18px;border-radius:18px;text-align:center;margin-bottom:12px">' +
+        '<span class="badge badge-gold">' + esc(gd.lot.badge) + '</span>' +
+        '<h3 style="margin:8px 0;font-size:23px">📦 ' + esc(gd.lot.name) + '</h3>' +
+        '<p style="margin:0;font-size:14px;color:var(--muted)">' + esc(gd.lot.hint) + '</p>' +
+      '</div>' +
+      '<div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:12px">' +
+        '<button type="button" class="btn btn-gold" data-act="da-bid" data-team="1" data-add="100">🟡 الفريق ١ يزايد (+١٠٠)</button>' +
+        '<button type="button" class="btn btn-teal" data-act="da-bid" data-team="2" data-add="100">🟢 الفريق ٢ يزايد (+١٠٠)</button>' +
+        '<button type="button" class="btn btn-rose" data-act="da-hammer">🔨 ترسية المزاد وفتح الصندوق!</button>' +
+      '</div>' +
+      (gd.revealed ? '<div style="padding:14px;background:rgba(16,185,129,0.2);border:1px solid var(--emerald);border-radius:14px;text-align:center;font-weight:900;margin-bottom:12px">' + esc(gd.resultText) + '</div>' : '') +
+      '<div style="background:rgba(0,0,0,0.3);padding:10px 14px;border-radius:12px;font-size:12.5px;color:var(--muted)">' +
+        '<b>📜 سجل المزايدات:</b> ' + gd.bidLog.slice(0, 4).map(esc).join(' · ') +
+      '</div>';
+    }
+
+    // 5. FORTUNE WHEEL (دائرة الحظ)
+    if (slug === 'fortune_wheel') {
+      return '<div class="score-strip">' +
+        '<div class="score-box ' + (gd.turnTeam === 1 ? 'active-turn' : '') + '"><span>🟡 الفريق الأول</span><b style="font-size:22px;color:var(--gold)">' + arNum(ST.teamScores[0]) + '</b></div>' +
+        '<div class="score-box ' + (gd.turnTeam === 2 ? 'active-turn' : '') + '"><span>🟢 الفريق الثاني</span><b style="font-size:22px;color:var(--teal)">' + arNum(ST.teamScores[1]) + '</b></div>' +
+        '<div class="score-box"><span>🎲 وضع المخاطرة</span><button type="button" class="btn ' + (gd.riskMode ? 'btn-rose' : 'btn-sec') + ' btn-sm" data-act="fw-toggle-risk">' + (gd.riskMode ? 'مفعّل (×٢)' : 'عادي (×١)') + '</button></div>' +
+      '</div>' +
+      '<div style="text-align:center;padding:16px">' +
+        '<div style="width:220px;height:220px;margin:0 auto 14px;border-radius:50%;border:6px solid var(--gold);background:conic-gradient(#F5B942 0deg 60deg, #2DD4BF 60deg 120deg, #F43F5E 120deg 180deg, #A855F7 180deg 240deg, #10B981 240deg 300deg, #F97316 300deg 360deg);display:grid;place-items:center;box-shadow:0 0 32px rgba(245,185,66,0.35);transition:transform 0.7s cubic-bezier(0.2,0.9,0.3,1);transform:rotate(' + gd.angle + 'deg)">' +
+          '<div style="width:84px;height:84px;border-radius:50%;background:#0A0F24;border:3px solid var(--gold);display:grid;place-items:center;font-weight:900;color:var(--gold)">🎡 الحظ</div>' +
+        '</div>' +
+        '<button type="button" class="btn btn-gold" style="padding:13px 28px;font-size:16px" data-act="fw-spin">🎡 أدر دائرة الحظ الآن!</button>' +
+        (gd.lastSegment ? '<div style="margin-top:14px;padding:14px;background:rgba(245,185,66,0.16);border:1px solid var(--gold);border-radius:14px;font-weight:900;font-size:17px">' + esc(gd.lastSegment) + '</div>' : '') +
+      '</div>';
+    }
+
+    // 6. FRIENDS COURT (محكمة الأصدقاء)
+    if (slug === 'friends_court') {
+      return '<div class="score-strip">' +
+        '<div class="score-box"><span>⚖️ القضية</span><b style="color:var(--gold)">' + esc(gd.caze.title) + '</b></div>' +
+        '<div class="score-box"><span>⏱️ وقت المرافعة</span><b id="liveTimerVal" style="color:var(--rose);font-size:20px">' + arNum(ST.timerSec) + ' ث</b></div>' +
+      '</div>' +
+      '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px">' +
+        '<span class="badge badge-gold">👨‍⚖️ القاضي: كريم</span>' +
+        '<span class="badge badge-rose">🕵️ المتهم: فهد</span>' +
+        '<span class="badge badge-blue">💼 المحامي: سلمان</span>' +
+        '<span class="badge">👀 الشاهد والمحلفون: نواف والبقية</span>' +
+      '</div>' +
+      '<div style="background:rgba(255,255,255,0.05);border:1px solid var(--border);padding:14px;border-radius:14px;margin-bottom:12px">' +
+        '<b>ملف الدعوى:</b> ' + esc(gd.caze.brief) +
+      '</div>' +
+      '<div style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px">' +
+        gd.caze.evidences.slice(0, gd.revealedEvidenceCount).map(function(ev, i) {
+          return '<div style="padding:10px 14px;background:rgba(245,185,66,0.12);border:1px solid var(--gold);border-radius:12px"><b>🔍 الدليل رقم ' + arNum(i + 1) + ':</b> ' + esc(ev) + '</div>';
+        }).join('') +
+      '</div>' +
+      '<div style="display:flex;gap:8px;flex-wrap:wrap">' +
+        (gd.revealedEvidenceCount < gd.caze.evidences.length ? '<button type="button" class="btn btn-teal btn-sm" data-act="fc-next-ev">📂 كشف الدليل التالي للمحكمة</button>' : '') +
+        '<button type="button" class="btn btn-gold btn-sm" data-act="fc-vote-innocent">🕊️ حكم البراءة (' + arNum(gd.juryVotes.innocent) + ')</button>' +
+        '<button type="button" class="btn btn-rose btn-sm" data-act="fc-vote-guilty">⚖️ حكم الإدانة (' + arNum(gd.juryVotes.guilty) + ')</button>' +
+      '</div>' +
+      (gd.verdictText ? '<div style="margin-top:12px;padding:12px;background:rgba(16,185,129,0.2);border:1px solid var(--emerald);border-radius:12px;font-weight:800">' + esc(gd.verdictText) + '</div>' : '');
+    }
+
+    // 7. LAST ONE STANDING (آخر واحد يصمد)
+    if (slug === 'last_one_standing') {
+      return '<div class="score-strip">' +
+        '<div class="score-box active-turn"><span>🔥 المرحلة الحالية</span><b style="color:var(--gold)">' + esc(gd.stage.type) + '</b></div>' +
+        '<div class="score-box"><span>🛡️ الصامدون في الحلبة</span><b style="color:var(--teal)">' + arNum(gd.survivors.filter(function(s){return !s.out;}).length) + ' لاعبين</b></div>' +
+      '</div>' +
+      '<div style="background:rgba(255,255,255,0.06);border:1.5px solid var(--gold);padding:18px;border-radius:18px;text-align:center;margin-bottom:14px">' +
+        '<h3 style="margin:0 0 10px;font-size:21px">' + esc(gd.stage.prompt) + '</h3>' +
+        '<div class="grid-2">' +
+          gd.stage.options.map(function(opt) {
+            return '<button type="button" class="btn btn-sec" data-act="los-answer" data-ans="' + esc(opt) + '">' + esc(opt) + '</button>';
+          }).join('') +
+        '</div>' +
+      '</div>' +
+      '<div class="grid-4">' +
+        gd.survivors.map(function(s) {
+          return '<div class="score-box" style="opacity:' + (s.out ? '0.38' : '1') + '"><b>' + esc(s.name) + '</b><span class="badge ' + (s.out ? 'badge-rose' : 'badge-gold') + '">' + (s.out ? 'مُقصى ❌' : arNum(s.pts) + ' ن') + '</span></div>';
+        }).join('') +
+      '</div>' +
+      (gd.champion ? '<div style="margin-top:14px;padding:14px;background:rgba(245,185,66,0.2);border:2px solid var(--gold);border-radius:14px;text-align:center;font-weight:900;font-size:18px">' + esc(gd.champion) + '</div>' : '');
+    }
+
+    // 8. SILENT LIBRARY & TRY NOT TO LAUGH (المكتبة الصامتة ولا تضحك!)
+    if (slug === 'silent_library') {
+      return '<div class="score-strip">' +
+        '<div class="score-box"><span>🤫 تحدي الصمت والضحك</span><b style="color:var(--gold)">' + esc(gd.challenge.cat) + '</b></div>' +
+        '<div class="score-box"><span>🚨 مخالفات الصوت/الضحك</span><b style="color:var(--rose);font-size:22px">' + arNum(gd.decibelWarnings) + ' / ٣</b></div>' +
+      '</div>' +
+      '<div style="background:rgba(255,255,255,0.06);border:2px solid var(--gold);padding:22px;border-radius:18px;text-align:center;margin-bottom:14px">' +
+        '<h3 style="margin:0 0 8px;font-size:22px">' + esc(gd.challenge.title) + '</h3>' +
+        '<p style="margin:0;color:var(--muted);font-size:15px;line-height:1.7">' + esc(gd.challenge.desc) + '</p>' +
+      '</div>' +
+      '<div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">' +
+        '<button type="button" class="btn btn-teal" data-act="sl-success">✓ صمد ونفّذ التحدي بصمت (+٣٠٠ نقطة)</button>' +
+        '<button type="button" class="btn btn-rose" data-act="sl-laugh">😂 ضحك أو أصدر صوتاً! (مخالفة)</button>' +
+      '</div>';
+    }
+
+    // 9. WHO KNOWS FRIEND (من يعرف صاحبه؟)
+    if (slug === 'who_knows_friend') {
+      var curQ = gd.questions[gd.qIdx % gd.questions.length];
+      return '<div class="score-strip">' +
+        '<div class="score-box active-turn"><span>👥 سؤال الشلة رقم ' + arNum(gd.qIdx + 1) + '</span><b style="color:var(--gold)">قابل للتعديل والإضافة</b></div>' +
+      '</div>' +
+      '<div style="background:rgba(245,185,66,0.14);border:2px solid var(--gold);padding:22px;border-radius:18px;text-align:center;margin-bottom:14px">' +
+        '<h3 style="margin:0;font-size:23px">' + esc(curQ) + '</h3>' +
+      '</div>' +
+      '<div class="grid-4" style="margin-bottom:14px">' +
+        ST.players.map(function(p) {
+          var cnt = gd.votes[p.name] || 0;
+          return '<button type="button" class="btn btn-sec" style="flex-direction:column;padding:14px" data-act="wk-vote" data-name="' + esc(p.name) + '">' +
+            '<b>' + esc(p.name) + '</b>' +
+            '<span class="badge badge-gold">' + arNum(cnt) + ' أصوات</span>' +
+          '</button>';
+        }).join('') +
+      '</div>';
+    }
+
+    // 10. DRAW & GUESS + FAKE ARTIST (ارسم وخمّن والرسام المندس)
+    if (slug === 'draw_guess') {
+      return '<div class="score-strip">' +
+        '<div class="score-box"><span>🎨 التصنيف: <b style="color:var(--gold)">' + esc(gd.category) + '</b></span></div>' +
+        '<div class="score-box">' +
+          '<button type="button" class="btn ' + (gd.mode === 'draw_guess' ? 'btn-gold' : 'btn-sec') + ' btn-sm" data-act="dg-mode" data-m="draw_guess">🖌️ ارسم وخمّن</button>' +
+          '<button type="button" class="btn ' + (gd.mode === 'fake_artist' ? 'btn-gold' : 'btn-sec') + ' btn-sm" data-act="dg-mode" data-m="fake_artist">🎭 الرسام المندس</button>' +
+          '<button type="button" class="btn ' + (gd.mode === 'hard_one_line' ? 'btn-gold' : 'btn-sec') + ' btn-sm" data-act="dg-mode" data-m="hard_one_line">⚡ رسم صعب (خط واحد)</button>' +
+        '</div>' +
+      '</div>' +
+      '<canvas id="sharedDrawPad" class="draw-pad" width="540" height="320"></canvas>' +
+      '<div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:12px">' +
+        ['#F5B942', '#2DD4BF', '#F43F5E', '#38BDF8', '#FFFFFF'].map(function(col) {
+          return '<button type="button" class="btn btn-sec btn-sm" style="border-color:' + col + ';color:' + col + '" data-act="dg-color" data-col="' + col + '">● لون</button>';
+        }).join('') +
+        '<button type="button" class="btn btn-sec btn-sm" data-act="dg-eraser">🧽 ممحاة</button>' +
+        '<button type="button" class="btn btn-sec btn-sm" data-act="dg-clear">🗑️ مسح اللوحة</button>' +
+      '</div>' +
+      (gd.winnerText ? '<div style="margin-top:12px;padding:12px;background:rgba(16,185,129,0.2);border:1px solid var(--emerald);border-radius:12px;text-align:center;font-weight:900">' + esc(gd.winnerText) + '</div>' : '');
+    }
+
+    // 11. STADIUM & ESPORTS (تحدي الملاعب والرياضات الإلكترونية)
+    if (slug === 'stadium_esports') {
+      return '<div class="score-strip">' +
+        '<div class="score-box"><span>🟡 الفريق الأول</span><b style="font-size:22px;color:var(--gold)">' + arNum(ST.teamScores[0]) + '</b></div>' +
+        '<div class="score-box"><span>🟢 الفريق الثاني</span><b style="font-size:22px;color:var(--teal)">' + arNum(ST.teamScores[1]) + '</b></div>' +
+        '<div class="score-box active-turn"><span>🎮 المجال</span><b style="color:var(--gold-light)">' + esc(gd.q.domain) + '</b></div>' +
+      '</div>' +
+      '<div style="background:rgba(255,255,255,0.06);border:1.5px solid var(--gold);padding:18px;border-radius:18px;margin-bottom:14px">' +
+        '<h3 style="margin:0 0 10px;font-size:20px">' + esc(gd.q.title) + '</h3>' +
+        gd.q.clues.slice(0, gd.clueStep).map(function(c, i) {
+          return '<div style="padding:8px 12px;background:rgba(0,0,0,0.3);border-radius:10px;margin-bottom:6px"><b>الدليل ' + arNum(i + 1) + ':</b> ' + esc(c) + '</div>';
+        }).join('') +
+        (gd.clueStep < gd.q.clues.length ? '<button type="button" class="btn btn-sec btn-sm" data-act="se-more-clue">🔍 كشف دليل إضافي</button>' : '') +
+      '</div>' +
+      '<div class="grid-2">' +
+        gd.q.options.map(function(opt) {
+          return '<button type="button" class="btn btn-gold" data-act="se-ans" data-ans="' + esc(opt) + '">⚽ ' + esc(opt) + '</button>';
+        }).join('') +
+      '</div>' +
+      (gd.winnerText ? '<div style="margin-top:12px;padding:12px;background:rgba(16,185,129,0.2);border:1px solid var(--emerald);border-radius:12px;text-align:center;font-weight:900">' + esc(gd.winnerText) + '</div>' : '');
+    }
+
+    // 12. HOW MUCH PRICE (كم سعرها؟)
+    if (slug === 'how_much_price') {
+      return '<div class="score-strip">' +
+        '<div class="score-box"><span>🟡 الفريق الأول</span><b style="font-size:22px;color:var(--gold)">' + arNum(ST.teamScores[0]) + '</b></div>' +
+        '<div class="score-box"><span>🟢 الفريق الثاني</span><b style="font-size:22px;color:var(--teal)">' + arNum(ST.teamScores[1]) + '</b></div>' +
+      '</div>' +
+      '<div style="background:rgba(255,255,255,0.06);border:1.5px solid var(--gold);padding:20px;border-radius:18px;text-align:center;margin-bottom:14px">' +
+        '<span class="badge badge-gold">' + esc(gd.prod.cat) + '</span>' +
+        '<h3 style="margin:10px 0;font-size:23px">🏷️ ' + esc(gd.prod.name) + '</h3>' +
+        '<p style="margin:0;color:var(--muted);font-size:14px">' + esc(gd.prod.desc) + '</p>' +
+        (gd.revealed ? '<div style="margin-top:12px;font-size:26px;font-weight:900;color:var(--teal)">السعر الحقيقي: ' + arNum(gd.prod.price) + ' ر.س</div>' : '') +
+      '</div>' +
+      (gd.winnerText ? '<div style="padding:12px;background:rgba(16,185,129,0.2);border:1px solid var(--emerald);border-radius:12px;text-align:center;font-weight:900">' + esc(gd.winnerText) + '</div>' : '');
+    }
+
+    // 13. PRESSURE SEAT (كرسي الضغط)
+    if (slug === 'pressure_seat') {
+      var curQ = gd.questions[gd.qIdx % gd.questions.length];
+      return '<div class="score-strip">' +
+        '<div class="score-box active-turn"><span>🔥 نقاط كرسي الضغط</span><b style="font-size:22px;color:var(--gold)">' + arNum(gd.roundPoints) + '</b></div>' +
+        '<div class="score-box"><span>⚡ سلسلة الصمود</span><b style="font-size:22px;color:var(--teal)">' + arNum(gd.streak) + '</b></div>' +
+        '<div class="score-box"><span>⏱️ المؤقت</span><b id="liveTimerVal" style="font-size:22px;color:var(--rose)">' + arNum(ST.timerSec) + ' ث</b></div>' +
+      '</div>' +
+      '<div style="background:rgba(255,255,255,0.06);border:2px solid var(--gold);padding:24px 18px;border-radius:20px;text-align:center;margin-bottom:14px">' +
+        '<div style="font-size:clamp(20px,3vw,26px);font-weight:900">' + esc(curQ) + '</div>' +
+      '</div>' +
+      '<div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">' +
+        (!gd.running ? '<button type="button" class="btn btn-gold" data-act="ps-start">▶️ ابدأ عدّاد الـ ٦٠ ثانية</button>' : '') +
+        '<button type="button" class="btn btn-teal" data-act="ps-pass-q">✓ نجا من السؤال (+١٠٠)</button>' +
+        '<button type="button" class="btn btn-rose" data-act="ps-trap">🚨 قفطة! قال نعم/لا أو تردد</button>' +
+      '</div>';
+    }
+
+    return '';
+  }
+
+  function renderPhoneHtml() {
+    var slug = CFG.slug;
+    var gd = ST.gameData;
+
+    if (slug === 'shifra') {
+      if (gd.phase === 'setup') {
+        return '<div style="padding:14px;background:rgba(255,255,255,0.05);border-radius:14px;text-align:center">' +
+          '<b style="color:var(--gold);display:block;margin-bottom:6px">📱 جوال السوبرفايزر جاهز!</b>' +
+          '<span style="font-size:13px;color:var(--muted)">اختر الحزمة واضغط «توزيع الـ ٢٥ بطاقة» لتظهر لك خريطة الألوان السرية هنا وفي اللوحة.</span>' +
+        '</div>';
+      }
+      return '<div style="display:flex;flex-direction:column;gap:12px">' +
+        '<button type="button" class="btn ' + (gd.spymasterPhoneOverlay ? 'btn-rose' : 'btn-gold') + '" data-act="cn-toggle-phone-spy">' +
+          (gd.spymasterPhoneOverlay ? '🙈 إخفاء خريطة ألوان السوبرفايزر في جوالي' : '🕵️ إظهار خريطة ألوان السوبرفايزر في جوالي') +
+        '</button>' +
+        (gd.spymasterPhoneOverlay ? (
+          '<div style="padding:10px;background:rgba(0,0,0,0.5);border-radius:14px;border:1px solid var(--gold)">' +
+            '<div style="font-size:12px;font-weight:800;color:var(--gold);margin-bottom:8px;text-align:center">🗺️ خريطة السوبرفايزر السرية (🔴 أحمر · 🔵 أزرق · 🟡 محايد · 💀 فخ أسود)</div>' +
+            '<div class="cn-grid-5" style="gap:5px">' +
+              gd.cards.map(function(c) {
+                var bg = c.role === 'red' ? '#DC2626' : (c.role === 'blue' ? '#2563EB' : (c.role === 'bomb' ? '#111827' : '#A3834C'));
+                var brd = c.role === 'bomb' ? '2px solid #F43F5E' : '1px solid rgba(255,255,255,0.25)';
+                return '<div style="padding:7px 3px;font-size:11px;font-weight:900;text-align:center;border-radius:7px;background:' + bg + ';border:' + brd + ';color:#fff;opacity:' + (c.revealed ? '0.35' : '1') + '">' +
+                  esc(c.word) +
+                '</div>';
+              }).join('') +
+            '</div>' +
+          '</div>'
+        ) : '') +
+        '<div style="background:rgba(255,255,255,0.04);padding:12px;border-radius:14px;display:flex;flex-direction:column;gap:8px">' +
+          '<label style="font-size:12.5px;color:var(--muted)">إرسال شفرة السوبرفايزر (كلمة واحدة + عدد الكلمات):</label>' +
+          '<div style="display:flex;gap:8px">' +
+            '<input id="cnClueInp" class="inp" placeholder="الشفرة (مثال: طويق)" value="' + esc(gd.clueWord) + '">' +
+            '<input id="cnCountInp" type="number" class="inp" style="max-width:80px" min="1" max="9" value="' + (gd.clueCount || 2) + '">' +
+          '</div>' +
+          '<button type="button" class="btn btn-teal btn-sm" data-act="cn-send-clue">إرسال الشفرة للفريق 📡</button>' +
+        '</div>' +
+      '</div>';
+    }
+
+    if (slug === 'who_knows_friend') {
+      return '<div style="display:flex;flex-direction:column;gap:10px">' +
+        '<label style="font-size:13px;color:var(--muted)">أضف سؤالاً مخصصاً عن شلتكم ليظهر فوراً على الشاشة:</label>' +
+        '<input id="wkCustomQInp" class="inp" placeholder="مثال: من أكثر شخص ينسى محفظته في الطلعات؟">' +
+        '<button type="button" class="btn btn-gold btn-sm" data-act="wk-add-q">+ إضافة السؤال وعرضه فوراً</button>' +
+      '</div>';
+    }
+
+    if (slug === 'draw_guess') {
+      return '<div style="display:flex;flex-direction:column;gap:10px">' +
+        '<button type="button" class="btn btn-gold" data-act="dg-toggle-word">' + (gd.revealRole ? '🙈 إخفاء الكلمة السرية' : '👁️ كشف الكلمة السرية للرسام') + '</button>' +
+        (gd.revealRole ? '<div style="padding:14px;background:rgba(245,185,66,0.16);border:1px solid var(--gold);border-radius:12px;text-align:center;font-weight:900;font-size:18px">الكلمة السرية: ' + esc(gd.secretWord) + '</div>' : '') +
+        '<div style="font-size:13px;color:var(--muted)">خمّن الكلمة المرسومة من جوالك:</div>' +
+        '<div class="grid-2">' +
+          gd.options.map(function(opt) {
+            return '<button type="button" class="btn btn-sec btn-sm" data-act="dg-guess" data-w="' + esc(opt) + '">' + esc(opt) + '</button>';
+          }).join('') +
+        '</div>' +
+      '</div>';
+    }
+
+    if (slug === 'how_much_price') {
+      return '<div style="display:flex;flex-direction:column;gap:10px">' +
+        '<label style="font-size:13px;color:var(--muted)">أدخل تخمين الفريق ١ للسعر (ر.س):</label>' +
+        '<input id="hpGuess1" type="number" class="inp" value="2500">' +
+        '<label style="font-size:13px;color:var(--muted)">أدخل تخمين الفريق ٢ للسعر (ر.س):</label>' +
+        '<input id="hpGuess2" type="number" class="inp" value="3200">' +
+        '<button type="button" class="btn btn-gold" data-act="hp-submit">💰 كشف السعر الحقيقي وحساب الأقرب!</button>' +
+      '</div>';
+    }
+
+    return '<div style="display:flex;flex-direction:column;gap:10px;text-align:center">' +
+      '<div style="padding:12px;background:rgba(255,255,255,0.05);border-radius:12px">' +
+        '<b style="color:var(--gold)">📱 وحدة تحكم الجوال متصلة بالغرفة (' + esc(ST.roomCode) + ')</b>' +
+        '<p style="margin:6px 0 0;font-size:12.5px;color:var(--muted)">استخدم الأزرار التفاعلية أو بدّل إلى شاشة التلفزيون من الشريط السفلي.</p>' +
+      '</div>' +
+      '<button type="button" class="btn btn-teal btn-sm" data-act="next-round">🔄 الانتقال للجولة التالية</button>' +
+    '</div>';
+  }
+
+  function bindCanvasDrawing() {
+    var pad = document.getElementById('sharedDrawPad');
+    if (!pad) return;
+    var ctx = pad.getContext('2d');
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+
+    ctx.clearRect(0, 0, pad.width, pad.height);
+    var strokes = ST.gameData.strokes || [];
+    strokes.forEach(function(st) {
+      ctx.strokeStyle = st.color;
+      ctx.lineWidth = st.size || 5;
+      ctx.beginPath();
+      st.pts.forEach(function(pt, i) {
+        if (i === 0) ctx.moveTo(pt.x, pt.y);
+        else ctx.lineTo(pt.x, pt.y);
+      });
+      ctx.stroke();
+    });
+
+    var drawing = false;
+    var curPts = [];
+
+    function getPos(ev) {
+      var rect = pad.getBoundingClientRect();
+      var clientX = ev.touches ? ev.touches[0].clientX : ev.clientX;
+      var clientY = ev.touches ? ev.touches[0].clientY : ev.clientY;
+      return {
+        x: (clientX - rect.left) * (pad.width / rect.width),
+        y: (clientY - rect.top) * (pad.height / rect.height)
+      };
+    }
+
+    pad.onpointerdown = function(ev) {
+      drawing = true;
+      curPts = [getPos(ev)];
+    };
+    pad.onpointermove = function(ev) {
+      if (!drawing) return;
+      var pt = getPos(ev);
+      curPts.push(pt);
+      ctx.strokeStyle = ST.gameData.eraser ? '#0B1024' : (ST.gameData.brushColor || '#F5B942');
+      ctx.lineWidth = ST.gameData.eraser ? 18 : (ST.gameData.brushSize || 5);
+      ctx.beginPath();
+      var prev = curPts[curPts.length - 2];
+      ctx.moveTo(prev.x, prev.y);
+      ctx.lineTo(pt.x, pt.y);
+      ctx.stroke();
+    };
+    window.onpointerup = function() {
+      if (!drawing) return;
+      drawing = false;
+      if (curPts.length > 1) {
+        ST.gameData.strokes.push({
+          color: ST.gameData.eraser ? '#0B1024' : (ST.gameData.brushColor || '#F5B942'),
+          size: ST.gameData.eraser ? 18 : 5,
+          pts: curPts
+        });
+        AUDIO.sfx('click');
+      }
+    };
+  }
+
+  function renderAll() {
+    var root = document.getElementById('gameRoot');
+    if (!root) return;
+    var showBoard = ST.viewMode === 'board' || ST.viewMode === 'both';
+    var showPhone = ST.viewMode === 'phone' || ST.viewMode === 'both';
+
+    root.innerHTML =
+      '<div class="top-bar">' +
+        '<div class="brand-Side">' +
+          '<span class="room-pill">غرفة: ' + esc(ST.roomCode) + '</span>' +
+          '<div><b style="font-size:16.5px">' + esc(CFG.title) + '</b><div style="font-size:12px;color:var(--muted)">' + esc(CFG.subtitle) + '</div></div>' +
+        '</div>' +
+        '<div class="ctrl-group">' +
+          '<span class="badge badge-gold">الجولة ' + arNum(ST.round) + '</span>' +
+          '<button type="button" class="btn btn-sec btn-sm ' + (!AUDIO.voiceOn ? 'off' : '') + '" data-act="toggle-voice">' + (AUDIO.voiceOn ? '🔊 الصوت: مفعّل' : '🔇 الصوت: مغلق') + '</button>' +
+          '<button type="button" class="btn btn-sec btn-sm ' + (!AUDIO.sfxOn ? 'off' : '') + '" data-act="toggle-sfx">' + (AUDIO.sfxOn ? '🎵 المؤثرات: مفعّلة' : '🔕 المؤثرات: مغلقة') + '</button>' +
+          '<button type="button" class="btn btn-sec btn-sm" data-act="open-qr">📱 رمز QR</button>' +
+          '<button type="button" class="btn btn-gold btn-sm" data-act="next-round">🔄 جولة جديدة</button>' +
+        '</div>' +
+      '</div>' +
+      '<div class="layout-wrap ' + (ST.viewMode === 'both' ? 'mode-both' : '') + '">' +
+        (showBoard ? (
+          '<section class="panel-box">' +
+            '<div class="panel-head">' +
+              '<div><span class="badge">📺 شاشة التلفزيون / الطاولة المشتركة</span><h2 style="margin:6px 0 0;font-size:18.5px">' + esc(ST.statusMsg) + '</h2></div>' +
+            '</div>' +
+            renderBoardHtml() +
+          '</section>'
+        ) : '') +
+        (showPhone ? (
+          '<aside class="panel-box">' +
+            '<div class="panel-head">' +
+              '<div><span class="badge badge-gold">📱 شاشة جوال اللاعب / السوبرفايزر</span><h3 style="margin:6px 0 0;font-size:16.5px">جهاز تحكم: كريم محمد</h3></div>' +
+            '</div>' +
+            renderPhoneHtml() +
+          '</aside>'
+        ) : '') +
+      '</div>' +
+      '<div class="view-tabs">' +
+        '<button type="button" class="' + (ST.viewMode === 'phone' ? 'active' : '') + '" data-act="set-view" data-v="phone">📱 جوالي</button>' +
+        '<button type="button" class="' + (ST.viewMode === 'board' ? 'active' : '') + '" data-act="set-view" data-v="board">📺 التلفزيون</button>' +
+        '<button type="button" class="' + (ST.viewMode === 'both' ? 'active' : '') + '" data-act="set-view" data-v="both">🖥️ الاثنين معاً</button>' +
+      '</div>';
+
+    if (CFG.slug === 'draw_guess') {
+      bindCanvasDrawing();
+    }
+  }
+
+  document.addEventListener('click', function(e) {
+    var btn = e.target.closest('[data-act]');
+    if (!btn) return;
+    var act = btn.getAttribute('data-act');
+    var gd = ST.gameData;
+
+    if (act === 'set-view') {
+      ST.viewMode = btn.getAttribute('data-v');
+      AUDIO.sfx('click');
+      renderAll();
+    } else if (act === 'toggle-voice') {
+      AUDIO.voiceOn = !AUDIO.voiceOn;
+      if (!AUDIO.voiceOn && window.speechSynthesis) { try { window.speechSynthesis.cancel(); } catch(err){} }
+      renderAll();
+    } else if (act === 'toggle-sfx') {
+      AUDIO.sfxOn = !AUDIO.sfxOn;
+      if (AUDIO.sfxOn) AUDIO.sfx('win');
+      renderAll();
+    } else if (act === 'open-qr') {
+      var modal = document.getElementById('qrModal');
+      var box = document.getElementById('qrBox');
+      var txt = document.getElementById('qrRoomCodeText');
+      if (modal && box) {
+        var joinUrl = window.location.href.split('#')[0] + '?room=' + ST.roomCode + '&game=' + CFG.slug;
+        if (window.M8QR && window.M8QR.svg) {
+          box.innerHTML = window.M8QR.svg(joinUrl, { ecc: 'M', pad: 2 });
+        }
+        if (txt) txt.textContent = 'كود الغرفة المباشر: ' + ST.roomCode;
+        modal.classList.add('open');
+        AUDIO.sfx('click');
+      }
+    } else if (act === 'next-round') {
+      ST.round++;
+      AUDIO.sfx('card_flip');
+      initGameEngine();
+    }
+    // SHIFRA ACTIONS
+    else if (act === 'cn-select-pack') {
+      var txtEl = document.getElementById('cnCustomWordsTxt');
+      if (txtEl) gd.customInputText = txtEl.value;
+      gd.selectedPackId = btn.getAttribute('data-pack');
+      AUDIO.sfx('click');
+      renderAll();
+    } else if (act === 'cn-autofill-custom') {
+      var txtArea = document.getElementById('cnCustomWordsTxt');
+      var raw = txtArea ? txtArea.value : (gd.customInputText || '');
+      var parts = raw.split(/[\n,،]+/).map(function(s){ return s.trim(); }).filter(Boolean);
+      var master = shuffle(getAllShifraWords());
+      for (var i = 0; i < master.length && parts.length < 25; i++) {
+        if (parts.indexOf(master[i]) === -1) parts.push(master[i]);
+      }
+      gd.customInputText = parts.slice(0, 25).join('، ');
+      AUDIO.sfx('win');
+      renderAll();
+    } else if (act === 'cn-start-board') {
+      var chosenWords = [];
+      var label = '';
+      if (gd.selectedPackId === 'random_all') {
+        chosenWords = shuffle(getAllShifraWords()).slice(0, 25);
+        label = '🎲 حزمة عشوائية شاملة';
+      } else if (gd.selectedPackId === 'custom_open') {
+        var txtArea2 = document.getElementById('cnCustomWordsTxt');
+        var raw2 = txtArea2 ? txtArea2.value : (gd.customInputText || '');
+        gd.customInputText = raw2;
+        var userWords = raw2.split(/[\n,،]+/).map(function(s){ return s.trim(); }).filter(Boolean);
+        var master2 = shuffle(getAllShifraWords());
+        for (var m = 0; m < master2.length && userWords.length < 25; m++) {
+          if (userWords.indexOf(master2[m]) === -1) userWords.push(master2[m]);
+        }
+        chosenWords = shuffle(userWords.slice(0, 25));
+        label = '✍️ حزمة مفتوحة مخصصة';
+      } else {
+        var pIdx = parseInt((gd.selectedPackId || 'pack_0').replace('pack_', ''), 10) || 0;
+        var pkObj = CFG.wordPacks[pIdx] || CFG.wordPacks[0];
+        chosenWords = shuffle(pkObj.words).slice(0, 25);
+        label = pkObj.name;
+      }
+      AUDIO.sfx('card_flip');
+      buildShifraBoardFromWords(chosenWords, label);
+      renderAll();
+    } else if (act === 'cn-back-setup') {
+      gd.phase = 'setup';
+      AUDIO.sfx('click');
+      renderAll();
+    } else if (act === 'cn-toggle-board-spy') {
+      gd.spymasterBoardOverlay = !gd.spymasterBoardOverlay;
+      AUDIO.sfx('card_flip');
+      renderAll();
+    } else if (act === 'cn-toggle-phone-spy') {
+      gd.spymasterPhoneOverlay = !gd.spymasterPhoneOverlay;
+      AUDIO.sfx('card_flip');
+      renderAll();
+    } else if (act === 'cn-send-clue') {
+      var cw = (document.getElementById('cnClueInp').value || '').trim() || 'شفرة';
+      var cc = parseInt(document.getElementById('cnCountInp').value, 10) || 2;
+      gd.clueWord = cw;
+      gd.clueCount = cc;
+      gd.guessesLeft = cc + 1;
+      ST.statusMsg = 'الشفرة المعلنة: «' + cw + ' (' + arNum(cc) + ')» — المسوا البطاقات وضعوا بطاقة العميل عليها!';
+      AUDIO.sfx('gavel');
+      AUDIO.speak('الشفرة هي ' + cw + '، عدد البطاقات ' + cc);
+      renderAll();
+    } else if (act === 'cn-pick') {
+      var idx = parseInt(btn.getAttribute('data-idx'), 10);
+      var card = gd.cards[idx];
+      if (!card || card.revealed || gd.gameOver) return;
+      card.revealed = true;
+      if (card.role === 'bomb') {
+        gd.gameOver = true;
+        gd.winnerText = '💥 تم كشف بطاقة الفخ الأسود («' + card.word + '»)! انتهت الجولة بفوز الفريق المنافس!';
+        AUDIO.sfx('bomb');
+      } else if (card.role === gd.turnTeam) {
+        AUDIO.sfx('win');
+        if (gd.guessesLeft > 0) gd.guessesLeft--;
+        var rem = gd.cards.filter(function(c){ return c.role === gd.turnTeam && !c.revealed; }).length;
+        if (rem === 0) {
+          gd.gameOver = true;
+          gd.winnerText = '🏆 اكتمل وضع جميع بطاقات العملاء للفريق ' + (gd.turnTeam === 'red' ? 'الأحمر 🔴' : 'الأزرق 🔵') + ' وفاز بالمباراة!';
+        } else if (gd.guessesLeft === 0) {
+          gd.turnTeam = gd.turnTeam === 'red' ? 'blue' : 'red';
+          gd.clueWord = '';
+        }
+      } else {
+        AUDIO.sfx('card_flip');
+        gd.turnTeam = gd.turnTeam === 'red' ? 'blue' : 'red';
+        gd.clueWord = '';
+      }
+      renderAll();
+    } else if (act === 'cn-end-turn') {
+      gd.turnTeam = gd.turnTeam === 'red' ? 'blue' : 'red';
+      gd.clueWord = '';
+      AUDIO.sfx('click');
+      renderAll();
+    }
+    // MYSTERY BUTTON ACTIONS
+    else if (act === 'mb-press') {
+      var bNum = parseInt(btn.getAttribute('data-num'), 10);
+      var bObj = gd.buttons[bNum - 1];
+      if (!bObj || bObj.opened) return;
+      bObj.opened = true;
+      var inf = bObj.info;
+      var tIdx = gd.turnTeam - 1;
+      var otherIdx = tIdx === 0 ? 1 : 0;
+      if (inf.bomb) {
+        if (gd.shields[tIdx] > 0) {
+          gd.shields[tIdx]--;
+          ST.statusMsg = '🛡️ انفجر الزر رقم ' + arNum(bNum) + ' لكن الدرع أنقذ نقاط الفريق ' + arNum(gd.turnTeam) + '!';
+          AUDIO.sfx('gavel');
+        } else {
+          gd.roundPot = 0;
+          ST.statusMsg = '💥 فخ الانفجار في الزر رقم ' + arNum(bNum) + '! ضاعت نقاط الجولة غير المؤمّنة وانتقل الدور!';
+          gd.turnTeam = gd.turnTeam === 1 ? 2 : 1;
+          AUDIO.sfx('bomb');
+        }
+      } else if (inf.mult) {
+        gd.roundPot = Math.max(400, gd.roundPot * 2);
+        ST.statusMsg = '✨ زر نادر! تضاعفت نقاط الجولة إلى ' + arNum(gd.roundPot) + ' نقطة!';
+        AUDIO.sfx('win');
+      } else if (inf.steal) {
+        var stAmt = Math.min(ST.teamScores[otherIdx], inf.steal);
+        ST.teamScores[otherIdx] -= stAmt;
+        ST.teamScores[tIdx] += stAmt;
+        ST.statusMsg = '🧲 سرقة ناجحة! تم سحب ' + arNum(stAmt) + ' نقطة من الفريق المنافس!';
+        AUDIO.sfx('win');
+      } else if (inf.swap) {
+        var tmp = ST.teamScores[0]; ST.teamScores[0] = ST.teamScores[1]; ST.teamScores[1] = tmp;
+        ST.statusMsg = '🔄 زر التبديل النادر! تم تبديل بنوك الفريقين بالكامل!';
+        AUDIO.sfx('gavel');
+      } else {
+        gd.roundPot = Math.max(0, gd.roundPot + (inf.pts || 0));
+        if (inf.shield) gd.shields[tIdx]++;
+        if (inf.challenge) gd.activeChallenge = inf.challenge;
+        ST.statusMsg = inf.icon + ' الزر رقم ' + arNum(bNum) + ': ' + inf.label;
+        AUDIO.sfx(inf.pts < 0 ? 'alarm' : 'win');
+      }
+      renderAll();
+    } else if (act === 'mb-complete-ch') {
+      gd.roundPot += 500;
+      gd.activeChallenge = '';
+      AUDIO.sfx('win');
+      renderAll();
+    } else if (act === 'mb-bank') {
+      ST.teamScores[gd.turnTeam - 1] += gd.roundPot;
+      gd.roundPot = 0;
+      gd.turnTeam = gd.turnTeam === 1 ? 2 : 1;
+      AUDIO.sfx('win');
+      renderAll();
+    }
+    // GOLDEN VAULT ACTIONS
+    else if (act === 'gv-switch-team') {
+      gd.activeTeam = gd.activeTeam === 1 ? 2 : 1;
+      AUDIO.sfx('click');
+      renderAll();
+    } else if (act === 'gv-try-code') {
+      var ans = btn.getAttribute('data-ans');
+      var tIdx2 = gd.activeTeam - 1;
+      var curLock = gd.locks[gd.teamProgress[tIdx2]];
+      if (curLock && ans === curLock.answer) {
+        gd.teamProgress[tIdx2]++;
+        AUDIO.sfx('win');
+        if (gd.teamProgress[tIdx2] >= gd.locks.length) {
+          gd.vaultOpenedBy = gd.activeTeam;
+          ST.teamScores[tIdx2] += 1000;
+        }
+      } else {
+        AUDIO.sfx('alarm');
+        ST.statusMsg = '❌ رمز خاطئ! انتقل الدور للفريق المنافس لمحاولة فك القفل.';
+        gd.activeTeam = gd.activeTeam === 1 ? 2 : 1;
+      }
+      renderAll();
+    } else if (act === 'gv-use-key') {
+      var tIdx3 = gd.activeTeam - 1;
+      if (gd.extraKeys[tIdx3] > 0) {
+        gd.extraKeys[tIdx3]--;
+        gd.teamProgress[tIdx3]++;
+        if (gd.teamProgress[tIdx3] >= gd.locks.length) gd.vaultOpenedBy = gd.activeTeam;
+        AUDIO.sfx('win');
+        renderAll();
+      }
+    } else if (act === 'gv-sabotage') {
+      AUDIO.sfx('gavel');
+      ST.statusMsg = '❄️ تم تجميد لوحة الفريق المنافس لمدة جولة واحدة!';
+      renderAll();
+    }
+    // DIWANIYA AUCTION ACTIONS
+    else if (act === 'da-mode') {
+      gd.mode = btn.getAttribute('data-m');
+      AUDIO.sfx('click');
+      renderAll();
+    } else if (act === 'da-bid') {
+      var bTeam = parseInt(btn.getAttribute('data-team'), 10);
+      var add = parseInt(btn.getAttribute('data-add'), 10) || 100;
+      gd.currentBid += add;
+      gd.highestTeam = bTeam;
+      gd.bidLog.unshift('🔼 زايد الفريق ' + arNum(bTeam) + ' بمبلغ ' + arNum(gd.currentBid) + ' نقطة');
+      AUDIO.sfx('gavel');
+      renderAll();
+    } else if (act === 'da-hammer') {
+      gd.revealed = true;
+      var net = gd.lot.trueValue - gd.currentBid;
+      ST.teamScores[gd.highestTeam - 1] += net;
+      gd.resultText = '🎉 القيمة الحقيقية للصندوق هي ' + arNum(gd.lot.trueValue) + ' نقطة! (صافي ربح/خسارة الفريق ' + arNum(gd.highestTeam) + ': ' + (net >= 0 ? '+' : '') + arNum(net) + ' نقطة)';
+      AUDIO.sfx(net >= 0 ? 'win' : 'alarm');
+      renderAll();
+    }
+    // FORTUNE WHEEL ACTIONS
+    else if (act === 'fw-toggle-risk') {
+      gd.riskMode = !gd.riskMode;
+      AUDIO.sfx('click');
+      renderAll();
+    } else if (act === 'fw-spin') {
+      var seg = gd.segments[Math.floor(Math.random() * gd.segments.length)];
+      gd.angle += 720 + Math.floor(Math.random() * 360);
+      var mult = gd.riskMode ? 2 : 1;
+      var delta = (seg.pts || 0) * mult;
+      ST.teamScores[gd.turnTeam - 1] += delta;
+      gd.lastSegment = seg.label + ' (' + (delta >= 0 ? '+' : '') + arNum(delta) + ' نقطة)';
+      gd.turnTeam = gd.turnTeam === 1 ? 2 : 1;
+      AUDIO.sfx(delta >= 0 ? 'win' : 'alarm');
+      renderAll();
+    }
+    // FRIENDS COURT ACTIONS
+    else if (act === 'fc-next-ev') {
+      gd.revealedEvidenceCount++;
+      AUDIO.sfx('card_flip');
+      renderAll();
+    } else if (act === 'fc-vote-innocent') {
+      gd.juryVotes.innocent++;
+      gd.verdictText = '🕊️ صوت المحلفون للبراءة — الحقيقة: ' + gd.caze.truth;
+      AUDIO.sfx('gavel');
+      renderAll();
+    } else if (act === 'fc-vote-guilty') {
+      gd.juryVotes.guilty++;
+      gd.verdictText = '⚖️ صوت المحلفون للإدانة — الحقيقة: ' + gd.caze.truth;
+      AUDIO.sfx('gavel');
+      renderAll();
+    }
+    // LAST ONE STANDING ACTIONS
+    else if (act === 'los-answer') {
+      var ans2 = btn.getAttribute('data-ans');
+      if (ans2 === gd.stage.answer) {
+        gd.survivors[0].pts += 200;
+        var aliveList = gd.survivors.filter(function(s){ return !s.out; });
+        if (aliveList.length > 1) aliveList[aliveList.length - 1].out = true;
+        var remAlive = gd.survivors.filter(function(s){ return !s.out; });
+        if (remAlive.length === 1) gd.champion = '👑 البطل الصامد الأخير هو: ' + remAlive[0].name + '!';
+        AUDIO.sfx('win');
+      } else {
+        AUDIO.sfx('alarm');
+      }
+      renderAll();
+    }
+    // SILENT LIBRARY ACTIONS
+    else if (act === 'sl-success') {
+      ST.teamScores[0] += 300;
+      ST.statusMsg = '👏 صمود أسطوري بدون صوت أو ضحك! +٣٠٠ نقطة للفريق!';
+      AUDIO.sfx('win');
+      renderAll();
+    } else if (act === 'sl-laugh') {
+      gd.decibelWarnings++;
+      ST.statusMsg = '😂 تم رصد ضحكة أو صوت! مخالفة رقم ' + arNum(gd.decibelWarnings) + '!';
+      AUDIO.sfx('alarm');
+      renderAll();
+    }
+    // WHO KNOWS FRIEND ACTIONS
+    else if (act === 'wk-vote') {
+      var nm = btn.getAttribute('data-name');
+      gd.votes[nm] = (gd.votes[nm] || 0) + 1;
+      AUDIO.sfx('click');
+      renderAll();
+    } else if (act === 'wk-add-q') {
+      var qInp = document.getElementById('wkCustomQInp');
+      if (qInp && qInp.value.trim()) {
+        gd.questions.unshift(qInp.value.trim());
+        gd.qIdx = 0;
+        gd.votes = {};
+        AUDIO.sfx('win');
+        renderAll();
+      }
+    }
+    // DRAW & GUESS ACTIONS
+    else if (act === 'dg-mode') {
+      gd.mode = btn.getAttribute('data-m');
+      AUDIO.sfx('click');
+      renderAll();
+    } else if (act === 'dg-color') {
+      gd.brushColor = btn.getAttribute('data-col');
+      gd.eraser = false;
+      AUDIO.sfx('click');
+    } else if (act === 'dg-eraser') {
+      gd.eraser = !gd.eraser;
+      AUDIO.sfx('click');
+    } else if (act === 'dg-clear') {
+      gd.strokes = [];
+      AUDIO.sfx('click');
+      renderAll();
+    } else if (act === 'dg-toggle-word') {
+      gd.revealRole = !gd.revealRole;
+      AUDIO.sfx('card_flip');
+      renderAll();
+    } else if (act === 'dg-guess') {
+      var gw = btn.getAttribute('data-w');
+      if (gw === gd.secretWord) {
+        gd.winnerText = '🎯 إجابة صحيحة! الرسمة هي «' + gw + '» (+٣٠٠ نقطة)!';
+        AUDIO.sfx('win');
+      } else {
+        gd.winnerText = '❌ تخمين غير صحيح («' + gw + '»)، حاول مرة أخرى!';
+        AUDIO.sfx('alarm');
+      }
+      renderAll();
+    }
+    // STADIUM & ESPORTS ACTIONS
+    else if (act === 'se-more-clue') {
+      gd.clueStep++;
+      AUDIO.sfx('card_flip');
+      renderAll();
+    } else if (act === 'se-ans') {
+      var sa = btn.getAttribute('data-ans');
+      if (sa === gd.q.answer) {
+        ST.teamScores[0] += 400;
+        gd.winnerText = '⚽ إجابة صحيحة: «' + sa + '» (+٤٠٠ نقطة)!';
+        AUDIO.sfx('win');
+      } else {
+        gd.winnerText = '❌ إجابة خاطئة! اكشف الدليل التالي.';
+        AUDIO.sfx('alarm');
+      }
+      renderAll();
+    }
+    // HOW MUCH PRICE ACTIONS
+    else if (act === 'hp-submit') {
+      var g1 = parseInt((document.getElementById('hpGuess1') || {}).value, 10) || 0;
+      var g2 = parseInt((document.getElementById('hpGuess2') || {}).value, 10) || 0;
+      gd.revealed = true;
+      var d1 = Math.abs(gd.prod.price - g1), d2 = Math.abs(gd.prod.price - g2);
+      if (d1 <= d2) {
+        ST.teamScores[0] += 300;
+        gd.winnerText = '🏆 الفريق ١ أقرب للسعر الحقيقي (فرق ' + arNum(d1) + ' ر.س) وكسب +٣٠٠ نقطة!';
+      } else {
+        ST.teamScores[1] += 300;
+        gd.winnerText = '🏆 الفريق ٢ أقرب للسعر الحقيقي (فرق ' + arNum(d2) + ' ر.س) وكسب +٣٠٠ نقطة!';
+      }
+      AUDIO.sfx('win');
+      renderAll();
+    }
+    // PRESSURE SEAT ACTIONS
+    else if (act === 'ps-start') {
+      gd.running = true;
+      AUDIO.sfx('gavel');
+      startTimer(60, function() { gd.running = false; renderAll(); });
+      renderAll();
+    } else if (act === 'ps-pass-q') {
+      gd.qIdx++;
+      gd.streak++;
+      gd.roundPoints += 100;
+      AUDIO.sfx('win');
+      renderAll();
+    } else if (act === 'ps-trap') {
+      gd.qIdx++;
+      gd.streak = 0;
+      gd.roundPoints = Math.max(0, gd.roundPoints - 50);
+      AUDIO.sfx('alarm');
+      renderAll();
+    }
+  });
+
+  document.getElementById('closeQrBtn').addEventListener('click', function() {
+    document.getElementById('qrModal').classList.remove('open');
+  });
+
+  initGameEngine();
+})();
+</script>
+
+<script>
+(function(){
+  window.addEventListener('message', function(ev) {
+    var d = ev && ev.data;
+    if (!d || typeof d !== 'object') return;
+    if (d.type === 'DW_AUDIO_SYNC') {
+      window.__DW_VOICE_ON = !!d.voiceOn;
+      window.__DW_SFX_ON = !!d.sfxOn;
+      if (!d.voiceOn && window.speechSynthesis) {
+        try { window.speechSynthesis.cancel(); } catch(e){}
+      }
+    }
+  });
+})();
+</script>
+
+</body>
+</html>

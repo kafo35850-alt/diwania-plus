@@ -1,0 +1,1465 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>ديوانية بلس — خزنة الـ ٥٠ زر — ديوانية بلس</title>
+<style>
+:root {
+  --bg-deep: #070B1A;
+  --bg-panel: #101733;
+  --bg-card: rgba(22, 32, 68, 0.86);
+  --gold: #F5B942;
+  --gold-light: #FFE08A;
+  --teal: #2DD4BF;
+  --coral: #F97316;
+  --rose: #F43F5E;
+  --emerald: #10B981;
+  --accent: #10B981;
+  --text: #F8FAFC;
+  --muted: #94A3B8;
+  --border: rgba(245, 185, 66, 0.24);
+}
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body {
+  margin: 0; padding: 0; min-height: 100vh;
+  background:
+    radial-gradient(900px 450px at 85% 0%, rgba(245, 185, 66, 0.14), transparent 65%),
+    radial-gradient(800px 450px at 10% 100%, rgba(45, 212, 191, 0.12), transparent 65%),
+    linear-gradient(180deg, #0E1530 0%, #070B1A 100%);
+  color: var(--text);
+  font-family: -apple-system, "SF Arabic", "Tajawal", "Cairo", system-ui, sans-serif;
+  overflow-x: hidden;
+}
+button, input, select { font: inherit; color: inherit; }
+button { cursor: pointer; border: none; background: none; touch-action: manipulation; }
+button:disabled { opacity: 0.45; cursor: not-allowed; }
+
+.top-bar {
+  position: sticky; top: 0; z-index: 40;
+  background: rgba(7, 11, 26, 0.9);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding: 10px 18px;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+}
+.brand-Side { display: flex; align-items: center; gap: 10px; }
+.room-pill {
+  background: rgba(245, 185, 66, 0.16);
+  border: 1px solid var(--gold);
+  color: var(--gold-light);
+  padding: 5px 12px; border-radius: 999px; font-weight: 900; font-size: 13.5px;
+}
+.ctrl-group { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+  padding: 10px 16px; border-radius: 12px; font-weight: 800; font-size: 14px;
+  transition: transform 0.12s, filter 0.12s;
+}
+.btn:active:not(:disabled) { transform: scale(0.96); }
+.btn-gold { background: linear-gradient(180deg, var(--gold-light), var(--gold)); color: #1B1100; box-shadow: 0 5px 16px rgba(245,185,66,0.3); }
+.btn-teal { background: linear-gradient(180deg, #5EEAD4, #0D9488); color: #042F2E; box-shadow: 0 5px 16px rgba(45,212,191,0.25); }
+.btn-rose { background: linear-gradient(180deg, #FB7185, #E11D48); color: #fff; box-shadow: 0 5px 16px rgba(225,29,72,0.35); }
+.btn-sec { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.14); color: var(--text); }
+.btn-sm { padding: 6px 12px; font-size: 12.5px; border-radius: 9px; }
+
+.layout-wrap {
+  max-width: 1320px; margin: 0 auto; padding: 18px 16px 90px;
+  display: grid; gap: 18px;
+}
+.layout-wrap.mode-both {
+  grid-template-columns: 1.35fr 0.95fr;
+  align-items: start;
+}
+@media (max-width: 920px) {
+  .layout-wrap.mode-both { grid-template-columns: 1fr; }
+}
+.panel-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  padding: 20px;
+  box-shadow: 0 18px 45px rgba(0,0,0,0.45);
+}
+.panel-head {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  padding-bottom: 12px; margin-bottom: 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.09);
+}
+.badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 800;
+  background: rgba(45,212,191,0.15); border: 1px solid rgba(45,212,191,0.4); color: #99F6E4;
+}
+.badge-gold {
+  background: rgba(245,185,66,0.18); border-color: rgba(245,185,66,0.5); color: var(--gold-light);
+}
+.badge-rose {
+  background: rgba(244,63,94,0.2); border-color: rgba(244,63,94,0.5); color: #FECDD3;
+}
+
+/* Grids & Cards inside games */
+.grid-5 { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; }
+.grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+.grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+
+.word-tile {
+  padding: 14px 6px; border-radius: 14px; font-weight: 900; font-size: clamp(12px, 1.8vw, 16px);
+  text-align: center; background: rgba(255,255,255,0.07);
+  border: 2px solid rgba(255,255,255,0.14);
+  color: var(--text); transition: all 0.16s; position: relative; min-height: 58px;
+  display: grid; place-items: center;
+}
+.word-tile:hover:not(:disabled) { transform: translateY(-2px); border-color: var(--gold); }
+.word-tile.rev-gold { background: linear-gradient(145deg, #F5B942, #B45309); color: #1A1000; border-color: #FFE08A; }
+.word-tile.rev-teal { background: linear-gradient(145deg, #2DD4BF, #0F766E); color: #042F2E; border-color: #99F6E4; }
+.word-tile.rev-neutral { background: rgba(148, 163, 184, 0.28); color: #CBD5E1; border-color: #64748B; }
+.word-tile.rev-bomb { background: linear-gradient(145deg, #991B1B, #090D16); color: #FECDD3; border-color: #F43F5E; box-shadow: 0 0 24px rgba(244,63,94,0.65); }
+.word-tile.spy-hint-gold { box-shadow: inset 0 0 0 2px #F5B942; }
+.word-tile.spy-hint-teal { box-shadow: inset 0 0 0 2px #2DD4BF; }
+.word-tile.spy-hint-bomb { box-shadow: inset 0 0 0 3px #F43F5E; background: rgba(244,63,94,0.18); }
+
+.vault-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(64px, 1fr)); gap: 8px;
+}
+.vault-btn {
+  height: 56px; border-radius: 13px; font-weight: 900; font-size: 16px;
+  background: linear-gradient(160deg, #1E293B, #0F172A);
+  border: 1.5px solid rgba(245,185,66,0.35); color: var(--gold-light);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  transition: transform 0.14s, border-color 0.14s;
+}
+.vault-btn:hover:not(:disabled) { transform: scale(1.05); border-color: var(--gold); }
+.vault-btn.opened-gold { background: linear-gradient(145deg, #F5B942, #B45309); color: #1A1000; }
+.vault-btn.opened-teal { background: linear-gradient(145deg, #2DD4BF, #0F766E); color: #042F2E; }
+.vault-btn.opened-bomb { background: linear-gradient(145deg, #E11D48, #881337); color: #fff; }
+
+.score-strip {
+  display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px;
+}
+.score-box {
+  flex: 1; min-width: 135px; background: rgba(0,0,0,0.32);
+  border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; padding: 10px 14px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.score-box.active-turn { border-color: var(--gold); box-shadow: 0 0 18px rgba(245,185,66,0.25); }
+
+.timer-ring {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 68px; height: 42px; padding: 0 14px; border-radius: 999px;
+  background: rgba(244,63,94,0.18); border: 2px solid var(--rose);
+  color: #FECDD3; font-weight: 900; font-size: 20px;
+}
+
+.inp {
+  width: 100%; padding: 10px 13px; border-radius: 11px;
+  background: rgba(5,9,22,0.75); border: 1px solid rgba(255,255,255,0.16);
+  color: var(--text); outline: none;
+}
+.inp:focus { border-color: var(--gold); }
+
+.view-tabs {
+  position: fixed; bottom: 14px; left: 50%; transform: translateX(-50%);
+  z-index: 60; background: rgba(8, 12, 28, 0.94);
+  border: 1px solid var(--border); border-radius: 999px;
+  padding: 5px; display: flex; gap: 6px;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.65);
+}
+.view-tabs button {
+  padding: 8px 16px; border-radius: 999px; font-weight: 800; font-size: 13px;
+  color: var(--muted);
+}
+.view-tabs button.active {
+  background: linear-gradient(135deg, var(--gold), #D97706);
+  color: #1A1000;
+}
+
+.modal-bg {
+  position: fixed; inset: 0; z-index: 80; background: rgba(4, 7, 18, 0.84);
+  backdrop-filter: blur(8px); display: none; place-items: center; padding: 16px;
+}
+.modal-bg.open { display: grid; }
+.modal-card {
+  width: 100%; max-width: 480px; background: #101733;
+  border: 1px solid var(--border); border-radius: 22px; padding: 22px;
+  display: flex; flex-direction: column; gap: 14px;
+}
+canvas.draw-pad {
+  width: 100%; max-width: 520px; height: 320px; background: #0B1024;
+  border: 2px solid var(--gold); border-radius: 16px; touch-action: none;
+  cursor: crosshair; display: block; margin: 0 auto;
+}
+</style>
+</head>
+<body>
+<script>/* qr.js */
+/* M8QR — compact ISO 18004 QR encoder (byte mode, ECC L/M/Q/H, versions 1-20). */
+(function (g) {
+  'use strict';
+  var ECC_PER_BLOCK = [
+    [-1, 7, 10, 15, 20, 26, 18, 20, 24, 30, 18, 20, 24, 26, 30, 22, 24, 28, 30, 28, 28],
+    [-1, 10, 16, 26, 18, 24, 16, 18, 22, 22, 26, 30, 22, 22, 24, 24, 28, 28, 26, 26, 26],
+    [-1, 13, 22, 18, 26, 18, 24, 18, 22, 20, 24, 28, 26, 24, 20, 30, 24, 28, 28, 26, 30],
+    [-1, 17, 28, 22, 16, 22, 28, 26, 26, 24, 28, 24, 28, 22, 24, 24, 30, 28, 28, 26, 28]
+  ];
+  var NUM_BLOCKS = [
+    [-1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 4, 4, 4, 4, 4, 6, 6, 6, 6, 7, 8],
+    [-1, 1, 1, 1, 2, 2, 4, 4, 4, 5, 5, 5, 8, 9, 9, 10, 10, 11, 13, 14, 16],
+    [-1, 1, 1, 2, 2, 4, 4, 6, 6, 8, 8, 8, 10, 12, 16, 12, 17, 16, 18, 21, 20],
+    [-1, 1, 1, 2, 4, 4, 4, 5, 6, 8, 8, 11, 11, 16, 16, 18, 16, 19, 21, 25, 25]
+  ];
+  var ECL_INDEX = { L: 0, M: 1, Q: 2, H: 3 };
+  var FORMAT_BITS = [1, 0, 3, 2];
+
+  function rawModules(ver) {
+    var r = (16 * ver + 128) * ver + 64;
+    if (ver >= 2) {
+      var na = Math.floor(ver / 7) + 2;
+      r -= (25 * na - 10) * na - 55;
+      if (ver >= 7) r -= 36;
+    }
+    return r;
+  }
+  function dataCodewords(ver, e) {
+    return Math.floor(rawModules(ver) / 8) - ECC_PER_BLOCK[e][ver] * NUM_BLOCKS[e][ver];
+  }
+  function gfMul(x, y) {
+    var z = 0;
+    for (var i = 7; i >= 0; i--) { z = (z << 1) ^ ((z >>> 7) * 0x11D); z ^= ((y >>> i) & 1) * x; }
+    return z & 0xFF;
+  }
+  function rsDivisor(deg) {
+    var res = []; for (var i = 0; i < deg - 1; i++) res.push(0); res.push(1);
+    var root = 1;
+    for (var i2 = 0; i2 < deg; i2++) {
+      for (var j = 0; j < deg; j++) {
+        res[j] = gfMul(res[j], root);
+        if (j + 1 < deg) res[j] ^= res[j + 1];
+      }
+      root = gfMul(root, 0x02);
+    }
+    return res;
+  }
+  function rsRemainder(data, div) {
+    var res = div.map(function () { return 0; });
+    data.forEach(function (b) {
+      var f = b ^ res.shift(); res.push(0);
+      div.forEach(function (c, i) { res[i] ^= gfMul(c, f); });
+    });
+    return res;
+  }
+  function utf8(str) {
+    if (typeof TextEncoder !== 'undefined') return Array.prototype.slice.call(new TextEncoder().encode(str));
+    var s = unescape(encodeURIComponent(str)), out = [];
+    for (var i = 0; i < s.length; i++) out.push(s.charCodeAt(i));
+    return out;
+  }
+  function alignPositions(ver, size) {
+    if (ver === 1) return [];
+    var n = Math.floor(ver / 7) + 2;
+    var step = ver === 32 ? 26 : Math.ceil((ver * 4 + 4) / (n * 2 - 2)) * 2;
+    var r = [6];
+    for (var pos = size - 7; r.length < n; pos -= step) r.splice(1, 0, pos);
+    return r;
+  }
+
+  function encode(text, eccName) {
+    var e = ECL_INDEX[eccName || 'M'];
+    var bytes = utf8(text);
+    var ver, capBits;
+    for (ver = 1; ver <= 20; ver++) {
+      capBits = dataCodewords(ver, e) * 8;
+      var need = 4 + (ver <= 9 ? 8 : 16) + bytes.length * 8;
+      if (need <= capBits) break;
+    }
+    if (ver > 20) throw new Error('QR: text too long');
+    var bits = [];
+    function put(v, n) { for (var i = n - 1; i >= 0; i--) bits.push((v >>> i) & 1); }
+    put(4, 4); put(bytes.length, ver <= 9 ? 8 : 16);
+    bytes.forEach(function (b) { put(b, 8); });
+    put(0, Math.min(4, capBits - bits.length));
+    put(0, (8 - bits.length % 8) % 8);
+    for (var pad = 0xEC; bits.length < capBits; pad ^= 0xEC ^ 0x11) put(pad, 8);
+    var data = [];
+    for (var i = 0; i < bits.length; i += 8) {
+      var v = 0; for (var j = 0; j < 8; j++) v = (v << 1) | bits[i + j]; data.push(v);
+    }
+    // ECC + interleave
+    var nb = NUM_BLOCKS[e][ver], eccLen = ECC_PER_BLOCK[e][ver];
+    var raw = Math.floor(rawModules(ver) / 8);
+    var nShort = nb - raw % nb, shortLen = Math.floor(raw / nb);
+    var blocks = [], div = rsDivisor(eccLen);
+    for (var bi = 0, k = 0; bi < nb; bi++) {
+      var dat = data.slice(k, k + shortLen - eccLen + (bi < nShort ? 0 : 1));
+      k += dat.length;
+      var ecc = rsRemainder(dat, div);
+      if (bi < nShort) dat.push(0);
+      blocks.push(dat.concat(ecc));
+    }
+    var all = [];
+    for (var ii = 0; ii < blocks[0].length; ii++) {
+      for (var jj = 0; jj < blocks.length; jj++) {
+        if (ii !== shortLen - eccLen || jj >= nShort) all.push(blocks[jj][ii]);
+      }
+    }
+    // matrix
+    var size = ver * 4 + 17;
+    var mod = [], fn = [];
+    for (var y = 0; y < size; y++) { mod.push(new Array(size).fill(false)); fn.push(new Array(size).fill(false)); }
+    function setFn(x, y, d) { mod[y][x] = d; fn[y][x] = true; }
+    function bit(x, i) { return ((x >>> i) & 1) !== 0; }
+    for (var t = 0; t < size; t++) { setFn(6, t, t % 2 === 0); setFn(t, 6, t % 2 === 0); }
+    function finder(cx, cy) {
+      for (var dy = -4; dy <= 4; dy++) for (var dx = -4; dx <= 4; dx++) {
+        var d = Math.max(Math.abs(dx), Math.abs(dy)), xx = cx + dx, yy = cy + dy;
+        if (xx >= 0 && xx < size && yy >= 0 && yy < size) setFn(xx, yy, d !== 2 && d !== 4);
+      }
+    }
+    finder(3, 3); finder(size - 4, 3); finder(3, size - 4);
+    var ap = alignPositions(ver, size), na = ap.length;
+    for (var a = 0; a < na; a++) for (var b = 0; b < na; b++) {
+      if ((a === 0 && b === 0) || (a === 0 && b === na - 1) || (a === na - 1 && b === 0)) continue;
+      for (var dy2 = -2; dy2 <= 2; dy2++) for (var dx2 = -2; dx2 <= 2; dx2++)
+        setFn(ap[a] + dx2, ap[b] + dy2, Math.max(Math.abs(dx2), Math.abs(dy2)) !== 1);
+    }
+    function drawFormat(mask) {
+      var d = (FORMAT_BITS[e] << 3) | mask, rem = d;
+      for (var i = 0; i < 10; i++) rem = (rem << 1) ^ ((rem >>> 9) * 0x537);
+      var bs = ((d << 10) | rem) ^ 0x5412;
+      for (var i1 = 0; i1 <= 5; i1++) setFn(8, i1, bit(bs, i1));
+      setFn(8, 7, bit(bs, 6)); setFn(8, 8, bit(bs, 7)); setFn(7, 8, bit(bs, 8));
+      for (var i2 = 9; i2 < 15; i2++) setFn(14 - i2, 8, bit(bs, i2));
+      for (var i3 = 0; i3 < 8; i3++) setFn(size - 1 - i3, 8, bit(bs, i3));
+      for (var i4 = 8; i4 < 15; i4++) setFn(8, size - 15 + i4, bit(bs, i4));
+      setFn(8, size - 8, true);
+    }
+    drawFormat(0);
+    if (ver >= 7) {
+      var rem = ver;
+      for (var q = 0; q < 12; q++) rem = (rem << 1) ^ ((rem >>> 11) * 0x1F25);
+      var vb = (ver << 12) | rem;
+      for (var q2 = 0; q2 < 18; q2++) {
+        var c = bit(vb, q2), aa = size - 11 + q2 % 3, bb = Math.floor(q2 / 3);
+        setFn(aa, bb, c); setFn(bb, aa, c);
+      }
+    }
+    // codewords
+    var idx = 0;
+    for (var right = size - 1; right >= 1; right -= 2) {
+      if (right === 6) right = 5;
+      for (var vert = 0; vert < size; vert++) {
+        for (var jx = 0; jx < 2; jx++) {
+          var x = right - jx, upward = ((right + 1) & 2) === 0, yy2 = upward ? size - 1 - vert : vert;
+          if (!fn[yy2][x] && idx < all.length * 8) { mod[yy2][x] = bit(all[idx >>> 3], 7 - (idx & 7)); idx++; }
+        }
+      }
+    }
+    function applyMask(m) {
+      for (var y = 0; y < size; y++) for (var x = 0; x < size; x++) {
+        var inv;
+        switch (m) {
+          case 0: inv = (x + y) % 2 === 0; break;
+          case 1: inv = y % 2 === 0; break;
+          case 2: inv = x % 3 === 0; break;
+          case 3: inv = (x + y) % 3 === 0; break;
+          case 4: inv = (Math.floor(x / 3) + Math.floor(y / 2)) % 2 === 0; break;
+          case 5: inv = x * y % 2 + x * y % 3 === 0; break;
+          case 6: inv = (x * y % 2 + x * y % 3) % 2 === 0; break;
+          default: inv = ((x + y) % 2 + x * y % 3) % 2 === 0;
+        }
+        if (!fn[y][x] && inv) mod[y][x] = !mod[y][x];
+      }
+    }
+    function penalty() {
+      var res = 0, x, y, i, run, color;
+      var P1 = [true, false, true, true, true, false, true, false, false, false, false];
+      var P2 = [false, false, false, false, true, false, true, true, true, false, true];
+      function lines(get) {
+        for (var a = 0; a < size; a++) {
+          run = 1; color = get(a, 0);
+          for (var b = 1; b < size; b++) {
+            var cur = get(a, b);
+            if (cur === color) { run++; if (run === 5) res += 3; else if (run > 5) res++; }
+            else { color = cur; run = 1; }
+          }
+          for (var s = 0; s + 11 <= size; s++) {
+            var m1 = true, m2 = true;
+            for (var k = 0; k < 11; k++) {
+              var v = get(a, s + k);
+              if (v !== P1[k]) m1 = false;
+              if (v !== P2[k]) m2 = false;
+              if (!m1 && !m2) break;
+            }
+            if (m1) res += 40; if (m2) res += 40;
+          }
+        }
+      }
+      lines(function (a, b) { return mod[a][b]; });
+      lines(function (a, b) { return mod[b][a]; });
+      for (y = 0; y < size - 1; y++) for (x = 0; x < size - 1; x++) {
+        var c0 = mod[y][x];
+        if (c0 === mod[y][x + 1] && c0 === mod[y + 1][x] && c0 === mod[y + 1][x + 1]) res += 3;
+      }
+      var dark = 0; for (y = 0; y < size; y++) for (x = 0; x < size; x++) if (mod[y][x]) dark++;
+      var total = size * size, kk = Math.ceil(Math.abs(dark * 20 - total * 10) / total) - 1;
+      res += kk * 10;
+      return res;
+    }
+    var best = -1, bestPen = Infinity;
+    for (var m = 0; m < 8; m++) {
+      applyMask(m); drawFormat(m);
+      var p = penalty();
+      if (p < bestPen) { bestPen = p; best = m; }
+      applyMask(m);
+    }
+    applyMask(best); drawFormat(best);
+    return { version: ver, size: size, mask: best, modules: mod };
+  }
+
+  function toSvg(text, opts) {
+    opts = opts || {};
+    var qr = encode(text, opts.ecc || 'M'), border = opts.border == null ? 4 : opts.border;
+    var fg = opts.fg || '#000', bg = opts.bg || '#fff', n = qr.size + border * 2, d = [];
+    for (var y = 0; y < qr.size; y++) {
+      var x = 0;
+      while (x < qr.size) {
+        if (qr.modules[y][x]) {
+          var x0 = x; while (x < qr.size && qr.modules[y][x]) x++;
+          d.push('M' + (x0 + border) + ',' + (y + border) + 'h' + (x - x0) + 'v1h-' + (x - x0) + 'z');
+        } else x++;
+      }
+    }
+    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + n + ' ' + n + '" shape-rendering="crispEdges">' +
+      '<rect width="' + n + '" height="' + n + '" fill="' + bg + '"/><path d="' + d.join('') + '" fill="' + fg + '"/></svg>';
+  }
+  function toDataUrl(text, opts) {
+    return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(toSvg(text, opts));
+  }
+  g.M8QR = { encode: encode, toSvg: toSvg, toDataUrl: toDataUrl };
+  if (typeof module !== 'undefined' && module.exports) module.exports = g.M8QR;
+})(typeof window !== 'undefined' ? window : globalThis);
+
+</script>
+<script>
+window.GAME_CONFIG = {"slug": "vault50", "title": "خزنة الـ ٥٠ زر — ديوانية بلس", "subtitle": "٥٠ خزنة رقمية · جوائز وتدبيل ودروع · أمّن رصيدك قبل جرس الإنذار", "accent": "#10B981"};
+</script>
+<div id="gameRoot"></div>
+<div id="qrModal" class="modal-bg">
+  <div class="modal-card" style="text-align:center">
+    <div style="display:flex;align-items:center;justify-content:space-between">
+      <b style="font-size:18px;color:var(--gold)">📱 ربط جوالات اللاعبين عبر الـ QR</b>
+      <button class="btn btn-sec btn-sm" id="closeQrBtn">إغلاق ✕</button>
+    </div>
+    <p style="margin:0;font-size:13.5px;color:var(--muted);line-height:1.6">
+      امسح رمز الـ QR بجوالك للانضمام الفوري إلى الغرفة كجهاز تحكم خاص بك، أو بدّل بين «جوالي» و«شاشة التلفزيون» من الشريط السفلي.
+    </p>
+    <div id="qrBox" style="background:#fff;padding:16px;border-radius:18px;width:210px;height:210px;margin:0 auto;display:grid;place-items:center"></div>
+    <div class="room-pill" id="qrRoomCodeText" style="margin:0 auto"></div>
+  </div>
+</div>
+
+<script>
+(function() {
+  'use strict';
+  var CFG = window.GAME_CONFIG;
+  var SFX = {
+    enabled: true,
+    ctx: null,
+    play: function(type) {
+      if (!this.enabled) return;
+      try {
+        var AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) return;
+        if (!this.ctx) this.ctx = new AudioCtx();
+        var ctx = this.ctx;
+        if (ctx.state === 'suspended') ctx.resume();
+        var osc = ctx.createOscillator();
+        var gain = ctx.createGain();
+        osc.connect(gain); gain.connect(ctx.destination);
+        var now = ctx.currentTime;
+        if (type === 'click') {
+          osc.frequency.setValueAtTime(520, now);
+          gain.gain.setValueAtTime(0.08, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+          osc.start(now); osc.stop(now + 0.08);
+        } else if (type === 'win') {
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(440, now);
+          osc.frequency.setValueAtTime(554, now + 0.09);
+          osc.frequency.setValueAtTime(659, now + 0.18);
+          gain.gain.setValueAtTime(0.14, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.38);
+          osc.start(now); osc.stop(now + 0.38);
+        } else if (type === 'alarm') {
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(220, now);
+          osc.frequency.setValueAtTime(150, now + 0.15);
+          gain.gain.setValueAtTime(0.16, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.36);
+          osc.start(now); osc.stop(now + 0.36);
+        } else if (type === 'buzz') {
+          osc.type = 'square';
+          osc.frequency.setValueAtTime(680, now);
+          gain.gain.setValueAtTime(0.12, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.22);
+          osc.start(now); osc.stop(now + 0.22);
+        }
+      } catch (e) {}
+    }
+  };
+
+  function arNum(n) {
+    return String(n == null ? 0 : n).replace(/\d/g, function(d) { return '٠١٢٣٤٥٦٧٨٩'[d]; });
+  }
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function(c) {
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+  function shuffle(arr) {
+    var a = arr.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+    }
+    return a;
+  }
+
+  var ST = {
+    roomCode: 'DW-' + Math.floor(1000 + Math.random() * 9000),
+    viewMode: window.innerWidth >= 960 ? 'both' : 'board',
+    round: 1,
+    activePlayerIdx: 0,
+    players: [
+      { id: 'p1', name: 'كريم (أنت)', score: 0, team: 1 },
+      { id: 'p2', name: 'فهد (بوت)', score: 0, team: 2 },
+      { id: 'p3', name: 'سلمان (بوت)', score: 0, team: 1 },
+      { id: 'p4', name: 'نواف (بوت)', score: 0, team: 2 }
+    ],
+    teamScores: [0, 0],
+    timerSec: 0,
+    timerHandle: null,
+    statusMsg: '',
+    gameData: {}
+  };
+
+  function stopTimer() {
+    if (ST.timerHandle) { clearInterval(ST.timerHandle); ST.timerHandle = null; }
+  }
+  function startTimer(sec, onExpire) {
+    stopTimer();
+    ST.timerSec = sec;
+    ST.timerHandle = setInterval(function() {
+      ST.timerSec = Math.max(0, ST.timerSec - 1);
+      var el = document.getElementById('liveTimerVal');
+      if (el) el.textContent = arNum(ST.timerSec) + ' ث';
+      if (ST.timerSec <= 0) {
+        stopTimer();
+        SFX.play('alarm');
+        if (onExpire) onExpire();
+      }
+    }, 1000);
+  }
+
+  // Initialize game-specific state
+  function initGameEngine() {
+    stopTimer();
+    var slug = CFG.slug;
+    if (slug === 'shifra') {
+      var packIdx = (ST.round - 1) % CFG.wordPacks.length;
+      var pack = CFG.wordPacks[packIdx];
+      var words = shuffle(pack.words).slice(0, 25);
+      var roles = [];
+      for (var i = 0; i < 9; i++) roles.push('gold');
+      for (var j = 0; j < 8; j++) roles.push('teal');
+      for (var k = 0; k < 7; k++) roles.push('neutral');
+      roles.push('bomb');
+      roles = shuffle(roles);
+      ST.gameData = {
+        packName: pack.name,
+        turnTeam: 'gold',
+        spymasterView: false,
+        clueWord: '',
+        clueCount: 2,
+        guessesLeft: 0,
+        gameOver: false,
+        winnerText: '',
+        cards: words.map(function(w, idx) {
+          return { idx: idx, word: w, role: roles[idx], revealed: false };
+        })
+      };
+      ST.statusMsg = 'دور قائد الفريق الذهبي لإعطاء شفرة من كلمة واحدة وعدد الكلمات المرتبطة.';
+    } else if (slug === 'mazad30') {
+      var cat = CFG.categories[(ST.round - 1) % CFG.categories.length];
+      ST.gameData = {
+        cat: cat,
+        phase: 'bidding', // bidding | countdown | result
+        currentBid: 3,
+        bidHolderTeam: 1,
+        namedItems: [],
+        availableItems: cat.examples.slice(),
+        roundWinner: null
+      };
+      ST.statusMsg = 'زايدوا على عدد الإجابات التي تستطيعون تسميتها خلال ٣٠ ثانية، أو ألزموا الخصم بالتحدي!';
+    } else if (slug === 'fake_artist') {
+      var item = CFG.prompts[(ST.round - 1) % CFG.prompts.length];
+      var fakeIdx = Math.floor(Math.random() * ST.players.length);
+      ST.gameData = {
+        category: item.cat,
+        secretWord: item.word,
+        options: item.options,
+        fakeIdx: fakeIdx,
+        revealRole: false,
+        phase: 'draw', // draw | vote | fake_guess | result
+        strokes: [],
+        strokeTurn: 0,
+        votes: {},
+        caughtFake: false,
+        winnerText: ''
+      };
+      ST.statusMsg = 'كل لاعب يرسم خطاً واحداً فقط في اللوحة المشتركة دون كشف الكلمة للرسام المندس!';
+    } else if (slug === 'liars_table') {
+      var emblems = ['👑 التاج', '⚔️ السيف', '🛡️ الدرع', '💎 الجوهرة'];
+      var target = emblems[(ST.round - 1) % emblems.length];
+      var deck = [];
+      emblems.forEach(function(em) { for (var n = 0; n < 5; n++) deck.push(em); });
+      deck.push('🃏 الجوكر'); deck.push('🃏 الجوكر');
+      deck = shuffle(deck);
+      ST.gameData = {
+        targetEmblem: target,
+        hand: deck.slice(0, 5),
+        selectedIndices: [],
+        lastPlay: null, // { playerName, count, actualCards }
+        pileCount: 0,
+        chamberRisk: [0, 0, 0, 0],
+        eliminated: [false, false, false, false],
+        phase: 'play', // play | challenge_result
+        verdictText: ''
+      };
+      ST.statusMsg = 'ورقة الطاولة المطلوبة في هذه الجولة: ' + target + ' — ارمِ أوراقك سراً أو اقفط الكذّاب!';
+    } else if (slug === 'vault50') {
+      var types = [];
+      for (var a = 0; a < 22; a++) types.push({ kind: 'gold', label: '+٣٠٠ نقطة', pts: 300 });
+      for (var b = 0; b < 10; b++) types.push({ kind: 'gold', label: '+٦٠٠ خزنة كبرى!', pts: 600 });
+      for (var c = 0; c < 6; c++) types.push({ kind: 'teal', label: '🛡️ درع حماية +٢٠٠', pts: 200, shield: true });
+      for (var d = 0; d < 6; d++) types.push({ kind: 'steal', label: '⚡ تحدي سرعة +٥٠٠', pts: 500 });
+      for (var e = 0; e < 6; e++) types.push({ kind: 'bomb', label: '💣 جرس الإنذار! تصفير رصيد الجولة', pts: 0, bomb: true });
+      types = shuffle(types);
+      ST.gameData = {
+        turnTeam: 1,
+        unbankedPot: 0,
+        shields: [0, 0],
+        vaults: types.map(function(t, idx) { return { num: idx + 1, opened: false, info: t }; })
+      };
+      ST.statusMsg = 'افتحوا الخزائن الـ ٥٠ لجمع النقاط، وأمّنوا رصيدكم في البنك قبل ضغط زر الإنذار!';
+    } else if (slug === 'radar_guess') {
+      var myst = CFG.mysteries[(ST.round - 1) % CFG.mysteries.length];
+      ST.gameData = {
+        mystery: myst,
+        clueIdx: 0,
+        ptsSchedule: [1000, 800, 600, 400, 250, 150],
+        buzzedTeam: null,
+        lockedTeams: {},
+        solved: false,
+        winnerText: ''
+      };
+      ST.statusMsg = 'اكشف التلميحات تدريجياً واضغط الجرس مبكراً لحصد أعلى النقاط!';
+    } else if (slug === 'alibi_court') {
+      var caze = CFG.cases[(ST.round - 1) % CFG.cases.length];
+      ST.gameData = {
+        caze: caze,
+        questionIdx: 0,
+        showSecretAlibi: false,
+        suspectAnswers: [],
+        phase: 'interrogate', // interrogate | vote | result
+        verdictText: ''
+      };
+      ST.statusMsg = 'المحقق يستجوب المشتبه بهم حول تفاصيل القصة — اكتشف من يرتجل الكذبة!';
+      startTimer(90);
+    } else if (slug === 'pressure_seat') {
+      ST.gameData = {
+        qIdx: 0,
+        questions: shuffle(CFG.questions),
+        streak: 0,
+        roundPoints: 0,
+        violations: 0,
+        running: false,
+        finished: false
+      };
+      ST.statusMsg = 'اجلس على كرسي الضغط لمدة ٦٠ ثانية وأجب فوراً بدون قول (نعم / لا / أبيض / أسود) أو التردد!';
+    }
+    renderAll();
+  }
+
+  function renderBoardHtml() {
+    var slug = CFG.slug;
+    var gd = ST.gameData;
+
+    if (slug === 'shifra') {
+      var goldLeft = gd.cards.filter(function(c){ return c.role === 'gold' && !c.revealed; }).length;
+      var tealLeft = gd.cards.filter(function(c){ return c.role === 'teal' && !c.revealed; }).length;
+      return '<div class="score-strip">' +
+        '<div class="score-box ' + (gd.turnTeam === 'gold' ? 'active-turn' : '') + '"><span>🟡 الفريق الذهبي (متبقي)</span><b style="font-size:22px;color:var(--gold)">' + arNum(goldLeft) + '</b></div>' +
+        '<div class="score-box ' + (gd.turnTeam === 'teal' ? 'active-turn' : '') + '"><span>🟢 فريق الفيروز (متبقي)</span><b style="font-size:22px;color:var(--teal)">' + arNum(tealLeft) + '</b></div>' +
+        '<div class="score-box"><span>📦 حزمة الكلمات</span><b style="color:var(--gold-light)">' + esc(gd.packName) + '</b></div>' +
+      '</div>' +
+      (gd.clueWord ? '<div style="background:rgba(245,185,66,0.14);border:1px solid var(--gold);padding:10px 14px;border-radius:12px;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">' +
+        '<span>📢 الشفرة الحالية: <b style="color:var(--gold);font-size:18px">' + esc(gd.clueWord) + ' (' + arNum(gd.clueCount) + ')</b></span>' +
+        '<span class="badge badge-gold">محاولات متبقية: ' + arNum(gd.guessesLeft) + '</span>' +
+        '<button class="btn btn-sec btn-sm" data-act="cn-end-turn">إنهاء الدور ⏭️</button>' +
+      '</div>' : '') +
+      (gd.gameOver ? '<div style="background:rgba(16,185,129,0.2);border:2px solid var(--emerald);padding:14px;border-radius:14px;margin-bottom:12px;text-align:center;font-weight:900;font-size:18px">' + esc(gd.winnerText) + '</div>' : '') +
+      '<div class="grid-5">' +
+        gd.cards.map(function(c) {
+          var cls = 'word-tile';
+          if (c.revealed) cls += ' rev-' + c.role;
+          return '<button class="' + cls + '" data-act="cn-pick" data-idx="' + c.idx + '" ' + (c.revealed || gd.gameOver ? 'disabled' : '') + '>' +
+            esc(c.word) +
+          '</button>';
+        }).join('') +
+      '</div>';
+    }
+
+    if (slug === 'mazad30') {
+      return '<div class="score-strip">' +
+        '<div class="score-box ' + (gd.bidHolderTeam === 1 ? 'active-turn' : '') + '"><span>🟡 الفريق الأول</span><b style="font-size:22px;color:var(--gold)">' + arNum(ST.teamScores[0]) + '</b></div>' +
+        '<div class="score-box ' + (gd.bidHolderTeam === 2 ? 'active-turn' : '') + '"><span>🟢 الفريق الثاني</span><b style="font-size:22px;color:var(--teal)">' + arNum(ST.teamScores[1]) + '</b></div>' +
+        '<div class="score-box"><span>🔨 أعلى مزايدة</span><b style="font-size:22px;color:var(--coral)">' + arNum(gd.currentBid) + ' إجابات</b></div>' +
+      '</div>' +
+      '<div style="background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:18px;padding:18px;text-align:center;margin-bottom:14px">' +
+        '<span class="badge badge-gold">فئة المزاد — الجولة ' + arNum(ST.round) + '</span>' +
+        '<h3 style="margin:10px 0 6px;font-size:24px">' + esc(gd.cat.title) + '</h3>' +
+        '<p style="margin:0;color:var(--muted);font-size:14px">' + esc(gd.cat.hint) + '</p>' +
+      '</div>' +
+      (gd.phase === 'bidding' ? (
+        '<div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">' +
+          '<button class="btn btn-gold" data-act="mz-bid-up" data-team="1">🟡 الفريق ١ يزايد (' + arNum(gd.currentBid + 1) + ')</button>' +
+          '<button class="btn btn-teal" data-act="mz-bid-up" data-team="2">🟢 الفريق ٢ يزايد (' + arNum(gd.currentBid + 1) + ')</button>' +
+          '<button class="btn btn-rose" data-act="mz-start-clock">⏱️ دق الجرس وابدأ عدّاد الـ ٣٠ ثانية للفريق ' + arNum(gd.bidHolderTeam) + '!</button>' +
+        '</div>'
+      ) : gd.phase === 'countdown' ? (
+        '<div style="text-align:center">' +
+          '<div style="margin-bottom:12px"><span class="timer-ring" id="liveTimerVal">' + arNum(ST.timerSec) + ' ث</span></div>' +
+          '<div style="font-size:18px;font-weight:900;margin-bottom:12px">الإجابات الصحيحة المسجلة: <span style="color:var(--teal)">' + arNum(gd.namedItems.length) + '</span> من <span style="color:var(--gold)">' + arNum(gd.currentBid) + '</span></div>' +
+          '<div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:12px">' +
+            gd.availableItems.map(function(item) {
+              var used = gd.namedItems.indexOf(item) !== -1;
+              return '<button class="btn ' + (used ? 'btn-teal' : 'btn-sec') + ' btn-sm" data-act="mz-tick-item" data-item="' + esc(item) + '" ' + (used ? 'disabled' : '') + '>' + (used ? '✓ ' : '+ ') + esc(item) + '</button>';
+            }).join('') +
+          '</div>' +
+          '<button class="btn btn-gold" data-act="mz-add-manual">+ احتساب إجابة صحيحة إضافية ✓</button>' +
+        '</div>'
+      ) : (
+        '<div style="text-align:center;padding:16px;background:rgba(16,185,129,0.16);border:1px solid var(--emerald);border-radius:16px">' +
+          '<h4 style="margin:0 0 8px;font-size:20px">' + esc(gd.roundWinner) + '</h4>' +
+          '<button class="btn btn-gold" data-act="next-round">الجولة التالية ⬅</button>' +
+        '</div>'
+      ));
+    }
+
+    if (slug === 'fake_artist') {
+      return '<div class="score-strip">' +
+        '<div class="score-box"><span>🎨 التصنيف العام</span><b style="color:var(--gold)">' + esc(gd.category) + '</b></div>' +
+        '<div class="score-box"><span>✏️ الخطوط المرسومة</span><b style="color:var(--teal)">' + arNum(gd.strokes.length) + ' / ' + arNum(ST.players.length * 2) + '</b></div>' +
+      '</div>' +
+      '<canvas id="sharedDrawPad" class="draw-pad" width="520" height="320"></canvas>' +
+      '<div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:12px">' +
+        '<button class="btn btn-teal btn-sm" data-act="fa-bot-stroke">🤖 دع البوت يرسم خطه التالي</button>' +
+        '<button class="btn btn-sec btn-sm" data-act="fa-clear-canvas">مسح اللوحة 🗑️</button>' +
+        '<button class="btn btn-rose btn-sm" data-act="fa-open-vote">🗳️ بدء التصويت لكشف الرسام المندس</button>' +
+      '</div>' +
+      (gd.phase === 'vote' ? (
+        '<div style="margin-top:14px;padding:14px;background:rgba(0,0,0,0.35);border-radius:14px;text-align:center">' +
+          '<b style="display:block;margin-bottom:10px">من هو الرسّام المندسّ الذي لا يعرف الكلمة السرية؟</b>' +
+          '<div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">' +
+            ST.players.map(function(p, idx) {
+              return '<button class="btn btn-sec btn-sm" data-act="fa-cast-vote" data-idx="' + idx + '">اتهام: ' + esc(p.name) + '</button>';
+            }).join('') +
+          '</div>' +
+        '</div>'
+      ) : gd.phase === 'result' ? (
+        '<div style="margin-top:14px;padding:14px;background:rgba(245,185,66,0.16);border:1px solid var(--gold);border-radius:14px;text-align:center">' +
+          '<b style="display:block;font-size:17px;margin-bottom:8px">' + esc(gd.winnerText) + '</b>' +
+          '<button class="btn btn-gold btn-sm" data-act="next-round">لوحة جديدة ⬅</button>' +
+        '</div>'
+      ) : '');
+    }
+
+    if (slug === 'liars_table') {
+      return '<div class="score-strip">' +
+        '<div class="score-box active-turn"><span>🃏 الورقة المطلوبة على الطاولة</span><b style="font-size:20px;color:var(--gold)">' + esc(gd.targetEmblem) + '</b></div>' +
+        '<div class="score-box"><span>📥 الأوراق المرمية مقلوبة</span><b style="font-size:20px;color:var(--teal)">' + arNum(gd.pileCount) + ' أوراق</b></div>' +
+      '</div>' +
+      '<div class="grid-4" style="margin-bottom:14px">' +
+        ST.players.map(function(p, idx) {
+          var out = gd.eliminated[idx];
+          return '<div class="score-box" style="flex-direction:column;align-items:flex-start;gap:6px;opacity:' + (out ? '0.4' : '1') + '">' +
+            '<b>' + esc(p.name) + (out ? ' (مُقصى 💀)' : '') + '</b>' +
+            '<span class="badge ' + (gd.chamberRisk[idx] >= 3 ? 'badge-rose' : 'badge-gold') + '">قفل الخطر: ' + arNum(gd.chamberRisk[idx]) + ' / ٦</span>' +
+          '</div>';
+        }).join('') +
+      '</div>' +
+      (gd.lastPlay ? (
+        '<div style="background:rgba(244,63,94,0.14);border:1px solid var(--rose);padding:16px;border-radius:16px;text-align:center;margin-bottom:12px">' +
+          '<div style="font-size:17px;font-weight:900;margin-bottom:10px">رمى «' + esc(gd.lastPlay.playerName) + '» ' + arNum(gd.lastPlay.count) + ' أوراق مقلوبة ويقول إنها كلها (' + esc(gd.targetEmblem) + ')!</div>' +
+          '<button class="btn btn-rose" data-act="lt-call-liar">🚨 اقفطه: كذّاب! (اكشف الأوراق المقلوبة)</button>' +
+        '</div>'
+      ) : '<div style="text-align:center;padding:18px;color:var(--muted)">بانتظار رمي أوراق مقلوبة من جوال اللاعب...</div>') +
+      (gd.verdictText ? '<div style="background:rgba(245,185,66,0.15);border:1px solid var(--gold);padding:14px;border-radius:14px;text-align:center;font-weight:800">' + esc(gd.verdictText) + '</div>' : '');
+    }
+
+    if (slug === 'vault50') {
+      return '<div class="score-strip">' +
+        '<div class="score-box ' + (gd.turnTeam === 1 ? 'active-turn' : '') + '"><span>🟡 بنك الفريق ١</span><b style="font-size:21px;color:var(--gold)">' + arNum(ST.teamScores[0]) + ' (🛡️' + arNum(gd.shields[0]) + ')</b></div>' +
+        '<div class="score-box ' + (gd.turnTeam === 2 ? 'active-turn' : '') + '"><span>🟢 بنك الفريق ٢</span><b style="font-size:21px;color:var(--teal)">' + arNum(ST.teamScores[1]) + ' (🛡️' + arNum(gd.shields[1]) + ')</b></div>' +
+        '<div class="score-box"><span>🔥 رصيد الجولة غير المؤمّن</span><b style="font-size:21px;color:var(--coral)">' + arNum(gd.unbankedPot) + ' نقطة</b></div>' +
+      '</div>' +
+      '<div style="display:flex;gap:10px;justify-content:center;margin-bottom:14px;flex-wrap:wrap">' +
+        '<button class="btn btn-gold" data-act="v50-bank" ' + (gd.unbankedPot <= 0 ? 'disabled' : '') + '>🏦 تأمين الرصيد في البنك (' + arNum(gd.unbankedPot) + ' نقطة) وتمرير الدور</button>' +
+      '</div>' +
+      '<div class="vault-grid">' +
+        gd.vaults.map(function(v) {
+          var cls = 'vault-btn';
+          if (v.opened) {
+            cls += v.info.bomb ? ' opened-bomb' : (v.info.kind === 'teal' ? ' opened-teal' : ' opened-gold');
+          }
+          return '<button class="' + cls + '" data-act="v50-open" data-num="' + v.num + '" ' + (v.opened ? 'disabled' : '') + '>' +
+            (v.opened ? '<span style="font-size:11px;line-height:1.2">' + esc(v.info.label) + '</span>' : arNum(v.num)) +
+          '</button>';
+        }).join('') +
+      '</div>';
+    }
+
+    if (slug === 'radar_guess') {
+      var curPts = gd.ptsSchedule[gd.clueIdx] || 150;
+      return '<div class="score-strip">' +
+        '<div class="score-box"><span>🟡 الفريق الأول</span><b style="font-size:22px;color:var(--gold)">' + arNum(ST.teamScores[0]) + '</b></div>' +
+        '<div class="score-box"><span>🟢 الفريق الثاني</span><b style="font-size:22px;color:var(--teal)">' + arNum(ST.teamScores[1]) + '</b></div>' +
+        '<div class="score-box active-turn"><span>💎 جائزة التلميح الحالي</span><b style="font-size:22px;color:var(--gold-light)">' + arNum(curPts) + ' نقطة</b></div>' +
+      '</div>' +
+      '<div style="margin-bottom:12px"><span class="badge badge-gold">تصنيف الرادار: ' + esc(gd.mystery.cat) + '</span></div>' +
+      '<div style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px">' +
+        gd.mystery.clues.slice(0, gd.clueIdx + 1).map(function(c, i) {
+          return '<div style="background:rgba(255,255,255,0.06);border:1px solid var(--border);padding:11px 14px;border-radius:12px;display:flex;justify-content:space-between;gap:10px">' +
+            '<span><b>تلميح ' + arNum(i + 1) + ':</b> ' + esc(c) + '</span>' +
+            '<span class="badge">' + arNum(gd.ptsSchedule[i]) + ' نقطة</span>' +
+          '</div>';
+        }).join('') +
+      '</div>' +
+      (gd.solved ? (
+        '<div style="padding:14px;background:rgba(16,185,129,0.2);border:1px solid var(--emerald);border-radius:14px;text-align:center">' +
+          '<b style="display:block;font-size:18px;margin-bottom:8px">' + esc(gd.winnerText) + ' — الإجابة: ' + esc(gd.mystery.answer) + '</b>' +
+          '<button class="btn btn-gold" data-act="next-round">اللغز التالي ⬅</button>' +
+        '</div>'
+      ) : (
+        '<div style="display:flex;gap:10px;flex-wrap:wrap">' +
+          (gd.clueIdx < gd.mystery.clues.length - 1 ? '<button class="btn btn-sec" data-act="rg-next-clue">🔍 كشف التلميح التالي (تقل النقاط)</button>' : '') +
+        '</div>'
+      ));
+    }
+
+    if (slug === 'alibi_court') {
+      var qText = gd.caze.questions[gd.questionIdx % gd.caze.questions.length];
+      return '<div class="score-strip">' +
+        '<div class="score-box"><span>🕵️ القضية</span><b style="color:var(--gold)">' + esc(gd.caze.title) + '</b></div>' +
+        '<div class="score-box"><span>⏱️ وقت التحقيق</span><b id="liveTimerVal" style="color:var(--rose);font-size:20px">' + arNum(ST.timerSec) + ' ث</b></div>' +
+      '</div>' +
+      '<div style="background:rgba(255,255,255,0.05);border:1px solid var(--border);padding:16px;border-radius:16px;margin-bottom:14px">' +
+        '<div style="color:var(--muted);font-size:13px;margin-bottom:6px">ملخص البلاغ الجنائي:</div>' +
+        '<div style="font-size:16px;line-height:1.7;font-weight:700">' + esc(gd.caze.brief) + '</div>' +
+      '</div>' +
+      '<div style="background:rgba(245,185,66,0.14);border:1px solid var(--gold);padding:14px;border-radius:14px;margin-bottom:14px">' +
+        '<b>سؤال المحقق المباغت (' + arNum(gd.questionIdx + 1) + '): </b> ' + esc(qText) +
+      '</div>' +
+      (gd.suspectAnswers.length ? (
+        '<div style="margin-bottom:14px">' +
+          '<b style="display:block;margin-bottom:8px">إجابات المشتبه بهم المسجلة:</b>' +
+          gd.suspectAnswers.map(function(sa) {
+            return '<div style="padding:8px 12px;background:rgba(0,0,0,0.3);border-radius:10px;margin-bottom:6px"><b>' + esc(sa.player) + ':</b> ' + esc(sa.text) + '</div>';
+          }).join('') +
+        '</div>'
+      ) : '') +
+      '<div style="display:flex;gap:8px;flex-wrap:wrap">' +
+        '<button class="btn btn-teal btn-sm" data-act="ac-next-q">سؤال استجواب تالٍ ⏭️</button>' +
+        '<button class="btn btn-rose btn-sm" data-act="ac-catch-culprit">⚖️ إصدار حكم المحقق وكشف المخادع</button>' +
+      '</div>' +
+      (gd.verdictText ? '<div style="margin-top:12px;padding:12px;background:rgba(16,185,129,0.18);border:1px solid var(--emerald);border-radius:12px;font-weight:800">' + esc(gd.verdictText) + '</div>' : '');
+    }
+
+    if (slug === 'pressure_seat') {
+      var curQ = gd.questions[gd.qIdx % gd.questions.length];
+      return '<div class="score-strip">' +
+        '<div class="score-box active-turn"><span>🔥 نقاط كرسي الضغط</span><b style="font-size:22px;color:var(--gold)">' + arNum(gd.roundPoints) + '</b></div>' +
+        '<div class="score-box"><span>⚡ سلسلة الصمود</span><b style="font-size:22px;color:var(--teal)">' + arNum(gd.streak) + ' متتالية</b></div>' +
+        '<div class="score-box"><span>⏱️ المؤقت</span><b id="liveTimerVal" style="font-size:22px;color:var(--rose)">' + arNum(ST.timerSec) + ' ث</b></div>' +
+      '</div>' +
+      '<div style="background:rgba(244,63,94,0.12);border:1.5px solid var(--rose);padding:12px;border-radius:14px;margin-bottom:14px;text-align:center;font-size:13.5px">' +
+        '🚫 <b>الكلمات المحظورة على الضحية:</b> (نعم / أيوه / إيه) · (لا / أبداً) · (أبيض / أسود) · (تكرار نفس الكلمة أو التردد لأكثر من ٣ ثوانٍ)' +
+      '</div>' +
+      '<div style="background:rgba(255,255,255,0.06);border:2px solid var(--gold);padding:26px 18px;border-radius:20px;text-align:center;margin-bottom:14px">' +
+        '<div style="color:var(--gold);font-size:13px;font-weight:800;margin-bottom:8px">السؤال المباغت رقم ' + arNum(gd.qIdx + 1) + '</div>' +
+        '<div style="font-size:clamp(20px,3vw,28px);font-weight:900">' + esc(curQ) + '</div>' +
+      '</div>' +
+      '<div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">' +
+        (!gd.running ? '<button class="btn btn-gold" data-act="ps-start">▶️ ابدأ تحدي الـ ٦٠ ثانية الآن!</button>' : '') +
+        '<button class="btn btn-teal" data-act="ps-pass-q">✓ نجا من السؤال (+١٠٠ نقطة)</button>' +
+        '<button class="btn btn-rose" data-act="ps-trap">🚨 قفطة! قال كلمة محظورة أو تردد</button>' +
+      '</div>';
+    }
+
+    return '';
+  }
+
+  function renderPhoneHtml() {
+    var slug = CFG.slug;
+    var gd = ST.gameData;
+
+    if (slug === 'shifra') {
+      return '<div style="display:flex;flex-direction:column;gap:12px">' +
+        '<button class="btn ' + (gd.spymasterView ? 'btn-rose' : 'btn-gold') + '" data-act="cn-toggle-spy">' +
+          (gd.spymasterView ? '🙈 إخفاء خريطة قائد الاستخبارات السرية' : '🕵️ كشف خريطة قائد الاستخبارات السرية (للكابتن فقط)') +
+        '</button>' +
+        (gd.spymasterView ? (
+          '<div class="grid-5" style="gap:5px;padding:10px;background:rgba(0,0,0,0.45);border-radius:14px">' +
+            gd.cards.map(function(c) {
+              return '<div style="padding:6px 3px;font-size:11px;font-weight:800;text-align:center;border-radius:8px" class="rev-' + c.role + '">' + esc(c.word) + '</div>';
+            }).join('') +
+          '</div>'
+        ) : '') +
+        '<div style="background:rgba(255,255,255,0.04);padding:12px;border-radius:14px;display:flex;flex-direction:column;gap:8px">' +
+          '<label style="font-size:12.5px;color:var(--muted)">إرسال شفرة القائد (كلمة واحدة + عدد البطاقات):</label>' +
+          '<div style="display:flex;gap:8px">' +
+            '<input id="cnClueInp" class="inp" placeholder="الشفرة (مثال: طويق)" value="' + esc(gd.clueWord) + '">' +
+            '<input id="cnCountInp" type="number" class="inp" style="max-width:80px" min="1" max="9" value="' + (gd.clueCount || 2) + '">' +
+          '</div>' +
+          '<button class="btn btn-teal btn-sm" data-act="cn-send-clue">إرسال الشفرة للفريق 📡</button>' +
+        '</div>' +
+      '</div>';
+    }
+
+    if (slug === 'mazad30') {
+      return '<div style="display:flex;flex-direction:column;gap:12px">' +
+        '<div style="padding:12px;background:rgba(255,255,255,0.05);border-radius:14px;text-align:center">' +
+          '<div style="font-size:13px;color:var(--muted)">المزايدة الحالية</div>' +
+          '<div style="font-size:30px;font-weight:900;color:var(--gold)">' + arNum(gd.currentBid) + ' إجابات</div>' +
+        '</div>' +
+        '<button class="btn btn-gold" data-act="mz-bid-up" data-team="1">🔼 أزايد بـ ' + arNum(gd.currentBid + 1) + ' إجابات (الفريق ١)</button>' +
+        '<button class="btn btn-teal" data-act="mz-bid-up" data-team="2">🔼 أزايد بـ ' + arNum(gd.currentBid + 1) + ' إجابات (الفريق ٢)</button>' +
+        '<button class="btn btn-rose" data-act="mz-start-clock">🔨 اترك المزاد للخصم وابدأ الـ ٣٠ ثانية!</button>' +
+      '</div>';
+    }
+
+    if (slug === 'fake_artist') {
+      var isFake = (gd.fakeIdx === 0);
+      return '<div style="display:flex;flex-direction:column;gap:12px">' +
+        '<button class="btn btn-gold" data-act="fa-toggle-role">' + (gd.revealRole ? '🙈 إخفاء بطاقة دوري السرية' : '👁️ اكشف بطاقة دوري والكلمة السرية (بسرية)') + '</button>' +
+        (gd.revealRole ? (
+          '<div style="padding:16px;border-radius:16px;text-align:center;border:2px solid var(--gold);background:rgba(245,185,66,0.14)">' +
+            (isFake
+              ? '<b style="font-size:19px;color:var(--rose)">🎭 أنت الرسّام المندسّ!</b><p style="margin:6px 0 0;font-size:13.5px">التصنيف هو (' + esc(gd.category) + ') لكنك لا تعرف الكلمة! راقب خطوطهم وتظاهر بالمعرفة.</p>'
+              : '<b style="font-size:19px;color:var(--teal)">🎨 أنت فنّان أصيل!</b><p style="margin:6px 0 0;font-size:15px">الكلمة السرية هي: <b style="color:var(--gold)">' + esc(gd.secretWord) + '</b></p>') +
+          '</div>'
+        ) : '') +
+        '<div style="padding:12px;background:rgba(255,255,255,0.04);border-radius:14px">' +
+          '<b style="display:block;font-size:13.5px;margin-bottom:8px">تخمين الكلمة السرية (فرصة الرسام المندس لخطف الفوز):</b>' +
+          '<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">' +
+            gd.options.map(function(opt) {
+              return '<button class="btn btn-sec btn-sm" data-act="fa-guess-word" data-w="' + esc(opt) + '">' + esc(opt) + '</button>';
+            }).join('') +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    }
+
+    if (slug === 'liars_table') {
+      return '<div style="display:flex;flex-direction:column;gap:12px">' +
+        '<div style="font-size:13.5px;color:var(--muted)">أوراقك السرية في جوالك (اختر ١ إلى ٣ أوراق لرميها مقلوبة على أنها <b>' + esc(gd.targetEmblem) + '</b>):</div>' +
+        '<div style="display:flex;gap:8px;flex-wrap:wrap">' +
+          gd.hand.map(function(card, idx) {
+            var sel = gd.selectedIndices.indexOf(idx) !== -1;
+            return '<button class="btn ' + (sel ? 'btn-gold' : 'btn-sec') + '" data-act="lt-toggle-card" data-idx="' + idx + '">' + esc(card) + '</button>';
+          }).join('') +
+        '</div>' +
+        '<button class="btn btn-teal" data-act="lt-play-selected" ' + (!gd.selectedIndices.length ? 'disabled' : '') + '>🃏 ارمِ الأوراق المحددة مقلوبة (' + arNum(gd.selectedIndices.length) + ')</button>' +
+        '<button class="btn btn-rose" data-act="lt-call-liar" ' + (!gd.lastPlay ? 'disabled' : '') + '>🚨 اقفط آخر لاعب: كذّاب!</button>' +
+      '</div>';
+    }
+
+    if (slug === 'vault50') {
+      return '<div style="display:flex;flex-direction:column;gap:12px">' +
+        '<div style="padding:14px;background:rgba(255,255,255,0.05);border-radius:14px;text-align:center">' +
+          '<div style="font-size:13px;color:var(--muted)">الدور الحالي</div>' +
+          '<div style="font-size:22px;font-weight:900;color:var(--gold)">الفريق ' + arNum(gd.turnTeam) + '</div>' +
+          '<div style="font-size:14px;color:var(--teal);margin-top:4px">رصيد الجولة المعلّق: ' + arNum(gd.unbankedPot) + ' نقطة</div>' +
+        '</div>' +
+        '<button class="btn btn-teal" data-act="v50-random">🎲 اختر خزنة عشوائية من جوالي</button>' +
+        '<button class="btn btn-gold" data-act="v50-bank" ' + (gd.unbankedPot <= 0 ? 'disabled' : '') + '>🏦 أمّن الرصيد في البنك الآن</button>' +
+      '</div>';
+    }
+
+    if (slug === 'radar_guess') {
+      return '<div style="display:flex;flex-direction:column;gap:10px">' +
+        '<div style="font-size:13.5px;color:var(--muted)">اضغط جرس فريقك واختَر الإجابة الصحيحة من جهازك:</div>' +
+        gd.mystery.options.map(function(opt) {
+          return '<button class="btn btn-gold" data-act="rg-answer" data-ans="' + esc(opt) + '">🔔 ' + esc(opt) + '</button>';
+        }).join('') +
+      '</div>';
+    }
+
+    if (slug === 'alibi_court') {
+      return '<div style="display:flex;flex-direction:column;gap:12px">' +
+        '<button class="btn btn-gold" data-act="ac-toggle-alibi">' + (gd.showSecretAlibi ? '🙈 إخفاء ملف العذر السري' : '📂 كشف ملف العذر السري للمشتبه به') + '</button>' +
+        (gd.showSecretAlibi ? (
+          '<div style="padding:14px;background:rgba(245,185,66,0.14);border:1px solid var(--gold);border-radius:14px;font-size:13.5px;line-height:1.7">' +
+            '<b>العذر المتفق عليه:</b> ' + esc(gd.caze.alibi) + '<br>' +
+            '<span style="color:var(--rose)"><b>تفصيلك السري:</b> ' + esc(gd.caze.twist) + '</span>' +
+          '</div>'
+        ) : '') +
+        '<input id="acAnsInp" class="inp" placeholder="اكتب إفادتك السريعة أمام المحقق...">' +
+        '<button class="btn btn-teal btn-sm" data-act="ac-submit-ans">إرسال الإفادة للشاشة ⚖️</button>' +
+      '</div>';
+    }
+
+    if (slug === 'pressure_seat') {
+      return '<div style="display:flex;flex-direction:column;gap:12px">' +
+        '<div style="padding:14px;background:rgba(244,63,94,0.15);border:1px solid var(--rose);border-radius:14px;text-align:center">' +
+          '<b style="font-size:17px">جرس الصيد والمراقبة (للفريق الخصم)</b>' +
+          '<p style="margin:6px 0 0;font-size:13px;color:var(--muted)">اضغط فوراً إذا نطق الضحية بكلمة (نعم / لا / أبيض / أسود) أو تردد!</p>' +
+        '</div>' +
+        '<button class="btn btn-rose" style="padding:18px;font-size:18px" data-act="ps-trap">🚨 قفطة! خالف شروط كرسي الضغط</button>' +
+        '<button class="btn btn-teal" data-act="ps-pass-q">✓ إجابة سليمة — السؤال التالي (+١٠٠)</button>' +
+      '</div>';
+    }
+
+    return '';
+  }
+
+  function bindCanvasDrawing() {
+    var pad = document.getElementById('sharedDrawPad');
+    if (!pad) return;
+    var ctx = pad.getContext('2d');
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.lineWidth = 4;
+
+    // Redraw existing strokes
+    ctx.clearRect(0, 0, pad.width, pad.height);
+    var strokes = ST.gameData.strokes || [];
+    strokes.forEach(function(st) {
+      ctx.strokeStyle = st.color;
+      ctx.beginPath();
+      st.pts.forEach(function(pt, i) {
+        if (i === 0) ctx.moveTo(pt.x, pt.y);
+        else ctx.lineTo(pt.x, pt.y);
+      });
+      ctx.stroke();
+    });
+
+    var drawing = false;
+    var curPts = [];
+    var colors = ['#F5B942', '#2DD4BF', '#F43F5E', '#A855F7'];
+
+    function getPos(ev) {
+      var rect = pad.getBoundingClientRect();
+      var clientX = ev.touches ? ev.touches[0].clientX : ev.clientX;
+      var clientY = ev.touches ? ev.touches[0].clientY : ev.clientY;
+      return {
+        x: (clientX - rect.left) * (pad.width / rect.width),
+        y: (clientY - rect.top) * (pad.height / rect.height)
+      };
+    }
+
+    pad.onpointerdown = function(ev) {
+      drawing = true;
+      curPts = [getPos(ev)];
+    };
+    pad.onpointermove = function(ev) {
+      if (!drawing) return;
+      var pt = getPos(ev);
+      curPts.push(pt);
+      ctx.strokeStyle = colors[ST.gameData.strokeTurn % colors.length];
+      ctx.beginPath();
+      var prev = curPts[curPts.length - 2];
+      ctx.moveTo(prev.x, prev.y);
+      ctx.lineTo(pt.x, pt.y);
+      ctx.stroke();
+    };
+    window.onpointerup = function() {
+      if (!drawing) return;
+      drawing = false;
+      if (curPts.length > 1) {
+        ST.gameData.strokes.push({
+          color: colors[ST.gameData.strokeTurn % colors.length],
+          pts: curPts
+        });
+        ST.gameData.strokeTurn++;
+        SFX.play('click');
+        renderAll();
+      }
+    };
+  }
+
+  function renderAll() {
+    var root = document.getElementById('gameRoot');
+    if (!root) return;
+    var showBoard = ST.viewMode === 'board' || ST.viewMode === 'both';
+    var showPhone = ST.viewMode === 'phone' || ST.viewMode === 'both';
+
+    root.innerHTML =
+      '<div class="top-bar">' +
+        '<div class="brand-Side">' +
+          '<span class="room-pill">غرفة: ' + esc(ST.roomCode) + '</span>' +
+          '<div><b style="font-size:17px">' + esc(CFG.title) + '</b><div style="font-size:12px;color:var(--muted)">' + esc(CFG.subtitle) + '</div></div>' +
+        '</div>' +
+        '<div class="ctrl-group">' +
+          '<span class="badge badge-gold">الجولة ' + arNum(ST.round) + '</span>' +
+          '<button class="btn btn-sec btn-sm" data-act="open-qr">📱 رمز QR للجوالات</button>' +
+          '<button class="btn btn-sec btn-sm" data-act="toggle-sfx">' + (SFX.enabled ? '🔊 الصوت: مفعّل' : '🔇 الصوت: صامت') + '</button>' +
+          '<button class="btn btn-gold btn-sm" data-act="next-round">🔄 جولة جديدة</button>' +
+        '</div>' +
+      '</div>' +
+      '<div class="layout-wrap ' + (ST.viewMode === 'both' ? 'mode-both' : '') + '">' +
+        (showBoard ? (
+          '<section class="panel-box">' +
+            '<div class="panel-head">' +
+              '<div><span class="badge">📺 شاشة التلفزيون / الطاولة المشتركة (16:9)</span><h2 style="margin:6px 0 0;font-size:20px">' + esc(ST.statusMsg) + '</h2></div>' +
+            '</div>' +
+            renderBoardHtml() +
+          '</section>'
+        ) : '') +
+        (showPhone ? (
+          '<aside class="panel-box">' +
+            '<div class="panel-head">' +
+              '<div><span class="badge badge-gold">📱 شاشة جوال اللاعب (التحكم السري)</span><h3 style="margin:6px 0 0;font-size:17px">جهاز تحكم: كريم محمد</h3></div>' +
+            '</div>' +
+            renderPhoneHtml() +
+          '</aside>'
+        ) : '') +
+      '</div>' +
+      '<div class="view-tabs">' +
+        '<button class="' + (ST.viewMode === 'phone' ? 'active' : '') + '" data-act="set-view" data-v="phone">📱 جوالي</button>' +
+        '<button class="' + (ST.viewMode === 'board' ? 'active' : '') + '" data-act="set-view" data-v="board">📺 التلفزيون</button>' +
+        '<button class="' + (ST.viewMode === 'both' ? 'active' : '') + '" data-act="set-view" data-v="both">🖥️ الاثنين معاً</button>' +
+      '</div>';
+
+    if (CFG.slug === 'fake_artist') {
+      bindCanvasDrawing();
+    }
+  }
+
+  document.addEventListener('click', function(e) {
+    var btn = e.target.closest('[data-act]');
+    if (!btn) return;
+    var act = btn.getAttribute('data-act');
+    var gd = ST.gameData;
+
+    if (act === 'set-view') {
+      ST.viewMode = btn.getAttribute('data-v');
+      renderAll();
+    } else if (act === 'toggle-sfx') {
+      SFX.enabled = !SFX.enabled;
+      renderAll();
+    } else if (act === 'open-qr') {
+      var modal = document.getElementById('qrModal');
+      var box = document.getElementById('qrBox');
+      var txt = document.getElementById('qrRoomCodeText');
+      if (modal && box) {
+        var joinUrl = window.location.href.split('#')[0] + '?room=' + ST.roomCode + '&game=' + CFG.slug;
+        if (window.M8QR && window.M8QR.svg) {
+          box.innerHTML = window.M8QR.svg(joinUrl, { ecc: 'M', pad: 2 });
+        }
+        if (txt) txt.textContent = 'كود الغرفة المباشر: ' + ST.roomCode;
+        modal.classList.add('open');
+      }
+    } else if (act === 'next-round') {
+      ST.round++;
+      SFX.play('click');
+      initGameEngine();
+    } else if (act === 'cn-toggle-spy') {
+      gd.spymasterView = !gd.spymasterView;
+      SFX.play('click');
+      renderAll();
+    } else if (act === 'cn-send-clue') {
+      var cw = (document.getElementById('cnClueInp').value || '').trim();
+      var cc = parseInt(document.getElementById('cnCountInp').value, 10) || 2;
+      if (!cw) cw = 'شفرة';
+      gd.clueWord = cw;
+      gd.clueCount = cc;
+      gd.guessesLeft = cc + 1;
+      ST.statusMsg = 'الشفرة المعلنة: «' + cw + ' (' + arNum(cc) + ')» — اضغطوا على الكلمات لتخمينها!';
+      SFX.play('buzz');
+      renderAll();
+    } else if (act === 'cn-pick') {
+      var idx = parseInt(btn.getAttribute('data-idx'), 10);
+      var card = gd.cards[idx];
+      if (!card || card.revealed || gd.gameOver) return;
+      card.revealed = true;
+      if (card.role === 'bomb') {
+        gd.gameOver = true;
+        gd.winnerText = '💥 تم كشف الفخ الأسود («' + card.word + '»)! خسر الفريق ' + (gd.turnTeam === 'gold' ? 'الذهبي' : 'الفيروزي') + ' القيم فوراً!';
+        SFX.play('alarm');
+      } else if (card.role === gd.turnTeam) {
+        SFX.play('win');
+        if (gd.guessesLeft > 0) gd.guessesLeft--;
+        var rem = gd.cards.filter(function(c){ return c.role === gd.turnTeam && !c.revealed; }).length;
+        if (rem === 0) {
+          gd.gameOver = true;
+          gd.winnerText = '🏆 كشف الفريق ' + (gd.turnTeam === 'gold' ? 'الذهبي' : 'الفيروزي') + ' جميع كلماته السرية وفاز بالقيم!';
+        } else if (gd.guessesLeft === 0) {
+          gd.turnTeam = gd.turnTeam === 'gold' ? 'teal' : 'gold';
+        }
+      } else {
+        SFX.play('alarm');
+        gd.turnTeam = gd.turnTeam === 'gold' ? 'teal' : 'gold';
+        gd.clueWord = '';
+      }
+      renderAll();
+    } else if (act === 'cn-end-turn') {
+      gd.turnTeam = gd.turnTeam === 'gold' ? 'teal' : 'gold';
+      gd.clueWord = '';
+      SFX.play('click');
+      renderAll();
+    } else if (act === 'mz-bid-up') {
+      var tm = parseInt(btn.getAttribute('data-team'), 10);
+      gd.currentBid++;
+      gd.bidHolderTeam = tm;
+      SFX.play('click');
+      renderAll();
+    } else if (act === 'mz-start-clock') {
+      gd.phase = 'countdown';
+      SFX.play('buzz');
+      startTimer(30, function() {
+        if (gd.namedItems.length < gd.currentBid) {
+          var other = gd.bidHolderTeam === 1 ? 2 : 1;
+          ST.teamScores[other - 1] += gd.currentBid * 100;
+          gd.phase = 'result';
+          gd.roundWinner = '⏱️ انتهى الوقت! لم يكمل الفريق ' + arNum(gd.bidHolderTeam) + ' العدد المطلوب — ذهبت +' + arNum(gd.currentBid * 100) + ' نقطة للفريق ' + arNum(other) + '!';
+          renderAll();
+        }
+      });
+      renderAll();
+    } else if (act === 'mz-tick-item') {
+      var itm = btn.getAttribute('data-item');
+      if (gd.namedItems.indexOf(itm) === -1) gd.namedItems.push(itm);
+      SFX.play('win');
+      if (gd.namedItems.length >= gd.currentBid) {
+        stopTimer();
+        ST.teamScores[gd.bidHolderTeam - 1] += gd.currentBid * 100;
+        gd.phase = 'result';
+        gd.roundWinner = '🏆 أنجز الفريق ' + arNum(gd.bidHolderTeam) + ' المزاد بنجاح (' + arNum(gd.currentBid) + ' إجابات) وكسب +' + arNum(gd.currentBid * 100) + ' نقطة!';
+      }
+      renderAll();
+    } else if (act === 'mz-add-manual') {
+      gd.namedItems.push('إجابة #' + (gd.namedItems.length + 1));
+      SFX.play('win');
+      if (gd.namedItems.length >= gd.currentBid) {
+        stopTimer();
+        ST.teamScores[gd.bidHolderTeam - 1] += gd.currentBid * 100;
+        gd.phase = 'result';
+        gd.roundWinner = '🏆 أنجز الفريق ' + arNum(gd.bidHolderTeam) + ' المزاد بنجاح وكسب +' + arNum(gd.currentBid * 100) + ' نقطة!';
+      }
+      renderAll();
+    } else if (act === 'fa-toggle-role') {
+      gd.revealRole = !gd.revealRole;
+      SFX.play('click');
+      renderAll();
+    } else if (act === 'fa-bot-stroke') {
+      var colors = ['#F5B942', '#2DD4BF', '#F43F5E', '#A855F7'];
+      var cx = 140 + Math.random() * 240, cy = 80 + Math.random() * 160;
+      var pts = [];
+      for (var s = 0; s < 12; s++) {
+        pts.push({ x: cx + Math.cos(s * 0.5) * (35 + Math.random() * 20), y: cy + Math.sin(s * 0.5) * (35 + Math.random() * 20) });
+      }
+      gd.strokes.push({ color: colors[gd.strokeTurn % colors.length], pts: pts });
+      gd.strokeTurn++;
+      SFX.play('click');
+      renderAll();
+    } else if (act === 'fa-clear-canvas') {
+      gd.strokes = [];
+      renderAll();
+    } else if (act === 'fa-open-vote') {
+      gd.phase = 'vote';
+      SFX.play('buzz');
+      renderAll();
+    } else if (act === 'fa-cast-vote') {
+      var vIdx = parseInt(btn.getAttribute('data-idx'), 10);
+      gd.phase = 'result';
+      if (vIdx === gd.fakeIdx) {
+        SFX.play('win');
+        gd.winnerText = '🎯 قفطة ناجحة! كشفتم الرسّام المندسّ (' + ST.players[gd.fakeIdx].name + ') — الكلمة السرية كانت: «' + gd.secretWord + '»!';
+      } else {
+        SFX.play('alarm');
+        gd.winnerText = '🎭 نجا الرسّام المندسّ (' + ST.players[gd.fakeIdx].name + ') وخدعكم جميعاً! الكلمة السرية كانت: «' + gd.secretWord + '»!';
+      }
+      renderAll();
+    } else if (act === 'fa-guess-word') {
+      var gw = btn.getAttribute('data-w');
+      gd.phase = 'result';
+      if (gw === gd.secretWord) {
+        SFX.play('win');
+        gd.winnerText = '🔥 أصاب الرسّام المندسّ الكلمة السرية («' + gw + '») وخطف نقاط الجولة!';
+      } else {
+        SFX.play('alarm');
+        gd.winnerText = '❌ تخمين خاطئ («' + gw + '»)! الكلمة الصحيحة هي «' + gd.secretWord + '» — فاز الفنانون!';
+      }
+      renderAll();
+    } else if (act === 'lt-toggle-card') {
+      var cIdx = parseInt(btn.getAttribute('data-idx'), 10);
+      var pos = gd.selectedIndices.indexOf(cIdx);
+      if (pos !== -1) gd.selectedIndices.splice(pos, 1);
+      else if (gd.selectedIndices.length < 3) gd.selectedIndices.push(cIdx);
+      SFX.play('click');
+      renderAll();
+    } else if (act === 'lt-play-selected') {
+      if (!gd.selectedIndices.length) return;
+      var played = gd.selectedIndices.map(function(i){ return gd.hand[i]; });
+      gd.hand = gd.hand.filter(function(_, i){ return gd.selectedIndices.indexOf(i) === -1; });
+      gd.selectedIndices = [];
+      gd.pileCount += played.length;
+      gd.lastPlay = { playerIdx: 0, playerName: ST.players[0].name, count: played.length, actualCards: played };
+      gd.verdictText = '';
+      SFX.play('click');
+      renderAll();
+    } else if (act === 'lt-call-liar') {
+      if (!gd.lastPlay) return;
+      var liar = gd.lastPlay.actualCards.some(function(c){ return c !== gd.targetEmblem && c !== '🃏 الجوكر'; });
+      if (liar) {
+        SFX.play('win');
+        gd.chamberRisk[gd.lastPlay.playerIdx]++;
+        gd.verdictText = '🚨 قفطة في محلها! الأوراق المرمية كانت [' + gd.lastPlay.actualCards.join(' ، ') + '] — ارتفع قفل الخطر على ' + gd.lastPlay.playerName + '!';
+      } else {
+        SFX.play('alarm');
+        gd.chamberRisk[1]++;
+        gd.verdictText = '🛡️ كان صادقاً! جميع أوراقه مطابقة [' + gd.lastPlay.actualCards.join(' ، ') + '] — العقاب يرتد على المتّهِم!';
+      }
+      gd.lastPlay = null;
+      gd.pileCount = 0;
+      renderAll();
+    } else if (act === 'v50-open') {
+      var num = parseInt(btn.getAttribute('data-num'), 10);
+      var v = gd.vaults[num - 1];
+      if (!v || v.opened) return;
+      v.opened = true;
+      if (v.info.bomb) {
+        if (gd.shields[gd.turnTeam - 1] > 0) {
+          gd.shields[gd.turnTeam - 1]--;
+          ST.statusMsg = '🛡️ انفجر زر الإنذار رقم ' + arNum(num) + ' لكن درع الحماية أنقذ رصيد الفريق ' + arNum(gd.turnTeam) + '!';
+          SFX.play('buzz');
+        } else {
+          gd.unbankedPot = 0;
+          ST.statusMsg = '💥 انفجر زر الإنذار رقم ' + arNum(num) + '! ضاع رصيد الجولة غير المؤمّن وانتقل الدور!';
+          gd.turnTeam = gd.turnTeam === 1 ? 2 : 1;
+          SFX.play('alarm');
+        }
+      } else {
+        gd.unbankedPot += v.info.pts;
+        if (v.info.shield) gd.shields[gd.turnTeam - 1]++;
+        ST.statusMsg = '✨ الخزنة رقم ' + arNum(num) + ': ' + v.info.label + ' — الرصيد المعلّق الآن ' + arNum(gd.unbankedPot) + ' نقطة!';
+        SFX.play('win');
+      }
+      renderAll();
+    } else if (act === 'v50-random') {
+      var closed = gd.vaults.filter(function(v){ return !v.opened; });
+      if (closed.length) {
+        var pick = closed[Math.floor(Math.random() * closed.length)];
+        var fakeBtn = document.querySelector('[data-act="v50-open"][data-num="' + pick.num + '"]');
+        if (fakeBtn) fakeBtn.click();
+      }
+    } else if (act === 'v50-bank') {
+      ST.teamScores[gd.turnTeam - 1] += gd.unbankedPot;
+      ST.statusMsg = '🏦 أمّن الفريق ' + arNum(gd.turnTeam) + ' مبلغ ' + arNum(gd.unbankedPot) + ' نقطة في البنك الرسمي!';
+      gd.unbankedPot = 0;
+      gd.turnTeam = gd.turnTeam === 1 ? 2 : 1;
+      SFX.play('win');
+      renderAll();
+    } else if (act === 'rg-next-clue') {
+      if (gd.clueIdx < gd.mystery.clues.length - 1) {
+        gd.clueIdx++;
+        SFX.play('click');
+        renderAll();
+      }
+    } else if (act === 'rg-answer') {
+      var ans = btn.getAttribute('data-ans');
+      var pts = gd.ptsSchedule[gd.clueIdx] || 150;
+      if (ans === gd.mystery.answer) {
+        ST.teamScores[0] += pts;
+        gd.solved = true;
+        gd.winnerText = '🎯 إجابة صحيحة من التلميح رقم ' + arNum(gd.clueIdx + 1) + ' (+' + arNum(pts) + ' نقطة)!';
+        SFX.play('win');
+      } else {
+        ST.statusMsg = '❌ تخمين خاطئ («' + ans + '»)! اكشف التلميح التالي لتقريب الإجابة.';
+        SFX.play('alarm');
+      }
+      renderAll();
+    } else if (act === 'ac-toggle-alibi') {
+      gd.showSecretAlibi = !gd.showSecretAlibi;
+      SFX.play('click');
+      renderAll();
+    } else if (act === 'ac-submit-ans') {
+      var inp = document.getElementById('acAnsInp');
+      var val = inp ? inp.value.trim() : '';
+      if (!val) val = 'كنا مجتمعين في الاستراحة وقت الحادثة!';
+      gd.suspectAnswers.push({ player: 'كريم (المشتبه ١)', text: val });
+      gd.suspectAnswers.push({ player: 'فهد (المشتبه ٢)', text: gd.caze.botReply });
+      SFX.play('click');
+      renderAll();
+    } else if (act === 'ac-next-q') {
+      gd.questionIdx++;
+      SFX.play('click');
+      renderAll();
+    } else if (act === 'ac-catch-culprit') {
+      gd.verdictText = '⚖️ انتهى الاستجواب! التناقض ظهر في رواية المشتبه الثاني حول التوقيت — +٥٠٠ نقطة لفريق المحققين!';
+      SFX.play('win');
+      renderAll();
+    } else if (act === 'ps-start') {
+      gd.running = true;
+      SFX.play('buzz');
+      startTimer(60, function() {
+        gd.running = false;
+        ST.statusMsg = '🏆 انتهت الـ ٦٠ ثانية! حصد اللاعب ' + arNum(gd.roundPoints) + ' نقطة على كرسي الضغط!';
+        renderAll();
+      });
+      renderAll();
+    } else if (act === 'ps-pass-q') {
+      gd.qIdx++;
+      gd.streak++;
+      gd.roundPoints += 100 + (gd.streak >= 3 ? 50 : 0);
+      SFX.play('win');
+      renderAll();
+    } else if (act === 'ps-trap') {
+      gd.qIdx++;
+      gd.streak = 0;
+      gd.violations++;
+      gd.roundPoints = Math.max(0, gd.roundPoints - 50);
+      ST.statusMsg = '🚨 قفطة مخالفة! نطق بكلمة محظورة أو تردد — تم خصم ٥٠ نقطة وتصفير السلسلة!';
+      SFX.play('alarm');
+      renderAll();
+    }
+  });
+
+  document.getElementById('closeQrBtn').addEventListener('click', function() {
+    document.getElementById('qrModal').classList.remove('open');
+  });
+
+  initGameEngine();
+})();
+</script>
+
+<script>
+(function(){
+  window.addEventListener('message', function(ev) {
+    var d = ev && ev.data;
+    if (!d || typeof d !== 'object') return;
+    if (d.type === 'DW_AUDIO_SYNC') {
+      window.__DW_VOICE_ON = !!d.voiceOn;
+      window.__DW_SFX_ON = !!d.sfxOn;
+      if (!d.voiceOn && window.speechSynthesis) {
+        try { window.speechSynthesis.cancel(); } catch(e){}
+      }
+    }
+  });
+})();
+</script>
+
+</body>
+</html>

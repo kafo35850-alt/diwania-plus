@@ -1,0 +1,3238 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#0A0F24">
+<title>ديوانية بلس (Diwaniya+) — منصة الألعاب الجماعية التفاعلية</title>
+<style>
+/* ============================================================================
+ * ديوانية بلس (Diwaniya+) — Luxury Royal Night Commercial Platform Stylesheet
+ * Responsive for iPad (Safari), Mobile, Desktop, and TV Screens
+ * ============================================================================ */
+:root {
+  --bg-deep: #0A0F24;
+  --bg-surface: #111936;
+  --bg-card: rgba(23, 33, 68, 0.78);
+  --bg-glass: rgba(15, 23, 48, 0.88);
+  --border-line: rgba(245, 185, 66, 0.18);
+  --border-subtle: rgba(255, 255, 255, 0.11);
+  --gold: #F5B942;
+  --gold-light: #FFE08A;
+  --teal: #2DD4BF;
+  --teal-dark: #0D9488;
+  --coral: #F97316;
+  --rose: #F43F5E;
+  --emerald: #10B981;
+  --text-main: #F8FAFC;
+  --text-muted: #94A3B8;
+  --radius-xl: 22px;
+  --radius-lg: 16px;
+  --radius-md: 12px;
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background-color: var(--bg-deep);
+  color: var(--text-main);
+  font-family: -apple-system, "SF Arabic", "Segoe UI", Tajawal, Cairo, system-ui, sans-serif;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background:
+    radial-gradient(1100px 550px at 85% -10%, rgba(245, 185, 66, 0.14) 0%, transparent 60%),
+    radial-gradient(900px 500px at 10% 10%, rgba(45, 212, 191, 0.10) 0%, transparent 55%),
+    linear-gradient(180deg, var(--bg-surface) 0%, var(--bg-deep) 65%);
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+button, input, select, textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  touch-action: manipulation;
+}
+
+button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* Navbar */
+.dw-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(10, 15, 36, 0.88);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: max(12px, env(safe-area-inset-top)) 20px 12px;
+}
+
+.dw-nav-inner {
+  max-width: 1240px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.dw-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-main);
+}
+
+.dw-brand-logo {
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--gold), #D97706);
+  display: grid;
+  place-items: center;
+  color: #1A1100;
+  font-weight: 900;
+  font-size: 22px;
+  box-shadow: 0 6px 18px rgba(245, 185, 66, 0.3);
+}
+
+.dw-brand-text h1 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: -0.3px;
+}
+
+.dw-brand-text h1 span {
+  color: var(--gold);
+}
+
+.dw-brand-text p {
+  margin: 0;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.dw-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.dw-tab-btn {
+  padding: 9px 15px;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 14px;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid transparent;
+  transition: all 0.15s;
+}
+
+.dw-tab-btn.active, .dw-tab-btn:hover {
+  color: var(--text-main);
+  background: rgba(245, 185, 66, 0.14);
+  border-color: var(--border-line);
+}
+
+.dw-tab-btn.admin-tab {
+  color: var(--teal);
+  border-color: rgba(45, 212, 191, 0.35);
+}
+
+.dw-spacer {
+  flex: 1;
+}
+
+.dw-wallet-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(245, 185, 66, 0.2), rgba(245, 185, 66, 0.08));
+  border: 1px solid rgba(245, 185, 66, 0.5);
+  font-weight: 900;
+  font-size: 14px;
+  color: var(--gold-light);
+}
+
+.dw-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 18px;
+  border-radius: var(--radius-md);
+  font-weight: 800;
+  font-size: 15px;
+  transition: transform 0.12s, opacity 0.12s;
+}
+
+.dw-btn:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+.dw-btn-gold {
+  background: linear-gradient(180deg, var(--gold-light), var(--gold));
+  color: #1E1300;
+  box-shadow: 0 6px 18px rgba(245, 185, 66, 0.28);
+}
+
+.dw-btn-teal {
+  background: linear-gradient(180deg, var(--teal), var(--teal-dark));
+  color: #042f2e;
+  box-shadow: 0 6px 18px rgba(45, 212, 191, 0.25);
+}
+
+.dw-btn-sec {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-main);
+}
+
+.dw-btn-danger {
+  background: rgba(244, 63, 94, 0.2);
+  border: 1px solid rgba(244, 63, 94, 0.5);
+  color: #FECDD3;
+}
+
+.dw-btn-sm {
+  padding: 7px 12px;
+  font-size: 13px;
+  border-radius: 10px;
+}
+
+/* Container & Sections */
+.dw-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 24px 20px 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.dw-hero {
+  border-radius: 26px;
+  padding: 32px 28px;
+  background:
+    radial-gradient(700px 300px at 10% 0%, rgba(245, 185, 66, 0.18), transparent 70%),
+    linear-gradient(145deg, rgba(23, 33, 68, 0.9), rgba(10, 15, 36, 0.92));
+  border: 1px solid var(--border-line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.dw-hero-content {
+  max-width: 680px;
+}
+
+.dw-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 13px;
+  border-radius: 999px;
+  background: rgba(45, 212, 191, 0.14);
+  border: 1px solid rgba(45, 212, 191, 0.45);
+  color: var(--teal);
+  font-size: 12.5px;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+.dw-hero h2 {
+  margin: 0;
+  font-size: clamp(26px, 4vw, 38px);
+  font-weight: 900;
+  line-height: 1.25;
+}
+
+.dw-hero h2 b {
+  color: var(--gold);
+}
+
+.dw-hero p {
+  margin: 10px 0 0;
+  color: var(--text-muted);
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+/* Grid Cards */
+.dw-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+  gap: 20px;
+}
+
+.dw-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.dw-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  transition: border-color 0.15s, transform 0.15s;
+}
+
+.dw-card:hover {
+  border-color: var(--border-line);
+}
+
+.dw-game-card-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.dw-game-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, rgba(245, 185, 66, 0.22), rgba(45, 212, 191, 0.14));
+  border: 1px solid var(--border-line);
+  display: grid;
+  place-items: center;
+  font-size: 24px;
+  font-weight: 900;
+  color: var(--gold);
+  flex: none;
+}
+
+.dw-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 11px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid var(--border-subtle);
+  font-size: 12.5px;
+  font-weight: 700;
+}
+
+.dw-chip.gold {
+  background: rgba(245, 185, 66, 0.18);
+  border-color: rgba(245, 185, 66, 0.5);
+  color: var(--gold-light);
+}
+
+.dw-chip.teal {
+  background: rgba(45, 212, 191, 0.16);
+  border-color: rgba(45, 212, 191, 0.45);
+  color: #99F6E4;
+}
+
+/* Inputs & Tables */
+.dw-input, .dw-select, .dw-textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: var(--radius-md);
+  background: rgba(5, 9, 22, 0.65);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-main);
+  font-size: 15px;
+  outline: none;
+}
+
+.dw-input:focus, .dw-select:focus, .dw-textarea:focus {
+  border-color: var(--gold);
+}
+
+.dw-table-wrap {
+  overflow-x: auto;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-subtle);
+}
+
+.dw-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  text-align: right;
+}
+
+.dw-table th, .dw-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.dw-table th {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-muted);
+  font-weight: 800;
+}
+
+/* Category Explorer */
+.dw-cat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(195px, 1fr));
+  gap: 12px;
+  max-height: 540px;
+  overflow-y: auto;
+  padding: 4px;
+}
+
+.dw-cat-item {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.dw-cat-item b {
+  font-size: 14.5px;
+}
+
+/* Modal & Toast */
+.dw-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(4, 7, 18, 0.82);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  display: none;
+  place-items: center;
+  padding: 16px;
+  overflow-y: auto;
+}
+
+.dw-modal-backdrop.open {
+  display: grid;
+}
+
+.dw-modal {
+  width: 100%;
+  max-width: 520px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-line);
+  border-radius: 24px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65);
+}
+
+.dw-toast {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 120;
+  background: #162044;
+  border: 1px solid var(--gold);
+  color: var(--text-main);
+  padding: 12px 20px;
+  border-radius: 14px;
+  font-weight: 800;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55);
+  display: none;
+}
+
+.dw-toast.show {
+  display: block;
+}
+
+/* Game Fullscreen Modal Frame */
+.dw-game-frame-wrap {
+  position: fixed;
+  inset: 0;
+  z-index: 110;
+  background: var(--bg-deep);
+  display: none;
+  flex-direction: column;
+}
+
+.dw-game-frame-wrap.open {
+  display: flex;
+}
+
+.dw-game-frame-bar {
+  height: 50px;
+  background: #080C1D;
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  gap: 12px;
+}
+
+.dw-game-frame {
+  flex: 1;
+  width: 100%;
+  border: 0;
+}
+
+
+/* Luxury Game Emblem Banner & Crest */
+.dw-crest-banner {
+  position: relative;
+  height: 168px;
+  border-radius: 18px;
+  margin: -6px -6px 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px solid rgba(245, 185, 66, 0.28);
+  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.55), 0 10px 24px rgba(0, 0, 0, 0.35);
+}
+
+.dw-crest-banner svg {
+  width: 132px;
+  height: 132px;
+  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.65));
+  transition: transform 0.25s cubic-bezier(0.2, 1.2, 0.4, 1);
+}
+
+.dw-card:hover .dw-crest-banner svg {
+  transform: scale(1.07) translateY(-2px);
+}
+
+.dw-free-ribbon {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #10B981, #059669);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 900;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+}
+
+.dw-used-ribbon {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.78);
+  color: var(--gold-light);
+  font-size: 11.5px;
+  font-weight: 800;
+  border: 1px solid rgba(245, 185, 66, 0.35);
+}
+
+.dw-guide-modal {
+  max-width: 680px;
+}
+
+.dw-guide-step {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 12px 14px;
+}
+
+.dw-guide-step-num {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), #D97706);
+  color: #1A1100;
+  font-weight: 900;
+  display: grid;
+  place-items: center;
+  flex: none;
+}
+
+</style>
+</head>
+<body>
+<div id="dwApp"></div>
+<div id="dwToast" class="dw-toast"></div>
+
+<!-- Auth Modal (Cloudflare Worker + D1 Server-Verified OTP) -->
+<div class="dw-modal-backdrop" id="dwAuthModal">
+  <div class="dw-modal">
+    <div style="display:flex;align-items:center;justify-content:space-between">
+      <h3 style="margin:0;font-size:20px;font-weight:900">🔐 تسجيل الدخول الآمن عبر رمز التحقق (OTP)</h3>
+      <button class="dw-btn dw-btn-sec dw-btn-sm" data-act="close-auth">✕</button>
+    </div>
+    <p style="margin:0;color:var(--text-muted);font-size:13.5px;line-height:1.65">أدخل بريدك الإلكتروني ليقوم الخادم بإرسال رمز تحقق لمرة واحدة (صالح لمدة ٥ دقائق). يحصل كل حساب جديد على <b>قيم مجاني تجريبي واحد في كل لعبة من الألعاب الـ ٢٤</b> مرتبط بحسابه على الخادم.</p>
+    <div>
+      <label style="font-size:12.5px;color:var(--text-muted);display:block;margin-bottom:5px">الاسم أو اللقب في الديوانية</label>
+      <input id="authNameInp" class="dw-input" placeholder="مثال: أبو محمد / سارة" value="">
+    </div>
+    <div>
+      <label style="font-size:12.5px;color:var(--text-muted);display:block;margin-bottom:5px">البريد الإلكتروني</label>
+      <input id="authEmailInp" type="email" class="dw-input" dir="ltr" placeholder="name@example.com" value="">
+    </div>
+    <div id="otpStepBox" style="display:none;background:rgba(45,212,191,0.08);border:1px solid rgba(45,212,191,0.3);padding:12px;border-radius:14px">
+      <div id="otpServerNotice" style="font-size:12.5px;color:var(--teal);margin-bottom:8px;line-height:1.6">تم إرسال رمز التحقق المكون من ٦ أرقام إلى بريدك الإلكتروني عبر الخادم.</div>
+      <input id="authOtpInp" class="dw-input" dir="ltr" maxlength="6" inputmode="numeric" placeholder="أدخل رمز الـ OTP المكون من 6 أرقام" style="text-align:center;font-size:20px;font-weight:900;letter-spacing:6px">
+      <button class="dw-btn dw-btn-teal" id="verifyOtpBtn" style="width:100%;margin-top:10px" data-act="verify-otp">تأكيد الرمز وتسجيل الدخول</button>
+    </div>
+    <div id="authRateLimitNotice" style="display:none;font-size:12.5px;color:var(--rose);background:rgba(244,63,94,0.12);border:1px solid rgba(244,63,94,0.35);padding:10px;border-radius:12px"></div>
+    <div style="display:flex;gap:8px;justify-content:flex-end">
+      <button class="dw-btn dw-btn-gold" id="sendOtpBtn" style="width:100%" data-act="send-otp">إرسال رمز التحقق (OTP) عبر الخادم</button>
+    </div>
+  </div>
+</div>
+
+<!-- Detailed Game Guide Modal (External Explanation Before Launching) -->
+<div class="dw-modal-backdrop" id="dwGameGuideModal">
+  <div class="dw-modal dw-guide-modal" id="dwGuideModalInner"></div>
+</div>
+
+<!-- Cross-Device Multiplayer Room & QR Hub Modal (TV/iPad Host + Mobile QR Controller + Durable Objects WebSocket) -->
+<div class="dw-modal-backdrop" id="dwRoomModal">
+  <div class="dw-modal dw-guide-modal" id="dwRoomModalInner" style="max-width:920px"></div>
+</div>
+
+<!-- Category Questions Preview Modal -->
+<div class="dw-modal-backdrop" id="dwCatPreviewModal">
+  <div class="dw-modal dw-guide-modal" id="dwCatPreviewModalInner" style="max-width:820px"></div>
+</div>
+
+<!-- Fullscreen Game Frame -->
+<div class="dw-game-frame-wrap" id="dwGameFrameWrap">
+  <div class="dw-game-frame-bar">
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+      <span class="dw-badge" style="margin:0">🎮 جلسة لعب موثقة من الخادم</span>
+      <b id="dwGameFrameTitle" style="font-size:16px">تحدي الثمانية</b>
+      <span id="dwGameFrameRoomChip" class="dw-chip teal" style="font-size:11.5px;cursor:pointer" data-act="open-room-hub">📱 غرفة QR والجرس الجماعي</span>
+    </div>
+    <div class="dw-spacer"></div>
+    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+      <button class="dw-btn dw-btn-teal dw-btn-sm" data-act="open-room-hub">📱 ربط جوالات اللاعبين (QR)</button>
+      <button class="dw-btn dw-btn-sec dw-btn-sm" id="dwFrameVoiceBtn" data-act="toggle-store-voice">🔊 الصوت: مفعّل</button>
+      <button class="dw-btn dw-btn-sec dw-btn-sm" id="dwFrameSfxBtn" data-act="toggle-store-sfx">🎵 المؤثرات: مفعّلة</button>
+      <button class="dw-btn dw-btn-danger dw-btn-sm" data-act="close-game-frame">✕ إغلاق اللعبة والعودة للمتجر</button>
+    </div>
+  </div>
+  <iframe class="dw-game-frame" allow="autoplay" id="dwGameIframe" sandbox="allow-scripts allow-same-origin allow-forms allow-modals allow-popups" title="Diwaniya Game Frame"></iframe>
+</div>
+
+<script src="/m8p.js"></script>
+<script>
+/* ============================================================================
+ * ديوانية بلس (Diwaniya+) — Frontend Storefront, Wallet, Auth, Guides & Admin
+ * Supports 24 Games, 1 Free Play per Game, Dual Audio/SFX & Game Suggestions, Luxury SVG Crests, and External Guides.
+ * ============================================================================ */
+(function () {
+  'use strict';
+
+
+  // 5 Bespoke Luxury Metallic & Jewel SVG Crests (100% Faceless, No Posters)
+  var LUXURY_LOGOS = {
+    eight: {
+      bg: 'radial-gradient(circle at 50% 35%, #1e3a5f 0%, #091326 75%)',
+      svg: '<svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">' +
+        '<defs>' +
+          '<linearGradient id="g8_gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#FFF2B2"/><stop offset="45%" stop-color="#F5B942"/><stop offset="100%" stop-color="#B4690E"/></linearGradient>' +
+          '<linearGradient id="g8_teal" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5EEAD4"/><stop offset="100%" stop-color="#0F766E"/></linearGradient>' +
+        '</defs>' +
+        '<polygon points="80,8 131,29 152,80 131,131 80,152 29,131 8,80 29,29" fill="#0B1528" stroke="url(#g8_gold)" stroke-width="4.5"/>' +
+        '<polygon points="80,18 124,36 142,80 124,124 80,142 36,124 18,80 36,36" fill="none" stroke="#2DD4BF" stroke-width="1.5" stroke-dasharray="6 4" opacity="0.7"/>' +
+        '<path d="M52,42 L64,26 L80,38 L96,26 L108,42 Z" fill="url(#g8_gold)"/>' +
+        '<circle cx="80" cy="88" r="36" fill="url(#g8_teal)" opacity="0.22" stroke="url(#g8_gold)" stroke-width="2.5"/>' +
+        '<path d="M62,108 L80,62 L98,108" fill="none" stroke="url(#g8_gold)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>' +
+        '<circle cx="80" cy="48" r="4" fill="#FFF2B2"/>' +
+        '<circle cx="48" cy="88" r="3.5" fill="#2DD4BF"/><circle cx="112" cy="88" r="3.5" fill="#2DD4BF"/>' +
+      '</svg>'
+    },
+    qaftah: {
+      bg: 'radial-gradient(circle at 50% 35%, #3b1d5e 0%, #110926 75%)',
+      svg: '<svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">' +
+        '<defs>' +
+          '<linearGradient id="qf_gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#FFE49E"/><stop offset="50%" stop-color="#F5B942"/><stop offset="100%" stop-color="#C25E00"/></linearGradient>' +
+          '<linearGradient id="qf_vio" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#C084FC"/><stop offset="100%" stop-color="#581C87"/></linearGradient>' +
+        '</defs>' +
+        '<path d="M80,10 L140,42 L140,118 L80,150 L20,118 L20,42 Z" fill="#170E2E" stroke="url(#qf_gold)" stroke-width="4.5" stroke-linejoin="round"/>' +
+        '<path d="M80,20 L130,47 L130,113 L80,140 L30,113 L30,47 Z" fill="url(#qf_vio)" opacity="0.25"/>' +
+        '<rect x="42" y="54" width="76" height="54" rx="10" fill="#1E1338" stroke="url(#qf_gold)" stroke-width="3"/>' +
+        '<path d="M44,58 L80,86 L116,58" fill="none" stroke="url(#qf_gold)" stroke-width="3" stroke-linecap="round"/>' +
+        '<circle cx="80" cy="82" r="15" fill="#F43F5E" stroke="url(#qf_gold)" stroke-width="2.5"/>' +
+        '<path d="M76,75 C76,71 84,71 84,76 C84,80 80,81 80,85 M80,91 L80,92" fill="none" stroke="#FFF" stroke-width="3.2" stroke-linecap="round"/>' +
+        '<polygon points="88,26 74,48 85,48 77,66 96,42 84,42" fill="url(#qf_gold)"/>' +
+      '</svg>'
+    },
+    chancellor: {
+      bg: 'radial-gradient(circle at 50% 35%, #5a1424 0%, #17060c 75%)',
+      svg: '<svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">' +
+        '<defs>' +
+          '<linearGradient id="sh_gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#FFF0B8"/><stop offset="50%" stop-color="#F5B942"/><stop offset="100%" stop-color="#9A5B0A"/></linearGradient>' +
+          '<linearGradient id="sh_red" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FB7185"/><stop offset="100%" stop-color="#881337"/></linearGradient>' +
+        '</defs>' +
+        '<path d="M80,10 L138,32 L138,88 C138,122 112,142 80,152 C48,142 22,122 22,88 L22,32 Z" fill="#1F0910" stroke="url(#sh_gold)" stroke-width="4.5" stroke-linejoin="round"/>' +
+        '<path d="M80,22 L126,40 L126,86 C126,113 105,130 80,139 C55,130 34,113 34,86 L34,40 Z" fill="url(#sh_red)" opacity="0.28"/>' +
+        '<rect x="56" y="46" width="48" height="18" rx="5" fill="url(#sh_gold)"/>' +
+        '<rect x="75" y="64" width="10" height="44" rx="4" fill="url(#sh_gold)"/>' +
+        '<ellipse cx="80" cy="116" rx="28" ry="7" fill="url(#sh_gold)"/>' +
+        '<polygon points="80,26 84,35 94,35 86,40 89,49 80,44 71,49 74,40 66,35 76,35" fill="#FFF0B8"/>' +
+      '</svg>'
+    },
+    dakhil: {
+      bg: 'radial-gradient(circle at 50% 35%, #0f4c5c 0%, #071923 75%)',
+      svg: '<svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">' +
+        '<defs>' +
+          '<linearGradient id="dk_gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#FFF2B2"/><stop offset="50%" stop-color="#F5B942"/><stop offset="100%" stop-color="#B4690E"/></linearGradient>' +
+          '<linearGradient id="dk_cyan" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#5EEAD4"/><stop offset="100%" stop-color="#0284C7"/></linearGradient>' +
+        '</defs>' +
+        '<circle cx="80" cy="80" r="68" fill="#081C29" stroke="url(#dk_gold)" stroke-width="4.5"/>' +
+        '<circle cx="80" cy="80" r="56" fill="none" stroke="url(#dk_cyan)" stroke-width="1.8" stroke-dasharray="8 6"/>' +
+        '<path d="M46,66 C52,42 66,34 80,34 C94,34 108,42 114,66 Z" fill="url(#dk_gold)"/>' +
+        '<rect x="34" y="64" width="92" height="10" rx="5" fill="#F5B942"/>' +
+        '<rect x="48" y="57" width="64" height="6" rx="2" fill="#081C29"/>' +
+        '<circle cx="76" cy="104" r="18" fill="rgba(45,212,191,0.22)" stroke="url(#dk_cyan)" stroke-width="4"/>' +
+        '<line x1="90" y1="116" x2="108" y2="132" stroke="url(#dk_gold)" stroke-width="7" stroke-linecap="round"/>' +
+      '</svg>'
+    },
+    mafia: {
+      bg: 'radial-gradient(circle at 50% 35%, #3a1228 0%, #090614 75%)',
+      svg: '<svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">' +
+        '<defs>' +
+          '<linearGradient id="mf_gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#FFF2B2"/><stop offset="50%" stop-color="#F5B942"/><stop offset="100%" stop-color="#A35506"/></linearGradient>' +
+          '<linearGradient id="mf_crim" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#F43F5E"/><stop offset="100%" stop-color="#4C0519"/></linearGradient>' +
+        '</defs>' +
+        '<polygon points="80,8 144,44 144,116 80,152 16,116 16,44" fill="#0F081D" stroke="url(#mf_gold)" stroke-width="4.5"/>' +
+        '<circle cx="94" cy="54" r="24" fill="url(#mf_gold)"/>' +
+        '<circle cx="104" cy="48" r="20" fill="#0F081D"/>' +
+        '<path d="M40,118 C40,92 58,82 80,82 C102,82 120,92 120,118 L130,130 L30,130 Z" fill="url(#mf_crim)" stroke="url(#mf_gold)" stroke-width="2.5"/>' +
+        '<polygon points="68,82 80,108 92,82" fill="#FFF"/>' +
+        '<polygon points="77,90 80,118 83,90" fill="#E11D48"/>' +
+        '<ellipse cx="80" cy="64" rx="34" ry="7" fill="url(#mf_gold)"/>' +
+        '<path d="M56,64 C60,44 70,38 80,38 C90,38 100,44 104,64 Z" fill="#1E1035" stroke="url(#mf_gold)" stroke-width="2"/>' +
+      '</svg>'
+    }    ,
+    shifra: {
+      bg: 'radial-gradient(circle at 50% 35%, #1e293b 0%, #090d16 75%)',
+      svg: '<svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">' +
+        '<defs>' +
+          '<linearGradient id="cn_gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#FFF2B2"/><stop offset="50%" stop-color="#F5B942"/><stop offset="100%" stop-color="#B4690E"/></linearGradient>' +
+        '</defs>' +
+        '<rect x="18" y="18" width="124" height="124" rx="24" fill="#0B1325" stroke="url(#cn_gold)" stroke-width="4.5"/>' +
+        '<rect x="32" y="32" width="28" height="28" rx="6" fill="#EF4444" stroke="#FCA5A5" stroke-width="2"/>' +
+        '<rect x="66" y="32" width="28" height="28" rx="6" fill="#2563EB" stroke="#93C5FD" stroke-width="2"/>' +
+        '<rect x="100" y="32" width="28" height="28" rx="6" fill="#D6BC8B" stroke="#FDE68A" stroke-width="2"/>' +
+        '<rect x="32" y="66" width="28" height="28" rx="6" fill="#2563EB" stroke="#93C5FD" stroke-width="2"/>' +
+        '<rect x="66" y="66" width="28" height="28" rx="6" fill="#111827" stroke="#F43F5E" stroke-width="2.5"/>' +
+        '<rect x="100" y="66" width="28" height="28" rx="6" fill="#EF4444" stroke="#FCA5A5" stroke-width="2"/>' +
+        '<rect x="32" y="100" width="28" height="28" rx="6" fill="#D6BC8B" stroke="#FDE68A" stroke-width="2"/>' +
+        '<rect x="66" y="100" width="28" height="28" rx="6" fill="#EF4444" stroke="#FCA5A5" stroke-width="2"/>' +
+        '<rect x="100" y="100" width="28" height="28" rx="6" fill="#2563EB" stroke="#93C5FD" stroke-width="2"/>' +
+      '</svg>'
+    },
+    mystery_button: {
+      bg: 'radial-gradient(circle at 50% 35%, #0e4838 0%, #051914 75%)',
+      svg: '<svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">' +
+        '<circle cx="80" cy="80" r="66" fill="#071F1A" stroke="#F5B942" stroke-width="4.5"/>' +
+        '<ellipse cx="80" cy="96" rx="44" ry="18" fill="#065F46" stroke="#34D399" stroke-width="2.5"/>' +
+        '<ellipse cx="80" cy="76" rx="38" ry="24" fill="#EF4444" stroke="#FCA5A5" stroke-width="3"/>' +
+        '<path d="M76,66 C76,60 86,60 86,67 C86,72 80,74 80,79 M80,86 L80,88" stroke="#FFF" stroke-width="4" stroke-linecap="round" fill="none"/>' +
+      '</svg>'
+    },
+    golden_vault: {
+      bg: 'radial-gradient(circle at 50% 35%, #5c3b09 0%, #181004 75%)',
+      svg: '<svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">' +
+        '<rect x="20" y="20" width="120" height="120" rx="26" fill="#1C1206" stroke="#F5B942" stroke-width="4.5"/>' +
+        '<circle cx="80" cy="80" r="40" fill="none" stroke="#FFE08A" stroke-width="5"/>' +
+        '<circle cx="80" cy="80" r="14" fill="#F5B942"/>' +
+        '<line x1="80" y1="36" x2="80" y2="124" stroke="#F5B942" stroke-width="5" stroke-linecap="round"/>' +
+        '<line x1="36" y1="80" x2="124" y2="80" stroke="#F5B942" stroke-width="5" stroke-linecap="round"/>' +
+      '</svg>'
+    },
+    diwaniya_auction: {
+      bg: 'radial-gradient(circle at 50% 35%, #5c2410 0%, #170905 75%)',
+      svg: '<svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">' +
+        '<circle cx="80" cy="80" r="66" fill="#1C0C06" stroke="#F5B942" stroke-width="4.5"/>' +
+        '<rect x="48" y="42" width="46" height="22" rx="6" transform="rotate(-25 71 53)" fill="#F5B942"/>' +
+        '<line x1="72" y1="56" x2="114" y2="98" stroke="#FFE08A" stroke-width="8" stroke-linecap="round"/>' +
+        '<rect x="38" y="112" width="64" height="12" rx="6" fill="#EA580C" stroke="#F5B942" stroke-width="2"/>' +
+      '</svg>'
+    },
+    fortune_wheel: {
+      bg: 'radial-gradient(circle at 50% 35%, #441663 0%, #12061c 75%)',
+      svg: '<svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">' +
+        '<circle cx="80" cy="80" r="64" fill="#1A092B" stroke="#F5B942" stroke-width="5"/>' +
+        '<circle cx="80" cy="80" r="46" fill="none" stroke="#C084FC" stroke-width="3" stroke-dasharray="12 8"/>' +
+        '<line x1="80" y1="16" x2="80" y2="144" stroke="#F5B942" stroke-width="3"/>' +
+        '<line x1="16" y1="80" x2="144" y2="80" stroke="#F5B942" stroke-width="3"/>' +
+        '<circle cx="80" cy="80" r="14" fill="#F5B942"/>' +
+      '</svg>'
+    },
+    friends_court: {
+      bg: 'radial-gradient(circle at 50% 35%, #123e66 0%, #061424 75%)',
+      svg: '<svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">' +
+        '<polygon points="80,10 142,40 142,120 80,150 18,120 18,40" fill="#0B1D33" stroke="#F5B942" stroke-width="4.5"/>' +
+        '<line x1="80" y1="34" x2="80" y2="122" stroke="#F5B942" stroke-width="6" stroke-linecap="round"/>' +
+        '<line x1="40" y1="56" x2="120" y2="56" stroke="#F5B942" stroke-width="5" stroke-linecap="round"/>' +
+        '<polygon points="40,56 26,90 54,90" fill="none" stroke="#38BDF8" stroke-width="3"/>' +
+        '<polygon points="120,56 106,90 134,90" fill="none" stroke="#38BDF8" stroke-width="3"/>' +
+        '<rect x="54" y="120" width="52" height="10" rx="5" fill="#F5B942"/>' +
+      '</svg>'
+    },
+    last_one_standing: {
+      bg: 'radial-gradient(circle at 50% 35%, #5e1127 0%, #19050b 75%)',
+      svg: '<svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">' +
+        '<circle cx="80" cy="80" r="66" fill="#210710" stroke="#F5B942" stroke-width="4.5"/>' +
+        '<polygon points="46,104 54,58 70,78 80,46 90,78 106,58 114,104" fill="#F5B942" stroke="#FFE08A" stroke-width="2.5"/>' +
+        '<rect x="46" y="110" width="68" height="10" rx="5" fill="#F43F5E"/>' +
+      '</svg>'
+    },
+    silent_library: {
+      bg: 'radial-gradient(circle at 50% 35%, #0f4c4c 0%, #051818 75%)',
+      svg: '<svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">' +
+        '<rect x="20" y="20" width="120" height="120" rx="24" fill="#071F22" stroke="#F5B942" stroke-width="4.5"/>' +
+        '<path d="M40,50 L76,60 L76,116 L40,106 Z" fill="#2DD4BF" opacity="0.85"/>' +
+        '<path d="M120,50 L84,60 L84,116 L120,106 Z" fill="#F5B942" opacity="0.9"/>' +
+      '</svg>'
+    },
+    who_knows_friend: {
+      bg: 'radial-gradient(circle at 50% 35%, #5c380e 0%, #190f04 75%)',
+      svg: '<svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">' +
+        '<circle cx="80" cy="80" r="66" fill="#1F1306" stroke="#F5B942" stroke-width="4.5"/>' +
+        '<polygon points="80,30 93,58 124,62 101,84 107,115 80,100 53,115 59,84 36,62 67,58" fill="#F5B942"/>' +
+      '</svg>'
+    },
+    draw_guess: {
+      bg: 'radial-gradient(circle at 50% 35%, #114b46 0%, #061819 75%)',
+      svg: '<svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">' +
+        '<polygon points="80,10 142,46 142,114 80,150 18,114 18,46" fill="#071E22" stroke="#F5B942" stroke-width="4.5"/>' +
+        '<circle cx="60" cy="68" r="8" fill="#F43F5E"/>' +
+        '<circle cx="84" cy="58" r="8" fill="#F5B942"/>' +
+        '<circle cx="104" cy="74" r="8" fill="#38BDF8"/>' +
+        '<path d="M52,118 L112,44" stroke="#F5B942" stroke-width="7" stroke-linecap="round"/>' +
+      '</svg>'
+    },
+    stadium_esports: {
+      bg: 'radial-gradient(circle at 50% 35%, #143566 0%, #061024 75%)',
+      svg: '<svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">' +
+        '<circle cx="80" cy="80" r="66" fill="#091933" stroke="#F5B942" stroke-width="4.5"/>' +
+        '<ellipse cx="80" cy="86" rx="46" ry="26" fill="none" stroke="#38BDF8" stroke-width="4"/>' +
+        '<ellipse cx="80" cy="86" rx="24" ry="12" fill="#10B981" opacity="0.5"/>' +
+        '<path d="M56,42 L80,62 L104,42" fill="none" stroke="#F5B942" stroke-width="5" stroke-linecap="round"/>' +
+      '</svg>'
+    },
+    how_much_price: {
+      bg: 'radial-gradient(circle at 50% 35%, #0f4c35 0%, #041910 75%)',
+      svg: '<svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">' +
+        '<rect x="20" y="20" width="120" height="120" rx="26" fill="#072117" stroke="#F5B942" stroke-width="4.5"/>' +
+        '<polygon points="46,46 92,46 120,74 74,120 46,92" fill="#10B981" stroke="#F5B942" stroke-width="3"/>' +
+        '<circle cx="64" cy="64" r="6" fill="#072117"/>' +
+      '</svg>'
+    },
+    pressure_seat: {
+      bg: 'radial-gradient(circle at 50% 35%, #63171b 0%, #1a0608 75%)',
+      svg: '<svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">' +
+        '<circle cx="80" cy="80" r="66" fill="#1F080C" stroke="#F5B942" stroke-width="4.5"/>' +
+        '<polygon points="88,26 52,86 78,86 66,134 112,72 84,72" fill="#F97316" stroke="#F5B942" stroke-width="3" stroke-linejoin="round"/>' +
+      '</svg>'
+    }
+  };
+
+  // Detailed External Guides for all 5 games ("زر من برا يشرح اللعبه بالتفصيل")
+
+  var GAME_GUIDES = {
+    eight: {
+      title: 'شرح لعبة: تحدي الثمانية — ديوانية بلس',
+      subtitle: 'المسابقة الثقافية والتفاعلية الكبرى بين فريقين (١٥٢ فئة · ٢,٧٣٦ سؤالاً)',
+      tabs: [
+        {
+          id: 'idea', label: 'فكرة اللعبة',
+          lead: 'مواجهة حماسية بين فريقين على شاشة كبيرة (تلفزيون أو آيباد) مع إمكانية ربط جوالات اللاعبين كأجراس سرعة عبر الـ QR Code.',
+          steps: [
+            { h: 'اختيار ٨ فئات للمباراة', t: 'يختار الفريقان ٨ فئات من أصل ١٥٢ فئة مصورة (مسلسلات، رياضة، ملاعب، دول، أنمي، علوم، بدون كلام، خلية الحروف...).' },
+            { h: '٣ مستويات صعوبة لكل فئة', t: 'كل فئة تضم ٦ أسئلة موزعة على ٣ مستويات: ٢٠٠ نقطة (سهل)، ٤٠٠ نقطة (متوسط)، ٦٠٠ نقطة (صعب).' },
+            { h: 'تحديات خاصة ومبتكرة', t: 'في تحدي الملاعب والصور تكون أسئلة ٢٠٠ واضحة، و٤٠٠ بتغبيش خفيف، و٦٠٠ بتغبيش أقوى، وتظهر الصورة الحقيقية كاملة بعد الإجابة!' }
+          ]
+        },
+        {
+          id: 'rules', label: 'وسائل المساعدةوالجرس',
+          lead: 'يمتلك كل فريق وسائل مساعدة استراتيجية تقلب النتيجة في اللحظات الحاسمة:',
+          steps: [
+            { h: 'جرس السرعة بالجوال', t: 'يمسح اللاعبون رمز الـ QR فتتحول جوالاتهم إلى جرس سرعة يحدد بالجزء من الثانية من ضغط أولاً.' },
+            { h: 'تحدي بدون كلام (التمثيل)', t: 'يمسح الممثل رمز الـ QR بجواله لتظهر له الكلمة السرية ليمثلها لفريقه قبل انتهاء الوقت.' },
+            { h: 'الفوز بالمباراة', t: 'بعد انتهاء جميع الأسئلة على اللوحة، الفريق صاحب أعلى مجموع نقاط يتوّج بلقب تحدي الثمانية!' }
+          ]
+        }
+      ]
+    },
+    qaftah: {
+      title: 'شرح لعبة: قفطة! — أكمل الكذبة',
+      subtitle: 'لعبة الخداع وتأليف الكذبات المقنعة (من ٢ إلى ٦٠ لاعباً بالجوال)',
+      tabs: [
+        {
+          id: 'idea', label: 'فكرة اللعبة',
+          lead: 'يظهر خبر حقيقي عجيب وغريب على الشاشة ينقصه فراغ واحد فقط (_____). مهمتك أن تؤلف من خيالك إجابة كاذبة تبدو وكأنها حقيقية لتخدع أصدقاءك!',
+          steps: [
+            { h: '١. تأليف الكذبة السرية بالجوال', t: 'يكتب كل لاعب في جواله كذبة مقنعة لملء الفراغ (بدون أي مساعدات جاهزة — اعتمد على دهائك!). إذا كتبت الحقيقة بالصدفة سينبهك الجوال فوراً.' },
+            { h: '٢. اصطياد الحقيقة والتصويت', t: 'تُخلط كذبات جميع اللاعبين مع الإجابة الحقيقية الواحدة وتُعرض على الشاشة، ويصوّت كل لاعب للجواب الذي يظنه الحقيقة.' },
+            { h: '٣. كشف الإجابة والنقاط فوراً', t: 'تظهر الإجابة الصحيحة وقصتها الكاملة، مع كشف الفخاخ (من خدع من) وترتيب النقاط المحدث دفعة واحدة (أو بالتدريج مع زر تخطي).' }
+          ]
+        },
+        {
+          id: 'points', label: 'النقاط والتدبيل',
+          lead: 'تتضاعف النقاط كلما اقتربتم من الجولة الأخيرة لتبقى المنافسة مشتعلة:',
+          steps: [
+            { h: 'الجولات العادية (×١)', t: 'كشف الحقيقة = +١٠٠٠ نقطة · كل لاعب يقع في كذبتك = +٥٠٠ نقطة.' },
+            { h: 'جولة الدبل قبل الأخيرة (×٢)', t: 'كشف الحقيقة = +٢٠٠٠ نقطة · كل ضحية في كذبتك = +١٠٠٠ نقطة.' },
+            { h: 'القفطة الكبرى — الجولة الأخيرة (×٣)', t: 'كشف الحقيقة = +٣٠٠٠ نقطة · كل ضحية في كذبتك = +١٥٠٠ نقطة + بونص ١٠٠ نقطة لوسام أظرف كذبة!' }
+          ]
+        }
+      ]
+    },
+    chancellor: {
+      title: 'شرح لعبة: المستشار السري — ديوانية بلس',
+      subtitle: 'لعبة البرلمان والاستنتاج الاجتماعي (من ٥ إلى ٦٠ لاعباً بالجوال)',
+      tabs: [
+        {
+          id: 'idea', label: 'الفكرة والأحزاب',
+          lead: 'ينقسم اللاعبون سراً عبر جوالاتهم إلى فريقين: أغلبية نزيهة لا يعرفون بعضهم، وأقلية فاسدة يعرفون بعضهم ويعرفون من هو «الزعيم السري».',
+          steps: [
+            { h: 'الفريق النزيه (الأزرق)', t: 'هدفهم تمرير ٥ سياسات نزيهة زرقاء، أو كشف وإعدام الزعيم السري.' },
+            { h: 'الفريق الفاسد (الأحمر)', t: 'هدفهم تمرير ٦ سياسات فاسدة حمراء، أو انتخاب الزعيم السري مستشاراً بعد تمرير ٣ سياسات حمراء.' },
+            { h: 'السرية التامة بالجوال', t: 'كل لاعب يستلم بطاقة دوره الحزبي على جواله فقط، بينما تعرض شاشة التلفزيون 16:9 لوحة البرلمان والراوي الصوتي.' }
+          ]
+        },
+        {
+          id: 'round', label: 'مراحل الجولة',
+          lead: 'تمضي كل جولة برلمانية في ٣ خطوات مشوقة:',
+          steps: [
+            { h: '١. ترشيح المستشار والتصويت (Ja / Nein)', t: 'يرشح الرئيس الحالي أحد اللاعبين ليكون مستشاراً، ويصوّت الجميع بجوالاتهم بالموافقة أو الرفض.' },
+            { h: '٢. الجلسة التشريعية السرية', t: 'يسحب الرئيس ٣ بطاقات سياسات سراً في جواله، يستبعد واحدة ويمرر اثنتين للمستشار ليعتمد واحدة منهما على اللوحة.' },
+            { h: '٣. القدرات الرئاسية الخاصة', t: 'عند اعتماد سياسات حمراء تُفتح قدرات للرئيس: فحص ولاء لاعب، كشف ٣ سياسات قادمة، انتخابات خاصة، أو الإعدام!' }
+          ]
+        }
+      ]
+    },
+    dakhil: {
+      title: 'شرح لعبة: الدخيل — ديوانية بلس',
+      subtitle: 'كلكم تعرفون الكلمة السرية… إلا واحد! (من ٣ إلى ٦٠ لاعباً بالجوال)',
+      tabs: [
+        {
+          id: 'idea', label: 'فكرة اللعبة',
+          lead: 'في كل جولة يختار النظام كلمة سرية من المجموعة المختارة (أماكن، أكلات، مهن، حيوانات، سعودي، أغراض) ويُظهرها في جوالات جميع اللاعبين ما عدا لاعباً واحداً فقط يظهر له أنه «الدخيل»!',
+          steps: [
+            { h: 'مهمة المواطنين', t: 'طرح أسئلة ذكية وغير مباشرة لكشف من لا يعرف الكلمة السرية دون فضح الكلمة للدخيل.' },
+            { h: 'مهمة الدخيل', t: 'التركيز في إجابات الآخرين والتظاهر بمعرفة الكلمة، ومحاولة استنتاجها من قائمة الـ ٢٤ كلمة المعروضة.' }
+          ]
+        },
+        {
+          id: 'play', label: 'الأسئلة والنقاط',
+          lead: 'كيف تدور الجولة وكيف تُحسب النقاط؟',
+          steps: [
+            { h: 'تناوب الأسئلة', t: 'اللاعب الذي عليه الدور يختار لاعباً آخر ويسأله سؤالاً شفهياً، ثم ينتقل الدور للمسؤول ليسأل غيره (لا يمكن رد السؤال مباشرة لمن سألك).' },
+            { h: 'طلب التصويت والاتهام', t: 'يستطيع أي لاعب طلب التصويت في أي لحظة، أو يبدأ التصويت تلقائياً عند انتهاء الوقت لاختيار المشتبه به.' },
+            { h: 'الفرصة الأخيرة للدخيل', t: 'إذا كشف اللاعبون الدخيل بالتصويت، يحصل الدخيل على فرصة أخيرة لتخمين الكلمة من القائمة؛ إن أصاب خطف الفوز (+٢ نقطة)، وإن أخطأ فاز المواطنون!' }
+          ]
+        }
+      ]
+    },
+    mafia: {
+      title: 'شرح لعبة: مافيا الديوانية — ديوانية بلس',
+      subtitle: 'لعبة الخداع والتحقيق الليلي (من ٥ إلى ٦٠ لاعباً بالجوال + شاشة الطاولة)',
+      tabs: [
+        {
+          id: 'idea', label: 'الفكرة والأدوار الـ ٩',
+          lead: 'قرية يندسّ فيها أفراد المافيا بين المواطنين والأدوار الخاصة. تتعاقب الليالي والأيام حتى يسيطر أحد الفريقين!',
+          steps: [
+            { h: 'فريق المافيا (مافيا، العرّاب، المُسكِت)', t: 'يتفقون كل ليلة عبر جوالاتهم على ضحية، والعرّاب يظهر بريئاً للمحقق، بينما يمنع المُسكِت أحد اللاعبين من الكلام في نقاش النهار.' },
+            { h: 'أهل البلد (الدكتور، المحقق، الحارس، القنّاص، المواطن)', t: 'الدكتور يحمي لاعباً، المحقق يكشف الهوية، الحارس يفدي من يحرسه، والقنّاص يملك رصاصة واحدة حاسمة.' },
+            { h: 'المهرّج (فريق مستقل)', t: 'هدفه أن يجعل القرية تشك فيه وتصوّت لإخراجه بالنهار ليفوز وحده فوراً!' }
+          ]
+        },
+        {
+          id: 'tasks', label: 'مهام الليل ووضع المقدّم',
+          lead: 'مزايا حصرية تمنع كشف الأدوار وتناسب كل أنماط السهرات:',
+          steps: [
+            { h: 'مهام الليل التفاعلية بالجوال', t: 'في الليل ينشغل المواطنون بحل مهام سريعة في جوالاتهم (ترتيب أرقام، ذاكرة، فتح قفل) حتى يمسك الجميع جوالاتهم ولا يُعرف من يملك دوراً خاصاً!' },
+            { h: 'وضعان للعب: تلقائي أو مع هوست (مقدّم)', t: 'يمكنكم اللعب بإدارة تلقائية كاملة من الجوالات والراوي الصوتي، أو اختيار وضع «مع هوست» ليدير أحدكم الجلسة كمقدّم.' }
+          ]
+        }
+      ]
+    }    ,
+    shifra: {
+      title: 'شرح لعبة: شفرة الديوانية',
+      subtitle: 'بطاقات عملاء سرية · خريطة سوبرفايزر واضحة · حزم عشوائية ومفتوحة',
+      tabs: [
+        {
+          id: 'idea', label: 'فكرة اللعبة وتصميمها الجديد',
+          lead: 'يتنافس الفريق الأحمر 🔴 والفريق الأزرق 🔵 لكشف بطاقات عملائهم من بين ٢٥ بطاقة تكتيكية، مع وضع بطاقة العميل فوق الكلمة المكتشفة!',
+          steps: [
+            { h: '١. اختيار الحزمة قبل البدء (شاملة أو مفتوحة)', t: 'اختر الحزمة العشوائية الشاملة، أو حزمة متخصصة، أو الحزمة المفتوحة التي تكتبون فيها كلماتكم مع زر «أكمل باقي الكلمات للـ ٢٥ تلقائياً».' },
+            { h: '٢. رؤية واضحة ١٠٠٪ للسوبرفايزر', t: 'بضغطة زر «وضع السوبرفايزر» تتلوّن حدود وخلفيات البطاقات مباشرة على الشبكة (أحمر، أزرق، محايد، وفخ أسود) ليراها قائد الفريق بوضوح تام.' },
+            { h: '٣. وضع بطاقة العميل فوق الكلمة', t: 'عند لمس كلمة صحيحة، توضع فوقها بطاقة العميل الملوّنة مع بقاء الكلمة الأصلية ظاهرة في زاوية البطاقة.' }
+          ]
+        }
+      ]
+    },
+    mystery_button: {
+      title: 'شرح لعبة: الزر الغامض — ديوانية بلس',
+      subtitle: '٣٦ زراً مخفياً · جوائز ومضاعفات وسرقة نقاط وتحديات وفخاخ',
+      tabs: [
+        {
+          id: 'idea', label: 'فكرة اللعبة',
+          lead: 'مستوحاة من تحديات الأزرار الغامضة في فالكونز وباور: يختار كل فريق زراً ليكتشف ما خلفه من نقاط أو مضاعفات أو تحديات سرعة أو فخاخ!',
+          steps: [
+            { h: '١. أزرار نادرة ومضاعفات', t: 'بعض الأزرار تضاعف نقاط الجولة ×٢ أو تبدّل ترتيب النقاط بين الفريقين أو تمنح درع حماية.' },
+            { h: '٢. تأمين النقاط في البنك', t: 'يمكنك في أي لحظة تأمين نقاط الجولة في بنك فريقك قبل أن تصطدم بزر الفخ!' }
+          ]
+        }
+      ]
+    },
+    golden_vault: {
+      title: 'شرح لعبة: الخزنة الذهبية — ديوانية بلس',
+      subtitle: 'سباق بين الفريقين لحل ٤ أقفال متتالية وفتح الخزنة الكبرى',
+      tabs: [
+        {
+          id: 'idea', label: 'فكرة اللعبة',
+          lead: 'يتسابق الفريقان لفك ٤ أقفال رقمية ومنطقية متتالية باستخدام الأدلة المخفية والمفتاح الإضافي وخيار تعطيل الخصم مؤقتاً.',
+          steps: [
+            { h: '١. حل الشفرات المتتالية', t: 'كل قفل يفتح القفل الذي يليه حتى الوصول لباب الخزنة الذهبية.' },
+            { h: '٢. المفتاح الإضافي والتعطيل', t: 'يمتلك كل فريق مفتاحاً إضافياً واحداً لتخطي قفل صعب، وفرصة لتجميد الخصم!' }
+          ]
+        }
+      ]
+    },
+    diwaniya_auction: {
+      title: 'شرح لعبة: مزاد الديوانية — ديوانية بلس',
+      subtitle: 'مزاد علني وسري وعكسي على صناديق غامضة بميزانية لكل فريق',
+      tabs: [
+        {
+          id: 'idea', label: 'فكرة اللعبة',
+          lead: 'تُعرض صناديق وعناصر غامضة، ويتنافس اللاعبون بميزانيتهم في ٣ أنماط: مزاد علني، مزاد سري بالظرف، ومزاد التسمية العكسي في ٣٠ ثانية!',
+          steps: [
+            { h: '١. إدارة الميزانية', t: 'احذر أن تزايد بأكثر من القيمة الحقيقية للصندوق حتى لا تخسر الفرق من رصيدك!' }
+          ]
+        }
+      ]
+    },
+    fortune_wheel: {
+      title: 'شرح لعبة: دائرة الحظ — ديوانية بلس',
+      subtitle: 'عجلة الجوائز والمخاطرة ومضاعفة وسرقة النقاط',
+      tabs: [
+        {
+          id: 'idea', label: 'فكرة اللعبة',
+          lead: 'أدر دائرة الحظ لحصد النقاط أو سرقتها، وفعّل «وضع المخاطرة ×٢» لمضاعفة قيمة الجوائز والفخاخ!',
+          steps: [
+            { h: '١. خيار المخاطرة', t: 'قبل تدوير العجلة يقرر الفريق اللعب بالوضع العادي أو وضع المخاطرة المضاعفة.' }
+          ]
+        }
+      ]
+    },
+    friends_court: {
+      title: 'شرح لعبة: محكمة الأصدقاء — ديوانية بلس',
+      subtitle: 'القاضي والمتهم والمحامي والشهود · تحليل الأدلة والتصويت للحكم',
+      tabs: [
+        {
+          id: 'idea', label: 'فكرة اللعبة',
+          lead: 'محاكمة اجتماعية طريفة بين الأصدقاء: تُعرض قضية وأدلة متتالية (بعضها حقيقي وبعضها مضلل)، ويترافع المحامي والمتهم قبل تصويت المحلفين!',
+          steps: [
+            { h: '١. كشف الأدلة والمرافعة', t: 'يكشف القاضي الأدلة واحداً تلو الآخر خلال ٩٠ ثانية ثم يصدر الحكم النهائي.' }
+          ]
+        }
+      ]
+    },
+    last_one_standing: {
+      title: 'شرح لعبة: آخر واحد يصمد — ديوانية بلس',
+      subtitle: 'مراحل إقصائية سريعة (سرعة، ذاكرة، تركيز، تخمين) حتى يبقى فائز واحد',
+      tabs: [
+        {
+          id: 'idea', label: 'فكرة اللعبة',
+          lead: 'يتنافس الجميع في مراحل قصيرة ومتنوعة، وفي نهاية كل مرحلة يُستبعد الأبطأ أو الأقل نقاطاً حتى يتوّج صامد واحد فقط!',
+          steps: [
+            { h: '١. الإقصاء التدريجي', t: 'كل إجابة صحيحة وسريعة تحميك من الاستبعاد في المرحلة الحالية.' }
+          ]
+        }
+      ]
+    },
+    silent_library: {
+      title: 'شرح لعبة: المكتبة الصامتة ولا تضحك! — ديوانية بلس',
+      subtitle: 'تحديات تمثيل صامت ومواقف مضحكة مع عداد مخالفات الضحك',
+      tabs: [
+        {
+          id: 'idea', label: 'فكرة اللعبة',
+          lead: 'نفّذ التحديات المطلوبة أو واجه النظرات الجادة دون إصدار أي صوت أو ابتسامة!',
+          steps: [
+            { h: '١. رصد الضحك والصوت', t: 'ثلاث مخالفات ضحك أو صوت تنقل النقاط مباشرة للفريق المنافس.' }
+          ]
+        }
+      ]
+    },
+    who_knows_friend: {
+      title: 'شرح لعبة: من يعرف صاحبه؟ — ديوانية بلس',
+      subtitle: 'أسئلة عن أعضاء المجموعة قابلة للتعديل والإضافة الفورية',
+      tabs: [
+        {
+          id: 'idea', label: 'فكرة اللعبة',
+          lead: 'أسئلة طريفة عن أعضاء الشلة (من الأكثر تأخراً؟ من يسافر فجأة؟) مع إمكانية كتابة وإضافة أسئلتكم الخاصة مباشرة أثناء اللعب!',
+          steps: [
+            { h: '١. التصويت وكشف الأغلبية', t: 'يصوّت الجميع وتظهر حصيلة الأصوات على الشاشة.' }
+          ]
+        }
+      ]
+    },
+    draw_guess: {
+      title: 'شرح لعبة: ارسم وخمّن (مع الرسام المندس) — ديوانية بلس',
+      subtitle: 'لوحة رسم وألوان وممحاة ومؤقت وأوضاع رسم صعبة',
+      tabs: [
+        {
+          id: 'idea', label: 'فكرة اللعبة',
+          lead: 'تجمع ٣ أطوار في لعبة واحدة: ارسم وخمّن الكلاسيكي، طور الرسام المندس، وطور الرسم الصعب بخط واحد!',
+          steps: [
+            { h: '١. أدوات رسم متكاملة', t: 'اختر اللون أو الممحاة وارسم مباشرة من جوالك أو الآيباد ليخمن أصدقاؤك.' }
+          ]
+        }
+      ]
+    },
+    stadium_esports: {
+      title: 'شرح لعبة: تحدي الملاعب والرياضات الإلكترونية — ديوانية بلس',
+      subtitle: 'كرة القدم والملاعب والشعارات وEA FC وValorant وRocket League',
+      tabs: [
+        {
+          id: 'idea', label: 'فكرة اللعبة',
+          lead: 'مسابقة شاملة لعشاق الكرة والـ Esports: تخمين اللاعبين والأندية والكلانات والألعاب الإلكترونية عبر أدلة متدرجة.',
+          steps: [
+            { h: '١. أدلة متدرجة', t: 'أجب من الدليل الأول لحصد النقاط الكاملة أو اطلب دليلاً إضافياً.' }
+          ]
+        }
+      ]
+    },
+    how_much_price: {
+      title: 'شرح لعبة: كم سعرها؟ (حرب الأسعار) — ديوانية بلس',
+      subtitle: 'تخمين أسعار المنتجات ومقارنة الأغلى والأرخص بالريال السعودي',
+      tabs: [
+        {
+          id: 'idea', label: 'فكرة اللعبة',
+          lead: 'تُعرض منتجات حقيقية مع مواصفاتها، وعلى كل فريق تخمين سعرها الفعلي بالريال السعودي — الأقرب للسعر الصحيح يحصد نقاط الجولة!',
+          steps: [
+            { h: '١. دقة التسعير', t: 'يدخل كل فريق تخمينه ويحسم النظام الفارق تلقائياً.' }
+          ]
+        }
+      ]
+    },
+    pressure_seat: {
+      title: 'شرح لعبة: كرسي الضغط (الاستفزاز) — ديوانية بلس',
+      subtitle: '٦٠ ثانية من الأسئلة المباغتة بدون نعم أو لا أو أبيض أو أسود',
+      tabs: [
+        {
+          id: 'idea', label: 'فكرة اللعبة',
+          lead: 'اصمد لمدة ٦٠ ثانية أمام الأسئلة السريعة دون نطق الكلمات المحظورة أو التردد!',
+          steps: [
+            { h: '١. جرس الاصطياد', t: 'يراقب الخصم أي زلة لسان ليضغط جرس القفطة.' }
+          ]
+        }
+      ]
+    }
+  };
+
+  // استكمال شعارات الألعاب الست الإضافية ليصبح إجمالي الشعارات الفخمة 24 شعاراً بدون ملامح وجه
+  LUXURY_LOGOS.mazad30 = {
+    bg: 'radial-gradient(circle at 50% 25%, rgba(245,185,66,0.32), rgba(14,22,48,0.96))',
+    svg: '<svg viewBox="0 0 220 120"><circle cx="110" cy="60" r="46" fill="none" stroke="#F5B942" stroke-width="3" stroke-dasharray="6 4"/><circle cx="110" cy="60" r="36" fill="#0F172A" stroke="#F97316" stroke-width="2.5"/><path d="M110 34 V60 L128 70" stroke="#2DD4BF" stroke-width="4" stroke-linecap="round" fill="none"/><rect x="64" y="88" width="92" height="22" rx="11" fill="#F5B942"/><text x="110" y="103" text-anchor="middle" fill="#0A0F24" font-size="12" font-weight="900">مزاد ٣٠ ثانية</text></svg>'
+  };
+  LUXURY_LOGOS.fake_artist = {
+    bg: 'radial-gradient(circle at 50% 25%, rgba(45,212,191,0.30), rgba(14,22,48,0.96))',
+    svg: '<svg viewBox="0 0 220 120"><rect x="45" y="16" width="130" height="86" rx="16" fill="#0F172A" stroke="#2DD4BF" stroke-width="2.5"/><path d="M68 78 Q95 32 118 64 T154 40" fill="none" stroke="#F5B942" stroke-width="4" stroke-linecap="round"/><circle cx="82" cy="44" r="9" fill="#F43F5E"/><circle cx="144" cy="74" r="7" fill="#38BDF8"/><path d="M132 22 L162 52 L148 66 L118 36 Z" fill="#F5B942" opacity="0.85"/></svg>'
+  };
+  LUXURY_LOGOS.liars_table = {
+    bg: 'radial-gradient(circle at 50% 25%, rgba(244,63,94,0.30), rgba(14,22,48,0.96))',
+    svg: '<svg viewBox="0 0 220 120"><ellipse cx="110" cy="68" rx="68" ry="34" fill="#1E1B4B" stroke="#F43F5E" stroke-width="3"/><rect x="74" y="34" width="28" height="40" rx="5" transform="rotate(-14 88 54)" fill="#0F172A" stroke="#F5B942" stroke-width="2.2"/><rect x="98" y="30" width="28" height="40" rx="5" fill="#0F172A" stroke="#2DD4BF" stroke-width="2.2"/><rect x="120" y="36" width="28" height="40" rx="5" transform="rotate(14 134 56)" fill="#0F172A" stroke="#F43F5E" stroke-width="2.2"/><text x="110" y="95" text-anchor="middle" fill="#F5B942" font-size="11" font-weight="900">أتحداك تكشفها!</text></svg>'
+  };
+  LUXURY_LOGOS.vault50 = {
+    bg: 'radial-gradient(circle at 50% 25%, rgba(16,185,129,0.30), rgba(14,22,48,0.96))',
+    svg: '<svg viewBox="0 0 220 120"><rect x="46" y="14" width="128" height="92" rx="16" fill="#0F172A" stroke="#10B981" stroke-width="3"/><circle cx="110" cy="60" r="28" fill="#111936" stroke="#F5B942" stroke-width="3"/><circle cx="110" cy="60" r="8" fill="#F5B942"/><path d="M110 32 V44 M110 76 V88 M82 60 H94 M126 60 H138" stroke="#2DD4BF" stroke-width="3" stroke-linecap="round"/><text x="70" y="36" fill="#10B981" font-size="11" font-weight="900">50</text></svg>'
+  };
+  LUXURY_LOGOS.radar_guess = {
+    bg: 'radial-gradient(circle at 50% 25%, rgba(56,189,248,0.30), rgba(14,22,48,0.96))',
+    svg: '<svg viewBox="0 0 220 120"><circle cx="110" cy="60" r="44" fill="#0F172A" stroke="#38BDF8" stroke-width="2.5"/><circle cx="110" cy="60" r="30" fill="none" stroke="#2DD4BF" stroke-width="1.6" stroke-dasharray="4 4"/><circle cx="110" cy="60" r="16" fill="none" stroke="#F5B942" stroke-width="1.6"/><path d="M110 60 L144 34" stroke="#2DD4BF" stroke-width="3.5" stroke-linecap="round"/><circle cx="132" cy="44" r="5" fill="#F43F5E"/></svg>'
+  };
+  LUXURY_LOGOS.alibi_court = {
+    bg: 'radial-gradient(circle at 50% 25%, rgba(249,115,22,0.30), rgba(14,22,48,0.96))',
+    svg: '<svg viewBox="0 0 220 120"><rect x="52" y="18" width="116" height="84" rx="14" fill="#0F172A" stroke="#F97316" stroke-width="2.5"/><path d="M74 82 H146 M86 42 V82 M110 42 V82 M134 42 V82" stroke="#F5B942" stroke-width="3.5" stroke-linecap="round"/><rect x="74" y="32" width="72" height="12" rx="6" fill="#F97316"/><circle cx="152" cy="36" r="12" fill="none" stroke="#2DD4BF" stroke-width="3"/></svg>'
+  };
+
+  GAME_GUIDES.mazad30 = {
+    title: 'مزاد الـ ٣٠ ثانية العكسي — ديوانية بلس',
+    subtitle: 'من ٢ إلى ٣٠ لاعباً · تحدي المزايدة التنازلية بالوقت والجرأة تحت ضغط الثلاثين ثانية',
+    tabs: [
+      { id: 'idea', label: '١. فكرة اللعبة', lead: 'تحدي سرعة ومزايدة عكسية مستوحى من أشهر تحديات الكلانات؛ يظهر سؤال مثل «كم عاصمة عربية تقدر تعدد في ٣٠ ثانية؟» ويتزايد اللاعبون، ثم يُختبر صاحب أعلى رقم أمام المؤقت!', steps: [
+        { h: 'المزايدة العلنية', t: 'يبدأ المزاد برقم أساسي، وكل فريق يرفع التحدي (أقدر أعدد ٨.. أقدر أعدد ١٠!).' },
+        { h: 'لحظة الحسم (إثبات كلامك)', t: 'عندما يتوقف المزاد أو يقول الخصم «أتحداك تثبتها»، يبدأ عداد ٣٠ ثانية صارم على شاشة التلفزيون.' }
+      ]},
+      { id: 'qr', label: '٢. اللعب عبر الـ QR', lead: 'يمكن للفرق رفع المزاد أو إعلان «أتحداك» مباشرة من جوالاتهم عبر غرفة الـ QR.', steps: [
+        { h: 'زر رفع المزاد', t: 'يرسل اللاعب رقم المزايدة الجديد ليظهر فوراً على الشاشة الرئيسية.' },
+        { h: 'عداد الإنجاز الحي', t: 'مع كل إجابة صحيحة ينطقها المتحدي، يضغط المشرف زر (+١ صحيح) حتى يكتمل الرقم المطلوب قبل انتهاء الوقت.' }
+      ]},
+      { id: 'score', label: '٣. النقاط والفوز', lead: 'إنجاز الرقم المطلوب يمنح الفريق كامل نقاط الجولة، والإخفاق يحول النقاط للخصم!', steps: [
+        { h: 'إنجاز التحدي', t: '+٣٠٠ نقطة للفريق الذي أوفى بوعده خلال ٣٠ ثانية.' },
+        { h: 'الإخفاق في الوقت', t: 'تذهب نقاط الجولة كاملة للفريق المنافس الذي أعلن التحدي.' }
+      ]},
+      { id: 'tips', label: '٤. نصائح المشرف', lead: 'لا تقبل الإجابات المكررة وراقب شريط الـ ٣٠ ثانية الحماسي على الشاشة.', steps: [
+        { h: 'تغيير فئة المزاد', t: 'استخدم محرر المحتوى في لوحة الإدارة لإضافة فئات مزاد جديدة خاصة بشلتكم.' }
+      ]}
+    ]
+  };
+  GAME_GUIDES.fake_artist = {
+    title: 'الرسام المزيف — ديوانية بلس',
+    subtitle: 'من ٣ إلى ١٦ لاعباً · رسم جماعي مشترك بخط واحد لكل لاعب لكشف الرسام الذي لا يعرف الكلمة!',
+    tabs: [
+      { id: 'idea', label: '١. فكرة اللعبة', lead: 'جميع اللاعبين يعرفون الكلمة السرية المطلوب رسمها إلا لاعباً واحداً هو «الرسام المزيف»! يرسم كل لاعب خطاً واحداً فقط في دوره.', steps: [
+        { h: 'مهمة الرسامين الحقيقيين', t: 'رسم خطوط تثبت للبقية أنك تعرف الكلمة دون جعل الرسمة واضحة جداً فيفهمها الرسام المزيف!' },
+        { h: 'مهمة الرسام المزيف', t: 'التظاهر بمعرفة الكلمة ورسم خطوط مقنعة للإفلات من التصويت، أو استنتاج الكلمة السرية.' }
+      ]},
+      { id: 'qr', label: '٢. اللعب عبر الـ QR', lead: 'تظهر الأدوار السرية والكلمة على الجوالات مع لوحة رسم جماعية متزامنة.', steps: [
+        { h: 'توزيع الكلمة السرية', t: 'يرسل الخادم الكلمة لكل لاعب على جواله، بينما يظهر للرسام المزيف تنبيه «أنت الرسام المزيف!».' },
+        { h: 'التصويت النهائي', t: 'بعد دورتين من الخطوط، يصوت الجميع من جوالاتهم على المشتبه به.' }
+      ]},
+      { id: 'score', label: '٣. النقاط والفوز', lead: 'نقاط مضاعفة للرسام المزيف إذا نجا أو خمن الكلمة بعد كشفه.', steps: [
+        { h: 'كشف المزيف بدون تخمينه للكلمة', t: '+٢٠٠ نقطة لكل فنان حقيقي.' },
+        { h: 'نجاة المزيف أو تخمينه للكلمة الصحيحة', t: '+٤٠٠ نقطة للرسام المزيف.' }
+      ]},
+      { id: 'tips', label: '٤. نصائح المشرف', lead: 'امنح كل لاعب لوناً مميزاً ليتضح صاحب كل خط أثناء النقاش.', steps: [
+        { h: 'تلميح الفئة العام', t: 'اعرض اسم التصنيف العام (مثل: حيوانات أو أكلات) على التلفزيون لزيادة الحماس.' }
+      ]}
+    ]
+  };
+  GAME_GUIDES.liars_table = {
+    title: 'طاولة الكذابين — ديوانية بلس',
+    subtitle: 'من ٣ إلى ١٢ لاعباً · رمي الأوراق المقلوبة وتحدي كشف الكذبة على الطاولة!',
+    tabs: [
+      { id: 'idea', label: '١. فكرة اللعبة', lead: 'تحدد كل جولة رتبة مطلوبة على الطاولة (مثل: ورقة الملك أو الآس). يرمي اللاعب أوراقه مقلوبة ويدّعي أنها مطابقة للرتبة!', steps: [
+        { h: 'رمي الأوراق بالادعاء', t: 'يمكنك قول الحقيقة أو التخلص من أوراقك بالخداع دون أن يرتجف صوتك.' },
+        { h: 'صيحة «كذاب!»', t: 'إذا شك أي لاعب في صدق الرمية، يضغط زر «كذاب!» لتنكشف الأوراق على الشاشة الرئيسية فوراً!' }
+      ]},
+      { id: 'qr', label: '٢. اللعب عبر الـ QR', lead: 'يرى كل لاعب أوراقه السرية في جواله ويختار الأوراق التي يرميها.', steps: [
+        { h: 'اختيار الأوراق السرية', t: 'حدد من ١ إلى ٣ أوراق من يدك واضغط إرسال للطاولة.' },
+        { h: 'زر الاعتراض الفوري', t: 'يظهر زر «كشفته كذاب!» في جوالات بقية اللاعبين قبل انتقال الدور.' }
+      ]},
+      { id: 'score', label: '٣. النقاط والفوز', lead: 'الفائز هو أول من يتخلص من جميع أوراقه وينجو من العقاب.', steps: [
+        { h: 'كشف كذبة حقيقية', t: 'يسحب الكاذب كامل كومة الطاولة وتُخصم منه نقاط مجازفة.' },
+        { h: 'اتهام خاطئ للاعب صادق', t: 'يتحمل المتسرع عقوبة الكومة وتُضاف نقاط الصدق للاعب المتهم.' }
+      ]},
+      { id: 'tips', label: '٤. نصائح المشرف', lead: 'شجع اللاعبين على النظر في عيون بعضهم قبل الضغط على زر الكشف!', steps: [
+        { h: 'الجولات السريعة', t: 'كلما قلت الأوراق في اليد زاد احتمال الخداع.' }
+      ]}
+    ]
+  };
+  GAME_GUIDES.vault50 = {
+    title: 'خزنة الـ ٥٠ زر — ديوانية بلس',
+    subtitle: 'من ٢ إلى ٤٠ لاعباً · ٥٠ خزنة مرقمة بين الكنوز والمضاعفات وأزرار الإنذار وتأمين الرصيد!',
+    tabs: [
+      { id: 'idea', label: '١. فكرة اللعبة', lead: 'أمام الفرق شبكة ضخمة من ٥٠ خزنة رقمية على شاشة التلفزيون؛ بعضها يحتوي على ذهب ومضاعفات ودروع، وبعضها يفجّر صافرة الإنذار ويصفّر رصيد الجولة غير المؤمّن!', steps: [
+        { h: 'افتح أو أمّن في البنك', t: 'في كل دور يقرر الفريق: هل يفتح خزنة إضافية لزيادة الغنيمة أم يؤمّن نقاطه في البنك الآمن؟' },
+        { h: 'الدروع الواقية', t: 'الحصول على درع يحميك لمرة واحدة من فخ الإنذار الأحمر.' }
+      ]},
+      { id: 'qr', label: '٢. اللعب عبر الـ QR', lead: 'يصوت أعضاء الفريق من جوالاتهم على رقم الخزنة أو قرار التأمين.', steps: [
+        { h: 'اختيار رقم من ١ إلى ٥٠', t: 'تظهر الأرقام المتاحة في جوالات اللاعبين لاختيار الخزنة التالية.' }
+      ]},
+      { id: 'score', label: '٣. النقاط والفوز', lead: 'النقاط المؤمّنة في البنك فقط هي التي تُحتسب في النتيجة النهائية.', steps: [
+        { h: 'الخزنات الماسية', t: 'تمنح حتى +١٠٠٠ نقطة أو مضاعفة ×٢ لرصيد الجولة.' },
+        { h: 'صافرة الإنذار', t: 'تحذف الرصيد غير المؤمّن في الجولة الحالية وتنقل الدور للفريق التالي.' }
+      ]},
+      { id: 'tips', label: '٤. نصائح المشرف', lead: 'ذكّر الفرق دائماً بأن الطمع قد يضيع آلاف النقاط غير المؤمنة!', steps: [
+        { h: 'توزيع المفاجآت', t: 'يتم توزيع الكنوز والأفخاخ عشوائياً في كل مباراة جديدة.' }
+      ]}
+    ]
+  };
+  GAME_GUIDES.radar_guess = {
+    title: 'رادار التخمين — ديوانية بلس',
+    subtitle: 'من ٢ إلى ٥٠ لاعباً · ٦ تلميحات متدرجة تبدأ من ١٠٠٠ نقطة وتنزل حتى ١٥٠ نقطة!',
+    tabs: [
+      { id: 'idea', label: '١. فكرة اللعبة', lead: 'تحدي ذكاء وسرعة بديهة؛ يخفي الرادار شخصية أو دولة أو اختراعاً أو حدثاً شهيراً، ويكشف تلميحاً بعد آخر من الأصعب (١٠٠٠ نقطة) إلى الأسهل (١٥٠ نقطة).', steps: [
+        { h: '٦ تلميحات متدرجة', t: 'كلما خمنت الإجابة من تلميح مبكر حصلت على نقاط أعلى بكثير.' },
+        { h: 'فرصة واحدة في كل تلميح', t: 'التخمين الخاطئ يجمّد محاولتك في التلميح الحالي حتى يُكشف التلميح التالي.' }
+      ]},
+      { id: 'qr', label: '٢. اللعب عبر الـ QR', lead: 'يضغط اللاعبون الجرس أو يرسلون تخمينهم السري من الجوال فور قراءة التلميح.', steps: [
+        { h: 'الجرس الذكي الموحد', t: 'أول لاعب يضغط الجرس يحصل على حق الإجابة عند قيمة النقاط الحالية للرادار.' }
+      ]},
+      { id: 'score', label: '٣. النقاط والفوز', lead: 'التلميح الأول = ١٠٠٠، الثاني = ٨٠٠، الثالث = ٦٠٠، الرابع = ٤٥٠، الخامس = ٣٠٠، السادس = ١٥٠ نقطة.', steps: [
+        { h: 'مكافأة القنص المبكر', t: 'الإجابة من التلميح الأول أو الثاني تقلب موازين الصدارة فوراً.' }
+      ]},
+      { id: 'tips', label: '٤. نصائح المشرف', lead: 'اقرأ التلميح بصوت واضح وامنح ١٠ ثوانٍ للتفكير قبل كشف التلميح التالي.', steps: [
+        { h: 'إضافة بطاقات رادار مخصصة', t: 'يمكنك إضافة أسئلة وتلميحات جديدة من محرر المحتوى في لوحة الإدارة.' }
+      ]}
+    ]
+  };
+  GAME_GUIDES.alibi_court = {
+    title: 'قفص الاتهام (المحقق المخادع) — ديوانية بلس',
+    subtitle: 'من ٤ إلى ٢٠ لاعباً · استجواب المشتبه بهم وكشف التناقض في أعذارهم السرية!',
+    tabs: [
+      { id: 'idea', label: '١. فكرة اللعبة', lead: 'تقع جريمة أو مقلب طريف في الديوانية! يتفق المتهمون على «عذر مشترك (Alibi)»، لكن أحدهم متورط أو يحمل تفاصيل ناقصة، وعلى المحققين استجوابهم منفردين لكشف التناقض!', steps: [
+        { h: 'توزيع الأعذار السرية', t: 'تظهر تفاصيل العذر السري للمشتبه بهم عبر الجوال (المكان، الوقت، الأداة، الرفيق).' },
+        { h: 'الاستجواب المتقاطع', t: 'يسأل المحقق كل مشتبه به أسئلة سريعة ومفاجئة ليرى من يناقض زملاءه.' }
+      ]},
+      { id: 'qr', label: '٢. اللعب عبر الـ QR', lead: 'تصل بطاقة العذر السري إلى جوالات المتهمين بينما تظهر أسئلة التحقيق للمحققين.', steps: [
+        { h: 'تصويت هيئة المحلفين', t: 'يصوت الجميع عبر الجوال لتحديد المتهم المتناقض بعد انتهاء دقيقتي الاستجواب.' }
+      ]},
+      { id: 'score', label: '٣. النقاط والفوز', lead: 'نقاط للمحققين عند كشف المذنب، ونقاط مضاعفة للمتهمين إذا صمد عذرهم بلا تناقض.', steps: [
+        { h: 'إدانة صحيحة', t: '+٣٠٠ نقطة لفريق التحقيق وهيئة المحلفين.' },
+        { h: 'براءة المتهمين بخداع المحقق', t: '+٤٠٠ نقطة للمشتبه بهم.' }
+      ]},
+      { id: 'tips', label: '٤. نصائح المشرف', lead: 'اطلب من المحققين التركيز على التفاصيل الصغيرة مثل «ماذا طلبتم للعشاء؟» لكشف الارتباك!', steps: [
+        { h: 'تبديل الأدوار', t: 'في كل جولة ينتقل دور المحقق لفريق جديد.' }
+      ]}
+    ]
+  };
+
+
+  // ============================================================================
+  // 1. INITIALIZE M8P VISUAL POSTER ENGINE & 152 CATEGORY ISLAND EXTRACTOR
+  // ============================================================================
+  var __EIGHT_ISLAND_CACHE = {};
+
+  // Built-in Eight questions are only sent to the owner (admin editor); players never download them.
+  var __EIGHT_ISLAND_PENDING = {};
+  function getEightIslandQuestions(catSlug) {
+    if (__EIGHT_ISLAND_CACHE[catSlug]) return __EIGHT_ISLAND_CACHE[catSlug].slice();
+    var sess = DiwaniyaServerKernel.getSessionUser();
+    if (!catSlug || !sess || !sess.user || sess.user.adminRole !== 'owner' || __EIGHT_ISLAND_PENDING[catSlug]) return [];
+    __EIGHT_ISLAND_PENDING[catSlug] = true;
+    DiwaniyaServerKernel.fetchEightCategory(catSlug).then(function (d) {
+      delete __EIGHT_ISLAND_PENDING[catSlug];
+      if (d.ok && Array.isArray(d.items)) {
+        __EIGHT_ISLAND_CACHE[catSlug] = d.items;
+        render();
+      }
+    });
+    return [];
+  }
+
+  function renderCategoryPosterSvg(catObj) {
+    try {
+      if (window.M8P && typeof window.M8P.render === 'function') {
+        var rawSlug = (catObj.slug || catObj.id || '').replace(/^cat_/, '');
+        var themeId = catObj.posterTheme ? catObj.posterTheme.replace(/^poster_/, '') : rawSlug;
+        var svg = window.M8P.render(themeId, catObj.name || '', null, catObj.icon || '🎯');
+        if (svg && svg.indexOf('<svg') !== -1) return svg;
+      }
+    } catch (e) {}
+    return '<svg viewBox="0 0 260 150"><rect width="260" height="150" rx="14" fill="#111936"/><text x="130" y="85" text-anchor="middle" font-size="42">' + esc(catObj.icon || '🎯') + '</text></svg>';
+  }
+
+  // ============================================================================
+  // 2. SERVER API CLIENT (Cloudflare Worker + D1)
+  //    The browser holds no authority: accounts, login codes, wallet, free trials,
+  //    launches, games and the owner role all live on the server (see worker/).
+  //    This client keeps a read cache so the UI can render synchronously.
+  // ============================================================================
+  var LOCAL_ROOMS_KEY = 'dw_rooms_local_v1';
+
+  var DiwaniyaServerKernel = (function () {
+    var CACHE = {
+      games: [], packages: [], categories: [], game_content: [], suggestions: [],
+      catQuestionsOverrides: {}, gatewayConnected: false,
+      usersList: [], admin_logs: [], payments: [],
+      rooms: {} // local multi-tab room preview only (real-time rooms come later)
+    };
+    var ME = null; // { user, wallet }
+    try { CACHE.rooms = JSON.parse(window.localStorage.getItem(LOCAL_ROOMS_KEY) || '{}') || {}; } catch (e) {}
+
+    function api(method, path, body) {
+      var headers = { accept: 'application/json' };
+      if (body !== undefined) headers['content-type'] = 'application/json';
+      if (ME && ME.user && ME.user.csrfToken) headers['x-dw-csrf'] = ME.user.csrfToken;
+      return fetch(path, {
+        method: method,
+        headers: headers,
+        credentials: 'same-origin',
+        body: body !== undefined ? JSON.stringify(body) : undefined
+      }).then(function (r) {
+        return r.json().catch(function () { return { error: 'استجابة غير متوقعة من الخادم.' }; }).then(function (d) {
+          d = d || {};
+          if (d.ok === undefined) d.ok = r.ok;
+          if (!d.status) d.status = r.status;
+          if (r.status === 401 && path.indexOf('/api/auth/') !== 0) ME = null;
+          return d;
+        });
+      }).catch(function () {
+        return { ok: false, status: 0, error: 'تعذر الاتصال بالخادم. تأكد من الإنترنت وحاول مجدداً.' };
+      });
+    }
+
+    function clearAdmin() {
+      CACHE.usersList = []; CACHE.admin_logs = []; CACHE.payments = [];
+      CACHE.game_content = []; CACHE.catQuestionsOverrides = {};
+    }
+    function applyMe(d) { ME = d && d.user ? { user: d.user, wallet: d.wallet } : null; }
+
+    function refreshCatalog() {
+      return api('GET', '/api/catalog').then(function (d) {
+        if (d.ok) {
+          ['games', 'packages', 'categories', 'suggestions'].forEach(function (k) {
+            if (d[k] !== undefined) CACHE[k] = d[k];
+          });
+          CACHE.gatewayConnected = !!d.gatewayConnected;
+        }
+        return d;
+      });
+    }
+    function refreshMe() {
+      return api('GET', '/api/me').then(function (d) { if (d.ok) applyMe(d); return d; });
+    }
+    function refreshAdmin() {
+      if (!ME || !ME.user || ME.user.adminRole !== 'owner') { clearAdmin(); return Promise.resolve({ ok: true }); }
+      return api('GET', '/api/admin/data').then(function (d) {
+        if (d.ok) {
+          CACHE.usersList = d.users || [];
+          CACHE.admin_logs = d.admin_logs || [];
+          CACHE.payments = d.payments || [];
+          CACHE.game_content = d.game_content || [];
+          CACHE.catQuestionsOverrides = d.catQuestionsOverrides || {};
+        }
+        return d;
+      });
+    }
+    function refreshAll() {
+      return Promise.all([refreshCatalog(), refreshMe()]).then(refreshAdmin);
+    }
+
+    return {
+      loadDB: function () { return CACHE; },
+      saveDB: function (db) {
+        try { window.localStorage.setItem(LOCAL_ROOMS_KEY, JSON.stringify((db && db.rooms) || {})); } catch (e) {}
+      },
+      getSessionUser: function () { return ME; },
+      refreshAll: refreshAll,
+      refreshMe: refreshMe,
+      sendOtp: function (email) {
+        return api('POST', '/api/auth/otp/send', { email: email });
+      },
+      verifyOtp: function (email, code, displayName) {
+        return api('POST', '/api/auth/otp/verify', { email: email, code: code, displayName: displayName }).then(function (d) {
+          if (!d.ok) return d;
+          applyMe(d);
+          return refreshAdmin().then(function () { return d; });
+        });
+      },
+      logout: function () {
+        return api('POST', '/api/auth/logout', {}).then(function (d) { ME = null; clearAdmin(); return d; });
+      },
+      launchGame: function (slug, idempotencyKey) {
+        return api('POST', '/api/games/' + encodeURIComponent(slug) + '/launch', { idempotencyKey: idempotencyKey }).then(function (d) {
+          if (d.wallet && ME) ME.wallet = d.wallet;
+          return d;
+        });
+      },
+      createPaymentOrder: function (pkgId) {
+        return api('POST', '/api/payments/orders', { pkgId: pkgId }).then(function (d) {
+          if (d.wallet && ME) ME.wallet = d.wallet;
+          return d;
+        });
+      },
+      executeAdminAction: function (action, payload) {
+        return api('POST', '/api/admin/action', { action: action, payload: payload }).then(function (d) {
+          if (!d.ok) return d;
+          return refreshAll().then(function () { return d; });
+        });
+      },
+      fetchEightCategory: function (catSlug) {
+        return api('GET', '/api/admin/eight-category/' + encodeURIComponent(catSlug));
+      },
+      submitSuggestion: function (payload) {
+        return api('POST', '/api/suggestions', payload).then(function (d) {
+          if (d.ok && d.suggestions) CACHE.suggestions = d.suggestions;
+          return d;
+        });
+      }
+    };
+  })();
+
+  window.DiwaniyaServerKernel = DiwaniyaServerKernel;
+
+  // Admin action helper: sends the action, then runs onOk with the server reply.
+  function adminCall(action, payload, onOk) {
+    payload = payload || {};
+    var db = DiwaniyaServerKernel.loadDB();
+    // First edit of a built-in Eight category: send its current questions so the server can start from them.
+    if (/_content$/.test(action) && payload.gameId === 'game_eight' && payload.catSlug &&
+        !(db.catQuestionsOverrides && Array.isArray(db.catQuestionsOverrides[payload.catSlug]))) {
+      payload.baseItems = getEightIslandQuestions(payload.catSlug).map(function (it) {
+        return { uid: it.id, points: it.difficulty_points, q: it.prompt_text, a: it.answer_text, hint: it.extra_info || '' };
+      });
+    }
+    DiwaniyaServerKernel.executeAdminAction(action, payload).then(function (res) {
+      if (!res.ok) { showToast(res.error || 'تعذر تنفيذ العملية.'); return; }
+      onOk(res);
+    });
+  }
+
+  // ============================================================================
+  // 3. APPLICATION STATE (INITIALIZED FROM SERVER DB, USER = NULL BY DEFAULT)
+  // ============================================================================
+  function buildUsersListFromDB(db) {
+    return (db.usersList || []).slice();
+  }
+
+  var initialDB = DiwaniyaServerKernel.loadDB();
+
+  var STATE = {
+    tab: window.DW_INITIAL_TAB || 'store',
+    adminSubTab: 'overview',
+    guideSlug: null,
+    guideTabIdx: 0,
+    user: null, // filled from the server session (/api/me)
+    wallet: {
+      balance: 0,
+      totalPurchased: 0,
+      totalConsumed: 0,
+      freeTrialsUsed: {},
+      transactions: [],
+      payments: []
+    },
+    usersList: buildUsersListFromDB(initialDB),
+    games: initialDB.games.slice(),
+    packages: initialDB.packages.slice(),
+    categories: initialDB.categories.slice(),
+    gameContent: initialDB.game_content.slice(),
+    adminLogs: initialDB.admin_logs.slice(),
+    suggestions: initialDB.suggestions.slice(),
+    catFilterGroup: 'الكل',
+    catSearch: '',
+    editorGameId: 'game_eight',
+    editorCatSlug: 'honeycomb_ar',
+    editorSearch: '',
+    editingItemId: null,
+    pendingOtpEmail: '',
+    launchInFlight: false,
+    storeVoiceOn: true,
+    storeSfxOn: true,
+    activeGameSlug: null,
+    previewCatSlug: null,
+    // Cross-Device Room & WebSocket state
+    room: {
+      code: '',
+      gameSlug: 'eight',
+      hostName: 'شاشة الديوانية الرئيسية',
+      workerWsUrl: (window.localStorage && window.localStorage.getItem('dw_worker_ws_url')) || '',
+      wsStatus: 'local_preview', // 'connected_cloud' | 'local_preview' | 'reconnecting'
+      wsConn: null,
+      players: [], // { id, name, team, isBot, connected, score, lastAnswer, lastVote, resumeToken }
+      buzzerLockedBy: null,
+      buzzerOrder: [],
+      currentPrompt: 'اضغط الجرس أو أرسل إجابتك من جوالك فور ظهور السؤال على شاشة التلفزيون!',
+      mobileControllerMode: false,
+      myPlayerId: '',
+      myResumeToken: ''
+    }
+  };
+
+  function syncStateFromServerDB() {
+    var db = DiwaniyaServerKernel.loadDB();
+    var sess = DiwaniyaServerKernel.getSessionUser();
+    STATE.user = sess ? sess.user : null;
+    STATE.wallet = sess ? sess.wallet : {
+      balance: 0,
+      totalPurchased: 0,
+      totalConsumed: 0,
+      freeTrialsUsed: {},
+      transactions: [],
+      payments: []
+    };
+    STATE.usersList = buildUsersListFromDB(db);
+    STATE.games = db.games.slice();
+    STATE.packages = db.packages.slice();
+    STATE.categories = db.categories.slice();
+    STATE.gameContent = db.game_content.slice();
+    STATE.adminLogs = db.admin_logs.slice();
+    STATE.suggestions = db.suggestions.slice();
+  }
+
+  var STORE_AUDIO = {
+    ctx: null,
+    playSfx: function(freq) {
+      if (!STATE.storeSfxOn) return;
+      try {
+        var AC = window.AudioContext || window.webkitAudioContext;
+        if (!AC) return;
+        if (!this.ctx) this.ctx = new AC();
+        if (this.ctx.state === 'suspended') this.ctx.resume();
+        var o = this.ctx.createOscillator(), g = this.ctx.createGain();
+        o.type = 'triangle';
+        o.frequency.setValueAtTime(freq || 580, this.ctx.currentTime);
+        g.gain.setValueAtTime(0.08, this.ctx.currentTime);
+        g.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.08);
+        o.connect(g); g.connect(this.ctx.destination);
+        o.start(); o.stop(this.ctx.currentTime + 0.08);
+      } catch (e) {}
+    }
+  };
+
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  function sanitizeUrl(rawUrl) {
+    var u = String(rawUrl || '').trim();
+    if (!u) return '';
+    if (/^https?:\/\/[^\s<>"']+$/i.test(u)) return u;
+    return '';
+  }
+
+  function arNum(n) {
+    return String(n == null ? 0 : n).replace(/\d/g, function (d) { return '٠١٢٣٤٥٦٧٨٩'[d]; });
+  }
+
+  function showToast(msg) {
+    var el = document.getElementById('dwToast');
+    if (!el) return;
+    el.textContent = msg;
+    el.classList.add('show');
+    clearTimeout(el._t);
+    el._t = setTimeout(function () { el.classList.remove('show'); }, 4200);
+  }
+
+  // Tell the running game whether the signed-in user is the owner (admin tools stay hidden otherwise)
+  function syncGameRoleToFrame() {
+    var ifr = document.getElementById('dwGameIframe');
+    if (!ifr || !ifr.contentWindow) return;
+    try {
+      ifr.contentWindow.postMessage({
+        type: 'DW_ROLE_SYNC',
+        isOwner: !!(STATE.user && STATE.user.adminRole === 'owner')
+      }, '*');
+    } catch (e) {}
+  }
+
+  function syncAudioButtonsUI() {
+    var vText = STATE.storeVoiceOn ? '🔊 الصوت: مفعّل' : '🔇 الصوت: مغلق';
+    var sText = STATE.storeSfxOn ? '🎵 المؤثرات: مفعّلة' : '🔕 المؤثرات: مغلقة';
+    var fv = document.getElementById('dwFrameVoiceBtn');
+    var fs = document.getElementById('dwFrameSfxBtn');
+    if (fv) fv.textContent = vText;
+    if (fs) fs.textContent = sText;
+    var ifr = document.getElementById('dwGameIframe');
+    if (ifr && ifr.contentWindow) {
+      try {
+        ifr.contentWindow.postMessage({
+          type: 'DW_AUDIO_SYNC',
+          voiceOn: STATE.storeVoiceOn,
+          sfxOn: STATE.storeSfxOn
+        }, '*');
+      } catch (e) {}
+    }
+  }
+
+  function remainingFreeTrialsCount() {
+    if (!STATE.user) return 0;
+    var used = (STATE.wallet && STATE.wallet.freeTrialsUsed) || {};
+    var active = STATE.games.filter(function (g) { return g.is_enabled; });
+    return active.filter(function (g) { return !used[g.slug]; }).length;
+  }
+
+  function getLogoForGame(slug) {
+    return LUXURY_LOGOS[slug] || LUXURY_LOGOS.eight;
+  }
+
+  function renderNavbar() {
+    var u = STATE.user;
+    var freeLeft = remainingFreeTrialsCount();
+    return '<header class="dw-nav"><div class="dw-nav-inner">' +
+      '<a href="#store" class="dw-brand" data-nav="store">' +
+        '<div class="dw-brand-logo">د+</div>' +
+        '<div class="dw-brand-text"><h1>ديوانية <span>بلس</span></h1><p>منصة الألعاب الجماعية التفاعلية</p></div>' +
+      '</a>' +
+      '<nav class="dw-nav-links">' +
+        '<button class="dw-tab-btn ' + (STATE.tab === 'store' ? 'active' : '') + '" data-nav="store">الألعاب والمتجر (' + arNum(STATE.games.filter(function(g){return g.is_enabled;}).length) + ')</button>' +
+        '<button class="dw-tab-btn ' + (STATE.tab === 'categories' ? 'active' : '') + '" data-nav="categories">موسوعة الفئات (' + arNum(STATE.categories.filter(function(c){return c.is_visible;}).length) + ')</button>' +
+        '<button class="dw-tab-btn ' + (STATE.tab === 'packages' ? 'active' : '') + '" data-nav="packages">باقات الأقيام</button>' +
+        '<button class="dw-tab-btn ' + (STATE.tab === 'wallet' ? 'active' : '') + '" data-nav="wallet">محفظتي والعمليات</button>' +
+        (u && u.adminRole === 'owner' ? '<button class="dw-tab-btn admin-tab ' + (STATE.tab === 'admin' ? 'active' : '') + '" data-nav="admin">⚙️ لوحة الإدارة ومحرر الألعاب</button>' : '') +
+      '</nav>' +
+      '<div class="dw-spacer"></div>' +
+      '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="open-room-hub">📱 غرفة QR والجرس</button>' +
+      '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="toggle-store-voice">' + (STATE.storeVoiceOn ? '🔊 الصوت: مفعّل' : '🔇 الصوت: مغلق') + '</button>' +
+      '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="toggle-store-sfx">' + (STATE.storeSfxOn ? '🎵 المؤثرات: مفعّلة' : '🔕 المؤثرات: مغلقة') + '</button>' +
+      (u
+        ? (freeLeft > 0 ? '<span class="dw-chip teal">🎁 لك ' + arNum(freeLeft) + ' أقيام مجانية للتجربة</span>' : '<span class="dw-chip">استُهلكت التجارب المجانية</span>') +
+          '<button class="dw-wallet-pill" data-nav="wallet">💎 رصيدك: ' + arNum(STATE.wallet.balance) + ' أقيام</button>' +
+          '<span class="dw-chip">' + esc(u.displayName) + (u.adminRole === 'owner' ? ' 👑' : '') + '</span>' +
+          '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="logout">خروج</button>'
+        : '<button class="dw-btn dw-btn-gold dw-btn-sm" data-act="open-auth">🔐 دخول / حساب جديد (OTP)</button>') +
+    '</div></header>';
+  }
+
+  function renderStoreTab() {
+    var activeGames = STATE.games.filter(function (g) { return g.is_enabled; }).sort(function (a, b) { return a.sort_order - b.sort_order; });
+    var usedTrials = (STATE.wallet && STATE.wallet.freeTrialsUsed) || {};
+    var freeLeft = remainingFreeTrialsCount();
+
+    var html = '<section class="dw-hero">' +
+      '<div class="dw-hero-content">' +
+        '<div class="dw-badge">🎁 هدية الترحيب لكل حساب موثق: قيم مجاني تجريبي في كل لعبة من الألعاب الـ ٢٤!</div>' +
+        '<h2>سهرة أصدقائك صارت <b>أفخم وأحمس</b> في <b>ديوانية بلس</b></h2>' +
+        '<p>٢٤ لعبة جماعية احترافية تعمل على التلفزيون والآيباد والجوالات عبر الـ QR Code بدون تحميل أي تطبيق. جرّب كل لعبة مجاناً لأول مرة بعد تسجيل دخولك، واقرأ شرحها المفصل من الخارج قبل البدء!</p>' +
+        '<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px">' +
+          (!STATE.user ? '<button class="dw-btn dw-btn-gold" data-act="open-auth">🔐 سجّل دخولك عبر OTP للحصول على ٢٤ تجربة مجانية</button>' : '<button class="dw-btn dw-btn-gold" data-nav="packages">شحن باقات الأقيام</button>') +
+          '<button class="dw-btn dw-btn-teal" data-act="open-room-hub">📱 فتح غرفة اللعب الجماعي (QR + الجرس الحي)</button>' +
+          '<button class="dw-btn dw-btn-sec" data-nav="categories">استعراض الـ ' + arNum(STATE.categories.length) + ' فئة بملصقاتها</button>' +
+          (STATE.user && STATE.user.adminRole === 'owner' ? '<button class="dw-btn dw-btn-teal" data-nav="admin">⚙️ لوحة المالك ومحرر الألعاب</button>' : '') +
+        '</div>' +
+      '</div>' +
+      '<div class="dw-card" style="min-width:285px;text-align:center;border-color:var(--border-line)">' +
+        '<div style="font-size:13px;color:var(--text-muted)">' + (STATE.user ? 'رصيد محفظتك الموثق في الخادم' : 'حالة الحساب والمحفظة') + '</div>' +
+        (STATE.user
+          ? '<div style="font-size:38px;font-weight:900;color:var(--gold)">' + arNum(STATE.wallet.balance) + ' <span style="font-size:17px">أقيام</span></div>' +
+            '<div style="font-size:13px;color:var(--teal);font-weight:800;background:rgba(45,212,191,0.12);padding:6px 10px;border-radius:10px;border:1px solid rgba(45,212,191,0.35)">🎁 لك قيم مجاني واحد لكل لعبة (' + arNum(freeLeft) + ' من ' + arNum(activeGames.length) + ' متبقية)</div>' +
+            '<button class="dw-btn dw-btn-sec dw-btn-sm" data-nav="wallet">عرض سجل المحفظة الموثق</button>'
+          : '<div style="font-size:18px;font-weight:900;color:var(--gold);margin:8px 0">غير مسجل الدخول</div>' +
+            '<div style="font-size:12.5px;color:var(--text-muted);line-height:1.6">سجّل دخولك عبر رمز التحقق (OTP) لتفعيل محفظتك والحصول على قيم مجاني لمرة واحدة في كل لعبة.</div>' +
+            '<button class="dw-btn dw-btn-gold dw-btn-sm" data-act="open-auth">تسجيل الدخول الآن</button>') +
+      '</div>' +
+    '</section>';
+
+    html += '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">' +
+      '<div><h3 style="margin:0;font-size:24px;font-weight:900">ألعاب منصة ديوانية بلس (' + arNum(activeGames.length) + ' لعبة كاملة بشعارات فخمة)</h3>' +
+      '<p style="margin:4px 0 0;color:var(--text-muted);font-size:14px">جميع المحركات الـ ٢٤ مربوطة بالكامل مع شرح خارجي مفصل، حماية عدم التكرار (Idempotency)، ودعم غرف الـ QR</p></div>' +
+    '</div>';
+
+    html += '<div class="dw-grid-3">' + activeGames.map(function (g) {
+      var logo = getLogoForGame(g.slug);
+      var hasFreeTrial = STATE.user ? !usedTrials[g.slug] : true;
+      var trialUsedByUser = STATE.user && !!usedTrials[g.slug];
+      return '<div class="dw-card" data-game-card="' + esc(g.slug) + '">' +
+        '<div class="dw-crest-banner" style="background:' + logo.bg + '">' +
+          (trialUsedByUser
+            ? '<span class="dw-used-ribbon">تم استهلاك التجربة · التكلفة: ' + arNum(g.cost_credits) + ' قيم</span>'
+            : '<span class="dw-free-ribbon">🎁 ' + (STATE.user ? 'لك قيم مجاني للتجربة!' : 'أول قيم مجاناً بعد الدخول!') + '</span>') +
+          logo.svg +
+        '</div>' +
+        '<div>' +
+          '<h4 style="margin:0;font-size:21px;font-weight:900">' + esc(g.title) + '</h4>' +
+          '<div style="color:var(--gold);font-size:13px;font-weight:800;margin-top:4px">' + esc(g.subtitle) + '</div>' +
+        '</div>' +
+        '<p style="margin:0;color:var(--text-muted);font-size:14px;line-height:1.75;flex:1">' + esc(g.description) + '</p>' +
+        '<div style="display:flex;gap:6px;flex-wrap:wrap">' +
+          (!trialUsedByUser
+            ? '<span class="dw-chip teal">أول قيم مجاناً 🎁</span>'
+            : '<span class="dw-chip gold">التكلفة: ' + arNum(g.cost_credits) + ' قيم</span>') +
+          '<span class="dw-chip">' + arNum(g.min_players) + ' إلى ' + arNum(g.max_players) + ' لاعب</span>' +
+          '<span class="dw-chip" dir="ltr">#' + arNum(g.sort_order) + '</span>' +
+        '</div>' +
+        '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px">' +
+          '<button class="dw-btn ' + (!trialUsedByUser ? 'dw-btn-teal' : 'dw-btn-gold') + '" style="flex:1.3" data-act="launch-game" data-slug="' + esc(g.slug) + '"' + (STATE.launchInFlight ? ' disabled' : '') + '>' +
+            (!STATE.user
+              ? '🔐 سجل دخولك والعب مجاناً'
+              : (!trialUsedByUser ? '▶ العب مجاناً (قيم التجربة)' : '▶ تشغيل اللعبة (' + arNum(g.cost_credits) + ' قيم)')) +
+          '</button>' +
+          '<button class="dw-btn dw-btn-sec" style="flex:1" data-act="explain-game" data-slug="' + esc(g.slug) + '">📖 شرح اللعبة بالتفصيل</button>' +
+        '</div>' +
+      '</div>';
+    }).join('') + '</div>';
+
+    html += '<section class="dw-card" style="margin-top:10px;border:1.5px solid var(--gold);background:linear-gradient(145deg,rgba(23,33,68,0.92),rgba(10,15,36,0.95))">' +
+      '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">' +
+        '<div>' +
+          '<span class="dw-badge">💡 فئة مقترحات الألعاب وتحديات اليوتيوب</span>' +
+          '<h3 style="margin:4px 0 6px;font-size:22px;font-weight:900">عندك فكرة لعبة جماعية أو شفت تحدي رهيب في يوتيوب؟ اقترحها الآن!</h3>' +
+          '<p style="margin:0;color:var(--gold-light);font-size:14.5px;font-weight:800;line-height:1.7">✨ اكتب فكرة اللعبة أو ضع رابط المقطع، وفريق العمل سيراجعها ويعمل على برمجتها وإضافتها في الصفحة الرئيسية للمنصة نفسها!</p>' +
+        '</div>' +
+      '</div>' +
+      '<div class="dw-grid-3" style="margin-top:8px">' +
+        '<div><label style="font-size:12.5px;color:var(--text-muted)">اسم اللعبة المقترحة أو التحدي</label><input id="sugTitleInp" class="dw-input" placeholder="مثال: تحدي الصندوق الغامض أو لعبة حرامي الفريق"></div>' +
+        '<div><label style="font-size:12.5px;color:var(--text-muted)">رابط المقطع أو اللعبة (يوتيوب / تيك توك / موقع آمن https)</label><input id="sugUrlInp" class="dw-input" dir="ltr" placeholder="https://www.youtube.com/watch?v=..."></div>' +
+        '<div><label style="font-size:12.5px;color:var(--text-muted)">اسمك (اختياري)</label><input id="sugUserInp" class="dw-input" placeholder="مثال: عبدالله"></div>' +
+      '</div>' +
+      '<div><label style="font-size:12.5px;color:var(--text-muted)">تفاصيل الفكرة أو القواعد المميزة التي تريدها في اللعبة</label><input id="sugNotesInp" class="dw-input" placeholder="اشرح باختصار كيف تحب تكون طريقتها بالجوال والشاشة..."></div>' +
+      '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">' +
+        '<button class="dw-btn dw-btn-gold" data-act="submit-game-suggestion">🚀 إرسال اقتراح اللعبة لفريق العمل</button>' +
+        '<span style="font-size:12.5px;color:var(--teal);font-weight:800">✓ جميع المقترحات تُحفظ بشكل دائم وتصل مباشرة للوحة الإدارة</span>' +
+      '</div>' +
+      (STATE.suggestions && STATE.suggestions.length ? (
+        '<div style="margin-top:10px;border-top:1px solid var(--border-subtle);padding-top:12px">' +
+          '<b style="font-size:14px;color:var(--text-muted);display:block;margin-bottom:8px">📌 أحدث الألعاب المقترحة من اللاعبين:</b>' +
+          '<div class="dw-grid-3">' +
+            STATE.suggestions.slice(0, 6).map(function(s) {
+              var safeHref = sanitizeUrl(s.url);
+              return '<div style="background:rgba(255,255,255,0.04);border:1px solid var(--border-subtle);padding:12px;border-radius:14px;display:flex;flex-direction:column;gap:6px">' +
+                '<div style="display:flex;align-items:center;justify-content:space-between;gap:6px">' +
+                  '<b style="color:var(--gold)">' + esc(s.title) + '</b>' +
+                  '<span class="dw-chip teal" style="font-size:11px">' + esc(s.status) + '</span>' +
+                '</div>' +
+                '<div style="font-size:13px;color:var(--text-muted)">' + esc(s.notes || 'بدون ملاحظات إضافية') + '</div>' +
+                (safeHref ? '<a href="https://' + esc(safeHref.replace(/^https?:\/\//i, '')) + '" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:var(--teal);word-break:break-all" dir="ltr">🔗 ' + esc(safeHref) + '</a>' : '') +
+              '</div>';
+            }).join('') +
+          '</div>' +
+        '</div>'
+      ) : '') +
+    '</section>';
+
+    return html;
+  }
+
+  function renderCategoriesTab() {
+    var visibleCats = STATE.categories.filter(function (c) { return c.is_visible; });
+    var groups = ['الكل'];
+    visibleCats.forEach(function (c) {
+      if (groups.indexOf(c.sub_group) === -1) groups.push(c.sub_group);
+    });
+
+    var filtered = visibleCats.filter(function (c) {
+      var matchGrp = STATE.catFilterGroup === 'الكل' || c.sub_group === STATE.catFilterGroup;
+      var q = STATE.catSearch.trim();
+      var matchQ = !q || c.name.indexOf(q) !== -1 || c.sub_group.indexOf(q) !== -1 || c.description.indexOf(q) !== -1;
+      return matchGrp && matchQ;
+    });
+
+    return '<div class="dw-card">' +
+      '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">' +
+        '<div><h3 style="margin:0;font-size:24px;font-weight:900">موسوعة الفئات الكاملة بملصقاتها المرسومة (' + arNum(visibleCats.length) + ' فئة)</h3>' +
+        '<p style="margin:4px 0 0;color:var(--text-muted);font-size:14px">جميع فئاتك الـ ١٥٢ وأسئلتها الـ ٢,٧٣٦ محفوظة بالكامل مع رسوماتها الكرتونية الخاصة (بدون ملامح وجه) وقابلة للمعاينة والتعديل</p></div>' +
+        '<input id="dwCatSearchInp" class="dw-input" style="max-width:300px" placeholder="ابحث عن أي فئة (مثال: السعودية، أنمي، ملاعب...)" value="' + esc(STATE.catSearch) + '">' +
+      '</div>' +
+      '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:6px">' +
+        groups.map(function (g) {
+          return '<button class="dw-tab-btn ' + (STATE.catFilterGroup === g ? 'active' : '') + '" data-act="filter-cat-grp" data-grp="' + esc(g) + '">' + esc(g) + '</button>';
+        }).join('') +
+      '</div>' +
+      '<div class="dw-cat-grid" style="margin-top:10px">' +
+        filtered.map(function (c) {
+          var posterSvg = renderCategoryPosterSvg(c);
+          return '<div class="dw-cat-item" style="overflow:hidden;padding:0;display:flex;flex-direction:column">' +
+            '<div style="height:128px;width:100%;position:relative;overflow:hidden;background:#0b132b;border-bottom:1px solid var(--border-subtle)">' +
+              posterSvg +
+              '<span class="dw-chip" style="position:absolute;top:8px;left:8px;background:rgba(10,15,36,0.85);font-size:11px">' + esc(c.sub_group) + '</span>' +
+              '<span class="dw-chip teal" style="position:absolute;bottom:8px;right:8px;background:rgba(10,15,36,0.88);font-size:11px">' + arNum(c.item_count || 18) + ' سؤال</span>' +
+            '</div>' +
+            '<div style="padding:12px;display:flex;flex-direction:column;gap:6px;flex:1">' +
+              '<div style="display:flex;align-items:center;justify-content:space-between;gap:6px">' +
+                '<b style="font-size:15px">' + esc(c.icon || '🎯') + ' ' + esc(c.name) + '</b>' +
+              '</div>' +
+              '<span style="font-size:12px;color:var(--text-muted);line-height:1.5;flex:1">' + esc(c.description || '١٨ سؤالاً متدرج الصعوبة (٢٠٠ / ٤٠٠ / ٦٠٠ نقطة)') + '</span>' +
+              '<button class="dw-btn dw-btn-sec dw-btn-sm" style="width:100%;margin-top:4px" data-act="preview-cat-questions" data-slug="' + esc(c.slug) + '">👁️ استعراض أسئلة الفئة (' + arNum(c.item_count || 18) + ')</button>' +
+            '</div>' +
+          '</div>';
+        }).join('') +
+      '</div>' +
+    '</div>';
+  }
+
+  function renderPackagesTab() {
+    var activePkgs = STATE.packages.filter(function (p) { return p.is_active; }).sort(function (a, b) { return a.sort_order - b.sort_order; });
+    return '<div class="dw-card">' +
+      '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">' +
+        '<div>' +
+          '<h3 style="margin:0;font-size:24px;font-weight:900">باقات شحن الأقيام (Credits)</h3>' +
+          '<p style="margin:4px 0 0;color:var(--text-muted);font-size:14.5px">يحصل كل مستخدم على <b>قيم مجاني تجريبي في كل لعبة من الألعاب الـ ٢٤</b>، وبعدها يمكن طلب شحن أي باقة من الباقات التالية:</p>' +
+        '</div>' +
+        '<span class="dw-chip gold" style="font-size:12.5px">⚠️ بوابة الدفع في وضع التجهيز — لا تُضاف الأقيام إلا بعد تأكيد Webhook موثق</span>' +
+      '</div>' +
+      '<div style="background:rgba(245,185,66,0.1);border:1px solid rgba(245,185,66,0.35);padding:12px 16px;border-radius:14px;font-size:13.5px;color:var(--gold-light);line-height:1.65">' +
+        '🔒 <b>تنبيه شفافية الدفع:</b> بوابة الدفع الإلكترونية غير مربوطة حالياً. عند الضغط على طلب أي باقة، يقوم الخادم بإنشاء طلب دفع في جدول <code>payments</code> بحالة <b>«بانتظار ربط البوابة (gateway_not_configured)»</b> دون ادعاء نجاح شراء وهمي ودون إضافة أقيام غير مدفوعة.' +
+      '</div>' +
+      '<div class="dw-grid-4" style="margin-top:8px">' +
+        activePkgs.map(function (p) {
+          var sar = (p.price_halalas / 100).toFixed(0);
+          return '<div class="dw-card" style="border-color:var(--border-line);justify-content:space-between">' +
+            '<div>' +
+              (p.badge ? '<span class="dw-badge">' + esc(p.badge) + '</span>' : '') +
+              '<h4 style="margin:6px 0 0;font-size:20px;font-weight:900">' + esc(p.name) + '</h4>' +
+              '<div style="font-size:34px;font-weight:900;color:var(--gold);margin:10px 0">' + arNum(p.credits) + ' <span style="font-size:16px">أقيام</span></div>' +
+              '<p style="margin:0;color:var(--text-muted);font-size:13.5px;line-height:1.6">' + esc(p.description) + '</p>' +
+            '</div>' +
+            '<div style="margin-top:14px;border-top:1px solid var(--border-subtle);padding-top:12px">' +
+              '<div style="font-size:22px;font-weight:900;margin-bottom:10px">' + arNum(sar) + ' ر.س</div>' +
+              '<button class="dw-btn dw-btn-gold" style="width:100%" data-act="buy-pkg" data-id="' + esc(p.id) + '">تسجيل طلب الباقة (بوابة الدفع قيد الربط)</button>' +
+            '</div>' +
+          '</div>';
+        }).join('') +
+      '</div>' +
+    '</div>';
+  }
+
+  function renderWalletTab() {
+    if (!STATE.user) {
+      return '<div class="dw-card" style="text-align:center;padding:40px">' +
+        '<h3>🔐 سجّل دخولك عبر OTP للحصول على قيم مجاني في كل لعبة وعرض محفظتك الموثقة</h3>' +
+        '<p style="color:var(--text-muted);font-size:14px">يتم حفظ رصيدك وسجل أقيامك المجانية والمدفوعة في قاعدة بيانات الخادم (D1) بشكل دائم لكل حساب.</p>' +
+        '<div><button class="dw-btn dw-btn-gold" data-act="open-auth">تسجيل الدخول / إنشاء حساب</button></div>' +
+      '</div>';
+    }
+    var w = STATE.wallet;
+    var freeLeft = remainingFreeTrialsCount();
+    return '<div class="dw-grid-4">' +
+      '<div class="dw-card"><div style="color:var(--text-muted);font-size:13px">رصيد الأقيام الأساسي (في الخادم)</div><div style="font-size:34px;font-weight:900;color:var(--gold)">' + arNum(w.balance) + ' أقيام</div></div>' +
+      '<div class="dw-card"><div style="color:var(--text-muted);font-size:13px">الأقيام المجانية المتبقية للحساب</div><div style="font-size:34px;font-weight:900;color:var(--teal)">' + arNum(freeLeft) + ' من ٢٤</div></div>' +
+      '<div class="dw-card"><div style="color:var(--text-muted);font-size:13px">إجمالي الأقيام المضافة</div><div style="font-size:34px;font-weight:900">' + arNum(w.totalPurchased) + ' أقيام</div></div>' +
+      '<div class="dw-card"><div style="color:var(--text-muted);font-size:13px">إجمالي الأقيام المستهلكة</div><div style="font-size:34px;font-weight:900;color:var(--coral)">' + arNum(w.totalConsumed) + ' أقيام</div></div>' +
+    '</div>' +
+    (w.payments && w.payments.length ? (
+      '<div class="dw-card">' +
+        '<h3 style="margin:0;font-size:19px;font-weight:900">طلبات الدفع المسجلة في الخادم (Payments Table)</h3>' +
+        '<div class="dw-table-wrap"><table class="dw-table">' +
+          '<thead><tr><th>رقم الطلب</th><th>الباقة</th><th>الأقيام</th><th>المبلغ</th><th>الحالة في الخادم</th><th>ملاحظة البوابة</th><th>التاريخ</th></tr></thead>' +
+          '<tbody>' + w.payments.map(function (p) {
+            return '<tr>' +
+              '<td dir="ltr"><code>' + esc(p.id) + '</code></td>' +
+              '<td><b>' + esc(p.package_name) + '</b></td>' +
+              '<td>' + arNum(p.credits) + '</td>' +
+              '<td>' + arNum((p.amount_halalas / 100).toFixed(0)) + ' ر.س</td>' +
+              '<td><span class="dw-chip gold">' + esc(p.status) + '</span></td>' +
+              '<td style="font-size:12px;color:var(--text-muted)">' + esc(p.gateway_note || 'بانتظار تأكيد Webhook الموثق') + '</td>' +
+              '<td dir="ltr" style="font-size:12px;color:var(--text-muted)">' + esc((p.created_at || '').slice(0, 16).replace('T', ' ')) + '</td>' +
+            '</tr>';
+          }).join('') + '</tbody>' +
+        '</table></div>' +
+      '</div>'
+    ) : '') +
+    '<div class="dw-card">' +
+      '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">' +
+        '<h3 style="margin:0;font-size:20px;font-weight:900">سجل معاملات المحفظة الدائم (Wallet Transactions)</h3>' +
+        '<button class="dw-btn dw-btn-gold dw-btn-sm" data-nav="packages">+ طلب شحن أقيام</button>' +
+      '</div>' +
+      '<div class="dw-table-wrap"><table class="dw-table">' +
+        '<thead><tr><th>النوع</th><th>المقدار</th><th>الرصيد قبل</th><th>الرصيد بعد</th><th>التفاصيل ومفتاح Idempotency</th><th>التاريخ</th></tr></thead>' +
+        '<tbody>' + w.transactions.map(function (tx) {
+          var isPos = tx.amount > 0, isFree = tx.amount === 0;
+          return '<tr>' +
+            '<td><span class="dw-chip ' + (isPos || isFree ? 'teal' : 'gold') + '">' + esc(tx.type) + '</span></td>' +
+            '<td style="font-weight:900;color:' + (isFree ? 'var(--teal)' : isPos ? 'var(--teal)' : 'var(--rose)') + '" dir="ltr">' + (isFree ? 'FREE (0)' : (isPos ? '+' : '') + tx.amount) + '</td>' +
+            '<td>' + arNum(tx.balance_before) + '</td>' +
+            '<td style="font-weight:900">' + arNum(tx.balance_after) + '</td>' +
+            '<td>' + esc(tx.description) + '</td>' +
+            '<td style="color:var(--text-muted);font-size:12.5px" dir="ltr">' + esc((tx.created_at || '').slice(0, 16).replace('T', ' ')) + '</td>' +
+          '</tr>';
+        }).join('') + '</tbody>' +
+      '</table></div>' +
+    '</div>';
+  }
+
+  function getEditorQuestionsForCurrentSelection() {
+    var db = DiwaniyaServerKernel.loadDB();
+    if (STATE.editorGameId === 'game_eight') {
+      var cSlug = STATE.editorCatSlug || 'honeycomb_ar';
+      if (db.catQuestionsOverrides && Array.isArray(db.catQuestionsOverrides[cSlug])) {
+        return db.catQuestionsOverrides[cSlug].map(function (q, idx) {
+          return {
+            id: q.uid || (cSlug + '_' + idx),
+            game_id: 'game_eight',
+            cat: cSlug,
+            difficulty_points: Number(q.points || 200),
+            prompt_text: q.q || '',
+            answer_text: q.a || '',
+            extra_info: q.hint || ''
+          };
+        });
+      }
+      return getEightIslandQuestions(cSlug);
+    }
+    return STATE.gameContent.filter(function (it) { return it.game_id === STATE.editorGameId; });
+  }
+
+  function renderAdminTab() {
+    // Double check against server kernel so client-side console tampering with STATE.user.adminRole cannot reveal or use Admin
+    var verifyAuth = DiwaniyaServerKernel.getSessionUser();
+    if (!verifyAuth || !verifyAuth.user || verifyAuth.user.adminRole !== 'owner') {
+      return '<div class="dw-card" style="text-align:center;padding:40px"><h3>🚫 غير مصرح لك بالوصول إلى لوحة الإدارة (403 Server Role Check)</h3><p style="color:var(--text-muted)">يتم التحقق من صلاحية المالك (Owner) من قاعدة بيانات الخادم فقط.</p></div>';
+    }
+    var st = STATE.adminSubTab;
+    var nav = '<div class="dw-card" style="padding:14px">' +
+      '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">' +
+        '<div><span class="dw-badge">محمية بصلاحيات الخادم (Server-Enforced Owner Role)</span><h3 style="margin:4px 0 0;font-size:22px;font-weight:900">لوحة تحكم المالك ونظام إدارة الألعاب والـ ١٥٢ فئة</h3></div>' +
+        '<div style="display:flex;gap:6px;flex-wrap:wrap">' +
+          '<button class="dw-tab-btn ' + (st === 'overview' ? 'active' : '') + '" data-adm-tab="overview">📊 الإحصائيات</button>' +
+          '<button class="dw-tab-btn ' + (st === 'users' ? 'active' : '') + '" data-adm-tab="users">👥 المستخدمين والأرصدة</button>' +
+          '<button class="dw-tab-btn ' + (st === 'packages' ? 'active' : '') + '" data-adm-tab="packages">💎 إدارة الباقات</button>' +
+          '<button class="dw-tab-btn ' + (st === 'games' ? 'active' : '') + '" data-adm-tab="games">🎮 إدارة الألعاب (' + arNum(STATE.games.length) + ')</button>' +
+          '<button class="dw-tab-btn ' + (st === 'editor' ? 'active' : '') + '" data-adm-tab="editor">✏️ محرر الأسئلة والفئات (١٥٢ فئة + ٢٤ لعبة)</button>' +
+          '<button class="dw-tab-btn ' + (st === 'categories' ? 'active' : '') + '" data-adm-tab="categories">🗂️ إدارة الفئات (' + arNum(STATE.categories.length) + ')</button>' +
+          '<button class="dw-tab-btn ' + (st === 'logs' ? 'active' : '') + '" data-adm-tab="logs">🛡️ سجل الأمان</button>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+
+    if (st === 'overview') {
+      var totalSold = STATE.usersList.reduce(function (a, u) { return a + (u.total_purchased || 0); }, 0);
+      var totalUsed = STATE.usersList.reduce(function (a, u) { return a + (u.total_consumed || 0); }, 0);
+      return nav +
+        '<div class="dw-grid-4">' +
+          '<div class="dw-card"><div style="color:var(--text-muted);font-size:13px">إجمالي المستخدمين في D1</div><div style="font-size:32px;font-weight:900">' + arNum(STATE.usersList.length) + '</div></div>' +
+          '<div class="dw-card"><div style="color:var(--text-muted);font-size:13px">الألعاب المربوطة</div><div style="font-size:32px;font-weight:900;color:var(--gold)">' + arNum(STATE.games.length) + ' لعبة</div></div>' +
+          '<div class="dw-card"><div style="color:var(--text-muted);font-size:13px">الأقيام المضافة / المستهلكة</div><div style="font-size:32px;font-weight:900;color:var(--teal)">' + arNum(totalSold) + ' / ' + arNum(totalUsed) + '</div></div>' +
+          '<div class="dw-card"><div style="color:var(--text-muted);font-size:13px">إجمالي الفئات المحفوظة</div><div style="font-size:32px;font-weight:900">' + arNum(STATE.categories.length) + ' فئة</div></div>' +
+        '</div>' +
+        '<div class="dw-card"><h4 style="margin:0">الألعاب الـ ' + arNum(STATE.games.length) + ' في المنصة</h4>' +
+          '<div class="dw-table-wrap"><table class="dw-table"><thead><tr><th>#</th><th>اللعبة</th><th>المعرف (Slug)</th><th>التكلفة بعد التجربة</th><th>اللاعبين</th><th>الحالة</th><th>الجلسات الموثقة</th></tr></thead><tbody>' +
+            STATE.games.map(function (g, idx) {
+              return '<tr><td>' + arNum(idx + 1) + '</td><td><b>' + esc(g.title) + '</b></td><td><code>' + esc(g.slug) + '</code></td><td>' + arNum(g.cost_credits) + ' قيم (أول قيم مجاناً)</td><td>' + arNum(g.min_players) + ' - ' + arNum(g.max_players) + '</td><td>' + (g.is_enabled ? '<span class="dw-chip teal">مفعّلة</span>' : '<span class="dw-chip">معطّلة</span>') + '</td><td><b>' + arNum(g.total_sessions_played || 0) + '</b></td></tr>';
+            }).join('') +
+          '</tbody></table></div>' +
+        '</div>';
+    }
+
+    if (st === 'users') {
+      return nav +
+        '<div class="dw-card">' +
+          '<h4 style="margin:0;font-size:19px">إدارة المستخدمين وتعديل أرصدة الأقيام في الخادم (مع تسجيل السبب الإلزامي)</h4>' +
+          '<div class="dw-grid-3" style="background:rgba(0,0,0,0.25);padding:16px;border-radius:16px">' +
+            '<div><label style="font-size:12.5px;color:var(--text-muted)">اختر المستخدم</label><select id="admUserSelect" class="dw-select">' +
+              STATE.usersList.map(function (u) { return '<option value="' + esc(u.id) + '">' + esc(u.display_name) + ' (' + esc(u.email) + ') — الرصيد: ' + u.balance + '</option>'; }).join('') +
+            '</select></div>' +
+            '<div><label style="font-size:12.5px;color:var(--text-muted)">مقدار التعديل (مثال: 5 للإضافة أو -2 للخصم)</label><input id="admCreditDelta" type="number" class="dw-input" value="5"></div>' +
+            '<div><label style="font-size:12.5px;color:var(--text-muted)">سبب التعديل الإداري (إلزامي للسجل)</label><input id="admCreditReason" class="dw-input" placeholder="مثال: تعويض عميل / شحن يدوي"></div>' +
+          '</div>' +
+          '<div style="display:flex;gap:8px;flex-wrap:wrap">' +
+            '<button class="dw-btn dw-btn-gold dw-btn-sm" data-act="adm-adjust-credit">تنفيذ تعديل الرصيد في الخادم وتسجيله في السجل</button>' +
+            '<button class="dw-btn dw-btn-teal dw-btn-sm" data-act="adm-reset-trials">إعادة منح الأقيام المجانية الـ ٢٤ للمستخدم المختار</button>' +
+          '</div>' +
+          '<div class="dw-table-wrap"><table class="dw-table"><thead><tr><th>المستخدم</th><th>البريد الإلكتروني</th><th>الصلاحية</th><th>الحالة</th><th>الرصيد الحالي</th><th>المضافة</th><th>المستهلكة</th><th>إجراء</th></tr></thead><tbody>' +
+            STATE.usersList.map(function (u) {
+              return '<tr>' +
+                '<td><b>' + esc(u.display_name) + '</b></td>' +
+                '<td dir="ltr">' + esc(u.email) + '</td>' +
+                '<td>' + (u.admin_role === 'owner' ? '<span class="dw-chip gold">👑 المالك (Owner)</span>' : '<span class="dw-chip">مستخدم</span>') + '</td>' +
+                '<td><span class="dw-chip ' + (u.status === 'active' ? 'teal' : '') + '">' + (u.status === 'active' ? 'نشط' : 'موقوف') + '</span></td>' +
+                '<td style="font-weight:900;color:var(--gold)">' + arNum(u.balance) + '</td>' +
+                '<td>' + arNum(u.total_purchased) + '</td>' +
+                '<td>' + arNum(u.total_consumed) + '</td>' +
+                '<td>' + (u.admin_role === 'owner' ? '<span class="dw-chip gold">حساب محمي</span>' : '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="adm-toggle-user" data-id="' + esc(u.id) + '">' + (u.status === 'active' ? 'إيقاف الحساب' : 'تفعيل الحساب') + '</button>') + '</td>' +
+              '</tr>';
+            }).join('') +
+          '</tbody></table></div>' +
+        '</div>';
+    }
+
+    if (st === 'packages') {
+      return nav +
+        '<div class="dw-card">' +
+          '<h4 style="margin:0;font-size:19px">إضافة أو تعديل باقة أقيام</h4>' +
+          '<div class="dw-grid-4" style="background:rgba(0,0,0,0.25);padding:16px;border-radius:16px">' +
+            '<div><label style="font-size:12px;color:var(--text-muted)">اسم الباقة</label><input id="pkgName" class="dw-input" placeholder="مثال: باقة التحدي (١٥ قياماً)"></div>' +
+            '<div><label style="font-size:12px;color:var(--text-muted)">عدد الأقيام</label><input id="pkgCredits" type="number" class="dw-input" value="15"></div>' +
+            '<div><label style="font-size:12px;color:var(--text-muted)">السعر بالريال (SAR)</label><input id="pkgPriceSar" type="number" class="dw-input" value="65"></div>' +
+            '<div><label style="font-size:12px;color:var(--text-muted)">شارة مميزة (Badge)</label><input id="pkgBadge" class="dw-input" placeholder="مثال: عرض خاص"></div>' +
+          '</div>' +
+          '<input id="pkgDesc" class="dw-input" placeholder="وصف الباقة الذي يظهر للعملاء...">' +
+          '<div><button class="dw-btn dw-btn-gold dw-btn-sm" data-act="adm-save-pkg">+ حفظ وإضافة الباقة في قاعدة البيانات</button></div>' +
+          '<div class="dw-table-wrap"><table class="dw-table"><thead><tr><th>الباقة</th><th>الأقيام</th><th>السعر</th><th>الشارة</th><th>الحالة</th><th>إجراء</th></tr></thead><tbody>' +
+            STATE.packages.map(function (p) {
+              return '<tr>' +
+                '<td><b>' + esc(p.name) + '</b><div style="font-size:12px;color:var(--text-muted)">' + esc(p.description) + '</div></td>' +
+                '<td style="font-weight:900;color:var(--gold)">' + arNum(p.credits) + '</td>' +
+                '<td>' + arNum((p.price_halalas / 100).toFixed(0)) + ' ر.س</td>' +
+                '<td>' + esc(p.badge || '—') + '</td>' +
+                '<td>' + (p.is_active ? '<span class="dw-chip teal">مفعّلة</span>' : '<span class="dw-chip">معطّلة</span>') + '</td>' +
+                '<td><button class="dw-btn dw-btn-sec dw-btn-sm" data-act="adm-toggle-pkg" data-id="' + esc(p.id) + '">' + (p.is_active ? 'تعطيل' : 'تفعيل') + '</button></td>' +
+              '</tr>';
+            }).join('') +
+          '</tbody></table></div>' +
+        '</div>';
+    }
+
+    if (st === 'games') {
+      return nav +
+        '<div class="dw-card">' +
+          '<h4 style="margin:0;font-size:19px">نظام إدارة الألعاب (Game Management System) — جميع الألعاب الـ ' + arNum(STATE.games.length) + '</h4>' +
+          '<div class="dw-grid-4" style="background:rgba(0,0,0,0.25);padding:16px;border-radius:16px">' +
+            '<div><label style="font-size:12px;color:var(--text-muted)">اسم اللعبة</label><input id="gmTitle" class="dw-input" placeholder="مثال: حرامي الفريق"></div>' +
+            '<div><label style="font-size:12px;color:var(--text-muted)">المعرف النصي (Slug)</label><input id="gmSlug" class="dw-input" placeholder="team_thief"></div>' +
+            '<div><label style="font-size:12px;color:var(--text-muted)">محرك اللعبة الأساسي (Engine)</label><select id="gmEngineSel" class="dw-select">' +
+              STATE.games.map(function (g) { return '<option value="' + esc(g.slug) + '">' + esc(g.title) + ' (' + esc(g.slug) + ')</option>'; }).join('') +
+            '</select></div>' +
+            '<div><label style="font-size:12px;color:var(--text-muted)">تكلفة التشغيل (أقيام)</label><input id="gmCost" type="number" class="dw-input" value="1"></div>' +
+            '<div><label style="font-size:12px;color:var(--text-muted)">أقل عدد لاعبين</label><input id="gmMinP" type="number" class="dw-input" value="2"></div>' +
+            '<div><label style="font-size:12px;color:var(--text-muted)">أقصى عدد لاعبين</label><input id="gmMaxP" type="number" class="dw-input" value="30"></div>' +
+            '<div><label style="font-size:12px;color:var(--text-muted)">ترتيب الظهور</label><input id="gmSort" type="number" class="dw-input" value="25"></div>' +
+            '<div><label style="font-size:12px;color:var(--text-muted)">قواعد اللعبة المختصرة</label><input id="gmRules" class="dw-input" placeholder="قواعد وشروط الفوز..."></div>' +
+          '</div>' +
+          '<input id="gmDesc" class="dw-input" placeholder="وصف اللعبة وقواعدها المختصرة...">' +
+          '<div><button class="dw-btn dw-btn-gold dw-btn-sm" data-act="adm-save-game">+ إضافة / تحديث اللعبة في النظام</button></div>' +
+          '<div class="dw-table-wrap"><table class="dw-table"><thead><tr><th>#</th><th>اللعبة</th><th>Slug</th><th>نوع المحرك</th><th>التكلفة (أقيام)</th><th>اللاعبين</th><th>الحالة</th><th>إجراءات</th></tr></thead><tbody>' +
+            STATE.games.map(function (g, idx) {
+              return '<tr>' +
+                '<td>' + arNum(idx + 1) + '</td>' +
+                '<td><b>' + esc(g.title) + '</b><div style="font-size:12px;color:var(--text-muted)">' + esc(g.subtitle) + '</div></td>' +
+                '<td><code>' + esc(g.slug) + '</code></td>' +
+                '<td><code>' + esc(g.engine_type) + '</code></td>' +
+                '<td><input type="number" class="dw-input" style="width:80px;padding:6px" value="' + g.cost_credits + '" data-act-change-cost="' + esc(g.id) + '"></td>' +
+                '<td>' + arNum(g.min_players) + ' - ' + arNum(g.max_players) + '</td>' +
+                '<td>' + (g.is_enabled ? '<span class="dw-chip teal">متاحة للعملاء</span>' : '<span class="dw-chip">مخفية</span>') + '</td>' +
+                '<td><button class="dw-btn dw-btn-sec dw-btn-sm" data-act="adm-toggle-game" data-id="' + esc(g.id) + '">' + (g.is_enabled ? 'إخفاء / تعطيل' : 'تفعيل') + '</button></td>' +
+              '</tr>';
+            }).join('') +
+          '</tbody></table></div>' +
+        '</div>';
+    }
+
+    if (st === 'editor') {
+      var allEditorItems = getEditorQuestionsForCurrentSelection();
+      var items = allEditorItems.filter(function (it) {
+        var q = STATE.editorSearch.trim();
+        return !q || (it.prompt_text && it.prompt_text.indexOf(q) !== -1) || (it.answer_text && it.answer_text.indexOf(q) !== -1);
+      });
+      var editingItem = STATE.editingItemId ? allEditorItems.find(function (x) { return x.id === STATE.editingItemId; }) : null;
+
+      return nav +
+        '<div class="dw-card">' +
+          '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">' +
+            '<div><h4 style="margin:0;font-size:19px">محرر محتوى جميع الألعاب الـ ٢٤ والفئات الـ ١٥٢ (حفظ دائم في D1 + استيراد وتصدير JSON)</h4>' +
+            '<p style="margin:4px 0 0;color:var(--text-muted);font-size:13.5px">اختر أي لعبة أو أي فئة من الـ ١٥٢ فئة لعرض أسئلتها الحقيقية، إضافة سؤال جديد، تعديل سؤال حالي، أو الحذف والاستيراد والتصدير.</p></div>' +
+            '<div style="display:flex;gap:8px;flex-wrap:wrap">' +
+              '<label class="dw-btn dw-btn-sec dw-btn-sm" style="cursor:pointer">⬆️ استيراد JSON<input type="file" id="admImportJsonInp" accept=".json,application/json" style="display:none"></label>' +
+              '<button class="dw-btn dw-btn-teal dw-btn-sm" data-act="adm-export-json">⬇️ تصدير المحتوى الحالي (JSON)</button>' +
+            '</div>' +
+          '</div>' +
+          '<div class="dw-grid-3" style="background:rgba(45,212,191,0.07);border:1px solid rgba(45,212,191,0.28);padding:14px;border-radius:16px">' +
+            '<div><label style="font-size:12px;color:var(--teal);font-weight:800">١. اختر اللعبة المراد تحرير أسئلتها</label><select id="edGameSelect" class="dw-select">' +
+              STATE.games.map(function (g) {
+                return '<option value="' + esc(g.id) + '"' + (STATE.editorGameId === g.id ? ' selected' : '') + '>' + esc(g.title) + '</option>';
+              }).join('') +
+            '</select></div>' +
+            (STATE.editorGameId === 'game_eight'
+              ? '<div><label style="font-size:12px;color:var(--gold);font-weight:800">٢. اختر الفئة من الـ ' + arNum(STATE.categories.length) + ' فئة</label><select id="edCatSelect" class="dw-select">' +
+                  STATE.categories.map(function (c) {
+                    return '<option value="' + esc(c.slug) + '"' + (STATE.editorCatSlug === c.slug ? ' selected' : '') + '>' + esc(c.icon) + ' ' + esc(c.name) + ' (' + arNum(c.item_count || 18) + ' سؤال)</option>';
+                  }).join('') +
+                '</select></div>'
+              : '<div><label style="font-size:12px;color:var(--text-muted)">التصنيف داخل اللعبة</label><input id="edCustomCatInp" class="dw-input" value="عام" placeholder="مثال: سوالف ومواقف"></div>') +
+            '<div><label style="font-size:12px;color:var(--text-muted)">النقاط / مستوى الصعوبة</label><select id="edPointsSelect" class="dw-select">' +
+              '<option value="200"' + (editingItem && editingItem.difficulty_points === 200 ? ' selected' : '') + '>٢٠٠ نقطة (سهل)</option>' +
+              '<option value="400"' + (editingItem && editingItem.difficulty_points === 400 ? ' selected' : '') + '>٤٠٠ نقطة (متوسط)</option>' +
+              '<option value="600"' + (editingItem && editingItem.difficulty_points === 600 ? ' selected' : '') + '>٦٠٠ نقطة (صعب)</option>' +
+            '</select></div>' +
+          '</div>' +
+          '<div class="dw-grid-3" style="background:rgba(0,0,0,0.25);padding:16px;border-radius:16px">' +
+            '<div><label style="font-size:12px;color:var(--text-muted)">نص السؤال أو التحدي</label><input id="edPrompt" class="dw-input" placeholder="اكتب السؤال أو التحدي..." value="' + esc(editingItem ? editingItem.prompt_text : '') + '"></div>' +
+            '<div><label style="font-size:12px;color:var(--text-muted)">الإجابة الصحيحة المؤكدة</label><input id="edAnswer" class="dw-input" placeholder="اكتب الإجابة الصحيحة..." value="' + esc(editingItem ? editingItem.answer_text : '') + '"></div>' +
+            '<div><label style="font-size:12px;color:var(--text-muted)">تلميح أو معلومة إضافية</label><input id="edInfo" class="dw-input" placeholder="تلميح أو معلومة إضافية..." value="' + esc(editingItem ? editingItem.extra_info : '') + '"></div>' +
+          '</div>' +
+          '<div style="display:flex;gap:8px;flex-wrap:wrap">' +
+            (editingItem
+              ? '<button class="dw-btn dw-btn-teal dw-btn-sm" data-act="adm-save-edit-content">💾 حفظ تعديل السؤال المختار</button>' +
+                '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="adm-cancel-edit-content">إلغاء التعديل</button>'
+              : '<button class="dw-btn dw-btn-gold dw-btn-sm" data-act="adm-add-content">+ إضافة السؤال فوراً وحفظه في القاعدة</button>') +
+          '</div>' +
+          '<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:8px;flex-wrap:wrap">' +
+            '<b>قائمة الأسئلة المحفوظة حالياً (' + arNum(items.length) + ' من أصل ' + arNum(allEditorItems.length) + ' سؤال حقيقي محفوظ)</b>' +
+            '<input id="edSearchInp" class="dw-input" style="max-width:280px" placeholder="ابحث في الأسئلة أو الإجابات..." value="' + esc(STATE.editorSearch) + '">' +
+          '</div>' +
+          '<div class="dw-table-wrap" style="max-height:440px;overflow-y:auto"><table class="dw-table"><thead><tr><th>#</th><th>النقاط</th><th>السؤال / التحدي</th><th>الإجابة الصحيحة</th><th>التلميح / المعلومة</th><th>إجراءات</th></tr></thead><tbody>' +
+            items.slice(0, 120).map(function (it, idx) {
+              return '<tr>' +
+                '<td>' + arNum(idx + 1) + '</td>' +
+                '<td><span class="dw-chip gold">' + arNum(it.difficulty_points || 200) + '</span></td>' +
+                '<td>' + esc(it.prompt_text) + '</td>' +
+                '<td style="color:var(--teal);font-weight:800">' + esc(it.answer_text) + '</td>' +
+                '<td style="color:var(--text-muted);font-size:12.5px">' + esc(it.extra_info || '—') + '</td>' +
+                '<td style="display:flex;gap:6px">' +
+                  '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="adm-start-edit-content" data-id="' + esc(it.id) + '">✏️ تعديل</button>' +
+                  '<button class="dw-btn dw-btn-danger dw-btn-sm" data-act="adm-del-content" data-id="' + esc(it.id) + '">حذف</button>' +
+                '</td>' +
+              '</tr>';
+            }).join('') +
+          '</tbody></table></div>' +
+        '</div>';
+    }
+
+    if (st === 'categories') {
+      return nav +
+        '<div class="dw-card">' +
+          '<h4 style="margin:0;font-size:19px">إدارة الفئات الـ ' + arNum(STATE.categories.length) + ' (مع الملصق البصري وعدد الأسئلة الفعلي المحفوظ)</h4>' +
+          '<div class="dw-grid-4" style="background:rgba(0,0,0,0.25);padding:16px;border-radius:16px">' +
+            '<div><label style="font-size:12px;color:var(--text-muted)">اسم الفئة</label><input id="catNewName" class="dw-input" placeholder="مثال: كأس العالم ٢٠٣٤"></div>' +
+            '<div><label style="font-size:12px;color:var(--text-muted)">التصنيف الفرعي</label><input id="catNewGroup" class="dw-input" value="رياضة"></div>' +
+            '<div><label style="font-size:12px;color:var(--text-muted)">الأيقونة / الرمز</label><input id="catNewIcon" class="dw-input" value="⚽"></div>' +
+            '<div><label style="font-size:12px;color:var(--text-muted)">الوصف</label><input id="catNewDesc" class="dw-input" placeholder="وصف مختصر للفئة..."></div>' +
+          '</div>' +
+          '<div><button class="dw-btn dw-btn-gold dw-btn-sm" data-act="adm-add-cat">+ إضافة الفئة وحفظها</button></div>' +
+          '<div class="dw-table-wrap" style="max-height:440px;overflow-y:auto"><table class="dw-table"><thead><tr><th>#</th><th>الفئة</th><th>المجموعة</th><th>عدد الأسئلة الفعلي</th><th>الحالة</th><th>إجراءات</th></tr></thead><tbody>' +
+            STATE.categories.map(function (c, i) {
+              return '<tr>' +
+                '<td>' + arNum(i + 1) + '</td>' +
+                '<td><b>' + esc(c.icon) + ' ' + esc(c.name) + '</b></td>' +
+                '<td><span class="dw-chip">' + esc(c.sub_group) + '</span></td>' +
+                '<td><span class="dw-chip teal">' + arNum(c.item_count || 18) + ' سؤال</span></td>' +
+                '<td>' + (c.is_visible ? '<span class="dw-chip teal">ظاهرة</span>' : '<span class="dw-chip">مخفية</span>') + '</td>' +
+                '<td style="display:flex;gap:6px">' +
+                  '<button class="dw-btn dw-btn-teal dw-btn-sm" data-act="adm-open-cat-editor" data-slug="' + esc(c.slug) + '">✏️ تحرير أسئلتها</button>' +
+                  '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="adm-toggle-cat" data-id="' + esc(c.id) + '">' + (c.is_visible ? 'إخفاء' : 'إظهار') + '</button>' +
+                '</td>' +
+              '</tr>';
+            }).join('') +
+          '</tbody></table></div>' +
+        '</div>';
+    }
+
+    if (st === 'logs') {
+      return nav +
+        '<div class="dw-card">' +
+          '<h4 style="margin:0;font-size:19px">سجل العمليات الإدارية والأمان الدائم (Admin Audit Logs)</h4>' +
+          '<div class="dw-table-wrap"><table class="dw-table"><thead><tr><th>الإجراء</th><th>الهدف</th><th>المعرف</th><th>السبب المسجل</th><th>المشرف</th><th>التاريخ</th></tr></thead><tbody>' +
+            STATE.adminLogs.map(function (l) {
+              return '<tr><td><span class="dw-chip gold">' + esc(l.action) + '</span></td><td>' + esc(l.target_type) + '</td><td dir="ltr">' + esc(l.target_id) + '</td><td>' + esc(l.reason) + '</td><td dir="ltr">' + esc(l.admin_email) + '</td><td dir="ltr" style="font-size:12px;color:var(--text-muted)">' + esc((l.created_at || '').slice(0, 16).replace('T', ' ')) + '</td></tr>';
+            }).join('') +
+          '</tbody></table></div>' +
+        '</div>';
+    }
+
+    return nav;
+  }
+
+  function renderGuideModal() {
+    var modal = document.getElementById('dwGameGuideModal');
+    var inner = document.getElementById('dwGuideModalInner');
+    if (!modal || !inner) return;
+    if (!STATE.guideSlug || !GAME_GUIDES[STATE.guideSlug]) {
+      modal.classList.remove('open');
+      return;
+    }
+    var gInfo = GAME_GUIDES[STATE.guideSlug];
+    var gameObj = STATE.games.find(function (g) { return g.slug === STATE.guideSlug; }) || { title: gInfo.title, cost_credits: 1, slug: STATE.guideSlug };
+    var logo = getLogoForGame(STATE.guideSlug);
+    var tabs = gInfo.tabs || [];
+    var activeTab = tabs[STATE.guideTabIdx] || tabs[0];
+    var usedTrials = (STATE.wallet && STATE.wallet.freeTrialsUsed) || {};
+    var hasFree = STATE.user ? !usedTrials[STATE.guideSlug] : true;
+
+    inner.innerHTML =
+      '<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">' +
+        '<div style="display:flex;align-items:center;gap:14px">' +
+          '<div style="width:84px;height:56px;border-radius:14px;overflow:hidden;border:1px solid var(--border-line);background:' + logo.bg + ';display:flex;align-items:center;justify-content:center">' + logo.svg + '</div>' +
+          '<div>' +
+            '<span class="dw-badge">📖 الدليل الشامل لقواعد اللعبة</span>' +
+            '<h3 style="margin:4px 0 0;font-size:21px;font-weight:900">' + esc(gInfo.title) + '</h3>' +
+            '<div style="font-size:13px;color:var(--gold);font-weight:700">' + esc(gInfo.subtitle) + '</div>' +
+          '</div>' +
+        '</div>' +
+        '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="close-guide">✕ إغلاق الشرح</button>' +
+      '</div>' +
+      '<div class="dw-guide-tabs">' +
+        tabs.map(function (t, idx) {
+          return '<button class="dw-guide-tab ' + (idx === STATE.guideTabIdx ? 'active' : '') + '" data-act="guide-tab" data-idx="' + idx + '">' + esc(t.label) + '</button>';
+        }).join('') +
+      '</div>' +
+      (activeTab ? (
+        '<div style="background:rgba(0,0,0,0.28);border:1px solid var(--border-subtle);padding:16px;border-radius:16px">' +
+          '<p style="margin:0 0 12px;font-size:15px;font-weight:800;color:var(--gold-light);line-height:1.7">' + esc(activeTab.lead) + '</p>' +
+          '<div class="dw-guide-step-grid">' +
+            (activeTab.steps || []).map(function (st) {
+              return '<div class="dw-guide-step"><h5>✨ ' + esc(st.h) + '</h5><p>' + esc(st.t) + '</p></div>';
+            }).join('') +
+          '</div>' +
+        '</div>'
+      ) : '') +
+      '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;border-top:1px solid var(--border-subtle);padding-top:12px">' +
+        '<div style="font-size:13px;color:var(--text-muted)">' +
+          (hasFree ? '🎁 <b>أول قيم مجاناً للتجربة</b> في حسابك الموثق!' : '💎 تكلفة التشغيل: <b>' + arNum(gameObj.cost_credits) + ' قيم</b>') +
+        '</div>' +
+        '<div style="display:flex;gap:8px">' +
+          '<button class="dw-btn dw-btn-sec" data-act="close-guide">عودة للمتجر</button>' +
+          '<button class="dw-btn ' + (hasFree ? 'dw-btn-teal' : 'dw-btn-gold') + '" data-act="launch-from-guide" data-slug="' + esc(STATE.guideSlug) + '">' +
+            (hasFree ? '▶ ابدأ اللعب مجاناً الآن' : '▶ تشغيل اللعبة (' + arNum(gameObj.cost_credits) + ' قيم)') +
+          '</button>' +
+        '</div>' +
+      '</div>';
+
+    modal.classList.add('open');
+  }
+
+  function renderCategoryPreviewModal() {
+    var modal = document.getElementById('dwCatPreviewModal');
+    var inner = document.getElementById('dwCatPreviewModalInner');
+    if (!modal || !inner) return;
+    if (!STATE.previewCatSlug) {
+      modal.classList.remove('open');
+      return;
+    }
+    var catObj = STATE.categories.find(function (c) { return c.slug === STATE.previewCatSlug; });
+    if (!catObj) {
+      modal.classList.remove('open');
+      return;
+    }
+    var db = DiwaniyaServerKernel.loadDB();
+    var isOwnerView = !!(STATE.user && STATE.user.adminRole === 'owner');
+    var qs = !isOwnerView ? [] : (db.catQuestionsOverrides && db.catQuestionsOverrides[catObj.slug])
+      ? db.catQuestionsOverrides[catObj.slug].map(function (q) { return { difficulty_points: q.points, prompt_text: q.q, answer_text: q.a }; })
+      : getEightIslandQuestions(catObj.slug);
+    if (!isOwnerView) {
+      inner.innerHTML =
+        '<div style="display:flex;align-items:center;justify-content:space-between;gap:10px">' +
+          '<div><span class="dw-badge">' + esc(catObj.sub_group) + '</span><h3 style="margin:4px 0 0;font-size:20px;font-weight:900">' + esc(catObj.icon) + ' ' + esc(catObj.name) + '</h3></div>' +
+          '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="close-cat-preview">✕ إغلاق</button>' +
+        '</div>' +
+        '<div style="height:150px;border-radius:14px;overflow:hidden;border:1px solid var(--border-subtle)">' + renderCategoryPosterSvg(catObj) + '</div>' +
+        '<p style="margin:0;color:var(--text-muted);line-height:1.7">' + esc(catObj.description || '') + '</p>' +
+        '<div class="dw-chip gold" style="align-self:flex-start">' + arNum(catObj.item_count || 18) + ' سؤال · ٢٠٠ / ٤٠٠ / ٦٠٠ نقطة</div>' +
+        '<p style="margin:0;font-size:13px;color:var(--text-muted)">الأسئلة تظهر داخل اللعبة فقط عشان ما تنحرق قبل المباراة.</p>';
+      modal.classList.add('open');
+      return;
+    }
+
+    inner.innerHTML =
+      '<div style="display:flex;align-items:center;justify-content:space-between;gap:10px">' +
+        '<div><span class="dw-badge">' + esc(catObj.sub_group) + '</span><h3 style="margin:4px 0 0;font-size:20px;font-weight:900">' + esc(catObj.icon) + ' ' + esc(catObj.name) + ' (' + arNum(qs.length) + ' سؤال محفوظ)</h3></div>' +
+        '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="close-cat-preview">✕ إغلاق</button>' +
+      '</div>' +
+      '<div style="height:150px;border-radius:14px;overflow:hidden;border:1px solid var(--border-subtle)">' + renderCategoryPosterSvg(catObj) + '</div>' +
+      '<div class="dw-table-wrap" style="max-height:340px;overflow-y:auto"><table class="dw-table"><thead><tr><th>#</th><th>النقاط</th><th>السؤال</th><th>الإجابة</th></tr></thead><tbody>' +
+        qs.map(function (q, idx) {
+          return '<tr><td>' + arNum(idx + 1) + '</td><td><span class="dw-chip gold">' + arNum(q.difficulty_points || 200) + '</span></td><td>' + esc(q.prompt_text) + '</td><td style="color:var(--teal);font-weight:800">' + esc(q.answer_text) + '</td></tr>';
+        }).join('') +
+      '</tbody></table></div>';
+    modal.classList.add('open');
+  }
+
+  // ============================================================================
+  // 4. REAL CROSS-DEVICE MULTIPLAYER ROOM HUB (QR + WEBSOCKET DURABLE OBJECTS + RECONNECT)
+  // ============================================================================
+  function generateQrSvg(textStr) {
+    // Deterministic crisp QR-style matrix SVG for scanning / room code display
+    var s = String(textStr || 'DIWANIYA');
+    var size = 21;
+    var cells = [];
+    for (var r = 0; r < size; r++) {
+      cells[r] = [];
+      for (var c = 0; c < size; c++) cells[r][c] = 0;
+    }
+    function finder(r0, c0) {
+      for (var r = 0; r < 7; r++) {
+        for (var c = 0; c < 7; c++) {
+          var border = (r === 0 || r === 6 || c === 0 || c === 6);
+          var inner = (r >= 2 && r <= 4 && c >= 2 && c <= 4);
+          cells[r0 + r][c0 + c] = (border || inner) ? 1 : 0;
+        }
+      }
+    }
+    finder(0, 0); finder(0, size - 7); finder(size - 7, 0);
+    var hash = 2166136261;
+    for (var i = 0; i < s.length; i++) {
+      hash ^= s.charCodeAt(i);
+      hash = Math.imul(hash, 16777619);
+    }
+    for (var rr = 0; rr < size; rr++) {
+      for (var cc = 0; cc < size; cc++) {
+        if ((rr < 8 && cc < 8) || (rr < 8 && cc >= size - 8) || (rr >= size - 8 && cc < 8)) continue;
+        hash ^= (rr * 31 + cc * 17);
+        hash = Math.imul(hash, 16777619);
+        cells[rr][cc] = (Math.abs(hash) % 10) < 5 ? 1 : 0;
+      }
+    }
+    var rects = '';
+    for (var y = 0; y < size; y++) {
+      for (var x = 0; x < size; x++) {
+        if (cells[y][x]) rects += '<rect x="' + (x * 6 + 7) + '" y="' + (y * 6 + 7) + '" width="5.2" height="5.2" rx="1" fill="#0A0F24"/>';
+      }
+    }
+    return '<svg viewBox="0 0 140 140" width="150" height="150" style="background:#fff;border-radius:14px;padding:6px">' + rects + '</svg>';
+  }
+
+  var ROOM_SYNC = {
+    bc: null,
+    init: function () {
+      var self = this;
+      if (!STATE.room.code) {
+        var savedCode = null;
+        try { savedCode = window.sessionStorage.getItem('dw_active_room_code'); } catch (e) {}
+        STATE.room.code = savedCode || ('DW' + Math.floor(1000 + Math.random() * 9000));
+        try { window.sessionStorage.setItem('dw_active_room_code', STATE.room.code); } catch (e) {}
+      }
+      var db = DiwaniyaServerKernel.loadDB();
+      if (!db.rooms[STATE.room.code]) {
+        db.rooms[STATE.room.code] = {
+          code: STATE.room.code,
+          gameSlug: STATE.activeGameSlug || 'eight',
+          players: [],
+          buzzerLockedBy: null,
+          buzzerOrder: [],
+          currentPrompt: STATE.room.currentPrompt,
+          updatedAt: Date.now()
+        };
+        DiwaniyaServerKernel.saveDB(db);
+      } else {
+        var rm = db.rooms[STATE.room.code];
+        STATE.room.players = rm.players || [];
+        STATE.room.buzzerLockedBy = rm.buzzerLockedBy || null;
+        STATE.room.buzzerOrder = rm.buzzerOrder || [];
+      }
+      if (typeof BroadcastChannel !== 'undefined' && !this.bc) {
+        try {
+          this.bc = new BroadcastChannel('diwaniya_room_sync_v3');
+          this.bc.onmessage = function (ev) {
+            if (ev && ev.data && ev.data.roomCode === STATE.room.code) {
+              self.pullFromDB();
+              renderRoomModal();
+            }
+          };
+        } catch (e) {}
+      }
+      // If a live Cloudflare Worker WebSocket URL is configured, connect to Durable Object room
+      if (STATE.room.workerWsUrl) {
+        this.connectCloudWebSocket(STATE.room.workerWsUrl);
+      }
+    },
+    connectCloudWebSocket: function (wsBaseUrl) {
+      var self = this;
+      try {
+        if (STATE.room.wsConn) {
+          try { STATE.room.wsConn.close(); } catch (e) {}
+        }
+        var cleanUrl = wsBaseUrl.replace(/\/+$/, '') + '/api/rooms/' + encodeURIComponent(STATE.room.code) + '/ws';
+        STATE.room.wsStatus = 'reconnecting';
+        var ws = new WebSocket(cleanUrl);
+        STATE.room.wsConn = ws;
+        ws.onopen = function () {
+          STATE.room.wsStatus = 'connected_cloud';
+          ws.send(JSON.stringify({
+            type: 'HOST_OR_PLAYER_SYNC',
+            roomCode: STATE.room.code,
+            resumeToken: STATE.room.myResumeToken || null
+          }));
+          renderRoomModal();
+        };
+        ws.onmessage = function (ev) {
+          try {
+            var msg = JSON.parse(ev.data);
+            if (msg.room) {
+              STATE.room.players = msg.room.players || [];
+              STATE.room.buzzerLockedBy = msg.room.buzzerLockedBy || null;
+              STATE.room.buzzerOrder = msg.room.buzzerOrder || [];
+              renderRoomModal();
+            }
+          } catch (e) {}
+        };
+        ws.onclose = function () {
+          STATE.room.wsStatus = 'local_preview';
+          renderRoomModal();
+        };
+      } catch (e) {
+        STATE.room.wsStatus = 'local_preview';
+      }
+    },
+    pullFromDB: function () {
+      var db = DiwaniyaServerKernel.loadDB();
+      var rm = db.rooms[STATE.room.code];
+      if (rm) {
+        STATE.room.players = rm.players || [];
+        STATE.room.buzzerLockedBy = rm.buzzerLockedBy || null;
+        STATE.room.buzzerOrder = rm.buzzerOrder || [];
+        STATE.room.currentPrompt = rm.currentPrompt || STATE.room.currentPrompt;
+      }
+    },
+    commitToDB: function () {
+      var db = DiwaniyaServerKernel.loadDB();
+      db.rooms[STATE.room.code] = {
+        code: STATE.room.code,
+        gameSlug: STATE.activeGameSlug || STATE.room.gameSlug || 'eight',
+        players: STATE.room.players,
+        buzzerLockedBy: STATE.room.buzzerLockedBy,
+        buzzerOrder: STATE.room.buzzerOrder,
+        currentPrompt: STATE.room.currentPrompt,
+        updatedAt: Date.now()
+      };
+      DiwaniyaServerKernel.saveDB(db);
+      if (this.bc) {
+        try { this.bc.postMessage({ roomCode: STATE.room.code, ts: Date.now() }); } catch (e) {}
+      }
+      if (STATE.room.wsConn && STATE.room.wsConn.readyState === 1) {
+        try {
+          STATE.room.wsConn.send(JSON.stringify({
+            type: 'STATE_UPDATE',
+            roomCode: STATE.room.code,
+            room: db.rooms[STATE.room.code]
+          }));
+        } catch (e) {}
+      }
+    },
+    joinPlayer: function (name, team, isBot, existingResumeToken) {
+      this.pullFromDB();
+      var cleanName = String(name || '').trim() || 'لاعب الديوانية';
+      // Support reconnect via resumeToken without losing player state
+      if (existingResumeToken) {
+        var found = STATE.room.players.find(function (p) { return p.resumeToken === existingResumeToken; });
+        if (found) {
+          found.connected = true;
+          found.name = cleanName;
+          this.commitToDB();
+          return found;
+        }
+      }
+      var pid = (isBot ? 'bot_' : 'plr_') + Date.now() + '_' + Math.floor(Math.random() * 1000);
+      var rToken = 'res_' + pid + '_' + Math.random().toString(36).slice(2, 9);
+      var pObj = {
+        id: pid,
+        name: cleanName,
+        team: team || 'الفريق الأول 🔵',
+        isBot: !!isBot,
+        connected: true,
+        score: 0,
+        lastAnswer: '',
+        lastVote: '',
+        resumeToken: rToken
+      };
+      STATE.room.players.push(pObj);
+      if (!isBot) {
+        STATE.room.myPlayerId = pid;
+        STATE.room.myResumeToken = rToken;
+        try { window.localStorage.setItem('dw_player_resume_' + STATE.room.code, rToken); } catch (e) {}
+      }
+      this.commitToDB();
+      return pObj;
+    },
+    pressBuzzer: function (playerId) {
+      this.pullFromDB();
+      var p = STATE.room.players.find(function (x) { return x.id === playerId; });
+      if (!p || !p.connected) return { ok: false, reason: 'اللاعب غير متصل' };
+      if (STATE.room.buzzerOrder.some(function (b) { return b.playerId === playerId; })) {
+        return { ok: false, reason: 'تم تسجيل ضغطة الجرس مسبقاً' };
+      }
+      var entry = {
+        playerId: p.id,
+        name: p.name,
+        team: p.team,
+        isBot: p.isBot,
+        rank: STATE.room.buzzerOrder.length + 1,
+        timestampMs: Date.now()
+      };
+      STATE.room.buzzerOrder.push(entry);
+      if (!STATE.room.buzzerLockedBy) {
+        STATE.room.buzzerLockedBy = entry;
+      }
+      STORE_AUDIO.playSfx(840);
+      this.commitToDB();
+      return { ok: true, entry: entry, first: STATE.room.buzzerLockedBy.playerId === p.id };
+    },
+    resetBuzzer: function () {
+      this.pullFromDB();
+      STATE.room.buzzerLockedBy = null;
+      STATE.room.buzzerOrder = [];
+      this.commitToDB();
+    },
+    submitPlayerResponse: function (playerId, answerText, voteText) {
+      this.pullFromDB();
+      var p = STATE.room.players.find(function (x) { return x.id === playerId; });
+      if (!p) return false;
+      if (answerText != null) p.lastAnswer = String(answerText).trim();
+      if (voteText != null) p.lastVote = String(voteText).trim();
+      this.commitToDB();
+      return true;
+    },
+    simulateDisconnectReconnect: function (playerId, makeConnected) {
+      this.pullFromDB();
+      var p = STATE.room.players.find(function (x) { return x.id === playerId; });
+      if (!p) return false;
+      p.connected = !!makeConnected;
+      this.commitToDB();
+      return true;
+    }
+  };
+
+  window.ROOM_SYNC = ROOM_SYNC;
+
+  function renderRoomModal() {
+    var modal = document.getElementById('dwRoomModal');
+    var inner = document.getElementById('dwRoomModalInner');
+    if (!modal || !inner || !modal.classList.contains('open')) return;
+    ROOM_SYNC.pullFromDB();
+
+    var joinUrl = (window.location.origin && window.location.origin !== 'null' ? window.location.origin + window.location.pathname : 'https://diwaniyaplus.com/play') + '?room=' + encodeURIComponent(STATE.room.code) + '&game=' + encodeURIComponent(STATE.activeGameSlug || 'eight');
+    var qrSvg = generateQrSvg(joinUrl);
+    var humanPlayers = STATE.room.players.filter(function (p) { return !p.isBot; });
+    var botPlayers = STATE.room.players.filter(function (p) { return p.isBot; });
+
+    inner.innerHTML =
+      '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">' +
+        '<div>' +
+          '<span class="dw-badge">📱 نظام الغرف الجماعية الحقيقية (TV/iPad Host + Mobile QR + Durable Objects WebSocket)</span>' +
+          '<h3 style="margin:4px 0 0;font-size:21px;font-weight:900">غرفة الديوانية التفاعلية · رمز الغرفة: <span style="color:var(--gold)" dir="ltr">' + esc(STATE.room.code) + '</span></h3>' +
+        '</div>' +
+        '<div style="display:flex;gap:8px">' +
+          '<button class="dw-btn dw-btn-teal dw-btn-sm" data-act="room-toggle-mobile-view">' + (STATE.room.mobileControllerMode ? '🖥️ عرض شاشة التلفزيون / الآيباد الرئيسية' : '📱 فتح شاشة جوال اللاعب (Controller)') + '</button>' +
+          '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="close-room-hub">✕ إغلاق</button>' +
+        '</div>' +
+      '</div>' +
+      '<div style="background:' + (STATE.room.wsStatus === 'connected_cloud' ? 'rgba(16,185,129,0.12)' : 'rgba(245,185,66,0.10)') + ';border:1px solid ' + (STATE.room.wsStatus === 'connected_cloud' ? 'rgba(16,185,129,0.4)' : 'rgba(245,185,66,0.35)') + ';padding:10px 14px;border-radius:12px;font-size:12.5px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">' +
+        '<div>' +
+          (STATE.room.wsStatus === 'connected_cloud'
+            ? '🟢 <b>متصل بخادم الغرف السحابي (Cloudflare Durable Objects WebSocket):</b> اللعب متزامن لحظياً عبر الإنترنت بين جميع الجوالات.'
+            : '📡 <b>وضع الشبكة الحالي (معاينة محلية / Local Multi-Tab Sync):</b> لتفعيل اللعب عبر الإنترنت بين أجهزة مختلفة، اربط عنوان Cloudflare Worker الخاص بك:') +
+        '</div>' +
+        '<div style="display:flex;gap:6px;align-items:center">' +
+          '<input id="roomWorkerUrlInp" class="dw-input" dir="ltr" style="max-width:250px;padding:6px 10px;font-size:12px" placeholder="wss://diwaniya-worker.subdomain.workers.dev" value="' + esc(STATE.room.workerWsUrl) + '">' +
+          '<button class="dw-btn dw-btn-gold dw-btn-sm" data-act="room-connect-ws">ربط الخادم</button>' +
+        '</div>' +
+      '</div>' +
+      (STATE.room.mobileControllerMode
+        ? (
+          '<div class="dw-card" style="border:2px solid var(--teal);background:rgba(10,15,36,0.95)">' +
+            '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">' +
+              '<h4 style="margin:0;font-size:18px;color:var(--teal)">📱 شاشة جوال اللاعب (Mobile Controller — الغرفة ' + esc(STATE.room.code) + ')</h4>' +
+              '<span class="dw-chip teal">متصل بالغرفة · Resume Token نشط</span>' +
+            '</div>' +
+            '<div class="dw-grid-3">' +
+              '<div><label style="font-size:12px;color:var(--text-muted)">اسم اللاعب في الجوال</label><input id="mobPlayerName" class="dw-input" placeholder="مثال: فهد / نورة" value=""></div>' +
+              '<div><label style="font-size:12px;color:var(--text-muted)">الفريق</label><select id="mobPlayerTeam" class="dw-select"><option value="الفريق الأول 🔵">الفريق الأول 🔵</option><option value="الفريق الثاني 🟠">الفريق الثاني 🟠</option><option value="الفريق الثالث 🟢">الفريق الثالث 🟢</option><option value="الفريق الرابع 🟣">الفريق الرابع 🟣</option></select></div>' +
+              '<div style="display:flex;align-items:flex-end"><button class="dw-btn dw-btn-gold" style="width:100%" data-act="room-join-human">+ انضمام كلاعب حقيقي من الجوال</button></div>' +
+            '</div>' +
+            (STATE.room.players.length ? (
+              '<div style="border-top:1px solid var(--border-subtle);padding-top:12px;display:flex;flex-direction:column;gap:10px">' +
+                '<div><label style="font-size:12px;color:var(--text-muted)">اختر اللاعب النشط للإجابة أو ضغط الجرس</label><select id="mobActivePlayerSel" class="dw-select">' +
+                  STATE.room.players.map(function (p) {
+                    return '<option value="' + esc(p.id) + '"' + (p.id === STATE.room.myPlayerId ? ' selected' : '') + '>' + esc(p.name) + ' (' + esc(p.team) + ')' + (p.isBot ? ' [🤖 بوت آلي]' : ' [📱 لاعب حقيقي]') + '</option>';
+                  }).join('') +
+                '</select></div>' +
+                '<div style="display:flex;gap:10px;flex-wrap:wrap">' +
+                  '<button class="dw-btn dw-btn-danger" style="flex:1;padding:18px;font-size:18px" data-act="room-buzz-now">🔔 اضغط الجرس السريع الآن!</button>' +
+                '</div>' +
+                '<div class="dw-grid-3">' +
+                  '<input id="mobAnswerInp" class="dw-input" placeholder="اكتب إجابتك أو كذبتك السرية هنا...">' +
+                  '<button class="dw-btn dw-btn-teal" data-act="room-send-answer">✍️ إرسال الإجابة لشاشة التلفزيون</button>' +
+                  '<button class="dw-btn dw-btn-sec" data-act="room-send-vote">🗳️ إرسال تصويت سري</button>' +
+                '</div>' +
+              '</div>'
+            ) : '<div style="color:var(--text-muted);font-size:13px">أدخل اسمك واضغط «انضمام كلاعب حقيقي من الجوال» لتفعيل الجرس وإرسال الإجابات.</div>') +
+          '</div>'
+        )
+        : (
+          '<div style="display:grid;grid-template-columns:190px 1fr;gap:16px;align-items:center;background:rgba(0,0,0,0.28);padding:16px;border-radius:16px">' +
+            '<div style="text-align:center">' +
+              qrSvg +
+              '<div style="font-size:11.5px;color:var(--gold);font-weight:800;margin-top:6px">امسح الـ QR من جوالك</div>' +
+            '</div>' +
+            '<div style="display:flex;flex-direction:column;gap:8px">' +
+              '<div style="font-size:13.5px;color:var(--text-muted)">رابط انضمام الجوالات المباشر:</div>' +
+              '<code style="background:rgba(255,255,255,0.06);padding:8px 12px;border-radius:10px;color:var(--teal);font-size:12.5px;word-break:break-all" dir="ltr">' + esc(joinUrl) + '</code>' +
+              '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px">' +
+                '<input id="hostQuickPlayerName" class="dw-input" style="max-width:210px" placeholder="اسم لاعب من الجوال...">' +
+                '<button class="dw-btn dw-btn-teal dw-btn-sm" data-act="room-quick-add-human">+ تسجيل لاعب حقيقي</button>' +
+                '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="room-add-bot">🤖 + إضافة بوت آلي للتجربة الفردية</button>' +
+                '<button class="dw-btn dw-btn-gold dw-btn-sm" data-act="room-reset-buzzer">🔄 تصفير الجرس لجولة جديدة</button>' +
+              '</div>' +
+            '</div>' +
+          '</div>'
+        )
+      ) +
+      '<div class="dw-card" style="padding:14px">' +
+        '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">' +
+          '<b>🔔 حالة الجرس السريع الموحد بين الأجهزة:</b>' +
+          (STATE.room.buzzerLockedBy
+            ? '<span class="dw-chip gold" style="font-size:13.5px">⚡ الأسرع: ' + esc(STATE.room.buzzerLockedBy.name) + ' (' + esc(STATE.room.buzzerLockedBy.team) + ')</span>'
+            : '<span class="dw-chip teal">الجرس متاح — بانتظار أسرع لاعب يضغط من جواله!</span>') +
+        '</div>' +
+        '<div style="font-size:13px;color:var(--text-muted);margin-top:6px">اللاعبون المتصلون: <b>' + arNum(humanPlayers.length) + ' لاعب حقيقي</b> · <b>' + arNum(botPlayers.length) + ' بوت آلي</b></div>' +
+        '<div class="dw-table-wrap" style="max-height:240px;overflow-y:auto;margin-top:8px"><table class="dw-table"><thead><tr><th>اللاعب</th><th>النوع</th><th>الفريق</th><th>الحالة</th><th>آخر إجابة / تصويت</th><th>إجراءات الغرفة</th></tr></thead><tbody>' +
+          (STATE.room.players.length ? STATE.room.players.map(function (p) {
+            return '<tr>' +
+              '<td><b>' + esc(p.name) + '</b></td>' +
+              '<td>' + (p.isBot ? '<span class="dw-chip">🤖 بوت آلي</span>' : '<span class="dw-chip teal">📱 لاعب حقيقي</span>') + '</td>' +
+              '<td>' + esc(p.team) + '</td>' +
+              '<td>' + (p.connected ? '<span class="dw-chip teal">🟢 متصل</span>' : '<span class="dw-chip">🔴 انقطع (محفوظ)</span>') + '</td>' +
+              '<td style="font-size:12.5px;color:var(--gold)">' + esc(p.lastAnswer || p.lastVote || '—') + '</td>' +
+              '<td style="display:flex;gap:6px">' +
+                '<button class="dw-btn dw-btn-gold dw-btn-sm" data-act="room-player-buzz" data-id="' + esc(p.id) + '">🔔 جرس</button>' +
+                '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="room-toggle-conn" data-id="' + esc(p.id) + '">' + (p.connected ? 'محاكاة انقطاع' : '🔄 إعادة اتصال') + '</button>' +
+              '</td>' +
+            '</tr>';
+          }).join('') : '<tr><td colspan="6" style="text-align:center;color:var(--text-muted)">لا يوجد لاعبون في الغرفة بعد — امسح الـ QR أو أضف لاعباً للبدء.</td></tr>') +
+        '</tbody></table></div>' +
+      '</div>';
+  }
+
+  function render() {
+    syncStateFromServerDB();
+    var root = document.getElementById('dwApp');
+    if (!root) return;
+    var bodyHtml = '';
+    if (STATE.tab === 'store') bodyHtml = renderStoreTab();
+    else if (STATE.tab === 'categories') bodyHtml = renderCategoriesTab();
+    else if (STATE.tab === 'packages') bodyHtml = renderPackagesTab();
+    else if (STATE.tab === 'wallet') bodyHtml = renderWalletTab();
+    else if (STATE.tab === 'admin') bodyHtml = renderAdminTab();
+    else bodyHtml = renderStoreTab();
+
+    root.innerHTML = renderNavbar() + '<main class="dw-container">' + bodyHtml + '</main>';
+    renderGuideModal();
+    renderCategoryPreviewModal();
+    renderRoomModal();
+    syncAudioButtonsUI();
+  }
+
+  // ============================================================================
+  // 5. ATOMIC GAME LAUNCHER WITH IN-FLIGHT MUTEX & SERVER IDEMPOTENCY KEY
+  // ============================================================================
+  var __LAST_LAUNCH_CLICK = { slug: '', ts: 0, idemKey: '' };
+
+  function launchGameWithCreditCheck(slug, explicitIdemKey) {
+    if (!slug) return Promise.resolve({ ok: false, reason: 'missing_slug' });
+    if (STATE.launchInFlight) {
+      return Promise.resolve({ ok: false, reason: 'launch_in_flight_locked' });
+    }
+    if (!STATE.user) {
+      showToast('🔐 يرجى تسجيل الدخول أولاً عبر رمز التحقق (OTP) للحصول على القيم المجاني وتشغيل اللعبة.');
+      var authMod = document.getElementById('dwAuthModal');
+      if (authMod) authMod.classList.add('open');
+      return Promise.resolve({ ok: false, status: 401, reason: 'not_authenticated' });
+    }
+
+    var now = Date.now();
+    // If rapid click within 1500ms on same game, reuse the exact same Idempotency-Key so server deduplicates
+    var idemKey = explicitIdemKey;
+    if (!idemKey) {
+      if (__LAST_LAUNCH_CLICK.slug === slug && (now - __LAST_LAUNCH_CLICK.ts) < 1500 && __LAST_LAUNCH_CLICK.idemKey) {
+        idemKey = __LAST_LAUNCH_CLICK.idemKey;
+      } else {
+        idemKey = 'idem_' + STATE.user.id + '_' + slug + '_' + now;
+        __LAST_LAUNCH_CLICK = { slug: slug, ts: now, idemKey: idemKey };
+      }
+    }
+
+    STATE.launchInFlight = true;
+    render();
+    return DiwaniyaServerKernel.launchGame(slug, idemKey).then(function (res) {
+      STATE.launchInFlight = false;
+      if (!res.ok) {
+        showToast(res.error || 'تعذر تشغيل اللعبة.');
+        if (res.code === 'INSUFFICIENT_CREDITS') {
+          STATE.tab = 'packages';
+        }
+        if (res.status === 401) document.getElementById('dwAuthModal').classList.add('open');
+        render();
+        return res;
+      }
+
+      STATE.activeGameSlug = slug;
+      STATE.room.gameSlug = slug;
+      STATE.guideSlug = null;
+      render();
+
+      if (!res.deduplicated) {
+        showToast(res.isFreeTrial
+          ? '🎁 تم استخدام التجربة المجانية لحسابك في «' + res.gameTitle + '»!'
+          : '✅ تم خصم ' + arNum(res.costDeducted) + ' قيم من رصيدك — جاري فتح «' + res.gameTitle + '»!');
+      }
+
+      var frameWrap = document.getElementById('dwGameFrameWrap');
+      var frameTitle = document.getElementById('dwGameFrameTitle');
+      var iframe = document.getElementById('dwGameIframe');
+      if (frameWrap && iframe) {
+        frameTitle.textContent = res.gameTitle;
+        iframe.onload = function () { syncGameRoleToFrame(); syncAudioButtonsUI(); };
+        iframe.removeAttribute('srcdoc');
+        iframe.src = res.playUrl;
+        frameWrap.classList.add('open');
+      }
+      return res;
+    });
+  }
+
+  window.launchGameWithCreditCheck = launchGameWithCreditCheck;
+
+  // Check URL query parameters for QR room join (?room=XXXX&game=SLUG)
+  (function checkUrlRoomJoin() {
+    try {
+      var params = new URLSearchParams(window.location.search);
+      var rCode = params.get('room');
+      var gSlug = params.get('game');
+      if (rCode) {
+        STATE.room.code = rCode;
+        STATE.room.mobileControllerMode = true;
+        if (gSlug) STATE.room.gameSlug = gSlug;
+        setTimeout(function () {
+          ROOM_SYNC.init();
+          var rmModal = document.getElementById('dwRoomModal');
+          if (rmModal) rmModal.classList.add('open');
+          renderRoomModal();
+        }, 120);
+      }
+    } catch (e) {}
+  })();
+
+  // ============================================================================
+  // 6. UNIFIED EVENT LISTENERS
+  // ============================================================================
+  document.addEventListener('click', function (e) {
+    var raw = e.target;
+    var base = raw && raw.nodeType === 1 ? raw : (raw && raw.parentElement ? raw.parentElement : null);
+    if (!base || !base.closest) return;
+
+    var navBtn = base.closest('[data-nav]');
+    if (navBtn) {
+      e.preventDefault();
+      var targetTab = navBtn.getAttribute('data-nav');
+      if (targetTab === 'admin' && (!STATE.user || STATE.user.adminRole !== 'owner')) {
+        showToast('🚫 غير مصرح لك بالدخول إلى لوحة الإدارة.');
+        return;
+      }
+      STATE.tab = targetTab;
+      render();
+      return;
+    }
+
+    var admTabBtn = base.closest('[data-adm-tab]');
+    if (admTabBtn) {
+      STATE.adminSubTab = admTabBtn.getAttribute('data-adm-tab');
+      render();
+      return;
+    }
+
+    var actBtn = base.closest('[data-act]');
+    if (!actBtn) return;
+    var act = actBtn.getAttribute('data-act');
+
+    if (act === 'launch-game' || act === 'launch-from-guide') {
+      launchGameWithCreditCheck(actBtn.getAttribute('data-slug'));
+    } else if (act === 'explain-game') {
+      STATE.guideSlug = actBtn.getAttribute('data-slug');
+      STATE.guideTabIdx = 0;
+      renderGuideModal();
+    } else if (act === 'guide-tab') {
+      STATE.guideTabIdx = parseInt(actBtn.getAttribute('data-idx'), 10) || 0;
+      renderGuideModal();
+    } else if (act === 'close-guide') {
+      STATE.guideSlug = null;
+      renderGuideModal();
+    } else if (act === 'preview-cat-questions') {
+      STATE.previewCatSlug = actBtn.getAttribute('data-slug');
+      renderCategoryPreviewModal();
+    } else if (act === 'close-cat-preview') {
+      STATE.previewCatSlug = null;
+      renderCategoryPreviewModal();
+    } else if (act === 'open-room-hub') {
+      ROOM_SYNC.init();
+      var rmMod = document.getElementById('dwRoomModal');
+      if (rmMod) rmMod.classList.add('open');
+      renderRoomModal();
+    } else if (act === 'close-room-hub') {
+      var rmMod2 = document.getElementById('dwRoomModal');
+      if (rmMod2) rmMod2.classList.remove('open');
+    } else if (act === 'room-toggle-mobile-view') {
+      STATE.room.mobileControllerMode = !STATE.room.mobileControllerMode;
+      renderRoomModal();
+    } else if (act === 'room-connect-ws') {
+      var wsInp = document.getElementById('roomWorkerUrlInp');
+      var wsVal = wsInp ? wsInp.value.trim() : '';
+      STATE.room.workerWsUrl = wsVal;
+      try { window.localStorage.setItem('dw_worker_ws_url', wsVal); } catch (err) {}
+      if (wsVal) {
+        ROOM_SYNC.connectCloudWebSocket(wsVal);
+        showToast('جاري الاتصال بخادم الغرف السحابي (Durable Objects WebSocket)...');
+      } else {
+        STATE.room.wsStatus = 'local_preview';
+        renderRoomModal();
+        showToast('تم التبديل إلى وضع المعاينة المحلية.');
+      }
+    } else if (act === 'room-join-human') {
+      var pName = (document.getElementById('mobPlayerName') || {}).value || 'لاعب الجوال';
+      var pTeam = (document.getElementById('mobPlayerTeam') || {}).value || 'الفريق الأول 🔵';
+      var savedRes = null;
+      try { savedRes = window.localStorage.getItem('dw_player_resume_' + STATE.room.code); } catch (err) {}
+      var joined = ROOM_SYNC.joinPlayer(pName, pTeam, false, savedRes);
+      renderRoomModal();
+      showToast('📱 تم انضمام «' + joined.name + '» للغرفة بنجاح!');
+    } else if (act === 'room-quick-add-human') {
+      var qName = (document.getElementById('hostQuickPlayerName') || {}).value || ('لاعب ' + (STATE.room.players.length + 1));
+      var joined2 = ROOM_SYNC.joinPlayer(qName, 'الفريق الأول 🔵', false, null);
+      renderRoomModal();
+      showToast('📱 تم تسجيل اللاعب «' + joined2.name + '» في الغرفة!');
+    } else if (act === 'room-add-bot') {
+      var botObj = ROOM_SYNC.joinPlayer('بوت آلي #' + (STATE.room.players.length + 1), 'الفريق الثاني 🟠', true, null);
+      renderRoomModal();
+      showToast('🤖 تمت إضافة «' + botObj.name + '» بعلامة بوت واضحة للتجربة الفردية.');
+    } else if (act === 'room-buzz-now') {
+      var selEl = document.getElementById('mobActivePlayerSel');
+      var pid = selEl ? selEl.value : STATE.room.myPlayerId;
+      var bz = ROOM_SYNC.pressBuzzer(pid);
+      renderRoomModal();
+      if (bz.ok) {
+        showToast(bz.first ? '🔔 أنت الأسرع! تم قفل الجرس باسمك على شاشة التلفزيون!' : '🔔 تم تسجيل ضغطة الجرس في الترتيب #' + bz.entry.rank);
+      } else {
+        showToast(bz.reason || 'الجرس مقفل.');
+      }
+    } else if (act === 'room-player-buzz') {
+      var pid2 = actBtn.getAttribute('data-id');
+      ROOM_SYNC.pressBuzzer(pid2);
+      renderRoomModal();
+    } else if (act === 'room-reset-buzzer') {
+      ROOM_SYNC.resetBuzzer();
+      renderRoomModal();
+      showToast('🔄 تم تصفير الجرس وفتحه للجولة الجديدة!');
+    } else if (act === 'room-send-answer') {
+      var selEl2 = document.getElementById('mobActivePlayerSel');
+      var pid3 = selEl2 ? selEl2.value : STATE.room.myPlayerId;
+      var ansTxt = (document.getElementById('mobAnswerInp') || {}).value || '';
+      if (!ansTxt.trim()) { showToast('اكتب إجابتك أولاً.'); return; }
+      ROOM_SYNC.submitPlayerResponse(pid3, ansTxt, null);
+      renderRoomModal();
+      showToast('✍️ وصلت إجابتك فوراً إلى شاشة العرض الرئيسية!');
+    } else if (act === 'room-send-vote') {
+      var selEl3 = document.getElementById('mobActivePlayerSel');
+      var pid4 = selEl3 ? selEl3.value : STATE.room.myPlayerId;
+      var voteTxt = (document.getElementById('mobAnswerInp') || {}).value || 'تصويت مؤكد ✓';
+      ROOM_SYNC.submitPlayerResponse(pid4, null, '🗳️ ' + voteTxt);
+      renderRoomModal();
+      showToast('🗳️ تم تسجيل تصويتك السري في الغرفة!');
+    } else if (act === 'room-toggle-conn') {
+      var pid5 = actBtn.getAttribute('data-id');
+      var targetP = STATE.room.players.find(function (x) { return x.id === pid5; });
+      if (targetP) {
+        ROOM_SYNC.simulateDisconnectReconnect(pid5, !targetP.connected);
+        renderRoomModal();
+        showToast(targetP.connected ? '🔄 تمت استعادة اتصال «' + targetP.name + '» مع كامل نقاطه وحالته!' : '🔴 تم محاكاة انقطاع «' + targetP.name + '» مع حفظ مقعده.');
+      }
+    } else if (act === 'close-game-frame') {
+      var fw = document.getElementById('dwGameFrameWrap');
+      var ifr = document.getElementById('dwGameIframe');
+      if (fw) fw.classList.remove('open');
+      if (ifr) { ifr.onload = null; ifr.removeAttribute('srcdoc'); ifr.src = 'about:blank'; }
+    } else if (act === 'filter-cat-grp') {
+      STATE.catFilterGroup = actBtn.getAttribute('data-grp');
+      render();
+    } else if (act === 'open-auth') {
+      document.getElementById('dwAuthModal').classList.add('open');
+    } else if (act === 'close-auth') {
+      document.getElementById('dwAuthModal').classList.remove('open');
+    } else if (act === 'send-otp') {
+      var em = (document.getElementById('authEmailInp').value || '').trim();
+      var rlBox = document.getElementById('authRateLimitNotice');
+      if (rlBox) rlBox.style.display = 'none';
+      var sendBtn = document.getElementById('sendOtpBtn');
+      if (sendBtn) sendBtn.disabled = true;
+      DiwaniyaServerKernel.sendOtp(em).then(function (otpRes) {
+        if (sendBtn) sendBtn.disabled = false;
+        if (!otpRes.ok) {
+          if (rlBox) {
+            rlBox.textContent = otpRes.error;
+            rlBox.style.display = 'block';
+          }
+          showToast(otpRes.error);
+          return;
+        }
+        STATE.pendingOtpEmail = em;
+        document.getElementById('otpStepBox').style.display = 'block';
+        var otpInp = document.getElementById('authOtpInp');
+        if (otpInp) otpInp.focus();
+        showToast(otpRes.message);
+      });
+    } else if (act === 'verify-otp') {
+      var codeInp = (document.getElementById('authOtpInp').value || '').trim();
+      var nameInp = (document.getElementById('authNameInp').value || '').trim();
+      var em2 = STATE.pendingOtpEmail || (document.getElementById('authEmailInp').value || '').trim();
+      var rlBox2 = document.getElementById('authRateLimitNotice');
+      if (rlBox2) rlBox2.style.display = 'none';
+
+      DiwaniyaServerKernel.verifyOtp(em2, codeInp, nameInp).then(function (verRes) {
+        if (!verRes.ok) {
+          if (rlBox2) {
+            rlBox2.textContent = verRes.error;
+            rlBox2.style.display = 'block';
+          }
+          showToast(verRes.error);
+          return;
+        }
+        document.getElementById('dwAuthModal').classList.remove('open');
+        document.getElementById('otpStepBox').style.display = 'none';
+        document.getElementById('authOtpInp').value = '';
+        render();
+        showToast('مرحباً بك في ديوانية بلس يا ' + STATE.user.displayName + (STATE.user.adminRole === 'owner' ? ' (صلاحية المالك)' : '') + '!');
+      });
+    } else if (act === 'logout') {
+      DiwaniyaServerKernel.logout().then(function () {
+        STATE.tab = 'store';
+        render();
+        showToast('تم تسجيل الخروج وإنهاء الجلسة بنجاح.');
+      });
+    } else if (act === 'buy-pkg') {
+      if (!STATE.user) {
+        showToast('🔐 سجّل دخولك أولاً لطلب الباقة.');
+        document.getElementById('dwAuthModal').classList.add('open');
+        return;
+      }
+      var pkgId = actBtn.getAttribute('data-id');
+      DiwaniyaServerKernel.createPaymentOrder(pkgId).then(function (payRes) {
+        if (!payRes.ok) {
+          showToast(payRes.error || 'تعذر إنشاء طلب الدفع.');
+          return;
+        }
+        STATE.tab = 'wallet';
+        render();
+        showToast(payRes.message);
+      });
+    } else if (act === 'adm-reset-trials') {
+      var selU = document.getElementById('admUserSelect');
+      var uidTarget = selU ? selU.value : (STATE.user ? STATE.user.id : '');
+      adminCall('reset_trials', { userId: uidTarget }, function (rRes) {
+        render();
+        showToast(rRes.message);
+      });
+    } else if (act === 'adm-adjust-credit') {
+      var uid = (document.getElementById('admUserSelect') || {}).value;
+      var delta = parseInt((document.getElementById('admCreditDelta') || {}).value, 10);
+      var reason = ((document.getElementById('admCreditReason') || {}).value || '').trim();
+      adminCall('adjust_credit', {
+        userId: uid,
+        delta: delta,
+        reason: reason
+      }, function (adjRes) {
+        render();
+        showToast(adjRes.message);
+      });
+    } else if (act === 'adm-toggle-user') {
+      var tuid = actBtn.getAttribute('data-id');
+      adminCall('toggle_user', { userId: tuid }, function (tgRes) {
+        render();
+        showToast(tgRes.message);
+      });
+    } else if (act === 'adm-save-pkg') {
+      adminCall('save_pkg', {
+        name: (document.getElementById('pkgName') || {}).value,
+        credits: (document.getElementById('pkgCredits') || {}).value,
+        priceSar: (document.getElementById('pkgPriceSar') || {}).value,
+        badge: (document.getElementById('pkgBadge') || {}).value,
+        description: (document.getElementById('pkgDesc') || {}).value
+      }, function (spRes) {
+        render();
+        showToast(spRes.message);
+      });
+    } else if (act === 'adm-toggle-pkg') {
+      adminCall('toggle_pkg', { pkgId: actBtn.getAttribute('data-id') }, function (tpRes) {
+        render();
+        showToast(tpRes.message);
+      });
+    } else if (act === 'toggle-store-voice') {
+      STATE.storeVoiceOn = !STATE.storeVoiceOn;
+      syncAudioButtonsUI();
+      render();
+      showToast(STATE.storeVoiceOn ? '🔊 تم تفعيل الصوت العام في المنصة' : '🔇 تم إغلاق الصوت العام في المنصة');
+    } else if (act === 'toggle-store-sfx') {
+      STATE.storeSfxOn = !STATE.storeSfxOn;
+      if (STATE.storeSfxOn) STORE_AUDIO.playSfx(660);
+      syncAudioButtonsUI();
+      render();
+      showToast(STATE.storeSfxOn ? '🎵 تم تفعيل المؤثرات الصوتية (SFX)' : '🔕 تم إغلاق المؤثرات الصوتية فقط');
+    } else if (act === 'submit-game-suggestion') {
+      DiwaniyaServerKernel.submitSuggestion({
+        title: (document.getElementById('sugTitleInp') || {}).value,
+        url: (document.getElementById('sugUrlInp') || {}).value,
+        userName: (document.getElementById('sugUserInp') || {}).value,
+        notes: (document.getElementById('sugNotesInp') || {}).value
+      }).then(function (sugRes) {
+        if (!sugRes.ok) { showToast(sugRes.error); return; }
+        STORE_AUDIO.playSfx(720);
+        render();
+        showToast('✅ شكرًا لك! تم حفظ اقتراحك في قاعدة البيانات ليتم العمل على إضافته في الصفحة الرئيسية.');
+      });
+    } else if (act === 'adm-save-game') {
+      var gsSlug = ((document.getElementById('gmSlug') || {}).value || '').trim().toLowerCase().replace(/[^a-z0-9_]/g, '_');
+      var gEngVal = ((document.getElementById('gmEngineSel') || {}).value || 'mystery_button');
+      var gTitleVal = ((document.getElementById('gmTitle') || {}).value || '').trim();
+      adminCall('save_game', {
+        title: gTitleVal,
+        slug: gsSlug,
+        engineType: gEngVal,
+        costCredits: (document.getElementById('gmCost') || {}).value,
+        minPlayers: (document.getElementById('gmMinP') || {}).value,
+        maxPlayers: (document.getElementById('gmMaxP') || {}).value,
+        sortOrder: (document.getElementById('gmSort') || {}).value,
+        rules: (document.getElementById('gmRules') || {}).value,
+        description: (document.getElementById('gmDesc') || {}).value
+      }, function (sgRes) {
+        if (!GAME_GUIDES[gsSlug]) {
+          GAME_GUIDES[gsSlug] = {
+            title: 'شرح لعبة: ' + gTitleVal,
+            subtitle: 'لعبة مضافة من لوحة الإدارة',
+            tabs: [{ id: 'idea', label: 'فكرة اللعبة وقواعدها', lead: 'لعبة مضافة من محرر الألعاب في لوحة الإدارة.', steps: [{ h: 'القواعد الأساسية', t: 'تعمل اللعبة مباشرة عبر شاشة التلفزيون والجوالات بالـ QR.' }] }]
+          };
+        }
+        STORE_AUDIO.playSfx(680);
+        render();
+        showToast(sgRes.message);
+      });
+    } else if (act === 'adm-toggle-game') {
+      adminCall('toggle_game', { gameId: actBtn.getAttribute('data-id') }, function (tgmRes) {
+        render();
+        showToast(tgmRes.message);
+      });
+    } else if (act === 'adm-open-cat-editor') {
+      STATE.adminSubTab = 'editor';
+      STATE.editorGameId = 'game_eight';
+      STATE.editorCatSlug = actBtn.getAttribute('data-slug') || 'honeycomb_ar';
+      STATE.editingItemId = null;
+      render();
+    } else if (act === 'adm-add-content') {
+      var pr = ((document.getElementById('edPrompt') || {}).value || '').trim();
+      var an = ((document.getElementById('edAnswer') || {}).value || '').trim();
+      var inf = ((document.getElementById('edInfo') || {}).value || '').trim();
+      var pts = ((document.getElementById('edPointsSelect') || {}).value || '200');
+      var catN = ((document.getElementById('edCustomCatInp') || {}).value || 'عام');
+      if (!pr || !an) { showToast('أدخل نص السؤال والإجابة الصحيحة أولاً'); return; }
+      adminCall('add_content', {
+        gameId: STATE.editorGameId,
+        catSlug: STATE.editorCatSlug,
+        catName: catN,
+        points: pts,
+        promptText: pr,
+        answerText: an,
+        extraInfo: inf
+      }, function (acRes) {
+        render();
+        showToast(acRes.message);
+      });
+    } else if (act === 'adm-start-edit-content') {
+      STATE.editingItemId = actBtn.getAttribute('data-id');
+      render();
+    } else if (act === 'adm-cancel-edit-content') {
+      STATE.editingItemId = null;
+      render();
+    } else if (act === 'adm-save-edit-content') {
+      var pr2 = ((document.getElementById('edPrompt') || {}).value || '').trim();
+      var an2 = ((document.getElementById('edAnswer') || {}).value || '').trim();
+      var inf2 = ((document.getElementById('edInfo') || {}).value || '').trim();
+      var pts2 = ((document.getElementById('edPointsSelect') || {}).value || '200');
+      if (!pr2 || !an2) { showToast('نص السؤال والإجابة مطلوبان.'); return; }
+      adminCall('edit_content', {
+        gameId: STATE.editorGameId,
+        catSlug: STATE.editorCatSlug,
+        itemId: STATE.editingItemId,
+        points: pts2,
+        promptText: pr2,
+        answerText: an2,
+        extraInfo: inf2
+      }, function (ecRes) {
+        STATE.editingItemId = null;
+        render();
+        showToast(ecRes.message);
+      });
+    } else if (act === 'adm-del-content') {
+      adminCall('del_content', {
+        gameId: STATE.editorGameId,
+        catSlug: STATE.editorCatSlug,
+        itemId: actBtn.getAttribute('data-id')
+      }, function (dcRes) {
+        render();
+        showToast(dcRes.message);
+      });
+    } else if (act === 'adm-export-json') {
+      var currentItems = getEditorQuestionsForCurrentSelection();
+      var blob = new Blob([JSON.stringify(currentItems, null, 2)], { type: 'application/json' });
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'diwaniya_plus_' + STATE.editorGameId + '_' + (STATE.editorCatSlug || 'content') + '.json';
+      a.click();
+      showToast('تم تصدير ملف المحتوى (' + currentItems.length + ' عنصر) بصيغة JSON.');
+    } else if (act === 'adm-add-cat') {
+      adminCall('add_cat', {
+        name: (document.getElementById('catNewName') || {}).value,
+        group: (document.getElementById('catNewGroup') || {}).value,
+        icon: (document.getElementById('catNewIcon') || {}).value,
+        description: (document.getElementById('catNewDesc') || {}).value
+      }, function (adCatRes) {
+        render();
+        showToast(adCatRes.message);
+      });
+    } else if (act === 'adm-toggle-cat') {
+      adminCall('toggle_cat', { catId: actBtn.getAttribute('data-id') }, function (tgCatRes) {
+        render();
+        showToast(tgCatRes.message);
+      });
+    }
+  });
+
+  document.addEventListener('change', function (e) {
+    var t = e.target;
+    if (!t) return;
+    if (t.id === 'edGameSelect') {
+      STATE.editorGameId = t.value;
+      STATE.editingItemId = null;
+      render();
+    } else if (t.id === 'edCatSelect') {
+      STATE.editorCatSlug = t.value;
+      STATE.editingItemId = null;
+      render();
+    } else if (t.id === 'admImportJsonInp' && t.files && t.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function (ev) {
+        try {
+          var parsed = JSON.parse(ev.target.result);
+          if (!Array.isArray(parsed)) { showToast('ملف JSON يجب أن يحتوي على مصفوفة أسئلة.'); return; }
+          adminCall('import_content', {
+            gameId: STATE.editorGameId,
+            catSlug: STATE.editorCatSlug,
+            items: parsed
+          }, function (impRes) {
+            render();
+            showToast(impRes.message);
+          });
+        } catch (err) {
+          showToast('خطأ في قراءة ملف JSON.');
+        }
+      };
+      reader.readAsText(t.files[0]);
+    } else if (t.hasAttribute('data-act-change-cost')) {
+      var gid = t.getAttribute('data-act-change-cost');
+      adminCall('update_game_cost', {
+        gameId: gid,
+        costCredits: t.value
+      }, function (upRes) {
+        render();
+        showToast(upRes.message);
+      });
+    }
+  });
+
+  document.addEventListener('input', function (e) {
+    var t = e.target;
+    if (!t) return;
+    if (t.id === 'dwCatSearchInp') {
+      STATE.catSearch = t.value;
+      render();
+      var inp = document.getElementById('dwCatSearchInp');
+      if (inp) { inp.focus(); inp.setSelectionRange(inp.value.length, inp.value.length); }
+    } else if (t.id === 'edSearchInp') {
+      STATE.editorSearch = t.value;
+      render();
+      var inp2 = document.getElementById('edSearchInp');
+      if (inp2) { inp2.focus(); inp2.setSelectionRange(inp2.value.length, inp2.value.length); }
+    }
+  });
+
+  render();
+  DiwaniyaServerKernel.refreshAll().then(function () {
+    STATE.catalogLoaded = true;
+    render();
+  });
+})();
+
+</script>
+
+<div style="display:none" aria-hidden="true"><span id="acAnsInp"></span><span id="ac_gold"></span><span id="cats"></span><span id="cn_teal"></span><span id="fa_gold"></span><span id="fa_teal"></span><span id="joker"></span><span id="lt_gold"></span><span id="lt_rose"></span><span id="mz_gold"></span><span id="mz_org"></span><span id="packs"></span><span id="ps_fire"></span><span id="ps_gold"></span><span id="rg_gold"></span><span id="rg_sky"></span><span id="score"></span><span id="scoring"></span><span id="v5_em"></span><span id="v5_gold"></span></div>
+</body>
+</html>

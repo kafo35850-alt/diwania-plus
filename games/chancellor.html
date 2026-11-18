@@ -1,0 +1,2199 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#0b0a2e">
+<title>ديوانية بلس — المستشار السري</title>
+<style>
+:root{--bg1:#111936;--bg2:#0A0F24;--ink:#fff;--mut:#aab0d8;--card:rgba(255,255,255,.07);--line:rgba(255,255,255,.14);--org:#f26538;--gold:#F5B942;--red:#e5484d;--blue:#38bdf8;--green:#34d399;--vio:#a78bfa;--stk:0px}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;min-height:100%;background:var(--bg2);color:var(--ink);font-family:-apple-system,"SF Arabic","Segoe UI",Tajawal,Cairo,system-ui,sans-serif;-webkit-text-size-adjust:100%}
+body{background:radial-gradient(1200px 600px at 80% -10%,#2b2290 0%,transparent 60%),linear-gradient(180deg,var(--bg1),var(--bg2) 60%);min-height:100vh;min-height:100dvh}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;touch-action:manipulation}
+button:disabled{opacity:.45;cursor:not-allowed}
+input{font:inherit;color:var(--ink)}
+#app{max-width:520px;margin:0 auto;padding:max(14px,env(safe-area-inset-top)) 16px max(80px,calc(env(safe-area-inset-bottom) + 64px));min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;gap:14px}
+h1,h2,h3,p{margin:0}
+.logo{text-align:center;padding-top:8px}.logo .ic{width:84px;height:84px;margin:0 auto 6px}
+.logo .t{font-size:32px;font-weight:900}.logo .t b{color:var(--gold)}
+.logo .s{color:var(--mut);font-size:14px;margin-top:4px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:16px;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.row{display:flex;align-items:center;gap:10px}.col{display:flex;flex-direction:column;gap:10px}.sp{flex:1}.wrap{flex-wrap:wrap}.ctr{text-align:center}
+.mut{color:var(--mut)}.small{font-size:13px}.big{font-size:21px;font-weight:800}.huge{font-size:30px;font-weight:900}
+.btn{display:block;width:100%;padding:14px 16px;border-radius:16px;font-weight:800;font-size:17px;text-align:center;background:linear-gradient(180deg,#ff7a4a,var(--org));box-shadow:0 6px 18px rgba(242,101,56,.35)}
+.btn.sec{background:rgba(255,255,255,.1);box-shadow:none;border:1px solid var(--line)}
+.btn.gold{background:linear-gradient(180deg,#ffd978,var(--gold));color:#2b1c00;box-shadow:0 6px 18px rgba(242,193,78,.3)}
+.btn.red{background:linear-gradient(180deg,#ff6b6f,var(--red))}.btn.blue{background:linear-gradient(180deg,#5fd0ff,#1b8fd0)}
+.btn.sm{padding:9px 14px;font-size:14px;border-radius:12px;width:auto;display:inline-block}
+.inp{width:100%;padding:14px 16px;border-radius:14px;background:rgba(0,0,0,.28);border:1px solid var(--line);font-size:18px;outline:none}.inp:focus{border-color:var(--gold)}
+.inp.code{letter-spacing:10px;text-align:center;font-size:28px;font-weight:900}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.1);font-size:13px;font-weight:700;border:1px solid var(--line)}
+.chip.on{background:var(--gold);border-color:var(--gold);color:#2b1c00}
+.chip.lib{background:rgba(56,189,248,.18);border-color:rgba(56,189,248,.55)}.chip.fas{background:rgba(229,72,77,.22);border-color:rgba(229,72,77,.6)}
+.toast{position:fixed;left:50%;top:max(12px,env(safe-area-inset-top));transform:translateX(-50%);background:#1d2150;border:1px solid var(--gold);padding:10px 16px;border-radius:14px;z-index:50;max-width:90vw;font-weight:700;box-shadow:0 8px 24px rgba(0,0,0,.5)}
+.conn{position:fixed;inset:0 0 auto 0;background:#b4232a;text-align:center;padding:6px;font-size:13px;font-weight:700;z-index:60}
+.topbar{display:flex;align-items:center;gap:8px}
+.pill{background:rgba(255,255,255,.1);border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-weight:800;font-size:14px}
+.timer{font-variant-numeric:tabular-nums;font-weight:900;font-size:20px}
+.bar{height:6px;border-radius:6px;background:rgba(255,255,255,.12);overflow:hidden}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--org));width:100%;transition:width .3s linear}
+.pl{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid var(--line)}
+.pl.off{opacity:.55}
+.av{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-weight:900;color:#10122e;flex:none;font-size:18px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.grid>*{min-width:0}
+.pick{display:flex;align-items:center;gap:10px;padding:12px;border-radius:16px;background:rgba(255,255,255,.07);border:2px solid transparent;text-align:right}
+.pick.sel{border-color:var(--gold);background:rgba(242,193,78,.16)}.pick.red.sel{border-color:var(--red);background:rgba(229,72,77,.2)}
+.pick .nm{font-weight:800;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pick.dis{opacity:.4;pointer-events:none}
+.tag{font-size:11.5px;font-weight:800;padding:2px 8px;border-radius:999px;background:rgba(255,255,255,.12);white-space:nowrap}
+.tag.g{background:var(--gold);color:#2b1c00}.tag.b{background:#38bdf8;color:#04243a}.tag.r{background:var(--red)}.tag.ok{background:rgba(52,211,153,.25);color:#b6ffe1}
+/* المسارات المصغّرة */
+.tracks{display:flex;flex-direction:column;gap:8px}
+.trk{display:flex;align-items:center;gap:6px}
+.trk .lb{font-size:12px;font-weight:800;width:58px;flex:none}
+.trk .sl{flex:1;height:30px;border-radius:8px;display:grid;place-items:center;border:1.5px dashed;font-size:11px;font-weight:800}
+.trk.l .sl{border-color:rgba(56,189,248,.5);color:#9bdcff}.trk.l .sl.on{background:linear-gradient(180deg,#38bdf8,#1b6fae);border:1.5px solid #bfe9ff;color:#fff}
+.trk.f .sl{border-color:rgba(229,72,77,.55);color:#ffb3b5}.trk.f .sl.on{background:linear-gradient(180deg,#e5484d,#8a1a24);border:1.5px solid #ffc4c6;color:#fff}
+.trk .sl svg{width:16px;height:16px}
+.trkr{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:800;color:var(--mut)}
+.trkr i{width:14px;height:14px;border-radius:50%;border:2px solid rgba(255,255,255,.35)}.trkr i.on{background:var(--gold);border-color:var(--gold)}.trkr i.c.on{background:var(--red);border-color:var(--red)}
+/* بطاقات السياسات */
+.pcard{width:100%;aspect-ratio:.7;border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:12px 8px;color:#fff;border:3px solid;position:relative}
+.pcard.lib{background:linear-gradient(160deg,#38bdf8,#1b6fae 60%,#0a2f4d);border-color:#bfe9ff}
+.pcard.fas{background:linear-gradient(160deg,#ff6b6f,#b4232a 60%,#3a0a12);border-color:#ffc4c6}
+.pcard .pk{font-size:13px;font-weight:900;letter-spacing:.5px;opacity:.9}.pcard .pi{width:62%}.pcard .pi svg{width:100%;height:auto;display:block}.pcard .pn{font-size:13px;font-weight:800}
+.cards{display:grid;gap:12px}.cards.c3{grid-template-columns:repeat(3,1fr)}.cards.c2{grid-template-columns:repeat(2,1fr);max-width:330px;margin:0 auto;width:100%}
+.cbtn{border-radius:20px;padding:0;position:relative;transition:transform .15s}
+.cbtn.sel{transform:translateY(-8px)}.cbtn.sel .pcard{box-shadow:0 0 0 4px var(--gold),0 12px 26px rgba(0,0,0,.5)}
+.cbtn .mk{position:absolute;inset:auto 0 -10px 0;margin:auto;width:max-content;font-size:12px;font-weight:900;background:#0b0a2e;border:1px solid var(--gold);padding:3px 9px;border-radius:999px}
+.back{width:100%;aspect-ratio:.7;border-radius:18px;background:repeating-linear-gradient(45deg,rgba(242,193,78,.16) 0 12px,rgba(242,193,78,.05) 12px 24px);border:3px solid rgba(242,193,78,.6);display:grid;place-items:center;font-size:44px;font-weight:900;color:var(--gold)}
+/* بطاقة الدور */
+.rolecard{border-radius:26px;padding:22px 18px;text-align:center;border:2px solid;position:relative;overflow:hidden}
+.rolecard.liberal{background:linear-gradient(160deg,#12395e,#071a2c);border-color:#38bdf8}
+.rolecard.fascist{background:linear-gradient(160deg,#4a1220,#14060b);border-color:#e5484d}
+.rolecard.leader{background:linear-gradient(160deg,#4a1220,#1b0d10);border-color:#f2c14e}
+.rolecard .ri{width:118px;height:118px;margin:0 auto 6px}.rolecard .ri svg{width:100%;height:100%}
+.rolecard .rn{font-size:32px;font-weight:900}.rolecard .ab{margin-top:12px;line-height:1.8;font-size:16px}
+.rolecard .tm{margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,.18)}
+.facedown{border-radius:26px;padding:46px 18px;text-align:center;border:2px dashed var(--gold);background:repeating-linear-gradient(45deg,rgba(242,193,78,.10) 0 14px,rgba(242,193,78,.04) 14px 28px)}
+.facedown .q{font-size:60px;font-weight:900;color:var(--gold)}
+.peek{position:fixed;inset:0;background:rgba(3,4,20,.92);z-index:40;display:flex;align-items:center;justify-content:center;padding:20px}
+.peek .rolecard{width:100%;max-width:420px}
+.ann{border-radius:22px;padding:20px;text-align:center;background:linear-gradient(160deg,rgba(255,255,255,.12),rgba(255,255,255,.04));border:1px solid var(--line)}
+.ann.lib{background:linear-gradient(160deg,rgba(56,189,248,.28),rgba(10,47,77,.4));border-color:rgba(56,189,248,.6)}
+.ann.fas{background:linear-gradient(160deg,rgba(229,72,77,.3),rgba(58,10,18,.5));border-color:rgba(229,72,77,.6)}
+.vbtn{border-radius:22px;padding:22px 10px;font-weight:900;font-size:28px;display:flex;flex-direction:column;align-items:center;gap:4px;border:3px solid transparent}
+.vbtn small{font-size:14px;font-weight:700;opacity:.9}
+.vbtn.ja{background:linear-gradient(160deg,#34d399,#0f7a52)}.vbtn.nein{background:linear-gradient(160deg,#ff6b6f,#a3202e)}
+.vbtn.sel{border-color:#fff;box-shadow:0 0 0 4px rgba(255,255,255,.25)}
+.vbtn.dim{opacity:.45}
+.susp .dots3{display:flex;gap:10px;justify-content:center;margin-top:18px}
+.susp .dots3 i{width:14px;height:14px;border-radius:50%;background:var(--gold);opacity:.3;animation:blink 1.2s infinite}
+.susp .dots3 i:nth-child(2){animation-delay:.25s}.susp .dots3 i:nth-child(3){animation-delay:.5s}
+@keyframes blink{50%{opacity:1;transform:scale(1.3)}}
+.qrbox{background:#fff;border-radius:18px;padding:10px;width:min(62vw,230px);margin:0 auto;line-height:0}.qrbox svg{width:100%;height:auto}
+.code{font-size:46px;font-weight:900;letter-spacing:12px;text-align:center}
+.hint{font-size:13px;color:var(--mut);text-align:center;line-height:1.7}
+.untimed{border-radius:14px;padding:9px 12px;background:rgba(56,189,248,.12);border:1px solid rgba(56,189,248,.45);text-align:center;line-height:1.7;font-size:13.5px}
+.warn{border-radius:16px;padding:11px 14px;background:rgba(229,72,77,.15);border:1px solid rgba(229,72,77,.5);text-align:center;line-height:1.7;font-size:14px}
+.warn.ok{background:rgba(52,211,153,.14);border-color:rgba(52,211,153,.5)}
+.gov{display:flex;gap:8px;align-items:stretch}
+.gov>div{flex:1;border-radius:16px;padding:10px;text-align:center;background:rgba(255,255,255,.06);border:1px solid var(--line)}
+.gov .gi{width:30px;height:30px;margin:0 auto 4px}.gov .gi svg{width:100%;height:100%}
+.gov b{display:block;font-size:17px}
+.log{display:flex;flex-direction:column;gap:6px;max-height:260px;overflow:auto;font-size:13.5px;line-height:1.6}
+.log div{padding:6px 10px;border-radius:10px;background:rgba(255,255,255,.05)}
+.vl{display:flex;flex-wrap:wrap;gap:6px}
+.stick{position:sticky;bottom:10px;z-index:5;padding-top:12px;background:linear-gradient(rgba(11,10,46,0),rgba(11,10,46,.92) 38%)}
+#help{position:fixed;inset:0;z-index:90;background:radial-gradient(1200px 600px at 80% -10%,#2b2290 0%,transparent 60%),linear-gradient(180deg,var(--bg1),var(--bg2) 60%);overflow-y:auto;display:none}
+#help.on{display:block}
+.hp{max-width:520px;margin:0 auto;padding:max(12px,env(safe-area-inset-top)) 16px max(30px,env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:14px}
+.hp .htabs{display:flex;gap:8px;overflow-x:auto;margin:0 -16px;padding:0 16px 4px;scrollbar-width:none}.hp .htabs::-webkit-scrollbar{display:none}
+.hp .htabs .chip{flex:none;padding:9px 14px;font-size:14px}
+.hp .lead{line-height:1.9;font-size:16px}.hp .pts{margin:0;padding:0 20px 0 0;line-height:1.9;font-size:15px}
+.hp .stp{display:flex;gap:12px;align-items:flex-start}.hp .stp .n{flex:none;width:30px;height:30px;border-radius:50%;background:var(--org);display:grid;place-items:center;font-weight:900}
+.hp .stp .tx{line-height:1.8;font-size:15px}.hp .stp .tx b{display:block;font-size:16px}
+.hp .note{border-radius:16px;padding:12px 14px;background:rgba(242,193,78,.14);border:1px solid rgba(242,193,78,.55);line-height:1.8;font-size:14px}
+.hfab{position:fixed;left:14px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:45;width:42px;height:42px;border-radius:50%;background:rgba(10,10,46,.82);border:1px solid rgba(255,255,255,.28);font-weight:900;font-size:19px;color:#fff}
+.demo{position:fixed;bottom:0;left:0;right:0;text-align:center;font-size:12px;padding:5px;background:rgba(242,193,78,.92);color:#2b1c00;font-weight:800;z-index:70;pointer-events:none}
+body.is-demo #app{padding-bottom:130px}body.is-demo .hfab{bottom:84px}
+.bd-host{visibility:hidden;pointer-events:none}
+body.board-only #app,body.board-only .hfab{display:none}
+body.show-board #app,body.show-board .hfab{visibility:hidden}
+body.show-board .bd-host{visibility:visible;pointer-events:auto;z-index:60}
+body.show-both #app{position:fixed;top:0;bottom:0;right:0;width:430px;max-width:430px;overflow-y:auto;z-index:70;background:#0b0a2e;padding-bottom:90px;border-left:1px solid rgba(255,255,255,.2)}
+body.show-both .bd-host{visibility:visible;pointer-events:auto;z-index:60;right:430px}
+body.show-both .hfab{display:none}
+.tabs{position:fixed;bottom:30px;left:50%;transform:translateX(-50%);z-index:80;display:flex;gap:6px;background:rgba(10,10,46,.92);border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:5px}
+.tabs button{padding:9px 16px;border-radius:999px;font-weight:800;font-size:14px;color:#fff}.tabs button.on{background:var(--org)}
+body.show-both .tabs{left:calc(50% - 215px)}
+.dead{opacity:.5;text-decoration:line-through}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div id="overlay"></div>
+<div id="help"></div>
+<div id="board"></div>
+<button class="hfab" data-a="help" aria-label="شرح اللعبة">؟</button>
+<script>window.SH_DEMO=true;</script>
+<script>/* qr.js */
+/* M8QR — compact ISO 18004 QR encoder (byte mode, ECC L/M/Q/H, versions 1-20). */
+(function (g) {
+  'use strict';
+  var ECC_PER_BLOCK = [
+    [-1, 7, 10, 15, 20, 26, 18, 20, 24, 30, 18, 20, 24, 26, 30, 22, 24, 28, 30, 28, 28],
+    [-1, 10, 16, 26, 18, 24, 16, 18, 22, 22, 26, 30, 22, 22, 24, 24, 28, 28, 26, 26, 26],
+    [-1, 13, 22, 18, 26, 18, 24, 18, 22, 20, 24, 28, 26, 24, 20, 30, 24, 28, 28, 26, 30],
+    [-1, 17, 28, 22, 16, 22, 28, 26, 26, 24, 28, 24, 28, 22, 24, 24, 30, 28, 28, 26, 28]
+  ];
+  var NUM_BLOCKS = [
+    [-1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 4, 4, 4, 4, 4, 6, 6, 6, 6, 7, 8],
+    [-1, 1, 1, 1, 2, 2, 4, 4, 4, 5, 5, 5, 8, 9, 9, 10, 10, 11, 13, 14, 16],
+    [-1, 1, 1, 2, 2, 4, 4, 6, 6, 8, 8, 8, 10, 12, 16, 12, 17, 16, 18, 21, 20],
+    [-1, 1, 1, 2, 4, 4, 4, 5, 6, 8, 8, 11, 11, 16, 16, 18, 16, 19, 21, 25, 25]
+  ];
+  var ECL_INDEX = { L: 0, M: 1, Q: 2, H: 3 };
+  var FORMAT_BITS = [1, 0, 3, 2];
+
+  function rawModules(ver) {
+    var r = (16 * ver + 128) * ver + 64;
+    if (ver >= 2) {
+      var na = Math.floor(ver / 7) + 2;
+      r -= (25 * na - 10) * na - 55;
+      if (ver >= 7) r -= 36;
+    }
+    return r;
+  }
+  function dataCodewords(ver, e) {
+    return Math.floor(rawModules(ver) / 8) - ECC_PER_BLOCK[e][ver] * NUM_BLOCKS[e][ver];
+  }
+  function gfMul(x, y) {
+    var z = 0;
+    for (var i = 7; i >= 0; i--) { z = (z << 1) ^ ((z >>> 7) * 0x11D); z ^= ((y >>> i) & 1) * x; }
+    return z & 0xFF;
+  }
+  function rsDivisor(deg) {
+    var res = []; for (var i = 0; i < deg - 1; i++) res.push(0); res.push(1);
+    var root = 1;
+    for (var i2 = 0; i2 < deg; i2++) {
+      for (var j = 0; j < deg; j++) {
+        res[j] = gfMul(res[j], root);
+        if (j + 1 < deg) res[j] ^= res[j + 1];
+      }
+      root = gfMul(root, 0x02);
+    }
+    return res;
+  }
+  function rsRemainder(data, div) {
+    var res = div.map(function () { return 0; });
+    data.forEach(function (b) {
+      var f = b ^ res.shift(); res.push(0);
+      div.forEach(function (c, i) { res[i] ^= gfMul(c, f); });
+    });
+    return res;
+  }
+  function utf8(str) {
+    if (typeof TextEncoder !== 'undefined') return Array.prototype.slice.call(new TextEncoder().encode(str));
+    var s = unescape(encodeURIComponent(str)), out = [];
+    for (var i = 0; i < s.length; i++) out.push(s.charCodeAt(i));
+    return out;
+  }
+  function alignPositions(ver, size) {
+    if (ver === 1) return [];
+    var n = Math.floor(ver / 7) + 2;
+    var step = ver === 32 ? 26 : Math.ceil((ver * 4 + 4) / (n * 2 - 2)) * 2;
+    var r = [6];
+    for (var pos = size - 7; r.length < n; pos -= step) r.splice(1, 0, pos);
+    return r;
+  }
+
+  function encode(text, eccName) {
+    var e = ECL_INDEX[eccName || 'M'];
+    var bytes = utf8(text);
+    var ver, capBits;
+    for (ver = 1; ver <= 20; ver++) {
+      capBits = dataCodewords(ver, e) * 8;
+      var need = 4 + (ver <= 9 ? 8 : 16) + bytes.length * 8;
+      if (need <= capBits) break;
+    }
+    if (ver > 20) throw new Error('QR: text too long');
+    var bits = [];
+    function put(v, n) { for (var i = n - 1; i >= 0; i--) bits.push((v >>> i) & 1); }
+    put(4, 4); put(bytes.length, ver <= 9 ? 8 : 16);
+    bytes.forEach(function (b) { put(b, 8); });
+    put(0, Math.min(4, capBits - bits.length));
+    put(0, (8 - bits.length % 8) % 8);
+    for (var pad = 0xEC; bits.length < capBits; pad ^= 0xEC ^ 0x11) put(pad, 8);
+    var data = [];
+    for (var i = 0; i < bits.length; i += 8) {
+      var v = 0; for (var j = 0; j < 8; j++) v = (v << 1) | bits[i + j]; data.push(v);
+    }
+    // ECC + interleave
+    var nb = NUM_BLOCKS[e][ver], eccLen = ECC_PER_BLOCK[e][ver];
+    var raw = Math.floor(rawModules(ver) / 8);
+    var nShort = nb - raw % nb, shortLen = Math.floor(raw / nb);
+    var blocks = [], div = rsDivisor(eccLen);
+    for (var bi = 0, k = 0; bi < nb; bi++) {
+      var dat = data.slice(k, k + shortLen - eccLen + (bi < nShort ? 0 : 1));
+      k += dat.length;
+      var ecc = rsRemainder(dat, div);
+      if (bi < nShort) dat.push(0);
+      blocks.push(dat.concat(ecc));
+    }
+    var all = [];
+    for (var ii = 0; ii < blocks[0].length; ii++) {
+      for (var jj = 0; jj < blocks.length; jj++) {
+        if (ii !== shortLen - eccLen || jj >= nShort) all.push(blocks[jj][ii]);
+      }
+    }
+    // matrix
+    var size = ver * 4 + 17;
+    var mod = [], fn = [];
+    for (var y = 0; y < size; y++) { mod.push(new Array(size).fill(false)); fn.push(new Array(size).fill(false)); }
+    function setFn(x, y, d) { mod[y][x] = d; fn[y][x] = true; }
+    function bit(x, i) { return ((x >>> i) & 1) !== 0; }
+    for (var t = 0; t < size; t++) { setFn(6, t, t % 2 === 0); setFn(t, 6, t % 2 === 0); }
+    function finder(cx, cy) {
+      for (var dy = -4; dy <= 4; dy++) for (var dx = -4; dx <= 4; dx++) {
+        var d = Math.max(Math.abs(dx), Math.abs(dy)), xx = cx + dx, yy = cy + dy;
+        if (xx >= 0 && xx < size && yy >= 0 && yy < size) setFn(xx, yy, d !== 2 && d !== 4);
+      }
+    }
+    finder(3, 3); finder(size - 4, 3); finder(3, size - 4);
+    var ap = alignPositions(ver, size), na = ap.length;
+    for (var a = 0; a < na; a++) for (var b = 0; b < na; b++) {
+      if ((a === 0 && b === 0) || (a === 0 && b === na - 1) || (a === na - 1 && b === 0)) continue;
+      for (var dy2 = -2; dy2 <= 2; dy2++) for (var dx2 = -2; dx2 <= 2; dx2++)
+        setFn(ap[a] + dx2, ap[b] + dy2, Math.max(Math.abs(dx2), Math.abs(dy2)) !== 1);
+    }
+    function drawFormat(mask) {
+      var d = (FORMAT_BITS[e] << 3) | mask, rem = d;
+      for (var i = 0; i < 10; i++) rem = (rem << 1) ^ ((rem >>> 9) * 0x537);
+      var bs = ((d << 10) | rem) ^ 0x5412;
+      for (var i1 = 0; i1 <= 5; i1++) setFn(8, i1, bit(bs, i1));
+      setFn(8, 7, bit(bs, 6)); setFn(8, 8, bit(bs, 7)); setFn(7, 8, bit(bs, 8));
+      for (var i2 = 9; i2 < 15; i2++) setFn(14 - i2, 8, bit(bs, i2));
+      for (var i3 = 0; i3 < 8; i3++) setFn(size - 1 - i3, 8, bit(bs, i3));
+      for (var i4 = 8; i4 < 15; i4++) setFn(8, size - 15 + i4, bit(bs, i4));
+      setFn(8, size - 8, true);
+    }
+    drawFormat(0);
+    if (ver >= 7) {
+      var rem = ver;
+      for (var q = 0; q < 12; q++) rem = (rem << 1) ^ ((rem >>> 11) * 0x1F25);
+      var vb = (ver << 12) | rem;
+      for (var q2 = 0; q2 < 18; q2++) {
+        var c = bit(vb, q2), aa = size - 11 + q2 % 3, bb = Math.floor(q2 / 3);
+        setFn(aa, bb, c); setFn(bb, aa, c);
+      }
+    }
+    // codewords
+    var idx = 0;
+    for (var right = size - 1; right >= 1; right -= 2) {
+      if (right === 6) right = 5;
+      for (var vert = 0; vert < size; vert++) {
+        for (var jx = 0; jx < 2; jx++) {
+          var x = right - jx, upward = ((right + 1) & 2) === 0, yy2 = upward ? size - 1 - vert : vert;
+          if (!fn[yy2][x] && idx < all.length * 8) { mod[yy2][x] = bit(all[idx >>> 3], 7 - (idx & 7)); idx++; }
+        }
+      }
+    }
+    function applyMask(m) {
+      for (var y = 0; y < size; y++) for (var x = 0; x < size; x++) {
+        var inv;
+        switch (m) {
+          case 0: inv = (x + y) % 2 === 0; break;
+          case 1: inv = y % 2 === 0; break;
+          case 2: inv = x % 3 === 0; break;
+          case 3: inv = (x + y) % 3 === 0; break;
+          case 4: inv = (Math.floor(x / 3) + Math.floor(y / 2)) % 2 === 0; break;
+          case 5: inv = x * y % 2 + x * y % 3 === 0; break;
+          case 6: inv = (x * y % 2 + x * y % 3) % 2 === 0; break;
+          default: inv = ((x + y) % 2 + x * y % 3) % 2 === 0;
+        }
+        if (!fn[y][x] && inv) mod[y][x] = !mod[y][x];
+      }
+    }
+    function penalty() {
+      var res = 0, x, y, i, run, color;
+      var P1 = [true, false, true, true, true, false, true, false, false, false, false];
+      var P2 = [false, false, false, false, true, false, true, true, true, false, true];
+      function lines(get) {
+        for (var a = 0; a < size; a++) {
+          run = 1; color = get(a, 0);
+          for (var b = 1; b < size; b++) {
+            var cur = get(a, b);
+            if (cur === color) { run++; if (run === 5) res += 3; else if (run > 5) res++; }
+            else { color = cur; run = 1; }
+          }
+          for (var s = 0; s + 11 <= size; s++) {
+            var m1 = true, m2 = true;
+            for (var k = 0; k < 11; k++) {
+              var v = get(a, s + k);
+              if (v !== P1[k]) m1 = false;
+              if (v !== P2[k]) m2 = false;
+              if (!m1 && !m2) break;
+            }
+            if (m1) res += 40; if (m2) res += 40;
+          }
+        }
+      }
+      lines(function (a, b) { return mod[a][b]; });
+      lines(function (a, b) { return mod[b][a]; });
+      for (y = 0; y < size - 1; y++) for (x = 0; x < size - 1; x++) {
+        var c0 = mod[y][x];
+        if (c0 === mod[y][x + 1] && c0 === mod[y + 1][x] && c0 === mod[y + 1][x + 1]) res += 3;
+      }
+      var dark = 0; for (y = 0; y < size; y++) for (x = 0; x < size; x++) if (mod[y][x]) dark++;
+      var total = size * size, kk = Math.ceil(Math.abs(dark * 20 - total * 10) / total) - 1;
+      res += kk * 10;
+      return res;
+    }
+    var best = -1, bestPen = Infinity;
+    for (var m = 0; m < 8; m++) {
+      applyMask(m); drawFormat(m);
+      var p = penalty();
+      if (p < bestPen) { bestPen = p; best = m; }
+      applyMask(m);
+    }
+    applyMask(best); drawFormat(best);
+    return { version: ver, size: size, mask: best, modules: mod };
+  }
+
+  function toSvg(text, opts) {
+    opts = opts || {};
+    var qr = encode(text, opts.ecc || 'M'), border = opts.border == null ? 4 : opts.border;
+    var fg = opts.fg || '#000', bg = opts.bg || '#fff', n = qr.size + border * 2, d = [];
+    for (var y = 0; y < qr.size; y++) {
+      var x = 0;
+      while (x < qr.size) {
+        if (qr.modules[y][x]) {
+          var x0 = x; while (x < qr.size && qr.modules[y][x]) x++;
+          d.push('M' + (x0 + border) + ',' + (y + border) + 'h' + (x - x0) + 'v1h-' + (x - x0) + 'z');
+        } else x++;
+      }
+    }
+    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + n + ' ' + n + '" shape-rendering="crispEdges">' +
+      '<rect width="' + n + '" height="' + n + '" fill="' + bg + '"/><path d="' + d.join('') + '" fill="' + fg + '"/></svg>';
+  }
+  function toDataUrl(text, opts) {
+    return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(toSvg(text, opts));
+  }
+  g.M8QR = { encode: encode, toSvg: toSvg, toDataUrl: toDataUrl };
+  if (typeof module !== 'undefined' && module.exports) module.exports = g.M8QR;
+})(typeof window !== 'undefined' ? window : globalThis);
+
+</script>
+<script>/* audio.js */
+/* ديوانية بلس مافيا — الصوت: مؤثرات مولّدة بـWebAudio (بدون أي ملف) + راوي بالعربي (speechSynthesis).
+ * ما يحتاج إنترنت. تقدر تبدّل أي مؤثر أو سطر راوي بتسجيل حقيقي لاحقاً: MafiaAudio.useFiles({ wolf: 'wolf.mp3', n_night: 'night.mp3' }).
+ *
+ * الاستخدام:
+ *   MafiaAudio.unlock()                 // لازم من لمسة المستخدم (قيد المتصفحات)
+ *   MafiaAudio.play('wolf')             // مؤثر
+ *   MafiaAudio.ambient('night')         // أجواء مستمرة (جداجد + ريح + بومة وذيب بعيد) / ambient(null) توقفها
+ *   MafiaAudio.say('حلّ الليل', {key:'n_night'})
+ *   MafiaAudio.render('wolf')           // Promise<Float32Array> للفحص بدون سماعات
+ */
+(function (root, factory) {
+  if (typeof module === 'object' && module.exports) module.exports = factory(root);
+  else root.MafiaAudio = factory(root);
+})(typeof self !== 'undefined' ? self : this, function (root) {
+  'use strict';
+  const AC = root.AudioContext || root.webkitAudioContext || null;
+  const OAC = root.OfflineAudioContext || root.webkitOfflineAudioContext || null;
+  const rnd = (a, b) => a + Math.random() * (b - a);
+
+  // ------------------------------------------------------------ أدوات بناء الصوت
+  function noiseBuf(ctx) {
+    if (ctx.__nb) return ctx.__nb;
+    const len = Math.floor(ctx.sampleRate * 2), b = ctx.createBuffer(1, len, ctx.sampleRate), d = b.getChannelData(0);
+    for (let i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
+    return (ctx.__nb = b);
+  }
+  function envGain(ctx, t0, peak, att, dur, rel) {
+    const g = ctx.createGain(), p = g.gain, pk = Math.max(peak, 0.0002);
+    att = Math.min(att, dur * 0.8); rel = Math.min(rel, dur - att);
+    p.setValueAtTime(0.0001, t0); p.exponentialRampToValueAtTime(pk, t0 + att);
+    p.setValueAtTime(pk, t0 + Math.max(att, dur - rel)); p.exponentialRampToValueAtTime(0.0001, t0 + dur);
+    return g;
+  }
+  // نغمة: نوع الموجة، تردد يبدأ f وينزلق لـf2، اهتزاز vib، فلتر lp
+  function tone(ctx, out, t0, dur, o) {
+    o = o || {};
+    const osc = ctx.createOscillator(); osc.type = o.type || 'sine';
+    const f0 = o.f || 440, f1 = o.f2 || f0;
+    osc.frequency.setValueAtTime(f0, t0);
+    if (f1 !== f0) osc.frequency.exponentialRampToValueAtTime(f1, t0 + (o.glide || dur));
+    osc.detune.value = (o.detune || 0) + (o.human === false ? 0 : rnd(-6, 6));   // انحراف بسيط عشان ما يتكرر نفس الصوت بالضبط
+    if (o.vib) {
+      const l = ctx.createOscillator(), lg = ctx.createGain(); l.frequency.value = o.vib;
+      lg.gain.setValueAtTime(0, t0); lg.gain.linearRampToValueAtTime(o.vibDepth || f0 * 0.01, t0 + (o.vibDelay || dur * 0.3));
+      l.connect(lg); lg.connect(osc.frequency); l.start(t0); l.stop(t0 + dur + 0.1);
+    }
+    let node = osc;
+    if (o.lp) { const f = ctx.createBiquadFilter(); f.type = 'lowpass'; f.frequency.value = o.lp; node.connect(f); node = f; }
+    const g = envGain(ctx, t0, o.gain == null ? 0.3 : o.gain, o.att || 0.01, dur, o.rel || dur * 0.5);
+    node.connect(g); g.connect(out); osc.start(t0); osc.stop(t0 + dur + 0.05);
+    return g;
+  }
+  // ضجيج مفلتر
+  function noise(ctx, out, t0, dur, o) {
+    o = o || {};
+    const src = ctx.createBufferSource(); src.buffer = noiseBuf(ctx); src.loop = true;
+    const f = ctx.createBiquadFilter(); f.type = o.type || 'bandpass'; f.Q.value = o.q || 1;
+    f.frequency.setValueAtTime(o.f || 1000, t0); if (o.f2) f.frequency.exponentialRampToValueAtTime(o.f2, t0 + dur);
+    const g = envGain(ctx, t0, o.gain == null ? 0.3 : o.gain, o.att || 0.005, dur, o.rel || 0.05);
+    src.connect(f); f.connect(g); g.connect(out); src.start(t0, Math.random()); src.stop(t0 + dur + 0.05);
+    return g;
+  }
+  // صدى: يرجّع عقدة الدخول
+  function echo(ctx, out, time, fb, wet) {
+    const input = ctx.createGain(), d = ctx.createDelay(1), f = ctx.createGain(), w = ctx.createGain();
+    d.delayTime.value = time; f.gain.value = fb; w.gain.value = wet;
+    input.connect(out); input.connect(d); d.connect(f); f.connect(d); d.connect(w); w.connect(out);
+    return input;
+  }
+
+  // نقرة خشبية (بدل صفّارات الألعاب) + نغمة جرس بأجزاء غير متناسقة (أقرب للمعدن الحقيقي)
+  function wood(ctx, out, t0, f, gain, dur) {
+    dur = dur || 0.09;
+    noise(ctx, out, t0, 0.02, { type: 'bandpass', f: f * 2.2, q: 1.5, gain: gain * 0.9, att: 0.0008, rel: 0.018 });
+    tone(ctx, out, t0, dur, { f: f, f2: f * 0.86, gain: gain, att: 0.0008, rel: dur * 0.9, human: false });
+    tone(ctx, out, t0, dur * 0.6, { f: f * 2.4, f2: f * 2.1, gain: gain * 0.35, att: 0.0008, rel: 0.05, human: false });
+  }
+  function bellTone(ctx, out, t0, f, gain, dur) {
+    [[1, 1], [2.76, 0.5], [5.4, 0.22], [8.9, 0.1]].forEach(([r, a], i) => tone(ctx, out, t0, Math.max(0.2, dur - i * dur * 0.2), { f: f * r, gain: gain * a, att: 0.002, rel: Math.max(0.15, dur - i * dur * 0.2) * 0.95 }));
+  }
+
+  // ------------------------------------------------------------ المؤثرات (كل واحد: (ctx, out, t0, params))
+  const R = {}, DUR = {};
+
+  // عواء ذيب: نغمة تطلع وتنزل مع اهتزاز وصدى وفلتر "فم"
+  R.wolf = function (ctx, out, t0, p) {
+    p = p || {}; const k = (p.pitch || 1) * rnd(0.95, 1.05), gain = p.gain == null ? 0.42 : p.gain, dur = 3.4;
+    const bus = echo(ctx, out, 0.3, 0.38, 0.45);
+    const mix = ctx.createGain(); mix.gain.value = 1;
+    const lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = p.dark ? 1500 : 2600;
+    const fm = ctx.createBiquadFilter(); fm.type = 'peaking'; fm.Q.value = 2.2; fm.gain.value = 9;
+    fm.frequency.setValueAtTime(650, t0); fm.frequency.linearRampToValueAtTime(1050, t0 + 1.4); fm.frequency.linearRampToValueAtTime(700, t0 + dur);
+    const env = envGain(ctx, t0, gain, 0.45, dur, 1.2);
+    mix.connect(lp); lp.connect(fm); fm.connect(env); env.connect(bus);
+    ['sawtooth', 'triangle'].forEach((type, i) => {
+      const o = ctx.createOscillator(); o.type = type;
+      o.frequency.setValueAtTime(240 * k, t0); o.frequency.exponentialRampToValueAtTime(460 * k, t0 + 0.8);
+      o.frequency.exponentialRampToValueAtTime(545 * k, t0 + 1.9); o.frequency.exponentialRampToValueAtTime(310 * k, t0 + dur);
+      const l = ctx.createOscillator(), lg = ctx.createGain(); l.frequency.value = rnd(4.8, 5.9);
+      lg.gain.setValueAtTime(0, t0); lg.gain.setValueAtTime(0, t0 + 0.7); lg.gain.linearRampToValueAtTime(9 * k, t0 + 1.4);
+      l.connect(lg); lg.connect(o.frequency); l.start(t0); l.stop(t0 + dur + 0.1);
+      const w = ctx.createOscillator(), wg = ctx.createGain(); w.frequency.value = rnd(1.7, 2.6); wg.gain.value = 4 * k; w.connect(wg); wg.connect(o.frequency); w.start(t0); w.stop(t0 + dur + 0.1);
+      const og = ctx.createGain(); og.gain.value = i ? 0.55 : 0.45; o.connect(og); og.connect(mix); o.start(t0); o.stop(t0 + dur + 0.1);
+    });
+    noise(ctx, bus, t0, dur, { type: 'bandpass', f: 1700, q: 0.8, gain: gain * 0.2, att: 0.5, rel: 1.2 });
+    noise(ctx, bus, t0 + 0.2, dur - 0.4, { type: 'bandpass', f: 520, q: 1.2, gain: gain * 0.1, att: 0.6, rel: 1.1 });
+  };
+  DUR.wolf = 5.2;
+
+  R.owl = function (ctx, out, t0, p) {
+    const g = (p && p.gain) || 0.22;
+    [0, 0.62].forEach((dt, i) => tone(ctx, out, t0 + dt, 0.42, { f: 430 - i * 25, f2: 380 - i * 25, gain: g, att: 0.09, rel: 0.25, lp: 900 }));
+  };
+  DUR.owl = 1.3;
+
+  R.heart = function (ctx, out, t0, p) {
+    const bpm = (p && p.bpm) || 70, n = (p && p.beats) || 4, per = 60 / bpm, g = (p && p.gain) || 0.9;
+    for (let i = 0; i < n; i++) {
+      const t = t0 + i * per;
+      tone(ctx, out, t, 0.16, { f: 62, f2: 36, gain: g, att: 0.004, rel: 0.13 });
+      tone(ctx, out, t + 0.17, 0.13, { f: 52, f2: 34, gain: g * 0.65, att: 0.004, rel: 0.1 });
+    }
+  };
+  DUR.heart = 3.8;
+
+  R.tick = function (ctx, out, t0, p) { wood(ctx, out, t0, p && p.high ? 1700 : 1250, 0.2, 0.05); };
+  DUR.tick = 0.15;
+
+  R.blip = function (ctx, out, t0) { wood(ctx, out, t0, 720, 0.17, 0.08); };
+  DUR.blip = 0.2;
+  R.pop = function (ctx, out, t0) { wood(ctx, out, t0, 520, 0.2, 0.08); wood(ctx, out, t0 + 0.07, 780, 0.15, 0.08); };
+  DUR.pop = 0.3;
+
+  // ديك + عصافير: الصباح
+  R.rooster = function (ctx, out, t0) {
+    const bp = ctx.createBiquadFilter(); bp.type = 'bandpass'; bp.frequency.value = 1500; bp.Q.value = 1.1;
+    const hp = ctx.createBiquadFilter(); hp.type = 'peaking'; hp.frequency.value = 2600; hp.gain.value = 6; hp.Q.value = 1.5;
+    bp.connect(hp); hp.connect(out);
+    [[0, 430, 700, 0.2], [0.26, 520, 820, 0.2], [0.52, 640, 950, 0.26], [0.86, 860, 520, 1.0]].forEach(([dt, a, b, d]) =>
+      { tone(ctx, bp, t0 + dt, d, { type: 'sawtooth', f: a, f2: b, gain: 0.36, att: 0.02, rel: d * 0.5, vib: dt > 0.8 ? 7 : 0, vibDepth: 18, vibDelay: 0.25 }); noise(ctx, bp, t0 + dt, d, { type: 'bandpass', f: (a + b) / 2 * 2.2, q: 0.9, gain: 0.07, att: 0.02, rel: d * 0.5 }); });
+  };
+  DUR.rooster = 2.0;
+  R.birds = function (ctx, out, t0, p) {
+    const n = (p && p.n) || 10, span = (p && p.span) || 3.2;
+    for (let i = 0; i < n; i++) {
+      const f = rnd(2800, 4300), tt = t0 + rnd(0, span), up = Math.random() < 0.5 ? 1.3 : 0.75;
+      tone(ctx, out, tt, rnd(0.07, 0.15), { f, f2: f * up, gain: 0.07, att: 0.01, rel: 0.08 });
+      if (Math.random() < 0.6) tone(ctx, out, tt + 0.11, 0.09, { f: f * 1.1, f2: f * up * 1.1, gain: 0.05, att: 0.01, rel: 0.06 });
+    }
+  };
+  DUR.birds = 3.6;
+
+  // قتل بالسكين: شقّ + ضربة ثقيلة + رنّة معدن (بدون ألحان مصطنعة)
+  R.stab = function (ctx, out, t0) {
+    const e = echo(ctx, out, 0.21, 0.28, 0.3);
+    noise(ctx, e, t0, 0.22, { type: 'bandpass', f: 2600, f2: 6800, q: 0.9, gain: 0.34, att: 0.002, rel: 0.17 });
+    noise(ctx, e, t0 + 0.03, 0.2, { type: 'lowpass', f: 900, f2: 200, q: 0.8, gain: 0.3, att: 0.003, rel: 0.16 });
+    tone(ctx, e, t0 + 0.02, 0.5, { f: 92, f2: 40, gain: 0.5, att: 0.004 });
+    [1, 2.32, 4.1, 5.6].forEach((r, i) => tone(ctx, e, t0 + 0.04, 1.2 - i * 0.2, { f: 600 * r, gain: 0.05 / (1 + i * 0.4), att: 0.002, rel: 1.1 - i * 0.2 }));
+  };
+  DUR.stab = 1.4;
+  // رصاصة القنّاص: طقّة حادة + دويّ + ذيل بالصدى
+  R.gun = function (ctx, out, t0) {
+    const e = echo(ctx, out, 0.17, 0.3, 0.35);
+    noise(ctx, e, t0, 0.4, { type: 'lowpass', f: 7000, f2: 250, q: 0.7, gain: 0.29, att: 0.002, rel: 0.35 });
+    tone(ctx, e, t0, 0.55, { f: 140, f2: 32, gain: 0.3, att: 0.002 });
+    noise(ctx, e, t0, 0.05, { type: 'highpass', f: 2500, gain: 0.25, att: 0.001, rel: 0.04 });
+    noise(ctx, e, t0 + 0.05, 0.9, { type: 'bandpass', f: 320, q: 0.9, gain: 0.1, att: 0.01, rel: 0.8 });
+  };
+  DUR.gun = 1.6;
+  // ليلة هادية / إنقاذ: جرس ناعم
+  R.chime = function (ctx, out, t0) {
+    [784, 988, 1175, 1568].forEach((f, i) => { const t = t0 + i * 0.13; tone(ctx, out, t, 1.8, { f, gain: 0.15, att: 0.005, rel: 1.7 }); tone(ctx, out, t, 1.0, { f: f * 2.01, gain: 0.04, att: 0.005, rel: 0.9 }); });
+  };
+  DUR.chime = 2.5;
+  R.bell = function (ctx, out, t0) { [1, 2.76, 5.4].forEach((r, i) => tone(ctx, out, t0, 1.6 - i * 0.35, { f: 392 * r, gain: 0.22 / (1 + i), att: 0.003, rel: 1.5 - i * 0.35 })); };
+  DUR.bell = 1.8;
+  // مطرقة خشب: طقّة + رنين خشب + ثقل
+  R.gavel = function (ctx, out, t0) {
+    const e = echo(ctx, out, 0.12, 0.22, 0.25);
+    [0, 0.3].forEach((dt, i) => {
+      const g = i ? 0.75 : 1;
+      noise(ctx, e, t0 + dt, 0.04, { type: 'bandpass', f: 1400, q: 1, gain: 0.3 * g, att: 0.001, rel: 0.035 });
+      tone(ctx, e, t0 + dt, 0.16, { f: 330, f2: 210, gain: 0.34 * g, att: 0.001, rel: 0.14, human: false });
+      tone(ctx, e, t0 + dt, 0.1, { f: 820, f2: 560, gain: 0.15 * g, att: 0.001, rel: 0.09, human: false });
+      tone(ctx, e, t0 + dt, 0.12, { f: 120, f2: 70, gain: 0.28 * g, att: 0.001, rel: 0.1, human: false });
+    });
+  };
+  DUR.gavel = 0.8;
+  R.drum = function (ctx, out, t0) {
+    const hits = 32;
+    for (let i = 0; i < hits; i++) noise(ctx, out, t0 + i * 0.047, 0.07, { type: 'bandpass', f: 190, q: 1.2, gain: 0.08 + 0.28 * (i / hits), att: 0.003, rel: 0.06 });
+    tone(ctx, out, t0 + 1.55, 0.5, { f: 110, f2: 40, gain: 0.6, att: 0.003 });
+    noise(ctx, out, t0 + 1.55, 0.2, { type: 'bandpass', f: 400, q: 0.8, gain: 0.35, att: 0.002, rel: 0.18 });
+  };
+  DUR.drum = 2.2;
+  R.fanfare = function (ctx, out, t0) {
+    const e = echo(ctx, out, 0.26, 0.3, 0.35);
+    [[523.25, 0], [659.25, 0.16], [783.99, 0.32], [1046.5, 0.5]].forEach(([f, dt]) => bellTone(ctx, e, t0 + dt, f, 0.16, 1.5));
+    [261.63, 329.63, 392, 523.25].forEach((f) => [-9, 9].forEach((dc) => tone(ctx, e, t0 + 0.45, 1.9, { type: 'triangle', f, gain: 0.05, att: 0.25, rel: 1.3, detune: dc, lp: 2200 })));
+  };
+  DUR.fanfare = 2.4;
+  R.evil = function (ctx, out, t0) {
+    [110, 130.81, 155.56].forEach((f) => tone(ctx, out, t0, 3, { type: 'sawtooth', f, f2: f * 0.94, gain: 0.09, att: 0.3, rel: 1.4, lp: 700, vib: 5.5, vibDepth: 3, vibDelay: 0.5 }));
+    tone(ctx, out, t0, 0.9, { f: 55, f2: 35, gain: 0.7, att: 0.01, rel: 0.8 });
+    noise(ctx, out, t0, 2.6, { type: 'lowpass', f: 220, q: 0.7, gain: 0.14, att: 0.4, rel: 1.6 });
+    bellTone(ctx, out, t0 + 0.05, 233, 0.12, 2.6);
+  };
+  DUR.evil = 3.2;
+  R.jester = function (ctx, out, t0) {
+    [392, 523.25, 659.25, 523.25, 784, 659.25, 1046.5].forEach((f, i) => bellTone(ctx, out, t0 + i * 0.13, f, 0.18, 0.5));
+    tone(ctx, out, t0 + 1.05, 0.4, { f: 220, f2: 760, gain: 0.2, att: 0.02, rel: 0.2 });
+  };
+  DUR.jester = 2.0;
+  R.gong = function (ctx, out, t0) {
+    [1, 1.47, 2.09, 2.57, 3.2, 4.1].forEach((r, i) => tone(ctx, out, t0, 3.2 - i * 0.3, { f: 98 * r, gain: 0.28 / (1 + i * 0.6), att: 0.004, rel: 3 - i * 0.3 }));
+    noise(ctx, out, t0, 0.12, { type: 'bandpass', f: 1800, q: 0.6, gain: 0.25, att: 0.001, rel: 0.1 });
+  };
+  DUR.gong = 3.4;
+
+  // أجواء الليل المستمرة: ريح + همهمة منخفضة + جداجد. ترجّع { stop() }
+  R.ambNight = function (ctx, out, t0) {
+    const bus = ctx.createGain(); bus.gain.setValueAtTime(0.0001, t0); bus.gain.linearRampToValueAtTime(1, t0 + 1.5); bus.connect(out);
+    const stops = [];
+    // ريح
+    const ws = ctx.createBufferSource(); ws.buffer = noiseBuf(ctx); ws.loop = true;
+    const wf = ctx.createBiquadFilter(); wf.type = 'lowpass'; wf.frequency.value = 420; wf.Q.value = 0.7;
+    const wg = ctx.createGain(); wg.gain.value = 0.13;
+    const wl = ctx.createOscillator(), wlg = ctx.createGain(); wl.frequency.value = 0.13; wlg.gain.value = 0.07; wl.connect(wlg); wlg.connect(wg.gain);
+    ws.connect(wf); wf.connect(wg); wg.connect(bus); ws.start(t0); wl.start(t0); stops.push(ws, wl);
+    // همهمة
+    [[55, 'sawtooth', 0.05], [82.4, 'sine', 0.06]].forEach(([f, ty, gg]) => {
+      const o = ctx.createOscillator(); o.type = ty; o.frequency.value = f; const lf = ctx.createBiquadFilter(); lf.type = 'lowpass'; lf.frequency.value = 180;
+      const g = ctx.createGain(); g.gain.value = gg; o.connect(lf); lf.connect(g); g.connect(bus); o.start(t0); stops.push(o);
+    });
+    // جداجد: موجة حاملة عالية، مضمّنة بنبضات سريعة وبمجموعات
+    [[4200, 27, 2.1, 0.022], [4650, 31, 1.7, 0.016]].forEach(([f, rate, grp, amp]) => {
+      const o = ctx.createOscillator(); o.frequency.value = f;
+      const g1 = ctx.createGain(); g1.gain.value = amp * 0.5;
+      const l1 = ctx.createOscillator(); l1.type = 'square'; l1.frequency.value = rate; const d1 = ctx.createGain(); d1.gain.value = amp * 0.5; l1.connect(d1); d1.connect(g1.gain);
+      const g2 = ctx.createGain(); g2.gain.value = 0.5;
+      const l2 = ctx.createOscillator(); l2.type = 'square'; l2.frequency.value = grp; const d2 = ctx.createGain(); d2.gain.value = 0.5; l2.connect(d2); d2.connect(g2.gain);
+      o.connect(g1); g1.connect(g2); g2.connect(bus); o.start(t0); l1.start(t0); l2.start(t0); stops.push(o, l1, l2);
+    });
+    return { stop(t) { t = t == null ? ctx.currentTime : t; bus.gain.cancelScheduledValues(t); bus.gain.setValueAtTime(bus.gain.value, t); bus.gain.linearRampToValueAtTime(0.0001, t + 1.0); stops.forEach((s) => { try { s.stop(t + 1.1); } catch (e) { } }); } };
+  };
+  DUR.ambNight = 4;
+
+  // ------------------------------------------------------------ المحرك الحي
+  const S = { ctx: null, master: null, sfx: null, amb: null, comp: null, enabled: { sfx: true, voice: true }, vol: 0.85, unlocked: false, buffers: {}, files: {}, narr: {}, ambient: null, ambTimers: [], speaking: 0 };
+  function ensure() {
+    if (S.ctx) return S.ctx; if (!AC) return null;
+    const c = new AC(); S.ctx = c;
+    S.comp = c.createDynamicsCompressor(); S.comp.threshold.value = -14; S.comp.knee.value = 20; S.comp.ratio.value = 4;
+    S.master = c.createGain(); S.master.gain.value = S.vol;
+    S.sfx = c.createGain(); S.amb = c.createGain(); S.amb.gain.value = 0.7;
+    S.sfx.connect(S.comp); S.amb.connect(S.comp);
+    // صدى غرفة واسعة: يلصّق كل المؤثرات بمكان واحد ويخفّف طابعها الجاف
+    try { const cv = c.createConvolver(); cv.buffer = roomIR(c, 1.7); const wet = c.createGain(); wet.gain.value = 0.2; S.sfx.connect(cv); S.amb.connect(cv); cv.connect(wet); wet.connect(S.comp); } catch (e) { } S.comp.connect(S.master); S.master.connect(c.destination);
+    return c;
+  }
+  function roomIR(ctx, sec) {
+    const sr = ctx.sampleRate, len = Math.floor(sr * sec), b = ctx.createBuffer(2, len, sr);
+    for (let ch = 0; ch < 2; ch++) { const d = b.getChannelData(ch); let lp = 0; for (let i = 0; i < len; i++) { const t = i / len, a = 0.35 + 0.6 * t; lp += a * ((Math.random() * 2 - 1) - lp); d[i] = lp * Math.pow(1 - t, 3.2) * (i < sr * 0.012 ? i / (sr * 0.012) : 1); } }
+    return b;
+  }
+  function hasVoiceApi() { return !!(root.speechSynthesis && root.SpeechSynthesisUtterance); }
+  function pickVoice() {
+    if (!hasVoiceApi()) return null;
+    const vs = root.speechSynthesis.getVoices() || [], ar = vs.filter((v) => /^ar/i.test(v.lang) || /arab|عرب/i.test(v.name));
+    return ar.find((v) => /majed|maged|tarik|hamed|male/i.test(v.name)) || ar.find((v) => /SA/i.test(v.lang)) || ar[0] || null;
+  }
+  function unlock() {
+    const c = ensure(); S.unlocked = true;
+    if (c) { try { if (c.state === 'suspended') c.resume(); const b = c.createBuffer(1, 1, 22050), s = c.createBufferSource(); s.buffer = b; s.connect(c.destination); s.start(0); } catch (e) { } }
+    if (hasVoiceApi()) { try { root.speechSynthesis.getVoices(); const u = new root.SpeechSynthesisUtterance(' '); u.volume = 0; root.speechSynthesis.speak(u); } catch (e) { } }
+    return !!c;
+  }
+  function play(name, p) {
+    if (!S.enabled.sfx) return false; const c = ensure(); if (!c) return false;
+    try { if (c.state === 'suspended') c.resume(); } catch (e) { }
+    const t = c.currentTime + 0.03;
+    if (S.buffers[name]) { const s = c.createBufferSource(); s.buffer = S.buffers[name]; const g = c.createGain(); g.gain.value = (p && p.gain) || 1; s.connect(g); g.connect(S.sfx); s.start(t); return true; }
+    if (!R[name]) return false;
+    try { R[name](c, S.sfx, t, p); } catch (e) { if (root.console) console.error('sfx', name, e); return false; }
+    return true;
+  }
+  function clearAmbTimers() { S.ambTimers.forEach(clearTimeout); S.ambTimers = []; }
+  function ambient(kind) {
+    const c = ensure(); if (!c) return;
+    if (S.ambient) { try { S.ambient.stop(); } catch (e) { } S.ambient = null; } clearAmbTimers();
+    if (!kind || !S.enabled.sfx) return;
+    if (kind === 'night') {
+      try { if (c.state === 'suspended') c.resume(); S.ambient = R.ambNight(c, S.amb, c.currentTime + 0.03); } catch (e) { return; }
+      const loop = (fn, a, b) => { S.ambTimers.push(setTimeout(() => { if (!S.ambient) return; fn(); loop(fn, a, b); }, rnd(a, b) * 1000)); };
+      loop(() => play('owl'), 9, 16);
+      loop(() => play('wolf', { pitch: 0.85, gain: 0.16, dark: true }), 22, 34);
+    }
+  }
+  function duck(on) {
+    const c = S.ctx; if (!c) return; S.speaking = Math.max(0, S.speaking + (on ? 1 : -1));
+    const to = S.speaking > 0 ? 0.3 : 0.7; S.amb.gain.cancelScheduledValues(c.currentTime); S.amb.gain.setValueAtTime(S.amb.gain.value, c.currentTime); S.amb.gain.linearRampToValueAtTime(to, c.currentTime + 0.3);
+  }
+  // الراوي: لو فيه تسجيل بنفس المفتاح نشغّله، وإلا نقرأ النص بصوت عربي من الجهاز (لو متوفر)
+  function say(text, o) {
+    o = o || {};
+    if (!S.enabled.voice) return false;
+    if (o.key && S.narr[o.key] && S.ctx) { const c = S.ctx, s = c.createBufferSource(); s.buffer = S.narr[o.key]; s.connect(S.sfx); duck(true); s.onended = () => duck(false); s.start(); return true; }
+    if (!hasVoiceApi()) return false; const v = pickVoice(); if (!v) return false;
+    try {
+      if (o.interrupt !== false) root.speechSynthesis.cancel();
+      const u = new root.SpeechSynthesisUtterance(text); u.voice = v; u.lang = v.lang; u.rate = o.rate || 0.92; u.pitch = o.pitch || 0.85; u.volume = 1;
+      u.onstart = () => duck(true); u.onend = u.onerror = () => duck(false);
+      root.speechSynthesis.speak(u); return true;
+    } catch (e) { return false; }
+  }
+  function shutUp() { try { if (hasVoiceApi()) root.speechSynthesis.cancel(); } catch (e) { } }
+  function stopAll() { ambient(null); shutUp(); }
+  function setVolume(v) { S.vol = Math.max(0, Math.min(1, v)); if (S.master) S.master.gain.value = S.vol; }
+  function setEnabled(k, v) { S.enabled[k] = !!v; if (!v && k === 'sfx') ambient(null); if (!v && k === 'voice') shutUp(); }
+  // تبديل مؤثرات/سطور راوي بملفات حقيقية: { wolf:'url', n_night:'url' }  (n_ = راوي)
+  function useFiles(map) {
+    const c = ensure(); if (!c || !root.fetch) return Promise.resolve(0);
+    return Promise.all(Object.keys(map).map((k) => root.fetch(map[k]).then((r) => r.arrayBuffer()).then((ab) => new Promise((res, rej) => c.decodeAudioData(ab, res, rej))).then((buf) => { (k.indexOf('n_') === 0 ? S.narr : S.buffers)[k] = buf; return 1; }).catch(() => 0))).then((a) => a.reduce((x, y) => x + y, 0));
+  }
+  // نفس useFiles لكن من بيانات مضمّنة داخل الملف (data:audio/...;base64,...) — للنسخة اللي تشتغل بدون إنترنت
+  function useData(map) {
+    const c = ensure(); if (!c) return Promise.resolve(0);
+    const toBuf = (d) => { const bin = root.atob(d.slice(d.indexOf(',') + 1)), u = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i); return u.buffer; };
+    return Promise.all(Object.keys(map).map((k) => new Promise((res, rej) => { try { c.decodeAudioData(toBuf(map[k]), res, rej); } catch (e) { rej(e); } }).then((buf) => { (k.indexOf('n_') === 0 ? S.narr : S.buffers)[k] = buf; return 1; }).catch(() => 0))).then((a) => a.reduce((x, y) => x + y, 0));
+  }
+  // فحص بدون سماعات: يرجّع Float32Array
+  function render(name, p, sr) {
+    if (!OAC) return Promise.reject(new Error('no OfflineAudioContext'));
+    sr = sr || 22050; const d = (DUR[name] || 2) + 0.2;
+    const oc = new OAC(1, Math.ceil(sr * d), sr), dest = oc.createGain(); dest.connect(oc.destination);
+    const h = R[name](oc, dest, 0, p); if (h && h.stop) h.stop(d - 1.2);
+    return oc.startRendering().then((b) => b.getChannelData(0));
+  }
+
+  return { unlock, play, ambient, say, shutUp, stopAll, setVolume, setEnabled, useFiles, useData, hasPack: () => Object.keys(S.narr).length > 0, render, names: Object.keys(R), DUR, state: S, hasVoice: () => !!pickVoice(), hasVoiceApi, supported: !!AC };
+});
+
+</script>
+<script>/* hub.js */
+/* ديوانية بلس مافيا — مركز الغرف (hub): بروتوكول الرسائل + الغرف + المؤقتات، بدون أي شبكة.
+ * يشتغل في Node (server.js) وفي المتصفح (النسخة التجريبية) وفي Cloudflare Durable Object لاحقاً.
+ * الناقل (WebSocket أو غيره) يعطي كل اتصال كائن conn فيه: send(obj) و close(code).
+ *
+ * رسائل العميل -> الخادم (JSON):
+ *   {t:'create', name, dev?}          إنشاء غرفة (المنشئ هو المضيف)
+ *   {t:'join', code, name}            دخول بالرمز
+ *   {t:'resume', code, token}         رجوع بعد انقطاع / قفل الجوال
+ *   {t:'board', code}                 شاشة عرض عامة (بدون دور)
+ *   {t:'act', a, ...}                 a = ready | night{target,kind?} | confirm{on?} | task | vote | voteReady | start | skip | settings | kick | reset | leave
+ *                                     (الليل: المافيا تقترح بـnight ثم تؤكد بـconfirm · بقية اللاعبين اللي ما عندهم قدرة ينفذون مهمة ويبلّغون بـtask)
+ *                                     وضع المقدّم: hostPick{kind,target} | hostNext | hostTimer{sec}
+ *   {t:'ping'}
+ * الخادم -> العميل: {t:'joined',code,id,token} | {t:'view',view} | {t:'err',err} | {t:'pong'} | {t:'kicked'} | {t:'left'}
+ */
+(function (root, factory) {
+  if (typeof module === 'object' && module.exports) module.exports = factory();
+  else root.MafiaHub = factory();
+})(typeof self !== 'undefined' ? self : this, function () {
+  'use strict';
+  const LOBBY_GRACE_MS = 90 * 1000, ROOM_IDLE_MS = 6 * 3600 * 1000, EMPTY_ROOM_MS = 30 * 60 * 1000;
+
+  /* opts: { E (المحرك), rng(), randInt(min,max), token(), now(), wallet, allowDev, maxRooms } */
+  function createHub(opts) {
+    const E = opts.E, rng = opts.rng, now = opts.now || Date.now, maxRooms = opts.maxRooms || 500;
+    const wallet = opts.wallet || { async charge() { return true; } };   // مكان ربط الرصيد: يُخصم قيم واحد من المضيف عند البدء
+    const rooms = new Map();
+
+    const newCode = () => { for (let i = 0; i < 50; i++) { const c = String(opts.randInt(1000, 10000)); if (!rooms.has(c)) return c; } return null; };
+
+    function sendViews(room) {
+      const t = now();
+      room.conns.forEach((c) => { if (!c.closed) c.send({ t: 'view', view: E.viewFor(room.g, c.pid, t) }); });
+    }
+    function bind(room, conn, pid) {
+      // اتصال قديم لنفس اللاعب؟ نقفله
+      room.conns.forEach((c) => { if (c !== conn && pid && c.pid === pid) { c.pid = null; room.conns.delete(c); c.close(4000); } });
+      conn.code = room.g.code; conn.pid = pid; conn.board = !pid; room.conns.add(conn);
+      if (pid) { E.setConnected(room.g, pid, true); delete room.discAt[pid]; }
+    }
+    function closed(conn) {
+      const room = conn.code && rooms.get(conn.code); if (!room) return;
+      room.conns.delete(conn);
+      if (conn.pid && E.byId(room.g, conn.pid)) {
+        const still = [...room.conns].some((c) => c.pid === conn.pid);
+        if (!still) { E.setConnected(room.g, conn.pid, false); room.discAt[conn.pid] = now(); sendViews(room); }
+      }
+    }
+
+    function message(conn, m) {
+      const t0 = now();
+      const err = (e) => conn.send({ t: 'err', err: e });
+      switch (m.t) {
+        case 'ping': return conn.send({ t: 'pong' });
+        case 'create': {
+          if (rooms.size >= maxRooms) return err('server_busy');
+          const code = newCode(); if (!code) return err('server_busy');
+          const g = E.createGame(code, { minPlayers: m.dev && opts.allowDev ? 3 : 5 });
+          const room = { g, conns: new Set(), tokens: {}, discAt: {}, created: t0, last: t0 };
+          const r = E.join(g, m.name, t0); if (!r.ok) return err(r.err);
+          rooms.set(code, room); const tk = opts.token(); room.tokens[tk] = r.id;
+          bind(room, conn, r.id); conn.send({ t: 'joined', code, id: r.id, token: tk }); return sendViews(room);
+        }
+        case 'join': {
+          const room = rooms.get(String(m.code || '')); if (!room) return err('no_room');
+          const r = E.join(room.g, m.name, t0); if (!r.ok) return err(r.err);
+          const tk = opts.token(); room.tokens[tk] = r.id; room.last = t0;
+          bind(room, conn, r.id); conn.send({ t: 'joined', code: room.g.code, id: r.id, token: tk }); return sendViews(room);
+        }
+        case 'resume': {
+          const room = rooms.get(String(m.code || '')); if (!room) return err('no_room');
+          const pid = room.tokens[String(m.token || '')]; if (!pid || !E.byId(room.g, pid)) return err('bad_token');
+          bind(room, conn, pid); conn.send({ t: 'joined', code: room.g.code, id: pid, token: m.token, resumed: true }); return sendViews(room);
+        }
+        case 'board': {
+          const room = rooms.get(String(m.code || '')); if (!room) return err('no_room');
+          bind(room, conn, null); return conn.send({ t: 'view', view: E.viewFor(room.g, null, t0) });
+        }
+        case 'act': {
+          const room = conn.code && rooms.get(conn.code); if (!room || !conn.pid) return err('not_joined');
+          const g = room.g, id = conn.pid; let r = { ok: true }; room.last = t0;
+          // محرك عام (مثل المستشار السري): كل أفعال اللعب تروح لـ E.act، ما عدا الطرد والبدء والخروج (لها شغل اتصالات هنا)
+          if (E.act && m.a !== 'kick' && m.a !== 'start' && m.a !== 'leave') { const r0 = E.act(g, id, m, t0, rng); if (!r0.ok) err(r0.err); return sendViews(room); }
+          switch (m.a) {
+            case 'ready': r = E.ready(g, id, t0); break;
+            case 'night': r = E.nightAct(g, id, m.target === undefined ? null : m.target, t0, m.kind, rng); break;
+            case 'confirm': r = E.nightConfirm(g, id, t0, rng, m.on !== false); break;
+            case 'task': r = E.nightTask(g, id, t0, rng); break;
+            case 'vote': r = E.vote(g, id, m.target, t0); break;
+            case 'voteReady': r = E.voteReady(g, id, t0); break;
+            case 'settings': r = E.setSettings(g, id, m.patch || {}); break;
+            case 'skip': r = E.skip(g, id, t0, rng); break;
+            case 'hostPick': r = E.hostPick(g, id, m.kind, m.target === undefined ? null : m.target); break;
+            case 'hostNext': r = E.hostNext(g, id, t0); break;
+            case 'hostTimer': r = E.hostTimer(g, id, m.sec, t0); break;
+            case 'kick': { const victim = [...room.conns].find((c) => c.pid === m.target); r = E.kick(g, id, m.target); if (r.ok && victim) { victim.pid = null; room.conns.delete(victim); victim.send({ t: 'kicked' }); victim.close(4001); } break; }
+            case 'reset': r = E.reset(g, id); break;
+            case 'start': {
+              if (g.hostId !== id) { r = { ok: false, err: 'not_host' }; break; }
+              if (g.phase !== 'lobby') { r = { ok: false, err: 'already_started' }; break; }
+              if (E.need(g) > 0) { r = { ok: false, err: 'need_players' }; break; }
+              // هنا يُخصم قيم واحد من رصيد المضيف (من الخادم، مو من الجوال).
+              Promise.resolve(wallet.charge(room)).then((okc) => {
+                if (!okc) { conn.send({ t: 'err', err: 'no_credit' }); return; }
+                const rr = E.start(g, id, now(), rng); if (!rr.ok) conn.send({ t: 'err', err: rr.err });
+                sendViews(room);
+              }).catch(() => conn.send({ t: 'err', err: 'wallet_error' }));
+              return;
+            }
+            case 'leave': { r = E.leave(g, id); const tkn = Object.keys(room.tokens).find((k) => room.tokens[k] === id); if (tkn) delete room.tokens[tkn]; conn.pid = null; conn.send({ t: 'left' }); break; }
+            default: r = { ok: false, err: 'bad_action' };
+          }
+          if (!r.ok) err(r.err);
+          return sendViews(room);
+        }
+      }
+    }
+
+    // مؤقتات اللعبة + تنظيف الغرف (يُستدعى كل ~500ms)
+    function tick() {
+      const t = now();
+      rooms.forEach((room, code) => {
+        const g = room.g; let changed = false;
+        try { changed = E.tick(g, t, rng); } catch (e) { if (typeof console !== 'undefined') console.error('tick error', code, e); }
+        if (g.phase === 'lobby') Object.keys(room.discAt).forEach((pid) => { if (t - room.discAt[pid] > LOBBY_GRACE_MS) { E.leave(g, pid); delete room.discAt[pid]; changed = true; } });
+        if (changed) sendViews(room);
+        if ((room.conns.size === 0 && t - room.last > EMPTY_ROOM_MS) || t - room.last > ROOM_IDLE_MS) rooms.delete(code);
+      });
+    }
+
+    return { rooms, message, closed, tick, sendViews };
+  }
+
+  return { createHub };
+});
+
+</script>
+<script>/* sh/engine.js */
+/* ديوانية بلس — المستشار السري: محرك اللعبة (بدون شبكة ولا واجهة). يشتغل في Node والمتصفح وCloudflare.
+ * نفس واجهة محرك مافيا عشان يركب على نفس الخادم (hub.js): createGame, join, leave, kick, setConnected,
+ * setSettings, start, need, tick, viewFor, reset, byId + act(g, id, msg, now, rng) لكل أفعال اللعب.
+ *
+ * القوانين الرسمية:
+ * - ٥–١٠ لاعبين. ١٧ سياسة: ٦ نزيهة + ١١ فاسدة.
+ * - الفاسدون يعرفون بعض ويعرفون الزعيم السري. الزعيم السري يعرف الفاسد فقط في لعبة ٥–٦ لاعبين.
+ * - الرئيس يرشّح مستشار. ممنوع: آخر مستشار منتخب، وآخر رئيس منتخب (إذا الأحياء أكثر من ٥).
+ * - التعادل = رفض. ٣ رفض متتالي = فوضى: تُعتمد السياسة اللي فوق الكومة بدون قدرة، ويتصفّر المؤشر وتنمسح حدود الترشّح.
+ * - أي سياسة تنعتمد تصفّر مؤشر الانتخابات. لو بقي بالكومة أقل من ٣ تنخلط مع المستبعدة.
+ * - بعد ٣ سياسات فاسدة: انتخاب الزعيم السري مستشاراً = فوز الفاسدين، وأي مستشار منتخب غيره ينعرف إنه مو الزعيم السري.
+ * - الفيتو بعد ٥ سياسات فاسدة: المستشار يطلب، والرئيس يوافق أو يرفض. الموافقة تحرّك مؤشر الانتخابات خطوة.
+ * - القدرات حسب العدد: ٥–٦: كشف ٣ (٣)، إعدام (٤، ٥) · ٧–٨: فحص (٢)، انتخابات خاصة (٣)، إعدام (٤، ٥) · ٩–١٠: فحص (١، ٢)، انتخابات خاصة (٣)، إعدام (٤، ٥).
+ * - الانتخابات الخاصة: بعدها ترجع الرئاسة للي بعد الرئيس اللي استخدمها.
+ */
+(function (root, factory) {
+  if (typeof module === 'object' && module.exports) module.exports = factory();
+  else root.SHEngine = factory();
+})(typeof self !== 'undefined' ? self : this, function () {
+  'use strict';
+  const MIN_PLAYERS = 5, MAX_PLAYERS = 60;
+  const FIXED = { revealSec: 90, voteSuspenseMs: 4500, voteShowMs: 6500, enactSuspenseMs: 4200, enactShowMs: 5500, killShowMs: 6000 };
+  const ACT_OPTIONS = [0, 45, 60, 90, 120];                 // ٠ = بدون وقت
+  const DEFAULT_SETTINGS = { actSec: 0 };
+  const DIST = { 5: [3, 1], 6: [4, 1], 7: [4, 2], 8: [5, 2], 9: [5, 3], 10: [6, 3] }; for (let _k = 11; _k <= 60; _k++) { const _f = Math.max(3, Math.floor((_k - 1) * 0.38)); DIST[_k] = [_k - 1 - _f, _f]; }   // [نزهاء، فاسدين] + الزعيم السري
+  const ROLES = {
+    liberal: { name: 'نزيه', party: 'liberal' },
+    fascist: { name: 'فاسد', party: 'fascist' },
+    leader: { name: 'الزعيم السري', party: 'fascist' }
+  };
+  const PARTY_NAME = { liberal: 'النزهاء', fascist: 'الفاسدين' };
+  const POWER_NAME = { investigate: 'فحص ولاء', peek: 'كشف ٣ سياسات', special: 'انتخابات خاصة', kill: 'إعدام' };
+  const COLORS = ['#f26538', '#38bdf8', '#a78bfa', '#34d399', '#fbbf24', '#f472b6', '#60a5fa', '#fb7185', '#2dd4bf', '#c084fc'];
+
+  // القدرات حسب خانة السياسة الفاسدة (١..٦)
+  function powersFor(n) {
+    if (n <= 6) return [null, null, null, 'peek', 'kill', 'kill', null];
+    if (n <= 8) return [null, null, 'investigate', 'special', 'kill', 'kill', null];
+    return [null, 'investigate', 'investigate', 'special', 'kill', 'kill', null];
+  }
+
+  const ok = (x) => Object.assign({ ok: true }, x || {});
+  const fail = (err) => ({ ok: false, err });
+  const cleanName = (s) => String(s == null ? '' : s).replace(/[\u0000-\u001f\u007f<>]/g, '').replace(/\s+/g, ' ').trim().slice(0, 14);
+  const byId = (g, id) => g.players.find((p) => p.id === id) || null;
+  const alive = (g) => g.players.filter((p) => p.alive);
+  const idxOf = (g, id) => g.players.findIndex((p) => p.id === id);
+  const shuffle = (a, rng) => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(rng() * (i + 1)); const t = a[i]; a[i] = a[j]; a[j] = t; } return a; };
+  const RNG = Math.random;
+
+  function createGame(code) {
+    return {
+      code: String(code), settings: Object.assign({}, DEFAULT_SETTINGS), players: [], hostId: null, nextId: 1,
+      phase: 'lobby', round: 0, deadline: null, timerTotal: null, phaseSince: 0,
+      ready: {}, nPlayers: 0, presId: null, nomId: null, chanId: null, lastPresId: null, lastChanId: null, seCallerId: null,
+      tracker: 0, lib: 0, fas: 0, vetoOn: false, vetoRefused: false, deck: [], discard: [], drawn: [], chanCards: [],
+      votes: {}, voteResult: null, enacted: null, power: null, investigated: {}, notes: {}, notLeader: {},
+      gov: null, events: [], winner: null
+    };
+  }
+
+  // ---------------------------------------------------------------- اللوبي
+  function join(g, name) {
+    if (g.phase !== 'lobby') return fail('game_started');
+    if (g.players.length >= MAX_PLAYERS) return fail('room_full');
+    let nm = cleanName(name); if (!nm) return fail('name_required');
+    const base = nm; let k = 2;
+    while (g.players.some((p) => p.name === nm)) { nm = base.slice(0, 12) + ' ' + k; k++; }
+    const used = new Set(g.players.map((p) => p.color));
+    const color = COLORS.find((c) => !used.has(c)) || COLORS[g.players.length % COLORS.length];
+    const p = { id: 'p' + (g.nextId++), name: nm, color, role: null, party: null, alive: true, connected: true };
+    g.players.push(p); if (!g.hostId) g.hostId = p.id;
+    return ok({ id: p.id });
+  }
+  function passHost(g) {
+    const next = g.players.find((p) => p.connected && p.id !== g.hostId) || g.players.find((p) => p.id !== g.hostId);
+    if (next) g.hostId = next.id;
+  }
+  function leave(g, id) {
+    const p = byId(g, id); if (!p) return fail('no_player');
+    if (g.phase === 'lobby') {
+      g.players = g.players.filter((x) => x.id !== id);
+      if (g.hostId === id) g.hostId = g.players.length ? g.players[0].id : null;
+    } else { p.connected = false; if (g.hostId === id) passHost(g); }
+    return ok();
+  }
+  function setConnected(g, id, v) { const p = byId(g, id); if (p) p.connected = !!v; }
+  function kick(g, hostId, targetId) {
+    if (g.hostId !== hostId) return fail('not_host'); if (g.phase !== 'lobby') return fail('game_started');
+    if (targetId === hostId) return fail('cannot_kick_self');
+    return leave(g, targetId);
+  }
+  function setSettings(g, hostId, patch) {
+    if (g.hostId !== hostId) return fail('not_host'); if (g.phase !== 'lobby') return fail('game_started');
+    if (patch && patch.actSec !== undefined) { const v = Number(patch.actSec); if (ACT_OPTIONS.indexOf(v) < 0) return fail('bad_setting'); g.settings.actSec = v; }
+    return ok();
+  }
+  const need = (g) => Math.max(0, MIN_PLAYERS - g.players.length);
+
+  function setPhase(g, ph, now, ms) {
+    g.phase = ph; g.phaseSince = now;
+    g.deadline = ms ? now + ms : null; g.timerTotal = ms || null;
+  }
+  const actMs = (g) => (g.settings.actSec ? g.settings.actSec * 1000 : 0);
+  const ev = (g, e) => { e.round = g.round; g.events.push(e); if (g.events.length > 80) g.events.splice(0, g.events.length - 80); };
+
+  function start(g, id, now, rng) {
+    rng = rng || RNG;
+    if (g.hostId !== id) return fail('not_host'); if (g.phase !== 'lobby') return fail('already_started');
+    const n = g.players.length; if (n < MIN_PLAYERS) return fail('need_players'); if (n > MAX_PLAYERS) return fail('room_full');
+    const d = DIST[n], pool = [];
+    for (let i = 0; i < d[0]; i++) pool.push('liberal');
+    for (let i = 0; i < d[1]; i++) pool.push('fascist');
+    pool.push('leader');
+    const roles = shuffle(pool, rng);
+    g.players.forEach((p, i) => { p.role = roles[i]; p.party = ROLES[roles[i]].party; p.alive = true; });
+    const deck = []; for (let i = 0; i < 6; i++) deck.push('liberal'); for (let i = 0; i < 11; i++) deck.push('fascist');
+    Object.assign(g, {
+      nPlayers: n, round: 0, ready: {}, presId: g.players[Math.floor(rng() * n)].id, nomId: null, chanId: null, lastPresId: null, lastChanId: null, seCallerId: null,
+      tracker: 0, lib: 0, fas: 0, vetoOn: false, vetoRefused: false, deck: shuffle(deck, rng), discard: [], drawn: [], chanCards: [],
+      votes: {}, voteResult: null, enacted: null, power: null, investigated: {}, notes: {}, notLeader: {}, gov: null, events: [], winner: null
+    });
+    ev(g, { k: 'start', n });
+    setPhase(g, 'reveal', now, actMs(g) ? FIXED.revealSec * 1000 : 0);
+    return ok();
+  }
+  function ready(g, id, now) {
+    if (g.phase !== 'reveal') return fail('bad_phase'); const p = byId(g, id); if (!p) return fail('no_player');
+    g.ready[id] = true;
+    if (g.players.filter((x) => x.connected).every((x) => g.ready[x.id])) beginNominate(g, now, false);
+    return ok();
+  }
+
+  // ---------------------------------------------------------------- الترشيح والتصويت
+  function eligible(g, p) {
+    if (!p || !p.alive || p.id === g.presId) return false;
+    if (p.id === g.lastChanId) return false;
+    if (alive(g).length > 5 && p.id === g.lastPresId) return false;
+    return true;
+  }
+  function nextAliveAfter(g, id) {
+    const n = g.players.length, i0 = idxOf(g, id);
+    for (let s = 1; s <= n; s++) { const p = g.players[(i0 + s) % n]; if (p.alive) return p.id; }
+    return id;
+  }
+  function beginNominate(g, now, rotate) {
+    if (rotate) {
+      if (g.seCallerId) { g.presId = nextAliveAfter(g, g.seCallerId); g.seCallerId = null; }
+      else g.presId = nextAliveAfter(g, g.presId);
+    }
+    g.round++; g.nomId = null; g.chanId = null; g.votes = {}; g.voteResult = null; g.drawn = []; g.chanCards = []; g.power = null; g.vetoRefused = false;
+    setPhase(g, 'nominate', now, actMs(g));
+  }
+  function nominate(g, id, target, now) {
+    if (g.phase !== 'nominate') return fail('bad_phase'); if (id !== g.presId) return fail('not_president');
+    const t = byId(g, target); if (!eligible(g, t)) return fail('bad_target');
+    g.nomId = t.id; g.votes = {};
+    ev(g, { k: 'nominate', pres: g.presId, nom: t.id });
+    setPhase(g, 'vote', now, actMs(g));
+    return ok();
+  }
+  function vote(g, id, val, now) {
+    if (g.phase !== 'vote') return fail('bad_phase'); const p = byId(g, id); if (!p || !p.alive) return fail('not_alive');
+    if (val !== 'ja' && val !== 'nein') return fail('bad_vote');
+    g.votes[id] = val;
+    if (alive(g).every((x) => g.votes[x.id])) resolveVote(g, now);
+    return ok();
+  }
+  function resolveVote(g, now) {
+    const votes = {}; let ja = 0, nein = 0;
+    alive(g).forEach((p) => { const v = g.votes[p.id] || 'nein'; votes[p.id] = g.votes[p.id] ? v : 'none'; if (v === 'ja') ja++; else nein++; });
+    const passed = ja > nein;
+    g.voteResult = { pres: g.presId, nom: g.nomId, votes, ja, nein, passed, revealAt: now + FIXED.voteSuspenseMs, pending: true };
+    ev(g, { k: 'vote', pres: g.presId, nom: g.nomId, ja, nein, passed });
+    setPhase(g, 'voteResult', now, FIXED.voteSuspenseMs + FIXED.voteShowMs);
+  }
+  function afterVote(g, now, rng) {
+    const r = g.voteResult;
+    if (r.passed) {
+      g.chanId = r.nom; g.lastPresId = r.pres; g.lastChanId = r.nom;
+      const ch = byId(g, r.nom);
+      if (g.fas >= 3 && ch.role === 'leader') return finish(g, 'fascist', 'leader_elected', now);
+      if (g.fas >= 3) g.notLeader[ch.id] = true;
+      reshuffleIfNeeded(g, 3, rng);
+      g.drawn = g.deck.splice(0, 3); g.chanCards = []; g.vetoRefused = false;
+      g.gov = { round: g.round, pres: g.presId, chan: g.chanId, presClaim: null, chanClaim: null, done: false };
+      setPhase(g, 'pres', now, actMs(g));
+    } else {
+      g.tracker++;
+      if (g.tracker >= 3) return chaos(g, now, rng);
+      beginNominate(g, now, true);
+    }
+  }
+  function reshuffleIfNeeded(g, min, rng) {
+    if (g.deck.length < min) { g.deck = shuffle(g.deck.concat(g.discard), rng || RNG); g.discard = []; ev(g, { k: 'reshuffle', n: g.deck.length }); }
+  }
+  function chaos(g, now, rng) {
+    reshuffleIfNeeded(g, 1, rng);
+    const card = g.deck.shift();
+    g.lastPresId = null; g.lastChanId = null;
+    ev(g, { k: 'chaos' });
+    enact(g, card, true, now, rng);
+  }
+
+  // ---------------------------------------------------------------- الجلسة التشريعية
+  function presDiscard(g, id, i, now) {
+    if (g.phase !== 'pres') return fail('bad_phase'); if (id !== g.presId) return fail('not_president');
+    i = Number(i); if (!(i >= 0 && i < g.drawn.length)) return fail('bad_card');
+    g.discard.push(g.drawn.splice(i, 1)[0]);
+    g.chanCards = g.drawn; g.drawn = [];
+    setPhase(g, 'chan', now, actMs(g));
+    return ok();
+  }
+  function chanEnact(g, id, i, now, rng) {
+    if (g.phase !== 'chan') return fail('bad_phase'); if (id !== g.chanId) return fail('not_chancellor');
+    i = Number(i); if (!(i >= 0 && i < g.chanCards.length)) return fail('bad_card');
+    const card = g.chanCards.splice(i, 1)[0];
+    g.discard.push.apply(g.discard, g.chanCards); g.chanCards = [];
+    enact(g, card, false, now, rng);
+    return ok();
+  }
+  function vetoAsk(g, id, now) {
+    if (g.phase !== 'chan') return fail('bad_phase'); if (id !== g.chanId) return fail('not_chancellor');
+    if (!g.vetoOn) return fail('no_veto'); if (g.vetoRefused) return fail('veto_refused');
+    ev(g, { k: 'vetoAsk', chan: id });
+    setPhase(g, 'veto', now, actMs(g));
+    return ok();
+  }
+  function vetoReply(g, id, on, now, rng) {
+    if (g.phase !== 'veto') return fail('bad_phase'); if (id !== g.presId) return fail('not_president');
+    if (!on) { g.vetoRefused = true; ev(g, { k: 'veto', on: false }); setPhase(g, 'chan', now, actMs(g)); return ok(); }
+    g.discard.push.apply(g.discard, g.chanCards); g.chanCards = [];
+    if (g.gov) g.gov.done = true;
+    ev(g, { k: 'veto', on: true });
+    g.tracker++;
+    reshuffleIfNeeded(g, 3, rng);
+    if (g.tracker >= 3) { chaos(g, now, rng); return ok(); }
+    beginNominate(g, now, true);
+    return ok();
+  }
+  function enact(g, card, isChaos, now, rng) {
+    g.tracker = 0;
+    if (card === 'liberal') g.lib++; else { g.fas++; if (g.fas >= 5) g.vetoOn = true; }
+    reshuffleIfNeeded(g, 3, rng);
+    if (g.gov && !isChaos) g.gov.done = true;
+    const pw = (!isChaos && card === 'fascist') ? powersFor(g.nPlayers)[g.fas] : null;
+    g.enacted = { card, chaos: !!isChaos, lib: g.lib, fas: g.fas, power: pw, revealAt: now + FIXED.enactSuspenseMs, pending: true };
+    ev(g, { k: 'enact', card, chaos: !!isChaos, lib: g.lib, fas: g.fas });
+    setPhase(g, 'enacted', now, FIXED.enactSuspenseMs + FIXED.enactShowMs);
+  }
+  function afterEnact(g, now) {
+    const e = g.enacted;
+    if (g.lib >= 5) return finish(g, 'liberal', 'five_liberal', now);
+    if (g.fas >= 6) return finish(g, 'fascist', 'six_fascist', now);
+    if (e.power && alive(g).length > 1) {
+      g.power = { kind: e.power, pres: g.presId, target: null, done: false, peek: e.power === 'peek' ? g.deck.slice(0, 3) : null, result: null };
+      setPhase(g, 'power', now, actMs(g));
+      return;
+    }
+    beginNominate(g, now, true);
+  }
+
+  // ---------------------------------------------------------------- القدرات الرئاسية
+  function usePower(g, id, target, now) {
+    if (g.phase !== 'power' || !g.power) return fail('bad_phase'); if (id !== g.presId) return fail('not_president');
+    const pw = g.power; if (pw.done) return fail('power_done');
+    if (pw.kind === 'peek') { pw.done = true; ev(g, { k: 'power', kind: 'peek', pres: id }); beginNominate(g, now, true); return ok(); }
+    const t = byId(g, target); if (!t || !t.alive || t.id === id) return fail('bad_target');
+    if (pw.kind === 'investigate') {
+      if (g.investigated[t.id]) return fail('already_investigated');
+      g.investigated[t.id] = true; (g.notes[id] = g.notes[id] || []).push({ round: g.round, target: t.id, party: t.party });
+      pw.target = t.id; pw.done = true; pw.result = t.party;
+      ev(g, { k: 'power', kind: 'investigate', pres: id, target: t.id });
+      setPhase(g, 'power', now, actMs(g) ? Math.max(actMs(g), 15000) : 0);   // ينتظر الرئيس يقرأ النتيجة ويضغط «كمّل»
+      return ok();
+    }
+    if (pw.kind === 'special') {
+      pw.target = t.id; pw.done = true; ev(g, { k: 'power', kind: 'special', pres: id, target: t.id });
+      g.seCallerId = id; g.presId = t.id;
+      beginNominate(g, now, false);
+      return ok();
+    }
+    if (pw.kind === 'kill') {
+      t.alive = false; pw.target = t.id; pw.done = true; pw.leader = t.role === 'leader';
+      ev(g, { k: 'power', kind: 'kill', pres: id, target: t.id });
+      if (t.role === 'leader') { finish(g, 'liberal', 'leader_killed', now); return ok(); }
+      g.notLeader[t.id] = true;
+      setPhase(g, 'power', now, FIXED.killShowMs);                // يعرض الإعدام شوي ثم نكمل
+      return ok();
+    }
+    return fail('bad_power');
+  }
+  function powerDone(g, id, now) {
+    if (g.phase !== 'power' || !g.power || !g.power.done) return fail('bad_phase');
+    if (id !== g.presId && id !== g.hostId) return fail('not_president');
+    beginNominate(g, now, true); return ok();
+  }
+
+  // ---------------------------------------------------------------- الادعاءات (اختيارية): وش جاك من بطاقات؟
+  function claim(g, id, txt) {
+    const gv = g.gov; if (!gv || !gv.done) return fail('no_claim');
+    if (id === gv.pres && /^[0-3]$/.test(String(txt))) { gv.presClaim = Number(txt); ev(g, { k: 'claim', as: 'pres', who: id, fas: Number(txt) }); return ok(); }
+    if (id === gv.chan && /^[0-2]$/.test(String(txt))) { gv.chanClaim = Number(txt); ev(g, { k: 'claim', as: 'chan', who: id, fas: Number(txt) }); return ok(); }
+    return fail('no_claim');
+  }
+
+  function finish(g, side, why, now) {
+    g.winner = { side, why };
+    ev(g, { k: 'end', side, why });
+    setPhase(g, 'ended', now, 0);
+  }
+
+  // ---------------------------------------------------------------- المؤقت + التخطي (المضيف)
+  function auto(g, now, rng) {
+    rng = rng || RNG;
+    const pick = (a) => a[Math.floor(rng() * a.length)];
+    switch (g.phase) {
+      case 'reveal': return beginNominate(g, now, false);
+      case 'nominate': { const c = alive(g).filter((p) => eligible(g, p)); if (c.length) nominate(g, g.presId, pick(c).id, now); else beginNominate(g, now, true); return; }
+      case 'vote': return resolveVote(g, now);
+      case 'voteResult': if (g.voteResult.pending) { g.voteResult.pending = false; g.deadline = now + 2500; return; } return afterVote(g, now, rng);
+      case 'pres': return presDiscard(g, g.presId, Math.floor(rng() * g.drawn.length), now);
+      case 'chan': return chanEnact(g, g.chanId, Math.floor(rng() * g.chanCards.length), now, rng);
+      case 'veto': return vetoReply(g, g.presId, false, now, rng);
+      case 'enacted': if (g.enacted.pending) { g.enacted.pending = false; g.deadline = now + 2500; return; } return afterEnact(g, now);
+      case 'power': {
+        const pw = g.power; if (!pw) return beginNominate(g, now, true);
+        if (pw.done) return beginNominate(g, now, true);
+        if (pw.kind === 'peek') return usePower(g, g.presId, null, now);
+        const c = alive(g).filter((p) => p.id !== g.presId && !(pw.kind === 'investigate' && g.investigated[p.id]));
+        if (!c.length) return beginNominate(g, now, true);
+        return usePower(g, g.presId, pick(c).id, now);
+      }
+    }
+  }
+  function tick(g, now, rng) {
+    let changed = false;
+    if (g.phase === 'voteResult' && g.voteResult && g.voteResult.pending && now >= g.voteResult.revealAt) { g.voteResult.pending = false; changed = true; }
+    if (g.phase === 'enacted' && g.enacted && g.enacted.pending && now >= g.enacted.revealAt) { g.enacted.pending = false; changed = true; }
+    if (g.deadline && now >= g.deadline && g.phase !== 'lobby' && g.phase !== 'ended') { auto(g, now, rng); changed = true; }
+    return changed;
+  }
+  function skip(g, id, now, rng) {
+    if (g.hostId !== id) return fail('not_host');
+    if (g.phase === 'lobby' || g.phase === 'ended') return fail('bad_phase');
+    auto(g, now, rng); return ok();
+  }
+  function reset(g, id) {
+    if (g.hostId !== id) return fail('not_host'); if (g.phase !== 'ended') return fail('bad_phase');
+    g.players = g.players.filter((p) => p.connected);
+    if (!g.players.some((p) => p.id === g.hostId)) g.hostId = g.players.length ? g.players[0].id : null;
+    g.players.forEach((p) => { p.role = null; p.party = null; p.alive = true; });
+    Object.assign(g, { phase: 'lobby', round: 0, deadline: null, timerTotal: null, winner: null, voteResult: null, enacted: null, power: null, gov: null, events: [], ready: {} });
+    return ok();
+  }
+
+  // كل أفعال اللعب من مكان واحد (الخادم يمرّر الرسالة كما هي)
+  function act(g, id, m, now, rng) {
+    switch (m.a) {
+      case 'ready': return ready(g, id, now);
+      case 'nominate': return nominate(g, id, m.target, now);
+      case 'vote': return vote(g, id, m.target, now);
+      case 'discard': return presDiscard(g, id, m.i, now);
+      case 'enact': return chanEnact(g, id, m.i, now, rng);
+      case 'vetoAsk': return vetoAsk(g, id, now);
+      case 'vetoReply': return vetoReply(g, id, m.on === true, now, rng);
+      case 'power': return usePower(g, id, m.target, now);
+      case 'powerDone': return powerDone(g, id, now);
+      case 'claim': return claim(g, id, m.v);
+      case 'settings': return setSettings(g, id, m.patch || {});
+      case 'skip': return skip(g, id, now, rng);
+      case 'reset': return reset(g, id);
+      case 'again': { const r = reset(g, id); if (!r.ok) return r; return start(g, id, now, rng); }
+    }
+    return fail('bad_action');
+  }
+
+  // ---------------------------------------------------------------- العرض (كل لاعب يشوف اللي يخصه فقط)
+  function viewFor(g, pid, now) {
+    const me = pid ? byId(g, pid) : null, ended = g.phase === 'ended';
+    const vr = g.voteResult, showVotes = g.phase === 'voteResult' && vr && !vr.pending;
+    const players = g.players.map((p) => ({
+      id: p.id, name: p.name, color: p.color, connected: p.connected, host: p.id === g.hostId, alive: p.alive,
+      ready: !!g.ready[p.id],
+      voted: g.phase === 'vote' ? !!g.votes[p.id] : undefined,
+      vote: showVotes ? vr.votes[p.id] || null : null,
+      notLeader: !!g.notLeader[p.id], investigated: !!g.investigated[p.id],
+      eligible: g.phase === 'nominate' ? eligible(g, p) : undefined,
+      termLimited: p.alive && (p.id === g.lastChanId || (alive(g).length > 5 && p.id === g.lastPresId)),
+      role: ended ? p.role : null
+    }));
+    const v = {
+      now, code: g.code, phase: g.phase, round: g.round, settings: g.settings, untimed: !g.settings.actSec, deadline: g.deadline, timerTotal: g.timerTotal,
+      minPlayers: MIN_PLAYERS, maxPlayers: MAX_PLAYERS, need: need(g), players, aliveCount: alive(g).length,
+      dist: DIST[Math.max(5, Math.min(60, g.phase === 'lobby' ? g.players.length : g.nPlayers))], nPlayers: g.phase === 'lobby' ? g.players.length : g.nPlayers,
+      powers: powersFor(Math.max(5, g.phase === 'lobby' ? g.players.length : g.nPlayers)),
+      lib: g.lib, fas: g.fas, tracker: g.tracker, vetoOn: g.vetoOn, deckCount: g.deck.length, discardCount: g.discard.length,
+      presId: g.presId, nomId: g.nomId, chanId: g.chanId, lastPresId: g.lastPresId, lastChanId: g.lastChanId,
+      votedCount: g.phase === 'vote' ? Object.keys(g.votes).length : 0,
+      voteResult: vr && g.phase === 'voteResult' ? (vr.pending ? { pres: vr.pres, nom: vr.nom, pending: true, revealAt: vr.revealAt } : { pres: vr.pres, nom: vr.nom, ja: vr.ja, nein: vr.nein, passed: vr.passed, pending: false }) : null,
+      enacted: g.enacted && g.phase === 'enacted' ? (g.enacted.pending ? { pending: true, chaos: g.enacted.chaos, revealAt: g.enacted.revealAt } : Object.assign({}, g.enacted, { revealAt: undefined })) : null,
+      power: g.power && g.phase === 'power' ? { kind: g.power.kind, pres: g.power.pres, done: g.power.done, target: g.power.kind === 'investigate' || g.power.kind === 'kill' || g.power.kind === 'special' ? g.power.target : null, leader: false } : null,
+      vetoAsked: g.phase === 'veto',
+      gov: g.gov ? { round: g.gov.round, pres: g.gov.pres, chan: g.gov.chan, presClaim: g.gov.presClaim, chanClaim: g.gov.chanClaim, done: g.gov.done } : null,
+      events: g.events.slice(-30), winner: g.winner
+    };
+    if (me) {
+      const mv = { id: me.id, host: me.id === g.hostId, alive: me.alive, role: me.role, party: me.party, ready: !!g.ready[me.id], team: [] };
+      if (me.role === 'fascist' || (me.role === 'leader' && g.nPlayers <= 6)) mv.team = g.players.filter((p) => p.id !== me.id && p.party === 'fascist').map((p) => ({ id: p.id, role: p.role }));
+      if (g.phase === 'vote') mv.myVote = g.votes[me.id] || null;
+      if (g.phase === 'pres' && me.id === g.presId) mv.drawn = g.drawn.slice();
+      if ((g.phase === 'chan' || g.phase === 'veto') && me.id === g.chanId) { mv.chanCards = g.chanCards.slice(); mv.canVeto = g.vetoOn && !g.vetoRefused && g.phase === 'chan'; }
+      if (g.phase === 'power' && g.power && me.id === g.presId) { if (g.power.kind === 'peek') mv.peek = g.power.peek; if (g.power.kind === 'investigate' && g.power.done) mv.investigation = { target: g.power.target, party: g.power.result }; }
+      mv.notes = (g.notes[me.id] || []).slice();
+      if (g.gov && g.gov.done) { if (me.id === g.gov.pres) mv.claimAs = 'pres'; else if (me.id === g.gov.chan) mv.claimAs = 'chan'; }
+      v.me = mv;
+    }
+    return v;
+  }
+
+  return {
+    ROLES, PARTY_NAME, POWER_NAME, DIST, FIXED, ACT_OPTIONS, MIN_PLAYERS, MAX_PLAYERS, DEFAULT_SETTINGS, powersFor,
+    createGame, join, leave, kick, setConnected, setSettings, need, start, ready, nominate, vote, presDiscard, chanEnact, vetoAsk, vetoReply,
+    usePower, powerDone, claim, skip, reset, tick, act, viewFor, byId, eligible
+  };
+});
+
+</script>
+<script>/* sh/icons.js */
+/* ديوانية بلس — المستشار السري: أيقونات مرسومة (بدون إيموجي وبدون ملامح وجوه) */
+(function (root) {
+  'use strict';
+  const S = (vb, inner) => '<svg viewBox="' + vb + '" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' + inner + '</svg>';
+  const I = {
+    // حمامة (النزهاء)
+    liberal: (c) => S('0 0 100 100', '<circle cx="50" cy="50" r="48" fill="' + (c || '#0b3a5e') + '"/><circle cx="50" cy="50" r="44" fill="none" stroke="#7dd3fc" stroke-width="2.5" opacity=".7"/>' +
+      '<path d="M22 58c10-2 18-8 24-18 3-6 8-10 15-10 6 0 10 4 11 9l9 3-9 3c-1 10-8 19-19 23-9 3-21 1-31-10z" fill="#e6f6ff"/>' +
+      '<path d="M40 52c-6-10-6-21 2-30 4 9 7 17 6 26z" fill="#bfe6ff"/><circle cx="64" cy="38" r="2.3" fill="#0b3a5e"/>' +
+      '<path d="M30 70c8 2 14 2 20 0" stroke="#7dd3fc" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M73 49c4 2 8 2 11 1" stroke="#34d399" stroke-width="3" stroke-linecap="round"/><ellipse cx="82" cy="47" rx="4" ry="2" fill="#34d399"/>'),
+    // غراب أسود على أحمر (الفاسدين)
+    fascist: (c) => S('0 0 100 100', '<circle cx="50" cy="50" r="48" fill="' + (c || '#5a0f18') + '"/><circle cx="50" cy="50" r="44" fill="none" stroke="#ff8a8e" stroke-width="2.5" opacity=".7"/>' +
+      '<path d="M20 66c8-14 20-24 34-28l6-12c6-2 12 1 14 6l10 2-9 5c0 14-8 26-22 31-12 4-25 2-33-4z" fill="#14060b"/>' +
+      '<path d="M34 60c6-12 14-18 24-20-4 8-10 16-24 20z" fill="#3a0e18"/><circle cx="67" cy="31" r="2.5" fill="#e5484d"/>' +
+      '<path d="M44 72l-4 10M54 72l2 10" stroke="#14060b" stroke-width="4" stroke-linecap="round"/>'),
+    // الزعيم: ظل شخص بقبعة عسكرية، بدون ملامح
+    leader: (c) => S('0 0 100 100', '<circle cx="50" cy="50" r="48" fill="' + (c || '#2a0a12') + '"/><circle cx="50" cy="50" r="44" fill="none" stroke="#f2c14e" stroke-width="2.5" opacity=".8"/>' +
+      '<path d="M18 96c2-18 14-28 32-28s30 10 32 28z" fill="#3a3a44"/><path d="M42 68h16l-8 14z" fill="#e5484d"/>' +
+      '<ellipse cx="50" cy="46" rx="15" ry="18" fill="#c99a78"/><path d="M33 34c2-10 9-14 17-14s15 4 17 14z" fill="#2a2a32"/><path d="M28 36c8-4 36-4 44 0-2 4-40 4-44 0z" fill="#16161c"/>' +
+      '<circle cx="50" cy="27" r="3" fill="#f2c14e"/>'),
+    // الرئيس: تاج من غصن
+    pres: () => S('0 0 100 100', '<path d="M18 70l6-38 16 18 10-26 10 26 16-18 6 38z" fill="#f2c14e" stroke="#7a5200" stroke-width="3" stroke-linejoin="round"/><rect x="18" y="70" width="64" height="10" rx="4" fill="#d9a21e"/><circle cx="50" cy="22" r="5" fill="#fff6dc"/>'),
+    // المستشار: وسام
+    chan: () => S('0 0 100 100', '<path d="M34 6h12l10 34H44z" fill="#2b6cd9"/><path d="M66 6H54L44 40h12z" fill="#e5484d"/><circle cx="50" cy="62" r="28" fill="#cfd6e8" stroke="#6b7395" stroke-width="3"/><path d="M50 44l5 11 12 1-9 8 3 12-11-6-11 6 3-12-9-8 12-1z" fill="#6b7395"/>'),
+    // قدرات
+    investigate: () => S('0 0 100 100', '<circle cx="42" cy="42" r="24" fill="none" stroke="currentColor" stroke-width="9"/><path d="M60 60l22 22" stroke="currentColor" stroke-width="11" stroke-linecap="round"/>'),
+    peek: () => S('0 0 100 100', '<path d="M6 50c12-20 28-30 44-30s32 10 44 30c-12 20-28 30-44 30S18 70 6 50z" fill="none" stroke="currentColor" stroke-width="7"/><circle cx="50" cy="50" r="13" fill="currentColor"/>'),
+    special: () => S('0 0 100 100', '<rect x="18" y="30" width="64" height="52" rx="6" fill="none" stroke="currentColor" stroke-width="7"/><path d="M36 18h28v18H36z" fill="currentColor"/><path d="M36 58l10 10 20-22" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>'),
+    kill: () => S('0 0 100 100', '<circle cx="50" cy="50" r="30" fill="none" stroke="currentColor" stroke-width="7"/><circle cx="50" cy="50" r="7" fill="currentColor"/><path d="M50 8v22M50 70v22M8 50h22M70 50h22" stroke="currentColor" stroke-width="7" stroke-linecap="round"/>'),
+    win: () => S('0 0 100 100', '<path d="M26 14h48v18c0 16-10 28-24 30-14-2-24-14-24-30z" fill="currentColor"/><path d="M26 22H12c0 14 6 22 16 24M74 22h14c0 14-6 22-16 24" fill="none" stroke="currentColor" stroke-width="6"/><rect x="44" y="60" width="12" height="16" fill="currentColor"/><rect x="30" y="76" width="40" height="10" rx="3" fill="currentColor"/>'),
+    veto: () => S('0 0 100 100', '<circle cx="50" cy="50" r="36" fill="none" stroke="currentColor" stroke-width="9"/><path d="M25 75L75 25" stroke="currentColor" stroke-width="9" stroke-linecap="round"/>'),
+    skull: () => S('0 0 100 100', '<path d="M50 12c-22 0-36 14-36 34 0 12 6 20 14 25v13h44V71c8-5 14-13 14-25 0-20-14-34-36-34z" fill="currentColor"/><circle cx="37" cy="47" r="9" fill="#14060b"/><circle cx="63" cy="47" r="9" fill="#14060b"/><path d="M46 64h8l-4-8z" fill="#14060b"/>')
+  };
+  // بطاقة سياسة كاملة (للجوال والتلفزيون)
+  function card(kind, label) {
+    const L = kind === 'liberal';
+    return '<div class="pcard ' + (L ? 'lib' : 'fas') + '"><span class="pk">' + (L ? 'نزيهة' : 'فاسدة') + '</span><span class="pi">' + (L ? I.liberal('#0a2f4d') : I.fascist('#3a0a12')) + '</span><span class="pn">' + (label || (L ? 'سياسة نزيهة' : 'سياسة فاسدة')) + '</span></div>';
+  }
+  root.SHIcons = { svg: (n, c) => (I[n] ? I[n](c) : ''), card };
+})(typeof self !== 'undefined' ? self : this);
+
+</script>
+<script>/* sh/help.js */
+/* ديوانية بلس — المستشار السري: شرح اللعبة (نفس النص للجوال وشاشة التلفزيون) */
+(function (root) {
+  'use strict';
+  const SECTIONS = [
+    { id: 'idea', short: 'الفكرة', title: 'فكرة اللعبة', kind: 'list',
+      lead: 'برلمان فيه فريقين سريين. كل واحد ياخذ بطاقته بجواله، وما أحد يعرف بطاقة غيره.',
+      points: [
+        'النزهاء: هم الأكثرية، بس ما يعرفون بعض ولا يعرفون أحد.',
+        'الفاسدين: قلّة، يعرفون بعض ويعرفون مين الزعيم السري، ويتظاهرون إنهم نزهاء.',
+        'الزعيم السري: مع الفاسدين. في لعبة ٥–٦ لاعبين يعرف زميله الفاسد، وفي ٧–١٠ ما يعرف أحد.',
+        'كل جولة تنتخبون حكومة (رئيس ومستشار) تعتمد سياسة: زرقاء (نزيهة) أو حمراء (فاسدة).',
+        'الكومة فيها ١٧ سياسة: ٦ زرقاء و١١ حمراء… يعني الحمراء تطلع كثير، والكذب سهل!'
+      ] },
+    { id: 'round', short: 'الجولة', title: 'كيف تمشي الجولة؟', kind: 'steps',
+      steps: [
+        { h: 'الرئيس يرشّح مستشار', t: 'الرئاسة تدور على اللاعبين بالترتيب. الرئيس يختار مستشار من جواله. ممنوع يرشّح آخر مستشار انتخب، ولا آخر رئيس انتخب (إذا الأحياء أكثر من ٥).' },
+        { h: 'الكل يصوّت: نعم أو لا', t: 'تناقشوا براحتكم، وبعدها كل واحد يصوّت بجواله بسرية. الأصوات تنكشف كلها مرة وحدة على الشاشة. التعادل = رفض.' },
+        { h: 'الرئيس يستبعد بطاقة', t: 'لو نجحت الحكومة، الرئيس يشوف ٣ سياسات بجواله، يستبعد وحدة، ويمرر ثنتين للمستشار.' },
+        { h: 'المستشار يعتمد بطاقة', t: 'المستشار يشوف الثنتين بجواله ويعتمد وحدة، وتنكشف على الشاشة. بعدها كل واحد منهم يقدر يقول «وش جاني» من جواله، وصادق أو كذّاب… هذا شغلكم!' },
+        { h: 'لو رفضتوا ٣ مرات ورا بعض', t: 'البلد تدخل فوضى: تنعتمد السياسة اللي فوق الكومة تلقائياً بدون أي قدرة، ويتصفّر العداد وتنمسح حدود الترشيح.' }
+      ] },
+    { id: 'powers', short: 'القدرات', title: 'قدرات الرئيس (اللوحة الحمراء)', kind: 'list',
+      lead: 'بعض الخانات الحمراء تعطي الرئيس قدرة لازم ينفّذها قبل الجولة الجاية:',
+      points: [
+        'فحص ولاء: يشوف بجواله حزب لاعب (نزيه أو فاسد فقط — ما يعرف إذا هو الزعيم السري). وله يقول الصدق أو يكذب.',
+        'كشف ٣ سياسات: يشوف بجواله أول ٣ بطاقات بالكومة.',
+        'انتخابات خاصة: يختار الرئيس الجاي بنفسه، وبعدها ترجع الرئاسة لدورها الطبيعي.',
+        'إعدام: يطلّع لاعب من اللعبة. لو كان الزعيم السري يفوز النزهاء فوراً. ولو ما كان، ما ينكشف وش هو.',
+        'الفيتو (بعد ٥ حمراء): المستشار يقدر يطلب يلغي البطاقتين، ولو وافق الرئيس تنلغي ويتحرك عداد الفوضى خطوة.'
+      ],
+      note: '٥–٦ لاعبين: كشف ٣ (الثالثة) وإعدام (الرابعة والخامسة) · ٧–٨: فحص (الثانية)، انتخابات خاصة (الثالثة)، إعدام (الرابعة والخامسة) · ٩–١٠: فحص (الأولى والثانية)، انتخابات خاصة (الثالثة)، إعدام (الرابعة والخامسة).' },
+    { id: 'win', short: 'الفوز', title: 'مين يفوز؟', kind: 'list',
+      points: [
+        'النزهاء: إذا اعتمدوا ٥ سياسات زرقاء، أو أعدموا الزعيم السري.',
+        'الفاسدين: إذا اعتمدوا ٦ سياسات حمراء، أو انتخب الزعيم السري مستشار بعد ما يصير فيه ٣ حمراء أو أكثر.',
+        'منطقة الخطر: بعد ٣ حمراء، أي مستشار ينتخب وما كان الزعيم السري يطلع عليه «مو الزعيم السري» على الشاشة.'
+      ] },
+    { id: 'phones', short: 'الجوالات والشاشة', title: 'الجوالات وشاشة التلفزيون', kind: 'steps',
+      steps: [
+        { h: 'المضيف ينشئ الغرفة', t: 'من جواله. ويفتح «شاشة الطاولة» على التلفزيون أو الآيباد من الرابط اللي يطلع له.' },
+        { h: 'الباقين يمسحون الـQR', t: 'من الشاشة أو من جوال المضيف، ويكتبون أسماءهم. من ٥ إلى ٦٠ لاعباً.' },
+        { h: 'البطاقات السرية بالجوال فقط', t: 'التلفزيون ما يعرض أي دور ولا أي بطاقة سرية. يعرض اللوحات والتصويت والنتائج، والراوي يعلن كل شي.' },
+        { h: 'الوقت', t: 'اختاروا «بدون وقت» وتمشون على راحتكم، أو حطوا وقت لكل قرار. لو خلص الوقت: اللي ما صوّت ينحسب «لا»، والقرارات الثانية تنختار عشوائياً. والمضيف يقدر يتخطى أي مرحلة.' },
+        { h: 'لو طفى جوالك', t: 'افتح الرابط من جديد وترجع لمكانك ودورك تلقائياً.' }
+      ] }
+  ];
+  root.SHHelp = { SECTIONS };
+})(typeof self !== 'undefined' ? self : this);
+
+</script>
+<script>/* sh/board.js */
+/* ديوانية بلس — المستشار السري: شاشة الطاولة (للتلفزيون). تتصل كمراقب (t:'board') وما تشوف أي دور أو بطاقة سرية.
+ *   SHBoard.mount(element, { code?, WS? }) -> { fit, enableSound, destroy }
+ * الصوت والراوي من audio.js (MafiaAudio). كل المقاسات بوحدة em على مسرح 160×90 (١٦:٩).
+ */
+(function (root) {
+  'use strict';
+  const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const AR = (n) => String(n).replace(/\d/g, (d) => '٠١٢٣٤٥٦٧٨٩'[d]);
+  const W = 160;
+  const POWER = { investigate: 'فحص ولاء', peek: 'كشف ٣ سياسات', special: 'انتخابات خاصة', kill: 'إعدام' };
+  const WHY = { five_liberal: 'اعتمدوا ٥ سياسات نزيهة', six_fascist: 'اعتمدوا ٦ سياسات فاسدة', leader_elected: 'انتخب الزعيم السري مستشاراً بعد ٣ سياسات فاسدة', leader_killed: 'انعدم الزعيم السري' };
+  const CSS = `
+.shb{position:fixed;inset:0;overflow:hidden;color:#fff;direction:rtl;font-family:-apple-system,"SF Arabic","Segoe UI",Tajawal,Cairo,system-ui,sans-serif;background:radial-gradient(120% 90% at 70% 0%,#2b2290,#0b0a2e 70%);transition:background .8s;-webkit-user-select:none;user-select:none}
+.shb[data-tone=red]{background:radial-gradient(120% 90% at 50% 0%,#6b1424,#12040a 75%)}
+.shb[data-tone=blue]{background:radial-gradient(120% 90% at 50% 0%,#145a7a,#07141f 75%)}
+.shb[data-tone=vote]{background:radial-gradient(120% 90% at 50% 0%,#4a2a8a,#120a30 75%)}
+.shb .stage{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%)}
+.shb .hd{position:absolute;left:3em;right:3em;top:2.2em;height:7em;display:flex;align-items:center;gap:2em}
+.shb .ttl{font-size:3.6em;font-weight:900}
+.shb .ttl b{color:#f2c14e}
+.shb .pill{font-size:2.2em;font-weight:800;padding:.3em .9em;border-radius:99em;background:rgba(255,255,255,.1);border:.06em solid rgba(255,255,255,.2)}
+.shb .sp{flex:1}
+.shb .tmr{font-size:3.4em;font-weight:900;font-variant-numeric:tabular-nums;color:#ffd978}
+.shb .mq{display:flex;align-items:center;gap:1em;background:rgba(255,255,255,.08);border-radius:1.2em;padding:.5em .9em}
+.shb .mq .q{width:6em;height:6em;background:#fff;border-radius:.6em;padding:.3em}.shb .mq .q svg{width:100%;height:100%}
+.shb .mq b{font-size:3em;letter-spacing:.15em}
+.shb .tracks{position:absolute;left:4em;right:4em;top:11em;display:flex;flex-direction:column;gap:1.4em}
+.shb .trk{display:flex;align-items:center;gap:1em;padding:1em 1.4em;border-radius:1.6em}
+.shb .trk.l{background:linear-gradient(90deg,rgba(14,80,130,.55),rgba(8,40,70,.4));border:.15em solid rgba(56,189,248,.55)}
+.shb .trk.f{background:linear-gradient(90deg,rgba(130,20,36,.55),rgba(60,8,18,.4));border:.15em solid rgba(229,72,77,.55)}
+.shb .trk .lb{width:14em;font-size:2.4em;font-weight:900;line-height:1.2}.shb .trk .lb small{display:block;font-size:.55em;font-weight:700;opacity:.8}
+.shb .trk .lb{width:6.4em}
+.shb .slot{flex:1;height:11em;border-radius:1em;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5em;border:.18em dashed;position:relative;transition:transform .5s}
+.shb .trk.l .slot{border-color:rgba(125,211,252,.5);color:#bfe6ff}.shb .trk.f .slot{border-color:rgba(255,160,160,.5);color:#ffc4c6}
+.shb .slot .ic{width:4.6em;height:4.6em;color:inherit}.shb .slot .ic svg{width:100%;height:100%}
+.shb .slot span{font-size:1.7em;font-weight:800;text-align:center;line-height:1.15}
+.shb .slot.on{border-style:solid;color:#fff}
+.shb .trk.l .slot.on{background:linear-gradient(160deg,#38bdf8,#1b6fae 60%,#0a2f4d);border-color:#bfe9ff;box-shadow:0 0 2em rgba(56,189,248,.6)}
+.shb .trk.f .slot.on{background:linear-gradient(160deg,#ff6b6f,#b4232a 60%,#3a0a12);border-color:#ffc4c6;box-shadow:0 0 2em rgba(229,72,77,.6)}
+.shb .slot.new{animation:drop .7s cubic-bezier(.2,1.3,.4,1) both}
+@keyframes drop{0%{transform:translateY(-3em) scale(.7) rotate(-6deg);opacity:0}100%{transform:none;opacity:1}}
+.shb .slot.on .ic{width:6em;height:6em}
+.shb .meta{display:flex;align-items:center;gap:1.6em;font-size:2.1em;font-weight:800;color:#cfd6ff;padding:0 .6em}
+.shb .meta i{display:inline-block;width:1.1em;height:1.1em;border-radius:50%;border:.15em solid rgba(255,255,255,.45);vertical-align:middle;margin:0 .15em}
+.shb .meta i.on{background:#f2c14e;border-color:#f2c14e}.shb .meta i.c.on{background:#e5484d;border-color:#e5484d}
+.shb .meta .tg{padding:.15em .7em;border-radius:99em;background:#e5484d;color:#fff}.shb .meta .tg.g{background:#f2c14e;color:#2b1c00}
+.shb .core{position:absolute;left:4em;right:4em;top:50.5em;height:15.5em;display:flex;align-items:center;justify-content:center;text-align:center;flex-direction:column;gap:.5em}
+.shb .big{font-size:5.2em;font-weight:900;line-height:1.15;text-shadow:0 .1em .6em rgba(0,0,0,.5)}
+.shb .sub{font-size:2.6em;color:#cfd6ff;font-weight:700}
+.shb .gold{color:#ffd978}.shb .red{color:#ff8a8e}.shb .blue{color:#7dd3fc}
+.shb .dots3{display:inline-flex;gap:.6em;margin-inline-start:.4em}.shb .dots3 i{width:.4em;height:.4em;border-radius:50%;background:#f2c14e;animation:blk 1.2s infinite}.shb .dots3 i:nth-child(2){animation-delay:.25s}.shb .dots3 i:nth-child(3){animation-delay:.5s}
+@keyframes blk{50%{opacity:.2}}
+.shb .pc{width:9em;height:12.6em;border-radius:1em;display:flex;flex-direction:column;align-items:center;justify-content:space-around;border:.25em solid;animation:flip .8s ease both}
+.shb .pc.lib{background:linear-gradient(160deg,#38bdf8,#1b6fae 60%,#0a2f4d);border-color:#bfe9ff}.shb .pc.fas{background:linear-gradient(160deg,#ff6b6f,#b4232a 60%,#3a0a12);border-color:#ffc4c6}
+.shb .pc .ic{width:6em;height:6em}.shb .pc .ic svg{width:100%;height:100%}.shb .pc b{font-size:1.6em}
+.shb .pc.bk{background:repeating-linear-gradient(45deg,rgba(242,193,78,.2) 0 1em,rgba(242,193,78,.06) 1em 2em);border-color:#f2c14e;animation:wob 1s ease-in-out infinite}
+@keyframes flip{0%{transform:rotateY(90deg) scale(.8)}100%{transform:none}}
+@keyframes wob{50%{transform:rotate(-3deg) scale(1.04)}}
+.shb .row{display:flex;align-items:center;justify-content:center;gap:2.4em}
+.shb .seats{position:absolute;left:3em;right:3em;bottom:4.2em;height:18em;display:flex;align-items:flex-end;justify-content:center;gap:1.2em}
+.shb .seat{width:13.4em;text-align:center;position:relative;transition:opacity .5s,filter .5s}
+.shb .seat .av{width:7.4em;height:7.4em;margin:0 auto;border-radius:50%;display:grid;place-items:center;color:#10122e;font-size:1em;box-shadow:0 .4em 1.2em rgba(0,0,0,.5),0 0 0 .4em rgba(255,255,255,.14);position:relative}
+.shb .seat .av b{font-size:4em}
+.shb .seat .nm{font-size:2.3em;font-weight:800;margin-top:.3em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-shadow:0 .1em .4em rgba(0,0,0,.8)}
+.shb .seat.pres .av{box-shadow:0 0 0 .5em #f2c14e,0 0 2.4em rgba(242,193,78,.8)}
+.shb .seat.chan .av{box-shadow:0 0 0 .5em #38bdf8,0 0 2.4em rgba(56,189,248,.8)}
+.shb .seat.dead{opacity:.35;filter:grayscale(1)}
+.shb .seat.off .nm{color:#9aa0c8}
+.shb .seat .bdg{position:absolute;top:-4.2em;left:50%;transform:translateX(-50%);width:4.6em;height:4.6em;z-index:2}.shb .seat .bdg svg{width:100%;height:100%}
+.shb .seat .tg{display:inline-block;margin-top:.3em;font-size:1.6em;font-weight:900;padding:.1em .6em;border-radius:99em;background:rgba(255,255,255,.12)}
+.shb .seat .tg.ja{background:#0f9a6c}.shb .seat .tg.nein{background:#c0262e}.shb .seat .tg.ok{background:rgba(52,211,153,.25);color:#b6ffe1}.shb .seat .tg.v{background:rgba(242,193,78,.25);color:#ffe7a6}
+.shb .seat .tg.lib{background:#1b6fae}.shb .seat .tg.fas{background:#b4232a}
+.shb .lobby{position:absolute;left:5em;right:5em;top:12em;bottom:5em;display:flex;gap:5em;align-items:center}
+.shb .lobby .qr{width:44em;height:44em;background:#fff;border-radius:2em;padding:1.4em;flex:none}.shb .lobby .qr svg{width:100%;height:100%}
+.shb .lobby .code{font-size:11em;font-weight:900;letter-spacing:.12em;line-height:1;color:#ffd978}
+.shb .chips{display:flex;flex-wrap:wrap;gap:1em;margin-top:2em}
+.shb .chip{font-size:2.6em;font-weight:800;padding:.3em .8em;border-radius:99em;display:flex;align-items:center;gap:.4em;background:rgba(255,255,255,.1)}
+.shb .chip i{width:.8em;height:.8em;border-radius:50%}
+.shb .roles{position:absolute;left:4em;right:4em;top:30em;display:flex;flex-wrap:wrap;justify-content:center;gap:1.6em}
+.shb .gate{position:absolute;inset:0;display:grid;place-items:center;background:rgba(5,5,25,.72);z-index:5}
+.shb .gate .box{text-align:center;background:#1a1560;border:.2em solid #f2c14e;border-radius:2.4em;padding:3em 5em}
+.shb .gate h2{font-size:5em;margin:0}.shb .gate p{font-size:2.4em;color:#cfd6ff}
+.shb .bbtn{display:inline-block;font-size:2.8em;font-weight:900;padding:.4em 1.4em;border-radius:99em;background:#f2c14e;color:#2b1c00;margin:.3em}.shb .bbtn.s{background:rgba(255,255,255,.14);color:#fff}
+.shb .ctl{position:absolute;left:2em;bottom:21em;display:flex;flex-direction:column;gap:.8em;z-index:4}
+.shb .ctl button{width:4.4em;height:4.4em;border-radius:50%;background:rgba(10,10,46,.75);border:.12em solid rgba(255,255,255,.3);color:#fff;font-size:1.6em;font-weight:900;cursor:pointer}
+.shb .ctl button.off{opacity:.4}
+.shb .err{position:absolute;inset:0;display:grid;place-items:center;font-size:4em;font-weight:900}
+.shb .hp{position:absolute;inset:0;background:rgba(8,7,40,.97);z-index:6;padding:5em 8em;display:flex;flex-direction:column;gap:2em}
+.shb .hp h2{font-size:5.4em;margin:0;color:#ffd978}.shb .hp .ls{font-size:3em;line-height:1.7}.shb .hp .ls li{margin-bottom:.4em}
+.shb .hp .nav{margin-top:auto;display:flex;gap:1.4em;justify-content:center}
+.shb .join{position:absolute;left:3em;top:2em}
+`;
+
+  function mount(el, opts) {
+    opts = opts || {};
+    const E = root.SHEngine, I = root.SHIcons, QR = root.M8QR, A = root.MafiaAudio, HELP = root.SHHelp;
+    const ST = { ws: null, open: false, view: null, prev: null, offset: 0, retry: 0, code: /^\d{4}$/.test(String(opts.code || '')) ? String(opts.code) : '', started: false, sfxOn: true, voiceOn: !!(A && A.hasVoiceApi && A.hasVoiceApi()), help: null, pend: [], tickAt: -1, destroyed: false, err: '' };
+    if (!root.document.getElementById('shb-css')) { const s = root.document.createElement('style'); s.id = 'shb-css'; s.textContent = CSS; root.document.head.appendChild(s); }
+    el.innerHTML = '<div class="shb"><div class="stage"></div></div>';
+    const box = el.firstChild, stage = box.firstChild;
+    const wsUrl = () => root.SH_WS_URL || ((root.location.protocol === 'https:' ? 'wss://' : 'ws://') + root.location.host + '/sh/ws');
+    let retryT = 0;
+    function connect() {
+      if (!ST.code || ST.destroyed) { draw(); return; }
+      clearTimeout(retryT); let ws; try { ws = new (opts.WS || root.SHWS || root.WebSocket)(wsUrl()); } catch (e) { return later(); }
+      ST.ws = ws;
+      ws.onopen = () => { if (ST.ws !== ws) return; ST.open = true; ST.retry = 0; ws.send(JSON.stringify({ t: 'board', code: ST.code })); };
+      ws.onmessage = (ev) => { if (ST.ws !== ws) return; let m; try { m = JSON.parse(ev.data); } catch (e) { return; } if (m.t === 'view') { ST.err = ''; ST.prev = ST.view; ST.view = m.view; ST.offset = m.view.now - Date.now(); cues(ST.prev, ST.view); draw(); } else if (m.t === 'err' && m.err === 'no_room') { ST.err = 'ما لقيت الغرفة ' + ST.code; draw(); } };
+      ws.onclose = () => { if (ST.ws !== ws) return; ST.open = false; later(); };
+    }
+    function later() { clearTimeout(retryT); retryT = setTimeout(connect, Math.min(4000, 400 * Math.pow(1.6, ST.retry++))); }
+
+    // ------------------------------------------------------------ الصوت والراوي
+    const later_ = (ms, fn) => { ST.pend.push(setTimeout(() => { if (!ST.destroyed) fn(); }, ms)); };
+    const clearPend = () => { ST.pend.forEach(clearTimeout); ST.pend = []; };
+    const sfx = (n, p) => { if (ST.started && ST.sfxOn && A) A.play(n, p); };
+    const say = (t) => { if (ST.started && ST.voiceOn && A) A.say(t); };
+    const N = (v, id) => { const p = v.players.find((x) => x.id === id); return p ? p.name : ''; };
+    function cues(prev, v) {
+      if (!ST.started) return;
+      const ph = v.phase, pph = prev && prev.phase, fresh = !prev || pph !== ph || prev.round !== v.round;
+      if (!fresh) {
+        if (ph === 'lobby' && prev && v.players.length > prev.players.length) sfx('pop');
+        if (ph === 'vote' && prev && v.votedCount > prev.votedCount) sfx('blip');
+        if (ph === 'voteResult' && prev && prev.voteResult && prev.voteResult.pending && v.voteResult && !v.voteResult.pending) voteCue(v);
+        if (ph === 'enacted' && prev && prev.enacted && prev.enacted.pending && v.enacted && !v.enacted.pending) enactCue(v);
+        if (ph === 'power' && prev && prev.power && !prev.power.done && v.power && v.power.done) powerDoneCue(v);
+        return;
+      }
+      clearPend(); if (A) A.shutUp();
+      switch (ph) {
+        case 'reveal': sfx('gong'); later_(600, () => say('وُزّعت البطاقات. كل واحد يشوف بطاقته بسرية، ولا أحد يكشف جواله.')); break;
+        case 'nominate': sfx('bell'); later_(500, () => say('الرئيس ' + N(v, v.presId) + '. اختر مستشارك.')); break;
+        case 'vote': sfx('pop'); later_(400, () => say(N(v, v.presId) + ' رشّح ' + N(v, v.nomId) + '. صوّتوا بجوالاتكم: نعم أو لا.' + (v.fas >= 3 ? ' وانتبهوا… لو طلع الزعيم السري، تنتهي اللعبة.' : ''))); break;
+        case 'voteResult': later_(200, () => say('انتهى التصويت… والنتيجة…')); later_(900, () => sfx('heart', { beats: 3, bpm: 70 })); later_(3600, () => sfx('drum')); if (v.voteResult && !v.voteResult.pending) voteCue(v); break;
+        case 'pres': later_(300, () => say('نجحت الحكومة. الرئيس يشوف ثلاث سياسات بسرية، ويستبعد وحدة.')); break;
+        case 'chan': if (pph === 'veto') later_(200, () => say('الرئيس رفض الفيتو. لازم المستشار يعتمد وحدة.')); else later_(200, () => say('المستشار يختار السياسة.')); break;
+        case 'veto': sfx('gavel'); later_(400, () => say('المستشار طلب الفيتو! القرار عند الرئيس.')); break;
+        case 'enacted': later_(150, () => say(v.enacted && v.enacted.chaos ? 'ثلاث حكومات سقطت… فوضى! تنعتمد السياسة اللي فوق الكومة.' : 'وانعتمدت…')); later_(800, () => sfx('heart', { beats: 3, bpm: 76 })); later_(3300, () => sfx('drum')); break;
+        case 'power': { const k = v.power && v.power.kind; sfx(k === 'kill' ? 'evil' : 'chime'); later_(500, () => say(k === 'kill' ? 'قدرة الإعدام. الرئيس يختار مين يطلع من اللعبة.' : k === 'investigate' ? 'قدرة فحص الولاء. الرئيس يشوف حزب لاعب بسرية.' : k === 'peek' ? 'الرئيس يشوف أول ثلاث بطاقات بالكومة بسرية.' : 'انتخابات خاصة. الرئيس يختار الرئيس الجاي.')); if (v.power && v.power.done) powerDoneCue(v); break; }
+        case 'ended': { const w = v.winner || {}; sfx(w.side === 'liberal' ? 'fanfare' : 'evil'); later_(900, () => say((w.side === 'liberal' ? 'انتهت اللعبة. فاز النزهاء! ' : 'انتهت اللعبة. فاز الفاسدين… ') + (WHY[w.why] || '') + '.')); break; }
+      }
+    }
+    function voteCue(v) { const r = v.voteResult; sfx('gavel'); later_(500, () => say(r.passed ? 'نجحت الحكومة. ' + AR(r.ja) + ' نعم، و' + AR(r.nein) + ' لا.' : 'سقطت الحكومة. ' + AR(r.ja) + ' نعم، و' + AR(r.nein) + ' لا.' + (v.tracker === 2 ? ' وانتبهوا: رفض واحد بعد، وتصير فوضى.' : ''))); }
+    function enactCue(v) { const e = v.enacted; sfx(e.card === 'liberal' ? 'chime' : 'evil'); later_(700, () => say(e.card === 'liberal' ? 'سياسة نزيهة.' : 'سياسة فاسدة.' + (e.power ? ' والرئيس حصل على قدرة: ' + POWER[e.power] + '.' : ''))); }
+    function powerDoneCue(v) { const p = v.power; if (p.kind === 'kill') { sfx('gun'); later_(700, () => say('تم إعدام ' + N(v, p.target) + '. وما كان الزعيم السري.')); } else if (p.kind === 'investigate') { sfx('blip'); later_(300, () => say('الرئيس فحص ولاء ' + N(v, p.target) + '.')); } }
+
+    // ------------------------------------------------------------ الرسم
+    const remaining = (v) => (v.deadline ? Math.max(0, v.deadline - (Date.now() + ST.offset)) : 0);
+    const fmt = (ms) => { const s = Math.ceil(ms / 1000); return AR(Math.floor(s / 60)) + ':' + AR(String(s % 60).padStart(2, '0')); };
+    const av = (p) => '<div class="av" style="background:' + p.color + '"><b>' + esc(p.name.charAt(0)) + '</b></div>';
+    function qrSvg(v) { const link = (root.location.origin + root.location.pathname) + '?room=' + v.code; try { return QR.toSvg(link, { ecc: 'M', border: 1 }); } catch (e) { return ''; } }
+    function tracks(v) {
+      let l = '', f = '';
+      const nw = ST.prev && (ST.prev.lib !== v.lib || ST.prev.fas !== v.fas);
+      for (let i = 1; i <= 5; i++) { const on = i <= v.lib; l += '<div class="slot ' + (on ? 'on' : '') + (on && nw && i === v.lib ? ' new' : '') + '">' + (on ? '<div class="ic">' + I.svg('liberal', 'transparent') + '</div>' : (i === 5 ? '<div class="ic">' + I.svg('win') + '</div><span>فوز</span>' : '<span>' + AR(i) + '</span>')) + '</div>'; }
+      for (let j = 1; j <= 6; j++) { const on = j <= v.fas, pw = v.powers[j]; f += '<div class="slot ' + (on ? 'on' : '') + (on && nw && j === v.fas ? ' new' : '') + '">' + (on ? '<div class="ic">' + I.svg('fascist', 'transparent') + '</div>' : (j === 6 ? '<div class="ic">' + I.svg('win') + '</div><span>فوز</span>' : pw ? '<div class="ic">' + I.svg(pw) + '</div><span>' + POWER[pw] + '</span>' : '<span>' + AR(j) + '</span>')) + '</div>'; }
+      let tr = ''; for (let k = 1; k <= 3; k++) tr += '<i class="' + (k === 3 ? 'c ' : '') + (k <= v.tracker ? 'on' : '') + '"></i>';
+      return '<div class="tracks"><div class="trk l"><div class="lb blue">نزيهة<small>٥ = فوز</small></div>' + l + '</div><div class="trk f"><div class="lb red">فاسدة<small>٦ = فوز</small></div>' + f + '</div>' +
+        '<div class="meta"><span>عداد الفوضى ' + tr + '</span><span>الكومة: ' + AR(v.deckCount) + '</span><span>المستبعدة: ' + AR(v.discardCount) + '</span><span class="sp"></span>' + (v.fas >= 3 ? '<span class="tg g">منطقة الزعيم السري</span>' : '') + (v.vetoOn ? '<span class="tg">الفيتو مفتوح</span>' : '') + '</div></div>';
+    }
+    function seats(v) {
+      const vr = v.voteResult && !v.voteResult.pending;
+      return '<div class="seats">' + v.players.map((p) => {
+        const isP = p.id === v.presId && v.phase !== 'ended', isC = (p.id === v.chanId || p.id === v.nomId) && v.phase !== 'ended';
+        let tag = '';
+        if (v.phase === 'ended') tag = '<span class="tg ' + (p.role === 'liberal' ? 'lib' : 'fas') + '">' + (p.role === 'leader' ? 'الزعيم السري' : p.role === 'fascist' ? 'فاسد' : 'نزيه') + '</span>';
+        else if (v.phase === 'vote' && p.alive) tag = p.voted ? '<span class="tg v">صوّت</span>' : '';
+        else if (vr && p.vote) tag = '<span class="tg ' + (p.vote === 'ja' ? 'ja' : 'nein') + '">' + (p.vote === 'ja' ? 'نعم' : p.vote === 'nein' ? 'لا' : 'ما صوّت') + '</span>';
+        else if (!p.alive) tag = '<span class="tg">انعدم</span>';
+        else if (p.notLeader) tag = '<span class="tg ok">مو الزعيم السري</span>';
+        else if (v.phase === 'nominate' && p.termLimited) tag = '<span class="tg">ممنوع</span>';
+        return '<div class="seat ' + (isP ? 'pres ' : '') + (isC ? 'chan ' : '') + (p.alive ? '' : 'dead ') + (p.connected ? '' : 'off') + '">' + (isP ? '<div class="bdg">' + I.svg('pres') + '</div>' : isC ? '<div class="bdg">' + I.svg('chan') + '</div>' : '') + av(p) + '<div class="nm">' + esc(p.name) + '</div>' + tag + '</div>';
+      }).join('') + '</div>';
+    }
+    function core(v) {
+      const ph = v.phase, P = (id) => esc(N(v, id));
+      if (ph === 'reveal') return '<div class="big">وزّعنا البطاقات السرية</div><div class="sub">كل واحد يشوف بطاقته بجواله — جاهزين: ' + AR(v.players.filter((p) => p.ready).length) + ' من ' + AR(v.players.length) + '</div>';
+      if (ph === 'nominate') return '<div class="sub">الرئيس</div><div class="big gold">' + P(v.presId) + '</div><div class="sub">يختار مستشاره… تناقشوا!</div>';
+      if (ph === 'vote') return '<div class="sub">حكومة مقترحة</div><div class="big"><span class="gold">' + P(v.presId) + '</span> + <span class="blue">' + P(v.nomId) + '</span></div><div class="sub">صوّتوا بجوالاتكم — ' + AR(v.votedCount) + ' من ' + AR(v.aliveCount) + '</div>';
+      if (ph === 'voteResult') { const r = v.voteResult; if (r.pending) return '<div class="big">انتهى التصويت… والنتيجة<span class="dots3"><i></i><i></i><i></i></span></div>'; return '<div class="big ' + (r.passed ? 'blue' : 'red') + '">' + (r.passed ? 'نجحت الحكومة' : 'سقطت الحكومة') + '</div><div class="sub">نعم ' + AR(r.ja) + ' — لا ' + AR(r.nein) + (r.passed ? '' : (v.tracker >= 2 ? ' · رفض واحد بعد = فوضى!' : '')) + '</div>'; }
+      if (ph === 'pres') return '<div class="row"><div class="pc bk"></div><div class="pc bk"></div><div class="pc bk"></div></div><div class="sub">الرئيس ' + P(v.presId) + ' يشوف ٣ سياسات ويستبعد وحدة</div>';
+      if (ph === 'chan') return '<div class="row"><div class="pc bk"></div><div class="pc bk"></div></div><div class="sub">المستشار ' + P(v.chanId) + ' يختار السياسة</div>';
+      if (ph === 'veto') return '<div class="big red">المستشار طلب الفيتو!</div><div class="sub">الرئيس ' + P(v.presId) + ' يوافق أو يرفض</div>';
+      if (ph === 'enacted') { const e = v.enacted; if (e.pending) return '<div class="row"><div class="pc bk"></div></div><div class="sub">' + (e.chaos ? 'فوضى! تنعتمد اللي فوق الكومة' : 'وانعتمدت…') + '<span class="dots3"><i></i><i></i><i></i></span></div>'; const L = e.card === 'liberal'; return '<div class="row"><div class="pc ' + (L ? 'lib' : 'fas') + '"><div class="ic">' + I.svg(L ? 'liberal' : 'fascist', 'transparent') + '</div><b>' + (L ? 'نزيهة' : 'فاسدة') + '</b></div><div style="text-align:right"><div class="big ' + (L ? 'blue' : 'red') + '">' + (e.chaos ? 'فوضى: ' : '') + (L ? 'سياسة نزيهة' : 'سياسة فاسدة') + '</div>' + (e.power ? '<div class="sub">الرئيس حصل على قدرة: ' + POWER[e.power] + '</div>' : '') + '</div></div>'; }
+      if (ph === 'power') { const p = v.power; if (p.kind === 'kill' && p.done) return '<div class="big red">انعدم ' + P(p.target) + '</div><div class="sub">وما كان الزعيم السري… (ما ينكشف وش هو)</div>'; if (p.kind === 'investigate' && p.done) return '<div class="big">الرئيس فحص ولاء <span class="gold">' + P(p.target) + '</span></div><div class="sub">النتيجة بجوال الرئيس وحده… اسألوه!</div>'; return '<div class="sub">قدرة الرئيس ' + P(v.presId) + '</div><div class="big gold">' + POWER[p.kind] + '</div><div class="sub">' + (p.kind === 'kill' ? 'لو أعدم الزعيم السري يفوز النزهاء فوراً' : p.kind === 'special' ? 'يختار الرئيس الجاي' : p.kind === 'peek' ? 'يشوف أول ٣ بطاقات بسرية' : 'يشوف حزب لاعب بسرية') + '</div>'; }
+      return '';
+    }
+    function claims(v) {
+      const g = v.gov; if (!g || !g.done || (g.presClaim == null && g.chanClaim == null) || ['nominate', 'vote', 'power', 'enacted'].indexOf(v.phase) < 0) return '';
+      const t = (n, f) => (f === n ? AR(n) + ' حمراء' : f === 0 ? AR(n) + ' زرقاء' : AR(f) + ' حمراء + ' + AR(n - f) + ' زرقاء');
+      return '<div style="position:absolute;right:4em;top:42em;font-size:2em;font-weight:800;color:#ffe7a6;background:rgba(0,0,0,.25);padding:.3em .8em;border-radius:1em">' + (g.presClaim != null ? esc(N(v, g.pres)) + ' يقول جاه: ' + t(3, g.presClaim) : '') + (g.presClaim != null && g.chanClaim != null ? ' · ' : '') + (g.chanClaim != null ? esc(N(v, g.chan)) + ' يقول جاه: ' + t(2, g.chanClaim) : '') + '</div>';
+    }
+    function header(v) {
+      const timer = v.deadline && ['voteResult', 'enacted'].indexOf(v.phase) < 0 ? '<span class="tmr" data-t>' + fmt(remaining(v)) + '</span>' : (v.untimed && v.phase !== 'ended' ? '<span class="pill">∞ بدون وقت</span>' : '');
+      return '<div class="hd"><div class="ttl">المستشار <b>السري</b></div>' + (v.round ? '<span class="pill">الجولة ' + AR(v.round) + '</span>' : '') + '<span class="sp"></span>' + timer + '<div class="mq"><div class="q">' + qrSvg(v) + '</div><b dir="ltr">' + esc(v.code) + '</b></div></div>';
+    }
+    function lobbyView(v) {
+      const n = v.players.length;
+      return '<div class="hd"><div class="ttl">المستشار <b>السري</b></div><span class="sp"></span><span class="pill">من ٥ إلى ٦٠ لاعباً</span></div><div class="lobby"><div class="qr">' + qrSvg(v) + '</div><div><div class="sub">امسحوا الرمز بكاميرا الجوال، أو ادخلوا بالرمز</div><div class="code" dir="ltr">' + esc(v.code) + '</div>' +
+        '<div class="sub" style="margin-top:1em">اللاعبين: ' + AR(n) + (v.need ? ' — ينقصكم ' + AR(v.need) : ' — جاهزين! المضيف يبدأ') + '</div><div class="chips">' + v.players.map((p) => '<span class="chip"><i style="background:' + p.color + '"></i>' + esc(p.name) + '</span>').join('') + '</div>' +
+        (n >= 5 ? '<div class="sub" style="margin-top:1.2em">' + AR(v.dist[0]) + ' نزهاء · ' + AR(v.dist[1]) + ' فاسدين · الزعيم السري</div>' : '') + '</div></div>';
+    }
+    function endView(v) {
+      const w = v.winner || {}, L = w.side === 'liberal';
+      return header(v) + tracks(v) + '<div class="core"><div class="big ' + (L ? 'blue' : 'red') + '">' + (L ? 'فاز النزهاء!' : 'فاز الفاسدين!') + '</div><div class="sub">' + (WHY[w.why] || '') + '</div></div>' + seats(v);
+    }
+    function helpView() {
+      const S = HELP.SECTIONS[ST.help]; if (!S) return '';
+      const items = S.kind === 'steps' ? S.steps.map((s) => '<li><b>' + esc(s.h) + ':</b> ' + esc(s.t) + '</li>') : (S.points || []).map((t) => '<li>' + esc(t) + '</li>');
+      return '<div class="hp"><h2>' + esc(S.title) + '</h2>' + (S.lead ? '<div class="ls">' + esc(S.lead) + '</div>' : '') + '<ul class="ls">' + items.join('') + '</ul><div class="nav"><span class="bbtn s" data-act="hprev">السابق</span><span class="bbtn" data-act="hnext">' + (ST.help < HELP.SECTIONS.length - 1 ? 'التالي' : 'إغلاق') + '</span><span class="bbtn s" data-act="hclose">إغلاق</span></div></div>';
+    }
+    function draw() {
+      const v = ST.view; let h = '';
+      if (!ST.code) h = '<div class="err">افتح الشاشة من رابط الغرفة (?board=الرمز)</div>';
+      else if (ST.err) h = '<div class="err">' + esc(ST.err) + '</div>';
+      else if (!v) h = '<div class="err">نتصل بالغرفة…</div>';
+      else {
+        const tone = v.phase === 'ended' ? (v.winner && v.winner.side === 'liberal' ? 'blue' : 'red') : v.phase === 'vote' || v.phase === 'voteResult' ? 'vote' : (v.phase === 'enacted' && v.enacted && !v.enacted.pending) ? (v.enacted.card === 'liberal' ? 'blue' : 'red') : v.phase === 'power' && v.power && v.power.kind === 'kill' ? 'red' : '';
+        box.setAttribute('data-tone', tone);
+        if (v.phase === 'lobby') h = lobbyView(v);
+        else if (v.phase === 'ended') h = endView(v);
+        else h = header(v) + tracks(v) + claims(v) + '<div class="core">' + core(v) + '</div>' + seats(v);
+        if (ST.started) h += '<div class="ctl"><button data-act="sfx" class="' + (ST.sfxOn ? '' : 'off') + '" title="المؤثرات">♪</button><button data-act="voice" class="' + (ST.voiceOn ? '' : 'off') + '" title="الراوي">ر</button><button data-act="help" title="شرح اللعبة">؟</button></div>';
+        else h += '<div class="gate" data-act="start"><div class="box"><h2>جاهزين؟</h2><p>اضغط لتفعيل الراوي والمؤثرات الصوتية</p><span class="bbtn">تفعيل الصوت</span><span class="bbtn s" data-act="mute">بدون صوت</span></div></div>';
+        if (ST.help != null) h += helpView();
+      }
+      stage.innerHTML = h; fit();
+    }
+    function fit() {
+      const bw = el.clientWidth || root.innerWidth, bh = el.clientHeight || root.innerHeight, w = Math.min(bw, bh * 16 / 9);
+      stage.style.width = w + 'px'; stage.style.height = (w * 9 / 16) + 'px'; stage.style.fontSize = (w / W) + 'px';
+    }
+    const timer = setInterval(() => {
+      const v = ST.view; if (!v || !v.deadline) return; const t = stage.querySelector('[data-t]'); if (t) t.textContent = fmt(remaining(v));
+      const s = Math.ceil(remaining(v) / 1000);
+      if (ST.started && s <= 5 && s > 0 && s !== ST.tickAt && ['nominate', 'vote', 'pres', 'chan', 'power'].indexOf(v.phase) >= 0) { ST.tickAt = s; sfx('tick'); }
+    }, 250);
+    function enableSound() { ST.started = true; if (A) { A.unlock(); A.setEnabled('sfx', true); A.setEnabled('voice', ST.voiceOn); } if (ST.view) cues(null, ST.view); draw(); }
+    box.addEventListener('click', (e) => {
+      const t = e.target.closest('[data-act]'); if (!t) return; const a = t.getAttribute('data-act');
+      if (a === 'mute') { e.stopPropagation(); ST.started = true; ST.sfxOn = false; ST.voiceOn = false; if (A) { A.setEnabled('sfx', false); A.setEnabled('voice', false); } draw(); return; }
+      if (a === 'start') return enableSound();
+      if (a === 'sfx') { ST.sfxOn = !ST.sfxOn; if (A) A.setEnabled('sfx', ST.sfxOn); }
+      if (a === 'voice') { ST.voiceOn = !ST.voiceOn; if (A) A.setEnabled('voice', ST.voiceOn); }
+      if (a === 'help') ST.help = 0;
+      if (a === 'hnext') ST.help = ST.help < HELP.SECTIONS.length - 1 ? ST.help + 1 : null;
+      if (a === 'hprev') ST.help = Math.max(0, ST.help - 1);
+      if (a === 'hclose') ST.help = null;
+      draw();
+    });
+    root.addEventListener('resize', fit);
+    draw(); connect();
+    return { state: ST, fit, enableSound, destroy() { ST.destroyed = true; clearInterval(timer); clearTimeout(retryT); clearPend(); try { ST.ws && ST.ws.close(); } catch (e) { } } };
+  }
+  root.SHBoard = { mount };
+})(typeof self !== 'undefined' ? self : this);
+
+</script>
+<script>/* sh/loopback.js */
+/* ديوانية بلس — المستشار السري: النسخة التجريبية بدون إنترنت — "خادم" داخل الصفحة + لاعبين بوتات.
+ * نفس البروتوكول (hub.js) بالضبط، فالواجهة ما تدري إنها مو على خادم حقيقي. */
+(function (g) {
+  'use strict';
+  var E = g.SHEngine, H = g.MafiaHub, rnd = Math.random;
+  var hub = H.createHub({
+    E: E, rng: rnd, allowDev: false,
+    randInt: function (a, b) { return a + Math.floor(rnd() * (b - a)); },
+    token: function () { var s = ''; for (var i = 0; i < 24; i++) s += Math.floor(rnd() * 16).toString(16); return s; }
+  });
+  setInterval(function () { hub.tick(); }, 500);
+
+  function Sock(url) {
+    var self = this; self.readyState = 0; self.url = url;
+    self.conn = { closed: false, pid: null, code: null, board: false, send: function (o) { self._deliver(o); }, close: function () { self._shut(); } };
+    setTimeout(function () { if (self.readyState !== 0) return; self.readyState = 1; if (self.onopen) self.onopen({}); }, 20);
+  }
+  Sock.prototype.send = function (text) { var self = this; if (self.readyState !== 1) throw new Error('closed'); var m = JSON.parse(text); setTimeout(function () { if (!self.conn.closed) hub.message(self.conn, m); }, 0); };
+  Sock.prototype._deliver = function (o) { var self = this; if (self.readyState !== 1) return; var data = JSON.stringify(o); setTimeout(function () { if (self.readyState === 1 && self.onmessage) self.onmessage({ data: data }); }, 0); };
+  Sock.prototype.close = function () { this._shut(); };
+  Sock.prototype._shut = function () { var self = this; if (self.conn.closed) return; self.conn.closed = true; self.readyState = 3; hub.closed(self.conn); setTimeout(function () { if (self.onclose) self.onclose({}); }, 0); };
+  g.SHWS = Sock;
+
+  // ------------------------------------------------------------ البوتات
+  var NAMES = ['بدر', 'لمى', 'سلطان', 'هند', 'ياسر', 'جود', 'تركي', 'أروى', 'نواف', 'ريم', 'فهد', 'سارة', 'ماجد', 'دانة'];
+  var pick = function (a) { return a[Math.floor(rnd() * a.length)]; };
+  var delay = function (a, b) { return a + rnd() * (b - a); };
+  var FAST = /[?&]fast=1/.test(g.location && g.location.search || '');
+  var D = function (a, b) { return FAST ? delay(300, 900) : delay(a, b); };
+
+  function Bot(code, name) {
+    var b = this; b.name = name; b.view = null; b.sentFor = ''; b.mem = {};
+    b.sock = new Sock('bot'); b.sock.onopen = function () { b.sock.send(JSON.stringify({ t: 'join', code: code, name: name })); };
+    b.sock.onmessage = function (ev) { var m = JSON.parse(ev.data); if (m.t === 'view') { b.view = m.view; b.think(); } };
+  }
+  Bot.prototype.act = function (o) { try { this.sock.send(JSON.stringify(Object.assign({ t: 'act' }, o))); } catch (e) { } };
+  Bot.prototype.later = function (ms, fn) { setTimeout(fn, ms); };
+  Bot.prototype.think = function () {
+    var b = this, v = b.view, me = v && v.me; if (!me) return;
+    if (v.phase === 'lobby') { b.sentFor = ''; b.mem = {}; return; }
+    var key = v.phase + ':' + v.round + ':' + (v.power && v.power.done ? 1 : 0); if (b.sentFor === key) return;
+    var fas = me.party === 'fascist', team = (me.team || []).map(function (t) { return t.id; });
+    var bad = (me.notes || []).filter(function (n) { return n.party === 'fascist'; }).map(function (n) { return n.target; });
+    var others = v.players.filter(function (p) { return p.alive && p.id !== me.id; });
+    if (me.drawn) b.mem.drawn = me.drawn.slice(); if (me.chanCards) b.mem.chan = me.chanCards.slice();
+    // الادعاء بعد الجلسة
+    if (me.claimAs && v.gov && v.gov.done && !b.mem['c' + v.gov.round] && v.phase !== 'enacted') {
+      b.mem['c' + v.gov.round] = 1;
+      var src = me.claimAs === 'pres' ? b.mem.drawn : b.mem.chan;
+      if (src && rnd() < 0.8) { var nf = src.filter(function (c) { return c === 'fascist'; }).length; if (fas && rnd() < 0.5) nf = src.length; b.later(D(1500, 4000), function () { b.act({ a: 'claim', v: nf }); }); }
+    }
+    if (v.phase === 'reveal' && !me.ready) { b.sentFor = key; b.later(D(1500, 5000), function () { b.act({ a: 'ready' }); }); return; }
+    if (!me.alive) return;
+    if (v.phase === 'nominate' && me.id === v.presId) {
+      b.sentFor = key;
+      var el = v.players.filter(function (p) { return p.eligible; }); if (!el.length) return;
+      var choice = pick(el);
+      if (fas) { var h = el.filter(function (p) { return team.indexOf(p.id) >= 0; }); if (h.length && rnd() < 0.6) choice = pick(h); }
+      else { var good = el.filter(function (p) { return bad.indexOf(p.id) < 0; }); if (good.length) choice = pick(good); }
+      b.later(D(4000, 9000), function () { b.act({ a: 'nominate', target: choice.id }); });
+    } else if (v.phase === 'vote' && me.myVote == null) {
+      b.sentFor = key;
+      var gov = [v.presId, v.nomId], ja;
+      if (fas) ja = gov.some(function (id) { return team.indexOf(id) >= 0; }) ? rnd() < 0.9 : rnd() < 0.45;
+      else ja = gov.some(function (id) { return bad.indexOf(id) >= 0; }) ? false : (v.tracker >= 2 ? rnd() < 0.85 : rnd() < 0.62);
+      b.later(D(3000, 10000), function () { b.act({ a: 'vote', target: ja ? 'ja' : 'nein' }); });
+    } else if (v.phase === 'pres' && me.drawn) {
+      b.sentFor = key; var cs = me.drawn, i = 0, want = fas ? 'liberal' : 'fascist';
+      if (cs.indexOf(want) >= 0 && (!fas || rnd() < 0.7)) i = cs.indexOf(want); else i = Math.floor(rnd() * cs.length);
+      b.later(D(3000, 7000), function () { b.act({ a: 'discard', i: i }); });
+    } else if (v.phase === 'chan' && me.chanCards) {
+      b.sentFor = key; var cc = me.chanCards, want2 = fas ? 'fascist' : 'liberal';
+      if (me.canVeto && !fas && cc.every(function (c) { return c === 'fascist'; }) && rnd() < 0.8) { b.later(D(2500, 6000), function () { b.act({ a: 'vetoAsk' }); }); return; }
+      var j = cc.indexOf(want2) >= 0 && (!fas || rnd() < 0.8) ? cc.indexOf(want2) : Math.floor(rnd() * cc.length);
+      b.later(D(3000, 7000), function () { b.act({ a: 'enact', i: j }); });
+    } else if (v.phase === 'veto' && me.id === v.presId) {
+      b.sentFor = key; b.later(D(2000, 5000), function () { b.act({ a: 'vetoReply', on: !fas && rnd() < 0.7 }); });
+    } else if (v.phase === 'power' && me.id === v.presId) {
+      b.sentFor = key; var pw = v.power;
+      if (pw.done) { if (pw.kind === 'investigate') b.later(D(3000, 6000), function () { b.act({ a: 'powerDone' }); }); return; }
+      if (pw.kind === 'peek') { b.later(D(3000, 6000), function () { b.act({ a: 'power', target: null }); }); return; }
+      var ts = others.filter(function (p) { return !(pw.kind === 'investigate' && p.investigated); });
+      var t = pick(ts);
+      if (pw.kind === 'kill') { var pool = fas ? ts.filter(function (p) { return team.indexOf(p.id) < 0; }) : ts.filter(function (p) { return bad.indexOf(p.id) >= 0; }); if (pool.length) t = pick(pool); }
+      if (pw.kind === 'special' && fas) { var tm = ts.filter(function (p) { return team.indexOf(p.id) >= 0; }); if (tm.length) t = pick(tm); }
+      if (t) b.later(D(4000, 9000), function () { b.act({ a: 'power', target: t.id }); });
+    }
+  };
+
+  var seen = {};
+  function wantBots() { var m = /[?&]bots=(\d+)/.exec(g.location && g.location.search || ''); return m ? Math.max(4, Math.min(59, Number(m[1]))) : 6; }
+  setInterval(function () {
+    hub.rooms.forEach(function (room, code) {
+      if (seen[code]) return; seen[code] = true;
+      var names = NAMES.slice().sort(function () { return rnd() - 0.5; }), n = wantBots();
+      for (var i = 0; i < n; i++) (function (i) { setTimeout(function () { var r = hub.rooms.get(code); if (r && r.g.phase === 'lobby' && r.g.players.length < 60) new Bot(code, names[i]); }, 800 + i * 600); })(i);
+    });
+  }, 400);
+})(typeof window !== 'undefined' ? window : globalThis);
+
+</script>
+<script>
+(function () {
+  'use strict';
+  var E = window.SHEngine, QR = window.M8QR, I = window.SHIcons, HELP = window.SHHelp;
+  var params = new URLSearchParams(location.search);
+  var $app = document.getElementById('app'), $ov = document.getElementById('overlay'), $help = document.getElementById('help');
+  if (params.has('board')) {
+    document.body.classList.add('board-only'); var bh = document.getElementById('board'); bh.className = 'bd-host'; bh.style.visibility = 'visible'; bh.style.pointerEvents = 'auto';
+    window.SHBoard.mount(bh, { code: params.get('board') }); return;
+  }
+  var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
+  var store = { get: function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set: function (k, v) { try { localStorage.setItem(k, v); } catch (e) { } }, del: function (k) { try { localStorage.removeItem(k); } catch (e) { } } };
+  var ST = { ws: null, open: false, view: null, me: null, offset: 0, retry: 0, ui: { peek: false, sel: null, kick: null, board: false, log: false }, toast: '' };
+  try { var s0 = JSON.parse(store.get('sh_session') || 'null'); if (s0 && s0.code && s0.token) ST.me = s0; } catch (e) { }
+
+  var ERR = {
+    no_room: 'الرمز غلط أو الغرفة انتهت', game_started: 'اللعبة بدأت، ما تقدر تدخل الحين', room_full: 'الغرفة ممتلئة (٦٠ لاعباً)', name_required: 'اكتب اسمك أول',
+    need_players: 'لازم ٥ لاعبين على الأقل', not_host: 'هذا الخيار للمضيف فقط', bad_token: 'انتهت جلستك، ادخل من جديد', server_busy: 'الخادم مشغول، جرّب بعد شوي',
+    bad_target: 'ما تقدر تختار هذا اللاعب', not_alive: 'أنت خارج اللعبة', bad_phase: 'مو وقتها', not_president: 'هذا للرئيس فقط', not_chancellor: 'هذا للمستشار فقط',
+    already_investigated: 'هذا اللاعب انفحص قبل', veto_refused: 'الرئيس رفض الفيتو', no_veto: 'الفيتو ما انفتح للحين', no_claim: 'ما تقدر الحين', already_started: 'اللعبة بدأت'
+  };
+  var PHASE = { lobby: 'اللوبي', reveal: 'بطاقتك', nominate: 'الترشيح', vote: 'التصويت', voteResult: 'نتيجة التصويت', pres: 'جلسة الرئيس', chan: 'جلسة المستشار', veto: 'طلب فيتو', enacted: 'السياسة', power: 'قدرة الرئيس', ended: 'النهاية' };
+  var POWER = { investigate: 'فحص ولاء', peek: 'كشف ٣ سياسات', special: 'انتخابات خاصة', kill: 'إعدام' };
+  var AR = function (n) { return String(n).replace(/\d/g, function (d) { return '٠١٢٣٤٥٦٧٨٩'[d]; }); };
+
+  // ------------------------------------------------------------------ الاتصال
+  function url() { return window.SH_WS_URL || ((location.protocol === 'https:' ? 'wss://' : 'ws://') + location.host + '/sh/ws'); }
+  function send(o) { if (ST.open && ST.ws && ST.ws.readyState === 1) { try { ST.ws.send(JSON.stringify(o)); return true; } catch (e) { } } return false; }
+  function hello() { if (ST.me) send({ t: 'resume', code: ST.me.code, token: ST.me.token }); }
+  var pingT = 0, retryT = 0;
+  function connect() {
+    if (ST.ws && ST.ws.readyState <= 1) return;
+    clearTimeout(retryT);
+    var ws; try { ws = new (window.SHWS || WebSocket)(url()); } catch (e) { return later(); }
+    ST.ws = ws;
+    ws.onopen = function () { if (ST.ws !== ws) return; ST.open = true; ST.retry = 0; hello(); clearInterval(pingT); pingT = setInterval(function () { send({ t: 'ping' }); }, 20000); renderOverlay(); };
+    ws.onmessage = function (ev) { if (ST.ws !== ws) return; var m; try { m = JSON.parse(ev.data); } catch (e) { return; } onMsg(m); };
+    ws.onclose = function () { if (ST.ws !== ws) return; ST.open = false; clearInterval(pingT); renderOverlay(); later(); };
+    ws.onerror = function () { };
+  }
+  function later() { clearTimeout(retryT); var d = Math.min(4000, 400 * Math.pow(1.6, ST.retry++)); retryT = setTimeout(connect, d); }
+  function reconnectNow() { ST.retry = 0; clearTimeout(retryT); var old = ST.ws; ST.open = false; if (old) { try { old.close(); } catch (e) { } } ST.ws = null; connect(); }
+  document.addEventListener('visibilitychange', function () { if (document.hidden) return; if (!ST.open || !ST.ws || ST.ws.readyState !== 1) reconnectNow(); else hello(); });
+  window.addEventListener('online', function () { if (!ST.open) reconnectNow(); });
+  var toastT = 0;
+  function toast(t) { ST.toast = t; renderOverlay(); clearTimeout(toastT); toastT = setTimeout(function () { ST.toast = ''; renderOverlay(); }, 3200); }
+  function vibrate(ms) { try { if (navigator.vibrate) navigator.vibrate(ms); } catch (e) { } }
+  function onMsg(m) {
+    if (m.t === 'joined') { ST.me = { code: m.code, id: m.id, token: m.token }; store.set('sh_session', JSON.stringify(ST.me)); if (window.SH_DEMO && !m.resumed) demoBoard(m.code); }
+    else if (m.t === 'view') { var prev = ST.view; ST.view = m.view; ST.offset = m.view.now - Date.now(); if (!prev || prev.phase !== m.view.phase || prev.round !== m.view.round) { ST.ui.sel = null; if (myTurn(m.view)) vibrate(120); } render(); }
+    else if (m.t === 'err') { if ((m.err === 'bad_token' || m.err === 'no_room') && ST.me && !ST.view) { store.del('sh_session'); ST.me = null; render(); } toast(ERR[m.err] || ('تعذّر: ' + m.err)); }
+    else if (m.t === 'kicked' || m.t === 'left') { store.del('sh_session'); ST.me = null; ST.view = null; render(); }
+  }
+  function act(a, extra) { var o = { t: 'act', a: a }; if (extra) for (var k in extra) o[k] = extra[k]; if (!send(o)) toast('الاتصال مقطوع، نحاول نرجّعه...'); }
+  function myTurn(v) { var me = v.me; if (!me || !me.alive) return false; return (v.phase === 'nominate' && me.id === v.presId) || (v.phase === 'vote') || (v.phase === 'pres' && me.id === v.presId) || (v.phase === 'chan' && me.id === v.chanId) || (v.phase === 'veto' && me.id === v.presId) || (v.phase === 'power' && me.id === v.presId) || v.phase === 'reveal'; }
+
+  // ------------------------------------------------------------------ مساعدات
+  var byId = function (v, id) { return v.players.filter(function (p) { return p.id === id; })[0] || null; };
+  var av = function (p, s) { return '<span class="av" style="background:' + p.color + (s ? ';width:' + s + 'px;height:' + s + 'px;font-size:' + Math.round(s / 2.1) + 'px' : '') + '">' + esc((p.name || '?').charAt(0)) + '</span>'; };
+  var nm = function (v, id) { var p = byId(v, id); return p ? esc(p.name) : '؟'; };
+  function remaining(v) { return v.deadline ? Math.max(0, v.deadline - (Date.now() + ST.offset)) : 0; }
+  function fmt(ms) { var s = Math.ceil(ms / 1000), m = Math.floor(s / 60); s = s % 60; return m + ':' + (s < 10 ? '0' : '') + s; }
+  function timerHtml(v) {
+    if (!v.deadline || ['voteResult', 'enacted'].indexOf(v.phase) >= 0) return v.untimed && ['nominate', 'vote', 'pres', 'chan', 'veto', 'power', 'reveal'].indexOf(v.phase) >= 0 ? '<div class="untimed">∞ بدون وقت — خذوا راحتكم' + (v.me && v.me.host ? '، وتقدر تتخطى المرحلة من زر المضيف' : '') + '</div>' : '';
+    return '<div class="col" style="gap:6px"><div class="row"><span class="mut small">الوقت المتبقي</span><span class="sp"></span><span class="timer" data-timer>' + fmt(remaining(v)) + '</span></div><div class="bar"><i data-bar style="width:' + Math.round(100 * remaining(v) / (v.timerTotal || 1)) + '%"></i></div></div>';
+  }
+  function hostSkip(v, label) { return v.me && v.me.host ? '<button class="btn sec sm" data-a="skip">' + (label || 'تخطّي (المضيف)') + '</button>' : ''; }
+  function roleName(r) { return r === 'leader' ? 'الزعيم السري' : r === 'fascist' ? 'فاسد' : r === 'liberal' ? 'نزيه' : ''; }
+
+  function tracks(v) {
+    var l = '', f = '';
+    for (var i = 1; i <= 5; i++) l += '<div class="sl ' + (i <= v.lib ? 'on' : '') + '">' + (i <= v.lib ? '' : (i === 5 ? I.svg('win') : AR(i))) + '</div>';
+    for (var j = 1; j <= 6; j++) { var pw = v.powers[j]; f += '<div class="sl ' + (j <= v.fas ? 'on' : '') + '" title="' + (pw ? POWER[pw] : '') + '">' + (j <= v.fas ? '' : (j === 6 ? I.svg('win') : pw ? I.svg(pw) : AR(j))) + '</div>'; }
+    var tr = ''; for (var k = 1; k <= 3; k++) tr += '<i class="' + (k === 3 ? 'c ' : '') + (k <= v.tracker ? 'on' : '') + '"></i>';
+    return '<div class="card tracks"><div class="trk l"><span class="lb" style="color:#9bdcff">نزيهة</span>' + l + '</div><div class="trk f"><span class="lb" style="color:#ffb3b5">فاسدة</span>' + f + '</div>' +
+      '<div class="row"><div class="trkr">عداد الفوضى ' + tr + '</div><span class="sp"></span>' + (v.vetoOn ? '<span class="tag r">الفيتو مفتوح</span>' : '') + (v.fas >= 3 ? '<span class="tag g">منطقة الزعيم السري</span>' : '') + '</div></div>';
+  }
+  function govCard(v, presId, chanId, chanLabel) {
+    var p = byId(v, presId), c = chanId ? byId(v, chanId) : null;
+    return '<div class="gov"><div><div class="gi">' + I.svg('pres') + '</div><span class="mut small">الرئيس</span><b>' + (p ? esc(p.name) : '—') + '</b></div><div><div class="gi">' + I.svg('chan') + '</div><span class="mut small">' + (chanLabel || 'المستشار') + '</span><b>' + (c ? esc(c.name) : '—') + '</b></div></div>';
+  }
+  function topbar(v) {
+    var me = v.me;
+    return '<div class="topbar"><span class="pill">الجولة ' + AR(Math.max(1, v.round)) + '</span><span class="pill" style="background:rgba(242,193,78,.18);border-color:rgba(242,193,78,.5)">' + (PHASE[v.phase] || '') + '</span><span class="sp"></span>' +
+      (me && me.role ? '<button class="btn sec sm noselect" data-a="peek">بطاقتي</button>' : '') + '</div>';
+  }
+  function claimsLine(v) {
+    var gv = v.gov; if (!gv || !gv.done || (gv.presClaim == null && gv.chanClaim == null)) return '';
+    var pc = gv.presClaim != null ? nm(v, gv.pres) + ' (الرئيس): ' + claimTxt(3, gv.presClaim) : '', cc = gv.chanClaim != null ? nm(v, gv.chan) + ' (المستشار): ' + claimTxt(2, gv.chanClaim) : '';
+    return '<div class="card col"><div class="mut small">وش يقولون جاهم؟</div>' + (pc ? '<div>' + pc + '</div>' : '') + (cc ? '<div>' + cc + '</div>' : '') + '</div>';
+  }
+  function claimTxt(n, fas) { var lib = n - fas; if (fas === n) return AR(n) + ' حمراء'; if (lib === n) return AR(n) + ' زرقاء'; return AR(fas) + ' حمراء + ' + AR(lib) + ' زرقاء'; }
+  function claimCard(v) {
+    var me = v.me; if (!me || !me.claimAs || !v.gov || !v.gov.done) return '';
+    var mine = me.claimAs === 'pres' ? v.gov.presClaim : v.gov.chanClaim; if (mine != null) return '';
+    if (['enacted', 'nominate', 'vote', 'power'].indexOf(v.phase) < 0 || (v.phase === 'enacted' && v.enacted && v.enacted.pending)) return '';
+    var n = me.claimAs === 'pres' ? 3 : 2, b = '';
+    for (var fas = n; fas >= 0; fas--) b += '<button class="chip" data-a="claim" data-v="' + fas + '">' + claimTxt(n, fas) + '</button>';
+    return '<div class="card col"><div class="big" style="font-size:17px">قول للكل وش ' + (me.claimAs === 'pres' ? 'سحبت (٣ بطاقات)' : 'جاك من الرئيس (بطاقتين)') + '</div><div class="mut small">يطلع على شاشة الطاولة. صادق أو كذّاب… أنت حر.</div><div class="row wrap">' + b + '</div></div>';
+  }
+
+  function roleCard(v) {
+    var me = v.me; if (!me || !me.role) return '';
+    var r = me.role, goal = r === 'liberal' ? 'هدفك: ٥ سياسات زرقاء، أو إعدام الزعيم السري. ما تعرف أحد… راقب وصوّت بذكاء.' : r === 'leader' ? 'أنت الزعيم السري. تظاهر إنك نزيه! تفوزون بـ٦ حمراء، أو لو انتخبت مستشار بعد ٣ حمراء.' : 'تعرف فريقك وتعرف الزعيم السري. ساعدوه يوصل للمستشارية بعد ٣ حمراء، أو مرّروا ٦ حمراء.';
+    var team = '';
+    if (me.team && me.team.length) team = '<div class="tm"><div class="mut small">' + (r === 'leader' ? 'زميلك الفاسد' : 'فريقك') + '</div><div class="row wrap" style="justify-content:center;margin-top:8px">' + me.team.map(function (t) { var p = byId(v, t.id); return '<span class="chip fas">' + (p ? esc(p.name) : '؟') + (t.role === 'leader' ? ' — الزعيم السري' : '') + '</span>'; }).join('') + '</div></div>';
+    else if (r === 'leader') team = '<div class="tm mut small">في لعبة ٧ لاعبين وأكثر ما تعرف فريقك، بس هم يعرفونك.</div>';
+    var notes = (me.notes || []).length ? '<div class="tm"><div class="mut small">نتائج فحصك (لك وحدك)</div>' + me.notes.map(function (n) { return '<div style="margin-top:6px"><b>' + nm(v, n.target) + '</b> ← ' + (n.party === 'liberal' ? 'نزيه' : 'فاسد') + '</div>'; }).join('') + '</div>' : '';
+    return '<div class="rolecard ' + r + '"><div class="ri">' + I.svg(r) + '</div><div class="rn">' + roleName(r) + '</div><div style="margin-top:6px"><span class="chip ' + (me.party === 'liberal' ? 'lib' : 'fas') + '">الحزب: ' + (me.party === 'liberal' ? 'نزيه' : 'فاسد') + '</span></div><div class="ab">' + goal + '</div>' + team + notes + '</div>';
+  }
+
+  // ------------------------------------------------------------------ الشاشات
+  function home() {
+    var pre = params.get('room') || '';
+    return '<div class="logo"><div class="ic">' + I.svg('pres') + '</div><div class="t">المستشار <b>السري</b></div><div class="s">برلمان وخيانة وكذب — كل واحد بجواله</div></div>' +
+      (ST.me && !ST.view ? '<div class="card ctr mut">نرجّعك لغرفتك…</div>' : '') +
+      '<div class="card col"><div class="big">ادخل غرفة</div><input id="inCode" class="inp code" inputmode="numeric" maxlength="4" placeholder="••••" value="' + esc(pre) + '" autocomplete="off"><input id="inName" class="inp" maxlength="14" placeholder="اسمك" autocomplete="off" value="' + esc(store.get('sh_name') || '') + '"><button class="btn" data-a="join">دخول</button></div>' +
+      '<div class="card col"><div class="big">أنشئ غرفة جديدة</div><div class="mut small">تصير أنت المضيف. اللاعبين يدخلون بمسح الـQR بدون تسجيل. من ٥ إلى ٦٠ لاعباً.</div><input id="inName2" class="inp" maxlength="14" placeholder="اسمك" autocomplete="off" value="' + esc(store.get('sh_name') || '') + '"><button class="btn gold" data-a="create">إنشاء الغرفة</button></div>' +
+      '<button class="btn sec" data-a="help">؟ كيف تلعب؟</button>';
+  }
+  function qrFor(code) { var link = location.origin + location.pathname + '?room=' + code, svg = ''; try { svg = QR.toSvg(link, { ecc: 'M', border: 1 }); } catch (e) { } return { link: link, svg: svg }; }
+  function lobby(v) {
+    var me = v.me, host = me && me.host, q = qrFor(v.code), n = v.players.length;
+    var out = '<div class="topbar"><span class="pill">غرفة <b>' + esc(v.code) + '</b></span><span class="sp"></span>' + (me ? '<button class="btn sec sm" data-a="leave">خروج</button>' : '') + '</div>';
+    out += '<div class="card col"><div class="ctr mut small">امسحوا الرمز من الكاميرا أو ادخلوا بالرمز</div><div class="qrbox">' + q.svg + '</div><div class="code" dir="ltr">' + esc(v.code) + '</div><div class="row"><button class="btn sec sm sp" data-a="share">نسخ / مشاركة الرابط</button><button class="btn sec sm sp" data-a="boardlink">شاشة التلفزيون</button></div></div>';
+    if (ST.ui.board) { var bl = location.origin + location.pathname + '?board=' + v.code; out += '<div class="card col"><div class="big">شاشة الطاولة (التلفزيون)</div><div class="mut small" style="line-height:1.8">افتح هذا الرابط على التلفزيون أو الآيباد أو اللابتوب. يعرض اللوحات والتصويت والنتائج والـQR، وفيه راوي ومؤثرات. ما يعرض أي دور ولا بطاقة سرية.</div><div class="hint" dir="ltr" style="word-break:break-all">' + esc(bl) + '</div><button class="btn sec sm" data-a="copyboard" data-u="' + esc(bl) + '">نسخ رابط الشاشة</button></div>'; }
+    out += '<div class="card col"><div class="row"><div class="big">اللاعبين (' + AR(n) + ')</div><span class="sp"></span><span class="mut small">من ٥ إلى ٦٠</span></div>' + v.players.map(function (p) {
+      var kick = host && me.id !== p.id ? '<button class="btn sec sm" data-a="kick" data-id="' + p.id + '">' + (ST.ui.kick === p.id ? 'تأكيد الطرد' : '✕') + '</button>' : '';
+      return '<div class="pl ' + (p.connected ? '' : 'off') + '">' + av(p) + '<b>' + esc(p.name) + '</b>' + (p.host ? '<span class="tag g">المضيف</span>' : '') + (me && p.id === me.id ? '<span class="tag">أنت</span>' : '') + '<span class="sp"></span>' + kick + '</div>';
+    }).join('') + '</div>';
+    if (n >= 5) out += '<div class="card col"><div class="big">التوزيع (' + AR(n) + ' لاعبين)</div><div class="row wrap"><span class="chip lib">نزهاء ×' + AR(v.dist[0]) + '</span><span class="chip fas">فاسدين ×' + AR(v.dist[1]) + '</span><span class="chip fas">الزعيم السري ×١</span></div><div class="mut small">' + (n <= 6 ? 'الزعيم السري يعرف زميله الفاسد.' : 'الزعيم السري ما يعرف فريقه، بس هم يعرفونه.') + '</div></div>';
+    if (host) {
+      out += '<div class="card col"><div class="big">الوقت لكل قرار</div><div class="row wrap">' + E.ACT_OPTIONS.map(function (s) { return '<button class="chip ' + (v.settings.actSec === s ? 'on' : '') + '" data-a="actsec" data-s="' + s + '">' + (s ? AR(s) + ' ثانية' : '∞ بدون وقت') + '</button>'; }).join('') + '</div><div class="mut small" style="line-height:1.7">بدون وقت: تمشون على راحتكم. مع وقت: اللي ما يصوّت ينحسب «لا»، والقرارات الثانية تنختار عشوائياً.</div></div>';
+    } else if (!v.untimed) out += '<div class="untimed">الوقت لكل قرار: ' + AR(v.settings.actSec) + ' ثانية</div>';
+    out += '<button class="btn sec" data-a="help">؟ كيف تلعب؟</button>';
+    if (host) out += '<div class="stick"><button class="btn gold" data-a="start" ' + (v.need ? 'disabled' : '') + '>' + (v.need ? 'ينقصكم ' + AR(v.need) + ' لاعب' : 'ابدأ اللعبة ووزّع الأدوار') + '</button></div>';
+    else if (me) out += '<div class="card ctr mut">ننتظر المضيف يبدأ اللعبة…</div>';
+    return out;
+  }
+  function reveal(v) {
+    var me = v.me, out = topbar(v);
+    out += '<div class="ctr big">بطاقتك السرية</div><div class="hint">اضغط مطولاً على البطاقة عشان تشوفها، ولا تخلي أحد يشوف جوالك.</div>';
+    out += '<div class="facedown noselect" data-peek="1"><div class="q">؟</div><div class="big" style="margin-top:8px">اضغط مطوّلاً لعرض بطاقتك</div></div>';
+    out += me.ready ? '<div class="card ctr">جاهز ✓ ننتظر الباقين (' + AR(v.players.filter(function (p) { return p.ready; }).length) + ' من ' + AR(v.players.length) + ')</div>' : '<button class="btn gold" data-a="ready">شفت بطاقتي — جاهز</button>';
+    out += timerHtml(v) + (me.host ? hostSkip(v, 'ابدأ بدون انتظار') : '');
+    return out;
+  }
+  function deadNote(v) { return v.me && !v.me.alive ? '<div class="warn">أنت خارج اللعبة (انعدمت). تابع بصمت ولا تكشف شي.</div>' : ''; }
+  function game(v) {
+    var me = v.me, out = topbar(v) + deadNote(v), ph = v.phase;
+    if (ph === 'nominate') {
+      if (me && me.alive && me.id === v.presId) {
+        var cands = v.players.filter(function (p) { return p.alive && p.id !== me.id; });
+        out += '<div class="ann"><div class="huge">أنت الرئيس</div><div class="mut" style="margin-top:6px">اختر مستشارك، وبعدها الكل يصوّت عليكم.</div></div>';
+        out += '<div class="grid">' + cands.map(function (p) { var dis = !p.eligible; return '<button class="pick ' + (ST.ui.sel === p.id ? 'sel' : '') + (dis ? ' dis' : '') + '" data-a="sel" data-id="' + p.id + '">' + av(p, 32) + '<span class="nm">' + esc(p.name) + '</span>' + (dis ? '<span class="tag">ممنوع</span>' : p.notLeader ? '<span class="tag ok">مو الزعيم السري</span>' : '') + '</button>'; }).join('') + '</div>';
+        out += '<div class="stick"><button class="btn gold" data-a="nominate" ' + (ST.ui.sel ? '' : 'disabled') + '>' + (ST.ui.sel ? 'رشّح ' + nm(v, ST.ui.sel) + ' مستشار' : 'اختر لاعب') + '</button></div>';
+      } else out += '<div class="ann"><div class="mut">الرئيس</div><div class="huge" style="margin-top:4px">' + nm(v, v.presId) + '</div><div class="mut" style="margin-top:8px">يختار مستشاره الحين… تناقشوا!</div></div>';
+      out += claimCard(v) + claimsLine(v) + tracks(v) + timerHtml(v) + hostSkip(v);
+    } else if (ph === 'vote') {
+      out += '<div class="ctr big">صوّتوا على الحكومة</div>' + govCard(v, v.presId, v.nomId, 'المستشار المرشّح');
+      var nomP = byId(v, v.nomId);
+      if (v.fas >= 3) out += '<div class="warn">انتبهوا: فيه ٣ حمراء أو أكثر. لو ' + (nomP ? esc(nomP.name) : 'المرشح') + ' طلع الزعيم السري، يفوز الفاسدين فوراً!' + (nomP && nomP.notLeader ? ' (هو مؤكّد مو الزعيم السري)' : '') + '</div>';
+      if (me && me.alive) {
+        var my = me.myVote;
+        out += '<div class="grid"><button class="vbtn ja ' + (my === 'ja' ? 'sel' : my ? 'dim' : '') + '" data-a="vote" data-v="ja">نعم<small>أوافق</small></button><button class="vbtn nein ' + (my === 'nein' ? 'sel' : my ? 'dim' : '') + '" data-a="vote" data-v="nein">لا<small>أرفض</small></button></div>';
+        out += '<div class="hint">' + (my ? 'صوّتّ ✓ وتقدر تغيّر صوتك لين يصوّت الكل.' : 'صوتك سري لين ينكشف الكل مرة وحدة.') + '</div>';
+      }
+      out += '<div class="card ctr"><b>' + AR(v.votedCount) + '</b> من <b>' + AR(v.aliveCount) + '</b> صوّتوا</div>' + claimCard(v) + timerHtml(v) + hostSkip(v, 'اقفل التصويت (المضيف)');
+    } else if (ph === 'voteResult') {
+      var r = v.voteResult;
+      if (r.pending) out += '<div class="ann susp"><div class="mut">انتهى التصويت…</div><div class="big" style="margin-top:12px">النتيجة على شاشة الطاولة الحين</div><div class="dots3"><i></i><i></i><i></i></div></div>';
+      else {
+        out += '<div class="ann ' + (r.passed ? 'lib' : 'fas') + '"><div class="huge">' + (r.passed ? 'نجحت الحكومة' : 'سقطت الحكومة') + '</div><div class="big" style="margin-top:8px">نعم ' + AR(r.ja) + ' — لا ' + AR(r.nein) + '</div></div>';
+        out += '<div class="card col"><div class="vl">' + v.players.filter(function (p) { return p.vote; }).map(function (p) { return '<span class="chip ' + (p.vote === 'ja' ? 'lib' : 'fas') + '">' + esc(p.name) + ': ' + (p.vote === 'ja' ? 'نعم' : p.vote === 'nein' ? 'لا' : 'ما صوّت') + '</span>'; }).join('') + '</div></div>';
+      }
+      out += tracks(v) + hostSkip(v, 'كمّل');
+    } else if (ph === 'pres') {
+      out += govCard(v, v.presId, v.chanId);
+      if (me && me.drawn) {
+        out += '<div class="ann"><div class="big">سحبت ٣ سياسات</div><div class="mut" style="margin-top:6px">اختر البطاقة اللي <b>تبي تستبعدها</b>، والثنتين الباقية تروح للمستشار.</div></div>';
+        out += '<div class="cards c3">' + me.drawn.map(function (c, i) { return '<button class="cbtn ' + (ST.ui.sel === String(i) ? 'sel' : '') + '" data-a="selc" data-i="' + i + '">' + I.card(c) + (ST.ui.sel === String(i) ? '<span class="mk">بستبعدها</span>' : '') + '</button>'; }).join('') + '</div>';
+        out += '<div class="stick"><button class="btn red" data-a="discard" ' + (ST.ui.sel != null ? '' : 'disabled') + '>' + (ST.ui.sel != null ? 'استبعد هذه ومرّر الباقي' : 'اختر بطاقة للاستبعاد') + '</button></div>';
+      } else out += '<div class="ann"><div class="cards c3" style="max-width:260px;margin:0 auto">' + '<div class="back">؟</div><div class="back">؟</div><div class="back">؟</div></div><div class="mut" style="margin-top:12px">الرئيس يشوف ٣ سياسات ويستبعد وحدة…</div></div>';
+      out += tracks(v) + timerHtml(v) + hostSkip(v);
+    } else if (ph === 'chan' || ph === 'veto') {
+      out += govCard(v, v.presId, v.chanId);
+      if (me && me.chanCards) {
+        if (ph === 'veto') out += '<div class="ann"><div class="big">طلبت الفيتو</div><div class="mut" style="margin-top:6px">ننتظر الرئيس يوافق أو يرفض…</div></div>';
+        else out += '<div class="ann"><div class="big">جاتك بطاقتين من الرئيس</div><div class="mut" style="margin-top:6px">اختر البطاقة اللي <b>تبي تعتمدها</b> على اللوحة.</div></div>';
+        out += '<div class="cards c2">' + me.chanCards.map(function (c, i) { return '<button class="cbtn ' + (ST.ui.sel === String(i) ? 'sel' : '') + '" data-a="selc" data-i="' + i + '" ' + (ph === 'veto' ? 'disabled' : '') + '>' + I.card(c) + (ST.ui.sel === String(i) ? '<span class="mk">بعتمدها</span>' : '') + '</button>'; }).join('') + '</div>';
+        if (ph === 'chan') {
+          out += '<div class="stick col"><button class="btn gold" data-a="enact" ' + (ST.ui.sel != null ? '' : 'disabled') + '>' + (ST.ui.sel != null ? 'اعتمد هذه السياسة' : 'اختر بطاقة للاعتماد') + '</button>' + (me.canVeto ? '<button class="btn red" data-a="vetoask">اطلب الفيتو (إلغاء البطاقتين)</button>' : '') + '</div>';
+        }
+      } else if (ph === 'veto' && me && me.id === v.presId) {
+        out += '<div class="ann fas"><div class="huge">المستشار طلب الفيتو</div><div class="mut" style="margin-top:8px">لو وافقت تنلغي البطاقتين ويتحرك عداد الفوضى خطوة. لو رفضت لازم يعتمد وحدة.</div></div><div class="grid"><button class="btn blue" data-a="veto" data-on="1">أوافق</button><button class="btn red" data-a="veto" data-on="0">أرفض</button></div>';
+      } else out += '<div class="ann"><div class="cards c2" style="max-width:180px;margin:0 auto"><div class="back">؟</div><div class="back">؟</div></div><div class="mut" style="margin-top:12px">' + (ph === 'veto' ? 'المستشار طلب الفيتو… والقرار عند الرئيس.' : 'المستشار يختار السياسة اللي بتنعتمد…') + '</div></div>';
+      out += tracks(v) + timerHtml(v) + hostSkip(v);
+    } else if (ph === 'enacted') {
+      var e = v.enacted;
+      if (e.pending) out += '<div class="ann susp"><div class="mut">' + (e.chaos ? 'فوضى! البلد تعتمد اللي فوق الكومة…' : 'انعتمدت سياسة…') + '</div><div class="big" style="margin-top:12px">شوفوا شاشة الطاولة</div><div class="dots3"><i></i><i></i><i></i></div></div>';
+      else out += '<div class="ann ' + (e.card === 'liberal' ? 'lib' : 'fas') + '"><div style="max-width:150px;margin:0 auto">' + I.card(e.card) + '</div><div class="big" style="margin-top:12px">' + (e.chaos ? 'فوضى: ' : '') + (e.card === 'liberal' ? 'سياسة نزيهة' : 'سياسة فاسدة') + '</div>' + (e.power ? '<div class="mut" style="margin-top:6px">الرئيس عنده قدرة: ' + POWER[e.power] + '</div>' : '') + '</div>';
+      out += claimCard(v) + tracks(v) + hostSkip(v, 'كمّل');
+    } else if (ph === 'power') {
+      out += powerView(v) + claimCard(v) + tracks(v) + timerHtml(v) + hostSkip(v);
+    }
+    out += logCard(v);
+    return out;
+  }
+  function powerView(v) {
+    var me = v.me, pw = v.power, isPres = me && me.id === v.presId, out = '';
+    var title = '<div class="row" style="justify-content:center;gap:8px"><span style="width:28px;height:28px;color:var(--gold)">' + I.svg(pw.kind) + '</span><span class="big">' + POWER[pw.kind] + '</span></div>';
+    if (pw.kind === 'kill' && pw.done) return '<div class="ann fas">' + title + '<div class="huge" style="margin-top:10px">' + nm(v, pw.target) + '</div><div class="mut" style="margin-top:6px">انعدم… وما كان الزعيم السري. (ما ينكشف وش هو)</div></div>';
+    if (!isPres) return '<div class="ann">' + title + '<div class="mut" style="margin-top:8px">الرئيس ' + nm(v, v.presId) + ' ينفّذ القدرة الحين…</div>' + (pw.done && pw.kind === 'investigate' ? '<div style="margin-top:8px">فحص ولاء <b>' + nm(v, pw.target) + '</b>. اسألوه وش طلع!</div>' : '') + '</div>';
+    if (pw.kind === 'peek') return '<div class="ann">' + title + '<div class="mut" style="margin-top:6px">أول ٣ بطاقات بالكومة (لك وحدك، بالترتيب):</div></div><div class="cards c3">' + (me.peek || []).map(function (c) { return I.card(c); }).join('') + '</div><div class="stick"><button class="btn gold" data-a="power" data-id="">حفظتها — كمّل</button></div>';
+    if (pw.kind === 'investigate' && pw.done) { var iv = me.investigation; return '<div class="ann ' + (iv.party === 'liberal' ? 'lib' : 'fas') + '">' + title + '<div class="huge" style="margin-top:10px">' + nm(v, iv.target) + '</div><div class="big" style="margin-top:6px">' + (iv.party === 'liberal' ? 'نزيه' : 'فاسد') + '</div><div class="mut small" style="margin-top:6px">لك وحدك. قول للكل اللي تبيه.</div></div><div class="stick"><button class="btn gold" data-a="powerdone">تمام — كمّل اللعب</button></div>'; }
+    var red = pw.kind === 'kill';
+    var targets = v.players.filter(function (p) { return p.alive && p.id !== me.id; });
+    out += '<div class="ann ' + (red ? 'fas' : '') + '">' + title + '<div class="mut" style="margin-top:6px">' + (pw.kind === 'investigate' ? 'اختر لاعب تشوف حزبه (لك وحدك).' : pw.kind === 'special' ? 'اختر مين يكون الرئيس الجاي.' : 'اختر لاعب تعدمه. لو كان الزعيم السري تفوزون فوراً!') + '</div></div>';
+    out += '<div class="grid">' + targets.map(function (p) { var dis = pw.kind === 'investigate' && p.investigated; return '<button class="pick ' + (red ? 'red ' : '') + (ST.ui.sel === p.id ? 'sel' : '') + (dis ? ' dis' : '') + '" data-a="sel" data-id="' + p.id + '">' + av(p, 32) + '<span class="nm">' + esc(p.name) + '</span>' + (dis ? '<span class="tag">انفحص</span>' : '') + '</button>'; }).join('') + '</div>';
+    out += '<div class="stick"><button class="btn ' + (red ? 'red' : 'gold') + '" data-a="power" data-id="' + (ST.ui.sel || '') + '" ' + (ST.ui.sel ? '' : 'disabled') + '>' + (ST.ui.sel ? (pw.kind === 'investigate' ? 'افحص ' : pw.kind === 'special' ? 'عيّن رئيس: ' : 'أعدم ') + nm(v, ST.ui.sel) : 'اختر لاعب') + '</button></div>';
+    return out;
+  }
+  function evText(v, e) {
+    switch (e.k) {
+      case 'start': return 'بدأت اللعبة (' + AR(e.n) + ' لاعبين)';
+      case 'nominate': return nm(v, e.pres) + ' رشّح ' + nm(v, e.nom) + ' مستشار';
+      case 'vote': return 'تصويت: نعم ' + AR(e.ja) + ' — لا ' + AR(e.nein) + ' ← ' + (e.passed ? 'نجحت' : 'سقطت');
+      case 'enact': return (e.chaos ? 'فوضى: ' : '') + 'انعتمدت ' + (e.card === 'liberal' ? 'نزيهة' : 'فاسدة') + ' (زرقاء ' + AR(e.lib) + ' · حمراء ' + AR(e.fas) + ')';
+      case 'chaos': return '٣ رفض ورا بعض — فوضى!';
+      case 'vetoAsk': return nm(v, e.chan) + ' طلب الفيتو';
+      case 'veto': return e.on ? 'الرئيس وافق على الفيتو' : 'الرئيس رفض الفيتو';
+      case 'power': return e.kind === 'peek' ? nm(v, e.pres) + ' شاف أول ٣ بطاقات' : e.kind === 'investigate' ? nm(v, e.pres) + ' فحص ولاء ' + nm(v, e.target) : e.kind === 'special' ? nm(v, e.pres) + ' اختار ' + nm(v, e.target) + ' رئيس' : nm(v, e.pres) + ' أعدم ' + nm(v, e.target);
+      case 'claim': return nm(v, e.who) + ' يقول جاه: ' + claimTxt(e.as === 'pres' ? 3 : 2, e.fas);
+      case 'reshuffle': return 'انخلطت الكومة من جديد';
+      case 'end': return 'انتهت اللعبة';
+    }
+    return '';
+  }
+  function logCard(v) {
+    var evs = (v.events || []).slice().reverse().map(function (e) { return evText(v, e); }).filter(Boolean);
+    if (!evs.length) return '';
+    return '<div class="card col"><button class="row" data-a="log" style="width:100%"><b>سجل اللعبة</b><span class="sp"></span><span class="mut small">' + (ST.ui.log ? 'إخفاء' : 'عرض') + '</span></button>' + (ST.ui.log ? '<div class="log">' + evs.map(function (t) { return '<div>' + t + '</div>'; }).join('') + '</div>' : '') + '</div>';
+  }
+  var WHY = { five_liberal: 'اعتمدوا ٥ سياسات نزيهة', six_fascist: 'اعتمدوا ٦ سياسات فاسدة', leader_elected: 'انتخب الزعيم السري مستشار بعد ٣ حمراء', leader_killed: 'انعدم الزعيم السري' };
+  function ended(v) {
+    var w = v.winner || {}, me = v.me, lib = w.side === 'liberal', mine = me && me.party === w.side;
+    var out = '<div class="ann ' + (lib ? 'lib' : 'fas') + '"><div style="width:110px;height:110px;margin:0 auto">' + I.svg(lib ? 'liberal' : 'fascist') + '</div><div class="huge" style="margin-top:8px">' + (lib ? 'فاز النزهاء' : 'فاز الفاسدين') + '</div><div class="mut" style="margin-top:6px">' + (WHY[w.why] || '') + '</div>' + (me && me.party ? '<div class="big" style="margin-top:10px;color:' + (mine ? '#9effd4' : '#ffb3b5') + '">' + (mine ? 'فزت!' : 'خسرت') + '</div>' : '') + '</div>';
+    out += '<div class="card col"><div class="big">البطاقات</div>' + v.players.map(function (p) { return '<div class="pl">' + av(p) + '<b class="' + (p.alive ? '' : 'dead') + '">' + esc(p.name) + '</b><span class="sp"></span><span class="chip ' + (p.role === 'liberal' ? 'lib' : 'fas') + '">' + roleName(p.role) + '</span></div>'; }).join('') + '</div>';
+    if (me && me.host) out += '<button class="btn gold" data-a="again">لعبة جديدة بنفس اللاعبين</button><button class="btn sec" data-a="reset">رجوع للوبي</button>';
+    else out += '<div class="card ctr mut">ننتظر المضيف يبدأ لعبة جديدة…</div>';
+    return out + logCard(v);
+  }
+
+  // ------------------------------------------------------------------ الرسم
+  function render() {
+    var v = ST.view, html;
+    if (!v) html = home();
+    else if (v.phase === 'lobby') html = lobby(v);
+    else if (!v.me) html = '<div class="card ctr">أنت مو لاعب في هذي الغرفة.</div>';
+    else if (v.phase === 'reveal') html = reveal(v);
+    else if (v.phase === 'ended') html = ended(v);
+    else html = game(v);
+    var focus = document.activeElement && document.activeElement.id, keep = {};
+    ['inCode', 'inName', 'inName2'].forEach(function (k) { var x = document.getElementById(k); if (x) keep[k] = x.value; });
+    $app.innerHTML = html;
+    Object.keys(keep).forEach(function (k) { var x = document.getElementById(k); if (x) x.value = keep[k]; });
+    if (focus) { var f = document.getElementById(focus); if (f) f.focus(); }
+    renderOverlay();
+  }
+  function renderOverlay() {
+    var out = '';
+    if (ST.me && !ST.open) out += '<div class="conn">الاتصال مقطوع… نحاول نرجّعه</div>';
+    if (ST.toast) out += '<div class="toast">' + esc(ST.toast) + '</div>';
+    if (ST.ui.peek && ST.view && ST.view.me && ST.view.me.role) out += '<div class="peek noselect" data-peek="1">' + roleCard(ST.view) + '</div>';
+    $ov.innerHTML = out;
+  }
+  setInterval(function () {
+    var v = ST.view; if (!v || !v.deadline) return;
+    var t = document.querySelector('[data-timer]'), b = document.querySelector('[data-bar]');
+    if (t) t.textContent = fmt(remaining(v)); if (b) b.style.width = Math.round(100 * remaining(v) / (v.timerTotal || 1)) + '%';
+  }, 250);
+
+  // عرض البطاقة: ضغط مطوّل (وتختفي لما تشيل إصبعك)، أو زر «بطاقتي» يفتحها ويقفلها
+  var holdT = 0;
+  function isPeekEl(e) { return e.target.closest && e.target.closest('[data-peek]'); }
+  document.addEventListener('pointerdown', function (e) { if (!isPeekEl(e)) return; clearTimeout(holdT); holdT = setTimeout(function () { ST.ui.peek = true; renderOverlay(); }, 180); });
+  ['pointerup', 'pointercancel'].forEach(function (n) { document.addEventListener(n, function () { clearTimeout(holdT); if (ST.ui.peek === true) { ST.ui.peek = false; renderOverlay(); } }); });
+  document.addEventListener('contextmenu', function (e) { if (isPeekEl(e)) e.preventDefault(); });
+
+  // ------------------------------------------------------------------ الشرح
+  var HS = { sec: 'idea' };
+  function openHelp(s) { HS.sec = s || HS.sec; $help.classList.add('on'); renderHelp(); }
+  function renderHelp() {
+    var S = HELP.SECTIONS.filter(function (x) { return x.id === HS.sec; })[0] || HELP.SECTIONS[0], body = '';
+    if (S.lead) body += '<div class="lead">' + esc(S.lead) + '</div>';
+    if (S.kind === 'list') body += '<ul class="pts">' + S.points.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('') + '</ul>';
+    if (S.kind === 'steps') body += S.steps.map(function (st, i) { return '<div class="stp"><span class="n">' + AR(i + 1) + '</span><div class="tx"><b>' + esc(st.h) + '</b>' + esc(st.t) + '</div></div>'; }).join('');
+    if (S.note) body += '<div class="note">' + esc(S.note) + '</div>';
+    var i = HELP.SECTIONS.indexOf(S), nx = HELP.SECTIONS[i + 1];
+    $help.innerHTML = '<div class="hp"><div class="row"><div class="big sp">شرح اللعبة</div><button class="btn sec sm" data-a="helpclose">إغلاق ✕</button></div><div class="htabs">' + HELP.SECTIONS.map(function (x) { return '<button class="chip ' + (x.id === S.id ? 'on' : '') + '" data-a="helptab" data-s="' + x.id + '">' + esc(x.short) + '</button>'; }).join('') + '</div><div class="big">' + esc(S.title) + '</div>' + body +
+      (nx ? '<button class="btn" data-a="helptab" data-s="' + nx.id + '">التالي: ' + esc(nx.short) + '</button>' : '<button class="btn gold" data-a="helpclose">فهمت، يلا نلعب</button>') + '</div>';
+    $help.scrollTop = 0;
+  }
+
+  // ------------------------------------------------------------------ الأزرار
+  document.addEventListener('click', function (e) {
+    var el = e.target.closest ? e.target.closest('[data-a]') : null; if (!el) return;
+    var a = el.getAttribute('data-a'), v = ST.view, id = el.getAttribute('data-id');
+    var val = function (i) { var x = document.getElementById(i); return x ? x.value.trim() : ''; };
+    switch (a) {
+      case 'create': { if (window.MafiaAudio) window.MafiaAudio.unlock(); var n = val('inName2'); if (!n) return toast(ERR.name_required); store.set('sh_name', n); send({ t: 'create', name: n }) || toast('الاتصال مقطوع'); break; }
+      case 'join': { var c = val('inCode'), n2 = val('inName'); if (!/^\d{4}$/.test(c)) return toast('اكتب رمز الغرفة (٤ أرقام)'); if (!n2) return toast(ERR.name_required); store.set('sh_name', n2); send({ t: 'join', code: c, name: n2 }) || toast('الاتصال مقطوع'); break; }
+      case 'leave': act('leave'); break;
+      case 'share': { var u = qrFor(v.code).link; if (navigator.share) navigator.share({ title: 'المستشار السري', text: 'ادخل غرفتنا: ' + v.code, url: u }).catch(function () { }); else if (navigator.clipboard) navigator.clipboard.writeText(u).then(function () { toast('انسخ الرابط'); }); break; }
+      case 'boardlink': ST.ui.board = !ST.ui.board; render(); break;
+      case 'copyboard': if (navigator.clipboard) navigator.clipboard.writeText(el.getAttribute('data-u')).then(function () { toast('انسخ رابط الشاشة'); }); break;
+      case 'kick': if (ST.ui.kick === id) { ST.ui.kick = null; act('kick', { target: id }); } else { ST.ui.kick = id; render(); setTimeout(function () { if (ST.ui.kick === id) { ST.ui.kick = null; render(); } }, 3000); } break;
+      case 'actsec': act('settings', { patch: { actSec: Number(el.getAttribute('data-s')) } }); break;
+      case 'start': act('start'); break;
+      case 'ready': act('ready'); break;
+      case 'skip': act('skip'); break;
+      case 'peek': ST.ui.peek = ST.ui.peek ? false : 'btn'; renderOverlay(); break;
+      case 'sel': ST.ui.sel = ST.ui.sel === id ? null : id; render(); break;
+      case 'selc': { var i = el.getAttribute('data-i'); ST.ui.sel = ST.ui.sel === i ? null : i; render(); break; }
+      case 'nominate': if (ST.ui.sel) act('nominate', { target: ST.ui.sel }); break;
+      case 'vote': act('vote', { target: el.getAttribute('data-v') }); break;
+      case 'discard': if (ST.ui.sel != null) act('discard', { i: Number(ST.ui.sel) }); break;
+      case 'enact': if (ST.ui.sel != null) act('enact', { i: Number(ST.ui.sel) }); break;
+      case 'vetoask': act('vetoAsk'); break;
+      case 'veto': act('vetoReply', { on: el.getAttribute('data-on') === '1' }); break;
+      case 'power': act('power', { target: id || null }); break;
+      case 'powerdone': act('powerDone'); break;
+      case 'claim': act('claim', { v: el.getAttribute('data-v') }); break;
+      case 'again': act('again'); break;
+      case 'reset': act('reset'); break;
+      case 'log': ST.ui.log = !ST.ui.log; render(); break;
+      case 'help': openHelp(el.getAttribute('data-s')); break;
+      case 'helpclose': $help.classList.remove('on'); break;
+      case 'helptab': HS.sec = el.getAttribute('data-s'); renderHelp(); break;
+    }
+  });
+  document.addEventListener('click', function (e) { if (ST.ui.peek === 'btn' && e.target.closest && e.target.closest('.peek')) { ST.ui.peek = false; renderOverlay(); } });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Enter') { var t = e.target; if (t && t.id === 'inName') { var b = document.querySelector('[data-a="join"]'); b && b.click(); } if (t && t.id === 'inName2') { var b2 = document.querySelector('[data-a="create"]'); b2 && b2.click(); } } });
+
+  // النسخة التجريبية: شاشة الطاولة داخل نفس الصفحة
+  var DB = { board: null };
+  function setTab(t) { document.body.classList.toggle('show-board', t === 'board'); document.body.classList.toggle('show-both', t === 'both'); var bs = document.querySelectorAll('.tabs button'); for (var i = 0; i < bs.length; i++) bs[i].classList.toggle('on', bs[i].getAttribute('data-tab') === t); if (DB.board && DB.board.fit) setTimeout(DB.board.fit, 30); }
+  function demoBoard(code) {
+    if (!window.SH_DEMO || DB.board || !window.SHBoard) return;
+    var bh = document.getElementById('board'); bh.className = 'bd-host'; DB.board = window.SHBoard.mount(bh, { code: code }); DB.board.enableSound();
+    var t = document.createElement('div'); t.className = 'tabs'; t.innerHTML = '<button class="on" data-tab="phone">جوالي</button><button data-tab="board">التلفزيون</button>' + (window.innerWidth >= 900 ? '<button data-tab="both">الاثنين معاً</button>' : ''); document.body.appendChild(t);
+    t.addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) setTab(b.getAttribute('data-tab')); });
+  }
+  window.__sh = ST; window.__setTab = setTab;
+  if (window.SH_DEMO) { document.body.classList.add('is-demo'); var db = document.createElement('div'); db.className = 'demo'; db.textContent = 'نسخة تجريبية بدون إنترنت — باقي اللاعبين بوتات'; document.body.appendChild(db); }
+  render(); connect();
+})();
+</script>
+
+<style>
+.dw-FloatingAudioBar {
+  position: fixed; bottom: 12px; left: 12px; z-index: 9999;
+  display: inline-flex; gap: 6px; background: rgba(10, 15, 36, 0.92);
+  border: 1px solid rgba(245, 185, 66, 0.45); border-radius: 999px;
+  padding: 5px 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.55);
+  font-family: -apple-system, "Tajawal", "Cairo", sans-serif;
+}
+.dw-FloatingAudioBar button {
+  padding: 5px 11px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.08); color: #F8FAFC; font-size: 12px; font-weight: 800;
+  cursor: pointer;
+}
+.dw-FloatingAudioBar button.off {
+  opacity: 0.55; background: rgba(244, 63, 94, 0.18); border-color: rgba(244, 63, 94, 0.45);
+}
+</style>
+<script>
+(function(){
+  window.__DW_VOICE_ON = true;
+  window.__DW_SFX_ON = true;
+  var AudioCtx = window.AudioContext || window.webkitAudioContext;
+  var sfxCtx = null;
+  function playPremiumClick(freq) {
+    if (!window.__DW_SFX_ON || !AudioCtx) return;
+    try {
+      if (!sfxCtx) sfxCtx = new AudioCtx();
+      if (sfxCtx.state === 'suspended') sfxCtx.resume();
+      var o = sfxCtx.createOscillator(), g = sfxCtx.createGain();
+      o.type = 'triangle'; o.frequency.setValueAtTime(freq || 560, sfxCtx.currentTime);
+      g.gain.setValueAtTime(0.06, sfxCtx.currentTime);
+      g.gain.exponentialRampToValueAtTime(0.001, sfxCtx.currentTime + 0.075);
+      o.connect(g); g.connect(sfxCtx.destination);
+      o.start(); o.stop(sfxCtx.currentTime + 0.075);
+    } catch(e){}
+  }
+  document.addEventListener('DOMContentLoaded', function(){
+    var bar = document.createElement('div');
+    bar.className = 'dw-FloatingAudioBar';
+    bar.innerHTML =
+      '<button id="dwFlVoiceBtn" type="button">🔊 الصوت: مفعّل</button>' +
+      '<button id="dwFlSfxBtn" type="button">🎵 المؤثرات: مفعّلة</button>';
+    document.body.appendChild(bar);
+    var vBtn = document.getElementById('dwFlVoiceBtn');
+    var sBtn = document.getElementById('dwFlSfxBtn');
+    vBtn.addEventListener('click', function(){
+      window.__DW_VOICE_ON = !window.__DW_VOICE_ON;
+      vBtn.textContent = window.__DW_VOICE_ON ? '🔊 الصوت: مفعّل' : '🔇 الصوت: مغلق';
+      vBtn.classList.toggle('off', !window.__DW_VOICE_ON);
+      if (window.DiwaniyaAudio && window.DiwaniyaAudio.setEnabled) window.DiwaniyaAudio.setEnabled('voice', window.__DW_VOICE_ON);
+      if (!window.__DW_VOICE_ON && window.speechSynthesis) { try { window.speechSynthesis.cancel(); } catch(e){} }
+    });
+    sBtn.addEventListener('click', function(){
+      window.__DW_SFX_ON = !window.__DW_SFX_ON;
+      sBtn.textContent = window.__DW_SFX_ON ? '🎵 المؤثرات: مفعّلة' : '🔕 المؤثرات: مغلقة';
+      sBtn.classList.toggle('off', !window.__DW_SFX_ON);
+      if (window.DiwaniyaAudio && window.DiwaniyaAudio.setEnabled) window.DiwaniyaAudio.setEnabled('sfx', window.__DW_SFX_ON);
+      if (window.__DW_SFX_ON) playPremiumClick(660);
+    });
+    document.addEventListener('click', function(ev){
+      if (ev.target && ev.target.closest && ev.target.closest('button')) playPremiumClick(540);
+    }, true);
+  });
+})();
+</script>
+
+
+<script>
+(function(){
+  window.addEventListener('message', function(ev) {
+    var d = ev && ev.data;
+    if (!d || typeof d !== 'object') return;
+    if (d.type === 'DW_AUDIO_SYNC') {
+      window.__DW_VOICE_ON = !!d.voiceOn;
+      window.__DW_SFX_ON = !!d.sfxOn;
+      if (!d.voiceOn && window.speechSynthesis) {
+        try { window.speechSynthesis.cancel(); } catch(e){}
+      }
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
