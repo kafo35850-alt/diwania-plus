@@ -2,6 +2,7 @@
 // falls back to the defaults bundled in seed.json.
 import SEED from './seed.json';
 import { nowIso } from './util.js';
+import { gatewayConfigured } from './payments.js';
 
 export const DOC_KEYS = ['games', 'packages', 'categories', 'game_content', 'suggestions', 'catQuestionsOverrides'];
 
@@ -35,5 +36,5 @@ export async function getCatalog(env) {
     getDoc(env, 'categories'),
     getDoc(env, 'suggestions')
   ]);
-  return { games, packages, categories, suggestions, gatewayConnected: false };
+  return { games, packages, categories, suggestions, gatewayConnected: gatewayConfigured(env) };
 }

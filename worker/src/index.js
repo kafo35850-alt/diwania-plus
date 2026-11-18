@@ -2,7 +2,8 @@
 // from ./public by Workers Static Assets.
 import { json, fail, HttpError, readJson, clientIp, cleanText, sanitizeUrl, nowIso, randomId, underRateLimit } from './util.js';
 import { sendOtp, verifyOtp, logout, currentSession, requireSession, publicUser, clearSessionCookie } from './auth.js';
-import { walletSnapshot, launchGame, createPaymentOrder, servePlay } from './wallet.js';
+import { walletSnapshot, launchGame, servePlay } from './wallet.js';
+import { createCheckout, handleReturn, handleWebhook, reconcileUserPending, paymentStatusForUser } from './payments.js';
 import { getCatalog, getDoc, putDoc } from './catalog.js';
 import { adminData, adminAction, eightCategoryQuestions } from './admin.js';
 
@@ -16,6 +17,7 @@ function sameOrigin(request) {
 async function me(env, request) {
   const session = await currentSession(env, request);
   if (!session) return { ok: true, user: null, wallet: EMPTY_WALLET };
+  await reconcileUserPending(env, session.user.id);
   return { ok: true, user: publicUser(session.user, session.csrfToken), wallet: await walletSnapshot(env, session.user.id) };
 }
 
@@ -43,6 +45,9 @@ async function submitSuggestion(env, request, body) {
 async function handleApi(env, request, url) {
   const path = url.pathname;
   const method = request.method;
+
+  // Server-to-server call from Moyasar (no browser origin); it only triggers a re-check with Moyasar.
+  if (method === 'POST' && path === '/api/payments/webhook') return handleWebhook(env, request);
 
   if (method !== 'GET' && !sameOrigin(request)) throw new HttpError(403, 'طلب من مصدر غير مسموح.');
 
@@ -73,7 +78,12 @@ async function handleApi(env, request, url) {
 
   if (method === 'POST' && path === '/api/payments/orders') {
     const session = await requireSession(env, request);
-    return json(await createPaymentOrder(env, session, await readJson(request)), 201);
+    return json(await createCheckout(env, request, session, await readJson(request)), 201);
+  }
+  const payOrder = path.match(/^\/api\/payments\/orders\/(pay_[A-Za-z0-9_-]{4,80})$/);
+  if (method === 'GET' && payOrder) {
+    const session = await requireSession(env, request, { csrf: false });
+    return json(await paymentStatusForUser(env, session, payOrder[1]));
   }
 
   if (method === 'POST' && path === '/api/suggestions') {
@@ -103,6 +113,8 @@ export default {
     const url = new URL(request.url);
     try {
       if (url.pathname.startsWith('/api/')) return await handleApi(env, request, url);
+
+      if (url.pathname === '/payments/return' && request.method === 'GET') return await handleReturn(env, request);
 
       const play = url.pathname.match(/^\/play\/([a-z0-9_]{2,40})\/?$/);
       if (play && request.method === 'GET') {

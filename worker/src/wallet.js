@@ -99,33 +99,6 @@ export async function launchGame(env, session, slug, body) {
   return { ...result, playUrl: await issuePlayToken(env, uid, slug), wallet: await walletSnapshot(env, uid) };
 }
 
-export async function createPaymentOrder(env, session, body) {
-  const packages = await getDoc(env, 'packages');
-  const pkg = packages.find((p) => p.id === body.pkgId && p.is_active);
-  if (!pkg) throw new HttpError(404, 'الباقة المختارة غير متاحة.');
-  const order = {
-    id: randomId('pay'),
-    user_id: session.user.id,
-    user_email: session.user.email,
-    package_id: pkg.id,
-    package_name: pkg.name,
-    credits: pkg.credits,
-    amount_halalas: pkg.price_halalas,
-    currency: pkg.currency || 'SAR',
-    status: 'gateway_not_configured',
-    gateway_note: 'الدفع الإلكتروني غير متاح حالياً لعدم ربط بوابة الدفع — لم يتم خصم أي مبلغ ولم تتم إضافة الأقيام.',
-    created_at: nowIso()
-  };
-  await env.DB.prepare(
-    'INSERT INTO payments (id, user_id, user_email, package_id, package_name, credits, amount_halalas, currency, status, gateway_note, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
-  ).bind(order.id, order.user_id, order.user_email, order.package_id, order.package_name, order.credits,
-    order.amount_halalas, order.currency, order.status, order.gateway_note, order.created_at).run();
-  return {
-    ok: true, status: 201, gatewayConnected: false, order,
-    message: 'تم تسجيل طلب «' + pkg.name + '». بوابة الدفع غير مربوطة بعد، فلم يُخصم أي مبلغ ولم تُضف أقيام.',
-    wallet: await walletSnapshot(env, session.user.id) };
-}
-
 // Games added from the admin panel reuse the engine file of an existing game.
 function resolveGameHtml(game) {
   if (GAMES[game.slug]) return { html: GAMES[game.slug], retitle: false };

@@ -1451,6 +1451,12 @@ button:disabled {
           return d;
         });
       },
+      paymentStatus: function (orderId) {
+        return api('GET', '/api/payments/orders/' + encodeURIComponent(orderId)).then(function (d) {
+          if (d.wallet && ME) ME.wallet = d.wallet;
+          return d;
+        });
+      },
       createPaymentOrder: function (pkgId) {
         return api('POST', '/api/payments/orders', { pkgId: pkgId }).then(function (d) {
           if (d.wallet && ME) ME.wallet = d.wallet;
@@ -1847,6 +1853,25 @@ button:disabled {
     '</div>';
   }
 
+  var PAYMENT_STATUS = {
+    pending: { label: '⏳ بانتظار الدفع', cls: 'gold' },
+    paid: { label: '✅ مدفوع', cls: 'teal' },
+    failed: { label: '❌ فشل الدفع', cls: '' },
+    expired: { label: '⌛ انتهت المهلة', cls: '' },
+    canceled: { label: '🚫 ملغي', cls: '' },
+    gateway_not_configured: { label: 'قبل ربط البوابة', cls: '' }
+  };
+  function paymentChip(status) {
+    var s = PAYMENT_STATUS[status] || { label: status, cls: '' };
+    return '<span class="dw-chip ' + s.cls + '">' + esc(s.label) + '</span>';
+  }
+
+  function legalLinksHtml() {
+    return '<a href="/legal/terms.html" target="_blank" rel="noopener" style="color:var(--gold)">الشروط والأحكام</a> · ' +
+      '<a href="/legal/refund.html" target="_blank" rel="noopener" style="color:var(--gold)">سياسة الاسترجاع</a> · ' +
+      '<a href="/legal/privacy.html" target="_blank" rel="noopener" style="color:var(--gold)">سياسة الخصوصية</a>';
+  }
+
   function renderPackagesTab() {
     var activePkgs = STATE.packages.filter(function (p) { return p.is_active; }).sort(function (a, b) { return a.sort_order - b.sort_order; });
     return '<div class="dw-card">' +
@@ -1855,10 +1880,13 @@ button:disabled {
           '<h3 style="margin:0;font-size:24px;font-weight:900">باقات شحن الأقيام (Credits)</h3>' +
           '<p style="margin:4px 0 0;color:var(--text-muted);font-size:14.5px">يحصل كل مستخدم على <b>قيم مجاني تجريبي في كل لعبة من الألعاب الـ ٢٤</b>، وبعدها يمكن طلب شحن أي باقة من الباقات التالية:</p>' +
         '</div>' +
-        '<span class="dw-chip gold" style="font-size:12.5px">⚠️ بوابة الدفع في وضع التجهيز — لا تُضاف الأقيام إلا بعد تأكيد Webhook موثق</span>' +
+        (DiwaniyaServerKernel.loadDB().gatewayConnected
+          ? '<span class="dw-chip teal" style="font-size:12.5px">🔒 دفع آمن عبر Moyasar · مدى · Apple Pay · بطاقات ائتمانية</span>'
+          : '<span class="dw-chip gold" style="font-size:12.5px">⚠️ الدفع الإلكتروني غير متاح حالياً</span>') +
       '</div>' +
-      '<div style="background:rgba(245,185,66,0.1);border:1px solid rgba(245,185,66,0.35);padding:12px 16px;border-radius:14px;font-size:13.5px;color:var(--gold-light);line-height:1.65">' +
-        '🔒 <b>تنبيه شفافية الدفع:</b> بوابة الدفع الإلكترونية غير مربوطة حالياً. عند الضغط على طلب أي باقة، يقوم الخادم بإنشاء طلب دفع في جدول <code>payments</code> بحالة <b>«بانتظار ربط البوابة (gateway_not_configured)»</b> دون ادعاء نجاح شراء وهمي ودون إضافة أقيام غير مدفوعة.' +
+      '<div style="background:rgba(45,212,191,0.08);border:1px solid rgba(45,212,191,0.3);padding:12px 16px;border-radius:14px;font-size:13.5px;line-height:1.75">' +
+        '💳 الدفع يتم في صفحة بوابة الدفع (Moyasar) مباشرة، وبيانات بطاقتك ما تمر على موقعنا. تنضاف الأقيام لمحفظتك تلقائياً بعد تأكيد البوابة للدفع.' +
+        '<br><span style="color:var(--text-muted)">بإتمام الشراء أنت توافق على ' + legalLinksHtml() + '.</span>' +
       '</div>' +
       '<div class="dw-grid-4" style="margin-top:8px">' +
         activePkgs.map(function (p) {
@@ -1872,7 +1900,9 @@ button:disabled {
             '</div>' +
             '<div style="margin-top:14px;border-top:1px solid var(--border-subtle);padding-top:12px">' +
               '<div style="font-size:22px;font-weight:900;margin-bottom:10px">' + arNum(sar) + ' ر.س</div>' +
-              '<button class="dw-btn dw-btn-gold" style="width:100%" data-act="buy-pkg" data-id="' + esc(p.id) + '">تسجيل طلب الباقة (بوابة الدفع قيد الربط)</button>' +
+              (DiwaniyaServerKernel.loadDB().gatewayConnected
+                ? '<button class="dw-btn dw-btn-gold" style="width:100%" data-act="buy-pkg" data-id="' + esc(p.id) + '"' + (STATE.checkoutInFlight ? ' disabled' : '') + '>💳 اشترِ الآن</button>'
+                : '<button class="dw-btn dw-btn-sec" style="width:100%" disabled>الدفع غير متاح حالياً</button>') +
             '</div>' +
           '</div>';
         }).join('') +
@@ -1898,17 +1928,18 @@ button:disabled {
     '</div>' +
     (w.payments && w.payments.length ? (
       '<div class="dw-card">' +
-        '<h3 style="margin:0;font-size:19px;font-weight:900">طلبات الدفع المسجلة في الخادم (Payments Table)</h3>' +
+        '<h3 style="margin:0;font-size:19px;font-weight:900">طلبات الشراء</h3>' +
         '<div class="dw-table-wrap"><table class="dw-table">' +
-          '<thead><tr><th>رقم الطلب</th><th>الباقة</th><th>الأقيام</th><th>المبلغ</th><th>الحالة في الخادم</th><th>ملاحظة البوابة</th><th>التاريخ</th></tr></thead>' +
+          '<thead><tr><th>رقم الطلب</th><th>الباقة</th><th>الأقيام</th><th>المبلغ</th><th>الحالة</th><th>ملاحظة</th><th>التاريخ</th></tr></thead>' +
           '<tbody>' + w.payments.map(function (p) {
             return '<tr>' +
               '<td dir="ltr"><code>' + esc(p.id) + '</code></td>' +
               '<td><b>' + esc(p.package_name) + '</b></td>' +
               '<td>' + arNum(p.credits) + '</td>' +
               '<td>' + arNum((p.amount_halalas / 100).toFixed(0)) + ' ر.س</td>' +
-              '<td><span class="dw-chip gold">' + esc(p.status) + '</span></td>' +
-              '<td style="font-size:12px;color:var(--text-muted)">' + esc(p.gateway_note || 'بانتظار تأكيد Webhook الموثق') + '</td>' +
+              '<td>' + paymentChip(p.status) + '</td>' +
+              '<td style="font-size:12px;color:var(--text-muted)">' + esc(p.gateway_note || '') +
+                (p.status === 'pending' && p.checkout_url ? ' <a href="' + esc(p.checkout_url) + '" style="color:var(--gold)">أكمل الدفع</a>' : '') + '</td>' +
               '<td dir="ltr" style="font-size:12px;color:var(--text-muted)">' + esc((p.created_at || '').slice(0, 16).replace('T', ' ')) + '</td>' +
             '</tr>';
           }).join('') + '</tbody>' +
@@ -1976,6 +2007,7 @@ button:disabled {
           '<button class="dw-tab-btn ' + (st === 'games' ? 'active' : '') + '" data-adm-tab="games">🎮 إدارة الألعاب (' + arNum(STATE.games.length) + ')</button>' +
           '<button class="dw-tab-btn ' + (st === 'editor' ? 'active' : '') + '" data-adm-tab="editor">✏️ محرر الأسئلة والفئات (١٥٢ فئة + ٢٤ لعبة)</button>' +
           '<button class="dw-tab-btn ' + (st === 'categories' ? 'active' : '') + '" data-adm-tab="categories">🗂️ إدارة الفئات (' + arNum(STATE.categories.length) + ')</button>' +
+          '<button class="dw-tab-btn ' + (st === 'payments' ? 'active' : '') + '" data-adm-tab="payments">💳 المدفوعات</button>' +
           '<button class="dw-tab-btn ' + (st === 'logs' ? 'active' : '') + '" data-adm-tab="logs">🛡️ سجل الأمان</button>' +
         '</div>' +
       '</div>' +
@@ -2188,6 +2220,30 @@ button:disabled {
                   '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="adm-toggle-cat" data-id="' + esc(c.id) + '">' + (c.is_visible ? 'إخفاء' : 'إظهار') + '</button>' +
                 '</td>' +
               '</tr>';
+            }).join('') +
+          '</tbody></table></div>' +
+        '</div>';
+    }
+
+    if (st === 'payments') {
+      var pays = DiwaniyaServerKernel.loadDB().payments || [];
+      var paidSum = pays.filter(function (p) { return p.status === 'paid'; }).reduce(function (a, p) { return a + Number(p.amount_halalas || 0); }, 0);
+      return nav +
+        '<div class="dw-grid-3">' +
+          '<div class="dw-card"><div style="color:var(--text-muted);font-size:13px">بوابة الدفع</div><div style="font-size:22px;font-weight:900">' + (DiwaniyaServerKernel.loadDB().gatewayConnected ? '🟢 مربوطة (Moyasar)' : '🔴 غير مربوطة') + '</div></div>' +
+          '<div class="dw-card"><div style="color:var(--text-muted);font-size:13px">إجمالي المبيعات المؤكدة</div><div style="font-size:30px;font-weight:900;color:var(--gold)">' + arNum((paidSum / 100).toFixed(0)) + ' ر.س</div></div>' +
+          '<div class="dw-card"><div style="color:var(--text-muted);font-size:13px">طلبات بانتظار الدفع</div><div style="font-size:30px;font-weight:900">' + arNum(pays.filter(function (p) { return p.status === 'pending'; }).length) + '</div></div>' +
+        '</div>' +
+        '<div class="dw-card">' +
+          '<h4 style="margin:0;font-size:19px">طلبات الشراء (آخر ٥٠٠)</h4>' +
+          '<p style="margin:0;font-size:13px;color:var(--text-muted)">الاسترجاع يتم من لوحة Moyasar، وبعدها اخصم الأقيام من «المستخدمين والأرصدة» مع ذكر السبب.</p>' +
+          '<div class="dw-table-wrap"><table class="dw-table"><thead><tr><th>الطلب</th><th>المستخدم</th><th>الباقة</th><th>المبلغ</th><th>الحالة</th><th>فاتورة البوابة</th><th>التاريخ</th><th></th></tr></thead><tbody>' +
+            pays.map(function (p) {
+              return '<tr><td dir="ltr"><code>' + esc(p.id) + '</code></td><td dir="ltr">' + esc(p.user_email) + '</td><td>' + esc(p.package_name) + ' (' + arNum(p.credits) + ')</td>' +
+                '<td>' + arNum((p.amount_halalas / 100).toFixed(0)) + ' ر.س</td><td>' + paymentChip(p.status) + '</td>' +
+                '<td dir="ltr" style="font-size:12px">' + esc(p.gateway_invoice_id || '—') + '</td>' +
+                '<td dir="ltr" style="font-size:12px;color:var(--text-muted)">' + esc((p.created_at || '').slice(0, 16).replace('T', ' ')) + '</td>' +
+                '<td>' + (p.status === 'pending' && p.gateway_invoice_id ? '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="adm-verify-payment" data-id="' + esc(p.id) + '">🔄 تحقق من البوابة</button>' : '') + '</td></tr>';
             }).join('') +
           '</tbody></table></div>' +
         '</div>';
@@ -2679,7 +2735,10 @@ button:disabled {
     else if (STATE.tab === 'admin') bodyHtml = renderAdminTab();
     else bodyHtml = renderStoreTab();
 
-    root.innerHTML = renderNavbar() + '<main class="dw-container">' + bodyHtml + '</main>';
+    root.innerHTML = renderNavbar() + '<main class="dw-container">' + bodyHtml + '</main>' +
+      '<footer style="text-align:center;padding:28px 16px 40px;color:var(--text-muted);font-size:13px;line-height:2">' +
+        legalLinksHtml() + '<br>© ديوانية بلس' +
+      '</footer>';
     renderGuideModal();
     renderCategoryPreviewModal();
     renderRoomModal();
@@ -2977,14 +3036,18 @@ button:disabled {
         return;
       }
       var pkgId = actBtn.getAttribute('data-id');
+      if (STATE.checkoutInFlight) return;
+      STATE.checkoutInFlight = true;
+      render();
       DiwaniyaServerKernel.createPaymentOrder(pkgId).then(function (payRes) {
-        if (!payRes.ok) {
-          showToast(payRes.error || 'تعذر إنشاء طلب الدفع.');
+        if (!payRes.ok || !payRes.checkoutUrl) {
+          STATE.checkoutInFlight = false;
+          render();
+          showToast(payRes.error || 'تعذر بدء عملية الدفع.');
           return;
         }
-        STATE.tab = 'wallet';
-        render();
-        showToast(payRes.message);
+        showToast(payRes.message || 'جاري تحويلك لصفحة الدفع…');
+        window.location.href = payRes.checkoutUrl;
       });
     } else if (act === 'adm-reset-trials') {
       var selU = document.getElementById('admUserSelect');
@@ -3158,6 +3221,11 @@ button:disabled {
         render();
         showToast(adCatRes.message);
       });
+    } else if (act === 'adm-verify-payment') {
+      adminCall('verify_payment', { orderId: actBtn.getAttribute('data-id') }, function (vRes) {
+        render();
+        showToast(vRes.message);
+      });
     } else if (act === 'adm-toggle-cat') {
       adminCall('toggle_cat', { catId: actBtn.getAttribute('data-id') }, function (tgCatRes) {
         render();
@@ -3224,10 +3292,35 @@ button:disabled {
     }
   });
 
+  var RETURN_PARAMS = (function () {
+    try {
+      var q = new URLSearchParams(window.location.search);
+      if (!q.get('payment') && !q.get('tab')) return null;
+      var info = { tab: q.get('tab'), payment: q.get('payment'), order: q.get('order') };
+      q.delete('payment'); q.delete('order'); q.delete('tab');
+      var rest = q.toString();
+      window.history.replaceState(null, '', window.location.pathname + (rest ? '?' + rest : ''));
+      return info;
+    } catch (e) { return null; }
+  })();
+  if (RETURN_PARAMS && ['store', 'packages', 'wallet', 'categories'].indexOf(RETURN_PARAMS.tab) !== -1) STATE.tab = RETURN_PARAMS.tab;
+
+  function announcePaymentResult(status) {
+    if (status === 'paid') showToast('🎉 تم الدفع بنجاح وانضافت الأقيام لمحفظتك!');
+    else if (status === 'pending') showToast('⏳ لم يكتمل الدفع بعد. إذا دفعت، بتنضاف الأقيام خلال لحظات.');
+    else if (status === 'failed' || status === 'expired' || status === 'canceled') showToast('❌ لم تتم عملية الدفع، وما انخصم منك شي.');
+  }
+
   render();
   DiwaniyaServerKernel.refreshAll().then(function () {
     STATE.catalogLoaded = true;
     render();
+    if (RETURN_PARAMS && RETURN_PARAMS.payment && RETURN_PARAMS.order && STATE.user) {
+      DiwaniyaServerKernel.paymentStatus(RETURN_PARAMS.order).then(function (d) {
+        render();
+        announcePaymentResult(d.ok && d.order ? d.order.status : RETURN_PARAMS.payment);
+      });
+    }
   });
 })();
 

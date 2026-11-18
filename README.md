@@ -26,6 +26,16 @@
 - **الألعاب** ما تنرسل للمتصفح إلا بتصريح مؤقت (12 ساعة) يطلع بعد الخصم أو التجربة المجانية، ومربوط بحساب اللاعب نفسه.
 - **أسئلة تحدي الثمانية وإجاباتها** ما تطلع في المتجر. تنرسل للعبة وقت التشغيل بس، والمالك يشوفها في لوحة الإدارة.
 
+## الدفع (Moyasar)
+
+1. الزبون يضغط «اشترِ الآن». الخادم ينشئ طلب بحالة `pending` وفاتورة في Moyasar. **السعر يجي من قائمة الباقات في الخادم**، مو من المتصفح.
+2. الزبون يتحول لصفحة الدفع في Moyasar (مدى، Apple Pay، بطاقات ائتمانية). بيانات البطاقة ما تمر على موقعك أبداً.
+3. بعد الدفع، Moyasar يرجّع الزبون لـ `/payments/return`، ويرسل إشعار (webhook) لـ `/api/payments/webhook`.
+4. في الحالتين، الخادم **يسأل Moyasar مباشرة** عن الفاتورة، وما يضيف الأقيام إلا إذا كانت مدفوعة بنفس المبلغ والعملة. الإضافة تصير مرة وحدة بس، حتى لو وصل الإشعار أكثر من مرة.
+5. لو ضاع الإشعار وسكّر الزبون الصفحة، الطلب ينراجع تلقائياً أول ما يفتح الموقع مرة ثانية (خلال يومين من الطلب). وفيه زر «تحقق من البوابة» في لوحة المالك ← المدفوعات.
+
+**الاسترجاع:** يتم من لوحة Moyasar، وبعدها تخصم الأقيام يدوياً من لوحة المالك ← المستخدمين والأرصدة، مع كتابة السبب.
+
 ## النشر لأول مرة
 
 تحتاج حساب [Cloudflare](https://dash.cloudflare.com) مجاني، وحساب [Resend](https://resend.com) مجاني لإرسال الإيميلات. Node.js لازم يكون الإصدار 20 أو أحدث.
@@ -43,6 +53,8 @@ npm run db:migrate:remote
 # 3) الأسرار (كل أمر يطلب منك تلصق القيمة)
 npx wrangler secret put AUTH_SECRET      # نص عشوائي طويل، مثلاً ناتج: openssl rand -base64 48
 npx wrangler secret put RESEND_API_KEY   # من لوحة Resend
+npx wrangler secret put MOYASAR_SECRET_KEY      # المفتاح السري من لوحة Moyasar (ابدأ بـ sk_test_ للتجربة)
+npx wrangler secret put MOYASAR_WEBHOOK_SECRET  # كلمة سر تختارها أنت، وتكتبها نفسها في Moyasar (الخطوة 6)
 
 # 4) عدّل [vars] في wrangler.toml:
 #    OWNER_EMAILS = "your@email.com"
@@ -53,6 +65,17 @@ npm run deploy
 ```
 
 بعد النشر، اربط الدومين من لوحة Cloudflare: **Workers & Pages ← diwaniya-plus ← Settings ← Domains & Routes**.
+
+```
+# 6) في لوحة Moyasar ← Settings ← Webhooks أضف:
+#    URL:          https://your-domain.com/api/payments/webhook
+#    Secret token: نفس قيمة MOYASAR_WEBHOOK_SECRET
+#    Events:       payment_paid و payment_failed
+```
+
+جرّب بمفاتيح الاختبار (`sk_test_`) وبطاقات Moyasar التجريبية أول. إذا كل شي زبط، بدّل للمفتاح الحقيقي (`sk_live_`) بنفس الأمر `wrangler secret put`.
+
+> قبل التشغيل الحقيقي، عبّي الخانات المظللة في صفحات `public/legal/` (اسم المنشأة، السجل التجاري، التواصل) وراجعها مع مستشار قانوني.
 
 ## التشغيل على جهازك للتجربة
 
@@ -86,7 +109,10 @@ npm run dev
 | POST | `/api/auth/logout` | تسجيل الخروج |
 | POST | `/api/games/:slug/launch` | تشغيل لعبة (خصم أو تجربة مجانية) ويرجع رابط لعب مؤقت |
 | GET | `/play/:slug?t=…` | ملف اللعبة نفسه، لصاحب التصريح فقط |
-| POST | `/api/payments/orders` | تسجيل طلب شراء باقة |
+| POST | `/api/payments/orders` | إنشاء طلب شراء وفاتورة في Moyasar، ويرجع رابط صفحة الدفع |
+| GET | `/api/payments/orders/:id` | حالة طلب الزبون نفسه (ويتحقق من البوابة إذا كان معلّق) |
+| POST | `/api/payments/webhook` | إشعارات Moyasar |
+| GET | `/payments/return` | رجوع الزبون من صفحة الدفع |
 | POST | `/api/suggestions` | اقتراح لعبة |
 | GET | `/api/admin/data` | للمالك: المستخدمين والمدفوعات والسجل |
 | GET | `/api/admin/eight-category/:slug` | للمالك: أسئلة فئة من تحدي الثمانية |
@@ -94,6 +120,4 @@ npm run dev
 
 ## الباقي (المراحل الجاية)
 
-- **ربط بوابة دفع** (Moyasar أو Tap). الحين طلبات الشراء تنحفظ بحالة "البوابة غير مربوطة" ولا تضيف أقيام.
-- **صفحات الخصوصية والشروط والاسترجاع.**
 - **غرف اللعب الجماعي والـ QR الحقيقي** باستخدام Durable Objects.

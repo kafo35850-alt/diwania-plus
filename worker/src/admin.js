@@ -2,6 +2,7 @@
 import { HttpError, nowIso, randomId, cleanText, toInt } from './util.js';
 import { getDoc, putDoc } from './catalog.js';
 import { GAMES } from './games.js';
+import { verifyOrder } from './payments.js';
 
 const SLUG_RE = /^[a-z0-9_]{2,40}$/;
 
@@ -184,6 +185,13 @@ export async function adminAction(env, session, action, payload) {
       await putDoc(env, 'games', games);
       await log(env, admin, 'update_game_cost', 'game', game.slug, String(game.cost_credits));
       return { ok: true, message: 'تم تحديث تكلفة «' + game.title + '» إلى ' + game.cost_credits + ' قيم.' };
+    }
+
+    case 'verify_payment': {
+      const r = await verifyOrder(env, String(payload.orderId || ''));
+      if (!r.ok) throw new HttpError(r.status || 400, r.error);
+      await log(env, admin, 'verify_payment', 'payment', r.order.id, 'الحالة: ' + r.order.status);
+      return { ok: true, message: 'حالة الطلب ' + r.order.id + ' في البوابة: ' + r.order.status + (r.changed ? ' (تم التحديث)' : '') };
     }
 
     case 'add_content':
