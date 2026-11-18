@@ -135,7 +135,8 @@ export async function adminAction(env, session, action, payload) {
     case 'save_pkg': {
       const name = cleanText(payload.name, 80);
       const credits = toInt(payload.credits, 0);
-      const priceSar = toInt(payload.priceSar, -1);
+      const priceHalalas = Math.round(Number(payload.priceSar) * 100);
+      const priceSar = Number.isFinite(priceHalalas) ? priceHalalas / 100 : -1;
       if (!name || credits <= 0 || credits > 100000 || priceSar < 0 || priceSar > 100000) throw new HttpError(400, 'بيانات الباقة غير مكتملة.');
       const packages = await getDoc(env, 'packages');
       packages.push({
@@ -143,7 +144,7 @@ export async function adminAction(env, session, action, payload) {
         name,
         description: cleanText(payload.description, 300) || ('باقة تحتوي على ' + credits + ' أقيام.'),
         credits,
-        price_halalas: priceSar * 100,
+        price_halalas: priceHalalas,
         currency: 'SAR',
         badge: cleanText(payload.badge, 40),
         is_active: 1,
