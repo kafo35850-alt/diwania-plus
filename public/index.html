@@ -711,6 +711,7 @@ footer a { text-decoration: none; }
 .g-ribbon { position: absolute; top: 10px; left: 10px; z-index: 2; font-size: 12.5px; font-weight: 700; padding: 5px 11px; border-radius: 999px; color: #2b1c00; background: linear-gradient(180deg, #ffe08a, #f5b942); box-shadow: 0 6px 16px rgba(0,0,0,.4); }
 .g-ribbon.hot { background: linear-gradient(180deg, #fb923c, #e11d48); color: #fff; }
 .g-ribbon.new { background: linear-gradient(180deg, #5eead4, #0d9488); color: #022c26; }
+.g-ribbon.free { background: linear-gradient(180deg, #86efac, #16a34a); color: #052e16; }
 .g-ribbon.pick { background: linear-gradient(180deg, #c4b5fd, #7c3aed); color: #fff; }
 .featured-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
 @media (max-width: 1100px) { .featured-row { grid-template-columns: repeat(2, 1fr); } }
@@ -770,6 +771,9 @@ footer a { text-decoration: none; }
   .cta-band { padding: 20px; }
   .cta-band .dw-btn { width: 100%; }
 }
+.more-games { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.more-games .dw-btn { padding: 13px 28px; font-size: 16px; border-color: rgba(245,185,66,.45); }
+.more-games span { color: var(--text-muted); font-size: 13.5px; }
 /* features + devices + faq */
 .feat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
 @media (max-width: 1000px) { .feat-grid { grid-template-columns: repeat(2, 1fr); } }
@@ -1950,7 +1954,7 @@ footer a { text-decoration: none; }
     if (!STATE.user) return 0;
     var used = (STATE.wallet && STATE.wallet.freeTrialsUsed) || {};
     var active = STATE.games.filter(function (g) { return g.is_enabled; });
-    return active.filter(function (g) { return !used[g.slug]; }).length;
+    return active.filter(function (g) { return !isFreeGame(g) && !used[g.slug]; }).length;
   }
 
   function getLogoForGame(slug) {
@@ -1965,7 +1969,7 @@ footer a { text-decoration: none; }
     party: ['silent_library', 'pressure_seat', 'draw_guess', 'fake_artist', 'fortune_wheel', 'mystery_button', 'diwaniya_auction', 'vault50', 'who_knows_friend'],
     bluff: ['shifra', 'friends_court', 'alibi_court', 'liars_table', 'dakhil', 'mafia', 'chancellor', 'qaftah']
   };
-  var GAME_FILTERS = [['all', 'الكل'], ['top', '🔥 الأشهر'], ['phones', '📱 بالجوالات'], ['quiz', '🧠 مسابقات'], ['party', '🎉 تحديات وضحك'], ['bluff', '🕵️ خداع وتحقيق']];
+  var GAME_FILTERS = [['all', 'الكل'], ['free', '🆓 مجانية'], ['top', '🔥 الأشهر'], ['phones', '📱 بالجوالات'], ['quiz', '🧠 مسابقات'], ['party', '🎉 تحديات وضحك'], ['bluff', '🕵️ خداع وتحقيق']];
   // Marketing ribbons on game posters (presentation only).
   var GAME_RIBBONS = {
     eight: ['hot', '🔥 الأكثر لعباً'],
@@ -1979,10 +1983,10 @@ footer a { text-decoration: none; }
     fortune_wheel: ['', '🎉 للتجمعات الكبيرة'],
     chancellor: ['pick', '🧠 للأذكياء']
   };
-  var FEATURED = ['eight', 'dakhil', 'mafia', 'qaftah'];
   function cleanTitle(s) {
     return String(s || '').replace(/\s*[—-]\s*ديوانية بلس\s*$/, '').replace(/^ديوانية بلس\s*[—-]\s*/, '').trim();
   }
+  function isFreeGame(g) { return !!g && Number(g.cost_credits) === 0; }
   function isPhoneGame(slug) { return GAME_TAGS.phones.indexOf(slug) !== -1; }
 
   function renderNavbar() {
@@ -2017,22 +2021,24 @@ footer a { text-decoration: none; }
   function renderGameCard(g) {
     var logo = getLogoForGame(g.slug);
     var used = (STATE.wallet && STATE.wallet.freeTrialsUsed) || {};
-    var trialLeft = !STATE.user || !used[g.slug];
+    var free = isFreeGame(g);
+    var trialLeft = free || !STATE.user || !used[g.slug];
     var players = 'من ' + arNum(g.min_players) + ' إلى ' + arNum(g.max_players) + ' لاعب';
-    var playLabel = !STATE.user ? '▶ جرّبها مجاناً' : (trialLeft ? '▶ العب مجاناً' : '▶ العب · ' + arNum(g.cost_credits) + ' قيم');
+    var playLabel = free ? '▶ العب مجاناً' : (!STATE.user ? '▶ جرّبها مجاناً' : (trialLeft ? '▶ العب مجاناً' : '▶ العب · ' + arNum(g.cost_credits) + ' قيم'));
+    var ribbon = free ? ['free', '🆓 مجانية'] : GAME_RIBBONS[g.slug];
     return '<article class="g-card" data-game-card="' + esc(g.slug) + '">' +
       (window.DW_POSTERS && window.DW_POSTERS[g.slug]
         ? '<div class="g-art g-poster">'
         : '<div class="g-art" style="background:' + logo.bg + '">') +
         ((window.DW_POSTERS && window.DW_POSTERS[g.slug]) || logo.svg) +
-        (GAME_RIBBONS[g.slug] ? '<span class="g-ribbon ' + GAME_RIBBONS[g.slug][0] + '">' + GAME_RIBBONS[g.slug][1] + '</span>' : '') +
+        (ribbon ? '<span class="g-ribbon ' + ribbon[0] + '">' + ribbon[1] + '</span>' : '') +
       '</div>' +
       '<div class="g-body">' +
         '<h4>' + esc(cleanTitle(g.title)) + '</h4>' +
         '<div class="g-meta"><span>👥 ' + players + '</span>' + (trialLeft ? '' : '<span>💎 ' + arNum(g.cost_credits) + ' قيم</span>') + '</div>' +
         '<div class="g-tags">' +
           (isPhoneGame(g.slug) ? '<span class="g-badge phones">📱 كل واحد بجواله</span>' : '') +
-          (trialLeft ? '<span class="g-badge free">🎁 تجربة مجانية</span>' : '') +
+          (free ? '<span class="g-badge free">🆓 مجانية دايماً</span>' : (trialLeft ? '<span class="g-badge free">🎁 تجربة مجانية</span>' : '')) +
         '</div>' +
         '<p class="g-desc">' + esc(g.description) + '</p>' +
         '<div class="g-actions">' +
@@ -2046,7 +2052,14 @@ footer a { text-decoration: none; }
   function renderStoreTab() {
     var activeGames = STATE.games.filter(function (g) { return g.is_enabled; }).sort(function (a, b) { return a.sort_order - b.sort_order; });
     var filter = STATE.gameFilter || 'all';
-    var shown = filter === 'all' ? activeGames : activeGames.filter(function (g) { return (GAME_TAGS[filter] || []).indexOf(g.slug) !== -1; });
+    var shown = filter === 'all' ? activeGames
+      : filter === 'free' ? activeGames.filter(isFreeGame)
+      : activeGames.filter(function (g) { return (GAME_TAGS[filter] || []).indexOf(g.slug) !== -1; });
+    // "All": the featured games first; the rest open with one button so the store never feels crowded.
+    var featuredList = activeGames.filter(function (g) { return g.featured; });
+    var collapsed = filter === 'all' && !STATE.showAllGames && featuredList.length >= 4 && featuredList.length < activeGames.length;
+    var rest = collapsed ? activeGames.filter(function (g) { return !g.featured; }) : [];
+    if (collapsed) shown = featuredList;
     var n = arNum(activeGames.length || 26);
     var art = ['eight', 'mafia', 'harf', 'qaftah'].map(function (s, i) {
       var l = getLogoForGame(s);
@@ -2075,27 +2088,26 @@ footer a { text-decoration: none; }
       '<div><span class="n">٣</span><div><b>الشلة تدخل بجوالاتها</b><span>يمسحون رمز الـ QR ويلعبون بدون حساب.</span></div></div>' +
     '</section>';
 
-    if (filter === 'all') {
-      var feat = FEATURED.map(function (sl) { return activeGames.filter(function (g) { return g.slug === sl; })[0]; }).filter(Boolean);
-      if (feat.length) {
-        html += '<div class="sec-head"><div><span class="sec-kicker">🔥 الأشهر في الديوانيات</span><h3>ابدأ بهذي</h3><p>الألعاب اللي الكل يطلبها في السهرات</p></div></div>';
-        html += '<div class="featured-row">' + feat.map(renderGameCard).join('') + '</div>';
-      }
-    }
-
     html += '<div class="sec-head" id="dwGamesTop">' +
-      '<div><h3>الألعاب</h3><p>' + arNum(shown.length) + ' لعبة' + (filter === 'phones' ? ' — كل لاعب يلعب من جواله' : '') + '</p></div>' +
+      '<div>' + (collapsed ? '<span class="sec-kicker">🔥 الأشهر في الديوانيات</span>' : '') + '<h3>' + (collapsed ? 'ابدأ بهذي' : 'الألعاب') + '</h3><p>' +
+        (collapsed ? 'أقوى ' + arNum(shown.length) + ' ألعاب عندنا — ومنها ' + arNum(shown.filter(isFreeGame).length) + ' مجانية دايماً'
+          : filter === 'free' ? arNum(shown.length) + ' ألعاب مجانية دايماً — العبها بقد ما تبي'
+          : arNum(shown.length) + ' لعبة' + (filter === 'phones' ? ' — كل لاعب يلعب من جواله' : '')) + '</p></div>' +
       '<div class="filters">' + GAME_FILTERS.map(function (f) {
         return '<button class="' + (filter === f[0] ? 'on' : '') + '" data-act="game-filter" data-f="' + f[0] + '">' + f[1] + '</button>';
       }).join('') + '</div>' +
     '</div>';
     html += '<div class="games">' + shown.map(renderGameCard).join('') + '</div>';
+    if (collapsed) {
+      html += '<div class="more-games"><button class="dw-btn dw-btn-sec" data-act="show-all-games">🎮 شوف كل الألعاب (' + arNum(activeGames.length) + ')</button>' +
+        '<span>+ ' + arNum(rest.length) + ' لعبة ثانية: مسابقات، تحديات، وألعاب خداع</span></div>';
+    }
 
     html += '<section class="feat-grid">' +
       '<div class="feat"><div class="ic">📺</div><b>الشاشة للكل</b><span>اللعبة على التلفزيون والكل يتابع ويتفاعل — جو ديوانية حقيقي.</span></div>' +
       '<div class="feat"><div class="ic">📱</div><b>بدون تطبيق</b><span>الشلة يمسحون الـ QR ويدخلون من المتصفح على طول، بدون حسابات.</span></div>' +
       '<div class="feat"><div class="ic">🇸🇦</div><b>محتوى عربي خليجي</b><span>أسئلة وفئات وتحديات تناسب سوالفنا وثقافتنا، تتجدد باستمرار.</span></div>' +
-      '<div class="feat"><div class="ic">🎁</div><b>جرّب قبل تشتري</b><span>أول تشغيلة في كل لعبة مجانية، وبعدها باقات تبدأ من ' + arNum(sarText(Math.min.apply(null, STATE.packages.filter(function (p) { return p.is_active; }).map(function (p) { return p.price_halalas; }).concat([799])))) + ' ر.س.</span></div>' +
+      '<div class="feat"><div class="ic">🎁</div><b>ألعاب مجانية دايماً</b><span>' + arNum(activeGames.filter(isFreeGame).length) + ' ألعاب مجانية بالكامل، وأول تشغيلة في باقي الألعاب ببلاش. الباقات تبدأ من ' + arNum(sarText(Math.min.apply(null, STATE.packages.filter(function (p) { return p.is_active; }).map(function (p) { return p.price_halalas; }).concat([799])))) + ' ر.س.</span></div>' +
     '</section>';
 
     html += '<section class="devices">' +
@@ -2271,7 +2283,7 @@ footer a { text-decoration: none; }
     '</section>';
   }
 
-  var TX_TYPES = { bonus: 'هدية', free_trial: 'تجربة مجانية', consume: 'تشغيل لعبة', purchase: 'شراء باقة', admin_add: 'إضافة من الإدارة', admin_deduct: 'خصم من الإدارة' };
+  var TX_TYPES = { bonus: 'هدية', free_play: 'لعبة مجانية', free_trial: 'تجربة مجانية', consume: 'تشغيل لعبة', purchase: 'شراء باقة', admin_add: 'إضافة من الإدارة', admin_deduct: 'خصم من الإدارة' };
   function renderWalletTab() {
     if (!STATE.user) {
       return '<div class="dw-card" style="text-align:center;padding:40px">' +
@@ -2498,8 +2510,10 @@ footer a { text-decoration: none; }
                 '<td><code>' + esc(g.engine_type) + '</code></td>' +
                 '<td><input type="number" class="dw-input" style="width:80px;padding:6px" value="' + g.cost_credits + '" data-act-change-cost="' + esc(g.id) + '"></td>' +
                 '<td>' + arNum(g.min_players) + ' - ' + arNum(g.max_players) + '</td>' +
-                '<td>' + (g.is_enabled ? '<span class="dw-chip teal">متاحة للعملاء</span>' : '<span class="dw-chip">مخفية</span>') + '</td>' +
-                '<td><button class="dw-btn dw-btn-sec dw-btn-sm" data-act="adm-toggle-game" data-id="' + esc(g.id) + '">' + (g.is_enabled ? 'إخفاء / تعطيل' : 'تفعيل') + '</button></td>' +
+                '<td>' + (g.is_enabled ? '<span class="dw-chip teal">ظاهرة</span>' : '<span class="dw-chip">مخفية</span>') + (isFreeGame(g) ? ' <span class="dw-chip teal">🆓 مجانية</span>' : '') + (g.featured ? ' <span class="dw-chip gold">⭐ مميزة</span>' : '') + '</td>' +
+                '<td style="white-space:nowrap"><button class="dw-btn dw-btn-sec dw-btn-sm" data-act="adm-toggle-game" data-id="' + esc(g.id) + '">' + (g.is_enabled ? 'إخفاء' : 'إظهار') + '</button> ' +
+                  '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="adm-toggle-free" data-id="' + esc(g.id) + '">' + (isFreeGame(g) ? '💎 خلّها مدفوعة' : '🆓 خلّها مجانية') + '</button> ' +
+                  '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="adm-toggle-featured" data-id="' + esc(g.id) + '">' + (g.featured ? '☆ شيلها من المميزة' : '⭐ خلّها مميزة') + '</button></td>' +
               '</tr>';
             }).join('') +
           '</tbody></table></div>' +
@@ -2659,7 +2673,8 @@ footer a { text-decoration: none; }
     var tabs = gInfo.tabs || [];
     var activeTab = tabs[STATE.guideTabIdx] || tabs[0];
     var usedTrials = (STATE.wallet && STATE.wallet.freeTrialsUsed) || {};
-    var hasFree = STATE.user ? !usedTrials[STATE.guideSlug] : true;
+    var alwaysFree = isFreeGame(gameObj);
+    var hasFree = alwaysFree || (STATE.user ? !usedTrials[STATE.guideSlug] : true);
 
     inner.innerHTML =
       '<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">' +
@@ -2692,7 +2707,7 @@ footer a { text-decoration: none; }
       ) : '') +
       '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;border-top:1px solid var(--border-subtle);padding-top:12px">' +
         '<div style="font-size:13px;color:var(--text-muted)">' +
-          (hasFree ? '🎁 <b>أول قيم مجاناً للتجربة</b> لكل حساب' : '💎 تكلفة التشغيل: <b>' + arNum(gameObj.cost_credits) + ' قيم</b>') +
+          (alwaysFree ? '🆓 <b>لعبة مجانية دايماً</b> — العبها بقد ما تبي' : hasFree ? '🎁 <b>أول قيم مجاناً للتجربة</b> لكل حساب' : '💎 تكلفة التشغيل: <b>' + arNum(gameObj.cost_credits) + ' قيم</b>') +
         '</div>' +
         '<div style="display:flex;gap:8px">' +
           '<button class="dw-btn dw-btn-sec" data-act="close-guide">عودة للمتجر</button>' +
@@ -3068,7 +3083,7 @@ footer a { text-decoration: none; }
       render();
 
       if (!res.deduplicated) {
-        showToast(res.isFreeTrial
+        showToast(res.isFree ? '🆓 لعبة مجانية — استمتع!' : res.isFreeTrial
           ? '🎁 تجربتك المجانية — استمتع!'
           : '✅ انخصم ' + arNum(res.costDeducted) + ' قيم — استمتع!');
       }
@@ -3151,6 +3166,9 @@ footer a { text-decoration: none; }
       launchGameWithCreditCheck(actBtn.getAttribute('data-slug'));
     } else if (act === 'game-filter') {
       STATE.gameFilter = actBtn.getAttribute('data-f') || 'all';
+      render();
+    } else if (act === 'show-all-games') {
+      STATE.showAllGames = true;
       render();
     } else if (act === 'scroll-games') {
       var gt = document.getElementById('dwGamesTop');
@@ -3403,6 +3421,11 @@ footer a { text-decoration: none; }
         STORE_AUDIO.playSfx(680);
         render();
         showToast(sgRes.message);
+      });
+    } else if (act === 'adm-toggle-free' || act === 'adm-toggle-featured') {
+      adminCall(act === 'adm-toggle-free' ? 'toggle_game_free' : 'toggle_game_featured', { gameId: actBtn.getAttribute('data-id') }, function (tfRes) {
+        render();
+        showToast(tfRes.message);
       });
     } else if (act === 'adm-toggle-game') {
       adminCall('toggle_game', { gameId: actBtn.getAttribute('data-id') }, function (tgmRes) {

@@ -60,9 +60,11 @@ export async function launchGame(env, session, slug, body) {
 
   const iso = nowIso();
   const cost = Math.max(0, Number(game.cost_credits) || 0);
-  const trial = await env.DB.prepare('INSERT INTO game_trials (user_id, game_slug, created_at) VALUES (?, ?, ?) ON CONFLICT DO NOTHING')
+  // Games priced at 0 are always free and keep the account's one-time trial untouched.
+  const alwaysFree = cost === 0;
+  const trial = alwaysFree ? null : await env.DB.prepare('INSERT INTO game_trials (user_id, game_slug, created_at) VALUES (?, ?, ?) ON CONFLICT DO NOTHING')
     .bind(uid, slug, iso).run();
-  const isFreeTrial = trial.meta.changes === 1;
+  const isFreeTrial = !!trial && trial.meta.changes === 1;
 
   let balanceBefore;
   let balanceAfter;
@@ -85,13 +87,13 @@ export async function launchGame(env, session, slug, body) {
   }
 
   const charged = isFreeTrial ? 0 : cost;
-  const result = { ok: true, status: 200, isFreeTrial, costDeducted: charged, gameSlug: slug, gameTitle: game.title, idempotencyKey: idemKey };
+  const result = { ok: true, status: 200, isFreeTrial, isFree: alwaysFree, costDeducted: charged, gameSlug: slug, gameTitle: game.title, idempotencyKey: idemKey };
   await env.DB.batch([
     env.DB.prepare(
       'INSERT INTO wallet_transactions (id, user_id, type, amount, balance_before, balance_after, description, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)'
     ).bind(
-      randomId('wtx'), uid, isFreeTrial ? 'free_trial' : 'consume', -charged, balanceBefore, balanceAfter,
-      (isFreeTrial ? '🎁 تشغيل مجاني (التجربة الوحيدة): ' : 'تشغيل لعبة: ') + game.title, iso
+      randomId('wtx'), uid, alwaysFree ? 'free_play' : (isFreeTrial ? 'free_trial' : 'consume'), -charged, balanceBefore, balanceAfter,
+      (alwaysFree ? '🆓 لعبة مجانية: ' : (isFreeTrial ? '🎁 تشغيل مجاني (التجربة الوحيدة): ' : 'تشغيل لعبة: ')) + game.title, iso
     ),
     env.DB.prepare('INSERT INTO game_stats (game_slug, plays) VALUES (?, 1) ON CONFLICT(game_slug) DO UPDATE SET plays = plays + 1').bind(slug),
     env.DB.prepare('UPDATE launches SET result_json = ? WHERE user_id = ? AND idem_key = ?').bind(JSON.stringify(result), uid, idemKey)

@@ -206,6 +206,28 @@ export async function adminAction(env, session, action, payload) {
       return { ok: true, message: 'تم تحديث حالة ظهور اللعبة في المتجر.' };
     }
 
+    case 'toggle_game_free': {
+      const games = await getDoc(env, 'games');
+      const game = games.find((g) => g.id === payload.gameId);
+      if (!game) throw new HttpError(404, 'اللعبة غير موجودة.');
+      const makeFree = Number(game.cost_credits) !== 0;
+      if (makeFree) game.paid_cost = Number(game.cost_credits) || 1;
+      game.cost_credits = makeFree ? 0 : Math.max(1, Number(game.paid_cost) || 1);
+      await putDoc(env, 'games', games);
+      await log(env, admin, 'toggle_game_free', 'game', game.slug, makeFree ? 'مجانية دايماً' : 'مدفوعة (' + game.cost_credits + ')');
+      return { ok: true, message: makeFree ? '«' + game.title + '» صارت مجانية دايماً.' : '«' + game.title + '» رجعت مدفوعة (' + game.cost_credits + ' قيم).' };
+    }
+
+    case 'toggle_game_featured': {
+      const games = await getDoc(env, 'games');
+      const game = games.find((g) => g.id === payload.gameId);
+      if (!game) throw new HttpError(404, 'اللعبة غير موجودة.');
+      game.featured = game.featured ? 0 : 1;
+      await putDoc(env, 'games', games);
+      await log(env, admin, 'toggle_game_featured', 'game', game.slug, game.featured ? 'مميزة' : 'عادية');
+      return { ok: true, message: game.featured ? '«' + game.title + '» صارت من الألعاب المميزة في أول المتجر.' : '«' + game.title + '» نزلت لقائمة «كل الألعاب».' };
+    }
+
     case 'update_game_cost': {
       const games = await getDoc(env, 'games');
       const game = games.find((g) => g.id === payload.gameId);
