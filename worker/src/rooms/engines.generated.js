@@ -1781,7 +1781,7 @@ function load_chancellor() {
         case 'act': {
           const room = conn.code && rooms.get(conn.code); if (!room || !conn.pid) return err('not_joined');
           const g = room.g, id = conn.pid; let r = { ok: true }; room.last = t0;
-          // محرك عام (مثل المستشار السري): كل أفعال اللعب تروح لـ E.act، ما عدا الطرد والبدء والخروج (لها شغل اتصالات هنا)
+          // محرك عام (مثل مستشار الديوانية): كل أفعال اللعب تروح لـ E.act، ما عدا الطرد والبدء والخروج (لها شغل اتصالات هنا)
           if (E.act && m.a !== 'kick' && m.a !== 'start' && m.a !== 'leave') { const r0 = E.act(g, id, m, t0, rng); if (!r0.ok) err(r0.err); return sendViews(room); }
           switch (m.a) {
             case 'ready': r = E.ready(g, id, t0); break;
@@ -1838,7 +1838,7 @@ function load_chancellor() {
 
 
 /* sh/engine.js */
-/* ديوانية بلس — المستشار السري: محرك اللعبة (بدون شبكة ولا واجهة). يشتغل في Node والمتصفح وCloudflare.
+/* ديوانية بلس — مستشار الديوانية: محرك اللعبة (بدون شبكة ولا واجهة). يشتغل في Node والمتصفح وCloudflare.
  * نفس واجهة محرك مافيا عشان يركب على نفس الخادم (hub.js): createGame, join, leave, kick, setConnected,
  * setSettings, start, need, tick, viewFor, reset, byId + act(g, id, msg, now, rng) لكل أفعال اللعب.
  *

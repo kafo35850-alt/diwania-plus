@@ -22,7 +22,7 @@
   }
 
   const cfg = {
-    id: 'harf', name: 'حرف ونص', nameHtml: 'حرف <b>ونص</b>', tagline: 'حرف واحد… وكل الخانات لازم تبدأ فيه', icon: ICON, wsPath: '/harf/ws', min: 2, max: 40,
+    id: 'harf', name: 'حروف الديوانية', nameHtml: '<b>حروف</b> الديوانية', tagline: 'حرف واحد… وكل الخانات لازم تبدأ فيه', icon: ICON, wsPath: '/harf/ws', min: 2, max: 40,
     engine: MG.harf, help: MG.harfHelp,
     err: {},
     phaseName: { write: 'الكتابة', review: 'المراجعة', result: 'النتيجة', ended: 'النهاية' },
@@ -81,7 +81,7 @@
 
   // ---------------------------------------------------------------- التلفزيون
   cfg.board = {
-    title: 'حرف <b>ونص</b>', timedPhases: ['write', 'review'], stepKey: (v) => (v.stopBy || '') + ':' + v.phase,
+    title: '<b>حروف</b> الديوانية', timedPhases: ['write', 'review'], stepKey: (v) => (v.stopBy || '') + ':' + v.phase,
     css: '.mdb .letter{font-size:16em;font-weight:900;line-height:1;color:#ffd978;text-shadow:0 .05em .3em rgba(0,0,0,.4)}.mdb .flds{display:flex;gap:.8em;flex-wrap:wrap;justify-content:center}.mdb .flds span{font-size:2.3em;font-weight:800;padding:.2em .9em;border-radius:99em;background:rgba(255,255,255,.1)}.mdb table.hf{border-collapse:collapse;font-size:1.9em;margin:0 auto}.mdb table.hf td,.mdb table.hf th{padding:.25em .7em;border-bottom:1px solid rgba(255,255,255,.12);text-align:center}.mdb table.hf .x{color:#ff8a8e;text-decoration:line-through}.mdb table.hf .ok{color:#7ef0c0}',
     tone: (v) => (v.phase === 'write' && v.stopBy ? 'red' : v.phase === 'ended' ? 'gold' : ''),
     render(v, B) {

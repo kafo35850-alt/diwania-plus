@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="theme-color" content="#0b0a2e">
-<title>ديوانية بلس — قفطة! (أكمل الكذبة)</title>
+<title>ديوانية بلس — قفطة الديوانية</title>
 <style>
 :root{--bg1:#111936;--bg2:#0A0F24;--ink:#fff;--mut:#aab0d8;--card:rgba(255,255,255,.07);--line:rgba(255,255,255,.14);--org:#f26538;--gold:#F5B942;--red:#e5484d;--blue:#38bdf8;--green:#34d399;--vio:#a78bfa;--stk:0px}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -1440,7 +1440,7 @@ body.show-both .tabs{left:calc(50% - 215px)}
     function header(v) {
       const timer = v.deadline && ['write', 'vote'].indexOf(v.phase) >= 0 ? '<span class="tmr" data-t>' + fmt(remaining(v)) + '</span>' : '';
       const multTag = v.mult > 1 ? '<span class="pill g">النقاط ×' + AR(v.mult) + '</span>' : '';
-      return '<div class="hd"><div class="ttl">ديوانية بلس <b>قفطة!</b></div>' + (v.round ? '<span class="pill">الجولة ' + AR(v.round) + ' من ' + AR(v.totalRounds) + '</span>' : '') + multTag + (v.q ? '<span class="pill">' + esc(v.q.cat) + '</span>' : '') + '<span class="sp"></span>' + timer + '<div class="mq"><div class="q">' + qrSvg(v) + '</div><b dir="ltr">' + esc(v.code) + '</b></div></div>';
+      return '<div class="hd"><div class="ttl"><b>قفطة</b> الديوانية</div>' + (v.round ? '<span class="pill">الجولة ' + AR(v.round) + ' من ' + AR(v.totalRounds) + '</span>' : '') + multTag + (v.q ? '<span class="pill">' + esc(v.q.cat) + '</span>' : '') + '<span class="sp"></span>' + timer + '<div class="mq"><div class="q">' + qrSvg(v) + '</div><b dir="ltr">' + esc(v.code) + '</b></div></div>';
     }
 
     function qCard(v) {
@@ -1500,7 +1500,7 @@ body.show-both .tabs{left:calc(50% - 215px)}
     function lobbyView(v) {
       const n = v.players.length;
       const dense = n > 14 ? ' dense' : '';
-      return '<div class="hd"><div class="ttl">ديوانية بلس <b>قفطة!</b></div><span class="sp"></span><span class="pill">حتى ' + AR(v.maxPlayers || 60) + ' لاعباً</span></div><div class="lobby"><div class="qr">' + qrSvg(v) + '</div><div style="flex:1;min-width:0"><div class="sub">امسحوا الرمز بكاميرا الجوال، أو ادخلوا بالرمز</div><div class="code" dir="ltr">' + esc(v.code) + '</div>' +
+      return '<div class="hd"><div class="ttl"><b>قفطة</b> الديوانية</div><span class="sp"></span><span class="pill">حتى ' + AR(v.maxPlayers || 60) + ' لاعباً</span></div><div class="lobby"><div class="qr">' + qrSvg(v) + '</div><div style="flex:1;min-width:0"><div class="sub">امسحوا الرمز بكاميرا الجوال، أو ادخلوا بالرمز</div><div class="code" dir="ltr">' + esc(v.code) + '</div>' +
         '<div class="sub" style="margin-top:.6em">المتسابقين في الغرفة: ' + AR(n) + (v.need ? ' — ينقصكم ' + AR(v.need) : ' — جاهزين! المضيف يبدأ') + '</div><div class="chips' + dense + '">' + v.players.map((p) => '<span class="chip"><i style="background:' + p.color + '"></i>' + esc(p.name) + '</span>').join('') + '</div></div></div>';
     }
 
@@ -1809,7 +1809,7 @@ body.show-both .tabs{left:calc(50% - 215px)}
     var pre = params.get('room') || '';
     var savedName = store.get('qf_name') || '';
     return '<div class="topbar"><span class="sp"></span>' + muteBtnHtml() + '</div>' +
-      '<div class="logo"><div class="ic">' + I.svg('fox') + '</div><div class="t">ديوانية بلس <b>قفطة!</b></div><div class="s">ألّف كذبتك من راسك — وطيّحهم في الفخ! (حتى ٥٠+ لاعب)</div></div>' +
+      '<div class="logo"><div class="ic">' + I.svg('fox') + '</div><div class="t"><b>قفطة</b> الديوانية</div><div class="s">ألّف كذبتك من راسك — وطيّحهم في الفخ! (حتى ٥٠+ لاعب)</div></div>' +
       '<div class="card col"><div class="big">أنشئ غرفة جديدة</div><div class="mut small">تصير أنت المضيف وتستوعب الغرفة حتى ٦٠ لاعباً بالراحة (ومعك بوتات جاهزة للتجربة فوراً).</div><input id="inName2" class="inp" maxlength="16" placeholder="اسمك (مثال: كريم)" autocomplete="off" value="' + esc(savedName) + '"><button class="btn gold" data-a="create">إنشاء الغرفة الآن</button></div>' +
       '<div class="card col"><div class="big">أو ادخل غرفة برمز</div><input id="inCode" class="inp code" inputmode="numeric" maxlength="4" placeholder="••••" value="' + esc(pre) + '" autocomplete="off"><input id="inName" class="inp" maxlength="16" placeholder="اسمك" autocomplete="off" value="' + esc(savedName) + '"><button class="btn" data-a="join">دخول الغرفة</button></div>' +
       '<button class="btn sec" data-a="help">؟ كيف تلعب؟</button>';

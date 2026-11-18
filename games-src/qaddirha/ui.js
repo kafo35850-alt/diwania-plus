@@ -11,7 +11,7 @@
   const inId = (v) => 'qd' + v.round;
 
   const cfg = {
-    id: 'qaddirha', name: 'قدّرها', nameHtml: 'قدّر<b>ها</b>', tagline: 'كلكم تخمنون الرقم… والأقرب ياخذها', icon: ICON, wsPath: '/qaddirha/ws', min: 2, max: 60,
+    id: 'qaddirha', name: 'تقدير الديوانية', nameHtml: '<b>تقدير</b> الديوانية', tagline: 'كلكم تخمنون الرقم… والأقرب ياخذها', icon: ICON, wsPath: '/qaddirha/ws', min: 2, max: 60,
     engine: MG.qaddirha, help: MG.qaddirhaHelp,
     err: { bad_number: 'اكتب رقم صحيح' },
     phaseName: { guess: 'التقدير', reveal: 'الكشف', ended: 'النهاية' },
@@ -49,7 +49,7 @@
   };
 
   cfg.board = {
-    title: 'قدّر<b>ها</b>', timedPhases: ['guess'], stepKey: (v) => v.phase + ':' + v.round,
+    title: '<b>تقدير</b> الديوانية', timedPhases: ['guess'], stepKey: (v) => v.phase + ':' + v.round,
     css: '.mdb .qq{font-size:4.2em;font-weight:900;line-height:1.35;max-width:34em;text-align:center}.mdb .ans{font-size:9em;font-weight:900;color:#ffd978;line-height:1}.mdb .rows{display:flex;flex-direction:column;gap:.4em;font-size:2.2em;min-width:30em}.mdb .rows div{display:flex;gap:1em;background:rgba(255,255,255,.07);padding:.25em .8em;border-radius:.6em}.mdb .rows div.top{background:rgba(242,193,78,.25)}.mdb .rows span.v{margin-inline-start:auto;color:#cfd6ff}',
     tone: (v) => (v.phase === 'reveal' ? 'blue' : v.phase === 'ended' ? 'gold' : ''),
     render(v, B) {

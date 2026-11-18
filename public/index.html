@@ -672,6 +672,11 @@ html, body { font-family: "IBM Plex Sans Arabic", -apple-system, "SF Arabic", "S
 .suggest .fields { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .suggest .fields .wide { grid-column: 1 / -1; }
 @media (max-width: 760px) { .suggest { grid-template-columns: 1fr; } .suggest .fields { grid-template-columns: 1fr; } }
+
+.g-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.g-tags:empty { display: none; }
+.g-art.g-poster { height: auto; aspect-ratio: 16 / 9; background: #0A0F24; }
+.g-art.g-poster > svg, .guide-poster svg { width: 100%; height: 100%; display: block; filter: none; }
 footer a { text-decoration: none; }
 </style>
 </head>
@@ -727,7 +732,7 @@ footer a { text-decoration: none; }
   <div class="dw-game-frame-bar">
     <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
       
-      <b id="dwGameFrameTitle" style="font-size:16px">تحدي الثمانية</b>
+      <b id="dwGameFrameTitle" style="font-size:16px">ديوانية الثمانية</b>
       <span id="dwGameFrameRoomChip" class="dw-chip teal" style="font-size:11.5px;cursor:pointer" data-act="open-room-hub">📱 غرفة QR والجرس الجماعي</span>
     </div>
     <div class="dw-spacer"></div>
@@ -744,6 +749,7 @@ footer a { text-decoration: none; }
 
 <script src="/m8p.js"></script>
 <script src="/qr.js"></script>
+<script src="/posters.js"></script>
 <script>
 /* ============================================================================
  * ديوانية بلس (Diwaniya+) — Frontend Storefront, Wallet, Auth, Guides & Admin
@@ -1004,7 +1010,7 @@ footer a { text-decoration: none; }
       ]
     },
     eight: {
-      title: 'شرح لعبة: تحدي الثمانية — ديوانية بلس',
+      title: 'شرح لعبة: ديوانية الثمانية — ديوانية بلس',
       subtitle: 'المسابقة الثقافية والتفاعلية الكبرى بين فريقين (١٥٢ فئة · ٢,٧٣٦ سؤالاً)',
       tabs: [
         {
@@ -1017,12 +1023,12 @@ footer a { text-decoration: none; }
           ]
         },
         {
-          id: 'rules', label: 'وسائل المساعدةوالجرس',
+          id: 'rules', label: 'وسائل المساعدة والجرس',
           lead: 'يمتلك كل فريق وسائل مساعدة استراتيجية تقلب النتيجة في اللحظات الحاسمة:',
           steps: [
             { h: 'جرس السرعة بالجوال', t: 'يمسح اللاعبون رمز الـ QR فتتحول جوالاتهم إلى جرس سرعة يحدد بالجزء من الثانية من ضغط أولاً.' },
             { h: 'تحدي بدون كلام (التمثيل)', t: 'يمسح الممثل رمز الـ QR بجواله لتظهر له الكلمة السرية ليمثلها لفريقه قبل انتهاء الوقت.' },
-            { h: 'الفوز بالمباراة', t: 'بعد انتهاء جميع الأسئلة على اللوحة، الفريق صاحب أعلى مجموع نقاط يتوّج بلقب تحدي الثمانية!' }
+            { h: 'الفوز بالمباراة', t: 'بعد انتهاء جميع الأسئلة على اللوحة، الفريق صاحب أعلى مجموع نقاط يتوّج بلقب ديوانية الثمانية!' }
           ]
         }
       ]
@@ -1052,7 +1058,7 @@ footer a { text-decoration: none; }
       ]
     },
     chancellor: {
-      title: 'شرح لعبة: المستشار السري — ديوانية بلس',
+      title: 'شرح لعبة: مستشار الديوانية — ديوانية بلس',
       subtitle: 'لعبة البرلمان والاستنتاج الاجتماعي (من ٥ إلى ٦٠ لاعباً بالجوال)',
       tabs: [
         {
@@ -1865,16 +1871,18 @@ footer a { text-decoration: none; }
     var players = 'من ' + arNum(g.min_players) + ' إلى ' + arNum(g.max_players) + ' لاعب';
     var playLabel = !STATE.user ? '▶ جرّبها مجاناً' : (trialLeft ? '▶ العب مجاناً' : '▶ العب · ' + arNum(g.cost_credits) + ' قيم');
     return '<article class="g-card" data-game-card="' + esc(g.slug) + '">' +
-      '<div class="g-art" style="background:' + logo.bg + '">' +
-        '<div class="g-badges">' +
-          (isPhoneGame(g.slug) ? '<span class="g-badge phones">📱 كل واحد بجواله</span>' : '') +
-          (trialLeft ? '<span class="g-badge free">🎁 تجربة مجانية</span>' : '') +
-        '</div>' +
-        logo.svg +
+      (window.DW_POSTERS && window.DW_POSTERS[g.slug]
+        ? '<div class="g-art g-poster">'
+        : '<div class="g-art" style="background:' + logo.bg + '">') +
+        ((window.DW_POSTERS && window.DW_POSTERS[g.slug]) || logo.svg) +
       '</div>' +
       '<div class="g-body">' +
         '<h4>' + esc(cleanTitle(g.title)) + '</h4>' +
         '<div class="g-meta"><span>👥 ' + players + '</span>' + (trialLeft ? '' : '<span>💎 ' + arNum(g.cost_credits) + ' قيم</span>') + '</div>' +
+        '<div class="g-tags">' +
+          (isPhoneGame(g.slug) ? '<span class="g-badge phones">📱 كل واحد بجواله</span>' : '') +
+          (trialLeft ? '<span class="g-badge free">🎁 تجربة مجانية</span>' : '') +
+        '</div>' +
         '<p class="g-desc">' + esc(g.description) + '</p>' +
         '<div class="g-actions">' +
           '<button class="dw-btn ' + (trialLeft ? 'dw-btn-teal' : 'dw-btn-gold') + ' play" data-act="launch-game" data-slug="' + esc(g.slug) + '"' + (STATE.launchInFlight ? ' disabled' : '') + '>' + playLabel + '</button>' +
@@ -2406,6 +2414,7 @@ footer a { text-decoration: none; }
     var gInfo = GAME_GUIDES[STATE.guideSlug];
     var gameObj = STATE.games.find(function (g) { return g.slug === STATE.guideSlug; }) || { title: gInfo.title, cost_credits: 1, slug: STATE.guideSlug };
     var logo = getLogoForGame(STATE.guideSlug);
+    var guidePoster = window.DW_POSTERS && window.DW_POSTERS[STATE.guideSlug];
     var tabs = gInfo.tabs || [];
     var activeTab = tabs[STATE.guideTabIdx] || tabs[0];
     var usedTrials = (STATE.wallet && STATE.wallet.freeTrialsUsed) || {};
@@ -2414,10 +2423,12 @@ footer a { text-decoration: none; }
     inner.innerHTML =
       '<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">' +
         '<div style="display:flex;align-items:center;gap:14px">' +
-          '<div style="width:84px;height:56px;border-radius:14px;overflow:hidden;border:1px solid var(--border-line);background:' + logo.bg + ';display:flex;align-items:center;justify-content:center">' + logo.svg + '</div>' +
+          (guidePoster
+            ? '<div style="width:128px;height:72px;border-radius:12px;overflow:hidden;border:1px solid var(--border-line);flex-shrink:0" class="guide-poster">' + guidePoster + '</div>'
+            : '<div style="width:84px;height:56px;border-radius:14px;overflow:hidden;border:1px solid var(--border-line);background:' + logo.bg + ';display:flex;align-items:center;justify-content:center">' + logo.svg + '</div>') +
           '<div>' +
             '<span class="dw-badge">📖 الدليل الشامل لقواعد اللعبة</span>' +
-            '<h3 style="margin:4px 0 0;font-size:21px;font-weight:900">' + esc(gInfo.title) + '</h3>' +
+            '<h3 style="margin:4px 0 0;font-size:21px;font-weight:900">طريقة لعب ' + esc(cleanTitle(gameObj.title)) + '</h3>' +
             '<div style="font-size:13px;color:var(--gold);font-weight:700">' + esc(gInfo.subtitle) + '</div>' +
           '</div>' +
         '</div>' +
@@ -2440,7 +2451,7 @@ footer a { text-decoration: none; }
       ) : '') +
       '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;border-top:1px solid var(--border-subtle);padding-top:12px">' +
         '<div style="font-size:13px;color:var(--text-muted)">' +
-          (hasFree ? '🎁 <b>أول قيم مجاناً للتجربة</b> في حسابك الموثق!' : '💎 تكلفة التشغيل: <b>' + arNum(gameObj.cost_credits) + ' قيم</b>') +
+          (hasFree ? '🎁 <b>أول قيم مجاناً للتجربة</b> لكل حساب' : '💎 تكلفة التشغيل: <b>' + arNum(gameObj.cost_credits) + ' قيم</b>') +
         '</div>' +
         '<div style="display:flex;gap:8px">' +
           '<button class="dw-btn dw-btn-sec" data-act="close-guide">عودة للمتجر</button>' +

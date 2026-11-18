@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="theme-color" content="#0b0a2e">
-<title>ديوانية بلس — المستشار السري</title>
+<title>ديوانية بلس — مستشار الديوانية</title>
 <style>
 :root{--bg1:#111936;--bg2:#0A0F24;--ink:#fff;--mut:#aab0d8;--card:rgba(255,255,255,.07);--line:rgba(255,255,255,.14);--org:#f26538;--gold:#F5B942;--red:#e5484d;--blue:#38bdf8;--green:#34d399;--vio:#a78bfa;--stk:0px}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -812,7 +812,7 @@ body.show-both .tabs{left:calc(50% - 215px)}
         case 'act': {
           const room = conn.code && rooms.get(conn.code); if (!room || !conn.pid) return err('not_joined');
           const g = room.g, id = conn.pid; let r = { ok: true }; room.last = t0;
-          // محرك عام (مثل المستشار السري): كل أفعال اللعب تروح لـ E.act، ما عدا الطرد والبدء والخروج (لها شغل اتصالات هنا)
+          // محرك عام (مثل مستشار الديوانية): كل أفعال اللعب تروح لـ E.act، ما عدا الطرد والبدء والخروج (لها شغل اتصالات هنا)
           if (E.act && m.a !== 'kick' && m.a !== 'start' && m.a !== 'leave') { const r0 = E.act(g, id, m, t0, rng); if (!r0.ok) err(r0.err); return sendViews(room); }
           switch (m.a) {
             case 'ready': r = E.ready(g, id, t0); break;
@@ -869,7 +869,7 @@ body.show-both .tabs{left:calc(50% - 215px)}
 
 </script>
 <script>/* sh/engine.js */
-/* ديوانية بلس — المستشار السري: محرك اللعبة (بدون شبكة ولا واجهة). يشتغل في Node والمتصفح وCloudflare.
+/* ديوانية بلس — مستشار الديوانية: محرك اللعبة (بدون شبكة ولا واجهة). يشتغل في Node والمتصفح وCloudflare.
  * نفس واجهة محرك مافيا عشان يركب على نفس الخادم (hub.js): createGame, join, leave, kick, setConnected,
  * setSettings, start, need, tick, viewFor, reset, byId + act(g, id, msg, now, rng) لكل أفعال اللعب.
  *
@@ -1298,7 +1298,7 @@ body.show-both .tabs{left:calc(50% - 215px)}
 
 </script>
 <script>/* sh/icons.js */
-/* ديوانية بلس — المستشار السري: أيقونات مرسومة (بدون إيموجي وبدون ملامح وجوه) */
+/* ديوانية بلس — مستشار الديوانية: أيقونات مرسومة (بدون إيموجي وبدون ملامح وجوه) */
 (function (root) {
   'use strict';
   const S = (vb, inner) => '<svg viewBox="' + vb + '" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' + inner + '</svg>';
@@ -1341,7 +1341,7 @@ body.show-both .tabs{left:calc(50% - 215px)}
 
 </script>
 <script>/* sh/help.js */
-/* ديوانية بلس — المستشار السري: شرح اللعبة (نفس النص للجوال وشاشة التلفزيون) */
+/* ديوانية بلس — مستشار الديوانية: شرح اللعبة (نفس النص للجوال وشاشة التلفزيون) */
 (function (root) {
   'use strict';
   const SECTIONS = [
@@ -1392,7 +1392,7 @@ body.show-both .tabs{left:calc(50% - 215px)}
 
 </script>
 <script>/* sh/board.js */
-/* ديوانية بلس — المستشار السري: شاشة الطاولة (للتلفزيون). تتصل كمراقب (t:'board') وما تشوف أي دور أو بطاقة سرية.
+/* ديوانية بلس — مستشار الديوانية: شاشة الطاولة (للتلفزيون). تتصل كمراقب (t:'board') وما تشوف أي دور أو بطاقة سرية.
  *   SHBoard.mount(element, { code?, WS? }) -> { fit, enableSound, destroy }
  * الصوت والراوي من audio.js (MafiaAudio). كل المقاسات بوحدة em على مسرح 160×90 (١٦:٩).
  */
@@ -1587,11 +1587,11 @@ body.show-both .tabs{left:calc(50% - 215px)}
     }
     function header(v) {
       const timer = v.deadline && ['voteResult', 'enacted'].indexOf(v.phase) < 0 ? '<span class="tmr" data-t>' + fmt(remaining(v)) + '</span>' : (v.untimed && v.phase !== 'ended' ? '<span class="pill">∞ بدون وقت</span>' : '');
-      return '<div class="hd"><div class="ttl">المستشار <b>السري</b></div>' + (v.round ? '<span class="pill">الجولة ' + AR(v.round) + '</span>' : '') + '<span class="sp"></span>' + timer + '<div class="mq"><div class="q">' + qrSvg(v) + '</div><b dir="ltr">' + esc(v.code) + '</b></div></div>';
+      return '<div class="hd"><div class="ttl"><b>مستشار</b> الديوانية</div>' + (v.round ? '<span class="pill">الجولة ' + AR(v.round) + '</span>' : '') + '<span class="sp"></span>' + timer + '<div class="mq"><div class="q">' + qrSvg(v) + '</div><b dir="ltr">' + esc(v.code) + '</b></div></div>';
     }
     function lobbyView(v) {
       const n = v.players.length;
-      return '<div class="hd"><div class="ttl">المستشار <b>السري</b></div><span class="sp"></span><span class="pill">من ٥ إلى ٦٠ لاعباً</span></div><div class="lobby"><div class="qr">' + qrSvg(v) + '</div><div><div class="sub">امسحوا الرمز بكاميرا الجوال، أو ادخلوا بالرمز</div><div class="code" dir="ltr">' + esc(v.code) + '</div>' +
+      return '<div class="hd"><div class="ttl"><b>مستشار</b> الديوانية</div><span class="sp"></span><span class="pill">من ٥ إلى ٦٠ لاعباً</span></div><div class="lobby"><div class="qr">' + qrSvg(v) + '</div><div><div class="sub">امسحوا الرمز بكاميرا الجوال، أو ادخلوا بالرمز</div><div class="code" dir="ltr">' + esc(v.code) + '</div>' +
         '<div class="sub" style="margin-top:1em">اللاعبين: ' + AR(n) + (v.need ? ' — ينقصكم ' + AR(v.need) : ' — جاهزين! المضيف يبدأ') + '</div><div class="chips">' + v.players.map((p) => '<span class="chip"><i style="background:' + p.color + '"></i>' + esc(p.name) + '</span>').join('') + '</div>' +
         (n >= 5 ? '<div class="sub" style="margin-top:1.2em">' + AR(v.dist[0]) + ' نزهاء · ' + AR(v.dist[1]) + ' فاسدين · الزعيم السري</div>' : '') + '</div></div>';
     }
@@ -1652,7 +1652,7 @@ body.show-both .tabs{left:calc(50% - 215px)}
 
 </script>
 <script>/* sh/loopback.js */
-/* ديوانية بلس — المستشار السري: النسخة التجريبية بدون إنترنت — "خادم" داخل الصفحة + لاعبين بوتات.
+/* ديوانية بلس — مستشار الديوانية: النسخة التجريبية بدون إنترنت — "خادم" داخل الصفحة + لاعبين بوتات.
  * نفس البروتوكول (hub.js) بالضبط، فالواجهة ما تدري إنها مو على خادم حقيقي. */
 (function (g) {
   'use strict';
@@ -1867,7 +1867,7 @@ body.show-both .tabs{left:calc(50% - 215px)}
   // ------------------------------------------------------------------ الشاشات
   function home() {
     var pre = params.get('room') || '';
-    return '<div class="logo"><div class="ic">' + I.svg('pres') + '</div><div class="t">المستشار <b>السري</b></div><div class="s">برلمان وخيانة وكذب — كل واحد بجواله</div></div>' +
+    return '<div class="logo"><div class="ic">' + I.svg('pres') + '</div><div class="t"><b>مستشار</b> الديوانية</div><div class="s">برلمان وخيانة وكذب — كل واحد بجواله</div></div>' +
       (ST.me && !ST.view ? '<div class="card ctr mut">نرجّعك لغرفتك…</div>' : '') +
       '<div class="card col"><div class="big">ادخل غرفة</div><input id="inCode" class="inp code" inputmode="numeric" maxlength="4" placeholder="••••" value="' + esc(pre) + '" autocomplete="off"><input id="inName" class="inp" maxlength="14" placeholder="اسمك" autocomplete="off" value="' + esc(store.get('sh_name') || '') + '"><button class="btn" data-a="join">دخول</button></div>' +
       '<div class="card col"><div class="big">أنشئ غرفة جديدة</div><div class="mut small">تصير أنت المضيف. اللاعبين يدخلون بمسح الـQR بدون تسجيل. من ٥ إلى ٦٠ لاعباً.</div><input id="inName2" class="inp" maxlength="14" placeholder="اسمك" autocomplete="off" value="' + esc(store.get('sh_name') || '') + '"><button class="btn gold" data-a="create">إنشاء الغرفة</button></div>' +
@@ -2066,7 +2066,7 @@ body.show-both .tabs{left:calc(50% - 215px)}
       case 'create': { if (window.MafiaAudio) window.MafiaAudio.unlock(); var n = val('inName2'); if (!n) return toast(ERR.name_required); store.set('sh_name', n); send({ t: 'create', name: n }) || toast('الاتصال مقطوع'); break; }
       case 'join': { var c = val('inCode'), n2 = val('inName'); if (!/^\d{4}$/.test(c)) return toast('اكتب رمز الغرفة (٤ أرقام)'); if (!n2) return toast(ERR.name_required); store.set('sh_name', n2); send({ t: 'join', code: c, name: n2 }) || toast('الاتصال مقطوع'); break; }
       case 'leave': act('leave'); break;
-      case 'share': { var u = qrFor(v.code).link; if (navigator.share) navigator.share({ title: 'المستشار السري', text: 'ادخل غرفتنا: ' + v.code, url: u }).catch(function () { }); else if (navigator.clipboard) navigator.clipboard.writeText(u).then(function () { toast('انسخ الرابط'); }); break; }
+      case 'share': { var u = qrFor(v.code).link; if (navigator.share) navigator.share({ title: 'مستشار الديوانية', text: 'ادخل غرفتنا: ' + v.code, url: u }).catch(function () { }); else if (navigator.clipboard) navigator.clipboard.writeText(u).then(function () { toast('انسخ الرابط'); }); break; }
       case 'boardlink': ST.ui.board = !ST.ui.board; render(); break;
       case 'copyboard': if (navigator.clipboard) navigator.clipboard.writeText(el.getAttribute('data-u')).then(function () { toast('انسخ رابط الشاشة'); }); break;
       case 'kick': if (ST.ui.kick === id) { ST.ui.kick = null; act('kick', { target: id }); } else { ST.ui.kick = id; render(); setTimeout(function () { if (ST.ui.kick === id) { ST.ui.kick = null; render(); } }, 3000); } break;

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="theme-color" content="#0b0a2e">
-<title>ديوانية بلس — مافيا</title>
+<title>ديوانية بلس — مافيا الديوانية</title>
 <style>
 :root{--bg1:#111936;--bg2:#0A0F24;--ink:#fff;--mut:#aab0d8;--card:rgba(255,255,255,.07);--line:rgba(255,255,255,.14);--org:#f26538;--gold:#F5B942;--red:#e5484d;--blue:#38bdf8;--green:#34d399;--vio:#a78bfa;--stk:62px}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -2350,7 +2350,7 @@ body.board .hfab,body.board-only .hfab,body.show-board .hfab,body.show-both .hfa
   function home() {
     var pre = params.get('room') || '';
     var hasSaved = ST.me && !ST.view;
-    return '<div class="logo"><div class="t">ديوانية بلس <b>مافيا</b></div><div class="s">لعبة الخداع والذكاء — كل واحد بجواله</div></div>' +
+    return '<div class="logo"><div class="t"><b>مافيا</b> الديوانية</div><div class="s">لعبة الخداع والذكاء — كل واحد بجواله</div></div>' +
       (hasSaved ? '<div class="card ctr mut">نرجّعك لغرفتك…</div>' : '') +
       '<div class="card col"><div class="big">ادخل غرفة</div><input id="inCode" class="inp code" inputmode="numeric" maxlength="4" placeholder="••••" value="' + esc(pre) + '" autocomplete="off"><input id="inName" class="inp" maxlength="14" placeholder="اسمك" autocomplete="off"><button class="btn" data-a="join">ادخل</button></div>' +
       '<div class="card col"><div class="big">أنشئ غرفة جديدة</div><div class="mut small">تصير أنت المضيف. اللاعبين يدخلون بمسح الـQR بدون تسجيل.</div><input id="inName2" class="inp" maxlength="14" placeholder="اسمك" value="" autocomplete="off"><button class="btn gold" data-a="create">أنشئ الغرفة</button></div>' +

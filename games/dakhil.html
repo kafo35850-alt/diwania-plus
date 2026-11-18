@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="theme-color" content="#0b0a2e">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<title>ديوانية بلس — الدخيل</title>
+<title>ديوانية بلس — دخيل الديوانية</title>
 </head>
 <body>
 <script>window.DIWANIYA_DEMO=true;</script>
@@ -1040,7 +1040,7 @@
   const nm = (v, id) => { const p = v.players.find((x) => x.id === id); return p ? esc(p.name) : '؟'; };
 
   const cfg = {
-    id: 'dakhil', name: 'الدخيل', nameHtml: 'ال<b>دخيل</b>', tagline: 'كلكم تعرفون الكلمة… إلا واحد', icon: ICON, wsPath: '/dakhil/ws', min: 3, max: 60,
+    id: 'dakhil', name: 'دخيل الديوانية', nameHtml: '<b>دخيل</b> الديوانية', tagline: 'كلكم تعرفون الكلمة… إلا واحد', icon: ICON, wsPath: '/dakhil/ws', min: 3, max: 60,
     engine: MG.dakhil, help: MG.dakhilHelp,
     err: { not_your_turn: 'مو دورك', no_back: 'ما تقدر تسأل نفس اللي سألك', already_called: 'طلبت تصويت قبل', not_spy: 'هذا للدخيل بس' },
     phaseName: { reveal: 'اكشف دورك', talk: 'الأسئلة', vote: 'التصويت', guess: 'تخمين الدخيل', result: 'النتيجة', ended: 'النهاية' },
@@ -1122,7 +1122,7 @@
 
   // ---------------------------------------------------------------- التلفزيون
   cfg.board = {
-    title: 'ال<b>دخيل</b>', timedPhases: ['talk', 'vote', 'guess'], untimedPhases: ['talk'], stepKey: (v) => v.asker + ':' + (v.askLog ? v.askLog.length : 0) + ':' + v.failedVotes,
+    title: '<b>دخيل</b> الديوانية', timedPhases: ['talk', 'vote', 'guess'], untimedPhases: ['talk'], stepKey: (v) => v.asker + ':' + (v.askLog ? v.askLog.length : 0) + ':' + v.failedVotes,
     css: '.mdb .wl{display:flex;flex-wrap:wrap;gap:.7em;justify-content:center;max-width:122em}.mdb .wl span{font-size:2.1em;font-weight:800;padding:.2em .8em;border-radius:99em;background:rgba(255,255,255,.1)}.mdb .wl span.hit{background:#f2c14e;color:#2b1c00}.mdb .pair{display:flex;align-items:center;gap:1.4em;font-size:3.2em;font-weight:900}.mdb .pair i{font-style:normal;color:#ffd978;font-size:.8em}.mdb .hist{display:flex;gap:1em;flex-wrap:wrap;justify-content:center;font-size:1.9em;color:#cfd6ff;font-weight:700}.mdb .hist span{background:rgba(255,255,255,.07);padding:.2em .8em;border-radius:99em}.mdb .stamp{font-size:2.2em;padding:.2em .9em;border-radius:99em;background:#c0262e;font-weight:900}',
     tone: (v) => (v.phase === 'vote' || v.phase === 'guess' ? 'red' : v.phase === 'result' ? (v.result && v.result.spyWins ? 'red' : 'blue') : v.phase === 'ended' ? 'gold' : ''),
     render(v, B) {
