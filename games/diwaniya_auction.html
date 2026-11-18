@@ -343,6 +343,21 @@ canvas.draw-pad {
 @media (min-width: 1280px) { .top-bar, .layout-wrap, .view-tabs { zoom: 1.18; } }
 @media (min-width: 1700px) { .top-bar, .layout-wrap, .view-tabs { zoom: 1.4; } }
 @media (min-width: 2400px) { .top-bar, .layout-wrap, .view-tabs { zoom: 1.8; } }
+/*dw-landscape*/
+@media (orientation: landscape) and (max-height: 540px) {
+  .top-bar { position: static; padding: 4px 10px; }
+  .top-bar .brand-Side div > div { display: none; }
+  .top-bar .brand-Side b { font-size: 14px !important; }
+  .layout-wrap { padding: 8px 8px 56px; gap: 8px; }
+  .layout-wrap.mode-both { grid-template-columns: 1.35fr 1fr; }
+  .panel-box { padding: 10px 12px; border-radius: 14px; }
+  .panel-head { padding-bottom: 4px; margin-bottom: 8px; }
+  .panel-head h2 { font-size: 15px !important; margin-top: 4px !important; }
+  .panel-head h3 { font-size: 14px !important; margin-top: 4px !important; }
+  .view-tabs { bottom: 6px; padding: 3px; }
+  .view-tabs button { padding: 5px 11px; font-size: 12px; }
+  .layout-wrap { zoom: 0.9; }
+}
 </style>
 </head>
 <body>
@@ -714,7 +729,7 @@ window.GAME_CONFIG = {"slug":"diwaniya_auction","title":"مزاد الديوان
 
   var ST = {
     roomCode: 'DW-' + Math.floor(1000 + Math.random() * 9000),
-    viewMode: window.innerWidth >= 960 ? 'both' : 'board',
+    viewMode: (window.innerWidth >= 960 || (window.innerWidth >= 640 && window.innerWidth > window.innerHeight)) ? 'both' : 'board',
     round: 1,
     players: [
       { id: 'p1', name: 'أنت', score: 0, budget: 1000, alive: true, team: 1 },

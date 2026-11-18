@@ -2355,7 +2355,7 @@ body.board .hfab,body.board-only .hfab,body.show-board .hfab,body.show-both .hfa
       '<div class="card col"><div class="big">ادخل غرفة</div><input id="inCode" class="inp code" inputmode="numeric" maxlength="4" placeholder="••••" value="' + esc(pre) + '" autocomplete="off"><input id="inName" class="inp" maxlength="14" placeholder="اسمك" autocomplete="off"><button class="btn" data-a="join">ادخل</button></div>' +
       '<div class="card col"><div class="big">أنشئ غرفة جديدة</div><div class="mut small">تصير أنت المضيف. اللاعبين يدخلون بمسح الـQR بدون تسجيل.</div><input id="inName2" class="inp" maxlength="14" placeholder="اسمك" value="" autocomplete="off"><button class="btn gold" data-a="create">أنشئ الغرفة</button></div>' +
       '<button class="btn sec" data-a="help">؟ كيف تلعب؟ (شرح اللعبة ومهام الليل)</button>' +
-      '<div class="hint">عندك شاشة كبيرة؟ افتح الرابط مع <b>?board=رمز_الغرفة</b> لعرض اللعب للجميع.</div>';
+      '<div class="hint">عندك شاشة كبيرة؟ بعد ما تنشئ الغرفة تقدر تعرض اللعب على <b>التلفزيون</b> للجميع.</div>';
   }
   function qrFor(code) {
     var link = location.origin + location.pathname + '?room=' + code, svg = '';

@@ -1616,7 +1616,7 @@ body.show-board .tabs{left:14px;transform:none;bottom:34px}
     }
     function draw() {
       const v = ST.view; let h = '';
-      if (!ST.code) h = '<div class="err">افتح الشاشة من رابط الغرفة (?board=الرمز)</div>';
+      if (!ST.code) h = '<div class="err">افتح شاشة العرض من زر «التلفزيون» داخل الغرفة</div>';
       else if (ST.err) h = '<div class="err">' + esc(ST.err) + '</div>';
       else if (!v) h = '<div class="err">نتصل بالغرفة…</div>';
       else {

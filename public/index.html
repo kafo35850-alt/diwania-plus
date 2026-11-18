@@ -515,6 +515,14 @@ button:disabled {
 .fb-btn.off { opacity: .55; }
 .fb-close { background: rgba(244,63,94,.18); border-color: rgba(244,63,94,.5); color: #fecdd3; }
 @media (max-width: 640px) { .fb-btn .lbl { display: none; } .fb-btn { padding: 0 10px; } .fb-title { font-size: 15px; } }
+@media (orientation: landscape) and (max-height: 540px) {
+  .dw-game-frame-bar { min-height: 40px; padding-top: max(3px, env(safe-area-inset-top)); padding-bottom: 3px; }
+  .fb-btn { height: 32px; min-width: 34px; padding: 0 9px; border-radius: 10px; font-size: 14px; }
+  .fb-btn .lbl { display: none; }
+  .fb-title { font-size: 14px; }
+}
+.dw-game-frame-wrap:fullscreen { width: 100vw; height: 100vh; }
+.dw-toast.in-game { bottom: auto; top: calc(58px + env(safe-area-inset-top)); padding: 8px 14px; font-size: 13px; max-width: min(92vw, 440px); text-align: center; border-radius: 12px; }
 
 .dw-game-frame {
   flex: 1;
@@ -697,6 +705,112 @@ html, body { font-family: "IBM Plex Sans Arabic", -apple-system, "SF Arabic", "S
   .dw-table td:nth-last-child(2) { white-space: normal; min-width: 180px; }
 }
 footer a { text-decoration: none; }
+
+/* ===== store merchandising ===== */
+.g-art { overflow: hidden; }
+.g-ribbon { position: absolute; top: 10px; left: 10px; z-index: 2; font-size: 12.5px; font-weight: 700; padding: 5px 11px; border-radius: 999px; color: #2b1c00; background: linear-gradient(180deg, #ffe08a, #f5b942); box-shadow: 0 6px 16px rgba(0,0,0,.4); }
+.g-ribbon.hot { background: linear-gradient(180deg, #fb923c, #e11d48); color: #fff; }
+.g-ribbon.new { background: linear-gradient(180deg, #5eead4, #0d9488); color: #022c26; }
+.g-ribbon.pick { background: linear-gradient(180deg, #c4b5fd, #7c3aed); color: #fff; }
+.featured-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+@media (max-width: 1100px) { .featured-row { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px) { .featured-row { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 6px; margin: 0 -16px; padding-inline: 16px; } .featured-row .g-card { flex: 0 0 78%; scroll-snap-align: center; } }
+.sec-kicker { display: inline-block; font-size: 13px; font-weight: 700; color: var(--gold); letter-spacing: .3px; margin-bottom: 4px; }
+
+/* pricing */
+.price-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; align-items: stretch; margin-top: 6px; }
+@media (max-width: 1100px) { .price-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) {
+  .price-grid { grid-template-columns: 1fr 1fr; gap: 22px 10px; }
+  .price-card { padding: 22px 12px 12px; gap: 6px; border-radius: 18px; }
+  .price-card .pc-name { font-size: 14.5px; }
+  .price-card .pc-credits { font-size: 34px; }
+  .price-card .pc-price b { font-size: 21px; }
+  .price-card .pc-price s { font-size: 12.5px; }
+  .price-card .pc-desc { display: none; }
+  .price-card .pc-badge { font-size: 11px; padding: 4px 9px; }
+  .price-card .dw-btn { padding: 10px 6px; font-size: 13.5px; margin-top: auto; }
+}
+.price-card { position: relative; display: flex; flex-direction: column; gap: 10px; padding: 24px 20px 20px; border-radius: 22px; background: rgba(17,25,54,.85); border: 1px solid var(--border-subtle); transition: transform .18s ease, border-color .18s ease; }
+.price-card:hover { transform: translateY(-3px); border-color: rgba(245,185,66,.45); }
+.price-card.hl { background: linear-gradient(180deg, rgba(245,185,66,.16), rgba(17,25,54,.92) 55%); border: 2px solid var(--gold); box-shadow: 0 0 0 6px rgba(245,185,66,.08), 0 24px 50px rgba(0,0,0,.45); }
+@media (min-width: 1101px) { .price-card.hl { transform: scale(1.04); } .price-card.hl:hover { transform: scale(1.04) translateY(-3px); } }
+.price-card .pc-badge { position: absolute; top: -13px; right: 50%; transform: translateX(50%); white-space: nowrap; font-size: 12.5px; font-weight: 700; padding: 5px 14px; border-radius: 999px; background: rgba(255,255,255,.1); border: 1px solid var(--border-subtle); color: #e2e8f0; backdrop-filter: blur(6px); }
+.price-card.hl .pc-badge { background: linear-gradient(180deg, #ffe08a, #f5b942); color: #2b1c00; border: 0; }
+.price-card .pc-name { font-size: 17px; font-weight: 700; color: #e2e8f0; }
+.price-card .pc-credits { font-size: 44px; font-weight: 700; line-height: 1; color: var(--gold); }
+.price-card .pc-credits small { font-size: 16px; color: #c9d2e6; font-weight: 600; margin-inline-start: 4px; }
+.price-card .pc-price { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.price-card .pc-price b { font-size: 28px; font-weight: 700; }
+.price-card .pc-price b small { font-size: 14px; font-weight: 600; color: #c9d2e6; }
+.price-card .pc-price s { color: #7c8aa5; font-size: 15px; }
+.price-card .pc-save { align-self: flex-start; font-size: 12.5px; font-weight: 700; padding: 3px 10px; border-radius: 999px; background: rgba(45,212,191,.16); color: #5eead4; border: 1px solid rgba(45,212,191,.35); }
+.price-card .pc-per { font-size: 13px; color: var(--text-muted); }
+.price-card .pc-desc { margin: 0; font-size: 14px; color: #b6c0d6; line-height: 1.7; flex: 1; }
+.price-card .dw-btn { width: 100%; padding: 12px; font-size: 15.5px; }
+.pay-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; justify-content: center; color: var(--text-muted); font-size: 13px; }
+.pay-chip { padding: 5px 11px; border-radius: 8px; background: rgba(255,255,255,.06); border: 1px solid var(--border-subtle); color: #e2e8f0; font-weight: 700; font-size: 12.5px; letter-spacing: .3px; }
+
+@media (max-width: 560px) {
+  .games { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .games .g-card { border-radius: 16px; }
+  .games .g-body { padding: 10px; gap: 6px; }
+  .games .g-body h4 { font-size: 15px; }
+  .games .g-meta { font-size: 11.5px; }
+  .games .g-desc, .games .g-tags .phones { display: none; }
+  .games .g-badge { font-size: 10.5px; padding: 3px 7px; }
+  .games .g-actions { flex-direction: column; gap: 6px; margin-top: auto; }
+  .games .g-actions .dw-btn { padding: 8px 6px; font-size: 13px; border-radius: 10px; }
+  .g-ribbon { font-size: 10.5px; padding: 3px 8px; top: 6px; left: 6px; }
+  .feat-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .feat { padding: 14px; }
+  .feat .ic { width: 38px; height: 38px; font-size: 18px; margin-bottom: 8px; }
+  .feat b { font-size: 14.5px; }
+  .feat span { font-size: 12.5px; }
+  .cta-band { padding: 20px; }
+  .cta-band .dw-btn { width: 100%; }
+}
+/* features + devices + faq */
+.feat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+@media (max-width: 1000px) { .feat-grid { grid-template-columns: repeat(2, 1fr); } }
+.feat { padding: 20px; border-radius: 20px; background: rgba(255,255,255,.04); border: 1px solid var(--border-subtle); }
+.feat .ic { width: 46px; height: 46px; border-radius: 14px; display: grid; place-items: center; font-size: 22px; background: rgba(245,185,66,.14); margin-bottom: 12px; }
+.feat b { display: block; font-size: 16.5px; margin-bottom: 4px; }
+.feat span { color: var(--text-muted); font-size: 14px; line-height: 1.7; }
+.devices { display: grid; grid-template-columns: 1.1fr 1fr; gap: 22px; align-items: center; padding: 26px; border-radius: 24px; background: radial-gradient(120% 140% at 100% 0%, rgba(45,212,191,.12), transparent 60%), rgba(255,255,255,.035); border: 1px solid var(--border-subtle); }
+.devices h3 { margin: 0 0 8px; font-size: 24px; }
+.devices p { margin: 0 0 12px; color: #c9d2e6; line-height: 1.8; font-size: 15px; }
+.devices ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+.devices li { display: flex; gap: 10px; align-items: flex-start; font-size: 14.5px; color: #c9d2e6; line-height: 1.7; }
+.devices li b { color: #fff; }
+.dev-art { display: flex; align-items: flex-end; justify-content: center; gap: 14px; }
+.dev-tv { width: 64%; aspect-ratio: 16/9; border-radius: 12px; border: 6px solid #1e293b; background: linear-gradient(135deg, #1e1b4b, #0f766e); display: grid; place-items: center; font-size: 40px; box-shadow: 0 20px 40px rgba(0,0,0,.45); position: relative; }
+.dev-tv:after { content: ''; position: absolute; bottom: -16px; width: 30%; height: 8px; border-radius: 4px; background: #1e293b; }
+.dev-phone { width: 26%; aspect-ratio: 16/9; border-radius: 10px; border: 4px solid #1e293b; background: linear-gradient(135deg, #7c2d12, #f59e0b); display: grid; place-items: center; font-size: 20px; box-shadow: 0 14px 30px rgba(0,0,0,.45); }
+@media (max-width: 860px) { .devices { grid-template-columns: 1fr; } .dev-art { order: -1; } }
+.faq { display: grid; gap: 10px; }
+.faq details { border-radius: 16px; background: rgba(255,255,255,.04); border: 1px solid var(--border-subtle); padding: 0 18px; }
+.faq details[open] { border-color: rgba(245,185,66,.4); }
+.faq summary { cursor: pointer; list-style: none; padding: 16px 0; font-weight: 700; font-size: 15.5px; display: flex; justify-content: space-between; gap: 10px; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary:after { content: '+'; color: var(--gold); font-size: 20px; line-height: 1; }
+.faq details[open] summary:after { content: '−'; }
+.faq p { margin: 0 0 16px; color: #c9d2e6; line-height: 1.85; font-size: 14.5px; }
+.cta-band { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding: 26px 28px; border-radius: 24px; background: linear-gradient(120deg, rgba(245,185,66,.22), rgba(124,58,237,.18)); border: 1px solid rgba(245,185,66,.4); }
+.cta-band h3 { margin: 0; font-size: 24px; }
+.cta-band p { margin: 6px 0 0; color: #e2e8f0; font-size: 15px; }
+.cta-band .dw-btn { padding: 13px 26px; font-size: 16px; }
+/* footer */
+.site-foot { margin-top: 40px; border-top: 1px solid var(--border-subtle); background: rgba(5,8,20,.6); }
+.site-foot .in { max-width: 1280px; margin: 0 auto; padding: 32px 16px 26px; display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 24px; }
+.site-foot h5 { margin: 0 0 10px; font-size: 15px; color: #fff; }
+.site-foot p, .site-foot a, .site-foot button.lnk { color: var(--text-muted); font-size: 14px; line-height: 2; }
+.site-foot button.lnk { background: none; border: 0; padding: 0; cursor: pointer; display: block; text-align: right; font: inherit; }
+.site-foot a:hover, .site-foot button.lnk:hover { color: var(--gold); }
+.site-foot .brand { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.site-foot .brand .dw-brand-logo { width: 40px; height: 40px; }
+.site-foot .copy { max-width: 1280px; margin: 0 auto; padding: 14px 16px 30px; border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; color: var(--text-muted); font-size: 13px; }
+@media (max-width: 760px) { .site-foot .in { grid-template-columns: 1fr 1fr; } .site-foot .in > div:first-child { grid-column: 1 / -1; } }
 </style>
 </head>
 <body>
@@ -756,6 +870,7 @@ footer a { text-decoration: none; }
       <button class="fb-btn" data-act="open-room-hub" title="غرفة الجرس والإجابات بالجوالات">📱<span class="lbl"> غرفة الجرس</span></button>
       <button class="fb-btn" id="dwFrameVoiceBtn" data-act="toggle-store-voice" title="صوت الراوي">🔊</button>
       <button class="fb-btn" id="dwFrameSfxBtn" data-act="toggle-store-sfx" title="المؤثرات">🎵</button>
+      <button class="fb-btn" id="dwFrameFsBtn" data-act="toggle-frame-fullscreen" title="ملء الشاشة" style="display:none">⛶</button>
     </div>
   </div>
   <iframe class="dw-game-frame" allow="autoplay" id="dwGameIframe" sandbox="allow-scripts allow-same-origin allow-forms allow-modals allow-popups" title="Diwaniya Game Frame"></iframe>
@@ -1786,6 +1901,7 @@ footer a { text-decoration: none; }
     el.classList.add('show');
     clearTimeout(el._t);
     var inGame = document.getElementById('dwGameFrameWrap');
+    el.classList.toggle('in-game', !!(inGame && inGame.classList.contains('open')));
     el._t = setTimeout(function () { el.classList.remove('show'); }, inGame && inGame.classList.contains('open') ? 2200 : 4200);
   }
 
@@ -1843,12 +1959,27 @@ footer a { text-decoration: none; }
 
   // Store groupings (client-side presentation only).
   var GAME_TAGS = {
+    top: ['eight', 'dakhil', 'mafia', 'qaftah', 'shifra', 'harf', 'chancellor', 'draw_guess', 'fortune_wheel', 'qaddirha'],
     phones: ['dakhil', 'mafia', 'qaftah', 'chancellor', 'harf', 'qaddirha'],
     quiz: ['eight', 'stadium_esports', 'last_one_standing', 'radar_guess', 'golden_vault', 'how_much_price', 'mazad30', 'qaddirha', 'harf'],
     party: ['silent_library', 'pressure_seat', 'draw_guess', 'fake_artist', 'fortune_wheel', 'mystery_button', 'diwaniya_auction', 'vault50', 'who_knows_friend'],
     bluff: ['shifra', 'friends_court', 'alibi_court', 'liars_table', 'dakhil', 'mafia', 'chancellor', 'qaftah']
   };
-  var GAME_FILTERS = [['all', 'الكل'], ['phones', '📱 بالجوالات'], ['quiz', '🧠 مسابقات'], ['party', '🎉 تحديات وضحك'], ['bluff', '🕵️ خداع وتحقيق']];
+  var GAME_FILTERS = [['all', 'الكل'], ['top', '🔥 الأشهر'], ['phones', '📱 بالجوالات'], ['quiz', '🧠 مسابقات'], ['party', '🎉 تحديات وضحك'], ['bluff', '🕵️ خداع وتحقيق']];
+  // Marketing ribbons on game posters (presentation only).
+  var GAME_RIBBONS = {
+    eight: ['hot', '🔥 الأكثر لعباً'],
+    dakhil: ['', '👑 الأكثر طلباً'],
+    mafia: ['pick', '⭐ ننصح بها'],
+    qaftah: ['hot', '😂 ضحك مضمون'],
+    harf: ['new', '✨ جديد'],
+    qaddirha: ['new', '✨ جديد'],
+    shifra: ['pick', '⭐ ننصح بها'],
+    draw_guess: ['', '👨‍👩‍👧 للعائلة'],
+    fortune_wheel: ['', '🎉 للتجمعات الكبيرة'],
+    chancellor: ['pick', '🧠 للأذكياء']
+  };
+  var FEATURED = ['eight', 'dakhil', 'mafia', 'qaftah'];
   function cleanTitle(s) {
     return String(s || '').replace(/\s*[—-]\s*ديوانية بلس\s*$/, '').replace(/^ديوانية بلس\s*[—-]\s*/, '').trim();
   }
@@ -1894,6 +2025,7 @@ footer a { text-decoration: none; }
         ? '<div class="g-art g-poster">'
         : '<div class="g-art" style="background:' + logo.bg + '">') +
         ((window.DW_POSTERS && window.DW_POSTERS[g.slug]) || logo.svg) +
+        (GAME_RIBBONS[g.slug] ? '<span class="g-ribbon ' + GAME_RIBBONS[g.slug][0] + '">' + GAME_RIBBONS[g.slug][1] + '</span>' : '') +
       '</div>' +
       '<div class="g-body">' +
         '<h4>' + esc(cleanTitle(g.title)) + '</h4>' +
@@ -1943,6 +2075,14 @@ footer a { text-decoration: none; }
       '<div><span class="n">٣</span><div><b>الشلة تدخل بجوالاتها</b><span>يمسحون رمز الـ QR ويلعبون بدون حساب.</span></div></div>' +
     '</section>';
 
+    if (filter === 'all') {
+      var feat = FEATURED.map(function (sl) { return activeGames.filter(function (g) { return g.slug === sl; })[0]; }).filter(Boolean);
+      if (feat.length) {
+        html += '<div class="sec-head"><div><span class="sec-kicker">🔥 الأشهر في الديوانيات</span><h3>ابدأ بهذي</h3><p>الألعاب اللي الكل يطلبها في السهرات</p></div></div>';
+        html += '<div class="featured-row">' + feat.map(renderGameCard).join('') + '</div>';
+      }
+    }
+
     html += '<div class="sec-head" id="dwGamesTop">' +
       '<div><h3>الألعاب</h3><p>' + arNum(shown.length) + ' لعبة' + (filter === 'phones' ? ' — كل لاعب يلعب من جواله' : '') + '</p></div>' +
       '<div class="filters">' + GAME_FILTERS.map(function (f) {
@@ -1950,6 +2090,43 @@ footer a { text-decoration: none; }
       }).join('') + '</div>' +
     '</div>';
     html += '<div class="games">' + shown.map(renderGameCard).join('') + '</div>';
+
+    html += '<section class="feat-grid">' +
+      '<div class="feat"><div class="ic">📺</div><b>الشاشة للكل</b><span>اللعبة على التلفزيون والكل يتابع ويتفاعل — جو ديوانية حقيقي.</span></div>' +
+      '<div class="feat"><div class="ic">📱</div><b>بدون تطبيق</b><span>الشلة يمسحون الـ QR ويدخلون من المتصفح على طول، بدون حسابات.</span></div>' +
+      '<div class="feat"><div class="ic">🇸🇦</div><b>محتوى عربي خليجي</b><span>أسئلة وفئات وتحديات تناسب سوالفنا وثقافتنا، تتجدد باستمرار.</span></div>' +
+      '<div class="feat"><div class="ic">🎁</div><b>جرّب قبل تشتري</b><span>أول تشغيلة في كل لعبة مجانية، وبعدها باقات تبدأ من ' + arNum(sarText(Math.min.apply(null, STATE.packages.filter(function (p) { return p.is_active; }).map(function (p) { return p.price_halalas; }).concat([799])))) + ' ر.س.</span></div>' +
+    '</section>';
+
+    html += '<section class="devices">' +
+      '<div>' +
+        '<span class="sec-kicker">تشتغل على كل الأجهزة</span>' +
+        '<h3>جوالك بالعرض… والتلفزيون شاشتكم</h3>' +
+        '<p>الألعاب تتكيّف مع أي شاشة: جوال بالطول أو بالعرض، آيباد، لابتوب، أو تلفزيون كبير.</p>' +
+        '<ul>' +
+          '<li>📺 <span><b>على التلفزيون:</b> افتح الموقع من متصفح التلفزيون، أو اعكس شاشة جوالك بـ AirPlay أو Chromecast.</span></li>' +
+          '<li>🔄 <span><b>اقلب الجوال بالعرض:</b> الشاشة وأزرار التحكم يصيرون جنب بعض عشان كل شي يبان مرة وحدة.</span></li>' +
+          '<li>⛶ <span><b>ملء الشاشة:</b> اضغط زر ⛶ فوق اللعبة عشان تاخذ الشاشة كاملة.</span></li>' +
+        '</ul>' +
+      '</div>' +
+      '<div class="dev-art" aria-hidden="true"><div class="dev-tv">🎮</div><div class="dev-phone">📱</div></div>' +
+    '</section>';
+
+    html += '<section>' +
+      '<div class="sec-head"><div><span class="sec-kicker">الباقات</span><h3>كل ما كبرت الباقة… وفّرت أكثر</h3><p>القيم الواحد = لعبة كاملة لكل الشلة</p></div>' +
+      '<button class="dw-btn dw-btn-sec" data-nav="packages">كل التفاصيل ←</button></div>' +
+      '<div style="padding-top:20px">' + renderPriceCards() + '</div>' +
+      '<div style="margin-top:14px">' + payTrustRow() + '</div>' +
+    '</section>';
+
+    html += renderFaq();
+
+    html += '<section class="cta-band">' +
+      '<div><h3>جاهزين للسهرة؟ 🎉</h3><p>سجّل بإيميلك في ثواني، وجرّب كل لعبة أول مرة ببلاش.</p></div>' +
+      (!STATE.user
+        ? '<button class="dw-btn dw-btn-gold" data-act="open-auth">ابدأ مجاناً</button>'
+        : '<button class="dw-btn dw-btn-gold" data-act="scroll-games">اختر لعبتك</button>') +
+    '</section>';
 
     html += '<section class="suggest">' +
       '<div><h3>💡 عندك فكرة لعبة؟</h3><p>اكتب الفكرة أو حط رابط مقطع شفته، وفريقنا يراجعها. أفضل الأفكار تنضاف للمنصة.</p></div>' +
@@ -2029,42 +2206,69 @@ footer a { text-decoration: none; }
       '<a href="/legal/privacy.html" target="_blank" rel="noopener" style="color:var(--gold)">سياسة الخصوصية</a>';
   }
 
+  // Price per credit of the smallest package is the reference for "you save".
+  function renderPriceCards() {
+    var pkgs = STATE.packages.filter(function (p) { return p.is_active; }).sort(function (a, b) { return a.sort_order - b.sort_order; });
+    if (!pkgs.length) return '';
+    var ref = pkgs.slice().sort(function (a, b) { return a.credits - b.credits; })[0];
+    var refPer = ref.price_halalas / ref.credits;
+    var gateway = DiwaniyaServerKernel.loadDB().gatewayConnected;
+    return '<div class="price-grid">' + pkgs.map(function (p) {
+      var full = Math.round(refPer * p.credits);
+      var save = full > p.price_halalas ? Math.round((1 - p.price_halalas / full) * 100) : 0;
+      var per = sarText(Math.round(p.price_halalas / p.credits));
+      var hl = !!p.highlight;
+      var btn = !gateway
+        ? '<button class="dw-btn dw-btn-sec" disabled>🔒 قريباً</button>'
+        : (!STATE.user
+          ? '<button class="dw-btn ' + (hl ? 'dw-btn-gold' : 'dw-btn-sec') + '" data-act="open-auth">اشترِ الآن</button>'
+          : '<button class="dw-btn ' + (hl ? 'dw-btn-gold' : 'dw-btn-sec') + '" data-act="buy-pkg" data-id="' + esc(p.id) + '"' + (STATE.checkoutInFlight ? ' disabled' : '') + '>💳 اشترِ الآن</button>');
+      return '<div class="price-card' + (hl ? ' hl' : '') + '">' +
+        (p.badge ? '<span class="pc-badge">' + esc(p.badge) + '</span>' : '') +
+        '<div class="pc-name">' + esc(p.name) + '</div>' +
+        '<div class="pc-credits">' + arNum(p.credits) + '<small>' + (p.credits === 1 ? 'قيم' : 'أقيام') + '</small></div>' +
+        '<div class="pc-price"><b>' + arNum(sarText(p.price_halalas)) + ' <small>ر.س</small></b>' + (save ? '<s>' + arNum(sarText(full)) + '</s>' : '') + '</div>' +
+        (save ? '<span class="pc-save">وفّر ' + arNum(save) + '٪</span>' : '<span class="pc-per">السعر الأساسي</span>') +
+        (p.credits > 1 ? '<div class="pc-per">≈ ' + arNum(per) + ' ر.س للقيم</div>' : '') +
+        '<p class="pc-desc">' + esc(p.description) + '</p>' +
+        btn +
+      '</div>';
+    }).join('') + '</div>';
+  }
+
+  function payTrustRow() {
+    return '<div class="pay-row">🔒 دفع آمن عبر بوابة Moyasar' +
+      '<span class="pay-chip">مدى</span><span class="pay-chip">Apple Pay</span><span class="pay-chip">VISA</span><span class="pay-chip">Mastercard</span></div>';
+  }
+
   function renderPackagesTab() {
-    var activePkgs = STATE.packages.filter(function (p) { return p.is_active; }).sort(function (a, b) { return a.sort_order - b.sort_order; });
-    return '<div class="dw-card">' +
-      '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">' +
-        '<div>' +
-          '<h3 style="margin:0;font-size:24px;font-weight:900">باقات الأقيام</h3>' +
-          '<p style="margin:4px 0 0;color:var(--text-muted);font-size:14.5px">يحصل كل مستخدم على <b>قيم مجاني تجريبي في كل لعبة</b>، وبعدها يمكن طلب شحن أي باقة من الباقات التالية:</p>' +
-        '</div>' +
-        (DiwaniyaServerKernel.loadDB().gatewayConnected
-          ? '<span class="dw-chip teal" style="font-size:12.5px">🔒 دفع آمن عبر Moyasar · مدى · Apple Pay · بطاقات ائتمانية</span>'
-          : '<span class="dw-chip gold" style="font-size:12.5px">⚠️ الدفع الإلكتروني غير متاح حالياً</span>') +
-      '</div>' +
-      '<div style="background:rgba(45,212,191,0.08);border:1px solid rgba(45,212,191,0.3);padding:12px 16px;border-radius:14px;font-size:13.5px;line-height:1.75">' +
-        '💳 الدفع يتم في صفحة بوابة الدفع (Moyasar) مباشرة، وبيانات بطاقتك ما تمر على موقعنا. تنضاف الأقيام لمحفظتك تلقائياً بعد تأكيد البوابة للدفع.' +
-        '<br><span style="color:var(--text-muted)">بإتمام الشراء أنت توافق على ' + legalLinksHtml() + '.</span>' +
-      '</div>' +
-      '<div class="dw-grid-4" style="margin-top:8px">' +
-        activePkgs.map(function (p) {
-          var sar = sarText(p.price_halalas);
-          return '<div class="dw-card" style="border-color:var(--border-line);justify-content:space-between">' +
-            '<div>' +
-              (p.badge ? '<span class="dw-badge">' + esc(p.badge) + '</span>' : '') +
-              '<h4 style="margin:6px 0 0;font-size:20px;font-weight:900">' + esc(p.name) + '</h4>' +
-              '<div style="font-size:34px;font-weight:900;color:var(--gold);margin:10px 0">' + arNum(p.credits) + ' <span style="font-size:16px">أقيام</span></div>' +
-              '<p style="margin:0;color:var(--text-muted);font-size:13.5px;line-height:1.6">' + esc(p.description) + '</p>' +
-            '</div>' +
-            '<div style="margin-top:14px;border-top:1px solid var(--border-subtle);padding-top:12px">' +
-              '<div style="font-size:22px;font-weight:900;margin-bottom:10px">' + arNum(sar) + ' ر.س</div>' +
-              (DiwaniyaServerKernel.loadDB().gatewayConnected
-                ? '<button class="dw-btn dw-btn-gold" style="width:100%" data-act="buy-pkg" data-id="' + esc(p.id) + '"' + (STATE.checkoutInFlight ? ' disabled' : '') + '>💳 اشترِ الآن</button>'
-                : '<button class="dw-btn dw-btn-sec" style="width:100%" disabled>الدفع غير متاح حالياً</button>') +
-            '</div>' +
-          '</div>';
-        }).join('') +
-      '</div>' +
-    '</div>';
+    return '<section style="text-align:center;padding:10px 0 4px">' +
+        '<span class="sec-kicker">الباقات</span>' +
+        '<h2 style="margin:0;font-size:32px">اشحن أقيامك وابدأ السهرة</h2>' +
+        '<p style="margin:8px auto 0;max-width:620px;color:#c9d2e6;line-height:1.8">القيم الواحد يشغّل لعبة كاملة لكل الشلة. كل ما كبرت الباقة نزل سعر القيم. وأول مرة في كل لعبة <b style="color:var(--teal)">مجانية</b>.</p>' +
+      '</section>' +
+      '<div style="padding-top:14px">' + renderPriceCards() + '</div>' +
+      payTrustRow() +
+      '<div style="text-align:center;color:var(--text-muted);font-size:13px;line-height:1.9">الأقيام ما لها تاريخ انتهاء، وتنضاف لمحفظتك تلقائياً بعد تأكيد الدفع. بياناتك البنكية ما تمر على موقعنا.<br>بإتمام الشراء أنت توافق على ' + legalLinksHtml() + '.</div>' +
+      renderFaq();
+  }
+
+  function renderFaq() {
+    var q = [
+      ['وش يعني «قيم»؟', 'القيم هو تشغيلة لعبة وحدة كاملة لكل الشلة. تفتح اللعبة مرة وحدة وتلعبون جولات بقد ما تبون خلال الجلسة (١٢ ساعة).'],
+      ['هل لازم كل اللاعبين يسجلون أو يدفعون؟', 'لا. واحد بس يشغّل اللعبة من حسابه، والباقين يدخلون بجوالاتهم عن طريق رمز الـ QR بدون حساب وبدون دفع.'],
+      ['كيف أعرض اللعبة على التلفزيون؟', 'افتح الموقع من تلفزيون ذكي أو لابتوب موصول بالشاشة، أو اعكس شاشة جوالك (AirPlay أو Chromecast) واقلب الجوال بالعرض. الألعاب مصممة تشتغل بالعرض على الشاشات الكبيرة.'],
+      ['هل فيه تجربة مجانية؟', 'إيه، أول مرة في كل لعبة مجانية لكل حساب. يعني تقدر تجرب كل الألعاب قبل ما تشتري أي باقة.'],
+      ['هل الأقيام تنتهي؟', 'لا، الأقيام تبقى في محفظتك لين تستخدمها.'],
+      ['وش طرق الدفع المتاحة؟', 'مدى، Apple Pay، وبطاقات فيزا وماستركارد، عن طريق بوابة Moyasar الآمنة.'],
+      ['أحتاج أحمّل تطبيق؟', 'لا، كل شي يشتغل من المتصفح على أي جهاز: جوال، آيباد، لابتوب، أو تلفزيون ذكي.']
+    ];
+    return '<section style="margin-top:10px">' +
+      '<div class="sec-head"><div><span class="sec-kicker">عندك سؤال؟</span><h3>الأسئلة الشائعة</h3></div></div>' +
+      '<div class="faq" style="margin-top:14px">' + q.map(function (x, i) {
+        return '<details' + (i === 0 ? ' open' : '') + '><summary>' + x[0] + '</summary><p>' + x[1] + '</p></details>';
+      }).join('') + '</div>' +
+    '</section>';
   }
 
   var TX_TYPES = { bonus: 'هدية', free_trial: 'تجربة مجانية', consume: 'تشغيل لعبة', purchase: 'شراء باقة', admin_add: 'إضافة من الإدارة', admin_deduct: 'خصم من الإدارة' };
@@ -2793,8 +2997,21 @@ footer a { text-decoration: none; }
     else bodyHtml = renderStoreTab();
 
     root.innerHTML = renderNavbar() + '<main class="dw-container">' + bodyHtml + '</main>' +
-      '<footer style="text-align:center;padding:28px 16px 40px;color:var(--text-muted);font-size:13px;line-height:2">' +
-        legalLinksHtml() + '<br>© ديوانية بلس' +
+      '<footer class="site-foot"><div class="in">' +
+        '<div><div class="brand"><div class="dw-brand-logo">د+</div><b style="font-size:18px">ديوانية <span style="color:var(--gold)">بلس</span></b></div>' +
+          '<p style="margin:0;max-width:380px">ألعاب جماعية عربية للسهرات والديوانيات. الشاشة للكل والجوال لك — بدون تطبيق.</p></div>' +
+        '<div><h5>المنصة</h5>' +
+          '<button class="lnk" data-nav="store">الألعاب</button>' +
+          '<button class="lnk" data-nav="categories">فئات الثمانية</button>' +
+          '<button class="lnk" data-nav="packages">الباقات والأسعار</button>' +
+          '<button class="lnk" data-act="open-room-hub">غرفة QR والجرس</button></div>' +
+        '<div><h5>السياسات</h5>' +
+          '<a href="/legal/terms.html" target="_blank" rel="noopener" style="display:block">الشروط والأحكام</a>' +
+          '<a href="/legal/refund.html" target="_blank" rel="noopener" style="display:block">سياسة الاسترجاع</a>' +
+          '<a href="/legal/privacy.html" target="_blank" rel="noopener" style="display:block">سياسة الخصوصية</a></div>' +
+      '</div>' +
+      '<div class="copy"><span>© ' + new Date().getFullYear() + ' ديوانية بلس — جميع الحقوق محفوظة</span>' +
+        '<span class="pay-row" style="justify-content:flex-start"><span class="pay-chip">مدى</span><span class="pay-chip">Apple Pay</span><span class="pay-chip">VISA</span><span class="pay-chip">Mastercard</span></span></div>' +
       '</footer>';
     renderGuideModal();
     renderCategoryPreviewModal();
@@ -2852,8 +3069,8 @@ footer a { text-decoration: none; }
 
       if (!res.deduplicated) {
         showToast(res.isFreeTrial
-          ? '🎁 تم استخدام التجربة المجانية لحسابك في «' + res.gameTitle + '»!'
-          : '✅ تم خصم ' + arNum(res.costDeducted) + ' قيم من رصيدك — جاري فتح «' + res.gameTitle + '»!');
+          ? '🎁 تجربتك المجانية — استمتع!'
+          : '✅ انخصم ' + arNum(res.costDeducted) + ' قيم — استمتع!');
       }
 
       var frameWrap = document.getElementById('dwGameFrameWrap');
@@ -2865,6 +3082,9 @@ footer a { text-decoration: none; }
         iframe.removeAttribute('srcdoc');
         iframe.src = res.playUrl;
         frameWrap.classList.add('open');
+        var tEl = document.getElementById('dwToast'); if (tEl) tEl.classList.add('in-game');
+        var fsBtn = document.getElementById('dwFrameFsBtn');
+        if (fsBtn) fsBtn.style.display = (document.fullscreenEnabled || document.webkitFullscreenEnabled) ? '' : 'none';
         syncFrameDemoButton();
       }
       return res;
@@ -2909,8 +3129,10 @@ footer a { text-decoration: none; }
         showToast('🚫 غير مصرح لك بالدخول إلى لوحة الإدارة.');
         return;
       }
+      var tabChanged = STATE.tab !== targetTab;
       STATE.tab = targetTab;
       render();
+      if (tabChanged || navBtn.closest('.site-foot')) window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
 
@@ -2996,10 +3218,24 @@ footer a { text-decoration: none; }
         dIfr.src = dUrl.pathname + dUrl.search;
         syncFrameDemoButton();
       }
+    } else if (act === 'toggle-frame-fullscreen') {
+      var fsWrap = document.getElementById('dwGameFrameWrap');
+      var fsEl = document.fullscreenElement || document.webkitFullscreenElement;
+      if (fsEl) { (document.exitFullscreen || document.webkitExitFullscreen).call(document); }
+      else {
+        var req = fsWrap.requestFullscreen || fsWrap.webkitRequestFullscreen;
+        if (req) {
+          Promise.resolve(req.call(fsWrap)).then(function () {
+            try { if (screen.orientation && screen.orientation.lock && window.innerWidth > window.innerHeight) screen.orientation.lock('landscape').catch(function () {}); } catch (e) {}
+          }).catch(function () {});
+        }
+      }
     } else if (act === 'close-game-frame') {
       var fw = document.getElementById('dwGameFrameWrap');
       var ifr = document.getElementById('dwGameIframe');
       if (fw) fw.classList.remove('open');
+      var tEl2 = document.getElementById('dwToast'); if (tEl2) tEl2.classList.remove('in-game');
+      if (document.fullscreenElement || document.webkitFullscreenElement) { try { (document.exitFullscreen || document.webkitExitFullscreen).call(document); } catch (e) {} }
       if (ifr) { ifr.onload = null; ifr.removeAttribute('srcdoc'); ifr.src = 'about:blank'; }
     } else if (act === 'filter-cat-grp') {
       STATE.catFilterGroup = actBtn.getAttribute('data-grp');
