@@ -7,7 +7,9 @@ import {
 import { sendLoginCode } from './mail.js';
 
 export const SESSION_COOKIE = 'dw_sess';
-const SESSION_TTL_MS = 7 * 24 * 60 * 60 * 1000;
+// Stay signed in for 90 days, renewed on every visit (at most once a day), so regular players never see the login again.
+const SESSION_TTL_MS = 90 * 24 * 60 * 60 * 1000;
+const SESSION_RENEW_AFTER_MS = 24 * 60 * 60 * 1000;
 const OTP_TTL_MS = 5 * 60 * 1000;
 const OTP_SEND_WINDOW_MS = 15 * 60 * 1000;
 const OTP_MAX_SENDS = 5;
@@ -79,7 +81,14 @@ export async function currentSession(env, request) {
   }
   if (row.status !== 'active') return null;
   const user = { id: row.id, email: row.email, display_name: row.display_name, status: row.status, role: row.role, created_at: row.created_at };
-  return { user, csrfToken: row.csrf_token, tokenHash };
+  // Sliding expiry: push the end date forward and hand the browser a fresh cookie.
+  let renewCookie = null;
+  const now = nowMs();
+  if (row.expires_at - now < SESSION_TTL_MS - SESSION_RENEW_AFTER_MS) {
+    await env.DB.prepare('UPDATE sessions SET expires_at = ? WHERE token_hash = ?').bind(now + SESSION_TTL_MS, tokenHash).run();
+    renewCookie = sessionCookie(token, request);
+  }
+  return { user, csrfToken: row.csrf_token, tokenHash, renewCookie };
 }
 
 export async function requireSession(env, request, { csrf = true, owner = false } = {}) {

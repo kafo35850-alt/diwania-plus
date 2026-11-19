@@ -21,9 +21,10 @@ function sameOrigin(request, env) {
 
 async function me(env, request) {
   const session = await currentSession(env, request);
-  if (!session) return { ok: true, user: null, wallet: EMPTY_WALLET };
+  if (!session) return [{ ok: true, user: null, wallet: EMPTY_WALLET }, {}];
   await reconcileUserPending(env, session.user.id);
-  return { ok: true, user: publicUser(session.user, session.csrfToken), wallet: await walletSnapshot(env, session.user.id) };
+  const body = { ok: true, user: publicUser(session.user, session.csrfToken), wallet: await walletSnapshot(env, session.user.id) };
+  return [body, session.renewCookie ? { 'set-cookie': session.renewCookie } : {}];
 }
 
 async function submitSuggestion(env, request, body) {
@@ -58,7 +59,7 @@ async function handleApi(env, request, url) {
   if (method !== 'GET' && !sameOrigin(request, env)) throw new HttpError(403, 'طلب من مصدر غير مسموح.');
 
   if (method === 'GET' && path === '/api/catalog') return json({ ok: true, ...(await getCatalog(env)) });
-  if (method === 'GET' && path === '/api/me') return json(await me(env, request));
+  if (method === 'GET' && path === '/api/me') { const [body, headers] = await me(env, request); return json(body, 200, { ...headers, 'cache-control': 'no-store' }); }
 
   if (method === 'POST' && path === '/api/auth/otp/send') {
     return json(await sendOtp(env, request, await readJson(request)));
