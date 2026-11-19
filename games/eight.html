@@ -1251,6 +1251,46 @@ body.board-mode-active .m8-board-unit .m8-point-pill { font-size: 13px !importan
 #boardCategoriesGrid > .m8-board-unit[data-owner="team1"] .m8-board-strip { --strip: #7dbeff; color: #dbeafe !important; }
 #boardCategoriesGrid > .m8-board-unit[data-owner="team2"] .m8-board-strip { --strip: #f0aa5a; color: #ffedd5 !important; }
 #boardCategoriesGrid > .m8-board-unit[data-owner="shared"] .m8-board-strip { --strip: #c8aaff; color: #ede9fe !important; }
+/*dw-banner-board*/
+#boardCategoriesGrid > .m8-board-unit.m8-banner-unit { display: flex !important; flex-direction: column; gap: clamp(6px, 1vh, 10px) !important; padding: clamp(6px, 1vh, 10px) !important; }
+body.board-mode-active #boardCategoriesGrid[data-count="8"] > .m8-board-unit.m8-banner-unit { display: flex !important; flex-direction: column; grid-template-columns: none !important; }
+.m8-banner { position: relative; flex: 1 1 auto; min-height: 7.5rem; border-radius: 12px; overflow: hidden; border: 1px solid rgba(212,175,95,.5); background: #0b1020; }
+.m8-banner .board-poster-box { position: absolute !important; inset: 0; width: 100% !important; height: 100% !important; min-height: 0 !important; }
+.m8-banner .board-poster-box > svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.m8-banner .board-poster-box img { width: 100%; height: 100%; object-fit: cover; }
+.m8-banner-name { position: absolute; inset: auto 0 0 0; z-index: 3; padding: 22px 10px 7px; background: linear-gradient(transparent, rgba(5,7,18,.94)); color: #fff; font-weight: 900; font-size: clamp(12px, 1.9vh, 18px); line-height: 1.25; text-align: right; text-shadow: 0 2px 6px rgba(0,0,0,.7); overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.m8-banner-owner { position: absolute; top: 7px; right: 7px; z-index: 4; font-size: clamp(9px, 1.4vh, 12px); font-weight: 900; padding: 2px 9px; border-radius: 99px; background: rgba(5,7,18,.82); border: 1px solid #d4af5f; color: #f6e2a8; }
+.m8-board-unit[data-owner="team1"] .m8-banner-owner { border-color: #7dbeff; color: #dbeafe; }
+.m8-board-unit[data-owner="team2"] .m8-banner-owner { border-color: #f0aa5a; color: #ffedd5; }
+.m8-board-unit[data-owner="shared"] .m8-banner-owner { border-color: #c8aaff; color: #ede9fe; }
+.m8-banner-info { position: absolute !important; top: 7px !important; left: 7px !important; bottom: auto !important; z-index: 4; width: 22px; height: 22px; border-radius: 50%; background: rgba(5,7,18,.8); border: 1px solid rgba(255,255,255,.35); color: #fff; font: 900 12px/1 Georgia, serif; display: grid; place-items: center; padding: 0 !important; }
+.m8-pill-grid { flex: 0 0 auto; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(5px, .8vh, 9px); }
+#boardCategoriesGrid .m8-pill-grid .m8-point-pill { margin: 0 !important; padding: clamp(6px, 1.1vh, 12px) 2px !important; font-size: clamp(14px, 2.3vh, 26px) !important; line-height: 1; display: flex; align-items: center; justify-content: center; min-height: 0 !important; flex: none !important; }
+body.board-mode-active #boardCategoriesGrid[data-count="8"] .m8-pill-grid { grid-auto-rows: minmax(0, 1fr); height: clamp(64px, 17vh, 170px); }
+body.board-mode-active #boardCategoriesGrid[data-count="8"] .m8-pill-grid .m8-point-pill { height: 100%; }
+body.board-mode-active .m8-banner { min-height: 0; }
+/* short screens (phone in landscape): the picture sits beside the values instead of above them */
+@media (max-height: 540px) {
+  #boardCategoriesGrid > .m8-board-unit.m8-banner-unit, body.board-mode-active #boardCategoriesGrid[data-count="8"] > .m8-board-unit.m8-banner-unit { flex-direction: row !important; align-items: stretch; }
+  .m8-banner { flex: 0 0 40%; min-height: 0; }
+  .m8-banner-name { font-size: 10px; padding: 12px 5px 4px; -webkit-line-clamp: 2; }
+  .m8-banner-owner { font-size: 8px; padding: 1px 5px; top: 3px; right: 3px; }
+  .m8-banner-info { width: 16px; height: 16px; font-size: 9px; top: 3px !important; left: 3px !important; }
+  .m8-pill-grid { flex: 1 1 auto; grid-auto-rows: minmax(0, 1fr); }
+  body.board-mode-active #boardCategoriesGrid[data-count="8"] .m8-pill-grid { height: auto; }
+  #boardCategoriesGrid .m8-pill-grid .m8-point-pill { font-size: 13px !important; padding: 0 !important; }
+}
+/* short screens: one slim scrolling row for the top controls, compact team scores */
+@media (max-height: 540px) {
+  body.board-mode-active #boardTopBar { flex-wrap: nowrap !important; padding: 3px 6px !important; gap: 4px !important; overflow-x: auto; scrollbar-width: none; }
+  body.board-mode-active #boardTopBar::-webkit-scrollbar { display: none; }
+  body.board-mode-active #boardTopBar > div { flex-wrap: nowrap !important; flex-shrink: 0; gap: 4px !important; }
+  body.board-mode-active #boardTopBar button, body.board-mode-active #boardTopBar span { font-size: 10px !important; padding: 2px 8px !important; white-space: nowrap; }
+  body.board-mode-active #boardTeamsBar .m8-team-card { padding: 3px 8px !important; gap: 4px !important; min-height: 0 !important; }
+  body.board-mode-active #boardTeamsBar .m8-team-card [class*="text-"] { line-height: 1.1; }
+  body.board-mode-active #boardTeamsBar .m8-team-card button { transform: scale(.8); }
+  body.board-mode-active #boardCategoriesGrid[data-count="8"] > .m8-board-unit.m8-banner-unit { min-height: 29vh; }
+}
 </style>
 </head>
 <body class="selection:bg-orange-500 selection:text-white">
@@ -8318,28 +8358,18 @@ ${qObj.points}
 `;
 };
 const unit = document.createElement('div');
-unit.className = 'm8-board-unit rounded-2xl bg-white border border-slate-200 p-1.5 sm:p-2 shadow-sm grid grid-cols-12 gap-1.5 items-stretch';
+unit.className = 'm8-board-unit m8-banner-unit';
 unit.setAttribute('data-owner', String(col.owner || ''));
+// Banner layout: wide poster with the name on it, then the six values in two rows (200 / 400 / 600).
 unit.innerHTML = `
-<!-- Right Column: 200, 400, 600 -->
-<div class="col-span-3 flex flex-col justify-between gap-1.5">
+<div class="m8-banner">
+${getCategoryPosterHtml(col, '')}
+<span class="m8-banner-owner">${meta.short}</span>
+<button type="button" data-info-cat-id="${col.id}" class="m8-banner-info" aria-label="شرح الفئة">i</button>
+<div class="m8-banner-name">${m8EscapeHtml(col.name)}</div>
+</div>
+<div class="m8-pill-grid">
 ${rightQs.map(renderPillBtn).join('')}
-</div>
-<!-- Center Illustrated Poster Card (Pure Vector Cartoon Drawing!) -->
-<div class="col-span-6 rounded-xl overflow-hidden border border-slate-200 flex flex-col justify-between shadow-sm relative">
-<button type="button" data-info-cat-id="${col.id}" class="absolute bottom-7 left-1 z-20 px-1.5 py-0.5 rounded-full text-[8px] font-black bg-slate-900/80 hover:bg-orange-600 text-white shadow-sm">
-ℹ️
-</button>
-<div class="absolute top-1 right-1 z-20 px-1.5 py-0.5 rounded-full text-[8px] font-black bg-white/95 text-slate-900 shadow-sm">
-${meta.short}
-</div>
-${getCategoryPosterHtml(col, 'h-28 sm:h-36')}
-<div class="${meta.stripBg} m8-board-strip text-white px-1.5 py-1 text-center">
-<div class="text-[10px] sm:text-xs font-black leading-tight line-clamp-1">${col.name}</div>
-</div>
-</div>
-<!-- Left Column: 200, 400, 600 -->
-<div class="col-span-3 flex flex-col justify-between gap-1.5">
 ${leftQs.map(renderPillBtn).join('')}
 </div>
 `;
