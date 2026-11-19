@@ -44,7 +44,8 @@ async function submitSuggestion(env, request, body) {
     created_at: nowIso().slice(0, 10)
   });
   await putDoc(env, 'suggestions', suggestions.slice(0, 300));
-  return { ok: true, suggestions: suggestions.slice(0, 300) };
+  // Other visitors' ideas (and the names they typed) are for the admins only.
+  return { ok: true };
 }
 
 async function handleApi(env, request, url) {

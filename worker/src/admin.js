@@ -7,6 +7,9 @@ import { verifyOrder } from './payments.js';
 import { cleanImageRef, cleanVideoRef } from './media.js';
 
 const SLUG_RE = /^[a-z0-9_]{2,40}$/;
+export const NOT_CLONABLE = ['eight', 'dakhil', 'mafia', 'qaftah', 'chancellor', 'harf', 'qaddirha'];
+// The question editor only offers games that actually read edited content.
+export const EDITABLE_GAMES = ['game_eight', 'game_qaftah'];
 
 async function log(env, admin, action, targetType, targetId, reason) {
   await env.DB.prepare(
@@ -24,9 +27,10 @@ export async function adminData(env) {
     env.DB.prepare('SELECT * FROM admin_logs ORDER BY created_at DESC LIMIT 200'),
     env.DB.prepare('SELECT * FROM payments ORDER BY created_at DESC LIMIT 500')
   ]);
-  const [gameContent, overrides, catSuggestions] = await Promise.all([getDoc(env, 'game_content'), getDoc(env, 'catQuestionsOverrides'), getDoc(env, 'cat_suggestions')]);
+  const [gameContent, overrides, catSuggestions, gameSuggestions] = await Promise.all([getDoc(env, 'game_content'), getDoc(env, 'catQuestionsOverrides'), getDoc(env, 'cat_suggestions'), getDoc(env, 'suggestions')]);
   return {
     cat_suggestions: catSuggestions || [],
+    suggestions: gameSuggestions || [],
     ok: true,
     users: users.results || [],
     admin_logs: logs.results || [],
@@ -203,6 +207,9 @@ export async function adminAction(env, session, action, payload) {
         });
       } else {
         const engine = String(payload.engineType || 'mystery_button').replace(/[^a-z0-9_]/g, '');
+        // Phone-room games and the Eight buzzer run on dedicated room servers that only know the original game.
+        if (NOT_CLONABLE.includes(engine)) throw new HttpError(400, 'هذي اللعبة تشتغل بغرف الجوالات وما تنفع كنسخة. اختر محرك من ألعاب الشاشة.');
+        if (!GAMES[engine]) throw new HttpError(400, 'المحرك المختار غير موجود.');
         games.push({
           id: 'game_' + slug, slug, title,
           subtitle: 'من ' + minP + ' إلى ' + maxP + ' لاعباً · ' + (rules || 'تحدي جماعي تفاعلي'),
@@ -319,6 +326,18 @@ export async function adminAction(env, session, action, payload) {
       return { ok: true, message: sug.status === 'approved' ? 'تم اعتماد فئة «' + sug.name + '» وصارت في ديوانية الثمانية.' : 'تم رفض الاقتراح.' };
     }
 
+    case 'mark_suggestion':
+    case 'del_suggestion': {
+      let list = (await getDoc(env, 'suggestions')) || [];
+      const sug = list.find((x) => x.id === payload.suggestionId);
+      if (!sug) throw new HttpError(404, 'الفكرة غير موجودة.');
+      if (action === 'del_suggestion') list = list.filter((x) => x.id !== sug.id);
+      else sug.status = sug.status === 'تمت المراجعة' ? 'وصل لفريق العمل' : 'تمت المراجعة';
+      await putDoc(env, 'suggestions', list);
+      await log(env, admin, action, 'suggestion', sug.id, sug.title);
+      return { ok: true, message: action === 'del_suggestion' ? 'تم حذف الفكرة.' : 'تم تحديث حالة الفكرة.' };
+    }
+
     case 'toggle_cat': {
       const categories = await getDoc(env, 'categories');
       const cat = categories.find((c) => c.id === payload.catId);
@@ -347,6 +366,7 @@ function eightItem(it, idx, catSlug) {
 
 async function contentAction(env, admin, action, payload) {
   const gameId = String(payload.gameId || 'game_qaftah');
+  if (!EDITABLE_GAMES.includes(gameId)) throw new HttpError(400, 'هذي اللعبة محتواها ثابت داخلها وما تقرأ تعديلات المحرر.');
   const MAX_ITEMS = 2000;
 
   if (gameId === 'game_eight') {

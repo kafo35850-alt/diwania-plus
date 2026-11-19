@@ -1745,14 +1745,14 @@ footer a { text-decoration: none; }
 
     function clearAdmin() {
       CACHE.usersList = []; CACHE.admin_logs = []; CACHE.payments = [];
-      CACHE.game_content = []; CACHE.catQuestionsOverrides = {};
+      CACHE.game_content = []; CACHE.catQuestionsOverrides = {}; CACHE.suggestions = []; CACHE.cat_suggestions = [];
     }
     function applyMe(d) { ME = d && d.user ? { user: d.user, wallet: d.wallet } : null; }
 
     function refreshCatalog() {
       return api('GET', '/api/catalog').then(function (d) {
         if (d.ok) {
-          ['games', 'packages', 'categories', 'suggestions'].forEach(function (k) {
+          ['games', 'packages', 'categories'].forEach(function (k) {
             if (d[k] !== undefined) CACHE[k] = d[k];
           });
           CACHE.gatewayConnected = !!d.gatewayConnected;
@@ -1773,6 +1773,7 @@ footer a { text-decoration: none; }
           CACHE.game_content = d.game_content || [];
           CACHE.catQuestionsOverrides = d.catQuestionsOverrides || {};
           CACHE.cat_suggestions = d.cat_suggestions || [];
+          CACHE.suggestions = d.suggestions || [];
         }
         return d;
       });
@@ -1845,7 +1846,6 @@ footer a { text-decoration: none; }
       },
       submitSuggestion: function (payload) {
         return api('POST', '/api/suggestions', payload).then(function (d) {
-          if (d.ok && d.suggestions) CACHE.suggestions = d.suggestions;
           return d;
         });
       }
@@ -2046,7 +2046,14 @@ footer a { text-decoration: none; }
   }
 
   function getLogoForGame(slug) {
+    slug = baseSlug(slug);
     return LUXURY_LOGOS[slug] || LUXURY_LOGOS.eight;
+  }
+  // A game added from the admin panel reuses another game's engine: show that game's poster and guide.
+  function baseSlug(slug) {
+    if (GAME_GUIDES[slug] || (window.DW_POSTERS && window.DW_POSTERS[slug])) return slug;
+    var g = STATE.games.find(function (x) { return x.slug === slug; });
+    return g && g.engine_type ? g.engine_type : slug;
   }
 
   // Store groupings (client-side presentation only).
@@ -2074,6 +2081,10 @@ footer a { text-decoration: none; }
   function cleanTitle(s) {
     return String(s || '').replace(/\s*[—-]\s*ديوانية بلس\s*$/, '').replace(/^ديوانية بلس\s*[—-]\s*/, '').trim();
   }
+  // Only these games read questions edited in the admin panel; the others carry their content inside the game.
+  var EDITABLE_GAMES = ['game_eight', 'game_qaftah'];
+  // Phone-room games and the Eight buzzer need their own room servers, so they cannot be copied as a new game.
+  var NOT_CLONABLE = ['eight', 'dakhil', 'mafia', 'qaftah', 'chancellor', 'harf', 'qaddirha'];
   function isFreeGame(g) { return !!g && Number(g.cost_credits) === 0; }
   function isPhoneGame(slug) { return GAME_TAGS.phones.indexOf(slug) !== -1; }
 
@@ -2115,10 +2126,10 @@ footer a { text-decoration: none; }
     var playLabel = free ? '▶ العب مجاناً' : (!STATE.user ? '▶ جرّبها مجاناً' : (trialLeft ? '▶ العب مجاناً' : '▶ العب · ' + arNum(g.cost_credits) + ' قيم'));
     var ribbon = free ? ['free', '🆓 مجانية'] : GAME_RIBBONS[g.slug];
     return '<article class="g-card" data-game-card="' + esc(g.slug) + '">' +
-      (window.DW_POSTERS && window.DW_POSTERS[g.slug]
+      (window.DW_POSTERS && window.DW_POSTERS[baseSlug(g.slug)]
         ? '<div class="g-art g-poster">'
         : '<div class="g-art" style="background:' + logo.bg + '">') +
-        ((window.DW_POSTERS && window.DW_POSTERS[g.slug]) || logo.svg) +
+        ((window.DW_POSTERS && window.DW_POSTERS[baseSlug(g.slug)]) || logo.svg) +
         (ribbon ? '<span class="g-ribbon ' + ribbon[0] + '">' + ribbon[1] + '</span>' : '') +
       '</div>' +
       '<div class="g-body">' +
@@ -2517,6 +2528,7 @@ footer a { text-decoration: none; }
           '<button class="dw-tab-btn ' + (st === 'games' ? 'active' : '') + '" data-adm-tab="games">🎮 إدارة الألعاب (' + arNum(STATE.games.length) + ')</button>' +
           '<button class="dw-tab-btn ' + (st === 'editor' ? 'active' : '') + '" data-adm-tab="editor">✏️ محرر الأسئلة والفئات </button>' +
           '<button class="dw-tab-btn ' + (st === 'categories' ? 'active' : '') + '" data-adm-tab="categories">🗂️ إدارة الفئات (' + arNum(STATE.categories.length) + ')</button>' +
+          '<button class="dw-tab-btn ' + (st === 'ideas' ? 'active' : '') + '" data-adm-tab="ideas">📝 أفكار الألعاب' + (function () { var n = (DiwaniyaServerKernel.loadDB().suggestions || []).filter(function (x) { return x.status !== 'تمت المراجعة'; }).length; return n ? ' (' + arNum(n) + ')' : ''; })() + '</button>' +
           '<button class="dw-tab-btn ' + (st === 'catsug' ? 'active' : '') + '" data-adm-tab="catsug">💡 اقتراحات الفئات' + (function () { var n = (DiwaniyaServerKernel.loadDB().cat_suggestions || []).filter(function (x) { return x.status === 'pending'; }).length; return n ? ' (' + arNum(n) + ')' : ''; })() + '</button>' +
           '<button class="dw-tab-btn ' + (st === 'payments' ? 'active' : '') + '" data-adm-tab="payments">💳 المدفوعات</button>' +
           '<button class="dw-tab-btn ' + (st === 'logs' ? 'active' : '') + '" data-adm-tab="logs">🛡️ سجل الأمان</button>' +
@@ -2563,7 +2575,7 @@ footer a { text-decoration: none; }
             }).join('') + '</div>' +
           '</div>'
         ) : '') +
-        '<div class="dw-card">'
+        '<div class="dw-card">' +
           '<h4 style="margin:0;font-size:19px">المستخدمين والأرصدة</h4>' +
           '<div class="dw-grid-3" style="background:rgba(0,0,0,0.25);padding:16px;border-radius:16px">' +
             '<div><label style="font-size:12.5px;color:var(--text-muted)">اختر المستخدم</label><select id="admUserSelect" class="dw-select">' +
@@ -2628,7 +2640,7 @@ footer a { text-decoration: none; }
             '<div><label style="font-size:12px;color:var(--text-muted)">اسم اللعبة</label><input id="gmTitle" class="dw-input" placeholder="مثال: حرامي الفريق"></div>' +
             '<div><label style="font-size:12px;color:var(--text-muted)">المعرف النصي (Slug)</label><input id="gmSlug" class="dw-input" placeholder="team_thief"></div>' +
             '<div><label style="font-size:12px;color:var(--text-muted)">محرك اللعبة الأساسي (Engine)</label><select id="gmEngineSel" class="dw-select">' +
-              STATE.games.map(function (g) { return '<option value="' + esc(g.slug) + '">' + esc(g.title) + ' (' + esc(g.slug) + ')</option>'; }).join('') +
+              STATE.games.filter(function (g) { return NOT_CLONABLE.indexOf(g.slug) === -1 && NOT_CLONABLE.indexOf(g.engine_type) === -1; }).map(function (g) { return '<option value="' + esc(g.engine_type && g.engine_type !== g.slug ? g.engine_type : g.slug) + '">' + esc(g.title) + '</option>'; }).join('') +
             '</select></div>' +
             '<div><label style="font-size:12px;color:var(--text-muted)">تكلفة التشغيل (أقيام)</label><input id="gmCost" type="number" class="dw-input" value="1"></div>' +
             '<div><label style="font-size:12px;color:var(--text-muted)">أقل عدد لاعبين</label><input id="gmMinP" type="number" class="dw-input" value="2"></div>' +
@@ -2668,8 +2680,8 @@ footer a { text-decoration: none; }
       return nav +
         '<div class="dw-card">' +
           '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">' +
-            '<div><h4 style="margin:0;font-size:19px">محرر محتوى جميع الألعاب والفئات الـ ١٥٢ (حفظ دائم في D1 + استيراد وتصدير JSON)</h4>' +
-            '<p style="margin:4px 0 0;color:var(--text-muted);font-size:13.5px">اختر أي لعبة أو أي فئة من الـ ١٥٢ فئة لعرض أسئلتها الحقيقية، إضافة سؤال جديد، تعديل سؤال حالي، أو الحذف والاستيراد والتصدير.</p></div>' +
+            '<div><h4 style="margin:0;font-size:19px">محرر الأسئلة: ديوانية الثمانية وقفطة الديوانية</h4>' +
+            '<p style="margin:4px 0 0;color:var(--text-muted);font-size:13.5px">أي سؤال تضيفه أو تعدّله هنا يوصل للعبة فوراً. باقي الألعاب محتواها جاهز داخلها.</p></div>' +
             '<div style="display:flex;gap:8px;flex-wrap:wrap">' +
               '<label class="dw-btn dw-btn-sec dw-btn-sm" style="cursor:pointer">⬆️ استيراد JSON<input type="file" id="admImportJsonInp" accept=".json,application/json" style="display:none"></label>' +
               '<button class="dw-btn dw-btn-teal dw-btn-sm" data-act="adm-export-json">⬇️ تصدير المحتوى الحالي (JSON)</button>' +
@@ -2677,7 +2689,7 @@ footer a { text-decoration: none; }
           '</div>' +
           '<div class="dw-grid-3" style="background:rgba(45,212,191,0.07);border:1px solid rgba(45,212,191,0.28);padding:14px;border-radius:16px">' +
             '<div><label style="font-size:12px;color:var(--teal);font-weight:800">١. اختر اللعبة المراد تحرير أسئلتها</label><select id="edGameSelect" class="dw-select">' +
-              STATE.games.map(function (g) {
+              STATE.games.filter(function (g) { return EDITABLE_GAMES.indexOf(g.id) !== -1; }).map(function (g) {
                 return '<option value="' + esc(g.id) + '"' + (STATE.editorGameId === g.id ? ' selected' : '') + '>' + esc(g.title) + '</option>';
               }).join('') +
             '</select></div>' +
@@ -2726,6 +2738,29 @@ footer a { text-decoration: none; }
               '</tr>';
             }).join('') +
           '</tbody></table></div>' +
+        '</div>';
+    }
+
+    if (st === 'ideas') {
+      var ideas = DiwaniyaServerKernel.loadDB().suggestions || [];
+      return nav +
+        '<div class="dw-card">' +
+          '<h4 style="margin:0;font-size:19px">📝 أفكار ألعاب من الزوار</h4>' +
+          '<p style="margin:0;color:var(--text-muted);font-size:13.5px">هذي الأفكار اللي انرسلت من خانة «عندك فكرة لعبة؟» في المتجر. تنشاف هنا بس، ما تطلع للناس.</p>' +
+          (ideas.length ? '<div class="dw-table-wrap"><table class="dw-table"><thead><tr><th>الفكرة</th><th>التفاصيل</th><th>من</th><th>التاريخ</th><th>الحالة</th><th>إجراء</th></tr></thead><tbody>' +
+            ideas.map(function (it) {
+              var done = it.status === 'تمت المراجعة';
+              return '<tr>' +
+                '<td><b>' + esc(it.title) + '</b>' + (safeMediaUrl(it.url) ? '<div><a href="' + esc(safeMediaUrl(it.url)) + '" target="_blank" rel="noopener noreferrer" style="color:var(--gold);font-size:12.5px">🔗 الرابط</a></div>' : '') + '</td>' +
+                '<td style="white-space:normal;min-width:220px;color:#c9d2e6">' + esc(it.notes) + '</td>' +
+                '<td>' + esc(it.user_name) + '</td>' +
+                '<td>' + esc(it.created_at) + '</td>' +
+                '<td>' + (done ? '<span class="dw-chip teal">✅ تمت المراجعة</span>' : '<span class="dw-chip gold">🆕 جديدة</span>') + '</td>' +
+                '<td style="white-space:nowrap"><button class="dw-btn dw-btn-sec dw-btn-sm" data-act="adm-idea" data-op="mark" data-id="' + esc(it.id) + '">' + (done ? '↩️ رجّعها جديدة' : '✅ تمت المراجعة') + '</button> ' +
+                  '<button class="dw-btn dw-btn-danger dw-btn-sm" data-act="adm-idea" data-op="del" data-id="' + esc(it.id) + '">حذف</button></td>' +
+              '</tr>';
+            }).join('') + '</tbody></table></div>'
+            : '<p style="color:var(--text-muted)">ما وصلت أفكار للحين.</p>') +
         '</div>';
     }
 
@@ -2836,14 +2871,15 @@ footer a { text-decoration: none; }
     var modal = document.getElementById('dwGameGuideModal');
     var inner = document.getElementById('dwGuideModalInner');
     if (!modal || !inner) return;
-    if (!STATE.guideSlug || !GAME_GUIDES[STATE.guideSlug]) {
+    var gKey = baseSlug(STATE.guideSlug);
+    if (!STATE.guideSlug || !GAME_GUIDES[gKey]) {
       modal.classList.remove('open');
       return;
     }
-    var gInfo = GAME_GUIDES[STATE.guideSlug];
+    var gInfo = GAME_GUIDES[gKey];
     var gameObj = STATE.games.find(function (g) { return g.slug === STATE.guideSlug; }) || { title: gInfo.title, cost_credits: 1, slug: STATE.guideSlug };
-    var logo = getLogoForGame(STATE.guideSlug);
-    var guidePoster = window.DW_POSTERS && window.DW_POSTERS[STATE.guideSlug];
+    var logo = getLogoForGame(gKey);
+    var guidePoster = window.DW_POSTERS && window.DW_POSTERS[gKey];
     var tabs = gInfo.tabs || [];
     var activeTab = tabs[STATE.guideTabIdx] || tabs[0];
     var usedTrials = (STATE.wallet && STATE.wallet.freeTrialsUsed) || {};
@@ -3609,13 +3645,6 @@ footer a { text-decoration: none; }
         rules: (document.getElementById('gmRules') || {}).value,
         description: (document.getElementById('gmDesc') || {}).value
       }, function (sgRes) {
-        if (!GAME_GUIDES[gsSlug]) {
-          GAME_GUIDES[gsSlug] = {
-            title: 'شرح لعبة: ' + gTitleVal,
-            subtitle: 'لعبة مضافة من لوحة الإدارة',
-            tabs: [{ id: 'idea', label: 'فكرة اللعبة وقواعدها', lead: 'لعبة مضافة من محرر الألعاب في لوحة الإدارة.', steps: [{ h: 'القواعد الأساسية', t: 'تعمل اللعبة مباشرة عبر شاشة التلفزيون والجوالات بالـ QR.' }] }]
-          };
-        }
         STORE_AUDIO.playSfx(680);
         render();
         showToast(sgRes.message);
@@ -3701,6 +3730,13 @@ footer a { text-decoration: none; }
       a.download = 'diwaniya_plus_' + STATE.editorGameId + '_' + (STATE.editorCatSlug || 'content') + '.json';
       a.click();
       showToast('تم تصدير ملف المحتوى (' + currentItems.length + ' عنصر) بصيغة JSON.');
+    } else if (act === 'adm-idea') {
+      var idOp = actBtn.getAttribute('data-op');
+      if (idOp === 'del' && !window.confirm('تحذف هالفكرة؟')) return;
+      adminCall(idOp === 'del' ? 'del_suggestion' : 'mark_suggestion', { suggestionId: actBtn.getAttribute('data-id') }, function (idRes) {
+        render();
+        showToast(idRes.message);
+      });
     } else if (act === 'adm-csug') {
       var csOp = actBtn.getAttribute('data-op');
       if (csOp === 'reject' && !window.confirm('ترفض هالاقتراح؟')) return;

@@ -38,11 +38,10 @@ export async function getGamesWithStats(env) {
 
 // Public catalog: no questions or answers (those only reach players inside a launched game).
 export async function getCatalog(env) {
-  const [games, packages, categories, suggestions] = await Promise.all([
+  const [games, packages, categories] = await Promise.all([
     getGamesWithStats(env),
     getDoc(env, 'packages'),
     getDoc(env, 'categories'),
-    getDoc(env, 'suggestions')
   ]);
-  return { games, packages, categories, suggestions, gatewayConnected: gatewayConfigured(env) };
+  return { games, packages, categories, gatewayConnected: gatewayConfigured(env) };
 }
