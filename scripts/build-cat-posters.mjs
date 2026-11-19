@@ -171,6 +171,40 @@ const POSTERS = {
     <g transform="translate(70 140)"><circle r="20" fill="#ef4444"/><path d="M-8 -20 q8 -10 16 0 q-8 4 -16 0z" fill="#22c55e"/><path d="M0 -8 v8 l6 4" fill="none" stroke="${WHITE}" stroke-width="3" stroke-linecap="round"/></g>`)
 };
 
+// Football and celebrity categories: stadium, ball, stage and camera art (no real faces).
+Object.assign(POSTERS, {
+  football_world: frame('o', ['#052e16', '#15803d'], '#86efac', `
+    <path d="M20 176 Q160 140 300 176 V200 H20 Z" fill="#166534"/>
+    <path d="M60 172 Q160 150 260 172" fill="none" stroke="#bbf7d0" stroke-width="2" opacity=".6"/>
+    ${[40, 280].map((x) => `<rect x="${x - 3}" y="30" width="6" height="120" fill="#cbd5e1"/><rect x="${x - 16}" y="22" width="32" height="14" rx="3" fill="${WHITE}"/><path d="M${x - 14} 36 l-30 120 M${x + 14} 36 l30 120" stroke="${WHITE}" stroke-opacity=".12" stroke-width="18"/>`).join('')}
+    <path d="M136 74 h48 v10 q0 30 -24 34 q-24 -4 -24 -34 z" fill="${GOLD}"/>
+    <path d="M136 82 q-16 0 -16 14 q0 12 18 14 M184 82 q16 0 16 14 q0 12 -18 14" fill="none" stroke="${GOLD}" stroke-width="5"/>
+    <rect x="154" y="118" width="12" height="16" fill="${GOLD}"/><rect x="140" y="134" width="40" height="10" rx="3" fill="${GOLD2}"/>
+    <g transform="translate(212 150)"><circle r="18" fill="${WHITE}"/><path d="M0 -8 l8 6 l-3 9 h-10 l-3 -9 z" fill="${INK}"/><path d="M0 -8 v-10 M8 -2 l10 -4 M5 7 l6 9 M-5 7 l-6 9 M-8 -2 l-10 -4" stroke="${INK}" stroke-width="2"/></g>`, 'grid'),
+  football_arab: frame('p', ['#064e3b', '#047857'], '#6ee7b7', `
+    <rect x="40" y="110" width="240" height="70" rx="6" fill="#065f46" stroke="#a7f3d0" stroke-opacity=".5" stroke-width="2"/>
+    <path d="M160 110 v70 M40 145 h20 M260 145 h20" stroke="#a7f3d0" stroke-opacity=".5" stroke-width="2"/>
+    <circle cx="160" cy="145" r="16" fill="none" stroke="#a7f3d0" stroke-opacity=".5" stroke-width="2"/>
+    <path d="M104 40 h112 l-14 50 h-84 z" fill="${WHITE}"/>
+    <path d="M118 52 h84 l-8 28 h-68 z" fill="#16a34a"/>
+    <path d="M160 58 l4 9 l10 1 l-7 7 l2 10 l-9 -5 l-9 5 l2 -10 l-7 -7 l10 -1 z" fill="${GOLD2}"/>
+    <g transform="translate(160 128)"><circle r="14" fill="${WHITE}"/><path d="M0 -6 l6 4 l-2 7 h-8 l-2 -7 z" fill="${INK}"/></g>
+    <path d="M70 70 q8 -18 20 0 M240 64 q8 -18 20 0" fill="none" stroke="${GOLD}" stroke-width="3" stroke-linecap="round"/>`),
+  celebs_arab: frame('q', ['#3f0d12', '#9f1239'], '#fda4af', `
+    ${[90, 160, 230].map((x) => `<path d="M${x} 20 L${x - 34} 170 H${x + 34} Z" fill="#fff" fill-opacity=".06"/>`).join('')}
+    <rect x="60" y="164" width="200" height="12" rx="6" fill="#7f1d1d"/>
+    <g transform="translate(118 112) rotate(-28)"><ellipse rx="30" ry="36" fill="#b45309"/><ellipse rx="22" ry="28" fill="#92400e"/><circle r="7" fill="#3f0d12"/><rect x="-4" y="-96" width="8" height="64" rx="3" fill="#78350f"/><rect x="-9" y="-104" width="18" height="12" rx="3" fill="#78350f"/></g>
+    <g transform="translate(206 66)"><rect x="-12" y="0" width="24" height="40" rx="12" fill="#e2e8f0"/><path d="M-12 6 h24 M-12 14 h24 M-12 22 h24" stroke="#94a3b8" stroke-width="2"/><path d="M-20 26 q0 26 20 26 q20 0 20 -26" fill="none" stroke="${GOLD}" stroke-width="4"/><rect x="-2" y="52" width="4" height="40" fill="${GOLD}"/><rect x="-16" y="92" width="32" height="6" rx="3" fill="${GOLD}"/></g>
+    <path d="M150 40 q6 -8 12 0 q-6 8 -12 0 z M168 52 l2 6 l6 1 l-5 4 l1 6 l-4 -3 l-5 3 l1 -6 l-4 -4 l6 -1 z" fill="${GOLD2}"/>`),
+  celebs_world: frame('r', ['#1e1b4b', '#7c2d12'], '#fcd34d', `
+    <path d="M40 176 h240 l-30 -40 h-180 z" fill="#991b1b"/>
+    <path d="M70 136 h180" stroke="${GOLD}" stroke-width="3"/>
+    <g transform="translate(160 76)"><path d="M0 -42 l12 26 l28 3 l-21 19 l6 28 l-25 -14 l-25 14 l6 -28 l-21 -19 l28 -3 z" fill="${GOLD}" stroke="${GOLD2}" stroke-width="3"/></g>
+    <g transform="translate(72 70)"><rect x="-26" y="-14" width="40" height="28" rx="5" fill="#334155"/><path d="M14 -6 l16 -8 v28 l-16 -8 z" fill="#334155"/><circle cx="-14" cy="-22" r="10" fill="#475569" stroke="#94a3b8" stroke-width="2"/><circle cx="6" cy="-22" r="10" fill="#475569" stroke="#94a3b8" stroke-width="2"/></g>
+    <g transform="translate(250 64)"><rect x="-24" y="-8" width="48" height="34" rx="4" fill="${WHITE}"/><path d="M-24 -8 l48 -10 l2 8 l-48 10 z" fill="${INK}"/><path d="M-14 -14 l6 8 M0 -17 l6 8 M14 -20 l6 8" stroke="${WHITE}" stroke-width="3"/></g>
+    ${[[110, 40], [214, 120], [96, 118], [236, 30]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="2.5" fill="${GOLD2}"/>`).join('')}`, 'grid')
+});
+
 for (const [name, svg] of Object.entries(POSTERS)) {
   writeFileSync(join(out, name + '.svg'), svg.replace(/\n\s*/g, '\n') + '\n');
 }

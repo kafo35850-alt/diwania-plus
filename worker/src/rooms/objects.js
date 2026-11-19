@@ -170,6 +170,13 @@ export class RelayRoomDO {
     if (this.conns.size >= 80) return jsonResponse({ ok: false, error: 'room_full' }, 429);
 
     const isHost = request.headers.get('x-dw-host') === '1';
+    // A room belongs to the account that opened it first: another host can't join the same code (stays a guest).
+    if (isHost) {
+      const user = request.headers.get('x-dw-user') || '';
+      const owner = await this.state.storage.get('owner');
+      if (!owner) await this.state.storage.put('owner', user);
+      else if (owner !== user && this.hostConnected()) return jsonResponse({ ok: false, error: 'room_taken' }, 409);
+    }
     // Every message goes to the other phones of the same room (the Eight buzzer protocol
     // carries its own room code, client id and message id, and drops duplicates).
     const { conn, response } = openSocket((from, m) => {

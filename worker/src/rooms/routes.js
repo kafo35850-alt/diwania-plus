@@ -111,7 +111,7 @@ export async function handleRooms(env, request, url) {
     const session = await currentSession(env, request);
     const token = url.searchParams.get('t') || '';
     const host = !!(session && token && await verifyPlayToken(env, session.user.id, 'eight', token));
-    return forwardSocket(request, stubFor(env.RELAY_ROOM, code), 'https://room/ws', { 'x-dw-host': host ? '1' : '0' });
+    return forwardSocket(request, stubFor(env.RELAY_ROOM, code), 'https://room/ws', { 'x-dw-host': host ? '1' : '0', 'x-dw-user': host ? session.user.id : '' });
   }
 
   if (path === '/api/rooms/status') {

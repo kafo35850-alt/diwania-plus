@@ -413,11 +413,12 @@ button:disabled {
 .dw-cat-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(195px, 1fr));
+  /* rows always as tall as their card: Safari used to squeeze them into thin lines inside a fixed-height box */
+  grid-auto-rows: max-content;
   gap: 12px;
-  max-height: 540px;
-  overflow-y: auto;
   padding: 4px;
 }
+.dw-cat-grid > .dw-cat-item { min-height: max-content; }
 
 .dw-cat-item {
   background: rgba(255, 255, 255, 0.05);
