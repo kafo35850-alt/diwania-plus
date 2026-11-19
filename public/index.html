@@ -897,6 +897,21 @@ footer a { text-decoration: none; }
 html.dw-game-open, html.dw-game-open body { overflow: hidden; height: 100%; overscroll-behavior: none; }
 html.dw-game-open #dwApp { visibility: hidden; }
 .dw-game-frame-wrap { height: 100vh; height: 100dvh; }
+.vo-group { border: 1px solid var(--border-subtle); border-radius: 16px; padding: 0 14px; background: rgba(255,255,255,.02); }
+.vo-group > summary { cursor: pointer; padding: 14px 0; font-weight: 800; font-size: 16px; }
+.vo-group > summary small { color: var(--text-muted); font-weight: 600; }
+.vo-line { padding: 12px 0; border-top: 1px solid var(--border-subtle); display: grid; gap: 6px; }
+.vo-line.done .vo-text { color: #a7f3d0; }
+.vo-text { font-size: 15.5px; font-weight: 700; line-height: 1.8; }
+.vo-slot { display: inline-block; padding: 0 8px; margin: 0 3px; border-radius: 8px; background: rgba(45,212,191,.16); color: #5eead4; font-size: 13px; font-weight: 700; }
+.vo-meta { font-size: 12.5px; color: var(--text-muted); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.vo-piece { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding: 8px 10px; border-radius: 12px; background: rgba(0,0,0,.2); }
+.vo-n { width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; background: var(--gold); color: #2b1c00; font-weight: 800; font-size: 12px; }
+.vo-say { flex: 1 1 200px; color: #fde68a; }
+.vo-btns { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.vo-rec-on { animation: vopulse 1s ease-in-out infinite alternate; }
+@keyframes vopulse { to { box-shadow: 0 0 0 6px rgba(244,63,94,.25); } }
+.vo-busy { color: #fde68a; font-size: 13px; }
 /* features + devices + faq */
 .feat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
 @media (max-width: 1000px) { .feat-grid { grid-template-columns: repeat(2, 1fr); } }
@@ -1918,6 +1933,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
           CACHE.cat_suggestions = d.cat_suggestions || [];
           CACHE.suggestions = d.suggestions || [];
           CACHE.promo = d.promo || null;
+          CACHE.voice = d.voice || null;
         }
         return d;
       });
@@ -2571,6 +2587,55 @@ html.dw-game-open #dwApp { visibility: hidden; }
     host.classList.add('open');
   }
 
+  // ---- narrator recordings (admin) ----
+  var VO = { rec: null, stream: null, chunks: [] };
+  function voSave(line, part, blob) {
+    STATE.voBusy = { line: line, part: part }; render();
+    DiwaniyaServerKernel.uploadMedia(blob).then(function (d) {
+      if (!d || !d.ok) { STATE.voBusy = null; render(); showToast((d && d.error) || 'تعذر رفع التسجيل.'); return; }
+      adminCall('save_voice', { lineId: line, part: part, url: d.url }, function (r) { STATE.voBusy = null; render(); showToast(r.message); });
+      setTimeout(function () { if (STATE.voBusy) { STATE.voBusy = null; render(); } }, 15000);
+    });
+  }
+  function voStartRecording(line, part) {
+    if (!navigator.mediaDevices || !window.MediaRecorder) { showToast('جهازك ما يدعم التسجيل من المتصفح. استخدم «⬆️ ارفع».'); return; }
+    if (VO.rec) voStopRecording(true);
+    navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true } }).then(function (stream) {
+      var type = ['audio/mp4', 'audio/webm;codecs=opus', 'audio/webm'].find(function (t) { return MediaRecorder.isTypeSupported && MediaRecorder.isTypeSupported(t); }) || '';
+      var mr = type ? new MediaRecorder(stream, { mimeType: type }) : new MediaRecorder(stream);
+      VO.rec = mr; VO.stream = stream; VO.chunks = []; VO.target = { line: line, part: part };
+      mr.ondataavailable = function (e) { if (e.data && e.data.size) VO.chunks.push(e.data); };
+      mr.onstop = function () {
+        stream.getTracks().forEach(function (t) { t.stop(); });
+        var t = VO.target, chunks = VO.chunks, cancel = VO.cancel;
+        VO.rec = null; VO.stream = null; VO.cancel = false; STATE.voRec = null;
+        if (cancel || !chunks.length) { render(); return; }
+        var blob = new Blob(chunks, { type: (mr.mimeType || 'audio/webm').split(';')[0] });
+        voSave(t.line, t.part, blob);
+      };
+      mr.start();
+      STATE.voRec = { line: line, part: part }; render();
+      showToast('🔴 يسجّل الحين… قل الجملة وبعدها «وقّف واحفظ».');
+    }).catch(function () { showToast('اسمح للموقع يستخدم المايك من إعدادات المتصفح، أو استخدم «⬆️ ارفع».'); });
+  }
+  function voStopRecording(cancel) {
+    if (!VO.rec) return;
+    VO.cancel = !!cancel;
+    try { VO.rec.stop(); } catch (e) {}
+  }
+  function voPlay(steps) {
+    var n = 0;
+    try { if (window.speechSynthesis) window.speechSynthesis.cancel(); } catch (e) {}
+    var next = function () {
+      if (n >= steps.length) return;
+      var st = steps[n++];
+      if (st.url) { var a = new Audio(st.url); a.onended = next; a.onerror = next; var pr = a.play(); if (pr && pr.catch) pr.catch(next); }
+      else if (st.say && window.speechSynthesis) { var u = new SpeechSynthesisUtterance(st.say); u.lang = 'ar-SA'; u.onend = u.onerror = next; window.speechSynthesis.speak(u); }
+      else next();
+    };
+    next();
+  }
+
   function newCatSugDraft() {
     return { name: '', icon: '💡', group: '', desc: '', qs: [] };
   }
@@ -2866,6 +2931,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
           '<button class="dw-tab-btn ' + (st === 'games' ? 'active' : '') + '" data-adm-tab="games">🎮 إدارة الألعاب (' + arNum(STATE.games.length) + ')</button>' +
           '<button class="dw-tab-btn ' + (st === 'editor' ? 'active' : '') + '" data-adm-tab="editor">✏️ محرر الأسئلة والفئات </button>' +
           '<button class="dw-tab-btn ' + (st === 'categories' ? 'active' : '') + '" data-adm-tab="categories">🗂️ إدارة الفئات (' + arNum(STATE.categories.length) + ')</button>' +
+          '<button class="dw-tab-btn ' + (st === 'voice' ? 'active' : '') + '" data-adm-tab="voice">🎙️ أصوات الراوي</button>' +
           '<button class="dw-tab-btn ' + (st === 'ideas' ? 'active' : '') + '" data-adm-tab="ideas">📝 أفكار الألعاب' + (function () { var n = (DiwaniyaServerKernel.loadDB().suggestions || []).filter(function (x) { return x.status !== 'تمت المراجعة'; }).length; return n ? ' (' + arNum(n) + ')' : ''; })() + '</button>' +
           '<button class="dw-tab-btn ' + (st === 'catsug' ? 'active' : '') + '" data-adm-tab="catsug">💡 اقتراحات الفئات' + (function () { var n = (DiwaniyaServerKernel.loadDB().cat_suggestions || []).filter(function (x) { return x.status === 'pending'; }).length; return n ? ' (' + arNum(n) + ')' : ''; })() + '</button>' +
           '<button class="dw-tab-btn ' + (st === 'payments' ? 'active' : '') + '" data-adm-tab="payments">💳 المدفوعات</button>' +
@@ -3071,6 +3137,53 @@ html.dw-game-open #dwApp { visibility: hidden; }
               '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="qe-open-edit" data-id="' + esc(it.id) + '">✏️ تعديل</button> ' +
               '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="adm-del-content" data-id="' + esc(it.id) + '" aria-label="حذف">🗑️</button>');
           }).join('') : '<p style="color:var(--text-muted);text-align:center">ما فيه أسئلة. اضغط «+ سؤال جديد».</p>') + '</div>' +
+        '</div>';
+    }
+
+    if (st === 'voice') {
+      var vd = DiwaniyaServerKernel.loadDB().voice || { lines: [], rec: {} };
+      var gameName = function (slug) { var g = STATE.games.find(function (x) { return x.slug === slug; }); return g ? cleanTitle(g.title) : slug; };
+      var groups = [];
+      vd.lines.forEach(function (l) {
+        var key = l.games.length > 1 ? 'shared' : l.games[0];
+        var grp = groups.find(function (x) { return x.key === key; });
+        if (!grp) { grp = { key: key, title: key === 'shared' ? '🔁 جمل مشتركة بين أكثر من لعبة' : '🎮 ' + gameName(key), lines: [] }; groups.push(grp); }
+        grp.lines.push(l);
+      });
+      var done = vd.lines.filter(function (l) { var r = vd.rec[l.id] || []; return l.pieces.every(function (_, i) { return r[i]; }); }).length;
+      var lineHtml = function (l) {
+        var r = vd.rec[l.id] || [];
+        var full = l.pieces.every(function (_, i) { return r[i]; });
+        var shown = esc(l.text).split('{}').join('<span class="vo-slot">🤖 الاسم</span>');
+        return '<div class="vo-line' + (full ? ' done' : '') + '">' +
+          '<div class="vo-text">' + shown + '</div>' +
+          '<div class="vo-meta">' + (full ? '✅ بصوتك' : (r.some(Boolean) ? '🟡 ناقص جزء' : '🤖 بالصوت الحالي')) +
+            (l.games.length > 1 ? ' · ' + l.games.map(gameName).join('، ') : '') +
+            (full ? ' <button class="dw-btn dw-btn-sec dw-btn-sm" data-act="vo-preview" data-line="' + esc(l.id) + '">▶ جرّب الجملة كاملة</button>' : '') + '</div>' +
+          l.pieces.map(function (piece, i) {
+            var url = r[i];
+            var rec = STATE.voRec && STATE.voRec.line === l.id && STATE.voRec.part === i;
+            var busy = STATE.voBusy && STATE.voBusy.line === l.id && STATE.voBusy.part === i;
+            return '<div class="vo-piece">' +
+              (l.pieces.length > 1 ? '<span class="vo-n">' + arNum(i + 1) + '</span>' : '') +
+              '<span class="vo-say">«' + esc(piece) + '»</span>' +
+              '<span class="vo-btns">' +
+                (busy ? '<span class="vo-busy">⏳ جاري الحفظ…</span>' :
+                  (rec ? '<button class="dw-btn dw-btn-danger dw-btn-sm vo-rec-on" data-act="vo-stop">⏹ وقّف واحفظ</button>'
+                       : '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="vo-rec" data-line="' + esc(l.id) + '" data-part="' + i + '">🔴 سجّل</button>') +
+                  '<label class="dw-btn dw-btn-sec dw-btn-sm" style="cursor:pointer;margin:0">⬆️ ارفع<input type="file" accept="audio/*" data-vo-file="' + esc(l.id) + '|' + i + '" hidden></label>' +
+                  (url ? '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="vo-play" data-url="' + esc(url) + '">▶ اسمع</button><button class="dw-btn dw-btn-sec dw-btn-sm" data-act="vo-del" data-line="' + esc(l.id) + '" data-part="' + i + '" aria-label="حذف">🗑️</button>' : '')) +
+              '</span>' +
+            '</div>';
+          }).join('') +
+        '</div>';
+      };
+      return nav +
+        '<div class="dw-card">' +
+          '<h4 style="margin:0;font-size:19px">🎙️ أصوات الراوي — سجّلها بصوتك</h4>' +
+          '<p style="margin:0;color:#c9d2e6;line-height:1.9;font-size:14px">اضغط «🔴 سجّل»، قل الجملة، وبعدها «⏹ وقّف واحفظ». الجمل اللي فيها <span class="vo-slot">🤖 الاسم</span> تتقسم: تسجّل اللي قبل الاسم واللي بعده، والجهاز يقول الاسم بس. أي جملة ما سجلتها تبقى بالصوت الحالي.</p>' +
+          '<div class="qsummary"><span class="qlv easy">' + arNum(done) + ' من ' + arNum(vd.lines.length) + ' جملة بصوتك</span><span class="qsum-note">💡 سجّل في مكان هادي، والجوال على بعد شبر من فمك.</span></div>' +
+          groups.map(function (g) { return '<details class="vo-group"' + (g.key === 'mafia' || g.key === 'shared' ? ' open' : '') + '><summary>' + esc(g.title) + ' <small>(' + arNum(g.lines.length) + ')</small></summary>' + g.lines.map(lineHtml).join('') + '</details>'; }).join('') +
         '</div>';
     }
 
@@ -4062,6 +4175,25 @@ html.dw-game-open #dwApp { visibility: hidden; }
       a.download = 'diwaniya_plus_' + STATE.editorGameId + '_' + (STATE.editorCatSlug || 'content') + '.json';
       a.click();
       showToast('تم تصدير ملف المحتوى (' + currentItems.length + ' عنصر) بصيغة JSON.');
+    } else if (act === 'vo-rec') {
+      voStartRecording(actBtn.getAttribute('data-line'), Number(actBtn.getAttribute('data-part')));
+    } else if (act === 'vo-stop') {
+      voStopRecording();
+    } else if (act === 'vo-play') {
+      voPlay([{ url: actBtn.getAttribute('data-url') }]);
+    } else if (act === 'vo-del') {
+      if (!window.confirm('تحذف هالتسجيل؟ الجملة ترجع للصوت الحالي.')) return;
+      adminCall('del_voice', { lineId: actBtn.getAttribute('data-line'), part: Number(actBtn.getAttribute('data-part')) }, function (r) { render(); showToast(r.message); });
+    } else if (act === 'vo-preview') {
+      var pvd = DiwaniyaServerKernel.loadDB().voice || { lines: [], rec: {} };
+      var pl = pvd.lines.find(function (x) { return x.id === actBtn.getAttribute('data-line'); });
+      if (!pl) return;
+      var segs = pl.text.replace(/\s+/g, ' ').trim().split('{}'), steps = [], pi = 0;
+      segs.forEach(function (seg, k) {
+        if (/[؀-ۿA-Za-z0-9]/.test(seg)) steps.push({ url: (pvd.rec[pl.id] || [])[pi++] });
+        if (k < segs.length - 1) steps.push({ say: 'سالم' });
+      });
+      voPlay(steps);
     } else if (act === 'adm-idea') {
       var idOp = actBtn.getAttribute('data-op');
       if (idOp === 'del' && !window.confirm('تحذف هالفكرة؟')) return;
@@ -4173,6 +4305,14 @@ html.dw-game-open #dwApp { visibility: hidden; }
     if (!t) return;
     if (t.hasAttribute && t.hasAttribute('data-csug')) { syncCatSugField(t); return; }
     if (t.hasAttribute && t.hasAttribute('data-upload-target')) { handleImagePick(t); return; }
+    if (t.hasAttribute && t.hasAttribute('data-vo-file')) {
+      var vf = t.files && t.files[0], vk = t.getAttribute('data-vo-file').split('|');
+      if (vf) {
+        var vtype = vf.type || (/\.m4a$/i.test(vf.name) ? 'audio/mp4' : /\.mp3$/i.test(vf.name) ? 'audio/mpeg' : /\.ogg|\.opus$/i.test(vf.name) ? 'audio/ogg' : /\.wav$/i.test(vf.name) ? 'audio/wav' : 'audio/mp4');
+        voSave(vk[0], Number(vk[1]), vf.type ? vf : new File([vf], vf.name, { type: vtype }));
+      }
+      t.value = ''; return;
+    }
     if (t.hasAttribute && t.hasAttribute('data-qe-file')) { qeUpload(t.getAttribute('data-qe-file'), t.files && t.files[0]); t.value = ''; return; }
     if (t.id === 'edGameSelect') {
       STATE.editorGameId = t.value;

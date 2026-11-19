@@ -6,6 +6,7 @@ import { GAMES } from './games.js';
 import { verifyOrder } from './payments.js';
 import { cleanMedia, legacyMedia, mediaBytesUsed } from './media.js';
 import { promoConfig, APP_CODE } from './promo.js';
+import { voiceAdminData, saveVoicePiece } from './voice.js';
 
 const SLUG_RE = /^[a-z0-9_]{2,40}$/;
 export const NOT_CLONABLE = ['eight', 'dakhil', 'mafia', 'qaftah', 'chancellor', 'harf', 'qaddirha'];
@@ -31,6 +32,7 @@ export async function adminData(env) {
   const [gameContent, overrides, catSuggestions, gameSuggestions] = await Promise.all([getDoc(env, 'game_content'), getDoc(env, 'catQuestionsOverrides'), getDoc(env, 'cat_suggestions'), getDoc(env, 'suggestions')]);
   return {
     media_bytes: await mediaBytesUsed(env),
+    voice: await voiceAdminData(env),
     promo: {
       ...(await promoConfig(env))[APP_CODE], code: APP_CODE,
       installs: ((await env.DB.prepare('SELECT COUNT(*) AS n FROM app_installs').first()) || {}).n || 0,
@@ -331,6 +333,13 @@ export async function adminAction(env, session, action, payload) {
       await putDoc(env, 'cat_suggestions', list);
       await log(env, admin, action, 'cat_suggestion', sug.id, sug.name);
       return { ok: true, message: sug.status === 'approved' ? 'تم اعتماد فئة «' + sug.name + '» وصارت في ديوانية الثمانية.' : 'تم رفض الاقتراح.' };
+    }
+
+    case 'save_voice':
+    case 'del_voice': {
+      const r = await saveVoicePiece(env, payload, action === 'del_voice');
+      await log(env, admin, action, 'voice', String(payload.lineId || ''), 'جزء ' + (Number(payload.part) + 1));
+      return r;
     }
 
     case 'save_promo': {

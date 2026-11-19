@@ -1,3 +1,4 @@
+import { voiceForGame } from './voice.js';
 // Wallet, game launches (credit / free-trial deduction) and protected game delivery.
 import { HttpError, nowMs, nowIso, randomToken, randomId, sha256Hex } from './util.js';
 import { getDoc } from './catalog.js';
@@ -173,7 +174,8 @@ export async function servePlay(env, request, session, slug) {
   if (ROOM_GAMES[slug]) {
     html = html.replace('</head>', '<style>/*dw-tv*/@media (min-width:1280px) and (min-height:700px){body{zoom:1.25}}@media (min-width:1700px) and (min-height:900px){body{zoom:1.55}}@media (min-width:2400px) and (min-height:1300px){body{zoom:2.1}}</style></head>');
   }
-  html = html.replace(/<head([^>]*)>/i, (m) => m + '\n<script>window.__DW_CONTENT = ' + scriptJson(content) + ';</script>');
+  content.voice = await voiceForGame(env, slug);
+  html = html.replace(/<head([^>]*)>/i, (m) => m + '\n<script>window.__DW_CONTENT = ' + scriptJson(content) + ';</script>' + (content.voice.length ? '<script src="/voice-player.js"></script>' : ''));
   html = html.replace('</head>', '<style>@media (max-width:700px){.dw-FloatingAudioBar{display:none!important}}html.dw-in-frame .dw-FloatingAudioBar{display:none!important}</style><script>try{if(window.top!==window)document.documentElement.classList.add(\'dw-in-frame\')}catch(e){}</script></head>');
 
   return new Response(html, {

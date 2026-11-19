@@ -640,6 +640,7 @@ window.GAME_CONFIG = {"slug":"pressure_seat","title":"كرسي الديواني�
     ctx: null,
     speak: function(text) {
       if (!this.voiceOn) return;
+      if (window.__dwVoice && window.__dwVoice.play(String(text))) return;
       try {
         if ('speechSynthesis' in window) {
           window.speechSynthesis.cancel();

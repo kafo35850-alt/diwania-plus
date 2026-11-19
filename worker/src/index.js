@@ -143,7 +143,7 @@ const STATIC_HEADERS = {
   'x-content-type-options': 'nosniff',
   'referrer-policy': 'strict-origin-when-cross-origin',
   'x-frame-options': 'SAMEORIGIN',
-  'permissions-policy': 'camera=(), geolocation=(), microphone=()'
+  'permissions-policy': 'camera=(), geolocation=(), microphone=(self)'
 };
 function serveStatic(request, url) {
   if (request.method !== 'GET' && request.method !== 'HEAD') return fail(405, 'Method not allowed');

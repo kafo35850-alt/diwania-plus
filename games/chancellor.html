@@ -693,6 +693,7 @@ body.show-both .tabs{left:calc(50% - 215px)}
   function say(text, o) {
     o = o || {};
     if (!S.enabled.voice) return false;
+    if (window.__dwVoice && window.__dwVoice.play(String(text))) return true;
     if (o.key && S.narr[o.key] && S.ctx) { const c = S.ctx, s = c.createBufferSource(); s.buffer = S.narr[o.key]; s.connect(S.sfx); duck(true); s.onended = () => duck(false); s.start(); return true; }
     if (!hasVoiceApi()) return false; const v = pickVoice(); if (!v) return false;
     try {
@@ -702,7 +703,7 @@ body.show-both .tabs{left:calc(50% - 215px)}
       root.speechSynthesis.speak(u); return true;
     } catch (e) { return false; }
   }
-  function shutUp() { try { if (hasVoiceApi()) root.speechSynthesis.cancel(); } catch (e) { } }
+  function shutUp() { try { if (window.__dwVoice) window.__dwVoice.stop(); if (hasVoiceApi()) root.speechSynthesis.cancel(); } catch (e) { } }
   function stopAll() { ambient(null); shutUp(); }
   function setVolume(v) { S.vol = Math.max(0, Math.min(1, v)); if (S.master) S.master.gain.value = S.vol; }
   function setEnabled(k, v) { S.enabled[k] = !!v; if (!v && k === 'sfx') ambient(null); if (!v && k === 'voice') shutUp(); }
