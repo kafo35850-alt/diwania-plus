@@ -46,41 +46,59 @@ const POSTERS = {
     <rect x="70" y="140" width="6" height="6" rx="2" fill="#f472b6"/>
     <rect x="250" y="150" width="8" height="8" rx="2" fill="${GOLD2}" transform="rotate(35 254 154)"/>`),
   // classical columned hall
-  uni_ksu: frame('b', ['#0b3b2e', '#0f766e'], '#34d399', `
-    <path d="M90 78 L160 46 L230 78 Z" fill="${GOLD}"/>
-    <rect x="86" y="78" width="148" height="10" rx="2" fill="${GOLD2}"/>
-    ${[100, 126, 152, 178, 204].map((x) => `<rect x="${x}" y="92" width="14" height="56" rx="3" fill="${WHITE}"/><rect x="${x - 2}" y="90" width="18" height="5" rx="1" fill="#d1fae5"/>`).join('')}
-    <rect x="80" y="148" width="160" height="10" rx="2" fill="${GOLD2}"/>
-    <rect x="72" y="158" width="176" height="10" rx="2" fill="${GOLD}"/>
-    <circle cx="160" cy="66" r="6" fill="${INK}"/>`, 'grid'),
+  // Riyadh skyline: Kingdom Centre (with its sky-bridge) and Al Faisaliah (with its golden sphere), over a columned hall
+  uni_ksu: frame('b', ['#0b1f4d', '#1d4ed8'], '#60a5fa', `
+    <path d="M196 170 L206 52 Q216 34 226 52 L236 170 Z" fill="#cbd5e1"/>
+    <path d="M206 56 Q216 92 226 56 Q216 40 206 56 Z" fill="#0b1f4d"/>
+    <rect x="206" y="78" width="20" height="4" rx="1" fill="#e2e8f0"/>
+    <path d="M100 170 L120 66 L140 170 Z" fill="#94a3b8"/>
+    <circle cx="120" cy="96" r="8" fill="${GOLD}"/><path d="M120 66 v-14" stroke="#e2e8f0" stroke-width="2"/>
+    <path d="M150 112 L170 102 L190 112 Z" fill="${GOLD}"/>
+    ${[154, 164, 174, 184].map((x) => `<rect x="${x}" y="114" width="5" height="40" rx="1.5" fill="${WHITE}"/>`).join('')}
+    <rect x="150" y="154" width="42" height="6" fill="${GOLD2}"/>
+    <rect x="40" y="168" width="240" height="6" rx="3" fill="#93c5fd" opacity=".5"/>
+    ${'<g transform="translate(26 26)"><rect width="61" height="30" rx="15" fill="#0A0F24" fill-opacity=".72" stroke="#93c5fd" stroke-width="2"/><text x="30.5" y="20.5" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="17" letter-spacing="1.5" fill="#93c5fd">KSU</text></g>'}`, 'grid'),
+
   // water tower on a hill + oil derrick
-  uni_kfupm: frame('c', ['#0c1d3d', '#0e7490'], '#22d3ee', `
-    <path d="M30 172 Q160 120 290 172 Z" fill="#0b2a4a"/>
-    <rect x="150" y="70" width="20" height="78" fill="#cbd5e1"/>
-    <path d="M150 148 L132 172 H188 L170 148 Z" fill="#94a3b8"/>
-    <path d="M128 46 Q160 22 192 46 L184 72 H136 Z" fill="${WHITE}" stroke="${GOLD}" stroke-width="3"/>
-    <rect x="132" y="64" width="56" height="8" rx="3" fill="${GOLD}"/>
-    <path d="M228 168 L246 92 L264 168 M234 140 H258 M238 120 H254 M242 104 H250" fill="none" stroke="${GOLD2}" stroke-width="3" stroke-linejoin="round"/>
-    <circle cx="246" cy="88" r="5" fill="${GOLD}"/>
-    <path d="M60 150 q8-14 16 0 q8 14 16 0" fill="none" stroke="#5eead4" stroke-width="3" opacity=".7"/>`),
+  // the university water tower on its hill (Dhahran), with an oil derrick beside it
+  uni_kfupm: frame('c', ['#052e2b', '#0f766e'], '#5eead4', `
+    <path d="M20 176 Q160 112 300 176 Z" fill="#064e3b"/>
+    <path d="M152 150 L156 64 H164 L168 150 Z" fill="#e2e8f0"/>
+    <path d="M156 64 Q160 58 164 64" fill="#e2e8f0"/>
+    <path d="M128 40 Q160 26 192 40 L180 64 Q160 70 140 64 Z" fill="${WHITE}" stroke="${GOLD}" stroke-width="3"/>
+    <path d="M136 52 Q160 60 184 52" fill="none" stroke="${GOLD}" stroke-width="2.5"/>
+    <rect x="157" y="20" width="6" height="14" rx="2" fill="${GOLD}"/>
+    <path d="M146 150 h28 l6 12 h-40 z" fill="#94a3b8"/>
+    <path d="M232 166 L248 98 L264 166 M237 144 H259 M241 124 H255 M244 108 H252" fill="none" stroke="${GOLD2}" stroke-width="3" stroke-linejoin="round"/>
+    <circle cx="248" cy="94" r="4" fill="${GOLD}"/>
+    ${'<g transform="translate(26 26)"><rect width="87" height="30" rx="15" fill="#0A0F24" fill-opacity=".72" stroke="#5eead4" stroke-width="2"/><text x="43.5" y="20.5" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="17" letter-spacing="1.5" fill="#5eead4">KFUPM</text></g>'}`),
+
   // automated metro train
-  uni_pnu: frame('d', ['#3b0a45', '#a21caf'], '#f0abfc', `
-    <rect x="40" y="164" width="240" height="6" rx="3" fill="#f5d0fe" opacity=".5"/>
-    <path d="M70 78 h156 q30 0 42 30 l8 30 q2 18 -16 18 H70 q-12 0 -12 -12 V90 q0-12 12-12 z" fill="${WHITE}"/>
-    <path d="M226 78 q30 0 42 30 l6 22 h-48 z" fill="#c084fc"/>
-    ${[78, 116, 154, 192].map((x) => `<rect x="${x}" y="92" width="30" height="28" rx="6" fill="#581c87"/>`).join('')}
-    <rect x="58" y="128" width="210" height="8" fill="${GOLD}"/>
-    <circle cx="100" cy="160" r="9" fill="${INK}"/><circle cx="220" cy="160" r="9" fill="${INK}"/>
-    <circle cx="262" cy="144" r="4" fill="${GOLD2}"/>`, 'grid'),
+  // the campus automated train arriving at a Riyadh metro station
+  uni_pnu: frame('d', ['#2e1065', '#7e22ce'], '#e9d5ff', `
+    <rect x="40" y="58" width="240" height="10" rx="3" fill="#c4b5fd"/>
+    ${[70, 160, 250].map((x) => `<rect x="${x - 4}" y="68" width="8" height="96" fill="#a78bfa"/>`).join('')}
+    <rect x="30" y="166" width="260" height="6" rx="3" fill="#f5d0fe" opacity=".55"/>
+    <path d="M66 92 h150 q32 0 44 30 l4 18 q2 16 -14 16 H66 q-12 0 -12 -12 V104 q0-12 12-12 z" fill="${WHITE}"/>
+    <path d="M216 92 q32 0 44 30 l4 14 h-48 z" fill="#2dd4bf"/>
+    ${[74, 110, 146, 182].map((x) => `<rect x="${x}" y="104" width="28" height="24" rx="5" fill="#4c1d95"/>`).join('')}
+    <rect x="54" y="134" width="206" height="7" fill="${GOLD}"/>
+    <circle cx="96" cy="160" r="8" fill="${INK}"/><circle cx="214" cy="160" r="8" fill="${INK}"/>
+    <path d="M250 70 l8 0 l0 -8" fill="none" stroke="${GOLD2}" stroke-width="3"/>
+    ${'<g transform="translate(26 26)"><rect width="61" height="30" rx="15" fill="#0A0F24" fill-opacity=".72" stroke="#e9d5ff" stroke-width="2"/><text x="30.5" y="20.5" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="17" letter-spacing="1.5" fill="#e9d5ff">PNU</text></g>'}`, 'grid'),
+
   // sea waves with a sail
-  uni_kau: frame('e', ['#082f49', '#0369a1'], '#38bdf8', `
-    <path d="M110 60 v86 h-34 z" fill="${WHITE}"/>
-    <path d="M116 46 v100 h64 z" fill="${GOLD2}"/>
-    <rect x="113" y="42" width="4" height="108" fill="${INK}"/>
-    <path d="M66 148 h132 l-14 18 h-104 z" fill="#7c2d12"/>
-    <circle cx="238" cy="62" r="20" fill="${GOLD}"/>
-    <path d="M30 168 q16-12 32 0 t32 0 t32 0 t32 0 t32 0 t32 0 t32 0 t32 0 V200 H30 z" fill="#0ea5e9" opacity=".75"/>
-    <path d="M14 180 q16-12 32 0 t32 0 t32 0 t32 0 t32 0 t32 0 t32 0 t32 0 t32 0 V200 H14 z" fill="#0284c7"/>`, 'waves'),
+  // King Fahd's Fountain shooting over the Red Sea at Jeddah, with the city's skyline
+  uni_kau: frame('e', ['#052e16', '#0e7490'], '#86efac', `
+    <path d="M160 160 C156 120 152 70 160 26 C168 70 164 120 160 160 Z" fill="#e0f2fe"/>
+    <path d="M160 34 C150 46 136 58 124 82 M160 34 C170 46 184 58 196 82" fill="none" stroke="#e0f2fe" stroke-width="3" stroke-linecap="round" opacity=".8"/>
+    ${[[118, 92], [128, 74], [192, 74], [204, 94], [140, 54], [180, 56]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="3" fill="#e0f2fe" opacity=".85"/>`).join('')}
+    ${[[40, 132, 18, 40], [62, 120, 14, 52], [80, 138, 22, 34], [232, 126, 16, 46], [252, 112, 14, 60], [270, 136, 20, 36]].map(([x, y, w, h]) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="2" fill="#134e4a"/>`).join('')}
+    <path d="M20 170 q20-10 40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 V200 H20 z" fill="#0ea5e9" opacity=".8"/>
+    <path d="M0 182 q20-10 40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 V200 H0 z" fill="#0369a1"/>
+    <circle cx="160" cy="166" r="6" fill="${GOLD}"/>
+    ${'<g transform="translate(26 26)"><rect width="61" height="30" rx="15" fill="#0A0F24" fill-opacity=".72" stroke="#86efac" stroke-width="2"/><text x="30.5" y="20.5" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="17" letter-spacing="1.5" fill="#86efac">KAU</text></g>'}`, 'waves'),
+
   // folded map with pins
   uni_others: frame('f', ['#450a0a', '#c2410c'], '#fb923c', `
     <path d="M70 60 l60-14 l60 14 l60-14 v104 l-60 14 l-60-14 l-60 14 z" fill="#fef3c7"/>

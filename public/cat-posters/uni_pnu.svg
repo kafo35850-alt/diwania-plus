@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice">
 <defs>
-<linearGradient id="gd" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3b0a45"/><stop offset="1" stop-color="#a21caf"/></linearGradient>
-<radialGradient id="rd" cx=".5" cy=".55" r=".5"><stop offset="0" stop-color="#f0abfc" stop-opacity=".55"/><stop offset="1" stop-color="#f0abfc" stop-opacity="0"/></radialGradient>
+<linearGradient id="gd" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2e1065"/><stop offset="1" stop-color="#7e22ce"/></linearGradient>
+<radialGradient id="rd" cx=".5" cy=".55" r=".5"><stop offset="0" stop-color="#e9d5ff" stop-opacity=".55"/><stop offset="1" stop-color="#e9d5ff" stop-opacity="0"/></radialGradient>
 <filter id="sd" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#000" flood-opacity=".35"/></filter>
 <pattern id="pd" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="#fff" stroke-opacity=".06"/></pattern>
 </defs>
@@ -9,12 +9,15 @@
 <rect width="320" height="200" fill="url(#pd)"/>
 <circle cx="160" cy="108" r="96" fill="url(#rd)"/>
 <g filter="url(#sd)">
-<rect x="40" y="164" width="240" height="6" rx="3" fill="#f5d0fe" opacity=".5"/>
-<path d="M70 78 h156 q30 0 42 30 l8 30 q2 18 -16 18 H70 q-12 0 -12 -12 V90 q0-12 12-12 z" fill="#F8FAFC"/>
-<path d="M226 78 q30 0 42 30 l6 22 h-48 z" fill="#c084fc"/>
-<rect x="78" y="92" width="30" height="28" rx="6" fill="#581c87"/><rect x="116" y="92" width="30" height="28" rx="6" fill="#581c87"/><rect x="154" y="92" width="30" height="28" rx="6" fill="#581c87"/><rect x="192" y="92" width="30" height="28" rx="6" fill="#581c87"/>
-<rect x="58" y="128" width="210" height="8" fill="#F5B942"/>
-<circle cx="100" cy="160" r="9" fill="#0A0F24"/><circle cx="220" cy="160" r="9" fill="#0A0F24"/>
-<circle cx="262" cy="144" r="4" fill="#FFE08A"/></g>
+<rect x="40" y="58" width="240" height="10" rx="3" fill="#c4b5fd"/>
+<rect x="66" y="68" width="8" height="96" fill="#a78bfa"/><rect x="156" y="68" width="8" height="96" fill="#a78bfa"/><rect x="246" y="68" width="8" height="96" fill="#a78bfa"/>
+<rect x="30" y="166" width="260" height="6" rx="3" fill="#f5d0fe" opacity=".55"/>
+<path d="M66 92 h150 q32 0 44 30 l4 18 q2 16 -14 16 H66 q-12 0 -12 -12 V104 q0-12 12-12 z" fill="#F8FAFC"/>
+<path d="M216 92 q32 0 44 30 l4 14 h-48 z" fill="#2dd4bf"/>
+<rect x="74" y="104" width="28" height="24" rx="5" fill="#4c1d95"/><rect x="110" y="104" width="28" height="24" rx="5" fill="#4c1d95"/><rect x="146" y="104" width="28" height="24" rx="5" fill="#4c1d95"/><rect x="182" y="104" width="28" height="24" rx="5" fill="#4c1d95"/>
+<rect x="54" y="134" width="206" height="7" fill="#F5B942"/>
+<circle cx="96" cy="160" r="8" fill="#0A0F24"/><circle cx="214" cy="160" r="8" fill="#0A0F24"/>
+<path d="M250 70 l8 0 l0 -8" fill="none" stroke="#FFE08A" stroke-width="3"/>
+<g transform="translate(26 26)"><rect width="61" height="30" rx="15" fill="#0A0F24" fill-opacity=".72" stroke="#e9d5ff" stroke-width="2"/><text x="30.5" y="20.5" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="17" letter-spacing="1.5" fill="#e9d5ff">PNU</text></g></g>
 <rect x="6" y="6" width="308" height="188" rx="14" fill="none" stroke="#fff" stroke-opacity=".12"/>
 </svg>

@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice">
 <defs>
-<linearGradient id="ge" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#082f49"/><stop offset="1" stop-color="#0369a1"/></linearGradient>
-<radialGradient id="re" cx=".5" cy=".55" r=".5"><stop offset="0" stop-color="#38bdf8" stop-opacity=".55"/><stop offset="1" stop-color="#38bdf8" stop-opacity="0"/></radialGradient>
+<linearGradient id="ge" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#052e16"/><stop offset="1" stop-color="#0e7490"/></linearGradient>
+<radialGradient id="re" cx=".5" cy=".55" r=".5"><stop offset="0" stop-color="#86efac" stop-opacity=".55"/><stop offset="1" stop-color="#86efac" stop-opacity="0"/></radialGradient>
 <filter id="se" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#000" flood-opacity=".35"/></filter>
 <pattern id="pe" width="40" height="16" patternUnits="userSpaceOnUse"><path d="M0 8q10-8 20 0t20 0" fill="none" stroke="#fff" stroke-opacity=".07" stroke-width="2"/></pattern>
 </defs>
@@ -9,12 +9,13 @@
 <rect width="320" height="200" fill="url(#pe)"/>
 <circle cx="160" cy="108" r="96" fill="url(#re)"/>
 <g filter="url(#se)">
-<path d="M110 60 v86 h-34 z" fill="#F8FAFC"/>
-<path d="M116 46 v100 h64 z" fill="#FFE08A"/>
-<rect x="113" y="42" width="4" height="108" fill="#0A0F24"/>
-<path d="M66 148 h132 l-14 18 h-104 z" fill="#7c2d12"/>
-<circle cx="238" cy="62" r="20" fill="#F5B942"/>
-<path d="M30 168 q16-12 32 0 t32 0 t32 0 t32 0 t32 0 t32 0 t32 0 t32 0 V200 H30 z" fill="#0ea5e9" opacity=".75"/>
-<path d="M14 180 q16-12 32 0 t32 0 t32 0 t32 0 t32 0 t32 0 t32 0 t32 0 t32 0 V200 H14 z" fill="#0284c7"/></g>
+<path d="M160 160 C156 120 152 70 160 26 C168 70 164 120 160 160 Z" fill="#e0f2fe"/>
+<path d="M160 34 C150 46 136 58 124 82 M160 34 C170 46 184 58 196 82" fill="none" stroke="#e0f2fe" stroke-width="3" stroke-linecap="round" opacity=".8"/>
+<circle cx="118" cy="92" r="3" fill="#e0f2fe" opacity=".85"/><circle cx="128" cy="74" r="3" fill="#e0f2fe" opacity=".85"/><circle cx="192" cy="74" r="3" fill="#e0f2fe" opacity=".85"/><circle cx="204" cy="94" r="3" fill="#e0f2fe" opacity=".85"/><circle cx="140" cy="54" r="3" fill="#e0f2fe" opacity=".85"/><circle cx="180" cy="56" r="3" fill="#e0f2fe" opacity=".85"/>
+<rect x="40" y="132" width="18" height="40" rx="2" fill="#134e4a"/><rect x="62" y="120" width="14" height="52" rx="2" fill="#134e4a"/><rect x="80" y="138" width="22" height="34" rx="2" fill="#134e4a"/><rect x="232" y="126" width="16" height="46" rx="2" fill="#134e4a"/><rect x="252" y="112" width="14" height="60" rx="2" fill="#134e4a"/><rect x="270" y="136" width="20" height="36" rx="2" fill="#134e4a"/>
+<path d="M20 170 q20-10 40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 V200 H20 z" fill="#0ea5e9" opacity=".8"/>
+<path d="M0 182 q20-10 40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 V200 H0 z" fill="#0369a1"/>
+<circle cx="160" cy="166" r="6" fill="#F5B942"/>
+<g transform="translate(26 26)"><rect width="61" height="30" rx="15" fill="#0A0F24" fill-opacity=".72" stroke="#86efac" stroke-width="2"/><text x="30.5" y="20.5" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="17" letter-spacing="1.5" fill="#86efac">KAU</text></g></g>
 <rect x="6" y="6" width="308" height="188" rx="14" fill="none" stroke="#fff" stroke-opacity=".12"/>
 </svg>
