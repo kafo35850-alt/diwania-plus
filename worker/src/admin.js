@@ -4,6 +4,7 @@ import { HttpError, nowIso, randomId, cleanText, toInt } from './util.js';
 import { getDoc, putDoc } from './catalog.js';
 import { GAMES } from './games.js';
 import { verifyOrder } from './payments.js';
+import { cleanImageRef, cleanVideoRef } from './media.js';
 
 const SLUG_RE = /^[a-z0-9_]{2,40}$/;
 
@@ -23,8 +24,9 @@ export async function adminData(env) {
     env.DB.prepare('SELECT * FROM admin_logs ORDER BY created_at DESC LIMIT 200'),
     env.DB.prepare('SELECT * FROM payments ORDER BY created_at DESC LIMIT 500')
   ]);
-  const [gameContent, overrides] = await Promise.all([getDoc(env, 'game_content'), getDoc(env, 'catQuestionsOverrides')]);
+  const [gameContent, overrides, catSuggestions] = await Promise.all([getDoc(env, 'game_content'), getDoc(env, 'catQuestionsOverrides'), getDoc(env, 'cat_suggestions')]);
   return {
+    cat_suggestions: catSuggestions || [],
     ok: true,
     users: users.results || [],
     admin_logs: logs.results || [],
@@ -32,6 +34,21 @@ export async function adminData(env) {
     game_content: gameContent,
     catQuestionsOverrides: overrides
   };
+}
+
+// The built-in questions of a category exactly as the game stores them (photos and all).
+function eightRawQuestions(catSlug) {
+  const html = GAMES.eight || '';
+  const marker = 'id="m8_cat_' + catSlug + '"';
+  const pos = html.indexOf(marker);
+  if (pos === -1) return [];
+  const gt = html.indexOf('>', pos);
+  const lt = html.indexOf('</script>', gt);
+  if (gt === -1 || lt === -1) return [];
+  try {
+    const arr = JSON.parse(html.slice(gt + 1, lt).trim());
+    return Array.isArray(arr) ? arr.map((q, i) => ({ ...q, uid: q.uid || (catSlug + '_q' + (i + 1) + '_' + (q.points || 200)) })) : [];
+  } catch (e) { return []; }
 }
 
 // Built-in questions of one Eight category, read from the game file (owner editor only).
@@ -54,6 +71,9 @@ export function eightCategoryQuestions(catSlug) {
     prompt_text: q.q || q.question || '',
     answer_text: q.a || q.answer || '',
     extra_info: q.hint || q.info || '',
+    image_url: q.img || '',
+    video_url: q.video || '',
+    has_builtin_media: !!(q.photo || q.rebus || q.scenePhoto || q.fantasy),
     options: q.options || [],
     sort_order: idx + 1,
     is_active: 1
@@ -262,10 +282,41 @@ export async function adminAction(env, session, action, payload) {
         sub_group: cleanText(payload.group, 40) || 'عام',
         description: cleanText(payload.description, 300) || 'فئة مضافة من لوحة الإدارة',
         icon: cleanText(payload.icon, 8) || '🎯',
-        posterTheme: 'country_saudi', sort_order: 1, is_visible: 1, item_count: 18
+        poster: cleanImageRef(payload.posterUrl),
+        posterTheme: 'country_saudi', sort_order: 1, is_visible: 1, item_count: 0
       });
       await putDoc(env, 'categories', categories);
-      return { ok: true, message: 'تمت إضافة الفئة.' };
+      return { ok: true, slug, message: 'تمت إضافة الفئة. الحين أضف أسئلتها من «محرر الأسئلة».' };
+    }
+
+    case 'approve_cat_suggestion':
+    case 'reject_cat_suggestion': {
+      const list = (await getDoc(env, 'cat_suggestions')) || [];
+      const sug = list.find((x) => x.id === payload.suggestionId);
+      if (!sug) throw new HttpError(404, 'الاقتراح غير موجود.');
+      if (sug.status !== 'pending') throw new HttpError(400, 'هذا الاقتراح تمت مراجعته من قبل.');
+      sug.status = action === 'approve_cat_suggestion' ? 'approved' : 'rejected';
+      sug.reviewed_by = admin.email;
+      sug.reviewed_at = nowIso();
+      if (sug.status === 'approved') {
+        const categories = await getDoc(env, 'categories');
+        const slug = 'custom_' + Date.now();
+        categories.unshift({
+          id: 'cat_' + slug, slug, name: sug.name,
+          macro_group: 'فئات الديوانية', sub_group: sug.group || 'من اقتراحات اللاعبين',
+          description: sug.description || ('فئة مقترحة من ' + sug.user_name),
+          icon: sug.icon || '💡', posterTheme: 'country_saudi', sort_order: 1, is_visible: 1,
+          item_count: sug.questions.length, suggested_by: sug.user_name
+        });
+        const overrides = await getDoc(env, 'catQuestionsOverrides');
+        overrides[slug] = sug.questions.map((it, i) => eightItem({ ...it, uid: slug + '_s' + (i + 1) }, i, slug));
+        await putDoc(env, 'catQuestionsOverrides', overrides);
+        await putDoc(env, 'categories', categories);
+        sug.category_slug = slug;
+      }
+      await putDoc(env, 'cat_suggestions', list);
+      await log(env, admin, action, 'cat_suggestion', sug.id, sug.name);
+      return { ok: true, message: sug.status === 'approved' ? 'تم اعتماد فئة «' + sug.name + '» وصارت في ديوانية الثمانية.' : 'تم رفض الاقتراح.' };
     }
 
     case 'toggle_cat': {
@@ -288,7 +339,9 @@ function eightItem(it, idx, catSlug) {
     points: toInt(it.points || it.difficulty_points, 200),
     q: cleanText(it.q || it.prompt_text, 1000),
     a: cleanText(it.a || it.answer_text, 500),
-    hint: cleanText(it.hint || it.extra_info, 1000)
+    hint: cleanText(it.hint || it.extra_info, 1000),
+    img: cleanImageRef(it.img || it.image_url),
+    video: cleanVideoRef(it.video || it.video_url)
   };
 }
 
@@ -300,15 +353,14 @@ async function contentAction(env, admin, action, payload) {
     const catSlug = String(payload.catSlug || '').replace(/[^A-Za-z0-9_-]/g, '');
     if (!catSlug) throw new HttpError(400, 'اختر الفئة أولاً.');
     const overrides = await getDoc(env, 'catQuestionsOverrides');
-    // The first edit of a category starts from the built-in questions the editor sent along.
-    let list = Array.isArray(overrides[catSlug])
-      ? overrides[catSlug]
-      : (Array.isArray(payload.baseItems) ? payload.baseItems.slice(0, MAX_ITEMS).map((it, i) => eightItem(it, i, catSlug)) : []);
+    // The first edit of a built-in category starts from its full questions (keeping their photos).
+    let list = Array.isArray(overrides[catSlug]) ? overrides[catSlug] : eightRawQuestions(catSlug);
 
     if (action === 'add_content') {
       list.unshift(eightItem({
         uid: catSlug + '_custom_' + Date.now(), points: payload.points,
-        q: payload.promptText, a: payload.answerText, hint: payload.extraInfo
+        q: payload.promptText, a: payload.answerText, hint: payload.extraInfo,
+        img: payload.imageUrl, video: payload.videoUrl
       }, 0, catSlug));
     } else if (action === 'edit_content') {
       list.forEach((q) => {
@@ -317,6 +369,8 @@ async function contentAction(env, admin, action, payload) {
           q.a = cleanText(payload.answerText || q.a, 500);
           q.hint = cleanText(payload.extraInfo != null ? payload.extraInfo : q.hint, 1000);
           if (payload.points) q.points = toInt(payload.points, q.points);
+          if (payload.imageUrl != null) q.img = cleanImageRef(payload.imageUrl);
+          if (payload.videoUrl != null) q.video = cleanVideoRef(payload.videoUrl);
         }
       });
     } else if (action === 'del_content') {
@@ -380,4 +434,32 @@ async function contentAction(env, admin, action, payload) {
   await putDoc(env, 'game_content', content);
   await log(env, admin, action, 'game_content', gameId, '');
   return { ok: true, message: 'تم حفظ محتوى اللعبة بنجاح!' };
+}
+
+// A signed-in player proposes a whole Eight category; it waits for an admin to approve it.
+export async function submitCategorySuggestion(env, session, body) {
+  const name = cleanText(body.name, 60);
+  if (!name) throw new HttpError(400, 'اكتب اسم الفئة.');
+  const raw = Array.isArray(body.questions) ? body.questions.slice(0, 30) : [];
+  const questions = raw.map((it, i) => eightItem({
+    uid: 'sug_' + i, points: [200, 400, 600].includes(toInt(it.points, 0)) ? toInt(it.points, 200) : 200,
+    q: it.q, a: it.a, hint: it.hint, img: it.img, video: it.video
+  }, i, 'sug')).filter((q) => q.q && q.a).map((q) => ({ ...q, q: q.q.slice(0, 300), a: q.a.slice(0, 120), hint: q.hint.slice(0, 300) }));
+  if (questions.length < 6) throw new HttpError(400, 'اكتب ٦ أسئلة على الأقل مع إجاباتها (اللوحة تحتاج ٦ أسئلة لكل فئة).');
+  const list = (await getDoc(env, 'cat_suggestions')) || [];
+  const mine = list.filter((x) => x.user_id === session.user.id && x.status === 'pending').length;
+  if (mine >= 5) throw new HttpError(429, 'عندك ٥ اقتراحات تنتظر المراجعة. انتظر لين نراجعها.');
+  list.unshift({
+    id: randomId('csug'), status: 'pending', name,
+    icon: cleanText(body.icon, 8) || '💡',
+    group: cleanText(body.group, 40),
+    description: cleanText(body.description, 300),
+    questions, user_id: session.user.id, user_name: session.user.display_name, user_email: session.user.email,
+    created_at: nowIso()
+  });
+  // Keep every pending one; trim old reviewed ones first.
+  const pending = list.filter((x) => x.status === 'pending');
+  const reviewed = list.filter((x) => x.status !== 'pending').slice(0, Math.max(0, 150 - pending.length));
+  await putDoc(env, 'cat_suggestions', [...pending, ...reviewed]);
+  return { ok: true, message: 'وصل اقتراحك 🎉 بنراجعه، ولو انعتمد بتلقاه في ديوانية الثمانية.' };
 }

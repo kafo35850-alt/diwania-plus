@@ -5,7 +5,8 @@ import { sendOtp, verifyOtp, logout, currentSession, requireSession, publicUser,
 import { walletSnapshot, launchGame, servePlay } from './wallet.js';
 import { createCheckout, handleReturn, handleWebhook, reconcileUserPending, paymentStatusForUser } from './payments.js';
 import { getCatalog, getDoc, putDoc } from './catalog.js';
-import { adminData, adminAction, eightCategoryQuestions } from './admin.js';
+import { adminData, adminAction, eightCategoryQuestions, submitCategorySuggestion } from './admin.js';
+import { uploadMedia, serveMedia } from './media.js';
 import { handleRooms } from './rooms/routes.js';
 import { STATIC } from './static.generated.js';
 export { GameHubDO, RelayRoomDO, BuzzerRoomDO } from './rooms/objects.js';
@@ -90,6 +91,15 @@ async function handleApi(env, request, url) {
     return json(await paymentStatusForUser(env, session, payOrder[1]));
   }
 
+  if (method === 'POST' && path === '/api/media') {
+    const session = await requireSession(env, request);
+    return json(await uploadMedia(env, request, session), 201);
+  }
+  if (method === 'POST' && path === '/api/suggestions/category') {
+    const session = await requireSession(env, request);
+    return json(await submitCategorySuggestion(env, session, await readJson(request)));
+  }
+
   if (method === 'POST' && path === '/api/suggestions') {
     return json(await submitSuggestion(env, request, await readJson(request)));
   }
@@ -155,6 +165,9 @@ export default {
       if (url.pathname.startsWith('/api/')) return await handleApi(env, request, url);
 
       if (url.pathname === '/payments/return' && request.method === 'GET') return await handleReturn(env, request);
+
+      const media = url.pathname.match(/^\/media\/(med_[A-Za-z0-9_-]{6,60})$/);
+      if (media && (request.method === 'GET' || request.method === 'HEAD')) return await serveMedia(env, request, media[1]);
 
       const play = url.pathname.match(/^\/play\/([a-z0-9_]{2,40})\/?$/);
       if (play && request.method === 'GET') {

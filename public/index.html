@@ -774,6 +774,15 @@ footer a { text-decoration: none; }
 .more-games { display: flex; flex-direction: column; align-items: center; gap: 8px; }
 .more-games .dw-btn { padding: 13px 28px; font-size: 16px; border-color: rgba(245,185,66,.45); }
 .more-games span { color: var(--text-muted); font-size: 13.5px; }
+.media-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; background: rgba(245,185,66,.06); border: 1px dashed rgba(245,185,66,.35); padding: 12px; border-radius: 14px; }
+.media-fields label { font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 4px; }
+.media-fields .mf-row { display: flex; gap: 6px; }
+.media-fields .mf-up { flex-shrink: 0; cursor: pointer; margin: 0; color: var(--text-main); }
+.media-fields .mf-prev { margin-top: 6px; min-height: 0; }
+@media (max-width: 640px) { .media-fields { grid-template-columns: 1fr; } }
+.csug-q { display: grid; grid-template-columns: 130px 1fr 1fr; gap: 8px; padding: 12px; border-radius: 14px; background: rgba(0,0,0,.22); border: 1px solid var(--border-subtle); }
+.csug-q .full { grid-column: 1 / -1; }
+@media (max-width: 640px) { .csug-q { grid-template-columns: 1fr; } }
 /* features + devices + faq */
 .feat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
 @media (max-width: 1000px) { .feat-grid { grid-template-columns: repeat(2, 1fr); } }
@@ -1607,7 +1616,82 @@ footer a { text-decoration: none; }
     return [];
   }
 
+  // Shrinks a photo in the browser (max 1280px, under ~400KB) before it is uploaded.
+  function compressImageFile(file) {
+    return new Promise(function (resolve, reject) {
+      if (!file || !/^image\//.test(file.type)) { reject(new Error('اختر ملف صورة.')); return; }
+      var url = URL.createObjectURL(file);
+      var im = new Image();
+      im.onload = function () {
+        URL.revokeObjectURL(url);
+        var scale = Math.min(1, 1280 / Math.max(im.naturalWidth, im.naturalHeight));
+        var cv = document.createElement('canvas');
+        cv.width = Math.max(1, Math.round(im.naturalWidth * scale));
+        cv.height = Math.max(1, Math.round(im.naturalHeight * scale));
+        var cx = cv.getContext('2d');
+        cx.fillStyle = '#fff'; cx.fillRect(0, 0, cv.width, cv.height);
+        cx.drawImage(im, 0, 0, cv.width, cv.height);
+        var q = 0.85;
+        (function attempt() {
+          cv.toBlob(function (b) {
+            if (!b) { reject(new Error('تعذر تجهيز الصورة.')); return; }
+            if (b.size > 400 * 1024 && q > 0.45) { q -= 0.12; attempt(); return; }
+            if (b.size > 440 * 1024) { reject(new Error('الصورة كبيرة حتى بعد الضغط.')); return; }
+            resolve(b);
+          }, 'image/jpeg', q);
+        })();
+      };
+      im.onerror = function () { URL.revokeObjectURL(url); reject(new Error('الملف مو صورة صالحة.')); };
+      im.src = url;
+    });
+  }
+  // Wires an <input type=file data-upload-target="inputId"> to fill the target with the uploaded address.
+  function handleImagePick(fileInput) {
+    var targetId = fileInput.getAttribute('data-upload-target');
+    var target = document.getElementById(targetId);
+    var file = fileInput.files && fileInput.files[0];
+    if (!target || !file) return;
+    if (!STATE.user) { showToast('سجّل دخول عشان ترفع صور.'); return; }
+    showToast('⏳ جاري رفع الصورة...');
+    compressImageFile(file).then(function (blob) {
+      return DiwaniyaServerKernel.uploadMedia(blob);
+    }).then(function (d) {
+      if (!d || !d.ok || !d.url) { showToast((d && d.error) || 'تعذر رفع الصورة.'); return; }
+      target.value = d.url;
+      target.dispatchEvent(new Event('input', { bubbles: true }));
+      var pv = document.getElementById(targetId + 'Preview');
+      if (pv) pv.innerHTML = mediaThumbHtml(d.url, '');
+      showToast('✅ انرفعت الصورة');
+    }).catch(function (e) { showToast(e.message || 'تعذر رفع الصورة.'); });
+    fileInput.value = '';
+  }
+  function safeMediaUrl(u) {
+    u = String(u || '').trim();
+    return /^\/media\/med_[A-Za-z0-9_-]+$/.test(u) || /^https:\/\//.test(u) ? u : '';
+  }
+  function mediaThumbHtml(img, video) {
+    var out = '';
+    if (safeMediaUrl(img)) out += '<img src="' + esc(safeMediaUrl(img)) + '" alt="" referrerpolicy="no-referrer" style="width:56px;height:42px;object-fit:cover;border-radius:8px;vertical-align:middle;border:1px solid var(--border-subtle)">';
+    if (safeMediaUrl(video)) out += ' <a href="' + esc(safeMediaUrl(video)) + '" target="_blank" rel="noopener noreferrer" class="dw-chip gold" style="text-decoration:none">🎬 فيديو</a>';
+    return out;
+  }
+  // One row of image + video fields (upload button or a link).
+  function mediaFieldsHtml(prefix, img, video) {
+    return '<div class="media-fields">' +
+      '<div><label>🖼️ صورة (اختياري)</label><div class="mf-row">' +
+        '<input id="' + prefix + 'Img" class="dw-input" dir="ltr" placeholder="ارفع صورة أو الصق رابط https" value="' + esc(img || '') + '">' +
+        '<label class="dw-btn dw-btn-sec dw-btn-sm mf-up">⬆️ رفع<input type="file" accept="image/*" data-upload-target="' + prefix + 'Img" style="display:none"></label>' +
+      '</div><div id="' + prefix + 'ImgPreview" class="mf-prev">' + mediaThumbHtml(img, '') + '</div></div>' +
+      '<div><label>🎬 فيديو (اختياري)</label>' +
+        '<input id="' + prefix + 'Video" class="dw-input" dir="ltr" placeholder="رابط يوتيوب أو رابط ملف فيديو" value="' + esc(video || '') + '">' +
+        '<div class="mf-prev" style="font-size:12px;color:var(--text-muted)">يوتيوب ويوتيوب شورتس يشتغلون داخل اللعبة مباشرة.</div></div>' +
+    '</div>';
+  }
+
   function renderCategoryPosterSvg(catObj) {
+    if (catObj && safeMediaUrl(catObj.poster)) {
+      return '<img src="' + esc(safeMediaUrl(catObj.poster)) + '" alt="" referrerpolicy="no-referrer" style="width:100%;height:100%;object-fit:cover;display:block">';
+    }
     try {
       if (window.M8P && typeof window.M8P.render === 'function') {
         var rawSlug = (catObj.slug || catObj.id || '').replace(/^cat_/, '');
@@ -1688,6 +1772,7 @@ footer a { text-decoration: none; }
           CACHE.payments = d.payments || [];
           CACHE.game_content = d.game_content || [];
           CACHE.catQuestionsOverrides = d.catQuestionsOverrides || {};
+          CACHE.cat_suggestions = d.cat_suggestions || [];
         }
         return d;
       });
@@ -1747,6 +1832,17 @@ footer a { text-decoration: none; }
       fetchEightCategory: function (catSlug) {
         return api('GET', '/api/admin/eight-category/' + encodeURIComponent(catSlug));
       },
+      // Image already compressed in the browser; the server stores it and returns its /media/ address.
+      uploadMedia: function (blob) {
+        var headers = { accept: 'application/json', 'content-type': blob.type };
+        if (ME && ME.user && ME.user.csrfToken) headers['x-dw-csrf'] = ME.user.csrfToken;
+        return fetch('/api/media', { method: 'POST', headers: headers, credentials: 'same-origin', body: blob })
+          .then(function (r) { return r.json().catch(function () { return { ok: false, error: 'تعذر رفع الصورة.' }; }); })
+          .catch(function () { return { ok: false, error: 'تعذر الاتصال بالخادم.' }; });
+      },
+      suggestCategory: function (payload) {
+        return api('POST', '/api/suggestions/category', payload);
+      },
       submitSuggestion: function (payload) {
         return api('POST', '/api/suggestions', payload).then(function (d) {
           if (d.ok && d.suggestions) CACHE.suggestions = d.suggestions;
@@ -1761,14 +1857,6 @@ footer a { text-decoration: none; }
   // Admin action helper: sends the action, then runs onOk with the server reply.
   function adminCall(action, payload, onOk) {
     payload = payload || {};
-    var db = DiwaniyaServerKernel.loadDB();
-    // First edit of a built-in Eight category: send its current questions so the server can start from them.
-    if (/_content$/.test(action) && payload.gameId === 'game_eight' && payload.catSlug &&
-        !(db.catQuestionsOverrides && Array.isArray(db.catQuestionsOverrides[payload.catSlug]))) {
-      payload.baseItems = getEightIslandQuestions(payload.catSlug).map(function (it) {
-        return { uid: it.id, points: it.difficulty_points, q: it.prompt_text, a: it.answer_text, hint: it.extra_info || '' };
-      });
-    }
     DiwaniyaServerKernel.executeAdminAction(action, payload).then(function (res) {
       if (!res.ok) { showToast(res.error || 'تعذر تنفيذ العملية.'); return; }
       onOk(res);
@@ -2152,6 +2240,51 @@ footer a { text-decoration: none; }
     return html;
   }
 
+  function newCatSugDraft() {
+    return { name: '', icon: '💡', group: '', desc: '', qs: [200, 200, 400, 400, 600, 600].map(function (p) { return { points: p, q: '', a: '', hint: '', img: '', video: '' }; }) };
+  }
+  function renderCatSuggestBox() {
+    if (!STATE.catSugOpen) {
+      return '<section class="cta-band" style="margin-bottom:4px">' +
+        '<div><h3>💡 عندك فكرة فئة؟</h3><p>اكتب أسئلتك بنفسك — مع صور أو فيديوهات — وإذا اعتمدناها تنضاف للعبة باسمك.</p></div>' +
+        '<button class="dw-btn dw-btn-gold" data-act="csug-open">اقترح فئة</button>' +
+      '</section>';
+    }
+    if (!STATE.user) {
+      return '<section class="dw-card" style="text-align:center"><h3 style="margin:0">💡 اقترح فئة</h3><p style="color:var(--text-muted)">سجّل دخول بإيميلك عشان تقدر تقترح فئة وترفع صور.</p>' +
+        '<div><button class="dw-btn dw-btn-gold" data-act="open-auth">تسجيل الدخول</button> <button class="dw-btn dw-btn-sec" data-act="csug-close">إلغاء</button></div></section>';
+    }
+    var d = STATE.catSug || (STATE.catSug = newCatSugDraft());
+    var lvl = { 200: '٢٠٠ سهل', 400: '٤٠٠ متوسط', 600: '٦٠٠ صعب' };
+    return '<section class="dw-card">' +
+      '<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">' +
+        '<div><h3 style="margin:0;font-size:22px">💡 اقترح فئة جديدة</h3><p style="margin:4px 0 0;color:var(--text-muted);font-size:13.5px">على الأقل ٦ أسئلة: ٢ سهلة، ٢ متوسطة، ٢ صعبة. تقدر تحط صورة أو فيديو مع أي سؤال.</p></div>' +
+        '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="csug-close">✕ إغلاق</button>' +
+      '</div>' +
+      '<div class="dw-grid-4">' +
+        '<div><label style="font-size:12px;color:var(--text-muted)">اسم الفئة *</label><input class="dw-input" data-csug="name" maxlength="60" placeholder="مثال: مسلسلات خليجية قديمة" value="' + esc(d.name) + '"></div>' +
+        '<div><label style="font-size:12px;color:var(--text-muted)">الأيقونة</label><input class="dw-input" data-csug="icon" maxlength="4" value="' + esc(d.icon) + '"></div>' +
+        '<div><label style="font-size:12px;color:var(--text-muted)">المجال</label><input class="dw-input" data-csug="group" maxlength="40" placeholder="مثال: فن، رياضة، تاريخ" value="' + esc(d.group) + '"></div>' +
+        '<div><label style="font-size:12px;color:var(--text-muted)">وصف قصير</label><input class="dw-input" data-csug="desc" maxlength="300" value="' + esc(d.desc) + '"></div>' +
+      '</div>' +
+      d.qs.map(function (q, i) {
+        return '<div class="csug-q">' +
+          '<div><label style="font-size:12px;color:var(--text-muted)">سؤال ' + arNum(i + 1) + '</label><select class="dw-select" data-csug="points" data-qi="' + i + '">' +
+            [200, 400, 600].map(function (p) { return '<option value="' + p + '"' + (q.points === p ? ' selected' : '') + '>' + lvl[p] + '</option>'; }).join('') +
+          '</select></div>' +
+          '<div><label style="font-size:12px;color:var(--text-muted)">السؤال *</label><input class="dw-input" data-csug="q" data-qi="' + i + '" maxlength="300" value="' + esc(q.q) + '"></div>' +
+          '<div><label style="font-size:12px;color:var(--text-muted)">الإجابة *</label><input class="dw-input" data-csug="a" data-qi="' + i + '" maxlength="120" value="' + esc(q.a) + '"></div>' +
+          '<div class="full">' + mediaFieldsHtml('csq' + i, q.img, q.video).replace(/id="csq(\d+)(Img|Video)"/g, function (m0, n, k) { return m0 + ' data-csug="' + (k === 'Img' ? 'img' : 'video') + '" data-qi="' + n + '"'; }) + '</div>' +
+          (d.qs.length > 6 ? '<div class="full"><button class="dw-btn dw-btn-sec dw-btn-sm" data-act="csug-del-q" data-qi="' + i + '">🗑️ احذف السؤال</button></div>' : '') +
+        '</div>';
+      }).join('') +
+      '<div style="display:flex;gap:8px;flex-wrap:wrap">' +
+        (d.qs.length < 30 ? '<button class="dw-btn dw-btn-sec" data-act="csug-add-q">+ سؤال ثاني</button>' : '') +
+        '<button class="dw-btn dw-btn-gold" data-act="csug-send"' + (STATE.catSugSending ? ' disabled' : '') + '>📨 أرسل الاقتراح</button>' +
+      '</div>' +
+    '</section>';
+  }
+
   function renderCategoriesTab() {
     var visibleCats = STATE.categories.filter(function (c) { return c.is_visible; });
     var groups = ['الكل'];
@@ -2166,7 +2299,7 @@ footer a { text-decoration: none; }
       return matchGrp && matchQ;
     });
 
-    return '<div class="dw-card">' +
+    return renderCatSuggestBox() + '<div class="dw-card">' +
       '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">' +
         '<div><h3 style="margin:0;font-size:24px;font-weight:900">فئات ديوانية الثمانية (' + arNum(visibleCats.length) + ' فئة)</h3>' +
         '<p style="margin:4px 0 0;color:var(--text-muted);font-size:14px">كل فئة فيها ١٨ سؤال على ٣ مستويات. اختاروا ٨ فئات داخل اللعبة وابدؤوا التحدي.</p></div>' +
@@ -2355,7 +2488,10 @@ footer a { text-decoration: none; }
             difficulty_points: Number(q.points || 200),
             prompt_text: q.q || '',
             answer_text: q.a || '',
-            extra_info: q.hint || ''
+            extra_info: q.hint || q.info || '',
+            image_url: q.img || '',
+            video_url: q.video || '',
+            has_builtin_media: !!(q.photo || q.rebus || q.scenePhoto || q.fantasy)
           };
         });
       }
@@ -2381,6 +2517,7 @@ footer a { text-decoration: none; }
           '<button class="dw-tab-btn ' + (st === 'games' ? 'active' : '') + '" data-adm-tab="games">🎮 إدارة الألعاب (' + arNum(STATE.games.length) + ')</button>' +
           '<button class="dw-tab-btn ' + (st === 'editor' ? 'active' : '') + '" data-adm-tab="editor">✏️ محرر الأسئلة والفئات </button>' +
           '<button class="dw-tab-btn ' + (st === 'categories' ? 'active' : '') + '" data-adm-tab="categories">🗂️ إدارة الفئات (' + arNum(STATE.categories.length) + ')</button>' +
+          '<button class="dw-tab-btn ' + (st === 'catsug' ? 'active' : '') + '" data-adm-tab="catsug">💡 اقتراحات الفئات' + (function () { var n = (DiwaniyaServerKernel.loadDB().cat_suggestions || []).filter(function (x) { return x.status === 'pending'; }).length; return n ? ' (' + arNum(n) + ')' : ''; })() + '</button>' +
           '<button class="dw-tab-btn ' + (st === 'payments' ? 'active' : '') + '" data-adm-tab="payments">💳 المدفوعات</button>' +
           '<button class="dw-tab-btn ' + (st === 'logs' ? 'active' : '') + '" data-adm-tab="logs">🛡️ سجل الأمان</button>' +
         '</div>' +
@@ -2562,6 +2699,7 @@ footer a { text-decoration: none; }
             '<div><label style="font-size:12px;color:var(--text-muted)">الإجابة الصحيحة المؤكدة</label><input id="edAnswer" class="dw-input" placeholder="اكتب الإجابة الصحيحة..." value="' + esc(editingItem ? editingItem.answer_text : '') + '"></div>' +
             '<div><label style="font-size:12px;color:var(--text-muted)">تلميح أو معلومة إضافية</label><input id="edInfo" class="dw-input" placeholder="تلميح أو معلومة إضافية..." value="' + esc(editingItem ? editingItem.extra_info : '') + '"></div>' +
           '</div>' +
+          (STATE.editorGameId === 'game_eight' ? mediaFieldsHtml('ed', editingItem ? editingItem.image_url : '', editingItem ? editingItem.video_url : '') : '') +
           '<div style="display:flex;gap:8px;flex-wrap:wrap">' +
             (editingItem
               ? '<button class="dw-btn dw-btn-teal dw-btn-sm" data-act="adm-save-edit-content">💾 حفظ تعديل السؤال المختار</button>' +
@@ -2572,7 +2710,7 @@ footer a { text-decoration: none; }
             '<b>قائمة الأسئلة المحفوظة حالياً (' + arNum(items.length) + ' من أصل ' + arNum(allEditorItems.length) + ' سؤال حقيقي محفوظ)</b>' +
             '<input id="edSearchInp" class="dw-input" style="max-width:280px" placeholder="ابحث في الأسئلة أو الإجابات..." value="' + esc(STATE.editorSearch) + '">' +
           '</div>' +
-          '<div class="dw-table-wrap" style="max-height:440px;overflow-y:auto"><table class="dw-table"><thead><tr><th>#</th><th>النقاط</th><th>السؤال / التحدي</th><th>الإجابة الصحيحة</th><th>التلميح / المعلومة</th><th>إجراءات</th></tr></thead><tbody>' +
+          '<div class="dw-table-wrap" style="max-height:440px;overflow-y:auto"><table class="dw-table"><thead><tr><th>#</th><th>النقاط</th><th>السؤال / التحدي</th><th>الإجابة الصحيحة</th><th>التلميح / المعلومة</th><th>صورة / فيديو</th><th>إجراءات</th></tr></thead><tbody>' +
             items.slice(0, 120).map(function (it, idx) {
               return '<tr>' +
                 '<td>' + arNum(idx + 1) + '</td>' +
@@ -2580,6 +2718,7 @@ footer a { text-decoration: none; }
                 '<td>' + esc(it.prompt_text) + '</td>' +
                 '<td style="color:var(--teal);font-weight:800">' + esc(it.answer_text) + '</td>' +
                 '<td style="color:var(--text-muted);font-size:12.5px">' + esc(it.extra_info || '—') + '</td>' +
+                '<td>' + (mediaThumbHtml(it.image_url, it.video_url) || (it.has_builtin_media ? '<span class="dw-chip">🖼️ صورة أصلية</span>' : '—')) + '</td>' +
                 '<td style="display:flex;gap:6px">' +
                   '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="adm-start-edit-content" data-id="' + esc(it.id) + '">✏️ تعديل</button>' +
                   '<button class="dw-btn dw-btn-danger dw-btn-sm" data-act="adm-del-content" data-id="' + esc(it.id) + '">حذف</button>' +
@@ -2587,6 +2726,34 @@ footer a { text-decoration: none; }
               '</tr>';
             }).join('') +
           '</tbody></table></div>' +
+        '</div>';
+    }
+
+    if (st === 'catsug') {
+      var sugs = DiwaniyaServerKernel.loadDB().cat_suggestions || [];
+      var stLabel = { pending: '<span class="dw-chip gold">⏳ تنتظر المراجعة</span>', approved: '<span class="dw-chip teal">✅ معتمدة</span>', rejected: '<span class="dw-chip">❌ مرفوضة</span>' };
+      return nav +
+        '<div class="dw-card">' +
+          '<h4 style="margin:0;font-size:19px">💡 فئات اقترحها اللاعبين</h4>' +
+          '<p style="margin:0;color:var(--text-muted);font-size:13.5px">راجع الأسئلة والصور. لو اعتمدت الفئة تنضاف لديوانية الثمانية فوراً، وتقدر تعدّل أسئلتها بعدين من محرر الأسئلة.</p>' +
+          (sugs.length ? sugs.map(function (sg) {
+            return '<details class="dw-card" style="padding:14px"' + (sg.status === 'pending' ? ' open' : '') + '>' +
+              '<summary style="cursor:pointer;display:flex;gap:10px;align-items:center;flex-wrap:wrap;list-style:none">' +
+                '<b style="font-size:16px">' + esc(sg.icon || '💡') + ' ' + esc(sg.name) + '</b>' + (stLabel[sg.status] || '') +
+                '<span style="color:var(--text-muted);font-size:12.5px">من ' + esc(sg.user_name) + ' (' + esc(sg.user_email) + ') · ' + arNum(sg.questions.length) + ' سؤال · ' + esc(String(sg.created_at || '').slice(0, 10)) + '</span>' +
+              '</summary>' +
+              (sg.description ? '<p style="margin:10px 0 0;color:#c9d2e6">' + esc(sg.description) + '</p>' : '') +
+              '<div class="dw-table-wrap" style="margin-top:10px"><table class="dw-table"><thead><tr><th>النقاط</th><th>السؤال</th><th>الإجابة</th><th>صورة / فيديو</th></tr></thead><tbody>' +
+                sg.questions.map(function (q) {
+                  return '<tr><td><span class="dw-chip gold">' + arNum(q.points) + '</span></td><td>' + esc(q.q) + (q.hint ? '<div style="font-size:12px;color:var(--text-muted)">💡 ' + esc(q.hint) + '</div>' : '') + '</td><td style="color:var(--teal);font-weight:800">' + esc(q.a) + '</td><td>' + (mediaThumbHtml(q.img, q.video) || '—') + '</td></tr>';
+                }).join('') +
+              '</tbody></table></div>' +
+              (sg.status === 'pending'
+                ? '<div style="display:flex;gap:8px;margin-top:10px"><button class="dw-btn dw-btn-teal dw-btn-sm" data-act="adm-csug" data-op="approve" data-id="' + esc(sg.id) + '">✅ اعتمدها وأضفها للعبة</button>' +
+                  '<button class="dw-btn dw-btn-danger dw-btn-sm" data-act="adm-csug" data-op="reject" data-id="' + esc(sg.id) + '">رفض</button></div>'
+                : '') +
+            '</details>';
+          }).join('') : '<p style="color:var(--text-muted)">ما فيه اقتراحات للحين.</p>') +
         '</div>';
     }
 
@@ -2600,6 +2767,13 @@ footer a { text-decoration: none; }
             '<div><label style="font-size:12px;color:var(--text-muted)">الأيقونة / الرمز</label><input id="catNewIcon" class="dw-input" value="⚽"></div>' +
             '<div><label style="font-size:12px;color:var(--text-muted)">الوصف</label><input id="catNewDesc" class="dw-input" placeholder="وصف مختصر للفئة..."></div>' +
           '</div>' +
+          '<div class="media-fields" style="grid-template-columns:1fr">' +
+            '<div><label>🖼️ صورة غلاف الفئة (اختياري)</label><div class="mf-row">' +
+              '<input id="catNewPoster" class="dw-input" dir="ltr" placeholder="ارفع صورة أو الصق رابط https">' +
+              '<label class="dw-btn dw-btn-sec dw-btn-sm mf-up">⬆️ رفع<input type="file" accept="image/*" data-upload-target="catNewPoster" style="display:none"></label>' +
+            '</div><div id="catNewPosterPreview" class="mf-prev"></div></div>' +
+          '</div>' +
+          '<p style="margin:0;color:var(--text-muted);font-size:13px">بعد ما تضيف الفئة بتنقلك لمحرر الأسئلة. الفئة تطلع في اللعبة لما يصير فيها ٦ أسئلة على الأقل (٢ سهلة، ٢ متوسطة، ٢ صعبة).</p>' +
           '<div><button class="dw-btn dw-btn-gold dw-btn-sm" data-act="adm-add-cat">+ إضافة الفئة وحفظها</button></div>' +
           '<div class="dw-table-wrap" style="max-height:440px;overflow-y:auto"><table class="dw-table"><thead><tr><th>#</th><th>الفئة</th><th>المجموعة</th><th>عدد الأسئلة الفعلي</th><th>الحالة</th><th>إجراءات</th></tr></thead><tbody>' +
             STATE.categories.map(function (c, i) {
@@ -3170,6 +3344,30 @@ footer a { text-decoration: none; }
     } else if (act === 'show-all-games') {
       STATE.showAllGames = true;
       render();
+    } else if (act === 'csug-open') {
+      STATE.catSugOpen = true;
+      render();
+    } else if (act === 'csug-close') {
+      STATE.catSugOpen = false;
+      render();
+    } else if (act === 'csug-add-q') {
+      if (STATE.catSug && STATE.catSug.qs.length < 30) STATE.catSug.qs.push({ points: 400, q: '', a: '', hint: '', img: '', video: '' });
+      render();
+    } else if (act === 'csug-del-q') {
+      if (STATE.catSug && STATE.catSug.qs.length > 6) STATE.catSug.qs.splice(Number(actBtn.getAttribute('data-qi')), 1);
+      render();
+    } else if (act === 'csug-send') {
+      var dsg = STATE.catSug;
+      if (!dsg || !dsg.name.trim()) { showToast('اكتب اسم الفئة.'); return; }
+      var filled = dsg.qs.filter(function (q) { return q.q.trim() && q.a.trim(); });
+      if (filled.length < 6) { showToast('اكتب ٦ أسئلة على الأقل مع إجاباتها.'); return; }
+      STATE.catSugSending = true; render();
+      DiwaniyaServerKernel.suggestCategory({ name: dsg.name, icon: dsg.icon, group: dsg.group, description: dsg.desc, questions: filled }).then(function (r) {
+        STATE.catSugSending = false;
+        if (r.ok) { STATE.catSug = null; STATE.catSugOpen = false; }
+        render();
+        showToast(r.ok ? r.message : (r.error || 'تعذر إرسال الاقتراح.'));
+      });
     } else if (act === 'scroll-games') {
       var gt = document.getElementById('dwGamesTop');
       if (gt) gt.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -3452,7 +3650,9 @@ footer a { text-decoration: none; }
         points: pts,
         promptText: pr,
         answerText: an,
-        extraInfo: inf
+        extraInfo: inf,
+        imageUrl: ((document.getElementById('edImg') || {}).value || '').trim(),
+        videoUrl: ((document.getElementById('edVideo') || {}).value || '').trim()
       }, function (acRes) {
         render();
         showToast(acRes.message);
@@ -3476,7 +3676,9 @@ footer a { text-decoration: none; }
         points: pts2,
         promptText: pr2,
         answerText: an2,
-        extraInfo: inf2
+        extraInfo: inf2,
+        imageUrl: document.getElementById('edImg') ? document.getElementById('edImg').value.trim() : undefined,
+        videoUrl: document.getElementById('edVideo') ? document.getElementById('edVideo').value.trim() : undefined
       }, function (ecRes) {
         STATE.editingItemId = null;
         render();
@@ -3499,13 +3701,27 @@ footer a { text-decoration: none; }
       a.download = 'diwaniya_plus_' + STATE.editorGameId + '_' + (STATE.editorCatSlug || 'content') + '.json';
       a.click();
       showToast('تم تصدير ملف المحتوى (' + currentItems.length + ' عنصر) بصيغة JSON.');
+    } else if (act === 'adm-csug') {
+      var csOp = actBtn.getAttribute('data-op');
+      if (csOp === 'reject' && !window.confirm('ترفض هالاقتراح؟')) return;
+      adminCall(csOp === 'approve' ? 'approve_cat_suggestion' : 'reject_cat_suggestion', { suggestionId: actBtn.getAttribute('data-id') }, function (csRes) {
+        render();
+        showToast(csRes.message);
+      });
     } else if (act === 'adm-add-cat') {
       adminCall('add_cat', {
         name: (document.getElementById('catNewName') || {}).value,
         group: (document.getElementById('catNewGroup') || {}).value,
         icon: (document.getElementById('catNewIcon') || {}).value,
-        description: (document.getElementById('catNewDesc') || {}).value
+        description: (document.getElementById('catNewDesc') || {}).value,
+        posterUrl: ((document.getElementById('catNewPoster') || {}).value || '').trim()
       }, function (adCatRes) {
+        if (adCatRes.slug) {
+          STATE.adminSubTab = 'editor';
+          STATE.editorGameId = 'game_eight';
+          STATE.editorCatSlug = adCatRes.slug;
+          STATE.editingItemId = null;
+        }
         render();
         showToast(adCatRes.message);
       });
@@ -3545,9 +3761,21 @@ footer a { text-decoration: none; }
     if (e.target && e.target.classList && e.target.classList.contains('dw-modal-backdrop')) closeAllModals();
   });
 
+  // Keeps the category-suggestion draft in memory so re-renders never lose what was typed.
+  function syncCatSugField(t) {
+    var f = t.getAttribute('data-csug');
+    if (!f || !STATE.catSug) return;
+    var qi = t.getAttribute('data-qi');
+    if (qi === null) STATE.catSug[f] = t.value;
+    else if (STATE.catSug.qs[Number(qi)]) STATE.catSug.qs[Number(qi)][f] = f === 'points' ? Number(t.value) : t.value;
+  }
+  document.addEventListener('input', function (e) { if (e.target && e.target.hasAttribute && e.target.hasAttribute('data-csug')) syncCatSugField(e.target); });
+
   document.addEventListener('change', function (e) {
     var t = e.target;
     if (!t) return;
+    if (t.hasAttribute && t.hasAttribute('data-csug')) { syncCatSugField(t); return; }
+    if (t.hasAttribute && t.hasAttribute('data-upload-target')) { handleImagePick(t); return; }
     if (t.id === 'edGameSelect') {
       STATE.editorGameId = t.value;
       STATE.editingItemId = null;

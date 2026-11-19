@@ -155,9 +155,16 @@ export async function servePlay(env, request, session, slug) {
   if (resolved.retitle) html = html.replace(/ديوانية بلس — [^<]+/g, 'ديوانية بلس — ' + game.title.replace(/[<>&]/g, ''));
 
   // Owner-edited content the games read at start-up (guests of the Eight buzzer never get questions).
-  const [overrides, gameContent] = await Promise.all([getDoc(env, 'catQuestionsOverrides'), getDoc(env, 'game_content')]);
+  const [overrides, gameContent, categories] = await Promise.all([getDoc(env, 'catQuestionsOverrides'), getDoc(env, 'game_content'), getDoc(env, 'categories')]);
   const content = {
     catQuestionsOverrides: slug === 'eight' && guest ? {} : overrides,
+    // Categories added from the admin panel (or approved suggestions), and built-ins the owner hid.
+    customCats: slug !== 'eight' ? [] : categories.filter((c) => String(c.slug).startsWith('custom_') && c.is_visible && Array.isArray(overrides[c.slug]) && overrides[c.slug].length >= 6).map((c) => ({
+      id: c.slug, name: c.name, icon: c.icon || '🎯', group: c.sub_group || 'فئات الديوانية', tag: c.sub_group || 'فئات الديوانية',
+      desc: c.description || '', questionCount: overrides[c.slug].length, qCount: overrides[c.slug].length,
+      ...(c.poster ? { customPosterDataUrl: c.poster } : {})
+    })),
+    hiddenCats: slug !== 'eight' ? [] : categories.filter((c) => !c.is_visible).map((c) => c.slug),
     qaftah: gameContent.filter((x) => x.game_id === 'game_qaftah' && x.is_active !== 0)
   };
   if (ROOM_GAMES[slug]) html = prepareRoomGame(html, slug, url, { token, demo: !guest && url.searchParams.get('demo') === '1' });
