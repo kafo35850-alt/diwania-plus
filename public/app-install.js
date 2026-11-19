@@ -72,7 +72,7 @@
   }
 
   function guideBody(reward) {
-    var head = '<p class="ai-lead">ثبّته مرة وحدة، وافتحه بعدها من أيقونته على شاشتك: بدون شريط المتصفح، وبملء الشاشة' + (reward ? '، و<b>تاخذ كود خصم ' + ar(reward) + ' ريال</b> على أي باقة 🎁' : '') + '.</p>';
+    var head = '<p class="ai-lead">ثبّته مرة وحدة، وافتحه بعدها من أيقونته على شاشتك: بدون شريط المتصفح، وبملء الشاشة' + (reward ? '، و<b>تاخذ كود خصم</b> على أي باقة 🎁' : '') + '.</p>';
     if (standalone()) return head + '<div class="ai-done">✅ أنت فاتح ديوانية بلس من التطبيق المثبّت.</div>';
     if (isInAppBrowser) return head + '<div class="ai-warn">⚠️ أنت فاتح الموقع من داخل تطبيق ثاني (مثل الواتساب أو الإنستقرام). اضغط «فتح في المتصفح» (Safari أو Chrome) وبعدين ثبّته من هناك.</div>';
     if (isIOS) {
@@ -102,7 +102,7 @@
     var h = host('dwAppReward');
     var amount = ar((info.amount_halalas || 200) / 100);
     h.innerHTML = '<div class="dw-modal ai-modal ai-reward" role="dialog" aria-modal="true"><div class="ai-confetti" aria-hidden="true">🎉</div>' +
-      '<h3>هلا فيك في تطبيق ديوانية بلس!</h3><p>شكراً إنك ثبّتنا 💛 هذا كود خصم <b>' + amount + ' ريال</b> على أي باقة أقيام، لمرة وحدة:</p>' +
+      '<h3>هلا فيك في تطبيق ديوانية بلس!</h3><p>شكراً إنك ثبّتنا 💛 هذا <b>كود خصم</b> على أي باقة أقيام، لمرة وحدة:</p>' +
       '<div class="ai-code"><span dir="ltr">' + esc(info.code) + '</span><button class="dw-btn dw-btn-gold dw-btn-sm" data-ai="copy" data-code="' + esc(info.code) + '">📋 نسخ الكود</button></div>' +
       '<p class="ai-small">اكتبه في صفحة «الباقات» قبل الدفع، والخصم ينحسب تلقائياً.</p>' +
       '<div class="ai-row"><button class="dw-btn dw-btn-sec" data-ai="close-reward">لاحقاً</button><button class="dw-btn dw-btn-gold" data-ai="use-code" data-code="' + esc(info.code) + '">💎 روح للباقات</button></div></div>';
