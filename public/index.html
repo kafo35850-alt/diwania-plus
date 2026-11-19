@@ -2640,7 +2640,11 @@ footer a { text-decoration: none; }
             '<div><label style="font-size:12px;color:var(--text-muted)">اسم اللعبة</label><input id="gmTitle" class="dw-input" placeholder="مثال: حرامي الفريق"></div>' +
             '<div><label style="font-size:12px;color:var(--text-muted)">المعرف النصي (Slug)</label><input id="gmSlug" class="dw-input" placeholder="team_thief"></div>' +
             '<div><label style="font-size:12px;color:var(--text-muted)">محرك اللعبة الأساسي (Engine)</label><select id="gmEngineSel" class="dw-select">' +
-              STATE.games.filter(function (g) { return NOT_CLONABLE.indexOf(g.slug) === -1 && NOT_CLONABLE.indexOf(g.engine_type) === -1; }).map(function (g) { return '<option value="' + esc(g.engine_type && g.engine_type !== g.slug ? g.engine_type : g.slug) + '">' + esc(g.title) + '</option>'; }).join('') +
+              STATE.games.filter(function (g) { return NOT_CLONABLE.indexOf(g.slug) === -1 && NOT_CLONABLE.indexOf(g.engine_type) === -1; }).map(function (g) {
+                // A copied game points at the original game's file; built-in games are their own file.
+                var file = STATE.games.some(function (x) { return x.slug === g.engine_type; }) ? g.engine_type : g.slug;
+                return '<option value="' + esc(file) + '">' + esc(g.title) + '</option>';
+              }).filter(function (opt, i, all) { return all.indexOf(opt) === i; }).join('') +
             '</select></div>' +
             '<div><label style="font-size:12px;color:var(--text-muted)">تكلفة التشغيل (أقيام)</label><input id="gmCost" type="number" class="dw-input" value="1"></div>' +
             '<div><label style="font-size:12px;color:var(--text-muted)">أقل عدد لاعبين</label><input id="gmMinP" type="number" class="dw-input" value="2"></div>' +
