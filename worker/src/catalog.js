@@ -1,3 +1,4 @@
+import { mediaLimits } from './media.js';
 // Admin-editable catalog documents. Anything the owner has not edited yet
 // falls back to the defaults bundled in seed.json.
 import SEED from './seed.json';
@@ -43,5 +44,5 @@ export async function getCatalog(env) {
     getDoc(env, 'packages'),
     getDoc(env, 'categories'),
   ]);
-  return { games, packages, categories, gatewayConnected: gatewayConfigured(env) };
+  return { games, packages, categories, gatewayConnected: gatewayConfigured(env), media: mediaLimits(env) };
 }

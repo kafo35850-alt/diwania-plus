@@ -15,11 +15,24 @@ const TYPES = {
   'audio/aac': 'audio', 'audio/wav': 'audio', 'audio/x-wav': 'audio', 'audio/wave': 'audio', 'audio/ogg': 'audio', 'audio/webm': 'audio',
   'video/mp4': 'video', 'video/quicktime': 'video', 'video/webm': 'video', 'video/x-m4v': 'video'
 };
-// Size limits per kind: staff (owner/admin) and players.
+// Size limits, the same for everyone. With R2 storage connected (MEDIA_BUCKET) files can be much bigger.
+// The Workers plan accepts uploads up to 100MB per request.
 const LIMITS = {
-  staff: { image: 450 * 1024, audio: 6 * MB, video: 15 * MB },
-  player: { image: 450 * 1024, audio: 3 * MB, video: 0 }
+  d1: { image: 8 * MB, audio: 8 * MB, video: 15 * MB },
+  r2: { image: 95 * MB, audio: 95 * MB, video: 95 * MB }
 };
+const R2_CAP = 9.5 * 1024 * MB;
+export function mediaLimits(env) {
+  const l = LIMITS[env.MEDIA_BUCKET ? 'r2' : 'd1'];
+  return { store: env.MEDIA_BUCKET ? 'r2' : 'd1', imageMb: l.image / MB, audioMb: l.audio / MB, videoMb: l.video / MB };
+}
+// Any image, audio or video format the person's device produces (HEIC, MOV, MKV...). SVG can carry scripts, so it is refused.
+function kindOf(mime) {
+  if (TYPES[mime]) return TYPES[mime];
+  if (!/^[a-z]+\/[a-z0-9.+-]{1,60}$/.test(mime) || /svg|xml|html/.test(mime)) return '';
+  const top = mime.split('/')[0];
+  return top === 'image' || top === 'audio' || top === 'video' ? top : '';
+}
 
 function ascii(b, from, len) { let s = ''; for (let i = from; i < from + len && i < b.length; i++) s += String.fromCharCode(b[i]); return s; }
 // Checks the file's first bytes, so a renamed file can't pass as media.
@@ -40,33 +53,49 @@ function looksLike(bytes, mime) {
   return false;
 }
 
-export async function mediaBytesUsed(env) {
-  const r = await env.DB.prepare('SELECT COALESCE(SUM(size), 0) AS n FROM media').first();
+export async function mediaBytesUsed(env, store = 'd1') {
+  const r = await env.DB.prepare('SELECT COALESCE(SUM(size), 0) AS n FROM media WHERE store = ?').bind(store).first();
   return r ? r.n : 0;
 }
 
 export async function uploadMedia(env, request, session) {
   const isStaff = session.user.role === 'owner' || session.user.role === 'admin';
-  if (!(await underRateLimit(env, 'media_u:' + session.user.id, isStaff ? 600 : 40, 60 * 60 * 1000)) ||
-      !(await underRateLimit(env, 'media_ip:' + clientIp(request), isStaff ? 600 : 60, 60 * 60 * 1000))) {
+  // Only a guard against floods (a script uploading nonstop); normal use never reaches it.
+  if (!(await underRateLimit(env, 'media_u:' + session.user.id, isStaff ? 1000 : 150, 60 * 60 * 1000)) ||
+      !(await underRateLimit(env, 'media_ip:' + clientIp(request), isStaff ? 1000 : 200, 60 * 60 * 1000))) {
     throw new HttpError(429, 'رفعت ملفات كثيرة خلال ساعة. حاول بعد شوي.');
   }
   const mime = String(request.headers.get('content-type') || '').split(';')[0].trim().toLowerCase();
-  const kind = TYPES[mime];
-  if (!kind) throw new HttpError(415, 'نوع الملف غير مدعوم. المسموح: صور (JPG/PNG)، صوت (MP3/M4A)، فيديو (MP4/MOV).');
-  const max = LIMITS[isStaff ? 'staff' : 'player'][kind];
-  if (!max) throw new HttpError(403, 'رفع الفيديو للإدارة بس. تقدر تحط رابط يوتيوب بدلاً منه.');
-  const tooBig = 'الملف كبير. الحد ' + (max >= MB ? Math.round(max / MB) + ' ميقابايت' : Math.round(max / 1024) + ' كيلوبايت') + (kind === 'video' ? '. للمقاطع الطويلة استخدم رابط يوتيوب.' : '.');
-  if (Number(request.headers.get('content-length') || 0) > max) throw new HttpError(413, tooBig);
-  const buf = new Uint8Array(await request.arrayBuffer());
-  if (!buf.length || buf.length > max) throw new HttpError(413, tooBig);
-  if (!looksLike(buf, mime)) throw new HttpError(415, 'الملف تالف أو مو من النوع المكتوب.');
-  if ((await mediaBytesUsed(env)) + buf.length > STORAGE_CAP) {
-    throw new HttpError(507, 'مساحة الوسائط امتلأت. احذف وسائط قديمة أو استخدم روابط يوتيوب.');
-  }
+  const kind = kindOf(mime);
+  if (!kind) throw new HttpError(415, 'الملف لازم يكون صورة أو صوت أو فيديو.');
+  const store = env.MEDIA_BUCKET ? 'r2' : 'd1';
+  const max = LIMITS[store][kind];
+  const tooBig = 'الملف كبير. الحد ' + Math.round(max / MB) + ' ميقابايت' + (kind === 'video' ? '. للمقاطع الطويلة استخدم رابط يوتيوب.' : '.');
+  const declared = Number(request.headers.get('content-length') || 0);
+  if (declared > max) throw new HttpError(413, tooBig);
   const id = randomId('med');
   const iso = nowIso();
-  if (kind === 'image' || buf.length <= CHUNK) {
+
+  if (store === 'r2') {
+    if (!declared) throw new HttpError(411, 'تعذر معرفة حجم الملف. حاول مرة ثانية.');
+    if ((await mediaBytesUsed(env, 'r2')) + declared > R2_CAP) throw new HttpError(507, 'مساحة التخزين امتلأت. احذف وسائط قديمة أو استخدم روابط يوتيوب.');
+    // Streamed straight into R2: big videos never sit in the Worker's memory.
+    const obj = await env.MEDIA_BUCKET.put(id, request.body, { httpMetadata: { contentType: mime } });
+    const size = obj ? obj.size : declared;
+    if (!size || size > max) { await env.MEDIA_BUCKET.delete(id); throw new HttpError(413, tooBig); }
+    await env.DB.prepare("INSERT INTO media (id, user_id, mime, size, data, created_at, chunks, kind, store) VALUES (?, ?, ?, ?, ?, ?, 0, ?, 'r2')")
+      .bind(id, session.user.id, mime, size, new Uint8Array(0), iso, kind).run();
+    return { ok: true, url: '/media/' + id, kind, size };
+  }
+
+  const buf = new Uint8Array(await request.arrayBuffer());
+  if (!buf.length || buf.length > max) throw new HttpError(413, tooBig);
+  // Formats we know get their first bytes checked; others are accepted as the browser labelled them.
+  if (TYPES[mime] && !looksLike(buf, mime)) throw new HttpError(415, 'الملف تالف أو مو من النوع المكتوب.');
+  if ((await mediaBytesUsed(env, 'd1')) + buf.length > STORAGE_CAP) {
+    throw new HttpError(507, 'مساحة الوسائط امتلأت. فعّل تخزين R2 أو استخدم روابط يوتيوب.');
+  }
+  if (buf.length <= CHUNK) {
     await env.DB.prepare('INSERT INTO media (id, user_id, mime, size, data, created_at, chunks, kind) VALUES (?, ?, ?, ?, ?, ?, 0, ?)')
       .bind(id, session.user.id, mime, buf.length, buf, iso, kind).run();
   } else {
@@ -90,8 +119,25 @@ const MEDIA_HEADERS = {
 };
 
 export async function serveMedia(env, request, id) {
-  const row = await env.DB.prepare('SELECT mime, size, chunks, data FROM media WHERE id = ?').bind(id).first();
+  const row = await env.DB.prepare('SELECT mime, size, chunks, store, CASE WHEN chunks = 0 AND store = \'d1\' THEN data END AS data FROM media WHERE id = ?').bind(id).first();
   if (!row) return new Response('Not found', { status: 404 });
+  if (row.store === 'r2') {
+    if (!env.MEDIA_BUCKET) return new Response('Storage not connected', { status: 503 });
+    const obj = await env.MEDIA_BUCKET.get(id, { range: request.headers, onlyIf: request.headers });
+    if (!obj) return new Response('Not found', { status: 404 });
+    const h = { ...MEDIA_HEADERS, 'content-type': row.mime, etag: obj.httpEtag };
+    if (!('body' in obj)) return new Response(null, { status: 304, headers: h });
+    const r = obj.range;
+    if (r && request.headers.get('range')) {
+      const off = r.offset != null ? r.offset : (r.suffix != null ? obj.size - r.suffix : 0);
+      const len = r.length != null ? r.length : (r.suffix != null ? r.suffix : obj.size - off);
+      h['content-range'] = 'bytes ' + off + '-' + (off + len - 1) + '/' + obj.size;
+      h['content-length'] = String(len);
+      return new Response(request.method === 'HEAD' ? null : obj.body, { status: 206, headers: h });
+    }
+    h['content-length'] = String(obj.size);
+    return new Response(request.method === 'HEAD' ? null : obj.body, { status: 200, headers: h });
+  }
   const head = request.method === 'HEAD';
   const size = row.size;
   let start = 0;

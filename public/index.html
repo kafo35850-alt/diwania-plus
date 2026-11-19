@@ -1842,6 +1842,7 @@ footer a { text-decoration: none; }
             if (d[k] !== undefined) CACHE[k] = d[k];
           });
           CACHE.gatewayConnected = !!d.gatewayConnected;
+          if (d.media) CACHE.media = d.media;
         }
         return d;
       });
@@ -2354,8 +2355,9 @@ footer a { text-decoration: none; }
     var m = e[slot];
     var title = slot === 'qm' ? 'وسائط السؤال' : 'وسائط الإجابة';
     var sub = slot === 'qm' ? 'اختياري: صورة أو صوت أو فيديو يطلع مع السؤال.' : 'اختياري: صورة أو صوت أو فيديو يطلع بعد كشف الإجابة.';
-    var accept = e.allowVideo ? 'image/*,audio/*,video/*' : 'image/*,audio/*';
-    var formats = e.allowVideo ? 'PNG، JPG، MP3، MP4' : 'PNG، JPG، MP3 — والفيديو برابط يوتيوب';
+    var accept = 'image/*,audio/*,video/*';
+    var lim = DiwaniyaServerKernel.loadDB().media || { videoMb: 15 };
+    var formats = 'أي صيغة: صور، صوت، فيديو (لين ' + arNum(lim.videoMb) + ' ميقا)';
     var body;
     if (e.busy[slot]) {
       body = '<div class="qe-drop busy"><span class="qe-spin"></span><b>جاري الرفع...</b></div>';
@@ -2364,7 +2366,7 @@ footer a { text-decoration: none; }
         '<div class="qe-filled-bar"><span>' + (MEDIA_LABEL[m.t] || '') + '</span><button class="dw-btn dw-btn-sec dw-btn-sm" data-act="qe-clear" data-slot="' + slot + '">✕ إزالة</button></div></div>';
     } else {
       body = '<label class="qe-drop"><input type="file" accept="' + accept + '" data-qe-file="' + slot + '" hidden>' +
-          '<span class="qe-up">⬆️</span><b>اضغط لرفع صورة أو صوت' + (e.allowVideo ? ' أو فيديو' : '') + '</b><small>' + formats + '</small></label>' +
+          '<span class="qe-up">⬆️</span><b>اضغط لرفع صورة أو صوت أو فيديو</b><small>' + formats + '</small></label>' +
         '<div class="qe-link"><input class="dw-input" dir="ltr" data-qe-link="' + slot + '" placeholder="أو الصق رابط يوتيوب أو رابط ملف"><button class="dw-btn dw-btn-sec dw-btn-sm" data-act="qe-link" data-slot="' + slot + '">إضافة</button></div>' +
         (slot === 'am' && e.qm ? '<p class="qe-note">💡 إذا تركتها فاضية، تطلع وسائط السؤال نفسها مع الإجابة.</p>' : '');
     }
@@ -2396,16 +2398,28 @@ footer a { text-decoration: none; }
     host.classList.add('open');
     var nb = host.querySelector('.qe-body'); if (nb) nb.scrollTop = keepScroll;
   }
+  function guessMimeFromName(name) {
+    var ext = String(name || '').split('.').pop().toLowerCase();
+    var map = { heic: 'image/heic', heif: 'image/heif', jpg: 'image/jpeg', jpeg: 'image/jpeg', png: 'image/png', webp: 'image/webp', gif: 'image/gif', avif: 'image/avif',
+      mp3: 'audio/mpeg', m4a: 'audio/mp4', aac: 'audio/aac', wav: 'audio/wav', ogg: 'audio/ogg', opus: 'audio/ogg', amr: 'audio/amr', flac: 'audio/flac',
+      mp4: 'video/mp4', mov: 'video/quicktime', m4v: 'video/x-m4v', webm: 'video/webm', mkv: 'video/x-matroska', avi: 'video/x-msvideo', '3gp': 'video/3gpp', wmv: 'video/x-ms-wmv' };
+    return map[ext] || '';
+  }
   function qeUpload(slot, file) {
     var e = STATE.qEditor;
     if (!e || !file) return;
-    var kind = /^image\//.test(file.type) ? 'image' : /^audio\//.test(file.type) ? 'audio' : /^video\//.test(file.type) ? 'video' : '';
+    var ftype = file.type || guessMimeFromName(file.name);
+    if (ftype !== file.type) file = new File([file], file.name, { type: ftype });
+    var kind = /^image\//.test(ftype) ? 'image' : /^audio\//.test(ftype) ? 'audio' : /^video\//.test(ftype) ? 'video' : '';
     if (!kind) { showToast('نوع الملف غير مدعوم.'); return; }
-    if (kind === 'video' && !e.allowVideo) { showToast('رفع الفيديو للإدارة بس. حط رابط يوتيوب بدلاً منه.'); return; }
-    var maxMb = kind === 'audio' ? (e.allowVideo ? 6 : 3) : kind === 'video' ? 15 : 20;
-    if (file.size > maxMb * 1024 * 1024) { showToast('الملف كبير. الحد ' + arNum(maxMb) + ' ميقابايت' + (kind === 'video' ? '. للمقاطع الطويلة حط رابط يوتيوب.' : '.')); return; }
+    var lim = DiwaniyaServerKernel.loadDB().media || { imageMb: 8, audioMb: 8, videoMb: 15 };
+    var maxMb = kind === 'audio' ? lim.audioMb : kind === 'video' ? lim.videoMb : Math.max(lim.imageMb, 20);
+    if (file.size > maxMb * 1024 * 1024) { showToast('الملف كبير. الحد ' + arNum(maxMb) + ' ميقابايت' + (kind === 'video' ? '. للمقاطع الأطول حط رابط يوتيوب.' : '.')); return; }
     e.busy[slot] = true; renderQEditorModal();
-    var ready = kind === 'image' && file.type !== 'image/gif' ? compressImageFile(file) : Promise.resolve(file);
+    // Photos are shrunk for fast loading; a format the browser can't open (e.g. HEIC on some devices) is sent as it is.
+    var ready = kind === 'image' && file.type !== 'image/gif'
+      ? compressImageFile(file).catch(function () { if (file.size > lim.imageMb * 1024 * 1024) throw new Error('الصورة كبيرة. الحد ' + arNum(lim.imageMb) + ' ميقابايت.'); return file; })
+      : Promise.resolve(file);
     ready.then(function (blob) { return DiwaniyaServerKernel.uploadMedia(blob); }).then(function (d) {
       if (STATE.qEditor !== e) return;
       e.busy[slot] = false;
@@ -2477,7 +2491,7 @@ footer a { text-decoration: none; }
     var d = STATE.catSug || (STATE.catSug = newCatSugDraft());
     return '<section class="dw-card">' +
       '<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">' +
-        '<div><h3 style="margin:0;font-size:22px">💡 اقترح فئة جديدة</h3><p style="margin:4px 0 0;color:var(--text-muted);font-size:13.5px">اكتب ٦ أسئلة على الأقل: ٢ سهلة، ٢ متوسطة، ٢ صعبة. وتقدر تحط صورة أو صوت مع السؤال أو الإجابة.</p></div>' +
+        '<div><h3 style="margin:0;font-size:22px">💡 اقترح فئة جديدة</h3><p style="margin:4px 0 0;color:var(--text-muted);font-size:13.5px">اكتب ٦ أسئلة على الأقل: ٢ سهلة، ٢ متوسطة، ٢ صعبة. وتقدر تحط صورة أو صوت أو فيديو مع السؤال أو الإجابة.</p></div>' +
         '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="csug-close">✕ إغلاق</button>' +
       '</div>' +
       '<div class="dw-grid-4">' +
@@ -3575,11 +3589,11 @@ footer a { text-decoration: none; }
     } else if (act === 'csug-new-q') {
       var cnt = { 200: 0, 400: 0, 600: 0 };
       (STATE.catSug ? STATE.catSug.qs : []).forEach(function (x) { cnt[x.points >= 600 ? 600 : x.points >= 400 ? 400 : 200]++; });
-      openQEditor({ mode: 'suggest', allowVideo: false, points: cnt[200] < 2 ? 200 : cnt[400] < 2 ? 400 : cnt[600] < 2 ? 600 : 400 });
+      openQEditor({ mode: 'suggest', allowVideo: true, points: cnt[200] < 2 ? 200 : cnt[400] < 2 ? 400 : cnt[600] < 2 ? 600 : 400 });
     } else if (act === 'csug-edit-q') {
       var cqi = Number(actBtn.getAttribute('data-qi'));
       var cq = STATE.catSug && STATE.catSug.qs[cqi];
-      if (cq) openQEditor({ mode: 'suggest', index: cqi, allowVideo: false, points: cq.points, q: cq.q, a: cq.a, hint: cq.hint, qm: cq.qm, am: cq.am });
+      if (cq) openQEditor({ mode: 'suggest', index: cqi, allowVideo: true, points: cq.points, q: cq.q, a: cq.a, hint: cq.hint, qm: cq.qm, am: cq.am });
     } else if (act === 'csug-del-q') {
       if (STATE.catSug) STATE.catSug.qs.splice(Number(actBtn.getAttribute('data-qi')), 1);
       render();
