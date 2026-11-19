@@ -16,6 +16,16 @@ export async function getDoc(env, key) {
       const slugs = new Set(stored.map((g) => g.slug));
       for (const g of SEED.games) if (!slugs.has(g.slug)) stored.push(structuredClone(g));
     }
+    // Ready-made categories shipped later appear even if the owner already edited the category list…
+    if (key === 'categories' && Array.isArray(stored)) {
+      const slugs = new Set(stored.map((c) => c.slug));
+      const fresh = SEED.categories.filter((c) => !slugs.has(c.slug)).map((c) => structuredClone(c));
+      if (fresh.length) stored.unshift(...fresh);
+    }
+    // …and so do their questions.
+    if (key === 'catQuestionsOverrides' && stored && typeof stored === 'object') {
+      for (const [slug, list] of Object.entries(SEED.catQuestionsOverrides || {})) if (!(slug in stored)) stored[slug] = structuredClone(list);
+    }
     return stored;
   }
   return structuredClone(SEED[key]);

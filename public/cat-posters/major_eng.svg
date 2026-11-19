@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice">
+<defs>
+<linearGradient id="gi" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0f172a"/><stop offset="1" stop-color="#1d4ed8"/></linearGradient>
+<radialGradient id="ri" cx=".5" cy=".55" r=".5"><stop offset="0" stop-color="#60a5fa" stop-opacity=".55"/><stop offset="1" stop-color="#60a5fa" stop-opacity="0"/></radialGradient>
+<filter id="si" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#000" flood-opacity=".35"/></filter>
+<pattern id="pi" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="#fff" stroke-opacity=".06"/></pattern>
+</defs>
+<rect width="320" height="200" fill="url(#gi)"/>
+<rect width="320" height="200" fill="url(#pi)"/>
+<circle cx="160" cy="108" r="96" fill="url(#ri)"/>
+<g filter="url(#si)">
+<rect x="86" y="54" width="148" height="94" rx="10" fill="#1e293b" stroke="#93c5fd" stroke-width="3"/>
+<rect x="96" y="64" width="128" height="74" rx="4" fill="#020617"/>
+<path d="M130 86 l-14 15 l14 15 M190 86 l14 15 l-14 15 M168 80 l-16 42" fill="none" stroke="#5eead4" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M66 148 h188 l-12 16 h-164 z" fill="#cbd5e1"/>
+<g transform="translate(250 56)"><circle r="16" fill="#F5B942"/><rect x="-4" y="-22" width="8" height="10" rx="2" fill="#F5B942" transform="rotate(0)"/><rect x="-4" y="-22" width="8" height="10" rx="2" fill="#F5B942" transform="rotate(45)"/><rect x="-4" y="-22" width="8" height="10" rx="2" fill="#F5B942" transform="rotate(90)"/><rect x="-4" y="-22" width="8" height="10" rx="2" fill="#F5B942" transform="rotate(135)"/><rect x="-4" y="-22" width="8" height="10" rx="2" fill="#F5B942" transform="rotate(180)"/><rect x="-4" y="-22" width="8" height="10" rx="2" fill="#F5B942" transform="rotate(225)"/><rect x="-4" y="-22" width="8" height="10" rx="2" fill="#F5B942" transform="rotate(270)"/><rect x="-4" y="-22" width="8" height="10" rx="2" fill="#F5B942" transform="rotate(315)"/><circle r="6" fill="#0A0F24"/></g></g>
+<rect x="6" y="6" width="308" height="188" rx="14" fill="none" stroke="#fff" stroke-opacity=".12"/>
+</svg>

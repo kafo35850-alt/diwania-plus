@@ -1725,7 +1725,7 @@ footer a { text-decoration: none; }
   }
   function safeMediaUrl(u) {
     u = String(u || '').trim();
-    return /^\/media\/med_[A-Za-z0-9_-]+$/.test(u) || /^https:\/\//.test(u) ? u : '';
+    return /^\/media\/med_[A-Za-z0-9_-]+$/.test(u) || /^\/cat-posters\/[a-z0-9_-]+\.svg$/.test(u) || /^https:\/\//.test(u) ? u : '';
   }
 
   // ---- question media: { t: 'image' | 'audio' | 'video' | 'youtube', u: address } ----
