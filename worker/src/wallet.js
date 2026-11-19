@@ -1,3 +1,4 @@
+import { getSettings } from './settings.js';
 import { voiceForGame } from './voice.js';
 // Wallet, game launches (credit / free-trial deduction) and protected game delivery.
 import { HttpError, nowMs, nowIso, randomToken, randomId, sha256Hex } from './util.js';
@@ -63,7 +64,8 @@ export async function launchGame(env, session, slug, body) {
   const cost = Math.max(0, Number(game.cost_credits) || 0);
   // Games priced at 0 are always free and keep the account's one-time trial untouched.
   const alwaysFree = cost === 0;
-  const trial = alwaysFree ? null : await env.DB.prepare('INSERT INTO game_trials (user_id, game_slug, created_at) VALUES (?, ?, ?) ON CONFLICT DO NOTHING')
+  const trialsOn = !!(await getSettings(env)).free_trials;
+  const trial = alwaysFree || !trialsOn ? null : await env.DB.prepare('INSERT INTO game_trials (user_id, game_slug, created_at) VALUES (?, ?, ?) ON CONFLICT DO NOTHING')
     .bind(uid, slug, iso).run();
   const isFreeTrial = !!trial && trial.meta.changes === 1;
 

@@ -7,6 +7,7 @@ import { verifyOrder } from './payments.js';
 import { cleanMedia, legacyMedia, mediaBytesUsed } from './media.js';
 import { promoConfig, APP_CODE } from './promo.js';
 import { voiceAdminData, saveVoicePiece } from './voice.js';
+import { getSettings } from './settings.js';
 
 const SLUG_RE = /^[a-z0-9_]{2,40}$/;
 export const NOT_CLONABLE = ['eight', 'dakhil', 'mafia', 'qaftah', 'chancellor', 'harf', 'qaddirha'];
@@ -33,6 +34,7 @@ export async function adminData(env) {
   return {
     media_bytes: await mediaBytesUsed(env),
     voice: await voiceAdminData(env),
+    settings: await getSettings(env),
     promo: {
       ...(await promoConfig(env))[APP_CODE], code: APP_CODE,
       installs: ((await env.DB.prepare('SELECT COUNT(*) AS n FROM app_installs').first()) || {}).n || 0,
@@ -333,6 +335,27 @@ export async function adminAction(env, session, action, payload) {
       await putDoc(env, 'cat_suggestions', list);
       await log(env, admin, action, 'cat_suggestion', sug.id, sug.name);
       return { ok: true, message: sug.status === 'approved' ? 'تم اعتماد فئة «' + sug.name + '» وصارت في ديوانية الثمانية.' : 'تم رفض الاقتراح.' };
+    }
+
+    case 'save_settings': {
+      const p = payload || {};
+      const link = String(p.announce_link || '').trim();
+      const wa = String(p.support_whatsapp || '').replace(/[^0-9]/g, '');
+      if (wa && (wa.length < 9 || wa.length > 15)) throw new HttpError(400, 'رقم الواتساب لازم يكون بمفتاح الدولة، مثل 9665xxxxxxxx.');
+      if (link && !/^https:\/\//.test(link) && !/^\/[A-Za-z0-9_\-/?=&#.]*$/.test(link)) throw new HttpError(400, 'رابط الإعلان لازم يبدأ بـ https:// أو /');
+      const next = {
+        announce_on: p.announce_on ? 1 : 0,
+        announce_text: cleanText(p.announce_text, 160),
+        announce_link: link.slice(0, 300),
+        signup_bonus: Math.max(0, Math.min(50, toInt(p.signup_bonus, 0))),
+        free_trials: p.free_trials ? 1 : 0,
+        support_whatsapp: wa,
+        install_banner: p.install_banner ? 1 : 0
+      };
+      if (next.announce_on && !next.announce_text) throw new HttpError(400, 'اكتب نص الإعلان أو أطفئه.');
+      await putDoc(env, 'settings', next);
+      await log(env, admin, 'save_settings', 'settings', 'store', JSON.stringify(next).slice(0, 180));
+      return { ok: true, message: 'انحفظت إعدادات المتجر ✅' };
     }
 
     case 'save_voice':

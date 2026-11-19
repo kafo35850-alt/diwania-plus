@@ -912,6 +912,16 @@ html.dw-game-open #dwApp { visibility: hidden; }
 .vo-rec-on { animation: vopulse 1s ease-in-out infinite alternate; }
 @keyframes vopulse { to { box-shadow: 0 0 0 6px rgba(244,63,94,.25); } }
 .vo-busy { color: #fde68a; font-size: 13px; }
+.qe-mic { width: 100%; margin-top: 8px; padding: 11px; }
+.qe-recording { border-color: #f43f5e !important; background: rgba(244,63,94,.08) !important; }
+.qe-recdot { width: 16px; height: 16px; border-radius: 50%; background: #f43f5e; animation: vopulse .8s ease-in-out infinite alternate; }
+.site-announce { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; padding: 10px 16px; border-radius: 16px; background: linear-gradient(110deg, rgba(245,185,66,.2), rgba(124,58,237,.16)); border: 1px solid rgba(245,185,66,.45); font-weight: 700; }
+.foot-wa { display: block; color: #4ade80 !important; font-weight: 700; }
+.set-page .set-box { border: 1px solid var(--border-subtle); border-radius: 16px; padding: 14px; display: grid; gap: 8px; background: rgba(255,255,255,.025); }
+.set-box h5 { margin: 0; font-size: 16px; }
+.set-box p { margin: 0; color: var(--text-muted); font-size: 13px; line-height: 1.7; }
+.set-sw { display: flex; align-items: center; gap: 8px; font-weight: 700; cursor: pointer; }
+.set-sw input { width: 20px; height: 20px; accent-color: var(--gold); }
 /* features + devices + faq */
 .feat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
 @media (max-width: 1000px) { .feat-grid { grid-template-columns: repeat(2, 1fr); } }
@@ -1909,7 +1919,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
     function refreshCatalog() {
       return api('GET', '/api/catalog').then(function (d) {
         if (d.ok) {
-          ['games', 'packages', 'categories'].forEach(function (k) {
+          ['games', 'packages', 'categories', 'settings'].forEach(function (k) {
             if (d[k] !== undefined) CACHE[k] = d[k];
           });
           CACHE.gatewayConnected = !!d.gatewayConnected;
@@ -1934,6 +1944,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
           CACHE.suggestions = d.suggestions || [];
           CACHE.promo = d.promo || null;
           CACHE.voice = d.voice || null;
+          CACHE.adminSettings = d.settings || null;
         }
         return d;
       });
@@ -2205,6 +2216,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
     if (!STATE.user) return 0;
     var used = (STATE.wallet && STATE.wallet.freeTrialsUsed) || {};
     var active = STATE.games.filter(function (g) { return g.is_enabled; });
+    if (!trialsOn()) return 0;
     return active.filter(function (g) { return !isFreeGame(g) && !used[g.slug]; }).length;
   }
 
@@ -2248,6 +2260,9 @@ html.dw-game-open #dwApp { visibility: hidden; }
   var EDITABLE_GAMES = ['game_eight', 'game_qaftah'];
   // Phone-room games and the Eight buzzer need their own room servers, so they cannot be copied as a new game.
   var NOT_CLONABLE = ['eight', 'dakhil', 'mafia', 'qaftah', 'chancellor', 'harf', 'qaddirha'];
+  function siteSettings() { return DiwaniyaServerKernel.loadDB().settings || {}; }
+  function trialsOn() { return siteSettings().free_trials !== false; }
+  function whatsappLink() { var w = siteSettings().support_whatsapp; return w ? 'https://wa.me/' + w : ''; }
   function isFreeGame(g) { return !!g && Number(g.cost_credits) === 0; }
   function isPhoneGame(slug) { return GAME_TAGS.phones.indexOf(slug) !== -1; }
 
@@ -2284,9 +2299,9 @@ html.dw-game-open #dwApp { visibility: hidden; }
     var logo = getLogoForGame(g.slug);
     var used = (STATE.wallet && STATE.wallet.freeTrialsUsed) || {};
     var free = isFreeGame(g);
-    var trialLeft = free || !STATE.user || !used[g.slug];
+    var trialLeft = free || (trialsOn() && (!STATE.user || !used[g.slug]));
     var players = 'من ' + arNum(g.min_players) + ' إلى ' + arNum(g.max_players) + ' لاعب';
-    var playLabel = free ? '▶ العب مجاناً' : (!STATE.user ? '▶ جرّبها مجاناً' : (trialLeft ? '▶ العب مجاناً' : '▶ العب · ' + arNum(g.cost_credits) + ' قيم'));
+    var playLabel = free ? '▶ العب مجاناً' : (!STATE.user ? (trialsOn() ? '▶ جرّبها مجاناً' : '▶ العب · ' + arNum(g.cost_credits) + ' قيم') : (trialLeft ? '▶ العب مجاناً' : '▶ العب · ' + arNum(g.cost_credits) + ' قيم'));
     var ribbon = free ? ['free', '🆓 مجانية'] : GAME_RIBBONS[g.slug];
     return '<article class="g-card" data-game-card="' + esc(g.slug) + '">' +
       (window.DW_POSTERS && window.DW_POSTERS[baseSlug(g.slug)]
@@ -2312,7 +2327,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
   }
 
   function installBannerHtml() {
-    if (!window.DwInstall || !window.DwInstall.bannerVisible()) return '';
+    if (!window.DwInstall || !window.DwInstall.bannerVisible() || siteSettings().install_banner === false) return '';
     var sar = STATE.appPromo ? STATE.appPromo.amount_halalas / 100 : 2;
     return '<div class="ai-banner" role="region" aria-label="تثبيت التطبيق">' +
       '<span class="ai-banner-ic">📲</span>' +
@@ -2347,16 +2362,16 @@ html.dw-game-open #dwApp { visibility: hidden; }
         '<div class="cta">' +
           '<button class="dw-btn dw-btn-gold" data-act="scroll-games">تصفّح الألعاب</button>' +
           (!STATE.user
-            ? '<button class="dw-btn dw-btn-sec" data-act="open-auth">سجّل وجرّب مجاناً</button>'
+            ? '<button class="dw-btn dw-btn-sec" data-act="open-auth">' + (trialsOn() ? 'سجّل وجرّب مجاناً' : 'سجّل وابدأ اللعب') + '</button>'
             : '<button class="dw-btn dw-btn-sec" data-nav="packages">💎 رصيدك ' + arNum(STATE.wallet.balance) + ' · اشحن</button>') +
         '</div>' +
-        '<ul class="hero-points"><li>🎁 تجربة مجانية لكل لعبة</li><li>📱 بدون تطبيق</li><li>👥 من ٢ إلى ٦٠ لاعب</li></ul>' +
+        '<ul class="hero-points"><li>' + (trialsOn() ? '🎁 تجربة مجانية لكل لعبة' : '🆓 ألعاب مجانية دايماً') + '</li><li>📱 بدون تطبيق</li><li>👥 من ٢ إلى ٦٠ لاعب</li></ul>' +
       '</div>' +
       '<div class="hero-art" aria-hidden="true">' + art + '</div>' +
     '</section>';
 
     html += '<section class="how">' +
-      '<div><span class="n">١</span><div><b>اختر اللعبة</b><span>كل لعبة لها تجربة مجانية أول مرة.</span></div></div>' +
+      '<div><span class="n">١</span><div><b>اختر اللعبة</b><span>' + (trialsOn() ? 'كل لعبة لها تجربة مجانية أول مرة.' : 'فيه ألعاب مجانية دايماً، والباقي بالأقيام.') + '</span></div></div>' +
       '<div><span class="n">٢</span><div><b>اعرضها على الشاشة</b><span>تلفزيون أو آيباد أو لابتوب — اللي عندك.</span></div></div>' +
       '<div><span class="n">٣</span><div><b>الشلة تدخل بجوالاتها</b><span>يمسحون رمز الـ QR ويلعبون بدون حساب.</span></div></div>' +
     '</section>';
@@ -2380,7 +2395,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
       '<div class="feat"><div class="ic">📺</div><b>الشاشة للكل</b><span>اللعبة على التلفزيون والكل يتابع ويتفاعل — جو ديوانية حقيقي.</span></div>' +
       '<div class="feat"><div class="ic">📱</div><b>بدون تطبيق</b><span>الشلة يمسحون الـ QR ويدخلون من المتصفح على طول، بدون حسابات.</span></div>' +
       '<div class="feat"><div class="ic">🇸🇦</div><b>محتوى عربي خليجي</b><span>أسئلة وفئات وتحديات تناسب سوالفنا وثقافتنا، تتجدد باستمرار.</span></div>' +
-      '<div class="feat"><div class="ic">🎁</div><b>ألعاب مجانية دايماً</b><span>' + arNum(activeGames.filter(isFreeGame).length) + ' ألعاب مجانية بالكامل، وأول تشغيلة في باقي الألعاب ببلاش. الباقات تبدأ من ' + arNum(sarText(Math.min.apply(null, STATE.packages.filter(function (p) { return p.is_active; }).map(function (p) { return p.price_halalas; }).concat([799])))) + ' ر.س.</span></div>' +
+      '<div class="feat"><div class="ic">🎁</div><b>ألعاب مجانية دايماً</b><span>' + arNum(activeGames.filter(isFreeGame).length) + ' ألعاب مجانية بالكامل' + (trialsOn() ? '، وأول تشغيلة في باقي الألعاب ببلاش' : '') + '. الباقات تبدأ من ' + arNum(sarText(Math.min.apply(null, STATE.packages.filter(function (p) { return p.is_active; }).map(function (p) { return p.price_halalas; }).concat([799])))) + ' ر.س.</span></div>' +
     '</section>';
 
     html += '<section class="devices">' +
@@ -2407,7 +2422,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
     html += renderFaq();
 
     html += '<section class="cta-band">' +
-      '<div><h3>جاهزين للسهرة؟ 🎉</h3><p>سجّل بإيميلك في ثواني، وجرّب كل لعبة أول مرة ببلاش.</p></div>' +
+      '<div><h3>جاهزين للسهرة؟ 🎉</h3><p>سجّل بإيميلك في ثواني، ' + (siteSettings().signup_bonus ? 'وخذ ' + arNum(siteSettings().signup_bonus) + ' ' + (siteSettings().signup_bonus === 1 ? 'قيم' : 'أقيام') + ' هدية' : (trialsOn() ? 'وجرّب كل لعبة أول مرة ببلاش' : 'والعب الألعاب المجانية على طول')) + '.</p></div>' +
       (!STATE.user
         ? '<button class="dw-btn dw-btn-gold" data-act="open-auth">ابدأ مجاناً</button>'
         : '<button class="dw-btn dw-btn-gold" data-act="scroll-games">اختر لعبتك</button>') +
@@ -2436,7 +2451,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
     renderQEditorModal();
     setTimeout(function () { var f = document.querySelector('#dwQEditorModal [data-qe="q"]'); if (f && !f.value) f.focus(); }, 30);
   }
-  function closeQEditor() { STATE.qEditor = null; renderQEditorModal(); }
+  function closeQEditor() { qeStopRecording(true); STATE.qEditor = null; renderQEditorModal(); }
   function qeSlotHtml(slot) {
     var e = STATE.qEditor;
     var m = e[slot];
@@ -2446,7 +2461,9 @@ html.dw-game-open #dwApp { visibility: hidden; }
     var lim = DiwaniyaServerKernel.loadDB().media || { videoMb: 15 };
     var formats = 'أي صيغة: صور، صوت، فيديو (لين ' + arNum(lim.videoMb) + ' ميقا)';
     var body;
-    if (e.busy[slot]) {
+    if (e.recording === slot) {
+      body = '<div class="qe-drop busy qe-recording"><span class="qe-recdot"></span><b>🎙️ يسجّل الحين… تكلّم</b><button class="dw-btn dw-btn-danger dw-btn-sm" data-act="qe-rec-stop" data-slot="' + slot + '">⏹ وقّف واحفظ</button></div>';
+    } else if (e.busy[slot]) {
       body = '<div class="qe-drop busy"><span class="qe-spin"></span><b>جاري الرفع...</b></div>';
     } else if (m) {
       body = '<div class="qe-filled">' + mediaPreviewHtml(m) +
@@ -2454,6 +2471,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
     } else {
       body = '<label class="qe-drop"><input type="file" accept="' + accept + '" data-qe-file="' + slot + '" hidden>' +
           '<span class="qe-up">⬆️</span><b>اضغط لرفع صورة أو صوت أو فيديو</b><small>' + formats + '</small></label>' +
+        '<button class="dw-btn dw-btn-sec qe-mic" data-act="qe-rec" data-slot="' + slot + '"' + (e.recording ? ' disabled' : '') + '>🎙️ سجّل صوت بالمايك</button>' +
         '<div class="qe-link"><input class="dw-input" dir="ltr" data-qe-link="' + slot + '" placeholder="أو الصق رابط يوتيوب أو رابط ملف"><button class="dw-btn dw-btn-sec dw-btn-sm" data-act="qe-link" data-slot="' + slot + '">إضافة</button></div>' +
         (slot === 'am' && e.qm ? '<p class="qe-note">💡 إذا تركتها فاضية، تطلع وسائط السؤال نفسها مع الإجابة.</p>' : '');
     }
@@ -2480,7 +2498,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
         (e.withMedia ? qeSlotHtml('qm') + qeSlotHtml('am') : '') +
       '</div>' +
       '<div class="qe-foot"><button class="dw-btn dw-btn-sec" data-act="qe-close">إلغاء</button>' +
-        '<button class="dw-btn dw-btn-gold" data-act="qe-save"' + (e.busy.qm || e.busy.am || e.saving ? ' disabled' : '') + '>' + (isEdit ? '💾 حفظ التعديل' : '+ إضافة السؤال') + '</button></div>' +
+        '<button class="dw-btn dw-btn-gold" data-act="qe-save"' + (e.busy.qm || e.busy.am || e.saving || e.recording ? ' disabled' : '') + '>' + (isEdit ? '💾 حفظ التعديل' : '+ إضافة السؤال') + '</button></div>' +
     '</div>';
     host.classList.add('open');
     var nb = host.querySelector('.qe-body'); if (nb) nb.scrollTop = keepScroll;
@@ -2514,6 +2532,43 @@ html.dw-game-open #dwApp { visibility: hidden; }
       else { e[slot] = { t: d.kind || kind, u: d.url }; showToast('✅ انرفع الملف'); }
       renderQEditorModal();
     }).catch(function (err) { e.busy[slot] = false; renderQEditorModal(); showToast(err.message || 'تعذر رفع الملف.'); });
+  }
+  // Record a voice clip straight into the question or answer media.
+  var QREC = { mr: null };
+  function qeStartRecording(slot) {
+    var e = STATE.qEditor;
+    if (!e) return;
+    if (!navigator.mediaDevices || !window.MediaRecorder) { showToast('جهازك ما يدعم التسجيل من المتصفح. ارفع ملف صوت بدلاً منه.'); return; }
+    navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true } }).then(function (stream) {
+      var type = ['audio/mp4', 'audio/webm;codecs=opus', 'audio/webm'].find(function (t) { return MediaRecorder.isTypeSupported && MediaRecorder.isTypeSupported(t); }) || '';
+      var mr = type ? new MediaRecorder(stream, { mimeType: type }) : new MediaRecorder(stream);
+      var chunks = [];
+      QREC.mr = mr; QREC.cancel = false;
+      mr.ondataavailable = function (ev) { if (ev.data && ev.data.size) chunks.push(ev.data); };
+      mr.onstop = function () {
+        stream.getTracks().forEach(function (t) { t.stop(); });
+        QREC.mr = null;
+        if (STATE.qEditor !== e) return;
+        e.recording = null;
+        if (QREC.cancel || !chunks.length) { renderQEditorModal(); return; }
+        var blob = new Blob(chunks, { type: (mr.mimeType || 'audio/webm').split(';')[0] });
+        e.busy[slot] = true; renderQEditorModal();
+        DiwaniyaServerKernel.uploadMedia(blob).then(function (d) {
+          if (STATE.qEditor !== e) return;
+          e.busy[slot] = false;
+          if (!d || !d.ok || !d.url) showToast((d && d.error) || 'تعذر حفظ التسجيل.');
+          else { e[slot] = { t: 'audio', u: d.url }; showToast('✅ انحفظ تسجيلك'); }
+          renderQEditorModal();
+        });
+      };
+      mr.start();
+      e.recording = slot; renderQEditorModal();
+    }).catch(function () { showToast('اسمح للموقع يستخدم المايك من إعدادات المتصفح.'); });
+  }
+  function qeStopRecording(cancel) {
+    if (!QREC.mr) return;
+    QREC.cancel = !!cancel;
+    try { QREC.mr.stop(); } catch (er) {}
   }
   function qeSave() {
     var e = STATE.qEditor;
@@ -2803,7 +2858,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
     return '<section style="text-align:center;padding:10px 0 4px">' +
         '<span class="sec-kicker">الباقات</span>' +
         '<h2 style="margin:0;font-size:32px">اشحن أقيامك وابدأ السهرة</h2>' +
-        '<p style="margin:8px auto 0;max-width:620px;color:#c9d2e6;line-height:1.8">القيم الواحد يشغّل لعبة كاملة لكل الشلة. كل ما كبرت الباقة نزل سعر القيم. وأول مرة في كل لعبة <b style="color:var(--teal)">مجانية</b>.</p>' +
+        '<p style="margin:8px auto 0;max-width:620px;color:#c9d2e6;line-height:1.8">القيم الواحد يشغّل لعبة كاملة لكل الشلة. كل ما كبرت الباقة نزل سعر القيم.' + (trialsOn() ? ' وأول مرة في كل لعبة <b style="color:var(--teal)">مجانية</b>.' : '') + '</p>' +
       '</section>' +
       promoBoxHtml() +
       '<div style="padding-top:14px">' + renderPriceCards() + '</div>' +
@@ -2817,9 +2872,10 @@ html.dw-game-open #dwApp { visibility: hidden; }
       ['وش يعني «قيم»؟', 'القيم هو تشغيلة لعبة وحدة كاملة لكل الشلة. تفتح اللعبة مرة وحدة وتلعبون جولات بقد ما تبون خلال الجلسة (١٢ ساعة).'],
       ['هل لازم كل اللاعبين يسجلون أو يدفعون؟', 'لا. واحد بس يشغّل اللعبة من حسابه، والباقين يدخلون بجوالاتهم عن طريق رمز الـ QR بدون حساب وبدون دفع.'],
       ['كيف أعرض اللعبة على التلفزيون؟', 'افتح الموقع من تلفزيون ذكي أو لابتوب موصول بالشاشة، أو اعكس شاشة جوالك (AirPlay أو Chromecast) واقلب الجوال بالعرض. الألعاب مصممة تشتغل بالعرض على الشاشات الكبيرة.'],
-      ['هل فيه تجربة مجانية؟', 'إيه، أول مرة في كل لعبة مجانية لكل حساب. يعني تقدر تجرب كل الألعاب قبل ما تشتري أي باقة.'],
+      trialsOn() ? ['هل فيه تجربة مجانية؟', 'إيه، أول مرة في كل لعبة مجانية لكل حساب. يعني تقدر تجرب كل الألعاب قبل ما تشتري أي باقة.'] : ['هل فيه ألعاب مجانية؟', 'إيه، فيه ألعاب مجانية دايماً تقدر تلعبها بقد ما تبي، وتلقاها بزر «🆓 مجانية» في المتجر.'],
       ['هل الأقيام تنتهي؟', 'لا، الأقيام تبقى في محفظتك لين تستخدمها.'],
       ['وش طرق الدفع المتاحة؟', 'مدى، Apple Pay، وبطاقات فيزا وماستركارد، عن طريق بوابة Moyasar الآمنة.'],
+      ['كيف أتواصل معكم؟', whatsappLink() ? 'كلمنا على الواتساب من زر «💬 تواصل معنا» تحت في الصفحة، ونرد عليك بأسرع وقت.' : 'من خانة «عندك فكرة لعبة؟» في الصفحة الرئيسية، أو من صفحة السياسات.'],
       ['أحتاج أحمّل تطبيق؟', 'لا، كل شي يشتغل من المتصفح على أي جهاز: جوال، آيباد، لابتوب، أو تلفزيون ذكي.']
     ];
     return '<section style="margin-top:10px">' +
@@ -2931,6 +2987,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
           '<button class="dw-tab-btn ' + (st === 'games' ? 'active' : '') + '" data-adm-tab="games">🎮 إدارة الألعاب (' + arNum(STATE.games.length) + ')</button>' +
           '<button class="dw-tab-btn ' + (st === 'editor' ? 'active' : '') + '" data-adm-tab="editor">✏️ محرر الأسئلة والفئات </button>' +
           '<button class="dw-tab-btn ' + (st === 'categories' ? 'active' : '') + '" data-adm-tab="categories">🗂️ إدارة الفئات (' + arNum(STATE.categories.length) + ')</button>' +
+          '<button class="dw-tab-btn ' + (st === 'settings' ? 'active' : '') + '" data-adm-tab="settings">⚙️ إعدادات المتجر</button>' +
           '<button class="dw-tab-btn ' + (st === 'voice' ? 'active' : '') + '" data-adm-tab="voice">🎙️ أصوات الراوي</button>' +
           '<button class="dw-tab-btn ' + (st === 'ideas' ? 'active' : '') + '" data-adm-tab="ideas">📝 أفكار الألعاب' + (function () { var n = (DiwaniyaServerKernel.loadDB().suggestions || []).filter(function (x) { return x.status !== 'تمت المراجعة'; }).length; return n ? ' (' + arNum(n) + ')' : ''; })() + '</button>' +
           '<button class="dw-tab-btn ' + (st === 'catsug' ? 'active' : '') + '" data-adm-tab="catsug">💡 اقتراحات الفئات' + (function () { var n = (DiwaniyaServerKernel.loadDB().cat_suggestions || []).filter(function (x) { return x.status === 'pending'; }).length; return n ? ' (' + arNum(n) + ')' : ''; })() + '</button>' +
@@ -3140,6 +3197,29 @@ html.dw-game-open #dwApp { visibility: hidden; }
         '</div>';
     }
 
+    if (st === 'settings') {
+      var cfg = DiwaniyaServerKernel.loadDB().adminSettings || {};
+      var on = function (v) { return v ? ' checked' : ''; };
+      return nav +
+        '<div class="dw-card set-page">' +
+          '<h4 style="margin:0;font-size:19px">⚙️ إعدادات المتجر</h4>' +
+          '<p style="margin:0;color:var(--text-muted);font-size:13.5px">أي تغيير هنا يطلع للزبائن أول ما تضغط «حفظ».</p>' +
+          '<section class="set-box"><h5>📢 شريط إعلان فوق المتجر</h5><p>للعروض والأخبار، مثل «خصم ٢٠٪ هالأسبوع» أو «لعبة جديدة نزلت».</p>' +
+            '<label class="set-sw"><input type="checkbox" id="setAnnOn"' + on(cfg.announce_on) + '> شغّل الشريط</label>' +
+            '<input class="dw-input" id="setAnnText" maxlength="160" placeholder="نص الإعلان" value="' + esc(cfg.announce_text || '') + '">' +
+            '<input class="dw-input" id="setAnnLink" dir="ltr" placeholder="رابط زر «اعرف أكثر» (اختياري): https://… أو /?tab=packages" value="' + esc(cfg.announce_link || '') + '"></section>' +
+          '<section class="set-box"><h5>🎁 هدية التسجيل</h5><p>عدد أقيام ينضاف تلقائياً لأي حساب جديد (من ٠ إلى ٥٠). صفر يعني بدون هدية.</p>' +
+            '<input class="dw-input" id="setBonus" type="number" min="0" max="50" style="max-width:140px" value="' + (cfg.signup_bonus || 0) + '"></section>' +
+          '<section class="set-box"><h5>🆓 التجربة المجانية</h5><p>أول تشغيلة لكل لعبة مدفوعة مجانية لكل حساب. لو أطفيتها، الألعاب المدفوعة تحتاج أقيام من أول مرة (والألعاب «المجانية دايماً» تبقى مجانية).</p>' +
+            '<label class="set-sw"><input type="checkbox" id="setTrials"' + on(cfg.free_trials) + '> التجربة المجانية شغّالة</label></section>' +
+          '<section class="set-box"><h5>💬 رقم واتساب الدعم</h5><p>يطلع زر «تواصل معنا» للزبائن. اكتبه بمفتاح الدولة بدون + (مثال: 9665xxxxxxxx). فاضي = بدون زر.</p>' +
+            '<input class="dw-input" id="setWa" dir="ltr" inputmode="numeric" placeholder="9665xxxxxxxx" style="max-width:240px" value="' + esc(cfg.support_whatsapp || '') + '"></section>' +
+          '<section class="set-box"><h5>📲 شريط «ثبّت التطبيق»</h5><p>الشريط اللي فوق الصفحة الرئيسية يدعو الناس يثبتون التطبيق ويأخذون كود الخصم.</p>' +
+            '<label class="set-sw"><input type="checkbox" id="setInstall"' + on(cfg.install_banner) + '> إظهار الشريط</label></section>' +
+          '<div><button class="dw-btn dw-btn-gold" data-act="adm-save-settings">💾 حفظ الإعدادات</button></div>' +
+        '</div>';
+    }
+
     if (st === 'voice') {
       var vd = DiwaniyaServerKernel.loadDB().voice || { lines: [], rec: {} };
       var gameName = function (slug) { var g = STATE.games.find(function (x) { return x.slug === slug; }); return g ? cleanTitle(g.title) : slug; };
@@ -3336,7 +3416,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
     var activeTab = tabs[STATE.guideTabIdx] || tabs[0];
     var usedTrials = (STATE.wallet && STATE.wallet.freeTrialsUsed) || {};
     var alwaysFree = isFreeGame(gameObj);
-    var hasFree = alwaysFree || (STATE.user ? !usedTrials[STATE.guideSlug] : true);
+    var hasFree = alwaysFree || (trialsOn() && (STATE.user ? !usedTrials[STATE.guideSlug] : true));
 
     inner.innerHTML =
       '<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">' +
@@ -3673,7 +3753,9 @@ html.dw-game-open #dwApp { visibility: hidden; }
     else if (STATE.tab === 'admin') bodyHtml = renderAdminTab();
     else bodyHtml = renderStoreTab();
 
-    root.innerHTML = renderNavbar() + '<main class="dw-container">' + bodyHtml + '</main>' +
+    var ann = siteSettings().announce;
+    var annHtml = ann ? '<div class="site-announce" role="status"><span>📢 ' + esc(ann.text) + '</span>' + (ann.link ? '<a class="dw-btn dw-btn-gold dw-btn-sm" href="' + esc(ann.link) + '"' + (/^https:/.test(ann.link) ? ' target="_blank" rel="noopener"' : '') + '>اعرف أكثر</a>' : '') + '</div>' : '';
+    root.innerHTML = renderNavbar() + '<main class="dw-container">' + annHtml + bodyHtml + '</main>' +
       '<footer class="site-foot"><div class="in">' +
         '<div><div class="brand"><div class="dw-brand-logo">د+</div><b style="font-size:18px">ديوانية <span style="color:var(--gold)">بلس</span></b></div>' +
           '<p style="margin:0;max-width:380px">ألعاب جماعية عربية للسهرات والديوانيات. الشاشة للكل والجوال لك — بدون تطبيق.</p></div>' +
@@ -3681,7 +3763,8 @@ html.dw-game-open #dwApp { visibility: hidden; }
           '<button class="lnk" data-nav="store">الألعاب</button>' +
           '<button class="lnk" data-nav="categories">فئات الثمانية</button>' +
           '<button class="lnk" data-nav="packages">الباقات والأسعار</button>' +
-          '<button class="lnk" data-act="open-room-hub">غرفة QR والجرس</button></div>' +
+          '<button class="lnk" data-act="open-room-hub">غرفة QR والجرس</button>' +
+          (whatsappLink() ? '<a href="' + esc(whatsappLink()) + '" target="_blank" rel="noopener" class="foot-wa">💬 تواصل معنا (واتساب)</a>' : '') + '</div>' +
         '<div><h5>السياسات</h5>' +
           '<a href="/legal/terms.html" target="_blank" rel="noopener" style="display:block">الشروط والأحكام</a>' +
           '<a href="/legal/refund.html" target="_blank" rel="noopener" style="display:block">سياسة الاسترجاع</a>' +
@@ -4149,6 +4232,10 @@ html.dw-game-open #dwApp { visibility: hidden; }
       if (STATE.qEditor) { STATE.qEditor.points = Number(actBtn.getAttribute('data-p')); renderQEditorModal(); }
     } else if (act === 'qe-clear') {
       if (STATE.qEditor) { STATE.qEditor[actBtn.getAttribute('data-slot')] = null; renderQEditorModal(); }
+    } else if (act === 'qe-rec') {
+      qeStartRecording(actBtn.getAttribute('data-slot'));
+    } else if (act === 'qe-rec-stop') {
+      qeStopRecording();
     } else if (act === 'qe-link') {
       var lslot = actBtn.getAttribute('data-slot');
       var linp = document.querySelector('[data-qe-link="' + lslot + '"]');
@@ -4194,6 +4281,12 @@ html.dw-game-open #dwApp { visibility: hidden; }
         if (k < segs.length - 1) steps.push({ say: 'سالم' });
       });
       voPlay(steps);
+    } else if (act === 'adm-save-settings') {
+      var g = function (id) { return document.getElementById(id) || {}; };
+      adminCall('save_settings', {
+        announce_on: !!g('setAnnOn').checked, announce_text: g('setAnnText').value, announce_link: g('setAnnLink').value,
+        signup_bonus: g('setBonus').value, free_trials: !!g('setTrials').checked, support_whatsapp: g('setWa').value, install_banner: !!g('setInstall').checked
+      }, function (r) { render(); showToast(r.message); });
     } else if (act === 'adm-idea') {
       var idOp = actBtn.getAttribute('data-op');
       if (idOp === 'del' && !window.confirm('تحذف هالفكرة؟')) return;

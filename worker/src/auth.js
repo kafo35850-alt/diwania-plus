@@ -5,6 +5,7 @@ import {
   constantTimeEqual, getCookie, clientIp, cleanText, underRateLimit
 } from './util.js';
 import { sendLoginCode } from './mail.js';
+import { getSettings } from './settings.js';
 
 export const SESSION_COOKIE = 'dw_sess';
 // Stay signed in for 90 days, renewed on every visit (at most once a day), so regular players never see the login again.
@@ -196,13 +197,18 @@ export async function verifyOtp(env, request, body) {
       role: isOwnerEmail ? 'owner' : null,
       created_at: iso
     };
+    const st = await getSettings(env);
+    const bonus = Math.max(0, Math.min(50, Number(st.signup_bonus) || 0));
+    const welcome = bonus
+      ? '🎁 هدية التسجيل: ' + bonus + ' ' + (bonus === 1 ? 'قيم' : 'أقيام') + (st.free_trials ? ' + تجربة مجانية في كل لعبة' : '')
+      : (st.free_trials ? '🎁 باقة الترحيب: تجربة مجانية واحدة في كل لعبة' : '🎉 أهلاً بك في ديوانية بلس');
     await env.DB.batch([
       env.DB.prepare('INSERT INTO users (id, email, display_name, status, role, created_at) VALUES (?, ?, ?, ?, ?, ?)')
         .bind(user.id, user.email, user.display_name, user.status, user.role, user.created_at),
-      env.DB.prepare('INSERT INTO wallets (user_id) VALUES (?)').bind(user.id),
+      env.DB.prepare('INSERT INTO wallets (user_id, balance, total_purchased) VALUES (?, ?, 0)').bind(user.id, bonus),
       env.DB.prepare(
-        "INSERT INTO wallet_transactions (id, user_id, type, amount, balance_before, balance_after, description, created_at) VALUES (?, ?, 'bonus', 0, 0, 0, ?, ?)"
-      ).bind(randomId('wtx'), user.id, '🎁 باقة الترحيب: تجربة مجانية واحدة في كل لعبة', iso)
+        "INSERT INTO wallet_transactions (id, user_id, type, amount, balance_before, balance_after, description, created_at) VALUES (?, ?, 'bonus', ?, 0, ?, ?, ?)"
+      ).bind(randomId('wtx'), user.id, bonus, bonus, welcome, iso)
     ]);
   } else {
     if (user.status !== 'active') throw new HttpError(403, 'هذا الحساب موقوف حالياً من إدارة المنصة.');
