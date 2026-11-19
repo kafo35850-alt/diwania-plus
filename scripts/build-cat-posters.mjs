@@ -57,7 +57,7 @@ const POSTERS = {
     ${[154, 164, 174, 184].map((x) => `<rect x="${x}" y="114" width="5" height="40" rx="1.5" fill="${WHITE}"/>`).join('')}
     <rect x="150" y="154" width="42" height="6" fill="${GOLD2}"/>
     <rect x="40" y="168" width="240" height="6" rx="3" fill="#93c5fd" opacity=".5"/>
-    ${'<g transform="translate(26 26)"><rect width="61" height="30" rx="15" fill="#0A0F24" fill-opacity=".72" stroke="#93c5fd" stroke-width="2"/><text x="30.5" y="20.5" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="17" letter-spacing="1.5" fill="#93c5fd">KSU</text></g>'}`, 'grid'),
+    ${'<g transform="translate(129.5 14)"><rect width="61" height="30" rx="15" fill="#0A0F24" fill-opacity=".72" stroke="#93c5fd" stroke-width="2"/><text x="30.5" y="20.5" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="17" letter-spacing="1.5" fill="#93c5fd">KSU</text></g>'}`, 'grid'),
 
   // water tower on a hill + oil derrick
   // the university water tower on its hill (Dhahran), with an oil derrick beside it
@@ -71,7 +71,7 @@ const POSTERS = {
     <path d="M146 150 h28 l6 12 h-40 z" fill="#94a3b8"/>
     <path d="M232 166 L248 98 L264 166 M237 144 H259 M241 124 H255 M244 108 H252" fill="none" stroke="${GOLD2}" stroke-width="3" stroke-linejoin="round"/>
     <circle cx="248" cy="94" r="4" fill="${GOLD}"/>
-    ${'<g transform="translate(26 26)"><rect width="87" height="30" rx="15" fill="#0A0F24" fill-opacity=".72" stroke="#5eead4" stroke-width="2"/><text x="43.5" y="20.5" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="17" letter-spacing="1.5" fill="#5eead4">KFUPM</text></g>'}`),
+    ${'<g transform="translate(116.5 14)"><rect width="87" height="30" rx="15" fill="#0A0F24" fill-opacity=".72" stroke="#5eead4" stroke-width="2"/><text x="43.5" y="20.5" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="17" letter-spacing="1.5" fill="#5eead4">KFUPM</text></g>'}`),
 
   // automated metro train
   // the campus automated train arriving at a Riyadh metro station
@@ -85,7 +85,7 @@ const POSTERS = {
     <rect x="54" y="134" width="206" height="7" fill="${GOLD}"/>
     <circle cx="96" cy="160" r="8" fill="${INK}"/><circle cx="214" cy="160" r="8" fill="${INK}"/>
     <path d="M250 70 l8 0 l0 -8" fill="none" stroke="${GOLD2}" stroke-width="3"/>
-    ${'<g transform="translate(26 26)"><rect width="61" height="30" rx="15" fill="#0A0F24" fill-opacity=".72" stroke="#e9d5ff" stroke-width="2"/><text x="30.5" y="20.5" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="17" letter-spacing="1.5" fill="#e9d5ff">PNU</text></g>'}`, 'grid'),
+    ${'<g transform="translate(129.5 14)"><rect width="61" height="30" rx="15" fill="#0A0F24" fill-opacity=".72" stroke="#e9d5ff" stroke-width="2"/><text x="30.5" y="20.5" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="17" letter-spacing="1.5" fill="#e9d5ff">PNU</text></g>'}`, 'grid'),
 
   // sea waves with a sail
   // King Fahd's Fountain shooting over the Red Sea at Jeddah, with the city's skyline
@@ -97,7 +97,7 @@ const POSTERS = {
     <path d="M20 170 q20-10 40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 V200 H20 z" fill="#0ea5e9" opacity=".8"/>
     <path d="M0 182 q20-10 40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 V200 H0 z" fill="#0369a1"/>
     <circle cx="160" cy="166" r="6" fill="${GOLD}"/>
-    ${'<g transform="translate(26 26)"><rect width="61" height="30" rx="15" fill="#0A0F24" fill-opacity=".72" stroke="#86efac" stroke-width="2"/><text x="30.5" y="20.5" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="17" letter-spacing="1.5" fill="#86efac">KAU</text></g>'}`, 'waves'),
+    ${'<g transform="translate(129.5 14)"><rect width="61" height="30" rx="15" fill="#0A0F24" fill-opacity=".72" stroke="#86efac" stroke-width="2"/><text x="30.5" y="20.5" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="17" letter-spacing="1.5" fill="#86efac">KAU</text></g>'}`, 'waves'),
 
   // folded map with pins
   uni_others: frame('f', ['#450a0a', '#c2410c'], '#fb923c', `

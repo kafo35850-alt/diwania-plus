@@ -7562,7 +7562,9 @@ function loadCustomCategories() {
 var dwServerCats = [];
 try { dwServerCats = ((window.__DW_CONTENT || {}).customCats || []).slice(); } catch (e) {}
 var dwLocal = dwLoadLocalCustomCategories();
-return dwServerCats.concat(dwLocal.filter(function (c) { return !dwServerCats.some(function (s) { return s.id === c.id; }); }));
+return dwServerCats.concat(dwLocal.filter(function (c) { return !dwServerCats.some(function (s) { return s.id === c.id; }); }))
+.filter(function (c) { return c && c.id; })
+.map(function (c) { return Object.assign({}, c, { id: String(c.id), name: String(c.name || 'فئة بدون اسم'), desc: String(c.desc || ''), tag: String(c.tag || c.group || 'فئاتي'), group: String(c.group || c.tag || 'فئاتي'), icon: c.icon || '🎯' }); });
 }
 function dwLoadLocalCustomCategories() {
 try {
@@ -7774,7 +7776,7 @@ const preferredOrder = [
 'ثقافة',
 'أدب'
 ];
-const otherTags = [...new Set(state.categories.map(c => c.tag))].filter(t => !preferredOrder.includes(t));
+const otherTags = [...new Set(state.categories.map(c => c.tag))].filter(t => t && !preferredOrder.includes(t));
 const tags = [...preferredOrder, ...otherTags];
 bar.innerHTML = '';
 tags.forEach(tag => {
@@ -7812,6 +7814,7 @@ document.getElementById('selectedCounterPill').textContent = `${state.selectedFo
 for (let i = 0; i < 8; i++) {
 const slot = state.selectedForMatch[i];
 const card = document.createElement('div');
+if (slot && !state.categories.find(c => c.id === slot.id)) { state.selectedForMatch = state.selectedForMatch.filter(s => s !== slot); return renderSelectedTray(); }
 if (slot) {
 const cat = state.categories.find(c => c.id === slot.id);
 const meta = getOwnerMeta(slot.owner);
@@ -7865,7 +7868,7 @@ grid.innerHTML = '';
 const q = state.searchQuery.trim().toLowerCase();
 const filtered = state.categories.filter(cat => {
 const matchTag = state.activeTag === 'الكل' || cat.tag === state.activeTag;
-const matchSearch = !q || cat.name.toLowerCase().includes(q) || cat.desc.toLowerCase().includes(q) || cat.tag.toLowerCase().includes(q);
+const matchSearch = !q || String(cat.name || '').toLowerCase().includes(q) || String(cat.desc || '').toLowerCase().includes(q) || String(cat.tag || '').toLowerCase().includes(q);
 return matchTag && matchSearch;
 });
 const totalCats = state.categories.length;
@@ -7882,7 +7885,7 @@ document.getElementById('remainingCatsCountLabel').textContent = remCount;
 } else {
 loadMoreContainer.classList.add('hidden');
 }
-visibleSlice.forEach(cat => {
+visibleSlice.forEach(cat => { try {
 const sel = state.selectedForMatch.find(s => s.id === cat.id);
 const card = document.createElement('div');
 const meta = sel ? getOwnerMeta(sel.owner) : null;
@@ -7921,7 +7924,7 @@ ${sel ? `
 </div>
 `;
 grid.appendChild(card);
-});
+} catch (e) { /* a category with broken data is skipped, the rest still show */ } });
 }
 function renderSetupView() {
 try { m8UpdateResumeBanner(); } catch (e) { }

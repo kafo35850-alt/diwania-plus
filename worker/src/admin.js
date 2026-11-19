@@ -1,7 +1,7 @@
 // Admin-panel operations (owners and admins). Every route here is reached through requireSession(..., { owner: true }).
 // Managing admins is reserved for owners.
 import { HttpError, nowIso, randomId, cleanText, toInt } from './util.js';
-import { getDoc, putDoc } from './catalog.js';
+import { getDoc, putDoc, isShippedCategory } from './catalog.js';
 import { GAMES } from './games.js';
 import { verifyOrder } from './payments.js';
 import { cleanMedia, legacyMedia, mediaBytesUsed } from './media.js';
@@ -339,9 +339,50 @@ export async function adminAction(env, session, action, payload) {
       return { ok: true, message: action === 'del_suggestion' ? 'تم حذف الفكرة.' : 'تم تحديث حالة الفكرة.' };
     }
 
+    case 'edit_cat': {
+      const categories = await getDoc(env, 'categories');
+      const cat = categories.find((c) => c.id === payload.catId && !c.deleted);
+      if (!cat) throw new HttpError(404, 'الفئة غير موجودة.');
+      const name = cleanText(payload.name, 80);
+      if (!name) throw new HttpError(400, 'اكتب اسم الفئة.');
+      cat.name = name;
+      cat.icon = cleanText(payload.icon, 8) || cat.icon || '🎯';
+      cat.sub_group = cleanText(payload.group, 40) || cat.sub_group;
+      cat.description = cleanText(payload.description, 300);
+      if (payload.posterUrl !== undefined && String(cat.slug).startsWith('custom_')) {
+        const pu = String(payload.posterUrl || '').trim();
+        cat.poster = /^\/cat-posters\/[a-z0-9_-]+\.svg$/.test(pu) ? pu : ((cleanMedia({ t: 'image', u: pu }) || {}).u || '');
+      }
+      await putDoc(env, 'categories', categories);
+      await log(env, admin, 'edit_cat', 'category', cat.slug, name);
+      return { ok: true, message: 'تم حفظ تعديل الفئة «' + name + '».' };
+    }
+
+    case 'del_cat': {
+      const categories = await getDoc(env, 'categories');
+      const cat = categories.find((c) => c.id === payload.catId && !c.deleted);
+      if (!cat) throw new HttpError(404, 'الفئة غير موجودة.');
+      // Built-in categories live inside the game file: they can be hidden, not deleted.
+      if (!String(cat.slug).startsWith('custom_')) throw new HttpError(400, 'هذي فئة أساسية من اللعبة: تقدر تخفيها بس، ما تنحذف.');
+      const overrides = await getDoc(env, 'catQuestionsOverrides');
+      let list;
+      if (isShippedCategory(cat.slug)) {
+        // A ready-made category would come back on the next update: keep a "deleted" mark instead.
+        cat.deleted = 1; cat.is_visible = 0; list = categories;
+        overrides[cat.slug] = [];
+      } else {
+        list = categories.filter((c) => c !== cat);
+        delete overrides[cat.slug];
+      }
+      await putDoc(env, 'catQuestionsOverrides', overrides);
+      await putDoc(env, 'categories', list);
+      await log(env, admin, 'del_cat', 'category', cat.slug, cat.name);
+      return { ok: true, message: 'تم حذف فئة «' + cat.name + '» وأسئلتها.' };
+    }
+
     case 'toggle_cat': {
       const categories = await getDoc(env, 'categories');
-      const cat = categories.find((c) => c.id === payload.catId);
+      const cat = categories.find((c) => c.id === payload.catId && !c.deleted);
       if (!cat) throw new HttpError(404, 'الفئة غير موجودة.');
       cat.is_visible = cat.is_visible ? 0 : 1;
       await putDoc(env, 'categories', categories);

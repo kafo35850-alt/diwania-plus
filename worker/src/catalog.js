@@ -39,9 +39,13 @@ export async function getDoc(env, key) {
   return structuredClone(SEED[key]);
 }
 
+export function isShippedCategory(slug) {
+  return !!(SEED.catQuestionsOverrides && SEED.catQuestionsOverrides[slug]);
+}
+
 // True when a saved category still holds only shipped questions, unedited, and fewer than ship now.
 function isUntouchedOlderSeed(slug, saved, fresh) {
-  if (!Array.isArray(saved) || saved.length >= fresh.length) return false;
+  if (!Array.isArray(saved) || !saved.length || saved.length >= fresh.length) return false;
   const texts = new Set(fresh.map((q) => q.q + '\u0000' + q.a));
   const uidRe = new RegExp('^' + slug + '_\\d+_\\d+$');
   return saved.every((q) => q && uidRe.test(q.uid || '') && !q.qm && !q.am && texts.has(q.q + '\u0000' + q.a));
@@ -70,5 +74,5 @@ export async function getCatalog(env) {
     getDoc(env, 'packages'),
     getDoc(env, 'categories'),
   ]);
-  return { games, packages, categories, gatewayConnected: gatewayConfigured(env), media: mediaLimits(env) };
+  return { games, packages, categories: categories.filter((c) => !c.deleted), gatewayConnected: gatewayConfigured(env), media: mediaLimits(env) };
 }

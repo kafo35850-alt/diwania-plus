@@ -2474,6 +2474,32 @@ footer a { text-decoration: none; }
       '<span class="qsum-note' + (okAll ? ' ok' : '') + '">' + (okAll ? '✅ جاهزة تطلع في اللعبة' : '⚠️ اللوحة تحتاج على الأقل ' + arNum(needEach) + ' من كل مستوى') + '</span></div>';
   }
 
+  // Window for editing a category's name, icon, group, description and cover picture.
+  function renderCatEditModal() {
+    var host = document.getElementById('dwCatEditModal');
+    if (!host) { host = document.createElement('div'); host.id = 'dwCatEditModal'; host.className = 'dw-modal-backdrop'; document.body.appendChild(host); }
+    var c = STATE.catEdit;
+    if (!c) { host.classList.remove('open'); host.innerHTML = ''; return; }
+    var custom = c.slug.indexOf('custom_') === 0;
+    host.innerHTML = '<div class="dw-modal qe-modal" role="dialog" aria-modal="true">' +
+      '<div class="qe-head"><div><h3>تعديل الفئة</h3><p>' + esc(c.name) + '</p></div><button class="dw-btn dw-btn-sec dw-btn-sm" data-act="ce-close">✕</button></div>' +
+      '<div class="qe-body">' +
+        '<label class="qe-lbl">اسم الفئة <i>*</i></label><input class="dw-input" id="ceName" maxlength="80" value="' + esc(c.name) + '">' +
+        '<div class="dw-grid-3" style="gap:10px"><div><label class="qe-lbl">الأيقونة</label><input class="dw-input" id="ceIcon" maxlength="8" value="' + esc(c.icon || '') + '"></div>' +
+        '<div style="grid-column:span 2"><label class="qe-lbl">المجموعة</label><input class="dw-input" id="ceGroup" maxlength="40" value="' + esc(c.sub_group || '') + '"></div></div>' +
+        '<label class="qe-lbl">الوصف</label><textarea class="dw-input qe-ta sm" id="ceDesc" maxlength="300">' + esc(c.description || '') + '</textarea>' +
+        (custom
+          ? '<section class="qe-box"><h5>صورة الغلاف</h5><p>تطلع على بطاقة الفئة في المتجر واللعبة.</p>' +
+              '<div class="qe-link"><input id="cePoster" class="dw-input" dir="ltr" placeholder="ارفع صورة أو الصق رابط https" value="' + esc(c.poster || '') + '">' +
+              '<label class="dw-btn dw-btn-sec dw-btn-sm" style="cursor:pointer;margin:0">⬆️ رفع<input type="file" accept="image/*" data-upload-target="cePoster" hidden></label></div>' +
+              '<div id="cePosterPreview" style="margin-top:8px">' + (safeMediaUrl(c.poster) ? '<img src="' + esc(c.poster) + '" alt="" style="width:100%;max-height:180px;object-fit:cover;border-radius:12px">' : '') + '</div></section>'
+          : '<p class="qe-note">هذي فئة أساسية من اللعبة، صورتها مرسومة داخل اللعبة.</p>') +
+      '</div>' +
+      '<div class="qe-foot"><button class="dw-btn dw-btn-sec" data-act="ce-close">إلغاء</button><button class="dw-btn dw-btn-gold" data-act="ce-save">💾 حفظ</button></div>' +
+    '</div>';
+    host.classList.add('open');
+  }
+
   function newCatSugDraft() {
     return { name: '', icon: '💡', group: '', desc: '', qs: [] };
   }
@@ -3010,17 +3036,23 @@ footer a { text-decoration: none; }
           '</div>' +
           '<p style="margin:0;color:var(--text-muted);font-size:13px">بعد ما تضيف الفئة بتنقلك لمحرر الأسئلة. الفئة تطلع في اللعبة لما يصير فيها ٦ أسئلة على الأقل (٢ سهلة، ٢ متوسطة، ٢ صعبة).</p>' +
           '<div><button class="dw-btn dw-btn-gold dw-btn-sm" data-act="adm-add-cat">+ إضافة الفئة وحفظها</button></div>' +
-          '<div class="dw-table-wrap" style="max-height:440px;overflow-y:auto"><table class="dw-table"><thead><tr><th>#</th><th>الفئة</th><th>المجموعة</th><th>عدد الأسئلة الفعلي</th><th>الحالة</th><th>إجراءات</th></tr></thead><tbody>' +
-            STATE.categories.map(function (c, i) {
+          '<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-top:6px">' +
+            '<p style="margin:0;color:var(--text-muted);font-size:13px;line-height:1.8">✏️ <b>تعديل الفئة</b>: الاسم والأيقونة والوصف والصورة. 📝 <b>أسئلتها</b>: تضيف وتعدل الأسئلة. 🗑️ <b>حذف</b>: للفئات المضافة بس — الفئات الأساسية تقدر تخفيها.</p>' +
+            '<input id="admCatSearch" class="dw-input" style="max-width:260px" placeholder="🔍 ابحث عن فئة..." value="' + esc(STATE.admCatSearch || '') + '">' +
+          '</div>' +
+          '<div class="dw-table-wrap" style="max-height:520px;overflow-y:auto"><table class="dw-table"><thead><tr><th>#</th><th>الفئة</th><th>المجموعة</th><th>الأسئلة</th><th>الحالة</th><th>إجراءات</th></tr></thead><tbody>' +
+            STATE.categories.filter(function (c) { var q = (STATE.admCatSearch || '').trim(); return !q || String(c.name).indexOf(q) !== -1 || String(c.sub_group).indexOf(q) !== -1; }).map(function (c, i) {
               return '<tr>' +
                 '<td>' + arNum(i + 1) + '</td>' +
                 '<td><b>' + esc(c.icon) + ' ' + esc(c.name) + '</b></td>' +
                 '<td><span class="dw-chip">' + esc(c.sub_group) + '</span></td>' +
-                '<td><span class="dw-chip teal">' + arNum(c.item_count || 18) + ' سؤال</span></td>' +
+                '<td><span class="dw-chip ' + ((c.item_count || 0) >= 6 || String(c.slug).indexOf('custom_') !== 0 ? 'teal' : 'gold') + '">' + arNum(String(c.slug).indexOf('custom_') === 0 ? (c.item_count || 0) : (c.item_count || 18)) + ' سؤال</span>' + (String(c.slug).indexOf('custom_') === 0 && (c.item_count || 0) < 6 ? '<div style="font-size:11px;color:#fcd34d">ما تطلع في اللعبة لين ٦ أسئلة</div>' : '') + '</td>' +
                 '<td>' + (c.is_visible ? '<span class="dw-chip teal">ظاهرة</span>' : '<span class="dw-chip">مخفية</span>') + '</td>' +
-                '<td style="display:flex;gap:6px">' +
-                  '<button class="dw-btn dw-btn-teal dw-btn-sm" data-act="adm-open-cat-editor" data-slug="' + esc(c.slug) + '">✏️ تحرير أسئلتها</button>' +
-                  '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="adm-toggle-cat" data-id="' + esc(c.id) + '">' + (c.is_visible ? 'إخفاء' : 'إظهار') + '</button>' +
+                '<td style="display:flex;gap:6px;flex-wrap:wrap">' +
+                  '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="adm-edit-cat" data-id="' + esc(c.id) + '">✏️ تعديل الفئة</button>' +
+                  '<button class="dw-btn dw-btn-teal dw-btn-sm" data-act="adm-open-cat-editor" data-slug="' + esc(c.slug) + '">📝 أسئلتها</button>' +
+                  '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="adm-toggle-cat" data-id="' + esc(c.id) + '">' + (c.is_visible ? '🙈 إخفاء' : '👁️ إظهار') + '</button>' +
+                  (String(c.slug).indexOf('custom_') === 0 ? '<button class="dw-btn dw-btn-danger dw-btn-sm" data-act="adm-del-cat" data-id="' + esc(c.id) + '">🗑️ حذف</button>' : '') +
                 '</td>' +
               '</tr>';
             }).join('') +
@@ -3926,6 +3958,23 @@ footer a { text-decoration: none; }
         render();
         showToast(csRes.message);
       });
+    } else if (act === 'adm-edit-cat') {
+      var ec = STATE.categories.find(function (x) { return x.id === actBtn.getAttribute('data-id'); });
+      if (ec) { STATE.catEdit = Object.assign({}, ec); renderCatEditModal(); }
+    } else if (act === 'ce-close') {
+      STATE.catEdit = null; renderCatEditModal();
+    } else if (act === 'ce-save') {
+      var ce = STATE.catEdit;
+      if (!ce) return;
+      var cePayload = { catId: ce.id, name: (document.getElementById('ceName') || {}).value, icon: (document.getElementById('ceIcon') || {}).value,
+        group: (document.getElementById('ceGroup') || {}).value, description: (document.getElementById('ceDesc') || {}).value };
+      if (document.getElementById('cePoster')) cePayload.posterUrl = document.getElementById('cePoster').value.trim();
+      adminCall('edit_cat', cePayload, function (r) { STATE.catEdit = null; renderCatEditModal(); render(); showToast(r.message); });
+    } else if (act === 'adm-del-cat') {
+      var dc = STATE.categories.find(function (x) { return x.id === actBtn.getAttribute('data-id'); });
+      if (!dc) return;
+      if (!window.confirm('متأكد تحذف فئة «' + dc.name + '» وكل أسئلتها؟ ما تقدر ترجعها.')) return;
+      adminCall('del_cat', { catId: dc.id }, function (r) { render(); showToast(r.message); });
     } else if (act === 'adm-add-cat') {
       adminCall('add_cat', {
         name: (document.getElementById('catNewName') || {}).value,
@@ -3992,6 +4041,13 @@ footer a { text-decoration: none; }
     if (!t || !t.hasAttribute) return;
     if (t.hasAttribute('data-csug')) syncCatSugField(t);
     if (t.hasAttribute('data-qe') && STATE.qEditor) STATE.qEditor[t.getAttribute('data-qe')] = t.value;
+    if (t.id === 'admCatSearch') {
+      STATE.admCatSearch = t.value;
+      var pos = t.selectionStart;
+      render();
+      var again = document.getElementById('admCatSearch');
+      if (again) { again.focus(); try { again.setSelectionRange(pos, pos); } catch (er) {} }
+    }
   });
 
   document.addEventListener('change', function (e) {
