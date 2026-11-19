@@ -1258,8 +1258,8 @@ body.board-mode-active #boardCategoriesGrid[data-count="8"] > .m8-board-unit.m8-
 .m8-banner .board-poster-box { position: absolute !important; inset: 0; width: 100% !important; height: 100% !important; min-height: 0 !important; }
 .m8-banner .board-poster-box > svg { position: absolute; inset: 0; width: 100%; height: 100%; }
 .m8-banner .board-poster-box img { width: 100%; height: 100%; object-fit: cover; }
-.m8-banner-name { position: absolute; inset: auto 0 0 0; z-index: 3; padding: 22px 10px 7px; background: linear-gradient(transparent, rgba(5,7,18,.94)); color: #fff; font-weight: 900; font-size: clamp(12px, 1.9vh, 18px); line-height: 1.25; text-align: right; text-shadow: 0 2px 6px rgba(0,0,0,.7); overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
-.m8-banner-owner { position: absolute; top: 7px; right: 7px; z-index: 4; font-size: clamp(9px, 1.4vh, 12px); font-weight: 900; padding: 2px 9px; border-radius: 99px; background: rgba(5,7,18,.82); border: 1px solid #d4af5f; color: #f6e2a8; }
+.m8-banner-name { position: absolute; inset: auto 0 0 0; z-index: 3; padding: 22px 10px 7px; background: linear-gradient(transparent, rgba(5,7,18,.94)); color: #fff; font-weight: 900; font-size: clamp(14px, 2.5vh, 23px); line-height: 1.25; text-align: right; text-shadow: 0 2px 6px rgba(0,0,0,.7); overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.m8-banner-owner { position: absolute; top: 6px; right: 6px; z-index: 4; font-size: clamp(8px, 1.1vh, 10px); font-weight: 800; padding: 1px 7px; opacity: .92; border-radius: 99px; background: rgba(5,7,18,.82); border: 1px solid #d4af5f; color: #f6e2a8; }
 .m8-board-unit[data-owner="team1"] .m8-banner-owner { border-color: #7dbeff; color: #dbeafe; }
 .m8-board-unit[data-owner="team2"] .m8-banner-owner { border-color: #f0aa5a; color: #ffedd5; }
 .m8-board-unit[data-owner="shared"] .m8-banner-owner { border-color: #c8aaff; color: #ede9fe; }
@@ -1273,8 +1273,8 @@ body.board-mode-active .m8-banner { min-height: 0; }
 @media (max-height: 540px) {
   #boardCategoriesGrid > .m8-board-unit.m8-banner-unit, body.board-mode-active #boardCategoriesGrid[data-count="8"] > .m8-board-unit.m8-banner-unit { flex-direction: row !important; align-items: stretch; }
   .m8-banner { flex: 0 0 40%; min-height: 0; }
-  .m8-banner-name { font-size: 10px; padding: 12px 5px 4px; -webkit-line-clamp: 2; }
-  .m8-banner-owner { font-size: 8px; padding: 1px 5px; top: 3px; right: 3px; }
+  .m8-banner-name { font-size: 11.5px; padding: 12px 5px 4px; -webkit-line-clamp: 2; }
+  .m8-banner-owner { font-size: 7px; padding: 0 4px; top: 3px; right: 3px; }
   .m8-banner-info { width: 16px; height: 16px; font-size: 9px; top: 3px !important; left: 3px !important; }
   .m8-pill-grid { flex: 1 1 auto; grid-auto-rows: minmax(0, 1fr); }
   body.board-mode-active #boardCategoriesGrid[data-count="8"] .m8-pill-grid { height: auto; }

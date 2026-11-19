@@ -14,6 +14,13 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<script src="/app-install.js" defer></script>
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="ديوانية+">
+<meta name="application-name" content="ديوانية+">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -842,6 +849,54 @@ footer a { text-decoration: none; }
 .qsum-note { font-size: 13px; color: #fcd34d; }
 .qsum-note.ok { color: #6ee7b7; }
 @media (max-width: 560px) { .qe-head, .qe-body, .qe-foot { padding-left: 14px; padding-right: 14px; } .qcard h5 { font-size: 15.5px; } }
+.dw-nav { padding-top: env(safe-area-inset-top); }
+.ai-banner { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 18px; background: linear-gradient(110deg, rgba(245,185,66,.22), rgba(45,212,191,.14)); border: 1px solid rgba(245,185,66,.5); }
+.ai-banner-ic { font-size: 28px; }
+.ai-banner-txt { flex: 1; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.ai-banner-txt b { font-size: 15.5px; }
+.ai-banner-txt span { font-size: 13px; color: #fde68a; }
+.ai-banner-x { width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--border-subtle); background: rgba(0,0,0,.2); color: var(--text-muted); cursor: pointer; flex-shrink: 0; }
+@media (max-width: 560px) { .ai-banner { flex-wrap: wrap; } .ai-banner-txt { flex-basis: calc(100% - 80px); } .ai-banner .dw-btn { flex: 1; } }
+.ai-modal { width: min(560px, 96vw); max-height: 92vh; padding: 0; overflow: hidden; display: flex; flex-direction: column; gap: 0; }
+.ai-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 16px 18px; border-bottom: 1px solid var(--border-subtle); }
+.ai-head h3 { margin: 0; font-size: 19px; }
+.ai-body { padding: 14px 18px 18px; overflow-y: auto; }
+.ai-lead { margin: 0 0 12px; color: #c9d2e6; line-height: 1.8; font-size: 14.5px; }
+.ai-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.ai-steps li { display: grid; grid-template-columns: 120px 1fr; gap: 14px; align-items: center; padding: 10px; border-radius: 16px; background: rgba(255,255,255,.035); border: 1px solid var(--border-subtle); }
+.ai-art { display: grid; place-items: center; }
+.ai-svg { width: 100%; max-height: 170px; }
+.ai-txt b { display: block; font-size: 16px; margin: 4px 0; }
+.ai-txt p { margin: 0; color: var(--text-muted); font-size: 13.5px; line-height: 1.7; }
+.ai-n { display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: var(--gold); color: #2b1c00; font-weight: 800; font-size: 13px; }
+.ai-install { width: 100%; padding: 14px; font-size: 17px; margin-bottom: 4px; }
+.ai-or { margin: 10px 0 8px; color: var(--text-muted); font-size: 13px; text-align: center; }
+.ai-warn, .ai-desk, .ai-done { padding: 12px 14px; border-radius: 14px; margin-bottom: 12px; line-height: 1.8; font-size: 14px; }
+.ai-warn { background: rgba(245,185,66,.12); border: 1px solid rgba(245,185,66,.4); }
+.ai-desk { background: rgba(255,255,255,.04); border: 1px solid var(--border-subtle); }
+.ai-done { background: rgba(45,212,191,.12); border: 1px solid rgba(45,212,191,.4); }
+.ai-reward { padding: 22px 20px; text-align: center; align-items: center; gap: 8px; }
+.ai-reward h3 { margin: 0; font-size: 21px; }
+.ai-reward p { margin: 0; color: #c9d2e6; line-height: 1.8; }
+.ai-confetti { font-size: 44px; animation: aibounce 1.2s ease-in-out infinite alternate; }
+@keyframes aibounce { to { transform: translateY(-6px) rotate(-6deg); } }
+.ai-code { display: flex; align-items: center; gap: 10px; margin: 6px 0; padding: 10px 12px 10px 16px; border-radius: 14px; border: 2px dashed var(--gold); background: rgba(245,185,66,.08); }
+.ai-code span { font: 800 26px/1 Georgia, serif; letter-spacing: 4px; color: #ffe08a; }
+.ai-small { font-size: 12.5px !important; color: var(--text-muted) !important; }
+.ai-row { display: flex; gap: 10px; width: 100%; margin-top: 6px; }
+.ai-row .dw-btn { flex: 1; padding: 12px; }
+@media (max-width: 480px) { .ai-steps li { grid-template-columns: 92px 1fr; } }
+.promo-box { margin: 6px auto 0; max-width: 560px; padding: 12px 14px; border-radius: 16px; background: rgba(255,255,255,.035); border: 1px dashed rgba(245,185,66,.45); display: grid; gap: 8px; }
+.promo-box label { font-size: 13.5px; color: var(--text-muted); }
+.promo-row { display: flex; gap: 8px; }
+.promo-row .dw-input { text-transform: uppercase; letter-spacing: 2px; }
+.promo-on { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; color: #fde68a; }
+.promo-offer { text-align: right; padding: 10px 12px; border-radius: 12px; border: 1px solid rgba(45,212,191,.5); background: rgba(45,212,191,.1); color: #ccfbf1; cursor: pointer; font: inherit; }
+.price-card .pc-save.promo { background: rgba(245,185,66,.16); color: #fde68a; border-color: rgba(245,185,66,.4); }
+/* while a game is open, nothing of the store shows or scrolls behind it (Safari can reveal the page under the bars) */
+html.dw-game-open, html.dw-game-open body { overflow: hidden; height: 100%; overscroll-behavior: none; }
+html.dw-game-open #dwApp { visibility: hidden; }
+.dw-game-frame-wrap { height: 100vh; height: 100dvh; }
 /* features + devices + faq */
 .feat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
 @media (max-width: 1000px) { .feat-grid { grid-template-columns: repeat(2, 1fr); } }
@@ -1862,6 +1917,7 @@ footer a { text-decoration: none; }
           CACHE.catQuestionsOverrides = d.catQuestionsOverrides || {};
           CACHE.cat_suggestions = d.cat_suggestions || [];
           CACHE.suggestions = d.suggestions || [];
+          CACHE.promo = d.promo || null;
         }
         return d;
       });
@@ -1906,8 +1962,11 @@ footer a { text-decoration: none; }
           return d;
         });
       },
-      createPaymentOrder: function (pkgId) {
-        return api('POST', '/api/payments/orders', { pkgId: pkgId }).then(function (d) {
+      claimAppInstall: function (platform) { return api('POST', '/api/app/installed', { platform: platform }); },
+      myPromo: function () { return api('GET', '/api/promo/mine'); },
+      checkPromo: function (code, pkgId) { return api('POST', '/api/promo/check', { code: code, pkgId: pkgId }); },
+      createPaymentOrder: function (pkgId, promoCode) {
+        return api('POST', '/api/payments/orders', promoCode ? { pkgId: pkgId, promoCode: promoCode } : { pkgId: pkgId }).then(function (d) {
           if (d.wallet && ME) ME.wallet = d.wallet;
           return d;
         });
@@ -2236,6 +2295,17 @@ footer a { text-decoration: none; }
     '</article>';
   }
 
+  function installBannerHtml() {
+    if (!window.DwInstall || !window.DwInstall.bannerVisible()) return '';
+    var sar = STATE.appPromo ? STATE.appPromo.amount_halalas / 100 : 2;
+    return '<div class="ai-banner" role="region" aria-label="تثبيت التطبيق">' +
+      '<span class="ai-banner-ic">📲</span>' +
+      '<div class="ai-banner-txt"><b>ثبّت تطبيق ديوانية بلس على جهازك في ١٠ ثوانٍ</b><span>واحصل على كود خصم ' + arNum(sar) + ' ريال فوراً 🎁</span></div>' +
+      '<button class="dw-btn dw-btn-gold dw-btn-sm" data-ai="open">' + (window.DwInstall.canPrompt() ? 'ثبّت الآن' : 'كيف أثبّته؟') + '</button>' +
+      '<button class="ai-banner-x" data-ai="dismiss" aria-label="إخفاء">✕</button>' +
+    '</div>';
+  }
+
   function renderStoreTab() {
     var activeGames = STATE.games.filter(function (g) { return g.is_enabled; }).sort(function (a, b) { return a.sort_order - b.sort_order; });
     var filter = STATE.gameFilter || 'all';
@@ -2253,7 +2323,7 @@ footer a { text-decoration: none; }
       return '<div class="tile t' + (i + 1) + '" style="background:' + l.bg + '">' + l.svg + '</div>';
     }).join('');
 
-    var html = '<section class="hero2">' +
+    var html = installBannerHtml() + '<section class="hero2">' +
       '<div>' +
         '<span class="eyebrow">ألعاب جماعية للسهرات والديوانيات</span>' +
         '<h2>الشاشة للكل…<br><b>والجوال لك</b></h2>' +
@@ -2616,6 +2686,7 @@ footer a { text-decoration: none; }
       var save = full > p.price_halalas ? Math.round((1 - p.price_halalas / full) * 100) : 0;
       var per = sarText(Math.round(p.price_halalas / p.credits));
       var hl = !!p.highlight;
+      var promoOff = STATE.promoApplied ? Math.max(0, Math.min(STATE.promoApplied.amount, p.price_halalas - 100)) : 0;
       var btn = !gateway
         ? '<button class="dw-btn dw-btn-sec" disabled>🔒 قريباً</button>'
         : (!STATE.user
@@ -2625,13 +2696,37 @@ footer a { text-decoration: none; }
         (p.badge ? '<span class="pc-badge">' + esc(p.badge) + '</span>' : '') +
         '<div class="pc-name">' + esc(p.name) + '</div>' +
         '<div class="pc-credits">' + arNum(p.credits) + '<small>' + (p.credits === 1 ? 'قيم' : 'أقيام') + '</small></div>' +
-        '<div class="pc-price"><b>' + arNum(sarText(p.price_halalas)) + ' <small>ر.س</small></b>' + (save ? '<s>' + arNum(sarText(full)) + '</s>' : '') + '</div>' +
+        (promoOff
+          ? '<div class="pc-price"><b>' + arNum(sarText(p.price_halalas - promoOff)) + ' <small>ر.س</small></b><s>' + arNum(sarText(p.price_halalas)) + '</s></div><span class="pc-save promo">🎁 بعد خصم الكود</span>'
+          : '<div class="pc-price"><b>' + arNum(sarText(p.price_halalas)) + ' <small>ر.س</small></b>' + (save ? '<s>' + arNum(sarText(full)) + '</s>' : '') + '</div>') +
         (save ? '<span class="pc-save">وفّر ' + arNum(save) + '٪</span>' : '<span class="pc-per">السعر الأساسي</span>') +
         (p.credits > 1 ? '<div class="pc-per">≈ ' + arNum(per) + ' ر.س للقيم</div>' : '') +
         '<p class="pc-desc">' + esc(p.description) + '</p>' +
         btn +
       '</div>';
     }).join('') + '</div>';
+  }
+
+  function applyPromo(code) {
+    code = String(code || '').trim();
+    if (!code) { showToast('اكتب كود الخصم.'); return; }
+    if (!STATE.user) { document.getElementById('dwAuthModal').classList.add('open'); showToast('🔐 سجّل دخولك عشان تستخدم الكود.'); return; }
+    STATE.promoInput = code;
+    DiwaniyaServerKernel.checkPromo(code).then(function (r) {
+      if (r && r.ok) { STATE.promoApplied = { code: r.code, amount: r.amount_halalas }; showToast(r.message); }
+      else { STATE.promoApplied = null; showToast((r && r.error) || 'الكود غير صالح.'); }
+      render();
+    });
+  }
+  function promoBoxHtml() {
+    var ap = STATE.promoApplied;
+    var offer = !ap && STATE.appPromo && STATE.appPromo.installed && !STATE.appPromo.used && STATE.appPromo.active;
+    return '<div class="promo-box">' +
+      (ap
+        ? '<div class="promo-on">🎁 كود <b dir="ltr">' + esc(ap.code) + '</b> مفعّل: خصم ' + arNum(sarText(ap.amount)) + ' ريال على الباقة اللي تختارها <button class="dw-btn dw-btn-sec dw-btn-sm" data-act="promo-clear">إلغاء</button></div>'
+        : '<label for="promoInp">عندك كود خصم؟</label><div class="promo-row"><input id="promoInp" class="dw-input" dir="ltr" maxlength="20" placeholder="APP2" value="' + esc(STATE.promoInput || '') + '"><button class="dw-btn dw-btn-gold dw-btn-sm" data-act="promo-apply">تطبيق</button></div>' +
+          (offer ? '<button class="promo-offer" data-act="promo-use-app">🎁 عندك كود <b dir="ltr">' + esc(STATE.appPromo.code) + '</b> لتثبيتك التطبيق (خصم ' + arNum(sarText(STATE.appPromo.amount_halalas)) + ' ريال) — اضغط لتطبيقه</button>' : '')) +
+    '</div>';
   }
 
   function payTrustRow() {
@@ -2645,6 +2740,7 @@ footer a { text-decoration: none; }
         '<h2 style="margin:0;font-size:32px">اشحن أقيامك وابدأ السهرة</h2>' +
         '<p style="margin:8px auto 0;max-width:620px;color:#c9d2e6;line-height:1.8">القيم الواحد يشغّل لعبة كاملة لكل الشلة. كل ما كبرت الباقة نزل سعر القيم. وأول مرة في كل لعبة <b style="color:var(--teal)">مجانية</b>.</p>' +
       '</section>' +
+      promoBoxHtml() +
       '<div style="padding-top:14px">' + renderPriceCards() + '</div>' +
       payTrustRow() +
       '<div style="text-align:center;color:var(--text-muted);font-size:13px;line-height:1.9">الأقيام ما لها تاريخ انتهاء، وتنضاف لمحفظتك تلقائياً بعد تأكيد الدفع. بياناتك البنكية ما تمر على موقعنا.<br>بإتمام الشراء أنت توافق على ' + legalLinksHtml() + '.</div>' +
@@ -2848,7 +2944,17 @@ footer a { text-decoration: none; }
     }
 
     if (st === 'packages') {
+      var pr = DiwaniyaServerKernel.loadDB().promo || {};
       return nav +
+        '<div class="dw-card">' +
+          '<h4 style="margin:0;font-size:19px">🎁 كود خصم تثبيت التطبيق <span dir="ltr" class="dw-chip gold">' + esc(pr.code || 'APP2') + '</span></h4>' +
+          '<p style="margin:0;color:var(--text-muted);font-size:13.5px;line-height:1.8">ينعطى تلقائياً لأي حساب يفتح الموقع من أيقونة التطبيق المثبّت، ويستخدمه مرة وحدة على أي باقة. ثبّته ' + arNum(pr.installs || 0) + ' حساب، واستخدمه ' + arNum(pr.used || 0) + '.</p>' +
+          '<div style="display:flex;gap:10px;align-items:end;flex-wrap:wrap">' +
+            '<div><label style="font-size:12px;color:var(--text-muted)">قيمة الخصم (ريال)</label><input id="promoAmt" type="number" step="0.01" min="0" class="dw-input" style="width:120px" value="' + ((pr.amount_halalas != null ? pr.amount_halalas : 200) / 100) + '"></div>' +
+            '<label style="display:flex;align-items:center;gap:8px;padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.04)"><input id="promoActive" type="checkbox"' + (pr.active === 0 || pr.active === false ? '' : ' checked') + '> مفعّل</label>' +
+            '<button class="dw-btn dw-btn-gold dw-btn-sm" data-act="adm-save-promo">💾 حفظ</button>' +
+          '</div>' +
+        '</div>' +
         '<div class="dw-card">' +
           '<h4 style="margin:0;font-size:19px">إضافة أو تعديل باقة أقيام</h4>' +
           '<div class="dw-grid-4" style="background:rgba(0,0,0,0.25);padding:16px;border-radius:16px">' +
@@ -3540,6 +3646,7 @@ footer a { text-decoration: none; }
         iframe.removeAttribute('srcdoc');
         iframe.src = res.playUrl;
         frameWrap.classList.add('open');
+        document.documentElement.classList.add('dw-game-open');
         var tEl = document.getElementById('dwToast'); if (tEl) tEl.classList.add('in-game');
         var fsBtn = document.getElementById('dwFrameFsBtn');
         if (fsBtn) fsBtn.style.display = (document.fullscreenEnabled || document.webkitFullscreenEnabled) ? '' : 'none';
@@ -3726,6 +3833,7 @@ footer a { text-decoration: none; }
       var fw = document.getElementById('dwGameFrameWrap');
       var ifr = document.getElementById('dwGameIframe');
       if (fw) fw.classList.remove('open');
+      document.documentElement.classList.remove('dw-game-open');
       var tEl2 = document.getElementById('dwToast'); if (tEl2) tEl2.classList.remove('in-game');
       if (document.fullscreenElement || document.webkitFullscreenElement) { try { (document.exitFullscreen || document.webkitExitFullscreen).call(document); } catch (e) {} }
       if (ifr) { ifr.onload = null; ifr.removeAttribute('srcdoc'); ifr.src = 'about:blank'; }
@@ -3778,6 +3886,7 @@ footer a { text-decoration: none; }
         document.getElementById('otpStepBox').style.display = 'none';
         document.getElementById('authOtpInp').value = '';
         render();
+        afterSignIn();
         showToast('مرحباً بك في ديوانية بلس يا ' + STATE.user.displayName + (STATE.user.adminRole === 'owner' ? ' (صلاحية المالك)' : '') + '!');
       });
     } else if (act === 'logout') {
@@ -3786,6 +3895,14 @@ footer a { text-decoration: none; }
         render();
         showToast('تم تسجيل الخروج وإنهاء الجلسة بنجاح.');
       });
+    } else if (act === 'promo-apply') {
+      applyPromo((document.getElementById('promoInp') || {}).value);
+    } else if (act === 'promo-use-app') {
+      applyPromo(STATE.appPromo && STATE.appPromo.code);
+    } else if (act === 'promo-clear') {
+      STATE.promoApplied = null; STATE.promoInput = ''; render();
+    } else if (act === 'adm-save-promo') {
+      adminCall('save_promo', { amountSar: (document.getElementById('promoAmt') || {}).value, active: !!(document.getElementById('promoActive') || {}).checked }, function (r) { render(); showToast(r.message); });
     } else if (act === 'buy-pkg') {
       if (!STATE.user) {
         showToast('🔐 سجّل دخولك أولاً لطلب الباقة.');
@@ -3796,7 +3913,7 @@ footer a { text-decoration: none; }
       if (STATE.checkoutInFlight) return;
       STATE.checkoutInFlight = true;
       render();
-      DiwaniyaServerKernel.createPaymentOrder(pkgId).then(function (payRes) {
+      DiwaniyaServerKernel.createPaymentOrder(pkgId, STATE.promoApplied ? STATE.promoApplied.code : '').then(function (payRes) {
         if (!payRes.ok || !payRes.checkoutUrl) {
           STATE.checkoutInFlight = false;
           render();
@@ -4131,10 +4248,30 @@ footer a { text-decoration: none; }
     else if (status === 'failed' || status === 'expired' || status === 'canceled') showToast('❌ لم تتم عملية الدفع، وما انخصم منك شي.');
   }
 
+  // Bridge for /app-install.js (install guide + install reward).
+  window.DwApp = {
+    toast: function (m) { showToast(m); },
+    user: function () { return STATE.user; },
+    claimInstall: function (platform) { return DiwaniyaServerKernel.claimAppInstall(platform); },
+    setPromo: function (info) { STATE.appPromo = info; render(); },
+    rewardSar: function () { return STATE.appPromo ? STATE.appPromo.amount_halalas / 100 : 2; },
+    goPackages: function (code) { STATE.tab = 'packages'; STATE.promoInput = code || ''; render(); window.scrollTo(0, 0); if (code) applyPromo(code); },
+    openLogin: function () { document.getElementById('dwAuthModal').classList.add('open'); },
+    onChange: function () { render(); }
+  };
+  function afterSignIn() {
+    if (window.DwInstall) window.DwInstall.checkReward();
+    else window.addEventListener('load', function () { if (window.DwInstall) window.DwInstall.checkReward(); });
+    if (STATE.user && !(window.DwInstall && window.DwInstall.standalone())) {
+      DiwaniyaServerKernel.myPromo().then(function (d) { if (d && d.ok && d.installed && !d.used && d.active) { STATE.appPromo = d; render(); } });
+    }
+  }
+
   render();
   DiwaniyaServerKernel.refreshAll().then(function () {
     STATE.catalogLoaded = true;
     render();
+    afterSignIn();
     if (RETURN_PARAMS && RETURN_PARAMS.payment && RETURN_PARAMS.order && STATE.user) {
       DiwaniyaServerKernel.paymentStatus(RETURN_PARAMS.order).then(function (d) {
         render();

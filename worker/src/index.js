@@ -7,6 +7,7 @@ import { createCheckout, handleReturn, handleWebhook, reconcileUserPending, paym
 import { getCatalog, getDoc, putDoc } from './catalog.js';
 import { adminData, adminAction, eightCategoryQuestions, submitCategorySuggestion } from './admin.js';
 import { uploadMedia, serveMedia } from './media.js';
+import { grantAppInstall, myPromo, checkPromo } from './promo.js';
 import { handleRooms } from './rooms/routes.js';
 import { STATIC } from './static.generated.js';
 export { GameHubDO, RelayRoomDO, BuzzerRoomDO } from './rooms/objects.js';
@@ -93,6 +94,19 @@ async function handleApi(env, request, url) {
     return json(await paymentStatusForUser(env, session, payOrder[1]));
   }
 
+  if (method === 'POST' && path === '/api/app/installed') {
+    const session = await requireSession(env, request);
+    return json(await grantAppInstall(env, session, await readJson(request)));
+  }
+  if (method === 'GET' && path === '/api/promo/mine') {
+    const session = await requireSession(env, request, { csrf: false });
+    return json(await myPromo(env, session));
+  }
+  if (method === 'POST' && path === '/api/promo/check') {
+    const session = await requireSession(env, request);
+    return json(await checkPromo(env, session, await readJson(request)));
+  }
+
   if (method === 'POST' && path === '/api/media') {
     const session = await requireSession(env, request);
     return json(await uploadMedia(env, request, session), 201);
@@ -143,8 +157,10 @@ function serveStatic(request, url) {
   }
   const [body, type] = file;
   const isHtml = type.startsWith('text/html');
+  // The service worker and the manifest must always be re-checked, or an update could stay stuck on phones.
+  const fresh = isHtml || path === '/sw.js' || path === '/manifest.webmanifest';
   return new Response(request.method === 'HEAD' ? null : body, {
-    headers: { ...STATIC_HEADERS, 'content-type': type, 'cache-control': isHtml ? 'no-cache' : 'public, max-age=3600' }
+    headers: { ...STATIC_HEADERS, 'content-type': type, 'cache-control': fresh ? 'no-cache' : 'public, max-age=3600' }
   });
 }
 

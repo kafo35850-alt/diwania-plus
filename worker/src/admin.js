@@ -5,6 +5,7 @@ import { getDoc, putDoc, isShippedCategory } from './catalog.js';
 import { GAMES } from './games.js';
 import { verifyOrder } from './payments.js';
 import { cleanMedia, legacyMedia, mediaBytesUsed } from './media.js';
+import { promoConfig, APP_CODE } from './promo.js';
 
 const SLUG_RE = /^[a-z0-9_]{2,40}$/;
 export const NOT_CLONABLE = ['eight', 'dakhil', 'mafia', 'qaftah', 'chancellor', 'harf', 'qaddirha'];
@@ -30,6 +31,11 @@ export async function adminData(env) {
   const [gameContent, overrides, catSuggestions, gameSuggestions] = await Promise.all([getDoc(env, 'game_content'), getDoc(env, 'catQuestionsOverrides'), getDoc(env, 'cat_suggestions'), getDoc(env, 'suggestions')]);
   return {
     media_bytes: await mediaBytesUsed(env),
+    promo: {
+      ...(await promoConfig(env))[APP_CODE], code: APP_CODE,
+      installs: ((await env.DB.prepare('SELECT COUNT(*) AS n FROM app_installs').first()) || {}).n || 0,
+      used: ((await env.DB.prepare("SELECT COUNT(*) AS n FROM promo_redemptions WHERE code = ? AND status = 'used'").bind(APP_CODE).first()) || {}).n || 0
+    },
     cat_suggestions: catSuggestions || [],
     suggestions: gameSuggestions || [],
     ok: true,
@@ -325,6 +331,16 @@ export async function adminAction(env, session, action, payload) {
       await putDoc(env, 'cat_suggestions', list);
       await log(env, admin, action, 'cat_suggestion', sug.id, sug.name);
       return { ok: true, message: sug.status === 'approved' ? 'تم اعتماد فئة «' + sug.name + '» وصارت في ديوانية الثمانية.' : 'تم رفض الاقتراح.' };
+    }
+
+    case 'save_promo': {
+      const amount = Math.round(Number(payload.amountSar) * 100);
+      if (!Number.isFinite(amount) || amount < 0 || amount > 100000) throw new HttpError(400, 'اكتب قيمة خصم صحيحة.');
+      const doc = (await getDoc(env, 'promos')) || {};
+      doc[APP_CODE] = { ...(doc[APP_CODE] || {}), amount_halalas: amount, active: payload.active ? 1 : 0, requires_app: 1 };
+      await putDoc(env, 'promos', doc);
+      await log(env, admin, 'save_promo', 'promo', APP_CODE, (amount / 100) + ' ر.س — ' + (payload.active ? 'مفعّل' : 'موقوف'));
+      return { ok: true, message: 'تم حفظ كود ' + APP_CODE + ': خصم ' + (amount / 100) + ' ريال — ' + (payload.active ? 'مفعّل' : 'موقوف') + '.' };
     }
 
     case 'mark_suggestion':

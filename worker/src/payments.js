@@ -8,6 +8,7 @@
 //   4. Either way we ask Moyasar's API for the invoice and only credit the wallet when Moyasar
 //      itself says it is paid with the exact amount and currency of the order.
 //      Crediting is a single D1 transaction guarded by status = 'pending', so it happens once.
+import { promoDiscount, reservePromo } from './promo.js';
 import { HttpError, nowMs, nowIso, randomId, constantTimeEqual, underRateLimit, clientIp } from './util.js';
 import { getDoc } from './catalog.js';
 import { walletSnapshot } from './wallet.js';
@@ -73,12 +74,15 @@ async function creditOrder(env, order, paymentId) {
        WHERE user_id = ?3 AND ${pendingGuard}`
     ).bind(order.id, order.credits, order.user_id),
     env.DB.prepare(
+      `UPDATE promo_redemptions SET status = 'used' WHERE order_id = ?1 AND ${pendingGuard}`
+    ).bind(order.id),
+    env.DB.prepare(
       `UPDATE payments SET status = 'paid', paid_at = ?2, updated_at = ?2, gateway_payment_id = COALESCE(?3, gateway_payment_id),
          gateway_note = 'تم الدفع وإضافة الأقيام'
        WHERE id = ?1 AND status = 'pending'`
     ).bind(order.id, iso, paymentId)
   ]);
-  return results[2].meta.changes === 1;
+  return results[3].meta.changes === 1;
 }
 
 // Asks Moyasar about the order's invoice and settles it. Safe to call any number of times.
@@ -111,8 +115,11 @@ export async function createCheckout(env, request, session, body) {
   const packages = await getDoc(env, 'packages');
   const pkg = packages.find((p) => p.id === body.pkgId && p.is_active);
   if (!pkg) throw new HttpError(404, 'الباقة المختارة غير متاحة.');
-  const amount = Number(pkg.price_halalas);
-  if (!Number.isInteger(amount) || amount < 100) throw new HttpError(400, 'سعر الباقة غير صالح.');
+  const price = Number(pkg.price_halalas);
+  if (!Number.isInteger(price) || price < 100) throw new HttpError(400, 'سعر الباقة غير صالح.');
+  // Discount codes are checked and applied here; the browser only sends the code.
+  const promo = body.promoCode ? await promoDiscount(env, session, body.promoCode, price) : null;
+  const amount = price - (promo ? promo.discount : 0);
 
   const origin = new URL(request.url).origin;
   const iso = nowIso();
@@ -124,14 +131,17 @@ export async function createCheckout(env, request, session, body) {
     package_name: pkg.name,
     credits: pkg.credits,
     amount_halalas: amount,
-    currency: pkg.currency || 'SAR'
+    currency: pkg.currency || 'SAR',
+    promo_code: promo ? promo.code : null,
+    discount_halalas: promo ? promo.discount : 0
   };
   await env.DB.prepare(
     `INSERT INTO payments (id, user_id, user_email, package_id, package_name, credits, amount_halalas, currency, status,
-       gateway, gateway_note, created_at, updated_at)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'pending', 'moyasar', 'بانتظار إتمام الدفع', ?, ?)`
+       gateway, gateway_note, created_at, updated_at, promo_code, discount_halalas)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'pending', 'moyasar', 'بانتظار إتمام الدفع', ?, ?, ?, ?)`
   ).bind(order.id, order.user_id, order.user_email, order.package_id, order.package_name, order.credits,
-    order.amount_halalas, order.currency, iso, iso).run();
+    order.amount_halalas, order.currency, iso, iso, order.promo_code, order.discount_halalas).run();
+  if (promo) await reservePromo(env, order.user_id, promo.code, order.id);
 
   const returnUrl = origin + '/payments/return?order=' + encodeURIComponent(order.id);
   let invoice;
@@ -139,7 +149,7 @@ export async function createCheckout(env, request, session, body) {
     invoice = await moyasar(env, 'POST', '/invoices', {
       amount: order.amount_halalas,
       currency: order.currency,
-      description: 'ديوانية بلس — ' + pkg.name + ' (' + pkg.credits + ' أقيام)',
+      description: 'ديوانية بلس — ' + pkg.name + ' (' + pkg.credits + ' أقيام)' + (promo ? ' — خصم ' + promo.code : ''),
       success_url: returnUrl,
       back_url: returnUrl,
       callback_url: origin + '/api/payments/webhook',
