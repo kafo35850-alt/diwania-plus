@@ -4,7 +4,7 @@ import { HttpError, nowIso, randomId, cleanText, toInt } from './util.js';
 import { getDoc, putDoc } from './catalog.js';
 import { GAMES } from './games.js';
 import { verifyOrder } from './payments.js';
-import { cleanImageRef, cleanVideoRef } from './media.js';
+import { cleanMedia, legacyMedia, mediaBytesUsed } from './media.js';
 
 const SLUG_RE = /^[a-z0-9_]{2,40}$/;
 export const NOT_CLONABLE = ['eight', 'dakhil', 'mafia', 'qaftah', 'chancellor', 'harf', 'qaddirha'];
@@ -29,6 +29,7 @@ export async function adminData(env) {
   ]);
   const [gameContent, overrides, catSuggestions, gameSuggestions] = await Promise.all([getDoc(env, 'game_content'), getDoc(env, 'catQuestionsOverrides'), getDoc(env, 'cat_suggestions'), getDoc(env, 'suggestions')]);
   return {
+    media_bytes: await mediaBytesUsed(env),
     cat_suggestions: catSuggestions || [],
     suggestions: gameSuggestions || [],
     ok: true,
@@ -75,8 +76,8 @@ export function eightCategoryQuestions(catSlug) {
     prompt_text: q.q || q.question || '',
     answer_text: q.a || q.answer || '',
     extra_info: q.hint || q.info || '',
-    image_url: q.img || '',
-    video_url: q.video || '',
+    qm: q.qm || legacyMedia(q.img, q.video),
+    am: q.am || null,
     has_builtin_media: !!(q.photo || q.rebus || q.scenePhoto || q.fantasy),
     options: q.options || [],
     sort_order: idx + 1,
@@ -289,7 +290,7 @@ export async function adminAction(env, session, action, payload) {
         sub_group: cleanText(payload.group, 40) || 'عام',
         description: cleanText(payload.description, 300) || 'فئة مضافة من لوحة الإدارة',
         icon: cleanText(payload.icon, 8) || '🎯',
-        poster: cleanImageRef(payload.posterUrl),
+        poster: (cleanMedia({ t: 'image', u: payload.posterUrl }) || {}).u || '',
         posterTheme: 'country_saudi', sort_order: 1, is_visible: 1, item_count: 0
       });
       await putDoc(env, 'categories', categories);
@@ -359,8 +360,9 @@ function eightItem(it, idx, catSlug) {
     q: cleanText(it.q || it.prompt_text, 1000),
     a: cleanText(it.a || it.answer_text, 500),
     hint: cleanText(it.hint || it.extra_info, 1000),
-    img: cleanImageRef(it.img || it.image_url),
-    video: cleanVideoRef(it.video || it.video_url)
+    // Question media, and answer media (when empty the game shows the question media with the answer).
+    qm: cleanMedia(it.qm) || legacyMedia(it.img || it.image_url, it.video || it.video_url),
+    am: cleanMedia(it.am)
   };
 }
 
@@ -380,7 +382,7 @@ async function contentAction(env, admin, action, payload) {
       list.unshift(eightItem({
         uid: catSlug + '_custom_' + Date.now(), points: payload.points,
         q: payload.promptText, a: payload.answerText, hint: payload.extraInfo,
-        img: payload.imageUrl, video: payload.videoUrl
+        qm: payload.qm, am: payload.am
       }, 0, catSlug));
     } else if (action === 'edit_content') {
       list.forEach((q) => {
@@ -389,8 +391,8 @@ async function contentAction(env, admin, action, payload) {
           q.a = cleanText(payload.answerText || q.a, 500);
           q.hint = cleanText(payload.extraInfo != null ? payload.extraInfo : q.hint, 1000);
           if (payload.points) q.points = toInt(payload.points, q.points);
-          if (payload.imageUrl != null) q.img = cleanImageRef(payload.imageUrl);
-          if (payload.videoUrl != null) q.video = cleanVideoRef(payload.videoUrl);
+          if (payload.qm !== undefined) { q.qm = cleanMedia(payload.qm); delete q.img; delete q.video; }
+          if (payload.am !== undefined) q.am = cleanMedia(payload.am);
         }
       });
     } else if (action === 'del_content') {
@@ -463,7 +465,7 @@ export async function submitCategorySuggestion(env, session, body) {
   const raw = Array.isArray(body.questions) ? body.questions.slice(0, 30) : [];
   const questions = raw.map((it, i) => eightItem({
     uid: 'sug_' + i, points: [200, 400, 600].includes(toInt(it.points, 0)) ? toInt(it.points, 200) : 200,
-    q: it.q, a: it.a, hint: it.hint, img: it.img, video: it.video
+    q: it.q, a: it.a, hint: it.hint, qm: it.qm, am: it.am
   }, i, 'sug')).filter((q) => q.q && q.a).map((q) => ({ ...q, q: q.q.slice(0, 300), a: q.a.slice(0, 120), hint: q.hint.slice(0, 300) }));
   if (questions.length < 6) throw new HttpError(400, 'اكتب ٦ أسئلة على الأقل مع إجاباتها (اللوحة تحتاج ٦ أسئلة لكل فئة).');
   const list = (await getDoc(env, 'cat_suggestions')) || [];

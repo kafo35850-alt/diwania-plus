@@ -783,6 +783,64 @@ footer a { text-decoration: none; }
 .csug-q { display: grid; grid-template-columns: 130px 1fr 1fr; gap: 8px; padding: 12px; border-radius: 14px; background: rgba(0,0,0,.22); border: 1px solid var(--border-subtle); }
 .csug-q .full { grid-column: 1 / -1; }
 @media (max-width: 640px) { .csug-q { grid-template-columns: 1fr; } }
+.qe-modal { width: min(640px, 96vw); max-height: 92vh; display: flex; flex-direction: column; padding: 0; overflow: hidden; gap: 0; }
+.qe-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; padding: 18px 20px 12px; border-bottom: 1px solid var(--border-subtle); }
+.qe-head h3 { margin: 0; font-size: 21px; }
+.qe-head p { margin: 4px 0 0; color: var(--text-muted); font-size: 13.5px; }
+.qe-body { padding: 16px 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
+.qe-lbl { font-weight: 700; font-size: 14.5px; }
+.qe-lbl i { color: #f43f5e; font-style: normal; }
+.qe-lbl small { color: var(--text-muted); font-weight: 500; }
+.qe-ta { min-height: 84px; resize: vertical; font: inherit; line-height: 1.7; }
+.qe-ta.sm { min-height: 64px; }
+.qe-box { border: 1px solid var(--border-subtle); border-radius: 18px; padding: 14px; background: rgba(255,255,255,.025); }
+.qe-box h5 { margin: 0; font-size: 15.5px; }
+.qe-box > p { margin: 3px 0 10px; color: var(--text-muted); font-size: 13px; }
+.qe-levels { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 10px; }
+.qe-lv { padding: 12px 6px; border-radius: 14px; font-weight: 700; font-size: 16px; border: 2px solid transparent; display: flex; flex-direction: column; align-items: center; gap: 2px; opacity: .55; }
+.qe-lv small { font-size: 11.5px; opacity: .8; font-weight: 500; }
+.qe-lv.on { opacity: 1; }
+.qe-lv.easy { background: rgba(16,185,129,.16); color: #6ee7b7; } .qe-lv.easy.on { border-color: #34d399; }
+.qe-lv.mid { background: rgba(245,185,66,.16); color: #fcd34d; } .qe-lv.mid.on { border-color: #fbbf24; }
+.qe-lv.hard { background: rgba(244,63,94,.16); color: #fda4af; } .qe-lv.hard.on { border-color: #fb7185; }
+.qe-drop { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 22px 12px; border: 2px dashed rgba(245,185,66,.4); border-radius: 16px; cursor: pointer; text-align: center; background: rgba(245,185,66,.04); }
+.qe-drop:hover { background: rgba(245,185,66,.09); }
+.qe-drop .qe-up { width: 46px; height: 46px; border-radius: 14px; display: grid; place-items: center; font-size: 22px; background: rgba(245,185,66,.16); }
+.qe-drop small { color: var(--text-muted); font-size: 12px; letter-spacing: .3px; }
+.qe-drop.busy { cursor: default; }
+.qe-spin { width: 28px; height: 28px; border-radius: 50%; border: 3px solid rgba(245,185,66,.25); border-top-color: var(--gold); animation: qespin .8s linear infinite; }
+@keyframes qespin { to { transform: rotate(360deg); } }
+.qe-link { display: flex; gap: 6px; margin-top: 8px; }
+.qe-note { margin: 8px 0 0; font-size: 12.5px; color: #5eead4; }
+.qe-filled { border-radius: 14px; overflow: hidden; border: 1px solid var(--border-subtle); background: #0b1220; }
+.qe-prev-img { display: block; width: 100%; max-height: 240px; object-fit: contain; background: #0b1220; }
+.qe-filled audio { display: block; padding: 12px; }
+.qe-filled-bar { display: flex; justify-content: space-between; align-items: center; padding: 8px 10px; background: rgba(255,255,255,.04); font-size: 13.5px; }
+.qe-foot { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 14px 20px; border-top: 1px solid var(--border-subtle); }
+.qe-foot .dw-btn { padding: 13px; font-size: 16px; }
+.qlist { display: flex; flex-direction: column; gap: 10px; }
+.qcard { border: 1px solid var(--border-subtle); border-radius: 18px; padding: 14px 16px; background: rgba(255,255,255,.03); }
+.qcard-top { display: flex; align-items: center; gap: 8px; }
+.qnum { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; background: #6d28d9; color: #fff; font-weight: 700; font-size: 14px; }
+.qlv { padding: 3px 11px; border-radius: 999px; font-size: 12.5px; font-weight: 700; }
+.qlv.easy { background: rgba(16,185,129,.16); color: #6ee7b7; }
+.qlv.mid { background: rgba(245,185,66,.16); color: #fcd34d; }
+.qlv.hard { background: rgba(244,63,94,.16); color: #fda4af; }
+.qlv.short { outline: 1px dashed currentColor; }
+.qcard h5 { margin: 10px 0 2px; font-size: 17px; line-height: 1.6; }
+.qcard .qans { margin: 0; color: #5eead4; font-weight: 700; }
+.qcard .qhint { margin: 4px 0 0; color: var(--text-muted); font-size: 13px; }
+.qcard-media { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+.qmedia-chip { display: inline-flex; align-items: center; gap: 8px; padding: 4px 12px 4px 4px; border-radius: 12px; border: 1px solid var(--border-subtle); background: rgba(255,255,255,.04); font-size: 13px; font-weight: 600; }
+.qmedia-chip small { color: var(--text-muted); font-weight: 500; }
+.qmedia-chip.inherited { opacity: .75; border-style: dashed; }
+.qmedia-chip .mt { width: 36px; height: 36px; border-radius: 9px; overflow: hidden; display: grid; place-items: center; background: #0b1220; }
+.qmedia-chip .mt img { width: 100%; height: 100%; object-fit: cover; }
+.qmedia-chip .mt-ic { font-size: 18px; }
+.qsummary { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; padding: 10px 12px; border-radius: 14px; background: rgba(0,0,0,.22); }
+.qsum-note { font-size: 13px; color: #fcd34d; }
+.qsum-note.ok { color: #6ee7b7; }
+@media (max-width: 560px) { .qe-head, .qe-body, .qe-foot { padding-left: 14px; padding-right: 14px; } .qcard h5 { font-size: 15.5px; } }
 /* features + devices + faq */
 .feat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
 @media (max-width: 1000px) { .feat-grid { grid-template-columns: repeat(2, 1fr); } }
@@ -1660,7 +1718,7 @@ footer a { text-decoration: none; }
       target.value = d.url;
       target.dispatchEvent(new Event('input', { bubbles: true }));
       var pv = document.getElementById(targetId + 'Preview');
-      if (pv) pv.innerHTML = mediaThumbHtml(d.url, '');
+      if (pv) pv.innerHTML = '<span class="qmedia-chip"><span class="mt">' + mediaThumb({ t: 'image', u: d.url }) + '</span>🖼️ صورة الغلاف</span>';
       showToast('✅ انرفعت الصورة');
     }).catch(function (e) { showToast(e.message || 'تعذر رفع الصورة.'); });
     fileInput.value = '';
@@ -1669,23 +1727,51 @@ footer a { text-decoration: none; }
     u = String(u || '').trim();
     return /^\/media\/med_[A-Za-z0-9_-]+$/.test(u) || /^https:\/\//.test(u) ? u : '';
   }
-  function mediaThumbHtml(img, video) {
-    var out = '';
-    if (safeMediaUrl(img)) out += '<img src="' + esc(safeMediaUrl(img)) + '" alt="" referrerpolicy="no-referrer" style="width:56px;height:42px;object-fit:cover;border-radius:8px;vertical-align:middle;border:1px solid var(--border-subtle)">';
-    if (safeMediaUrl(video)) out += ' <a href="' + esc(safeMediaUrl(video)) + '" target="_blank" rel="noopener noreferrer" class="dw-chip gold" style="text-decoration:none">🎬 فيديو</a>';
-    return out;
+
+  // ---- question media: { t: 'image' | 'audio' | 'video' | 'youtube', u: address } ----
+  function youTubeIdOf(u) {
+    try {
+      var x = new URL(u);
+      var h = x.hostname.replace(/^(www|m|music)\./, '');
+      var id = '';
+      if (h === 'youtu.be') id = x.pathname.slice(1).split('/')[0];
+      else if (h === 'youtube.com' || h === 'youtube-nocookie.com') id = x.searchParams.get('v') || ((x.pathname.match(/^\/(?:shorts|embed|live)\/([A-Za-z0-9_-]+)/) || [])[1] || '');
+      return /^[A-Za-z0-9_-]{6,20}$/.test(id) ? id : '';
+    } catch (e) { return ''; }
   }
-  // One row of image + video fields (upload button or a link).
-  function mediaFieldsHtml(prefix, img, video) {
-    return '<div class="media-fields">' +
-      '<div><label>🖼️ صورة (اختياري)</label><div class="mf-row">' +
-        '<input id="' + prefix + 'Img" class="dw-input" dir="ltr" placeholder="ارفع صورة أو الصق رابط https" value="' + esc(img || '') + '">' +
-        '<label class="dw-btn dw-btn-sec dw-btn-sm mf-up">⬆️ رفع<input type="file" accept="image/*" data-upload-target="' + prefix + 'Img" style="display:none"></label>' +
-      '</div><div id="' + prefix + 'ImgPreview" class="mf-prev">' + mediaThumbHtml(img, '') + '</div></div>' +
-      '<div><label>🎬 فيديو (اختياري)</label>' +
-        '<input id="' + prefix + 'Video" class="dw-input" dir="ltr" placeholder="رابط يوتيوب أو رابط ملف فيديو" value="' + esc(video || '') + '">' +
-        '<div class="mf-prev" style="font-size:12px;color:var(--text-muted)">يوتيوب ويوتيوب شورتس يشتغلون داخل اللعبة مباشرة.</div></div>' +
-    '</div>';
+  function kindOfUrl(u) {
+    if (youTubeIdOf(u)) return 'youtube';
+    if (/\.(mp3|m4a|aac|wav|ogg|oga)(\?|#|$)/i.test(u)) return 'audio';
+    if (/\.(mp4|webm|mov|m4v)(\?|#|$)/i.test(u)) return 'video';
+    return 'image';
+  }
+  function mediaOf(m) { return m && safeMediaUrl(m.u) ? { t: m.t || kindOfUrl(m.u), u: m.u } : null; }
+  function legacyMediaOf(img, video) {
+    if (safeMediaUrl(img)) return { t: 'image', u: img };
+    if (safeMediaUrl(video)) return { t: kindOfUrl(video), u: video };
+    return null;
+  }
+  var MEDIA_LABEL = { image: '🖼️ صورة', audio: '🎧 صوت', video: '🎬 فيديو', youtube: '▶️ يوتيوب' };
+  // Small square preview used on question cards.
+  function mediaThumb(m) {
+    m = mediaOf(m);
+    if (!m) return '';
+    if (m.t === 'image') return '<img src="' + esc(m.u) + '" alt="" referrerpolicy="no-referrer">';
+    if (m.t === 'youtube') return '<img src="https://i.ytimg.com/vi/' + esc(youTubeIdOf(m.u)) + '/default.jpg" alt="" referrerpolicy="no-referrer">';
+    return '<span class="mt-ic">' + (m.t === 'audio' ? '🎧' : '🎬') + '</span>';
+  }
+  function mediaChip(label, m, inherited) {
+    if (!mediaOf(m)) return '';
+    return '<span class="qmedia-chip' + (inherited ? ' inherited' : '') + '"><span class="mt">' + mediaThumb(m) + '</span>' + label + (inherited ? ' <small>(نفس وسائط السؤال)</small>' : '') + '</span>';
+  }
+  // Bigger preview inside the add-question window.
+  function mediaPreviewHtml(m) {
+    m = mediaOf(m);
+    if (!m) return '';
+    if (m.t === 'image') return '<img src="' + esc(m.u) + '" alt="" referrerpolicy="no-referrer" class="qe-prev-img">';
+    if (m.t === 'audio') return '<audio src="' + esc(m.u) + '" controls preload="metadata" style="width:100%"></audio>';
+    if (m.t === 'video') return '<video src="' + esc(m.u) + '" controls playsinline preload="metadata" class="qe-prev-img"></video>';
+    return '<img src="https://i.ytimg.com/vi/' + esc(youTubeIdOf(m.u)) + '/hqdefault.jpg" alt="" referrerpolicy="no-referrer" class="qe-prev-img">';
   }
 
   function renderCategoryPosterSvg(catObj) {
@@ -2251,8 +2337,131 @@ footer a { text-decoration: none; }
     return html;
   }
 
+  // One window for adding or editing a question: admin editor (Eight / Qaftah) and player suggestions.
+  function openQEditor(opts) {
+    STATE.qEditor = {
+      mode: opts.mode, itemId: opts.itemId || null, index: opts.index != null ? opts.index : null,
+      withMedia: opts.withMedia !== false, allowVideo: !!opts.allowVideo,
+      points: Number(opts.points || 200), q: opts.q || '', a: opts.a || '', hint: opts.hint || '',
+      qm: mediaOf(opts.qm), am: mediaOf(opts.am), busy: {}
+    };
+    renderQEditorModal();
+    setTimeout(function () { var f = document.querySelector('#dwQEditorModal [data-qe="q"]'); if (f && !f.value) f.focus(); }, 30);
+  }
+  function closeQEditor() { STATE.qEditor = null; renderQEditorModal(); }
+  function qeSlotHtml(slot) {
+    var e = STATE.qEditor;
+    var m = e[slot];
+    var title = slot === 'qm' ? 'وسائط السؤال' : 'وسائط الإجابة';
+    var sub = slot === 'qm' ? 'اختياري: صورة أو صوت أو فيديو يطلع مع السؤال.' : 'اختياري: صورة أو صوت أو فيديو يطلع بعد كشف الإجابة.';
+    var accept = e.allowVideo ? 'image/*,audio/*,video/*' : 'image/*,audio/*';
+    var formats = e.allowVideo ? 'PNG، JPG، MP3، MP4' : 'PNG، JPG، MP3 — والفيديو برابط يوتيوب';
+    var body;
+    if (e.busy[slot]) {
+      body = '<div class="qe-drop busy"><span class="qe-spin"></span><b>جاري الرفع...</b></div>';
+    } else if (m) {
+      body = '<div class="qe-filled">' + mediaPreviewHtml(m) +
+        '<div class="qe-filled-bar"><span>' + (MEDIA_LABEL[m.t] || '') + '</span><button class="dw-btn dw-btn-sec dw-btn-sm" data-act="qe-clear" data-slot="' + slot + '">✕ إزالة</button></div></div>';
+    } else {
+      body = '<label class="qe-drop"><input type="file" accept="' + accept + '" data-qe-file="' + slot + '" hidden>' +
+          '<span class="qe-up">⬆️</span><b>اضغط لرفع صورة أو صوت' + (e.allowVideo ? ' أو فيديو' : '') + '</b><small>' + formats + '</small></label>' +
+        '<div class="qe-link"><input class="dw-input" dir="ltr" data-qe-link="' + slot + '" placeholder="أو الصق رابط يوتيوب أو رابط ملف"><button class="dw-btn dw-btn-sec dw-btn-sm" data-act="qe-link" data-slot="' + slot + '">إضافة</button></div>' +
+        (slot === 'am' && e.qm ? '<p class="qe-note">💡 إذا تركتها فاضية، تطلع وسائط السؤال نفسها مع الإجابة.</p>' : '');
+    }
+    return '<section class="qe-box"><h5>' + title + '</h5><p>' + sub + '</p>' + body + '</section>';
+  }
+  function renderQEditorModal() {
+    var host = document.getElementById('dwQEditorModal');
+    if (!host) { host = document.createElement('div'); host.id = 'dwQEditorModal'; host.className = 'dw-modal-backdrop'; document.body.appendChild(host); }
+    var e = STATE.qEditor;
+    if (!e) { host.classList.remove('open'); host.innerHTML = ''; return; }
+    var keepScroll = host.querySelector('.qe-body') ? host.querySelector('.qe-body').scrollTop : 0;
+    var isEdit = e.itemId || (e.mode === 'suggest' && e.index != null);
+    var lv = [[200, 'سهل', 'easy'], [400, 'متوسط', 'mid'], [600, 'صعب', 'hard']];
+    host.innerHTML = '<div class="dw-modal qe-modal" role="dialog" aria-modal="true">' +
+      '<div class="qe-head"><div><h3>' + (isEdit ? 'تعديل سؤال' : 'إضافة سؤال') + '</h3><p>اكتب السؤال والإجابة وحدد مستوى الصعوبة.</p></div>' +
+        '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="qe-close" aria-label="إغلاق">✕</button></div>' +
+      '<div class="qe-body">' +
+        '<label class="qe-lbl">السؤال <i>*</i></label><textarea class="dw-input qe-ta" data-qe="q" maxlength="1000" placeholder="اكتب السؤال بشكل واضح">' + esc(e.q) + '</textarea>' +
+        '<label class="qe-lbl">الإجابة <i>*</i></label><textarea class="dw-input qe-ta sm" data-qe="a" maxlength="500" placeholder="اكتب الإجابة المختصرة">' + esc(e.a) + '</textarea>' +
+        '<label class="qe-lbl">معلومة أو تلميح <small>(اختياري)</small></label><input class="dw-input" data-qe="hint" maxlength="1000" value="' + esc(e.hint) + '">' +
+        '<section class="qe-box"><h5>الصعوبة</h5><div class="qe-levels">' + lv.map(function (l) {
+          return '<button class="qe-lv ' + l[2] + (e.points === l[0] ? ' on' : '') + '" data-act="qe-points" data-p="' + l[0] + '">' + l[1] + '<small>' + arNum(l[0]) + ' نقطة</small></button>';
+        }).join('') + '</div></section>' +
+        (e.withMedia ? qeSlotHtml('qm') + qeSlotHtml('am') : '') +
+      '</div>' +
+      '<div class="qe-foot"><button class="dw-btn dw-btn-sec" data-act="qe-close">إلغاء</button>' +
+        '<button class="dw-btn dw-btn-gold" data-act="qe-save"' + (e.busy.qm || e.busy.am || e.saving ? ' disabled' : '') + '>' + (isEdit ? '💾 حفظ التعديل' : '+ إضافة السؤال') + '</button></div>' +
+    '</div>';
+    host.classList.add('open');
+    var nb = host.querySelector('.qe-body'); if (nb) nb.scrollTop = keepScroll;
+  }
+  function qeUpload(slot, file) {
+    var e = STATE.qEditor;
+    if (!e || !file) return;
+    var kind = /^image\//.test(file.type) ? 'image' : /^audio\//.test(file.type) ? 'audio' : /^video\//.test(file.type) ? 'video' : '';
+    if (!kind) { showToast('نوع الملف غير مدعوم.'); return; }
+    if (kind === 'video' && !e.allowVideo) { showToast('رفع الفيديو للإدارة بس. حط رابط يوتيوب بدلاً منه.'); return; }
+    var maxMb = kind === 'audio' ? (e.allowVideo ? 6 : 3) : kind === 'video' ? 15 : 20;
+    if (file.size > maxMb * 1024 * 1024) { showToast('الملف كبير. الحد ' + arNum(maxMb) + ' ميقابايت' + (kind === 'video' ? '. للمقاطع الطويلة حط رابط يوتيوب.' : '.')); return; }
+    e.busy[slot] = true; renderQEditorModal();
+    var ready = kind === 'image' && file.type !== 'image/gif' ? compressImageFile(file) : Promise.resolve(file);
+    ready.then(function (blob) { return DiwaniyaServerKernel.uploadMedia(blob); }).then(function (d) {
+      if (STATE.qEditor !== e) return;
+      e.busy[slot] = false;
+      if (!d || !d.ok || !d.url) showToast((d && d.error) || 'تعذر رفع الملف.');
+      else { e[slot] = { t: d.kind || kind, u: d.url }; showToast('✅ انرفع الملف'); }
+      renderQEditorModal();
+    }).catch(function (err) { e.busy[slot] = false; renderQEditorModal(); showToast(err.message || 'تعذر رفع الملف.'); });
+  }
+  function qeSave() {
+    var e = STATE.qEditor;
+    if (!e) return;
+    if (!e.q.trim() || !e.a.trim()) { showToast('اكتب السؤال والإجابة أول.'); return; }
+    var item = { points: e.points, q: e.q.trim(), a: e.a.trim(), hint: e.hint.trim(), qm: e.qm, am: e.am };
+    if (e.mode === 'suggest') {
+      var d = STATE.catSug;
+      if (!d) { closeQEditor(); return; }
+      if (e.index != null && d.qs[e.index]) d.qs[e.index] = item; else d.qs.push(item);
+      closeQEditor(); render();
+      return;
+    }
+    e.saving = true; renderQEditorModal();
+    var payload = { gameId: STATE.editorGameId, catSlug: STATE.editorCatSlug, catName: ((document.getElementById('edCustomCatInp') || {}).value || 'عام'),
+      points: e.points, promptText: item.q, answerText: item.a, extraInfo: item.hint };
+    if (e.withMedia) { payload.qm = e.qm; payload.am = e.am; }
+    if (e.itemId) payload.itemId = e.itemId;
+    DiwaniyaServerKernel.executeAdminAction(e.itemId ? 'edit_content' : 'add_content', payload).then(function (r) {
+      if (!r.ok) { e.saving = false; renderQEditorModal(); showToast(r.error || 'تعذر الحفظ.'); return; }
+      closeQEditor(); render(); showToast(r.message);
+    });
+  }
+  // Card used in the admin list and in the suggestion form.
+  function questionCardHtml(it, idx, actions) {
+    var lvl = it.points >= 600 ? ['صعب', 'hard'] : it.points >= 400 ? ['متوسط', 'mid'] : ['سهل', 'easy'];
+    var qm = mediaOf(it.qm), am = mediaOf(it.am);
+    return '<article class="qcard">' +
+      '<div class="qcard-top"><span class="qnum">' + arNum(idx + 1) + '</span><span class="qlv ' + lvl[1] + '">' + lvl[0] + '</span><span style="flex:1"></span>' + actions + '</div>' +
+      '<h5>' + esc(it.q) + '</h5><p class="qans">' + esc(it.a) + '</p>' +
+      (it.hint ? '<p class="qhint">💡 ' + esc(it.hint) + '</p>' : '') +
+      ((qm || am || it.builtin) ? '<div class="qcard-media">' +
+        mediaChip('وسائط السؤال', qm) + (am ? mediaChip('وسائط الإجابة', am) : (qm ? mediaChip('وسائط الإجابة', qm, true) : '')) +
+        (!qm && it.builtin ? '<span class="qmedia-chip"><span class="mt"><span class="mt-ic">🖼️</span></span>صورة أصلية من اللعبة</span>' : '') +
+      '</div>' : '') +
+    '</article>';
+  }
+  function levelSummaryHtml(list, needEach) {
+    var c = { 200: 0, 400: 0, 600: 0 }, files = 0;
+    list.forEach(function (it) { var p = it.points >= 600 ? 600 : it.points >= 400 ? 400 : 200; c[p]++; if (mediaOf(it.qm)) files++; if (mediaOf(it.am)) files++; });
+    var okAll = c[200] >= needEach && c[400] >= needEach && c[600] >= needEach;
+    var chip = function (p, label, cls) { return '<span class="qlv ' + cls + (c[p] >= needEach ? '' : ' short') + '">' + label + ' ' + arNum(c[p]) + '</span>'; };
+    return '<div class="qsummary">' + chip(200, 'سهل', 'easy') + chip(400, 'متوسط', 'mid') + chip(600, 'صعب', 'hard') +
+      '<span class="qmedia-chip" style="padding:5px 12px">📎 ' + arNum(files) + ' مرفقات</span>' +
+      '<span class="qsum-note' + (okAll ? ' ok' : '') + '">' + (okAll ? '✅ جاهزة تطلع في اللعبة' : '⚠️ اللوحة تحتاج على الأقل ' + arNum(needEach) + ' من كل مستوى') + '</span></div>';
+  }
+
   function newCatSugDraft() {
-    return { name: '', icon: '💡', group: '', desc: '', qs: [200, 200, 400, 400, 600, 600].map(function (p) { return { points: p, q: '', a: '', hint: '', img: '', video: '' }; }) };
+    return { name: '', icon: '💡', group: '', desc: '', qs: [] };
   }
   function renderCatSuggestBox() {
     if (!STATE.catSugOpen) {
@@ -2266,10 +2475,9 @@ footer a { text-decoration: none; }
         '<div><button class="dw-btn dw-btn-gold" data-act="open-auth">تسجيل الدخول</button> <button class="dw-btn dw-btn-sec" data-act="csug-close">إلغاء</button></div></section>';
     }
     var d = STATE.catSug || (STATE.catSug = newCatSugDraft());
-    var lvl = { 200: '٢٠٠ سهل', 400: '٤٠٠ متوسط', 600: '٦٠٠ صعب' };
     return '<section class="dw-card">' +
       '<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">' +
-        '<div><h3 style="margin:0;font-size:22px">💡 اقترح فئة جديدة</h3><p style="margin:4px 0 0;color:var(--text-muted);font-size:13.5px">على الأقل ٦ أسئلة: ٢ سهلة، ٢ متوسطة، ٢ صعبة. تقدر تحط صورة أو فيديو مع أي سؤال.</p></div>' +
+        '<div><h3 style="margin:0;font-size:22px">💡 اقترح فئة جديدة</h3><p style="margin:4px 0 0;color:var(--text-muted);font-size:13.5px">اكتب ٦ أسئلة على الأقل: ٢ سهلة، ٢ متوسطة، ٢ صعبة. وتقدر تحط صورة أو صوت مع السؤال أو الإجابة.</p></div>' +
         '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="csug-close">✕ إغلاق</button>' +
       '</div>' +
       '<div class="dw-grid-4">' +
@@ -2278,20 +2486,13 @@ footer a { text-decoration: none; }
         '<div><label style="font-size:12px;color:var(--text-muted)">المجال</label><input class="dw-input" data-csug="group" maxlength="40" placeholder="مثال: فن، رياضة، تاريخ" value="' + esc(d.group) + '"></div>' +
         '<div><label style="font-size:12px;color:var(--text-muted)">وصف قصير</label><input class="dw-input" data-csug="desc" maxlength="300" value="' + esc(d.desc) + '"></div>' +
       '</div>' +
-      d.qs.map(function (q, i) {
-        return '<div class="csug-q">' +
-          '<div><label style="font-size:12px;color:var(--text-muted)">سؤال ' + arNum(i + 1) + '</label><select class="dw-select" data-csug="points" data-qi="' + i + '">' +
-            [200, 400, 600].map(function (p) { return '<option value="' + p + '"' + (q.points === p ? ' selected' : '') + '>' + lvl[p] + '</option>'; }).join('') +
-          '</select></div>' +
-          '<div><label style="font-size:12px;color:var(--text-muted)">السؤال *</label><input class="dw-input" data-csug="q" data-qi="' + i + '" maxlength="300" value="' + esc(q.q) + '"></div>' +
-          '<div><label style="font-size:12px;color:var(--text-muted)">الإجابة *</label><input class="dw-input" data-csug="a" data-qi="' + i + '" maxlength="120" value="' + esc(q.a) + '"></div>' +
-          '<div class="full">' + mediaFieldsHtml('csq' + i, q.img, q.video).replace(/id="csq(\d+)(Img|Video)"/g, function (m0, n, k) { return m0 + ' data-csug="' + (k === 'Img' ? 'img' : 'video') + '" data-qi="' + n + '"'; }) + '</div>' +
-          (d.qs.length > 6 ? '<div class="full"><button class="dw-btn dw-btn-sec dw-btn-sm" data-act="csug-del-q" data-qi="' + i + '">🗑️ احذف السؤال</button></div>' : '') +
-        '</div>';
-      }).join('') +
+      levelSummaryHtml(d.qs, 2) +
+      '<div class="qlist">' + (d.qs.length ? d.qs.map(function (q, i) {
+        return questionCardHtml(q, i, '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="csug-edit-q" data-qi="' + i + '">✏️ تعديل</button> <button class="dw-btn dw-btn-sec dw-btn-sm" data-act="csug-del-q" data-qi="' + i + '" aria-label="حذف">🗑️</button>');
+      }).join('') : '<p style="color:var(--text-muted);text-align:center;margin:8px 0">ما فيه أسئلة للحين. اضغط «+ سؤال» وابدأ.</p>') + '</div>' +
       '<div style="display:flex;gap:8px;flex-wrap:wrap">' +
-        (d.qs.length < 30 ? '<button class="dw-btn dw-btn-sec" data-act="csug-add-q">+ سؤال ثاني</button>' : '') +
-        '<button class="dw-btn dw-btn-gold" data-act="csug-send"' + (STATE.catSugSending ? ' disabled' : '') + '>📨 أرسل الاقتراح</button>' +
+        (d.qs.length < 30 ? '<button class="dw-btn dw-btn-sec" data-act="csug-new-q">+ سؤال</button>' : '') +
+        '<button class="dw-btn dw-btn-gold" data-act="csug-send"' + (STATE.catSugSending ? ' disabled' : '') + '>📨 أرسل للمراجعة</button>' +
       '</div>' +
     '</section>';
   }
@@ -2500,8 +2701,8 @@ footer a { text-decoration: none; }
             prompt_text: q.q || '',
             answer_text: q.a || '',
             extra_info: q.hint || q.info || '',
-            image_url: q.img || '',
-            video_url: q.video || '',
+            qm: mediaOf(q.qm) || legacyMediaOf(q.img, q.video),
+            am: mediaOf(q.am),
             has_builtin_media: !!(q.photo || q.rebus || q.scenePhoto || q.fantasy)
           };
         });
@@ -2674,13 +2875,20 @@ footer a { text-decoration: none; }
     }
 
     if (st === 'editor') {
-      var allEditorItems = getEditorQuestionsForCurrentSelection();
+      var isEight = STATE.editorGameId === 'game_eight';
+      var allEditorItems = getEditorQuestionsForCurrentSelection().map(function (it) {
+        return { id: it.id, points: Number(it.difficulty_points || 200), q: it.prompt_text || '', a: it.answer_text || '', hint: it.extra_info || '',
+          qm: it.qm, am: it.am, builtin: !!it.has_builtin_media };
+      });
+      // Easy first, then medium, then hard (stable within a level).
+      allEditorItems = allEditorItems.map(function (it, i) { it._i = i; return it; }).sort(function (x, y) {
+        var lx = x.points >= 600 ? 3 : x.points >= 400 ? 2 : 1, ly = y.points >= 600 ? 3 : y.points >= 400 ? 2 : 1;
+        return lx - ly || x._i - y._i;
+      });
       var items = allEditorItems.filter(function (it) {
         var q = STATE.editorSearch.trim();
-        return !q || (it.prompt_text && it.prompt_text.indexOf(q) !== -1) || (it.answer_text && it.answer_text.indexOf(q) !== -1);
+        return !q || it.q.indexOf(q) !== -1 || it.a.indexOf(q) !== -1;
       });
-      var editingItem = STATE.editingItemId ? allEditorItems.find(function (x) { return x.id === STATE.editingItemId; }) : null;
-
       return nav +
         '<div class="dw-card">' +
           '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">' +
@@ -2688,60 +2896,34 @@ footer a { text-decoration: none; }
             '<p style="margin:4px 0 0;color:var(--text-muted);font-size:13.5px">أي سؤال تضيفه أو تعدّله هنا يوصل للعبة فوراً. باقي الألعاب محتواها جاهز داخلها.</p></div>' +
             '<div style="display:flex;gap:8px;flex-wrap:wrap">' +
               '<label class="dw-btn dw-btn-sec dw-btn-sm" style="cursor:pointer">⬆️ استيراد JSON<input type="file" id="admImportJsonInp" accept=".json,application/json" style="display:none"></label>' +
-              '<button class="dw-btn dw-btn-teal dw-btn-sm" data-act="adm-export-json">⬇️ تصدير المحتوى الحالي (JSON)</button>' +
+              '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="adm-export-json">⬇️ تصدير JSON</button>' +
             '</div>' +
           '</div>' +
           '<div class="dw-grid-3" style="background:rgba(45,212,191,0.07);border:1px solid rgba(45,212,191,0.28);padding:14px;border-radius:16px">' +
-            '<div><label style="font-size:12px;color:var(--teal);font-weight:800">١. اختر اللعبة المراد تحرير أسئلتها</label><select id="edGameSelect" class="dw-select">' +
+            '<div><label style="font-size:12px;color:var(--teal);font-weight:800">١. اللعبة</label><select id="edGameSelect" class="dw-select">' +
               STATE.games.filter(function (g) { return EDITABLE_GAMES.indexOf(g.id) !== -1; }).map(function (g) {
                 return '<option value="' + esc(g.id) + '"' + (STATE.editorGameId === g.id ? ' selected' : '') + '>' + esc(g.title) + '</option>';
               }).join('') +
             '</select></div>' +
-            (STATE.editorGameId === 'game_eight'
-              ? '<div><label style="font-size:12px;color:var(--gold);font-weight:800">٢. اختر الفئة من الـ ' + arNum(STATE.categories.length) + ' فئة</label><select id="edCatSelect" class="dw-select">' +
+            (isEight
+              ? '<div><label style="font-size:12px;color:var(--gold);font-weight:800">٢. الفئة (' + arNum(STATE.categories.length) + ' فئة)</label><select id="edCatSelect" class="dw-select">' +
                   STATE.categories.map(function (c) {
-                    return '<option value="' + esc(c.slug) + '"' + (STATE.editorCatSlug === c.slug ? ' selected' : '') + '>' + esc(c.icon) + ' ' + esc(c.name) + ' (' + arNum(c.item_count || 18) + ' سؤال)</option>';
+                    return '<option value="' + esc(c.slug) + '"' + (STATE.editorCatSlug === c.slug ? ' selected' : '') + '>' + esc(c.icon) + ' ' + esc(c.name) + '</option>';
                   }).join('') +
                 '</select></div>'
               : '<div><label style="font-size:12px;color:var(--text-muted)">التصنيف داخل اللعبة</label><input id="edCustomCatInp" class="dw-input" value="عام" placeholder="مثال: سوالف ومواقف"></div>') +
-            '<div><label style="font-size:12px;color:var(--text-muted)">النقاط / مستوى الصعوبة</label><select id="edPointsSelect" class="dw-select">' +
-              '<option value="200"' + (editingItem && editingItem.difficulty_points === 200 ? ' selected' : '') + '>٢٠٠ نقطة (سهل)</option>' +
-              '<option value="400"' + (editingItem && editingItem.difficulty_points === 400 ? ' selected' : '') + '>٤٠٠ نقطة (متوسط)</option>' +
-              '<option value="600"' + (editingItem && editingItem.difficulty_points === 600 ? ' selected' : '') + '>٦٠٠ نقطة (صعب)</option>' +
-            '</select></div>' +
+            '<div style="display:flex;align-items:flex-end"><button class="dw-btn dw-btn-gold" style="width:100%" data-act="qe-open-new">+ سؤال جديد</button></div>' +
           '</div>' +
-          '<div class="dw-grid-3" style="background:rgba(0,0,0,0.25);padding:16px;border-radius:16px">' +
-            '<div><label style="font-size:12px;color:var(--text-muted)">نص السؤال أو التحدي</label><input id="edPrompt" class="dw-input" placeholder="اكتب السؤال أو التحدي..." value="' + esc(editingItem ? editingItem.prompt_text : '') + '"></div>' +
-            '<div><label style="font-size:12px;color:var(--text-muted)">الإجابة الصحيحة المؤكدة</label><input id="edAnswer" class="dw-input" placeholder="اكتب الإجابة الصحيحة..." value="' + esc(editingItem ? editingItem.answer_text : '') + '"></div>' +
-            '<div><label style="font-size:12px;color:var(--text-muted)">تلميح أو معلومة إضافية</label><input id="edInfo" class="dw-input" placeholder="تلميح أو معلومة إضافية..." value="' + esc(editingItem ? editingItem.extra_info : '') + '"></div>' +
-          '</div>' +
-          (STATE.editorGameId === 'game_eight' ? mediaFieldsHtml('ed', editingItem ? editingItem.image_url : '', editingItem ? editingItem.video_url : '') : '') +
-          '<div style="display:flex;gap:8px;flex-wrap:wrap">' +
-            (editingItem
-              ? '<button class="dw-btn dw-btn-teal dw-btn-sm" data-act="adm-save-edit-content">💾 حفظ تعديل السؤال المختار</button>' +
-                '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="adm-cancel-edit-content">إلغاء التعديل</button>'
-              : '<button class="dw-btn dw-btn-gold dw-btn-sm" data-act="adm-add-content">+ إضافة السؤال فوراً وحفظه في القاعدة</button>') +
-          '</div>' +
-          '<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:8px;flex-wrap:wrap">' +
-            '<b>قائمة الأسئلة المحفوظة حالياً (' + arNum(items.length) + ' من أصل ' + arNum(allEditorItems.length) + ' سؤال حقيقي محفوظ)</b>' +
+          (isEight ? levelSummaryHtml(allEditorItems, 2) : '') +
+          '<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">' +
+            '<b>الأسئلة (' + arNum(items.length) + (items.length !== allEditorItems.length ? ' من ' + arNum(allEditorItems.length) : '') + ')</b>' +
             '<input id="edSearchInp" class="dw-input" style="max-width:280px" placeholder="ابحث في الأسئلة أو الإجابات..." value="' + esc(STATE.editorSearch) + '">' +
           '</div>' +
-          '<div class="dw-table-wrap" style="max-height:440px;overflow-y:auto"><table class="dw-table"><thead><tr><th>#</th><th>النقاط</th><th>السؤال / التحدي</th><th>الإجابة الصحيحة</th><th>التلميح / المعلومة</th><th>صورة / فيديو</th><th>إجراءات</th></tr></thead><tbody>' +
-            items.slice(0, 120).map(function (it, idx) {
-              return '<tr>' +
-                '<td>' + arNum(idx + 1) + '</td>' +
-                '<td><span class="dw-chip gold">' + arNum(it.difficulty_points || 200) + '</span></td>' +
-                '<td>' + esc(it.prompt_text) + '</td>' +
-                '<td style="color:var(--teal);font-weight:800">' + esc(it.answer_text) + '</td>' +
-                '<td style="color:var(--text-muted);font-size:12.5px">' + esc(it.extra_info || '—') + '</td>' +
-                '<td>' + (mediaThumbHtml(it.image_url, it.video_url) || (it.has_builtin_media ? '<span class="dw-chip">🖼️ صورة أصلية</span>' : '—')) + '</td>' +
-                '<td style="display:flex;gap:6px">' +
-                  '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="adm-start-edit-content" data-id="' + esc(it.id) + '">✏️ تعديل</button>' +
-                  '<button class="dw-btn dw-btn-danger dw-btn-sm" data-act="adm-del-content" data-id="' + esc(it.id) + '">حذف</button>' +
-                '</td>' +
-              '</tr>';
-            }).join('') +
-          '</tbody></table></div>' +
+          '<div class="qlist">' + (items.length ? items.slice(0, 150).map(function (it, idx) {
+            return questionCardHtml(it, idx,
+              '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="qe-open-edit" data-id="' + esc(it.id) + '">✏️ تعديل</button> ' +
+              '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="adm-del-content" data-id="' + esc(it.id) + '" aria-label="حذف">🗑️</button>');
+          }).join('') : '<p style="color:var(--text-muted);text-align:center">ما فيه أسئلة. اضغط «+ سؤال جديد».</p>') + '</div>' +
         '</div>';
     }
 
@@ -2784,7 +2966,7 @@ footer a { text-decoration: none; }
               (sg.description ? '<p style="margin:10px 0 0;color:#c9d2e6">' + esc(sg.description) + '</p>' : '') +
               '<div class="dw-table-wrap" style="margin-top:10px"><table class="dw-table"><thead><tr><th>النقاط</th><th>السؤال</th><th>الإجابة</th><th>صورة / فيديو</th></tr></thead><tbody>' +
                 sg.questions.map(function (q) {
-                  return '<tr><td><span class="dw-chip gold">' + arNum(q.points) + '</span></td><td>' + esc(q.q) + (q.hint ? '<div style="font-size:12px;color:var(--text-muted)">💡 ' + esc(q.hint) + '</div>' : '') + '</td><td style="color:var(--teal);font-weight:800">' + esc(q.a) + '</td><td>' + (mediaThumbHtml(q.img, q.video) || '—') + '</td></tr>';
+                  return '<tr><td><span class="dw-chip gold">' + arNum(q.points) + '</span></td><td>' + esc(q.q) + (q.hint ? '<div style="font-size:12px;color:var(--text-muted)">💡 ' + esc(q.hint) + '</div>' : '') + '</td><td style="color:var(--teal);font-weight:800">' + esc(q.a) + '</td><td>' + ((mediaChip('وسائط السؤال', q.qm || legacyMediaOf(q.img, q.video)) + mediaChip('وسائط الإجابة', q.am)) || '—') + '</td></tr>';
                 }).join('') +
               '</tbody></table></div>' +
               (sg.status === 'pending'
@@ -3390,17 +3572,24 @@ footer a { text-decoration: none; }
     } else if (act === 'csug-close') {
       STATE.catSugOpen = false;
       render();
-    } else if (act === 'csug-add-q') {
-      if (STATE.catSug && STATE.catSug.qs.length < 30) STATE.catSug.qs.push({ points: 400, q: '', a: '', hint: '', img: '', video: '' });
-      render();
+    } else if (act === 'csug-new-q') {
+      var cnt = { 200: 0, 400: 0, 600: 0 };
+      (STATE.catSug ? STATE.catSug.qs : []).forEach(function (x) { cnt[x.points >= 600 ? 600 : x.points >= 400 ? 400 : 200]++; });
+      openQEditor({ mode: 'suggest', allowVideo: false, points: cnt[200] < 2 ? 200 : cnt[400] < 2 ? 400 : cnt[600] < 2 ? 600 : 400 });
+    } else if (act === 'csug-edit-q') {
+      var cqi = Number(actBtn.getAttribute('data-qi'));
+      var cq = STATE.catSug && STATE.catSug.qs[cqi];
+      if (cq) openQEditor({ mode: 'suggest', index: cqi, allowVideo: false, points: cq.points, q: cq.q, a: cq.a, hint: cq.hint, qm: cq.qm, am: cq.am });
     } else if (act === 'csug-del-q') {
-      if (STATE.catSug && STATE.catSug.qs.length > 6) STATE.catSug.qs.splice(Number(actBtn.getAttribute('data-qi')), 1);
+      if (STATE.catSug) STATE.catSug.qs.splice(Number(actBtn.getAttribute('data-qi')), 1);
       render();
     } else if (act === 'csug-send') {
       var dsg = STATE.catSug;
       if (!dsg || !dsg.name.trim()) { showToast('اكتب اسم الفئة.'); return; }
       var filled = dsg.qs.filter(function (q) { return q.q.trim() && q.a.trim(); });
-      if (filled.length < 6) { showToast('اكتب ٦ أسئلة على الأقل مع إجاباتها.'); return; }
+      var need = { 200: 0, 400: 0, 600: 0 };
+      filled.forEach(function (x) { need[x.points >= 600 ? 600 : x.points >= 400 ? 400 : 200]++; });
+      if (need[200] < 2 || need[400] < 2 || need[600] < 2) { showToast('تحتاج على الأقل سؤالين من كل مستوى: سهل، متوسط، صعب.'); return; }
       STATE.catSugSending = true; render();
       DiwaniyaServerKernel.suggestCategory({ name: dsg.name, icon: dsg.icon, group: dsg.group, description: dsg.desc, questions: filled }).then(function (r) {
         STATE.catSugSending = false;
@@ -3669,54 +3858,29 @@ footer a { text-decoration: none; }
       STATE.editorCatSlug = actBtn.getAttribute('data-slug') || 'honeycomb_ar';
       STATE.editingItemId = null;
       render();
-    } else if (act === 'adm-add-content') {
-      var pr = ((document.getElementById('edPrompt') || {}).value || '').trim();
-      var an = ((document.getElementById('edAnswer') || {}).value || '').trim();
-      var inf = ((document.getElementById('edInfo') || {}).value || '').trim();
-      var pts = ((document.getElementById('edPointsSelect') || {}).value || '200');
-      var catN = ((document.getElementById('edCustomCatInp') || {}).value || 'عام');
-      if (!pr || !an) { showToast('أدخل نص السؤال والإجابة الصحيحة أولاً'); return; }
-      adminCall('add_content', {
-        gameId: STATE.editorGameId,
-        catSlug: STATE.editorCatSlug,
-        catName: catN,
-        points: pts,
-        promptText: pr,
-        answerText: an,
-        extraInfo: inf,
-        imageUrl: ((document.getElementById('edImg') || {}).value || '').trim(),
-        videoUrl: ((document.getElementById('edVideo') || {}).value || '').trim()
-      }, function (acRes) {
-        render();
-        showToast(acRes.message);
-      });
-    } else if (act === 'adm-start-edit-content') {
-      STATE.editingItemId = actBtn.getAttribute('data-id');
-      render();
-    } else if (act === 'adm-cancel-edit-content') {
-      STATE.editingItemId = null;
-      render();
-    } else if (act === 'adm-save-edit-content') {
-      var pr2 = ((document.getElementById('edPrompt') || {}).value || '').trim();
-      var an2 = ((document.getElementById('edAnswer') || {}).value || '').trim();
-      var inf2 = ((document.getElementById('edInfo') || {}).value || '').trim();
-      var pts2 = ((document.getElementById('edPointsSelect') || {}).value || '200');
-      if (!pr2 || !an2) { showToast('نص السؤال والإجابة مطلوبان.'); return; }
-      adminCall('edit_content', {
-        gameId: STATE.editorGameId,
-        catSlug: STATE.editorCatSlug,
-        itemId: STATE.editingItemId,
-        points: pts2,
-        promptText: pr2,
-        answerText: an2,
-        extraInfo: inf2,
-        imageUrl: document.getElementById('edImg') ? document.getElementById('edImg').value.trim() : undefined,
-        videoUrl: document.getElementById('edVideo') ? document.getElementById('edVideo').value.trim() : undefined
-      }, function (ecRes) {
-        STATE.editingItemId = null;
-        render();
-        showToast(ecRes.message);
-      });
+    } else if (act === 'qe-open-new') {
+      openQEditor({ mode: 'admin', withMedia: STATE.editorGameId === 'game_eight', allowVideo: true, points: 200 });
+    } else if (act === 'qe-open-edit') {
+      var eid = actBtn.getAttribute('data-id');
+      var eit = getEditorQuestionsForCurrentSelection().find(function (x) { return x.id === eid; });
+      if (!eit) return;
+      openQEditor({ mode: 'admin', itemId: eid, withMedia: STATE.editorGameId === 'game_eight', allowVideo: true,
+        points: eit.difficulty_points, q: eit.prompt_text, a: eit.answer_text, hint: eit.extra_info, qm: eit.qm, am: eit.am });
+    } else if (act === 'qe-close') {
+      closeQEditor();
+    } else if (act === 'qe-points') {
+      if (STATE.qEditor) { STATE.qEditor.points = Number(actBtn.getAttribute('data-p')); renderQEditorModal(); }
+    } else if (act === 'qe-clear') {
+      if (STATE.qEditor) { STATE.qEditor[actBtn.getAttribute('data-slot')] = null; renderQEditorModal(); }
+    } else if (act === 'qe-link') {
+      var lslot = actBtn.getAttribute('data-slot');
+      var linp = document.querySelector('[data-qe-link="' + lslot + '"]');
+      var lval = linp ? linp.value.trim() : '';
+      if (!/^https:\/\//.test(lval)) { showToast('الرابط لازم يبدأ بـ https://'); return; }
+      STATE.qEditor[lslot] = { t: kindOfUrl(lval), u: lval };
+      renderQEditorModal();
+    } else if (act === 'qe-save') {
+      qeSave();
     } else if (act === 'adm-del-content') {
       adminCall('del_content', {
         gameId: STATE.editorGameId,
@@ -3809,13 +3973,19 @@ footer a { text-decoration: none; }
     if (qi === null) STATE.catSug[f] = t.value;
     else if (STATE.catSug.qs[Number(qi)]) STATE.catSug.qs[Number(qi)][f] = f === 'points' ? Number(t.value) : t.value;
   }
-  document.addEventListener('input', function (e) { if (e.target && e.target.hasAttribute && e.target.hasAttribute('data-csug')) syncCatSugField(e.target); });
+  document.addEventListener('input', function (e) {
+    var t = e.target;
+    if (!t || !t.hasAttribute) return;
+    if (t.hasAttribute('data-csug')) syncCatSugField(t);
+    if (t.hasAttribute('data-qe') && STATE.qEditor) STATE.qEditor[t.getAttribute('data-qe')] = t.value;
+  });
 
   document.addEventListener('change', function (e) {
     var t = e.target;
     if (!t) return;
     if (t.hasAttribute && t.hasAttribute('data-csug')) { syncCatSugField(t); return; }
     if (t.hasAttribute && t.hasAttribute('data-upload-target')) { handleImagePick(t); return; }
+    if (t.hasAttribute && t.hasAttribute('data-qe-file')) { qeUpload(t.getAttribute('data-qe-file'), t.files && t.files[0]); t.value = ''; return; }
     if (t.id === 'edGameSelect') {
       STATE.editorGameId = t.value;
       STATE.editingItemId = null;

@@ -7523,39 +7523,40 @@ el.style.opacity = '0';
 setTimeout(() => el.remove(), 300);
 }, 2800);
 }
-// Image / video attached to a question from the admin editor or an approved suggestion.
+// Media attached to a question from the admin editor or an approved suggestion.
+// qm = question media, am = answer media; when am is empty the answer shows the question media.
 function dwEsc(v) { return String(v == null ? '' : v).replace(/[&<>"']/g, function (ch) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]; }); }
 function dwYouTubeId(u) {
 try {
 var x = new URL(u);
-var h = x.hostname.replace(/^www\.|^m\./, '');
-if (h === 'youtu.be') return x.pathname.slice(1).split('/')[0];
-if (h === 'youtube.com' || h === 'youtube-nocookie.com') {
-if (x.searchParams.get('v')) return x.searchParams.get('v');
-var m = x.pathname.match(/^\/(?:shorts|embed|live)\/([A-Za-z0-9_-]{6,20})/);
-if (m) return m[1];
+var h = x.hostname.replace(/^(www|m|music)\./, '');
+var id = '';
+if (h === 'youtu.be') id = x.pathname.slice(1).split('/')[0];
+else if (h === 'youtube.com' || h === 'youtube-nocookie.com') id = x.searchParams.get('v') || ((x.pathname.match(/^\/(?:shorts|embed|live)\/([A-Za-z0-9_-]+)/) || [])[1] || '');
+return /^[A-Za-z0-9_-]{6,20}$/.test(id) ? id : '';
+} catch (e) { return ''; }
 }
-} catch (e) {}
-return '';
+function dwOkUrl(u) { u = String(u || ''); return /^\/media\/med_[A-Za-z0-9_-]+$/.test(u) || /^https:\/\//.test(u) ? u : ''; }
+function dwQMedia(q) {
+if (!q) return null;
+if (q.qm && dwOkUrl(q.qm.u)) return q.qm;
+if (q.img && dwOkUrl(q.img)) return { t: 'image', u: q.img };
+if (q.video && dwOkUrl(q.video)) return { t: dwYouTubeId(q.video) ? 'youtube' : (/\.(mp3|m4a|aac|wav|ogg)(\?|#|$)/i.test(q.video) ? 'audio' : 'video'), u: q.video };
+return null;
 }
-function dwQuestionMediaHtml(q) {
-var out = '';
-var img = String(q.img || '');
-if (img && (/^\/media\/med_[A-Za-z0-9_-]+$/.test(img) || /^https:\/\//.test(img))) {
-out += '<img src="' + dwEsc(img) + '" alt="" referrerpolicy="no-referrer" style="display:block;max-width:100%;max-height:min(46vh,420px);object-fit:contain;border-radius:12px;background:#0b1220">';
+function dwAMedia(q) { return (q && q.am && dwOkUrl(q.am.u)) ? q.am : dwQMedia(q); }
+function dwMediaHtml(m) {
+if (!m) return '';
+var u = dwOkUrl(m.u);
+if (!u) return '';
+var yt = dwYouTubeId(u);
+if (m.t === 'youtube' || yt) {
+if (!yt) return '';
+return '<div style="position:relative;width:100%;aspect-ratio:16/9;max-height:46vh"><iframe src="https://www.youtube-nocookie.com/embed/' + yt + '?rel=0&playsinline=1" title="video" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border:0;border-radius:12px"></iframe></div>';
 }
-var vid = String(q.video || '');
-if (/^https:\/\//.test(vid)) {
-var yt = dwYouTubeId(vid);
-if (yt && /^[A-Za-z0-9_-]{6,20}$/.test(yt)) {
-out += '<div style="position:relative;width:100%;aspect-ratio:16/9;max-height:46vh"><iframe src="https://www.youtube-nocookie.com/embed/' + yt + '?rel=0&playsinline=1" title="video" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border:0;border-radius:12px"></iframe></div>';
-} else if (/\.(mp4|webm|mov|m4v)(\?|#|$)/i.test(vid)) {
-out += '<video src="' + dwEsc(vid) + '" controls playsinline preload="metadata" style="display:block;width:100%;max-height:46vh;border-radius:12px;background:#000"></video>';
-} else {
-out += '<a href="' + dwEsc(vid) + '" target="_blank" rel="noopener noreferrer" style="display:inline-block;padding:10px 18px;border-radius:12px;background:#f59e0b;color:#1b1100;font-weight:900;text-decoration:none">▶ افتح المقطع</a>';
-}
-}
-return out;
+if (m.t === 'video') return '<video src="' + dwEsc(u) + '" controls playsinline preload="metadata" style="display:block;width:100%;max-height:46vh;border-radius:12px;background:#000"></video>';
+if (m.t === 'audio') return '<div style="width:100%;padding:14px;border-radius:14px;background:linear-gradient(135deg,#1e1b4b,#0f766e);text-align:center"><div style="font-size:40px;line-height:1.2">🎧</div><audio src="' + dwEsc(u) + '" controls preload="metadata" style="width:100%;margin-top:8px"></audio></div>';
+return '<img src="' + dwEsc(u) + '" alt="" referrerpolicy="no-referrer" style="display:block;margin:0 auto;max-width:100%;max-height:min(46vh,420px);object-fit:contain;border-radius:12px;background:#0b1220">';
 }
 function loadCustomCategories() {
 var dwServerCats = [];
@@ -8269,10 +8270,10 @@ visualStage.classList.remove('hidden');
 visualControls.classList.add('hidden');
 visualArt.style.filter = 'blur(0px)';
 if (!qObj.photo) window.__m8Pix = null;
-if (qObj.img || qObj.video) {
+if (dwQMedia(qObj)) {
 visualStage.className = 'max-w-xl mx-auto rounded-2xl overflow-hidden border border-amber-300 bg-slate-900 p-1.5 shadow-inner';
 visualArt.className = 'rounded-xl flex flex-col items-center justify-center gap-2 overflow-hidden';
-visualArt.innerHTML = dwQuestionMediaHtml(qObj);
+visualArt.innerHTML = dwMediaHtml(dwQMedia(qObj));
 } else if (col.isLetterHoneycomb || qObj.letter || qObj.letter) {
 visualStage.className = 'max-w-lg mx-auto rounded-2xl overflow-hidden border border-orange-200 bg-white p-2 space-y-1 shadow-inner';
 visualArt.className = 'min-h-[160px] rounded-xl flex items-center justify-center overflow-visible';
@@ -8557,6 +8558,12 @@ if (portraitBox) {
 portraitBox.innerHTML = renderAnswerVisualPortraitHtml(qObj, m.boardColumns[cell.colIdx]);
 if (qObj.rebus && qObj.rebus.pics) { const st = document.getElementById('qModalVisualStage'); if (st) st.classList.add('hidden'); }
 if (qObj.fantasy) { const cb = document.getElementById('qModalCharadesBox'); if (cb) cb.classList.add('hidden'); }
+const dwAM = dwAMedia(qObj);
+if (dwAM) {
+// The answer media replaces the question media on screen (this also stops a question clip that is still playing).
+const st = document.getElementById('qModalVisualStage'); if (st) { st.classList.add('hidden'); const va = document.getElementById('visualArtContainer'); if (va) va.innerHTML = ''; }
+portraitBox.innerHTML = '<div style="margin-top:8px;padding:6px;border-radius:14px;background:#0b1220">' + dwMediaHtml(dwAM) + '</div>';
+}
 }
 if (qObj.surprise === 'deduct' || qObj.surprise === 'double') {
 m8ApplySurpriseUI(qObj, false);
