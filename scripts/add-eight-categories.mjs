@@ -34,11 +34,12 @@ const eightHtml = readFileSync(join(root, 'games/eight.html'), 'utf8');
 const draftSlugs = new Set(cats.filter((c) => c.draft).map((c) => c.slug));
 for (const [slug, byIndex] of Object.entries(women)) {
   if (draftSlugs.has(slug)) continue;
+  if (!cats.some((c) => c.slug === slug)) delete seed.catQuestionsOverrides[slug]; // built-in: rebuilt from the game file every run
   let list = seed.catQuestionsOverrides[slug];
   if (!list) {
     const m = eightHtml.match(new RegExp('id="m8_cat_' + slug + '">([\\s\\S]*?)</script>'));
     if (!m) { console.warn('no built-in questions for', slug); continue; }
-    list = JSON.parse(m[1]).map((q, n) => Object.assign({}, q, { uid: q.uid || slug + '_q' + (n + 1) }));
+    list = JSON.parse(m[1]).map((q, n) => Object.assign({}, q, { uid: q.uid || slug + '_q' + (n + 1) + '_' + (q.points || 200) })); // the game's own id: its drawings are keyed by it
     seed.catQuestionsOverrides[slug] = list;
   }
   for (const [i, pics] of Object.entries(byIndex)) {
