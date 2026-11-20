@@ -13,7 +13,8 @@ seed.catQuestionsOverrides = seed.catQuestionsOverrides || {};
 // Pictures from content/media/<key>.jpg are loaded into the database by scripts/seed-media.mjs as /media/med_seed_<key>.
 const pic = (key) => (key ? { t: 'image', u: '/media/med_seed_' + key } : null);
 const extra = [];
-cats.forEach((c, i) => {
+// Categories marked "draft": true wait for the owner's OK and are left out of the site.
+cats.filter((c) => !c.draft).forEach((c, i) => {
   extra.push({
     id: 'cat_' + c.slug, slug: c.slug, name: c.name,
     macro_group: 'فئات الديوانية', sub_group: c.group, description: c.description, icon: c.icon,
