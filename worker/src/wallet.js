@@ -13,8 +13,36 @@ const MAX_PENDING_TRIES = 3;
 // Called when a launched free trial really starts: from then on the trial counts as used.
 export async function confirmTrialStart(env, session, body) {
   const slug = String((body && body.slug) || '').slice(0, 60);
-  const r = await env.DB.prepare("UPDATE game_trials SET state = 'used' WHERE user_id = ? AND game_slug = ? AND state = 'pending'").bind(session.user.id, slug).run();
+  const uid = session.user.id;
+  const [r] = await env.DB.batch([
+    env.DB.prepare("UPDATE game_trials SET state = 'used' WHERE user_id = ? AND game_slug = ? AND state = 'pending'").bind(uid, slug),
+    env.DB.prepare('UPDATE launches SET started = 1 WHERE user_id = ? AND game_slug = ? AND created_at > ?').bind(uid, slug, nowMs() - PLAY_TOKEN_TTL_MS)
+  ]);
   return { ok: true, confirmed: r.meta.changes === 1 };
+}
+
+// A paid game closed before it really started: give the credits back (once, within 20 minutes of the launch)
+// and stop that launch's play link from working.
+const REFUND_WINDOW_MS = 20 * 60 * 1000;
+export async function cancelLaunch(env, session, body) {
+  const uid = session.user.id;
+  const idemKey = String((body && body.idempotencyKey) || '');
+  if (!IDEM_RE.test(idemKey)) throw new HttpError(400, 'طلب غير صالح.');
+  const row = await env.DB.prepare('SELECT game_slug, result_json, created_at, started, refunded FROM launches WHERE user_id = ? AND idem_key = ?').bind(uid, idemKey).first();
+  if (!row || !row.result_json) return { ok: true, refunded: 0 };
+  const res = JSON.parse(row.result_json);
+  const cost = Number(res.costDeducted) || 0;
+  if (!cost || row.started || row.refunded || nowMs() - row.created_at > REFUND_WINDOW_MS) return { ok: true, refunded: 0 };
+  const claim = await env.DB.prepare('UPDATE launches SET refunded = 1 WHERE user_id = ? AND idem_key = ? AND refunded = 0 AND started = 0').bind(uid, idemKey).run();
+  if (!claim.meta.changes) return { ok: true, refunded: 0 };
+  const w = await env.DB.prepare('UPDATE wallets SET balance = balance + ?, total_consumed = MAX(0, total_consumed - ?) WHERE user_id = ? RETURNING balance').bind(cost, cost, uid).first();
+  const after = w ? w.balance : cost;
+  await env.DB.batch([
+    env.DB.prepare('INSERT INTO wallet_transactions (id, user_id, type, amount, balance_before, balance_after, description, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)')
+      .bind(randomId('wtx'), uid, 'refund', cost, after - cost, after, '↩️ رجعت الأقيام (ما بدأت اللعب): ' + (res.gameTitle || row.game_slug), nowIso()),
+    env.DB.prepare('DELETE FROM play_tokens WHERE user_id = ? AND game_slug = ?').bind(uid, row.game_slug)
+  ]);
+  return { ok: true, refunded: cost, wallet: await walletSnapshot(env, uid) };
 }
 
 export async function walletSnapshot(env, userId) {

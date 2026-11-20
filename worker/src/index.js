@@ -2,7 +2,7 @@
 // from ./public by Workers Static Assets.
 import { json, fail, HttpError, readJson, clientIp, cleanText, sanitizeUrl, nowIso, randomId, underRateLimit } from './util.js';
 import { sendOtp, verifyOtp, logout, currentSession, requireSession, publicUser, clearSessionCookie } from './auth.js';
-import { walletSnapshot, launchGame, servePlay, confirmTrialStart } from './wallet.js';
+import { walletSnapshot, launchGame, servePlay, confirmTrialStart, cancelLaunch } from './wallet.js';
 import { createCheckout, handleReturn, handleWebhook, reconcileUserPending, paymentStatusForUser } from './payments.js';
 import { getCatalog, getDoc, putDoc } from './catalog.js';
 import { adminData, adminAction, eightCategoryQuestions, submitCategorySuggestion } from './admin.js';
@@ -124,6 +124,10 @@ async function handleApi(env, request, url) {
   if (method === 'GET' && path === '/api/admin/data') {
     await requireSession(env, request, { csrf: false, owner: true });
     return json(await adminData(env));
+  }
+  if (method === 'POST' && path === '/api/play/cancel') {
+    const session = await requireSession(env, request);
+    return json(await cancelLaunch(env, session, await readJson(request)));
   }
   if (method === 'POST' && path === '/api/play/started') {
     const session = await requireSession(env, request);

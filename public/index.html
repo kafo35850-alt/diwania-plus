@@ -2062,6 +2062,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
       myPromo: function () { return api('GET', '/api/promo/mine'); },
       ping: function () { return api('POST', '/api/ping', {}); },
       trialStarted: function (slug) { return api('POST', '/api/play/started', { slug: slug }); },
+      cancelLaunch: function (key) { return api('POST', '/api/play/cancel', { idempotencyKey: key }); },
       analytics: function () { return api('GET', '/api/admin/analytics'); },
       analyticsUser: function (id) { return api('GET', '/api/admin/analytics/user/' + encodeURIComponent(id)); },
       checkPromo: function (code, pkgId) { return api('POST', '/api/promo/check', { code: code, pkgId: pkgId }); },
@@ -3527,7 +3528,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
         else if (!D.ok) body = '<p>⚠️ ' + esc(D.error || 'تعذر التحميل') + '</p>';
         else {
           var maxS = Math.max.apply(null, [60].concat(D.days.map(function (d) { return d.seconds; })));
-          var txName = { free_play: '🆓 لعب مجاني', free_trial: '🎁 تجربة مجانية', consume: '🎮 لعب بالأقيام', purchase: '💳 شراء', bonus: '🎁 هدية', admin_add: '🛠️ إضافة من الأدمن', admin_deduct: '🛠️ خصم من الأدمن' };
+          var txName = { refund: '↩️ استرجاع', free_play: '🆓 لعب مجاني', free_trial: '🎁 تجربة مجانية', consume: '🎮 لعب بالأقيام', purchase: '💳 شراء', bonus: '🎁 هدية', admin_add: '🛠️ إضافة من الأدمن', admin_deduct: '🛠️ خصم من الأدمن' };
           body =
             '<h5 class="an-h5">⏱️ وقته في الموقع (آخر ٣٠ يوم نشاط)</h5>' +
             (D.days.length ? '<div class="an-days">' + D.days.map(function (d) {
@@ -3979,13 +3980,22 @@ html.dw-game-open #dwApp { visibility: hidden; }
   // A free trial only counts once the game really starts: a start button pressed inside it,
   // or the game kept open for 4 minutes. Closing it before that keeps the trial for later.
   var START_RE = /ابدأ|ابدا|إبدأ|بدء|يلا نبدأ|يلا نلعب|ابدئي|start/i;
+  // Paid games work the same way: closed before starting = the credits come back.
   var TRIAL_WATCH = {
-    slug: null, timer: null,
-    arm: function (slug) {
-      this.disarm(); this.slug = slug;
-      if (slug) { var self = this; this.timer = setTimeout(function () { self.confirm(); }, 4 * 60 * 1000); }
+    slug: null, timer: null, paidKey: null,
+    arm: function (slug, paidKey) {
+      this.disarm(); this.slug = slug; this.paidKey = paidKey || null;
+      // Eight takes longer to set up (choosing 8 categories), so it waits longer before counting as started.
+      if (slug) { var self = this; this.timer = setTimeout(function () { self.confirm(); }, (slug === 'eight' ? 15 : 4) * 60 * 1000); }
     },
-    disarm: function () { if (this.timer) clearTimeout(this.timer); this.timer = null; this.slug = null; },
+    disarm: function () { if (this.timer) clearTimeout(this.timer); this.timer = null; this.slug = null; this.paidKey = null; },
+    closedEarly: function () {
+      var key = this.paidKey; this.disarm();
+      if (!key) return;
+      DiwaniyaServerKernel.cancelLaunch(key).then(function (d) {
+        if (d && d.refunded) { showToast('↩️ ما بدأت اللعب، فرجعنا لك ' + arNum(d.refunded) + ' ' + (d.refunded === 1 ? 'قيم' : 'أقيام')); DiwaniyaServerKernel.refreshMe().then(function () { render(); }); }
+      });
+    },
     confirm: function () {
       var slug = this.slug; if (!slug) return; this.disarm();
       DiwaniyaServerKernel.trialStarted(slug).then(function () { return DiwaniyaServerKernel.refreshMe(); }).then(function () { render(); });
@@ -4047,7 +4057,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
       if (!res.deduplicated) {
         showToast(res.isFree ? '🆓 لعبة مجانية — استمتع!' : res.isFreeTrial
           ? '🎁 تجربتك المجانية — استمتع!'
-          : '✅ انخصم ' + arNum(res.costDeducted) + ' قيم — استمتع!');
+          : '✅ انخصم ' + arNum(res.costDeducted) + ' قيم — وإذا قفلت قبل ما تبدأ ترجع لك');
       }
 
       var frameWrap = document.getElementById('dwGameFrameWrap');
@@ -4056,7 +4066,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
       if (frameWrap && iframe) {
         frameTitle.textContent = cleanTitle(res.gameTitle);
         iframe.onload = function () { syncGameRoleToFrame(); syncAudioButtonsUI(); watchTrialStart(iframe); };
-        TRIAL_WATCH.arm(res.isFreeTrial && !res.deduplicated ? slug : null);
+        TRIAL_WATCH.arm(!res.deduplicated && (res.isFreeTrial || res.costDeducted > 0) ? slug : null, res.costDeducted > 0 ? idemKey : null);
         iframe.removeAttribute('srcdoc');
         iframe.src = res.playUrl;
         frameWrap.classList.add('open');
@@ -4244,7 +4254,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
         }
       }
     } else if (act === 'close-game-frame') {
-      TRIAL_WATCH.disarm();
+      TRIAL_WATCH.closedEarly();
       var fw = document.getElementById('dwGameFrameWrap');
       var ifr = document.getElementById('dwGameIframe');
       if (fw) fw.classList.remove('open');
