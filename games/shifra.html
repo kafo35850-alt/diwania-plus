@@ -120,6 +120,16 @@ button:disabled { opacity: 0.45; cursor: not-allowed; }
   padding: 14px;
   box-shadow: inset 0 0 40px rgba(0,0,0,0.75);
 }
+.cn-clue-fly { position: fixed; left: 50%; top: 45%; z-index: 9000; transform: translate(-50%,-50%) scale(.4); opacity: 0; padding: 26px 46px; border-radius: 28px; background: linear-gradient(135deg,#1b2350,#0b1026); border: 3px solid #F5B942; color: #FFE08A; font-weight: 900; font-size: clamp(34px, 7vw, 84px); box-shadow: 0 0 60px rgba(245,185,66,.55); white-space: nowrap; transition: transform .75s cubic-bezier(.6,0,.3,1), opacity .75s; animation: cnFlyIn .55s cubic-bezier(.2,1.4,.4,1) forwards; pointer-events: none; }
+@keyframes cnFlyIn { to { transform: translate(-50%,-50%) scale(1); opacity: 1; } }
+.cn-clue-bar.flash { box-shadow: 0 0 0 3px #F5B942, 0 0 28px rgba(245,185,66,.6); transition: box-shadow .3s; }
+.cn-left { display: inline-block; margin-inline-start: 6px; padding: 2px 10px; border-radius: 999px; background: rgba(245,185,66,.18); border: 1px solid rgba(245,185,66,.5); font-weight: 800; }
+.cn-mini { gap: 5px !important; }
+.cn-mini .cn-card { min-height: 0; padding: 3px; border-radius: 8px; box-shadow: 0 3px 0 #7C6A46; cursor: pointer; -webkit-touch-callout: none; touch-action: manipulation; }
+.cn-mini .cn-card-top { font-size: 8.5px; padding-bottom: 1px; }
+.cn-mini .cn-card-word { font-size: clamp(10px, 2.6vw, 13px); padding: 5px 2px; margin-top: 2px; }
+.cn-mini .cn-badge { font-size: 8.5px; }
+.cn-mini .cn-card.cn-done { opacity: .35; }
 .cn-grid-5 {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -613,7 +623,7 @@ canvas.draw-pad {
 window.GAME_CONFIG = {"slug":"shifra","title":"شفرة الديوانية","subtitle":"بطاقات عملاء سرية · خريطة سوبرفايزر واضحة · حزمة عشوائية ومفتوحة","accent":"#F5B942","wordPacks":[{"name":"🇸🇦 حزمة السعودية والخليج","words":["الرياض","جدة","العلا","الدرعية","طويق","نيوم","القدية","البشت","الدلة","الفنجال","العرضة","الكبسة","الجريش","التمر","الصقر","السيف","الخيمة","المبخرة","العود","البيك","البوليفارد","أبها","البحر الأحمر","المكعب","الروضة","القصيم","الحجاز","الدمام","سفاري","النفود"]},{"name":"⚽ حزمة الكرة والملاعب","words":["الهلال","النصر","الاتحاد","الأهلي","الجوهرة","المملكة أرينا","كأس العالم","الأخضر","الدوري","الحكم","الفار","تسلل","ركلة جزاء","الكلاسيكو","الأبطال","مدريد","برشلونة","ليفربول","تشيلسي","الحارس","المدرب","المدرج","الشباك","العارضة","الكابتن","الإعارة","الميركاتو"]},{"name":"🎬 حزمة المسلسلات والأفلام والأنمي","words":["طاش","العاصوف","شباب البومب","الحارة","الزير","البروفيسور","كونان","ون بيس","ناروتو","القناص","سبيستون","المسرح","السينما","المخرج","البطل","اللغز","الجزيرة","القلعة","القطار","الطائرة","المحيط","القمر","الصحراء","الواحة","البرج","الأوسكار","التنين"]},{"name":"🌍 حزمة الثقافة العامة والمنوعات","words":["الذهب","الألماس","البوصلة","الساعة","المفتاح","الخزنة","الجاسوس","السفينة","البركان","الجليد","البرق","النسر","الأسد","الحصان","القهوة","الشاهي","العسل","الزيتون","النخلة","المكتبة","الجامعة","المختبر","الفضاء","المجهر","التاج","الدرع","القصر"]},{"name":"🍽️ حزمة الأكل والسفرة","words":["كبسة","مندي","جريش","قرصان","مطبق","شاورما","برجر","بيتزا","كنافة","لقيمات","تمر","قهوة","شاهي","حليب","عسل","سمن","خبز","رز","دجاج","لحم","سمك","سلطة","شوربة","سمبوسة","فول","تميس","كيك","آيسكريم","عصير","ليمون"]},{"name":"🏠 حزمة البيت والحياة","words":["مفتاح","باب","شباك","درج","سطح","حوش","مجلس","مطبخ","ثلاجة","مكيف","مروحة","سرير","مخدة","كنبة","زولية","تلفزيون","ريموت","جوال","شاحن","ساعة","مراية","دولاب","شنطة","مظلة","لمبة","مكنسة","غسالة","فرن","كرسي","طاولة"]},{"name":"🌍 حزمة الطبيعة والعالم","words":["بحر","جبل","صحراء","نهر","غابة","جزيرة","بركان","شلال","ثلج","مطر","رعد","برق","شمس","قمر","نجم","كوكب","رمل","صخرة","كهف","واحة","نخلة","وردة","شجرة","عشب","ريح","غيم","موج","شاطئ","وادي","سهل"]}]};
 /*dw-shuffle-rounds*/ (function (c) { if (!c) return; Object.keys(c).forEach(function (k) { var a = c[k]; if (!Array.isArray(a) || ["segments","decks","wordPacks"].indexOf(k) !== -1) return; for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } }); })(window.GAME_CONFIG);
 </script>
-<script id="dwHelpData">window.DW_HELP = {"title":"شرح لعبة: شفرة الديوانية","subtitle":"بطاقات عملاء سرية · خريطة سوبرفايزر واضحة · حزم عشوائية ومفتوحة","tabs":[{"label":"فكرة اللعبة وتصميمها الجديد","lead":"يتنافس الفريق الأحمر 🔴 والفريق الأزرق 🔵 لكشف بطاقات عملائهم من بين ٢٥ بطاقة تكتيكية، مع وضع بطاقة العميل فوق الكلمة المكتشفة!","steps":[{"h":"١. اختيار الحزمة قبل البدء (شاملة أو مفتوحة)","t":"اختر الحزمة العشوائية الشاملة، أو حزمة متخصصة، أو الحزمة المفتوحة التي تكتبون فيها كلماتكم مع زر «أكمل باقي الكلمات للـ ٢٥ تلقائياً»."},{"h":"٢. رؤية واضحة ١٠٠٪ للسوبرفايزر","t":"بضغطة زر «وضع السوبرفايزر» تتلوّن حدود وخلفيات البطاقات مباشرة على الشبكة (أحمر، أزرق، محايد، وفخ أسود) ليراها قائد الفريق بوضوح تام."},{"h":"٣. وضع بطاقة العميل فوق الكلمة","t":"عند لمس كلمة صحيحة، توضع فوقها بطاقة العميل الملوّنة مع بقاء الكلمة الأصلية ظاهرة في زاوية البطاقة."}]}]};</script>
+<script id="dwHelpData">window.DW_HELP = {"title":"شرح لعبة: شفرة الديوانية","subtitle":"بطاقات عملاء سرية · خريطة سوبرفايزر واضحة · حزم عشوائية ومفتوحة","tabs":[{"label":"فكرة اللعبة وتصميمها الجديد","lead":"يتنافس الفريق الأحمر 🔴 والفريق الأزرق 🔵 لكشف بطاقات عملائهم من بين ٢٥ بطاقة تكتيكية، مع وضع بطاقة العميل فوق الكلمة المكتشفة!","steps":[{"h":"١. اختيار الحزمة قبل البدء (شاملة أو مفتوحة)","t":"اختر الحزمة العشوائية الشاملة، أو حزمة متخصصة، أو الحزمة المفتوحة التي تكتبون فيها كلماتكم مع زر «أكمل باقي الكلمات للـ ٢٥ تلقائياً»."},{"h":"٢. سمّوا فريقكم","t":"تقدرون تكتبون اسم لكل فريق قبل البدء، والألوان تبقى نفسها (أحمر وأزرق)."},{"h":"٣. خريطة السوبرفايزر في «التحكم»","t":"الألوان السرية تطلع للسوبرفايزر في شاشة «التحكم» بس، مو على التلفزيون. اضغط مطوّل على أي بطاقة يطلع لونها، أو اضغط «إظهار كل الألوان»."},{"h":"٤. الشفرة","t":"السوبرفايزر يكتب كلمة ورقم (مثلاً «طويق ٢»)، وتطلع كبيرة بنص الشاشة ثم تروح لمكانها."},{"h":"٥. المحاولات","t":"الفريق يقدر يختار عدد البطاقات + ١ (الشفرة ٢ = ٣ محاولات). إذا اختاروا بطاقة محايدة 🟡 أو بطاقة الفريق الثاني، دورهم يخلص على طول. والبطاقة السوداء 💀 تخسّرهم اللعبة!"},{"h":"٦. الفوز","t":"أول فريق يكشف كل بطاقاته يفوز."}]}]};</script>
 <div id="gameRoot"></div>
 <div id="qrModal" class="modal-bg">
   <div class="modal-card" style="text-align:center">
@@ -776,6 +786,26 @@ window.GAME_CONFIG = {"slug":"shifra","title":"شفرة الديوانية","sub
     return all;
   }
 
+  function cnTeam(t) { var n = (ST.gameData.teamNames || {})[t]; return n || (t === 'red' ? 'الفريق الأحمر' : 'الفريق الأزرق'); }
+  function cnFlyClue(text) {
+    var old = document.getElementById('cnClueFly'); if (old) old.remove();
+    var el = document.createElement('div'); el.id = 'cnClueFly'; el.className = 'cn-clue-fly'; el.textContent = text;
+    document.body.appendChild(el);
+    setTimeout(function () {
+      var target = document.querySelector('.cn-clue-bar b');
+      if (!target) { el.classList.add('out'); setTimeout(function () { el.remove(); }, 600); return; }
+      var r = target.getBoundingClientRect(), me = el.getBoundingClientRect();
+      var dx = (r.left + r.width / 2) - (me.left + me.width / 2), dy = (r.top + r.height / 2) - (me.top + me.height / 2);
+      el.style.transform = 'translate(-50%,-50%) translate(' + dx + 'px,' + dy + 'px) scale(.25)'; el.style.opacity = '0';
+      setTimeout(function () { el.remove(); var b = document.querySelector('.cn-clue-bar'); if (b) { b.classList.add('flash'); setTimeout(function () { b.classList.remove('flash'); }, 900); } }, 750);
+    }, 1700);
+  }
+  function cnCheckWin(gd) {
+    ['red', 'blue'].forEach(function (t) {
+      if (gd.gameOver) return;
+      if (!gd.cards.some(function (c) { return c.role === t && !c.revealed; })) { gd.gameOver = true; gd.winnerText = '🏆 ' + cnTeam(t) + ' كشف كل عملائه وفاز بالمباراة!'; }
+    });
+  }
   function buildShifraBoardFromWords(words25, packLabel) {
     var roles = [];
     for (var i = 0; i < 9; i++) roles.push('red');
@@ -787,7 +817,7 @@ window.GAME_CONFIG = {"slug":"shifra","title":"شفرة الديوانية","sub
     ST.gameData.packName = packLabel;
     ST.gameData.turnTeam = 'red';
     ST.gameData.spymasterBoardOverlay = false;
-    ST.gameData.spymasterPhoneOverlay = true;
+    ST.gameData.spymasterPhoneOverlay = false;
     ST.gameData.clueWord = '';
     ST.gameData.clueCount = 2;
     ST.gameData.guessesLeft = 0;
@@ -811,10 +841,12 @@ window.GAME_CONFIG = {"slug":"shifra","title":"شفرة الديوانية","sub
 
     if (slug === 'shifra') {
       var prevCustom = (ST.gameData && ST.gameData.customInputText) || '';
+      var prevNames = (ST.gameData && ST.gameData.teamNames) || { red: 'الفريق الأحمر', blue: 'الفريق الأزرق' };
       ST.gameData = {
         phase: 'setup', // Starts in Pre-Game Pack Selector Lobby ("اختار الحزمة قبل ما ادخل")!
         selectedPackId: 'random_all',
         customInputText: prevCustom,
+        teamNames: prevNames,
         customWordsList: [],
         packName: 'حزمة عشوائية شاملة (كل شيء)',
         turnTeam: 'red',
@@ -1013,6 +1045,13 @@ window.GAME_CONFIG = {"slug":"shifra","title":"شفرة الديوانية","sub
               '<textarea id="cnCustomWordsTxt" class="txtarea" rows="4" placeholder="مثال: استراحة العارض، شاورما كلاسيك، كبسة حاشي، دوري روشن... (ثم اضغط زر أكمل باقي الكلمات تلقائياً)">' + esc(gd.customInputText) + '</textarea>' +
             '</div>'
           ) : '') +
+          '<div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.12);padding:14px;border-radius:16px;display:grid;gap:10px">' +
+            '<b>🏷️ أسماء الفريقين (اختياري، والألوان تبقى نفسها)</b>' +
+            '<div class="grid-2">' +
+              '<label style="display:grid;gap:6px"><span style="color:#FCA5A5;font-weight:800">🔴 الفريق الأحمر</span><input id="cnNameRed" class="inp" maxlength="24" value="' + esc(gd.teamNames.red) + '"></label>' +
+              '<label style="display:grid;gap:6px"><span style="color:#93C5FD;font-weight:800">🔵 الفريق الأزرق</span><input id="cnNameBlue" class="inp" maxlength="24" value="' + esc(gd.teamNames.blue) + '"></label>' +
+            '</div>' +
+          '</div>' +
           '<div style="display:flex;justify-content:center;margin-top:6px">' +
             '<button type="button" class="btn btn-gold" style="padding:14px 28px;font-size:16.5px" data-act="cn-start-board">🚀 توزيع الـ ٢٥ بطاقة وبدء شفرة الديوانية</button>' +
           '</div>' +
@@ -1024,26 +1063,23 @@ window.GAME_CONFIG = {"slug":"shifra","title":"شفرة الديوانية","sub
 
       return '<div class="score-strip">' +
         '<div class="score-box ' + (gd.turnTeam === 'red' ? 'active-turn' : '') + '" style="background:linear-gradient(135deg,rgba(217,45,32,0.28),rgba(15,23,42,0.85));border-color:#EF4444">' +
-          '<span>🔴 عملاء الفريق الأحمر</span><b style="font-size:24px;color:#FCA5A5">' + arNum(redLeft) + '</b>' +
+          '<span>🔴 ' + esc(cnTeam('red')) + '</span><b style="font-size:24px;color:#FCA5A5">' + arNum(redLeft) + '</b>' +
         '</div>' +
         '<div class="score-box ' + (gd.turnTeam === 'blue' ? 'active-turn' : '') + '" style="background:linear-gradient(135deg,rgba(21,112,239,0.28),rgba(15,23,42,0.85));border-color:#3B82F6">' +
-          '<span>🔵 عملاء الفريق الأزرق</span><b style="font-size:24px;color:#93C5FD">' + arNum(blueLeft) + '</b>' +
+          '<span>🔵 ' + esc(cnTeam('blue')) + '</span><b style="font-size:24px;color:#93C5FD">' + arNum(blueLeft) + '</b>' +
         '</div>' +
         '<div class="score-box">' +
           '<span>📦 الحزمة: <b style="color:var(--gold)">' + esc(gd.packName) + '</b></span>' +
           '<button type="button" class="btn btn-sec btn-sm" data-act="cn-back-setup">تغيير الحزمة ⚙️</button>' +
         '</div>' +
       '</div>' +
-      '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:12px;background:rgba(0,0,0,0.35);padding:10px 14px;border-radius:14px;border:1px solid rgba(255,255,255,0.1)">' +
+      '<div class="cn-clue-bar" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:12px;background:rgba(0,0,0,0.35);padding:10px 14px;border-radius:14px;border:1px solid rgba(255,255,255,0.1)">' +
         '<div>' +
           (gd.clueWord
-            ? '<span>📢 شفرة القائد: <b style="color:var(--gold);font-size:18px">' + esc(gd.clueWord) + ' — ' + arNum(gd.clueCount) + '</b> (محاولات متبقية: ' + arNum(gd.guessesLeft) + ')</span>'
-            : '<span style="color:var(--muted)">بانتظار السوبرفايزر لإرسال الشفرة... (' + (gd.turnTeam === 'red' ? '🔴 الدور للأحمر' : '🔵 الدور للأزرق') + ')</span>') +
+            ? '<span>📢 شفرة ' + (gd.turnTeam === 'red' ? '🔴 ' : '🔵 ') + esc(cnTeam(gd.turnTeam)) + ': <b style="color:var(--gold);font-size:20px">' + esc(gd.clueWord) + ' — ' + arNum(gd.clueCount) + '</b> <span class="cn-left">باقي ' + arNum(gd.guessesLeft) + ' ' + (gd.guessesLeft === 1 ? 'محاولة' : 'محاولات') + '</span></span>'
+            : '<span style="color:var(--muted)">بانتظار السوبرفايزر يرسل الشفرة… الدور لـ ' + (gd.turnTeam === 'red' ? '🔴 ' : '🔵 ') + esc(cnTeam(gd.turnTeam)) + '</span>') +
         '</div>' +
         '<div style="display:flex;gap:8px;flex-wrap:wrap">' +
-          '<button type="button" class="btn ' + (gd.spymasterBoardOverlay ? 'btn-rose' : 'btn-gold') + ' btn-sm" data-act="cn-toggle-board-spy">' +
-            (gd.spymasterBoardOverlay ? '🙈 إخفاء ألوان السوبرفايزر عن اللوحة' : '🕵️ وضع السوبرفايزر (إظهار ألوان البطاقات بوضوح)') +
-          '</button>' +
           '<button type="button" class="btn btn-sec btn-sm" data-act="cn-end-turn">إنهاء الدور وتمرير اللعب ⏭️</button>' +
         '</div>' +
       '</div>' +
@@ -1365,23 +1401,21 @@ window.GAME_CONFIG = {"slug":"shifra","title":"شفرة الديوانية","sub
         '</div>';
       }
       return '<div style="display:flex;flex-direction:column;gap:12px">' +
-        '<button type="button" class="btn ' + (gd.spymasterPhoneOverlay ? 'btn-rose' : 'btn-gold') + '" data-act="cn-toggle-phone-spy">' +
-          (gd.spymasterPhoneOverlay ? '🙈 إخفاء خريطة ألوان السوبرفايزر في جوالي' : '🕵️ إظهار خريطة ألوان السوبرفايزر في جوالي') +
-        '</button>' +
-        (gd.spymasterPhoneOverlay ? (
-          '<div style="padding:10px;background:rgba(0,0,0,0.5);border-radius:14px;border:1px solid var(--gold)">' +
-            '<div style="font-size:12px;font-weight:800;color:var(--gold);margin-bottom:8px;text-align:center">🗺️ خريطة السوبرفايزر السرية (🔴 أحمر · 🔵 أزرق · 🟡 محايد · 💀 فخ أسود)</div>' +
-            '<div class="cn-grid-5" style="gap:5px">' +
-              gd.cards.map(function(c) {
-                var bg = c.role === 'red' ? '#DC2626' : (c.role === 'blue' ? '#2563EB' : (c.role === 'bomb' ? '#111827' : '#A3834C'));
-                var brd = c.role === 'bomb' ? '2px solid #F43F5E' : '1px solid rgba(255,255,255,0.25)';
-                return '<div style="padding:7px 3px;font-size:11px;font-weight:900;text-align:center;border-radius:7px;background:' + bg + ';border:' + brd + ';color:#fff;opacity:' + (c.revealed ? '0.35' : '1') + '">' +
-                  esc(c.word) +
-                '</div>';
-              }).join('') +
-            '</div>' +
-          '</div>'
-        ) : '') +
+        '<div style="padding:10px;background:rgba(0,0,0,0.45);border-radius:14px;border:1px solid var(--gold);display:grid;gap:8px">' +
+          '<div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap">' +
+            '<b style="color:var(--gold)">🕵️ خريطة السوبرفايزر</b>' +
+            '<button type="button" class="btn ' + (gd.spymasterPhoneOverlay ? 'btn-rose' : 'btn-gold') + ' btn-sm" data-act="cn-toggle-phone-spy">' + (gd.spymasterPhoneOverlay ? '🙈 إخفاء الألوان' : '👁️ إظهار كل الألوان') + '</button>' +
+          '</div>' +
+          (gd.spymasterPhoneOverlay ? '' : '<div style="font-size:12.5px;color:var(--muted)">الألوان مخفية عشان محد يشوفها. اضغط مطوّل على أي بطاقة يطلع لونها، وإذا شلت إصبعك ترجع عادية.</div>') +
+          '<div class="cn-grid-5 cn-mini">' +
+            gd.cards.map(function(c) {
+              var badge = c.role === 'red' ? '🔴 أحمر' : (c.role === 'blue' ? '🔵 أزرق' : (c.role === 'bomb' ? '💀 قاتل' : '🟡 محايد'));
+              return '<div class="cn-card' + (gd.spymasterPhoneOverlay ? ' spy-' + c.role : '') + (c.revealed ? ' cn-done' : '') + '" data-peek="' + c.role + '">' +
+                '<div class="cn-card-top"><span>' + esc(c.serial.replace('DW-', '')) + '</span>' + (gd.spymasterPhoneOverlay ? '<span class="cn-badge">' + badge + '</span>' : '<span class="cn-card-dot"></span>') + '</div>' +
+                '<div class="cn-card-word">' + esc(c.word) + '</div></div>';
+            }).join('') +
+          '</div>' +
+        '</div>' +
         '<div style="background:rgba(255,255,255,0.04);padding:12px;border-radius:14px;display:flex;flex-direction:column;gap:8px">' +
           '<label style="font-size:12.5px;color:var(--muted)">إرسال شفرة السوبرفايزر (كلمة واحدة + عدد الكلمات):</label>' +
           '<div style="display:flex;gap:8px">' +
@@ -1543,6 +1577,15 @@ window.GAME_CONFIG = {"slug":"shifra","title":"شفرة الديوانية","sub
     }
   }
 
+  // Supervisor map: hold a card to see its colour, let go to hide it again.
+  function cnPeek(e, on) {
+    var c = e.target.closest && e.target.closest('[data-peek]'); if (!c) return;
+    var r = c.getAttribute('data-peek');
+    if (on) { c.classList.add('spy-' + r); } else if (!(ST.gameData && ST.gameData.spymasterPhoneOverlay)) { c.classList.remove('spy-' + r); }
+  }
+  ['pointerdown', 'pointerup', 'pointerleave', 'pointercancel'].forEach(function (ev) {
+    document.addEventListener(ev, function (e) { cnPeek(e, ev === 'pointerdown'); }, true);
+  });
   document.addEventListener('click', function(e) {
     var btn = e.target.closest('[data-act]');
     if (!btn) return;
@@ -1598,6 +1641,8 @@ window.GAME_CONFIG = {"slug":"shifra","title":"شفرة الديوانية","sub
       AUDIO.sfx('win');
       renderAll();
     } else if (act === 'cn-start-board') {
+      var nr = document.getElementById('cnNameRed'), nb = document.getElementById('cnNameBlue');
+      gd.teamNames = { red: ((nr && nr.value) || '').trim().slice(0, 24) || 'الفريق الأحمر', blue: ((nb && nb.value) || '').trim().slice(0, 24) || 'الفريق الأزرق' };
       var chosenWords = [];
       var label = '';
       if (gd.selectedPackId === 'random_all') {
@@ -1641,6 +1686,7 @@ window.GAME_CONFIG = {"slug":"shifra","title":"شفرة الديوانية","sub
       gd.clueWord = cw;
       gd.clueCount = cc;
       gd.guessesLeft = cc + 1;
+      setTimeout(function () { cnFlyClue(cw + ' — ' + arNum(cc)); }, 30);
       ST.statusMsg = 'الشفرة المعلنة: «' + cw + ' (' + arNum(cc) + ')» — المسوا البطاقات وضعوا بطاقة العميل عليها!';
       AUDIO.sfx('gavel');
       AUDIO.speak('الشفرة هي ' + cw + '، عدد البطاقات ' + cc);
@@ -1649,6 +1695,7 @@ window.GAME_CONFIG = {"slug":"shifra","title":"شفرة الديوانية","sub
       var idx = parseInt(btn.getAttribute('data-idx'), 10);
       var card = gd.cards[idx];
       if (!card || card.revealed || gd.gameOver) return;
+      if (!gd.clueWord) { ST.statusMsg = '✋ انتظروا السوبرفايزر يرسل الشفرة أول، بعدين اختاروا البطاقات.'; AUDIO.sfx('alarm'); renderAll(); return; }
       card.revealed = true;
       if (card.role === 'bomb') {
         gd.gameOver = true;
@@ -1667,9 +1714,12 @@ window.GAME_CONFIG = {"slug":"shifra","title":"شفرة الديوانية","sub
         }
       } else {
         AUDIO.sfx('card_flip');
+        ST.statusMsg = (card.role === 'neutral' ? '🟡 بطاقة محايدة' : '😬 بطاقة الفريق الثاني') + ' — انتهى دور ' + cnTeam(gd.turnTeam) + '، والدور الحين لـ ' + cnTeam(gd.turnTeam === 'red' ? 'blue' : 'red') + '.';
         gd.turnTeam = gd.turnTeam === 'red' ? 'blue' : 'red';
         gd.clueWord = '';
+        gd.guessesLeft = 0;
       }
+      cnCheckWin(gd);
       renderAll();
     } else if (act === 'cn-end-turn') {
       gd.turnTeam = gd.turnTeam === 'red' ? 'blue' : 'red';
