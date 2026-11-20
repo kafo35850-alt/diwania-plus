@@ -2613,9 +2613,14 @@ body.board-mode-active .m8-banner { min-height: 0; }
 <div id="buzzerStatusBanner" class="hidden mt-2 p-2 rounded-xl text-center font-black text-xs"></div>
 <div id="m8BuzzOrder" class="hidden mt-1.5 p-2 rounded-xl border border-slate-300 text-[11px] font-bold text-right space-y-0.5"></div>
 </div>
+<div id="m8ViewQBanner" class="hidden p-3 rounded-2xl bg-sky-50 border-2 border-sky-400 flex flex-wrap items-center justify-between gap-2 text-right">
+<span class="text-sm font-black text-sky-900">👀 تشوف السؤال بس (الإجابة انكشفت خلاص)</span>
+<button id="m8BackToABtn" type="button" class="px-4 py-1.5 rounded-full font-black text-xs bg-emerald-600 hover:bg-emerald-700 text-white shadow">✅ رجوع للإجابة</button>
+</div>
 <div id="answerRevealContainer" class="hidden p-4 rounded-2xl bg-emerald-50 border-2 border-emerald-500 space-y-2.5 text-right">
-<div class="flex items-center justify-between">
+<div class="flex items-center justify-between gap-2 flex-wrap">
 <span class="text-xs font-black px-2.5 py-0.5 rounded-full bg-emerald-600 text-white">✅ الإجابة الصحيحة</span>
+<button id="m8BackToQBtn" type="button" class="px-3 py-1 rounded-full font-black text-xs bg-sky-600 hover:bg-sky-700 text-white shadow">↩️ شوف السؤال</button>
 <span id="answerPointsSummary" class="text-xs font-black text-orange-600 num-font"></span>
 </div>
 <div id="qModalAnswerText" class="text-lg sm:text-2xl font-black text-emerald-900"></div>
@@ -8576,6 +8581,9 @@ state.modal.buzzerPlayerName = null;
 state.modal.questionOpenedAt = performance.now();
 m8BuzzRoundStart();
 state.modal.answerRevealed = false;
+state.modal.viewingQuestion = false;
+state.modal.qStageHiddenOnReveal = false;
+document.getElementById('m8ViewQBanner').classList.add('hidden');
 state.modal.currentBlurPx = 10;
 playSound('click');
 document.getElementById('qModalCatIcon').textContent = col.icon;
@@ -8656,7 +8664,33 @@ m.armedLifelines = null;
 renderArmedLifelinesBanner();
 }
 }
+// View-only look back at the question after the answer is out: nothing about scoring changes.
+function m8ShowQuestionOnly() {
+const cell = state.match.activeCell;
+if (!cell || !state.modal.answerRevealed) return;
+const m = state.match;
+const col = m.boardColumns[cell.colIdx];
+const qObj = col.questions[cell.qIdx];
+state.modal.viewingQuestion = true;
+document.getElementById('answerRevealContainer').classList.add('hidden');
+renderQuestionVisual(m, col, qObj);
+const va = document.getElementById('visualArtContainer'); if (va) va.style.filter = 'blur(0px)';
+if (qObj.photo && typeof m8PixClear === 'function') m8PixClear();
+const cb = document.getElementById('qModalCharadesBox'); if (cb && qObj.fantasy) cb.classList.remove('hidden');
+document.getElementById('m8ViewQBanner').classList.remove('hidden');
+}
+function m8BackToAnswer() {
+if (!state.modal.viewingQuestion) return;
+state.modal.viewingQuestion = false;
+document.getElementById('m8ViewQBanner').classList.add('hidden');
+if (state.modal.qStageHiddenOnReveal) {
+const st = document.getElementById('qModalVisualStage'); if (st) st.classList.add('hidden');
+const va = document.getElementById('visualArtContainer'); if (va) va.innerHTML = '';
+}
+document.getElementById('answerRevealContainer').classList.remove('hidden');
+}
 function revealAnswerAndSurprise() {
+if (state.modal.viewingQuestion) { m8BackToAnswer(); return; }
 m8StopAnswerCountdown();
 const cell = state.match.activeCell;
 if (!cell) return;
@@ -8681,6 +8715,7 @@ const st = document.getElementById('qModalVisualStage'); if (st) { st.classList.
 portraitBox.innerHTML = '<div style="margin-top:8px;padding:6px;border-radius:14px;background:#0b1220">' + dwMediaHtml(dwAM) + '</div>';
 }
 }
+{ const st = document.getElementById('qModalVisualStage'); state.modal.qStageHiddenOnReveal = !!(st && st.classList.contains('hidden')); }
 if (qObj.surprise === 'deduct' || qObj.surprise === 'double') {
 m8ApplySurpriseUI(qObj, false);
 } else {
@@ -10496,6 +10531,8 @@ pressBuzzer('team2');
 document.getElementById('revealAnswerBtn').addEventListener('click', () => {
 revealAnswerAndSurprise();
 });
+document.getElementById('m8BackToQBtn').addEventListener('click', m8ShowQuestionOnly);
+document.getElementById('m8BackToABtn').addEventListener('click', m8BackToAnswer);
 document.getElementById('awardTeam1Btn').addEventListener('click', () => resolveQuestion('team1_win'));
 document.getElementById('awardTeam2Btn').addEventListener('click', () => resolveQuestion('team2_win'));
 document.getElementById('awardNoneBtn').addEventListener('click', () => resolveQuestion('none'));
