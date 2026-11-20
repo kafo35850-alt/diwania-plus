@@ -25,29 +25,38 @@ cats.filter((c) => !c.draft).forEach((c, i) => {
     uid: c.slug + '_' + (n + 1) + '_' + q.points, points: q.points, q: q.q, a: q.a, hint: q.hint || '', info: q.hint || '', qm: pic(q.qm), am: pic(q.am)
   }));
 });
-// Owner-approved pictures of women (hijab versions) for chosen questions: content/women_pictures.json
-// { slug: { "<question index>": { qm?: key, am?: key } } }. A built-in category (questions inside games/eight.html)
-// is shipped as an override with all its questions, unchanged except for these pictures.
-const womenPath = join(root, 'content/women_pictures.json');
-const women = existsSync(womenPath) ? JSON.parse(readFileSync(womenPath, 'utf8')) : {};
+// Pictures for the built-in categories (questions inside games/eight.html) go to worker/src/pictures.json:
+// uid → [question picture key, answer picture key]. The game adds them to its own questions.
+//   content/question_pictures.json  — found automatically (real photos; never a woman)
+//   content/women_pictures.json     — the owner's hijab photos { slug: { "<question index>": { qm?, am? } } }, these win
+const readJson = (f, d) => (existsSync(join(root, f)) ? JSON.parse(readFileSync(join(root, f), 'utf8')) : d);
+const pics = readJson('content/question_pictures.json', {});
+const women = readJson('content/women_pictures.json', {});
 const eightHtml = readFileSync(join(root, 'games/eight.html'), 'utf8');
 const draftSlugs = new Set(cats.filter((c) => c.draft).map((c) => c.slug));
 for (const [slug, byIndex] of Object.entries(women)) {
   if (draftSlugs.has(slug)) continue;
-  if (!cats.some((c) => c.slug === slug)) delete seed.catQuestionsOverrides[slug]; // built-in: rebuilt from the game file every run
-  let list = seed.catQuestionsOverrides[slug];
-  if (!list) {
-    const m = eightHtml.match(new RegExp('id="m8_cat_' + slug + '">([\\s\\S]*?)</script>'));
-    if (!m) { console.warn('no built-in questions for', slug); continue; }
-    list = JSON.parse(m[1]).map((q, n) => Object.assign({}, q, { uid: q.uid || slug + '_q' + (n + 1) + '_' + (q.points || 200) })); // the game's own id: its drawings are keyed by it
-    seed.catQuestionsOverrides[slug] = list;
+  const own = seed.catQuestionsOverrides[slug] && cats.some((c) => c.slug === slug);
+  if (own) { // a ready-made category of ours: the picture goes on the question itself
+    for (const [i, p] of Object.entries(byIndex)) {
+      const q = seed.catQuestionsOverrides[slug][Number(i)]; if (!q) continue;
+      if (p.qm) q.qm = pic(p.qm); if (p.am) q.am = pic(p.am);
+    }
+    continue;
   }
-  for (const [i, pics] of Object.entries(byIndex)) {
+  delete seed.catQuestionsOverrides[slug]; // older releases shipped built-ins as full copies
+  const m = eightHtml.match(new RegExp('id="m8_cat_' + slug + '">([\\s\\S]*?)</script>'));
+  if (!m) { console.warn('no built-in questions for', slug); continue; }
+  const list = JSON.parse(m[1]);
+  for (const [i, p] of Object.entries(byIndex)) {
     const q = list[Number(i)]; if (!q) continue;
-    if (pics.qm) q.qm = pic(pics.qm);
-    if (pics.am) q.am = pic(pics.am);
+    const uid = slug + '_q' + (Number(i) + 1) + '_' + (q.points || 200);
+    const cur = pics[uid] || ['', ''];
+    pics[uid] = [p.qm || cur[0], p.am || cur[1]];
   }
 }
+writeFileSync(join(root, 'worker/src/pictures.json'), JSON.stringify(pics));
+console.log('built-in questions with pictures:', Object.keys(pics).length);
 const drafts = new Set(cats.filter((c) => c.draft).map((c) => c.slug));
 drafts.forEach((s) => { delete seed.catQuestionsOverrides[s]; });
 const slugs = new Set([...extra.map((c) => c.slug), ...drafts]);

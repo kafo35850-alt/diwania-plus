@@ -6554,7 +6554,7 @@ return { options: four, correctIndex: four.indexOf(correctText) };
 }
 function buildFreshQuestionsForCategory(cat, seenMap) {
 const rawQuestions = (Array.isArray(cat.questions) && cat.questions.length) ? cat.questions : (CATEGORY_QUESTIONS_CACHE[cat.id] || []);
-const pool = rawQuestions.map((q, idx) => ({
+const pool = rawQuestions.map((q, idx) => m8WithPics({
 ...q,
 uid: q.uid || `${cat.id}_q${idx + 1}`,
 points: Number(q.points || 200),
@@ -7420,11 +7420,24 @@ row.appendChild(go); row.appendChild(del);
 box.appendChild(t); box.appendChild(s2); box.appendChild(row);
 box.classList.remove('hidden');
 }
+// Real pictures for built-in questions (window.__DW_CONTENT.pics: uid → [question picture, answer picture]).
+// A picture the owner set on a question always wins.
+function m8WithPics(q) {
+try {
+const pic = ((window.__DW_CONTENT || {}).pics || {})[q.uid];
+if (!pic) return q;
+const m = (k) => (k ? { t: 'image', u: '/media/med_seed_' + k } : null);
+const out = { ...q };
+if (!out.qm && pic[0]) out.qm = m(pic[0]);
+if (!out.am && pic[1]) out.am = m(pic[1]);
+return out;
+} catch (e) { return q; }
+}
 function m8RawQuestion(cat, uid) {
 const raw = (Array.isArray(cat.questions) && cat.questions.length) ? cat.questions : (CATEGORY_QUESTIONS_CACHE[cat.id] || []);
 for (let i = 0; i < raw.length; i++) {
 const q = raw[i];
-if ((q.uid || `${cat.id}_q${i + 1}`) === uid) return { ...q, uid: uid, points: Number(q.points || 200), info: q.info || q.a };
+if ((q.uid || `${cat.id}_q${i + 1}`) === uid) return m8WithPics({ ...q, uid: uid, points: Number(q.points || 200), info: q.info || q.a });
 }
 return null;
 }
