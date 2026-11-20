@@ -10772,6 +10772,9 @@ redeemVoucherCode(document.getElementById('licenseCodeInput').value);
 document.getElementById('closeCatInfoModalBtn').addEventListener('click', () => {
 document.getElementById('categoryInfoModal').classList.add('hidden');
 });
+document.getElementById('categoryInfoModal').addEventListener('click', (e) => {
+if (e.target && e.target.id === 'categoryInfoModal') e.target.classList.add('hidden');
+});
 document.getElementById('selectCatFromInfoModalBtn').addEventListener('click', () => {
 document.getElementById('categoryInfoModal').classList.add('hidden');
 if (currentInfoCatId && !state.match.active) {
@@ -10797,8 +10800,10 @@ showToast('🗑️ تم مسح قائمة البلاغات.', 'info');
 });
 renderAdminReportsList();
 }
-window.onload = initDiwaniya8App;
-try { initDiwaniya8App(); } catch (e) { document.addEventListener('DOMContentLoaded', initDiwaniya8App); }
+// Start once, after the whole page is parsed (some screens, like the category studio, are defined below this script).
+let __m8Booted = false;
+function __m8Boot() { if (__m8Booted) return; __m8Booted = true; initDiwaniya8App(); }
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', __m8Boot); else __m8Boot();
 </script>
 
   <!-- ==================== ADMIN & CUSTOMER VISUAL CATEGORY/QUESTION/IMAGE STUDIO MODAL ==================== -->
