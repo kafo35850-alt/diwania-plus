@@ -13,6 +13,14 @@
    "qm": "hj_custom_celebs_arab_16_q"
   }
  },
+ "custom_celebs_world": {
+  "5": {
+   "am": "hj_custom_celebs_world_6_a"
+  },
+  "9": {
+   "am": "hj_custom_celebs_world_10_a"
+  }
+ },
  "custom_tb_ramadan": {
   "3": {
    "am": "hj_custom_tb_ramadan_4_a"
@@ -166,11 +174,17 @@
   }
  },
  "series_la_casa": {
+  "5": {
+   "am": "hj_series_la_casa_6_a"
+  },
   "6": {
    "am": "hj_series_la_casa_7_a"
   },
   "11": {
    "am": "hj_series_la_casa_12_a"
+  },
+  "15": {
+   "am": "hj_series_la_casa_16_a"
   }
  },
  "series_lan_aeesh": {
@@ -245,6 +259,17 @@
   },
   "16": {
    "am": "hj_series_vikings_17_a"
+  }
+ },
+ "turkish_drama_series": {
+  "9": {
+   "am": "hj_turkish_drama_series_10_a"
+  },
+  "13": {
+   "am": "hj_turkish_drama_series_14_a"
+  },
+  "14": {
+   "am": "hj_turkish_drama_series_15_a"
   }
  }
 }
