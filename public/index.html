@@ -922,6 +922,29 @@ html.dw-game-open #dwApp { visibility: hidden; }
 .set-box p { margin: 0; color: var(--text-muted); font-size: 13px; line-height: 1.7; }
 .set-sw { display: flex; align-items: center; gap: 8px; font-weight: 700; cursor: pointer; }
 .set-sw input { width: 20px; height: 20px; accent-color: var(--gold); }
+.an-tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 10px; }
+.an-tile { border: 1px solid var(--border-subtle); border-radius: 16px; padding: 12px 14px; background: rgba(255,255,255,.03); display: grid; gap: 2px; }
+.an-tile span { color: var(--text-muted); font-size: 13px; }
+.an-tile b { font-size: 24px; font-weight: 900; color: var(--gold); }
+.an-tile small { color: var(--text-muted); font-size: 12px; }
+.an-two { display: grid; grid-template-columns: 1.3fr 1fr; gap: 16px; }
+@media (max-width: 820px) { .an-two { grid-template-columns: 1fr; } }
+.an-bars { display: flex; align-items: flex-end; gap: 6px; height: 190px; padding-top: 18px; direction: ltr; }
+.an-bar { flex: 1; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; gap: 4px; min-width: 0; }
+.an-bar > div { width: 100%; border-radius: 8px 8px 3px 3px; background: linear-gradient(180deg, var(--gold), rgba(245,185,66,.35)); }
+.an-bar i { font-style: normal; font-size: 11px; color: var(--text-muted); }
+.an-bar span { font-size: 11px; color: var(--text-muted); }
+.an-game { display: grid; gap: 4px; margin-top: 8px; }
+.an-game-h { display: flex; justify-content: space-between; gap: 8px; font-size: 14px; }
+.an-game-h small { color: var(--text-muted); }
+.an-game-bar { height: 8px; border-radius: 99px; background: rgba(255,255,255,.07); overflow: hidden; }
+.an-game-bar > div { height: 100%; border-radius: 99px; background: linear-gradient(90deg, #4fbf98, var(--gold)); }
+.an-table td { vertical-align: middle; }
+.an-modal { position: fixed; inset: 0; z-index: 9000; background: rgba(4,6,18,.72); display: grid; place-items: center; padding: 16px; }
+.an-modal-box { width: min(760px, 100%); max-height: 88vh; overflow: auto; }
+.an-h5 { margin: 8px 0 0; font-size: 15px; }
+.an-days { display: grid; gap: 6px; }
+.an-day { display: grid; grid-template-columns: 54px 1fr 90px; align-items: center; gap: 8px; font-size: 13px; }
 /* features + devices + faq */
 .feat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
 @media (max-width: 1000px) { .feat-grid { grid-template-columns: repeat(2, 1fr); } }
@@ -1991,6 +2014,9 @@ html.dw-game-open #dwApp { visibility: hidden; }
       },
       claimAppInstall: function (platform) { return api('POST', '/api/app/installed', { platform: platform }); },
       myPromo: function () { return api('GET', '/api/promo/mine'); },
+      ping: function () { return api('POST', '/api/ping', {}); },
+      analytics: function () { return api('GET', '/api/admin/analytics'); },
+      analyticsUser: function (id) { return api('GET', '/api/admin/analytics/user/' + encodeURIComponent(id)); },
       checkPromo: function (code, pkgId) { return api('POST', '/api/promo/check', { code: code, pkgId: pkgId }); },
       createPaymentOrder: function (pkgId, promoCode) {
         return api('POST', '/api/payments/orders', promoCode ? { pkgId: pkgId, promoCode: promoCode } : { pkgId: pkgId }).then(function (d) {
@@ -2151,6 +2177,21 @@ html.dw-game-open #dwApp { visibility: hidden; }
     return '';
   }
 
+  // 3725 seconds -> «١ س ٢ د»
+  function durText(sec) {
+    sec = Math.round(Number(sec) || 0);
+    if (sec < 60) return sec ? 'أقل من دقيقة' : '—';
+    var m = Math.round(sec / 60), h = Math.floor(m / 60);
+    return h ? arNum(h) + ' س' + (m % 60 ? ' ' + arNum(m % 60) + ' د' : '') : arNum(m) + ' د';
+  }
+  function agoText(ms) {
+    if (!ms) return 'ما دخل بعد التحديث';
+    var d = (Date.now() - Number(ms)) / 60000;
+    if (d < 3) return '🟢 الحين';
+    if (d < 60) return 'قبل ' + arNum(Math.round(d)) + ' دقيقة';
+    if (d < 1440) return 'قبل ' + arNum(Math.round(d / 60)) + ' ساعة';
+    return 'قبل ' + arNum(Math.round(d / 1440)) + ' يوم';
+  }
   function arNum(n) {
     return String(n == null ? 0 : n).replace(/\d/g, function (d) { return '٠١٢٣٤٥٦٧٨٩'[d]; });
   }
@@ -2982,6 +3023,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
         '<div><span class="dw-badge">لوحة المالك</span><h3 style="margin:4px 0 0;font-size:22px;font-weight:900">لوحة تحكم المالك ونظام إدارة الألعاب والـ ١٥٢ فئة</h3></div>' +
         '<div style="display:flex;gap:6px;flex-wrap:wrap">' +
           '<button class="dw-tab-btn ' + (st === 'overview' ? 'active' : '') + '" data-adm-tab="overview">📊 الإحصائيات</button>' +
+          '<button class="dw-tab-btn ' + (st === 'analytics' ? 'active' : '') + '" data-adm-tab="analytics">📈 تحليل العملاء</button>' +
           '<button class="dw-tab-btn ' + (st === 'users' ? 'active' : '') + '" data-adm-tab="users">👥 المستخدمين والأرصدة</button>' +
           '<button class="dw-tab-btn ' + (st === 'packages' ? 'active' : '') + '" data-adm-tab="packages">💎 إدارة الباقات</button>' +
           '<button class="dw-tab-btn ' + (st === 'games' ? 'active' : '') + '" data-adm-tab="games">🎮 إدارة الألعاب (' + arNum(STATE.games.length) + ')</button>' +
@@ -3358,6 +3400,107 @@ html.dw-game-open #dwApp { visibility: hidden; }
             }).join('') +
           '</tbody></table></div>' +
         '</div>';
+    }
+
+    if (st === 'analytics') {
+      var A = STATE.analytics;
+      if (!A) {
+        if (!STATE.analyticsLoading) {
+          STATE.analyticsLoading = true;
+          DiwaniyaServerKernel.analytics().then(function (d) { STATE.analyticsLoading = false; STATE.analytics = d.ok ? d : { error: d.error || 'تعذر تحميل الإحصائيات.' }; render(); });
+        }
+        return nav + '<div class="dw-card" style="text-align:center;padding:40px">⏳ جاري تجهيز الإحصائيات…</div>';
+      }
+      if (A.error) return nav + '<div class="dw-card" style="text-align:center;padding:30px">⚠️ ' + esc(A.error) + ' <button class="dw-btn dw-btn-sec dw-btn-sm" data-act="an-refresh">🔄 حاول مرة ثانية</button></div>';
+      var S = A.summary;
+      var tile = function (label, val, sub) { return '<div class="an-tile"><span>' + label + '</span><b>' + val + '</b>' + (sub ? '<small>' + sub + '</small>' : '') + '</div>'; };
+      var maxU = Math.max.apply(null, [1].concat(A.days.map(function (d) { return d.users; })));
+      var dayMap = {}; A.days.forEach(function (d) { dayMap[d.day] = d; });
+      var bars = '';
+      for (var di = 13; di >= 0; di--) {
+        var key = new Date(Date.now() + 3 * 3600000 - di * 86400000).toISOString().slice(0, 10);
+        var dd = dayMap[key] || { users: 0, seconds: 0 };
+        bars += '<div class="an-bar" title="' + esc(key) + ': ' + arNum(dd.users) + ' عميل · ' + durText(dd.seconds) + '"><i>' + (dd.users ? arNum(dd.users) : '') + '</i><div style="height:' + Math.max(3, Math.round(dd.users / maxU * 100)) + '%"></div><span>' + arNum(Number(key.slice(8))) + '</span></div>';
+      }
+      var maxG = A.top_games.length ? A.top_games[0].plays : 1;
+      var sortKey = STATE.anSort || 'last';
+      var sorters = {
+        last: function (u) { return Number(u.last_seen) || 0; },
+        time: function (u) { return Number(u.total_seconds) || 0; },
+        paid: function (u) { return Number(u.paid_halalas) || 0; },
+        plays: function (u) { return (u.free_plays || 0) + (u.trials || 0) + (u.paid_plays || 0); },
+        new: function (u) { return String(u.created_at || ''); }
+      };
+      var list = A.users.slice().sort(function (a, b) { var x = sorters[sortKey](a), y = sorters[sortKey](b); return x < y ? 1 : x > y ? -1 : 0; });
+      var dev = { iPhone: '📱 آيفون', iPad: '📱 آيباد', Android: '📱 أندرويد', Windows: '💻 ويندوز', Mac: '💻 ماك', TV: '📺 تلفزيون', other: '🌐 ثاني' };
+      var sortBtn = function (k, l) { return '<button class="dw-chip' + (sortKey === k ? ' gold' : '') + '" data-act="an-sort" data-k="' + k + '">' + l + '</button>'; };
+      var html = nav +
+        '<div class="dw-card"><div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px"><h4 style="margin:0;font-size:19px">📈 تحليل العملاء</h4>' +
+          '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="an-refresh">🔄 تحديث</button></div>' +
+          '<p style="margin:0;color:var(--text-muted);font-size:13px">خاصة فيك أنت بس. الوقت ينحسب للحسابات المسجّلة دخول وهي فاتحة الموقع (يشمل وقت اللعب)، من تاريخ إضافة هالميزة.</p>' +
+          '<div class="an-tiles">' +
+            tile('👥 المسجّلين', arNum(S.users)) +
+            tile('🟢 نشطين اليوم', arNum(S.active_today)) +
+            tile('📅 نشطين آخر ٧ أيام', arNum(S.active_7), 'آخر ٣٠ يوم: ' + arNum(S.active_30)) +
+            tile('💳 اشتروا', arNum(S.buyers), S.users ? 'نسبة الشراء ' + arNum(Math.round(S.buyers / S.users * 100)) + '٪' : '') +
+            tile('💰 المبيعات', arNum(sarText(S.revenue_halalas)) + ' ر.س') +
+            tile('⏱️ متوسط وقت العميل', durText(S.avg_seconds), 'الإجمالي: ' + durText(S.total_seconds)) +
+            tile('🆓 لعب مجاني', arNum(S.free_plays), 'مجانية + تجارب') +
+            tile('🎮 لعب بالأقيام', arNum(S.paid_plays)) +
+          '</div></div>' +
+        '<div class="an-two">' +
+          '<div class="dw-card"><h4 style="margin:0;font-size:17px">العملاء النشطين باليوم (آخر ١٤ يوم)</h4><div class="an-bars">' + bars + '</div></div>' +
+          '<div class="dw-card"><h4 style="margin:0;font-size:17px">🏆 أكثر الألعاب لعباً</h4>' +
+            (A.top_games.length ? A.top_games.map(function (g) {
+              return '<div class="an-game"><div class="an-game-h"><b>' + esc(g.game) + '</b><span>' + arNum(g.plays) + ' · <small>مجاني ' + arNum(g.free) + ' / بالأقيام ' + arNum(g.paid) + '</small></span></div><div class="an-game-bar"><div style="width:' + Math.round(g.plays / maxG * 100) + '%"></div></div></div>';
+            }).join('') : '<p style="color:var(--text-muted)">ما فيه لعب للحين.</p>') +
+          '</div>' +
+        '</div>' +
+        '<div class="dw-card"><h4 style="margin:0;font-size:17px">العملاء (' + arNum(list.length) + ')</h4>' +
+          '<div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center">' +
+            '<input class="dw-input" id="anSearch" placeholder="🔎 ابحث بالإيميل أو الاسم" style="max-width:280px">' +
+            sortBtn('last', 'آخر دخول') + sortBtn('time', 'الأكثر وقت') + sortBtn('paid', 'الأكثر شراء') + sortBtn('plays', 'الأكثر لعب') + sortBtn('new', 'الأحدث تسجيل') +
+          '</div>' +
+          '<div class="dw-table-wrap"><table class="dw-table an-table"><thead><tr><th>العميل</th><th>آخر دخول</th><th>الوقت في الموقع</th><th>أيام النشاط</th><th>الزيارات</th><th>الجهاز</th><th>اشترى</th><th>لعب مجاناً</th><th>لعب بالأقيام</th><th>الرصيد</th><th></th></tr></thead><tbody>' +
+            list.map(function (u) {
+              return '<tr data-an-q="' + esc((u.email + ' ' + (u.display_name || '')).toLowerCase()) + '">' +
+                '<td><b>' + esc(u.display_name || '—') + '</b><div dir="ltr" style="font-size:12px;color:var(--text-muted)">' + esc(u.email) + '</div></td>' +
+                '<td style="white-space:nowrap">' + agoText(u.last_seen) + '</td>' +
+                '<td>' + durText(u.total_seconds) + '</td><td>' + arNum(u.days_active || 0) + '</td><td>' + arNum(u.visits || 0) + '</td>' +
+                '<td style="white-space:nowrap">' + (dev[u.platform] || '—') + (u.installed ? ' <span title="مثبّت التطبيق">📲</span>' : '') + '</td>' +
+                '<td>' + (u.paid_count ? '<b style="color:var(--gold)">' + arNum(sarText(u.paid_halalas)) + ' ر.س</b><div style="font-size:12px;color:var(--text-muted)">' + arNum(u.paid_count) + ' طلب</div>' : '—') + '</td>' +
+                '<td>' + arNum((u.free_plays || 0) + (u.trials || 0)) + '</td><td>' + arNum(u.paid_plays || 0) + '</td><td>' + arNum(u.balance) + '</td>' +
+                '<td><button class="dw-btn dw-btn-sec dw-btn-sm" data-act="an-user" data-id="' + esc(u.id) + '">📋 التفاصيل</button></td></tr>';
+            }).join('') +
+          '</tbody></table></div></div>';
+      var D = STATE.anUser;
+      if (D) {
+        var body;
+        if (D.loading) body = '<p style="text-align:center">⏳ جاري التحميل…</p>';
+        else if (!D.ok) body = '<p>⚠️ ' + esc(D.error || 'تعذر التحميل') + '</p>';
+        else {
+          var maxS = Math.max.apply(null, [60].concat(D.days.map(function (d) { return d.seconds; })));
+          var txName = { free_play: '🆓 لعب مجاني', free_trial: '🎁 تجربة مجانية', consume: '🎮 لعب بالأقيام', purchase: '💳 شراء', bonus: '🎁 هدية', admin_add: '🛠️ إضافة من الأدمن', admin_deduct: '🛠️ خصم من الأدمن' };
+          body =
+            '<h5 class="an-h5">⏱️ وقته في الموقع (آخر ٣٠ يوم نشاط)</h5>' +
+            (D.days.length ? '<div class="an-days">' + D.days.map(function (d) {
+              return '<div class="an-day"><span dir="ltr">' + esc(d.day.slice(5)) + '</span><div class="an-game-bar"><div style="width:' + Math.round(d.seconds / maxS * 100) + '%"></div></div><b>' + durText(d.seconds) + '</b></div>';
+            }).join('') + '</div>' : '<p style="color:var(--text-muted)">ما فيه وقت مسجّل للحين.</p>') +
+            '<h5 class="an-h5">💳 مشترياته</h5>' +
+            (D.payments.length ? '<div class="dw-table-wrap"><table class="dw-table"><thead><tr><th>الباقة</th><th>المبلغ</th><th>الحالة</th><th>التاريخ</th></tr></thead><tbody>' + D.payments.map(function (p) {
+              return '<tr><td>' + esc(p.package_name) + ' (' + arNum(p.credits) + ')' + (p.promo_code ? ' <span class="dw-chip">' + esc(p.promo_code) + '</span>' : '') + '</td><td>' + arNum(sarText(p.amount_halalas)) + ' ر.س</td><td>' + paymentChip(p.status) + '</td><td dir="ltr" style="font-size:12px">' + esc(String(p.created_at || '').slice(0, 16).replace('T', ' ')) + '</td></tr>';
+            }).join('') + '</tbody></table></div>' : '<p style="color:var(--text-muted)">ما اشترى شي للحين.</p>') +
+            '<h5 class="an-h5">🎮 لعبه وحركات محفظته</h5>' +
+            (D.transactions.length ? '<div class="dw-table-wrap"><table class="dw-table"><thead><tr><th>النوع</th><th>التفاصيل</th><th>الأقيام</th><th>التاريخ</th></tr></thead><tbody>' + D.transactions.map(function (t) {
+              return '<tr><td style="white-space:nowrap">' + (txName[t.type] || esc(t.type)) + '</td><td>' + esc(t.description) + '</td><td dir="ltr">' + (t.amount > 0 ? '+' : '') + arNum(t.amount) + '</td><td dir="ltr" style="font-size:12px">' + esc(String(t.created_at || '').slice(0, 16).replace('T', ' ')) + '</td></tr>';
+            }).join('') + '</tbody></table></div>' : '<p style="color:var(--text-muted)">ما لعب ولا شي للحين.</p>');
+        }
+        html += '<div class="an-modal" data-act="an-close-bg"><div class="an-modal-box dw-card">' +
+          '<div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><h4 style="margin:0;font-size:18px">📋 ' + esc(D.user ? (D.user.display_name || D.user.email) : '') + '</h4><button class="dw-btn dw-btn-sec dw-btn-sm" data-act="an-close">✕ إغلاق</button></div>' +
+          (D.user ? '<div dir="ltr" style="font-size:12.5px;color:var(--text-muted);text-align:right">' + esc(D.user.email) + ' · سجّل ' + esc(String(D.user.created_at || '').slice(0, 10)) + '</div>' : '') +
+          body + '</div></div>';
+      }
+      return html;
     }
 
     if (st === 'payments') {
@@ -4281,6 +4424,17 @@ html.dw-game-open #dwApp { visibility: hidden; }
         if (k < segs.length - 1) steps.push({ say: 'سالم' });
       });
       voPlay(steps);
+    } else if (act === 'an-refresh') {
+      STATE.analytics = null; render();
+    } else if (act === 'an-sort') {
+      STATE.anSort = actBtn.getAttribute('data-k'); render();
+    } else if (act === 'an-user') {
+      var anId = actBtn.getAttribute('data-id');
+      STATE.anUser = { loading: true };
+      render();
+      DiwaniyaServerKernel.analyticsUser(anId).then(function (d) { if (STATE.anUser) { STATE.anUser = d; render(); } });
+    } else if (act === 'an-close' || (act === 'an-close-bg' && e.target === actBtn)) {
+      STATE.anUser = null; render();
     } else if (act === 'adm-save-settings') {
       var g = function (id) { return document.getElementById(id) || {}; };
       adminCall('save_settings', {
@@ -4382,6 +4536,11 @@ html.dw-game-open #dwApp { visibility: hidden; }
   document.addEventListener('input', function (e) {
     var t = e.target;
     if (!t || !t.hasAttribute) return;
+    if (t.id === 'anSearch') {
+      var q = t.value.trim().toLowerCase();
+      document.querySelectorAll('[data-an-q]').forEach(function (tr) { tr.style.display = !q || tr.getAttribute('data-an-q').indexOf(q) !== -1 ? '' : 'none'; });
+      return;
+    }
     if (t.hasAttribute('data-csug')) syncCatSugField(t);
     if (t.hasAttribute('data-qe') && STATE.qEditor) STATE.qEditor[t.getAttribute('data-qe')] = t.value;
     if (t.id === 'admCatSearch') {
@@ -4493,12 +4652,19 @@ html.dw-game-open #dwApp { visibility: hidden; }
     onChange: function () { render(); }
   };
   function afterSignIn() {
+    activityPing();
     if (window.DwInstall) window.DwInstall.checkReward();
     else window.addEventListener('load', function () { if (window.DwInstall) window.DwInstall.checkReward(); });
     if (STATE.user && !(window.DwInstall && window.DwInstall.standalone())) {
       DiwaniyaServerKernel.myPromo().then(function (d) { if (d && d.ok && d.installed && !d.used && d.active) { STATE.appPromo = d; render(); } });
     }
   }
+
+  function activityPing() {
+    if (STATE.user && document.visibilityState === 'visible') DiwaniyaServerKernel.ping();
+  }
+  setInterval(activityPing, 60000);
+  document.addEventListener('visibilitychange', activityPing);
 
   render();
   DiwaniyaServerKernel.refreshAll().then(function () {

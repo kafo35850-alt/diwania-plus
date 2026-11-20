@@ -9,6 +9,7 @@ import { adminData, adminAction, eightCategoryQuestions, submitCategorySuggestio
 import { uploadMedia, serveMedia } from './media.js';
 import { grantAppInstall, myPromo, checkPromo } from './promo.js';
 import { handleRooms } from './rooms/routes.js';
+import { recordPing, analyticsOverview, analyticsUser } from './activity.js';
 import { STATIC } from './static.generated.js';
 export { GameHubDO, RelayRoomDO, BuzzerRoomDO } from './rooms/objects.js';
 
@@ -123,6 +124,19 @@ async function handleApi(env, request, url) {
   if (method === 'GET' && path === '/api/admin/data') {
     await requireSession(env, request, { csrf: false, owner: true });
     return json(await adminData(env));
+  }
+  if (method === 'POST' && path === '/api/ping') {
+    const session = await requireSession(env, request);
+    return json(await recordPing(env, session, request));
+  }
+  if (method === 'GET' && path === '/api/admin/analytics') {
+    await requireSession(env, request, { csrf: false, owner: true });
+    return json(await analyticsOverview(env));
+  }
+  const anUser = path.match(/^\/api\/admin\/analytics\/user\/([A-Za-z0-9_-]{1,80})$/);
+  if (method === 'GET' && anUser) {
+    await requireSession(env, request, { csrf: false, owner: true });
+    return json(await analyticsUser(env, anUser[1]));
   }
   const eightCat = path.match(/^\/api\/admin\/eight-category\/([A-Za-z0-9_-]{1,80})$/);
   if (method === 'GET' && eightCat) {
