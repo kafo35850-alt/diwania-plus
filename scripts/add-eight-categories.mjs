@@ -25,7 +25,9 @@ cats.filter((c) => !c.draft).forEach((c, i) => {
     uid: c.slug + '_' + (n + 1) + '_' + q.points, points: q.points, q: q.q, a: q.a, hint: q.hint || '', info: q.hint || '', qm: pic(q.qm), am: pic(q.am)
   }));
 });
-const slugs = new Set(extra.map((c) => c.slug));
+const drafts = new Set(cats.filter((c) => c.draft).map((c) => c.slug));
+drafts.forEach((s) => { delete seed.catQuestionsOverrides[s]; });
+const slugs = new Set([...extra.map((c) => c.slug), ...drafts]);
 seed.categories = [...extra, ...seed.categories.filter((c) => !slugs.has(c.slug))];
 writeFileSync(seedPath, JSON.stringify(seed));
 console.log('categories:', extra.length, 'questions:', extra.reduce((n, c) => n + c.item_count, 0));
