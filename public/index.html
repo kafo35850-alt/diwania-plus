@@ -2834,7 +2834,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
     return renderCatSuggestBox() + '<div class="dw-card">' +
       '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">' +
         '<div><h3 style="margin:0;font-size:24px;font-weight:900">فئات ديوانية الثمانية (' + arNum(visibleCats.length) + ' فئة)</h3>' +
-        '<p style="margin:4px 0 0;color:var(--text-muted);font-size:14px">كل فئة فيها ١٨ سؤال على ٣ مستويات. اختاروا ٨ فئات داخل اللعبة وابدؤوا التحدي.</p></div>' +
+        '<p style="margin:4px 0 0;color:var(--text-muted);font-size:14px">كل فئة فيها أسئلة على ٣ مستويات (٢٠٠ و٤٠٠ و٦٠٠). اختاروا ٨ فئات داخل اللعبة وابدؤوا التحدي.</p></div>' +
         '<input id="dwCatSearchInp" class="dw-input" style="max-width:300px" placeholder="ابحث عن أي فئة (مثال: السعودية، أنمي، ملاعب...)" value="' + esc(STATE.catSearch) + '">' +
       '</div>' +
       '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:6px">' +
@@ -2933,7 +2933,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
     return '<div class="promo-box">' +
       (ap
         ? '<div class="promo-on">🎁 كود <b dir="ltr">' + esc(ap.code) + '</b> مفعّل وينخصم من سعر الباقة اللي تختارها <button class="dw-btn dw-btn-sec dw-btn-sm" data-act="promo-clear">إلغاء</button></div>'
-        : '<label for="promoInp">عندك كود خصم؟</label><div class="promo-row"><input id="promoInp" class="dw-input" dir="ltr" maxlength="20" placeholder="APP2" value="' + esc(STATE.promoInput || '') + '"><button class="dw-btn dw-btn-gold dw-btn-sm" data-act="promo-apply">تطبيق</button></div>' +
+        : '<label for="promoInp">عندك كود خصم؟</label><div class="promo-row"><input id="promoInp" class="dw-input" dir="auto" maxlength="20" placeholder="اكتب الكود هنا" value="' + esc(STATE.promoInput || '') + '"><button class="dw-btn dw-btn-gold dw-btn-sm" data-act="promo-apply">تطبيق</button></div>' +
           (offer ? '<button class="promo-offer" data-act="promo-use-app">🎁 عندك كود <b dir="ltr">' + esc(STATE.appPromo.code) + '</b> لأنك ثبّت التطبيق — اضغط لتطبيقه</button>' : '')) +
     '</div>';
   }
