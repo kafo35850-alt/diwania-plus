@@ -1,7 +1,7 @@
 // Adds the ready-made Eight categories in content/eight_categories.json to worker/src/seed.json
 // (category + its questions). Safe to run again: categories are replaced by slug.
 //   node scripts/add-eight-categories.mjs
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 
@@ -25,6 +25,28 @@ cats.filter((c) => !c.draft).forEach((c, i) => {
     uid: c.slug + '_' + (n + 1) + '_' + q.points, points: q.points, q: q.q, a: q.a, hint: q.hint || '', info: q.hint || '', qm: pic(q.qm), am: pic(q.am)
   }));
 });
+// Owner-approved pictures of women (hijab versions) for chosen questions: content/women_pictures.json
+// { slug: { "<question index>": { qm?: key, am?: key } } }. A built-in category (questions inside games/eight.html)
+// is shipped as an override with all its questions, unchanged except for these pictures.
+const womenPath = join(root, 'content/women_pictures.json');
+const women = existsSync(womenPath) ? JSON.parse(readFileSync(womenPath, 'utf8')) : {};
+const eightHtml = readFileSync(join(root, 'games/eight.html'), 'utf8');
+const draftSlugs = new Set(cats.filter((c) => c.draft).map((c) => c.slug));
+for (const [slug, byIndex] of Object.entries(women)) {
+  if (draftSlugs.has(slug)) continue;
+  let list = seed.catQuestionsOverrides[slug];
+  if (!list) {
+    const m = eightHtml.match(new RegExp('id="m8_cat_' + slug + '">([\\s\\S]*?)</script>'));
+    if (!m) { console.warn('no built-in questions for', slug); continue; }
+    list = JSON.parse(m[1]).map((q, n) => Object.assign({}, q, { uid: q.uid || slug + '_q' + (n + 1) }));
+    seed.catQuestionsOverrides[slug] = list;
+  }
+  for (const [i, pics] of Object.entries(byIndex)) {
+    const q = list[Number(i)]; if (!q) continue;
+    if (pics.qm) q.qm = pic(pics.qm);
+    if (pics.am) q.am = pic(pics.am);
+  }
+}
 const drafts = new Set(cats.filter((c) => c.draft).map((c) => c.slug));
 drafts.forEach((s) => { delete seed.catQuestionsOverrides[s]; });
 const slugs = new Set([...extra.map((c) => c.slug), ...drafts]);
