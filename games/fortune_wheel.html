@@ -612,6 +612,7 @@ canvas.draw-pad {
 <script>
 window.GAME_CONFIG = {"slug":"fortune_wheel","title":"عجلة حظ الديوانية","subtitle":"عجلة الجوائز والمخاطرة · مضاعفة النقاط وسرقتها · مراحل خاصة","accent":"#A855F7","segments":[{"label":"💎 جائزة كبرى +٥٠٠ نقطة!","pts":500},{"label":"⚡ بونص سرعة +٣٠٠ نقطة!","pts":300},{"label":"🧲 سرقة +٤٠٠ نقطة!","pts":400},{"label":"📉 فخ خصم -٢٠٠ نقطة!","pts":-200},{"label":"🎁 مفاجأة الديوانية +٦٠٠ نقطة!","pts":600},{"label":"💣 عاصفة الحظ -٣٠٠ نقطة!","pts":-300}]};
 </script>
+<script id="dwHelpData">window.DW_HELP = {"title":"شرح لعبة: عجلة حظ الديوانية","subtitle":"فريقين يتناوبون على العجلة… واللي يجمع نقاط أكثر يفوز","tabs":[{"label":"فكرة اللعبة","lead":"تنقسمون فريقين (🟡 الأول و🟢 الثاني). كل دور، الفريق يدوّر العجلة وياخذ اللي تطلع له: نقاط زيادة أو خصم!","steps":[{"h":"كم لاعب؟","t":"من ٢ وفوق، على جوال أو آيباد واحد. الأفضل تعرض «الشاشة» على التلفزيون."},{"h":"الدور","t":"الإطار الذهبي حول اسم الفريق يوضح مين دوره. بعد كل تدويرة ينتقل الدور للفريق الثاني تلقائياً."},{"h":"الفوز","t":"تتفقون على عدد أدوار (مثلاً ١٠ لكل فريق)، وفي الأخير الفريق اللي نقاطه أعلى يفوز."}]},{"label":"خطوة بخطوة","lead":"كل دور يمشي كذا:","steps":[{"h":"١. قرّروا المخاطرة","t":"قبل التدوير، الفريق يقرر: «عادي ×١» أو «مخاطرة ×٢». المخاطرة تضاعف اللي يطلع، سواء ربح أو خصم."},{"h":"٢. دوّروا العجلة","t":"اضغطوا «🎡 أدر دائرة الحظ الآن!» وانتظروا وين توقف."},{"h":"٣. شوفوا النتيجة","t":"تطلع النتيجة تحت العجلة، وتنضاف (أو تنخصم) من نقاط الفريق على طول."},{"h":"٤. الدور الجاي","t":"ينتقل الدور للفريق الثاني، ويرجعون يقررون المخاطرة من جديد."}]},{"label":"وش في العجلة؟","lead":"٦ خانات:","steps":[{"h":"🎁 مفاجأة الديوانية","t":"+٦٠٠ نقطة"},{"h":"💎 جائزة كبرى","t":"+٥٠٠ نقطة"},{"h":"🧲 سرقة","t":"+٤٠٠ نقطة"},{"h":"⚡ بونص سرعة","t":"+٣٠٠ نقطة"},{"h":"📉 فخ خصم","t":"−٢٠٠ نقطة"},{"h":"💣 عاصفة الحظ","t":"−٣٠٠ نقطة"},{"h":"مع المخاطرة ×٢","t":"كل الأرقام تتضاعف: الجائزة الكبرى تصير +١٠٠٠، والعاصفة تصير −٦٠٠!"}]}]};</script>
 <div id="gameRoot"></div>
 <div id="qrModal" class="modal-bg">
   <div class="modal-card" style="text-align:center">
@@ -729,7 +730,7 @@ window.GAME_CONFIG = {"slug":"fortune_wheel","title":"عجلة حظ الديوا
 
   var ST = {
     roomCode: 'DW-' + Math.floor(1000 + Math.random() * 9000),
-    viewMode: (window.innerWidth >= 960 || (window.innerWidth >= 640 && window.innerWidth > window.innerHeight)) ? 'both' : 'board',
+    viewMode: 'phone',
     round: 1,
     players: [
       { id: 'p1', name: 'أنت', score: 0, budget: 1000, alive: true, team: 1 },
@@ -1951,6 +1952,51 @@ window.GAME_CONFIG = {"slug":"fortune_wheel","title":"عجلة حظ الديوا
   });
 
   initGameEngine();
+/*dw-intro*/
+  // Explanation first, then the host's own screen («التحكم»).
+  (function () {
+    var H = window.DW_HELP || { title: CFG.title, tabs: [] };
+    var screens = { label: 'الشاشات', lead: 'تحت الصفحة فيه ٣ أزرار، تطلع عندك أنت بس (اللي فاتح اللعبة):', steps: [
+      { h: '🎮 التحكم', t: 'شاشتك أنت: فيها أزرار اللعب والأسرار (مثل الكلمة السرية أو خريطة الألوان). لا تعرضها للاعبين.' },
+      { h: '📺 الشاشة', t: 'اعرضها على التلفزيون أو الشاشة الكبيرة عشان يشوفها الكل. ما فيها أي سر.' },
+      { h: '🖥️ الاثنين', t: 'التحكم والشاشة جنب بعض، للآيباد أو اللابتوب إذا كنت المشرف وما فيه تلفزيون.' },
+      { h: 'نصيحة', t: 'وصّل جوالك أو الآيباد بالتلفزيون واختر «الشاشة»، وإذا تبي تضغط أزرار ارجع لـ«التحكم».' }
+    ] };
+    var pages = (H.tabs || []).concat([screens]), at = 0;
+    var css = document.createElement('style');
+    css.textContent = '.dwi-bg{position:fixed;inset:0;z-index:9999;background:rgba(5,8,22,.86);display:grid;place-items:center;padding:16px;backdrop-filter:blur(4px)}' +
+      '.dwi{width:min(620px,100%);max-height:92vh;overflow:auto;background:linear-gradient(165deg,#161d3d,#0b1026);border:1px solid rgba(245,185,66,.5);border-radius:22px;padding:20px;color:#fff;display:grid;gap:12px;box-shadow:0 20px 60px rgba(0,0,0,.6)}' +
+      '.dwi h2{margin:0;font-size:22px;color:#ffd978}.dwi .sub{color:#aab2d1;font-size:13.5px;line-height:1.7;margin:0}' +
+      '.dwi .tabs{display:flex;gap:6px;flex-wrap:wrap}.dwi .tabs button{border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.05);color:#dfe5ff;border-radius:999px;padding:6px 12px;font:700 13px inherit;cursor:pointer}' +
+      '.dwi .tabs button.on{background:#f5b942;color:#0a0f24;border-color:#f5b942}.dwi .lead{font-weight:800;font-size:16px;line-height:1.7}' +
+      '.dwi ol{margin:0;padding:0;list-style:none;display:grid;gap:8px}.dwi li{line-height:1.7;font-size:14.5px}.dwi li b{color:#ffd978}' +
+      '.dwi .nav{display:flex;gap:8px;justify-content:space-between;flex-wrap:wrap}.dwi .nav button{border:0;border-radius:14px;padding:11px 18px;font:900 15px inherit;cursor:pointer}' +
+      '.dwi .go{background:linear-gradient(135deg,#ffe08a,#f5b942);color:#0a0f24;flex:1}.dwi .sec{background:rgba(255,255,255,.08);color:#fff}' +
+      '.dwi-fab{position:fixed;left:12px;bottom:72px;z-index:50;width:44px;height:44px;border-radius:50%;border:1px solid rgba(245,185,66,.6);background:#141b3a;color:#ffd978;font:900 20px inherit;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.4)}';
+    document.head.appendChild(css);
+    var bg = document.createElement('div'); bg.className = 'dwi-bg'; bg.id = 'dwIntro';
+    function esc2(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+    function draw() {
+      var P = pages[at] || screens;
+      bg.innerHTML = '<div class="dwi" role="dialog" aria-label="شرح اللعبة"><h2>' + esc2(H.title || CFG.title) + '</h2>' + (H.subtitle ? '<p class="sub">' + esc2(H.subtitle) + '</p>' : '') +
+        '<div class="tabs">' + pages.map(function (p, i) { return '<button data-dwi="' + i + '" class="' + (i === at ? 'on' : '') + '">' + esc2(p.label) + '</button>'; }).join('') + '</div>' +
+        (P.lead ? '<div class="lead">' + esc2(P.lead) + '</div>' : '') +
+        '<ol>' + (P.steps || []).map(function (s) { return '<li><b>' + esc2(s.h) + ':</b> ' + esc2(s.t) + '</li>'; }).join('') + '</ol>' +
+        '<div class="nav">' + (at < pages.length - 1 ? '<button class="sec" data-dwi="' + (at + 1) + '">التالي ←</button>' : '') + '<button class="go" data-dwi="go">فهمت، يلا نبدأ ✅</button></div></div>';
+    }
+    bg.addEventListener('click', function (e) {
+      var t = e.target.closest('[data-dwi]'); if (!t) return;
+      var k = t.getAttribute('data-dwi');
+      if (k === 'go') { bg.remove(); ST.viewMode = 'phone'; renderAll(); return; }
+      at = Number(k); draw();
+    });
+    function open() { at = 0; draw(); if (!bg.parentNode) document.body.appendChild(bg); }
+    var fab = document.createElement('button'); fab.className = 'dwi-fab'; fab.textContent = '؟'; fab.title = 'شرح اللعبة'; fab.addEventListener('click', open);
+    document.body.appendChild(fab);
+    window.__dwIntro = { open: open, close: function () { if (bg.parentNode) { bg.remove(); ST.viewMode = 'phone'; renderAll(); } } };
+    open();
+  })();
+/*dw-intro-end*/
 })();
 </script>
 

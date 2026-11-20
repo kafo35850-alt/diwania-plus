@@ -613,6 +613,7 @@ canvas.draw-pad {
 window.GAME_CONFIG = {"slug":"shifra","title":"شفرة الديوانية","subtitle":"بطاقات عملاء سرية · خريطة سوبرفايزر واضحة · حزمة عشوائية ومفتوحة","accent":"#F5B942","wordPacks":[{"name":"🇸🇦 حزمة السعودية والخليج","words":["الرياض","جدة","العلا","الدرعية","طويق","نيوم","القدية","البشت","الدلة","الفنجال","العرضة","الكبسة","الجريش","التمر","الصقر","السيف","الخيمة","المبخرة","العود","البيك","البوليفارد","أبها","البحر الأحمر","المكعب","الروضة","القصيم","الحجاز","الدمام","سفاري","النفود"]},{"name":"⚽ حزمة الكرة والملاعب","words":["الهلال","النصر","الاتحاد","الأهلي","الجوهرة","المملكة أرينا","كأس العالم","الأخضر","الدوري","الحكم","الفار","تسلل","ركلة جزاء","الكلاسيكو","الأبطال","مدريد","برشلونة","ليفربول","تشيلسي","الحارس","المدرب","المدرج","الشباك","العارضة","الكابتن","الإعارة","الميركاتو"]},{"name":"🎬 حزمة المسلسلات والأفلام والأنمي","words":["طاش","العاصوف","شباب البومب","الحارة","الزير","البروفيسور","كونان","ون بيس","ناروتو","القناص","سبيستون","المسرح","السينما","المخرج","البطل","اللغز","الجزيرة","القلعة","القطار","الطائرة","المحيط","القمر","الصحراء","الواحة","البرج","الأوسكار","التنين"]},{"name":"🌍 حزمة الثقافة العامة والمنوعات","words":["الذهب","الألماس","البوصلة","الساعة","المفتاح","الخزنة","الجاسوس","السفينة","البركان","الجليد","البرق","النسر","الأسد","الحصان","القهوة","الشاهي","العسل","الزيتون","النخلة","المكتبة","الجامعة","المختبر","الفضاء","المجهر","التاج","الدرع","القصر"]},{"name":"🍽️ حزمة الأكل والسفرة","words":["كبسة","مندي","جريش","قرصان","مطبق","شاورما","برجر","بيتزا","كنافة","لقيمات","تمر","قهوة","شاهي","حليب","عسل","سمن","خبز","رز","دجاج","لحم","سمك","سلطة","شوربة","سمبوسة","فول","تميس","كيك","آيسكريم","عصير","ليمون"]},{"name":"🏠 حزمة البيت والحياة","words":["مفتاح","باب","شباك","درج","سطح","حوش","مجلس","مطبخ","ثلاجة","مكيف","مروحة","سرير","مخدة","كنبة","زولية","تلفزيون","ريموت","جوال","شاحن","ساعة","مراية","دولاب","شنطة","مظلة","لمبة","مكنسة","غسالة","فرن","كرسي","طاولة"]},{"name":"🌍 حزمة الطبيعة والعالم","words":["بحر","جبل","صحراء","نهر","غابة","جزيرة","بركان","شلال","ثلج","مطر","رعد","برق","شمس","قمر","نجم","كوكب","رمل","صخرة","كهف","واحة","نخلة","وردة","شجرة","عشب","ريح","غيم","موج","شاطئ","وادي","سهل"]}]};
 /*dw-shuffle-rounds*/ (function (c) { if (!c) return; Object.keys(c).forEach(function (k) { var a = c[k]; if (!Array.isArray(a) || ["segments","decks","wordPacks"].indexOf(k) !== -1) return; for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } }); })(window.GAME_CONFIG);
 </script>
+<script id="dwHelpData">window.DW_HELP = {"title":"شرح لعبة: شفرة الديوانية","subtitle":"بطاقات عملاء سرية · خريطة سوبرفايزر واضحة · حزم عشوائية ومفتوحة","tabs":[{"label":"فكرة اللعبة وتصميمها الجديد","lead":"يتنافس الفريق الأحمر 🔴 والفريق الأزرق 🔵 لكشف بطاقات عملائهم من بين ٢٥ بطاقة تكتيكية، مع وضع بطاقة العميل فوق الكلمة المكتشفة!","steps":[{"h":"١. اختيار الحزمة قبل البدء (شاملة أو مفتوحة)","t":"اختر الحزمة العشوائية الشاملة، أو حزمة متخصصة، أو الحزمة المفتوحة التي تكتبون فيها كلماتكم مع زر «أكمل باقي الكلمات للـ ٢٥ تلقائياً»."},{"h":"٢. رؤية واضحة ١٠٠٪ للسوبرفايزر","t":"بضغطة زر «وضع السوبرفايزر» تتلوّن حدود وخلفيات البطاقات مباشرة على الشبكة (أحمر، أزرق، محايد، وفخ أسود) ليراها قائد الفريق بوضوح تام."},{"h":"٣. وضع بطاقة العميل فوق الكلمة","t":"عند لمس كلمة صحيحة، توضع فوقها بطاقة العميل الملوّنة مع بقاء الكلمة الأصلية ظاهرة في زاوية البطاقة."}]}]};</script>
 <div id="gameRoot"></div>
 <div id="qrModal" class="modal-bg">
   <div class="modal-card" style="text-align:center">
@@ -730,7 +731,7 @@ window.GAME_CONFIG = {"slug":"shifra","title":"شفرة الديوانية","sub
 
   var ST = {
     roomCode: 'DW-' + Math.floor(1000 + Math.random() * 9000),
-    viewMode: (window.innerWidth >= 960 || (window.innerWidth >= 640 && window.innerWidth > window.innerHeight)) ? 'both' : 'board',
+    viewMode: 'phone',
     round: 1,
     players: [
       { id: 'p1', name: 'أنت', score: 0, budget: 1000, alive: true, team: 1 },
@@ -1952,6 +1953,51 @@ window.GAME_CONFIG = {"slug":"shifra","title":"شفرة الديوانية","sub
   });
 
   initGameEngine();
+/*dw-intro*/
+  // Explanation first, then the host's own screen («التحكم»).
+  (function () {
+    var H = window.DW_HELP || { title: CFG.title, tabs: [] };
+    var screens = { label: 'الشاشات', lead: 'تحت الصفحة فيه ٣ أزرار، تطلع عندك أنت بس (اللي فاتح اللعبة):', steps: [
+      { h: '🎮 التحكم', t: 'شاشتك أنت: فيها أزرار اللعب والأسرار (مثل الكلمة السرية أو خريطة الألوان). لا تعرضها للاعبين.' },
+      { h: '📺 الشاشة', t: 'اعرضها على التلفزيون أو الشاشة الكبيرة عشان يشوفها الكل. ما فيها أي سر.' },
+      { h: '🖥️ الاثنين', t: 'التحكم والشاشة جنب بعض، للآيباد أو اللابتوب إذا كنت المشرف وما فيه تلفزيون.' },
+      { h: 'نصيحة', t: 'وصّل جوالك أو الآيباد بالتلفزيون واختر «الشاشة»، وإذا تبي تضغط أزرار ارجع لـ«التحكم».' }
+    ] };
+    var pages = (H.tabs || []).concat([screens]), at = 0;
+    var css = document.createElement('style');
+    css.textContent = '.dwi-bg{position:fixed;inset:0;z-index:9999;background:rgba(5,8,22,.86);display:grid;place-items:center;padding:16px;backdrop-filter:blur(4px)}' +
+      '.dwi{width:min(620px,100%);max-height:92vh;overflow:auto;background:linear-gradient(165deg,#161d3d,#0b1026);border:1px solid rgba(245,185,66,.5);border-radius:22px;padding:20px;color:#fff;display:grid;gap:12px;box-shadow:0 20px 60px rgba(0,0,0,.6)}' +
+      '.dwi h2{margin:0;font-size:22px;color:#ffd978}.dwi .sub{color:#aab2d1;font-size:13.5px;line-height:1.7;margin:0}' +
+      '.dwi .tabs{display:flex;gap:6px;flex-wrap:wrap}.dwi .tabs button{border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.05);color:#dfe5ff;border-radius:999px;padding:6px 12px;font:700 13px inherit;cursor:pointer}' +
+      '.dwi .tabs button.on{background:#f5b942;color:#0a0f24;border-color:#f5b942}.dwi .lead{font-weight:800;font-size:16px;line-height:1.7}' +
+      '.dwi ol{margin:0;padding:0;list-style:none;display:grid;gap:8px}.dwi li{line-height:1.7;font-size:14.5px}.dwi li b{color:#ffd978}' +
+      '.dwi .nav{display:flex;gap:8px;justify-content:space-between;flex-wrap:wrap}.dwi .nav button{border:0;border-radius:14px;padding:11px 18px;font:900 15px inherit;cursor:pointer}' +
+      '.dwi .go{background:linear-gradient(135deg,#ffe08a,#f5b942);color:#0a0f24;flex:1}.dwi .sec{background:rgba(255,255,255,.08);color:#fff}' +
+      '.dwi-fab{position:fixed;left:12px;bottom:72px;z-index:50;width:44px;height:44px;border-radius:50%;border:1px solid rgba(245,185,66,.6);background:#141b3a;color:#ffd978;font:900 20px inherit;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.4)}';
+    document.head.appendChild(css);
+    var bg = document.createElement('div'); bg.className = 'dwi-bg'; bg.id = 'dwIntro';
+    function esc2(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+    function draw() {
+      var P = pages[at] || screens;
+      bg.innerHTML = '<div class="dwi" role="dialog" aria-label="شرح اللعبة"><h2>' + esc2(H.title || CFG.title) + '</h2>' + (H.subtitle ? '<p class="sub">' + esc2(H.subtitle) + '</p>' : '') +
+        '<div class="tabs">' + pages.map(function (p, i) { return '<button data-dwi="' + i + '" class="' + (i === at ? 'on' : '') + '">' + esc2(p.label) + '</button>'; }).join('') + '</div>' +
+        (P.lead ? '<div class="lead">' + esc2(P.lead) + '</div>' : '') +
+        '<ol>' + (P.steps || []).map(function (s) { return '<li><b>' + esc2(s.h) + ':</b> ' + esc2(s.t) + '</li>'; }).join('') + '</ol>' +
+        '<div class="nav">' + (at < pages.length - 1 ? '<button class="sec" data-dwi="' + (at + 1) + '">التالي ←</button>' : '') + '<button class="go" data-dwi="go">فهمت، يلا نبدأ ✅</button></div></div>';
+    }
+    bg.addEventListener('click', function (e) {
+      var t = e.target.closest('[data-dwi]'); if (!t) return;
+      var k = t.getAttribute('data-dwi');
+      if (k === 'go') { bg.remove(); ST.viewMode = 'phone'; renderAll(); return; }
+      at = Number(k); draw();
+    });
+    function open() { at = 0; draw(); if (!bg.parentNode) document.body.appendChild(bg); }
+    var fab = document.createElement('button'); fab.className = 'dwi-fab'; fab.textContent = '؟'; fab.title = 'شرح اللعبة'; fab.addEventListener('click', open);
+    document.body.appendChild(fab);
+    window.__dwIntro = { open: open, close: function () { if (bg.parentNode) { bg.remove(); ST.viewMode = 'phone'; renderAll(); } } };
+    open();
+  })();
+/*dw-intro-end*/
 })();
 </script>
 

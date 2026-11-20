@@ -613,6 +613,7 @@ canvas.draw-pad {
 window.GAME_CONFIG = {"slug":"draw_guess","title":"رسّام الديوانية","subtitle":"لوحة رسم وألوان وممحاة · وضع الرسام المندس · تحديات رسم صعبة","accent":"#2DD4BF","prompts":[{"cat":"تراث ومعالم","word":"دلة قهوة","options":["دلة قهوة","مبخرة عود","سيف عربي","فانوس رمضان"]},{"cat":"عمارة وأبراج","word":"برج المملكة","options":["برج المملكة","برج خليفة","ساعة مكة","الأهرامات"]},{"cat":"تراث ومعالم","word":"خيمة","options":["خيمة","بيت شعر","مظلة","قلعة"]},{"cat":"تراث ومعالم","word":"مبخرة","options":["مبخرة","دلة قهوة","فنجال","إبريق"]},{"cat":"تراث ومعالم","word":"سيف","options":["سيف","خنجر","رمح","عصا"]},{"cat":"تراث ومعالم","word":"نخلة","options":["نخلة","شجرة","صبار","وردة"]},{"cat":"تراث ومعالم","word":"قلعة","options":["قلعة","برج","مسجد","بيت"]},{"cat":"تراث ومعالم","word":"فانوس","options":["فانوس","شمعة","مصباح","قمر"]},{"cat":"أكلات","word":"كبسة","options":["كبسة","مندي","جريش","مطبق"]},{"cat":"أكلات","word":"شاورما","options":["شاورما","برجر","بيتزا","سمبوسة"]},{"cat":"أكلات","word":"بيتزا","options":["بيتزا","كيك","فطيرة","خبز"]},{"cat":"أكلات","word":"آيسكريم","options":["آيسكريم","عصير","كيك","دونات"]},{"cat":"أكلات","word":"بطيخ","options":["بطيخ","شمام","تفاح","برتقال"]},{"cat":"أكلات","word":"موز","options":["موز","ليمون","خيار","جزر"]},{"cat":"حيوانات","word":"جمل","options":["جمل","حصان","خروف","غزال"]},{"cat":"حيوانات","word":"صقر","options":["صقر","حمامة","بومة","نسر"]},{"cat":"حيوانات","word":"زرافة","options":["زرافة","فيل","جمل","حمار وحشي"]},{"cat":"حيوانات","word":"سمكة","options":["سمكة","دولفين","قرش","حوت"]},{"cat":"حيوانات","word":"قطة","options":["قطة","أرنب","كلب","فأر"]},{"cat":"حيوانات","word":"سلحفاة","options":["سلحفاة","حلزون","ضفدع","تمساح"]},{"cat":"حيوانات","word":"فيل","options":["فيل","وحيد القرن","فرس النهر","زرافة"]},{"cat":"رياضة","word":"كرة قدم","options":["كرة قدم","كرة سلة","تنس","بولينج"]},{"cat":"رياضة","word":"مرمى","options":["مرمى","سلة","شبكة","ملعب"]},{"cat":"رياضة","word":"كأس","options":["كأس","ميدالية","درع","تاج"]},{"cat":"رياضة","word":"دراجة","options":["دراجة","سيارة","دباب","سكوتر"]},{"cat":"رياضة","word":"سباحة","options":["سباحة","غوص","تجديف","ركض"]},{"cat":"أدوات وأشياء","word":"جوال","options":["جوال","ريموت","آلة حاسبة","محفظة"]},{"cat":"أدوات وأشياء","word":"نظارة","options":["نظارة","ساعة","خاتم","قبعة"]},{"cat":"أدوات وأشياء","word":"مفتاح","options":["مفتاح","قفل","مسمار","مقص"]},{"cat":"أدوات وأشياء","word":"مظلة","options":["مظلة","خيمة","شمسية بحر","مروحة"]},{"cat":"أدوات وأشياء","word":"ساعة حائط","options":["ساعة حائط","بوصلة","طبق","عجلة"]},{"cat":"أدوات وأشياء","word":"مقص","options":["مقص","سكين","مشط","قلم"]},{"cat":"أدوات وأشياء","word":"شنطة سفر","options":["شنطة سفر","صندوق","درج","حقيبة مدرسة"]},{"cat":"أماكن","word":"مستشفى","options":["مستشفى","مدرسة","فندق","مطار"]},{"cat":"أماكن","word":"مطار","options":["مطار","محطة قطار","ميناء","مول"]},{"cat":"أماكن","word":"بحر","options":["بحر","نهر","بحيرة","مسبح"]},{"cat":"أماكن","word":"جبل","options":["جبل","هضبة","بركان","تل"]},{"cat":"أماكن","word":"ملعب","options":["ملعب","حديقة","ساحة","استاد"]},{"cat":"مواصلات","word":"طيارة","options":["طيارة","صاروخ","هليكوبتر","طائرة ورقية"]},{"cat":"مواصلات","word":"قارب","options":["قارب","سفينة","غواصة","جت سكي"]},{"cat":"مواصلات","word":"قطار","options":["قطار","مترو","باص","شاحنة"]},{"cat":"طبيعة","word":"شمس","options":["شمس","قمر","نجمة","كوكب"]},{"cat":"طبيعة","word":"مطر","options":["مطر","ثلج","غيمة","برق"]},{"cat":"طبيعة","word":"قوس قزح","options":["قوس قزح","غيمة","شروق","برق"]}]};
 /*dw-shuffle-rounds*/ (function (c) { if (!c) return; Object.keys(c).forEach(function (k) { var a = c[k]; if (!Array.isArray(a) || ["segments","decks","wordPacks"].indexOf(k) !== -1) return; for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } }); })(window.GAME_CONFIG);
 </script>
+<script id="dwHelpData">window.DW_HELP = {"title":"شرح لعبة: ارسم وخمّن (مع الرسام المندس) — ديوانية بلس","subtitle":"لوحة رسم وألوان وممحاة ومؤقت وأوضاع رسم صعبة","tabs":[{"label":"فكرة اللعبة","lead":"تجمع ٣ أطوار في لعبة واحدة: ارسم وخمّن الكلاسيكي، طور الرسام المندس، وطور الرسم الصعب بخط واحد!","steps":[{"h":"١. أدوات رسم متكاملة","t":"اختر اللون أو الممحاة وارسم مباشرة من جوالك أو الآيباد ليخمن أصدقاؤك."}]}]};</script>
 <div id="gameRoot"></div>
 <div id="qrModal" class="modal-bg">
   <div class="modal-card" style="text-align:center">
@@ -730,7 +731,7 @@ window.GAME_CONFIG = {"slug":"draw_guess","title":"رسّام الديوانية
 
   var ST = {
     roomCode: 'DW-' + Math.floor(1000 + Math.random() * 9000),
-    viewMode: (window.innerWidth >= 960 || (window.innerWidth >= 640 && window.innerWidth > window.innerHeight)) ? 'both' : 'board',
+    viewMode: 'phone',
     round: 1,
     players: [
       { id: 'p1', name: 'أنت', score: 0, budget: 1000, alive: true, team: 1 },
@@ -1952,6 +1953,51 @@ window.GAME_CONFIG = {"slug":"draw_guess","title":"رسّام الديوانية
   });
 
   initGameEngine();
+/*dw-intro*/
+  // Explanation first, then the host's own screen («التحكم»).
+  (function () {
+    var H = window.DW_HELP || { title: CFG.title, tabs: [] };
+    var screens = { label: 'الشاشات', lead: 'تحت الصفحة فيه ٣ أزرار، تطلع عندك أنت بس (اللي فاتح اللعبة):', steps: [
+      { h: '🎮 التحكم', t: 'شاشتك أنت: فيها أزرار اللعب والأسرار (مثل الكلمة السرية أو خريطة الألوان). لا تعرضها للاعبين.' },
+      { h: '📺 الشاشة', t: 'اعرضها على التلفزيون أو الشاشة الكبيرة عشان يشوفها الكل. ما فيها أي سر.' },
+      { h: '🖥️ الاثنين', t: 'التحكم والشاشة جنب بعض، للآيباد أو اللابتوب إذا كنت المشرف وما فيه تلفزيون.' },
+      { h: 'نصيحة', t: 'وصّل جوالك أو الآيباد بالتلفزيون واختر «الشاشة»، وإذا تبي تضغط أزرار ارجع لـ«التحكم».' }
+    ] };
+    var pages = (H.tabs || []).concat([screens]), at = 0;
+    var css = document.createElement('style');
+    css.textContent = '.dwi-bg{position:fixed;inset:0;z-index:9999;background:rgba(5,8,22,.86);display:grid;place-items:center;padding:16px;backdrop-filter:blur(4px)}' +
+      '.dwi{width:min(620px,100%);max-height:92vh;overflow:auto;background:linear-gradient(165deg,#161d3d,#0b1026);border:1px solid rgba(245,185,66,.5);border-radius:22px;padding:20px;color:#fff;display:grid;gap:12px;box-shadow:0 20px 60px rgba(0,0,0,.6)}' +
+      '.dwi h2{margin:0;font-size:22px;color:#ffd978}.dwi .sub{color:#aab2d1;font-size:13.5px;line-height:1.7;margin:0}' +
+      '.dwi .tabs{display:flex;gap:6px;flex-wrap:wrap}.dwi .tabs button{border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.05);color:#dfe5ff;border-radius:999px;padding:6px 12px;font:700 13px inherit;cursor:pointer}' +
+      '.dwi .tabs button.on{background:#f5b942;color:#0a0f24;border-color:#f5b942}.dwi .lead{font-weight:800;font-size:16px;line-height:1.7}' +
+      '.dwi ol{margin:0;padding:0;list-style:none;display:grid;gap:8px}.dwi li{line-height:1.7;font-size:14.5px}.dwi li b{color:#ffd978}' +
+      '.dwi .nav{display:flex;gap:8px;justify-content:space-between;flex-wrap:wrap}.dwi .nav button{border:0;border-radius:14px;padding:11px 18px;font:900 15px inherit;cursor:pointer}' +
+      '.dwi .go{background:linear-gradient(135deg,#ffe08a,#f5b942);color:#0a0f24;flex:1}.dwi .sec{background:rgba(255,255,255,.08);color:#fff}' +
+      '.dwi-fab{position:fixed;left:12px;bottom:72px;z-index:50;width:44px;height:44px;border-radius:50%;border:1px solid rgba(245,185,66,.6);background:#141b3a;color:#ffd978;font:900 20px inherit;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.4)}';
+    document.head.appendChild(css);
+    var bg = document.createElement('div'); bg.className = 'dwi-bg'; bg.id = 'dwIntro';
+    function esc2(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+    function draw() {
+      var P = pages[at] || screens;
+      bg.innerHTML = '<div class="dwi" role="dialog" aria-label="شرح اللعبة"><h2>' + esc2(H.title || CFG.title) + '</h2>' + (H.subtitle ? '<p class="sub">' + esc2(H.subtitle) + '</p>' : '') +
+        '<div class="tabs">' + pages.map(function (p, i) { return '<button data-dwi="' + i + '" class="' + (i === at ? 'on' : '') + '">' + esc2(p.label) + '</button>'; }).join('') + '</div>' +
+        (P.lead ? '<div class="lead">' + esc2(P.lead) + '</div>' : '') +
+        '<ol>' + (P.steps || []).map(function (s) { return '<li><b>' + esc2(s.h) + ':</b> ' + esc2(s.t) + '</li>'; }).join('') + '</ol>' +
+        '<div class="nav">' + (at < pages.length - 1 ? '<button class="sec" data-dwi="' + (at + 1) + '">التالي ←</button>' : '') + '<button class="go" data-dwi="go">فهمت، يلا نبدأ ✅</button></div></div>';
+    }
+    bg.addEventListener('click', function (e) {
+      var t = e.target.closest('[data-dwi]'); if (!t) return;
+      var k = t.getAttribute('data-dwi');
+      if (k === 'go') { bg.remove(); ST.viewMode = 'phone'; renderAll(); return; }
+      at = Number(k); draw();
+    });
+    function open() { at = 0; draw(); if (!bg.parentNode) document.body.appendChild(bg); }
+    var fab = document.createElement('button'); fab.className = 'dwi-fab'; fab.textContent = '؟'; fab.title = 'شرح اللعبة'; fab.addEventListener('click', open);
+    document.body.appendChild(fab);
+    window.__dwIntro = { open: open, close: function () { if (bg.parentNode) { bg.remove(); ST.viewMode = 'phone'; renderAll(); } } };
+    open();
+  })();
+/*dw-intro-end*/
 })();
 </script>
 

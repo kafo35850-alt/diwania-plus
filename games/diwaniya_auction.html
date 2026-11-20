@@ -613,6 +613,7 @@ canvas.draw-pad {
 window.GAME_CONFIG = {"slug":"diwaniya_auction","title":"مزاد الديوانية","subtitle":"مزاد علني وسري وعكسي · صناديق مفاجآت وميزانية لكل فريق · سجل مزايدات","accent":"#F97316","lots":[{"name":"الصندوق الملكي المقفول #١","badge":"صندوق مفاجآت نادر","hint":"تتراوح قيمته بين ١٠٠ و ١٢٠٠ نقطة — هل يستحق المزايدة؟","trueValue":950},{"name":"خزنة الكابتن الغامضة #٢","badge":"مخاطرة عالية","hint":"قد يحتوي على جوهرة نقاط أو فخ مالي!","trueValue":150},{"name":"حقيبة الديوانية الذهبية #٣","badge":"كنز مضمون","hint":"صندوق ثقيل يلمع من الداخل!","trueValue":1300},{"name":"صندوق البحّار القديم","badge":"صندوق كنز","hint":"قيمته بين ٢٠٠ و ١٠٠٠ نقطة — فيه لؤلؤ ولا رمل؟","trueValue":720},{"name":"شنطة الكشتة المقفلة","badge":"مفاجأة البر","hint":"بين ١٠٠ و ٨٠٠ نقطة.","trueValue":180},{"name":"دلة الجد الذهبية","badge":"تحفة تراثية","hint":"بين ٤٠٠ و ١٢٠٠ نقطة — تحفة ولا تقليد؟","trueValue":1100},{"name":"كرتون المندي الغامض","badge":"وجبة الحظ","hint":"بين ٥٠ و ٦٠٠ نقطة.","trueValue":90},{"name":"خزنة المكتب الصغيرة","badge":"خزنة مقفلة","hint":"بين ٣٠٠ و ١٥٠٠ نقطة — المخاطرة عالية!","trueValue":1350},{"name":"ظرف الهدية الأحمر","badge":"ظرف سري","hint":"بين ١٠٠ و ٧٠٠ نقطة.","trueValue":640},{"name":"صندوق الكورة الموقّعة","badge":"تذكار رياضي","hint":"بين ٢٠٠ و ١٠٠٠ نقطة — التوقيع أصلي؟","trueValue":260},{"name":"شنطة البلايستيشن المستعملة","badge":"صفقة مستعملة","hint":"بين ١٥٠ و ٩٠٠ نقطة.","trueValue":510},{"name":"علبة العود الكمبودي","badge":"طيب فاخر","hint":"بين ٣٠٠ و ١٢٠٠ نقطة.","trueValue":980},{"name":"صندوق الخردة من المستودع","badge":"مخاطرة","hint":"بين ٠ و ٨٠٠ نقطة — ممكن يطلع فاضي!","trueValue":30},{"name":"مفتاح السيارة المجهولة","badge":"مفتاح غامض","hint":"بين ٢٠٠ و ١٥٠٠ نقطة.","trueValue":400},{"name":"لوحة الرسام المجهول","badge":"فن","hint":"بين ١٠٠ و ١٢٠٠ نقطة — تحفة ولا رسمة طفل؟","trueValue":1150},{"name":"صندوق تمر العيد","badge":"هدية موسمية","hint":"بين ١٠٠ و ٦٠٠ نقطة.","trueValue":220},{"name":"كيس الصرافة المقفول","badge":"عملات قديمة","hint":"بين ٢٠٠ و ١٠٠٠ نقطة.","trueValue":860},{"name":"شنطة المصوّر","badge":"معدات","hint":"بين ٣٠٠ و ١١٠٠ نقطة.","trueValue":330}]};
 /*dw-shuffle-rounds*/ (function (c) { if (!c) return; Object.keys(c).forEach(function (k) { var a = c[k]; if (!Array.isArray(a) || ["segments","decks","wordPacks"].indexOf(k) !== -1) return; for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } }); })(window.GAME_CONFIG);
 </script>
+<script id="dwHelpData">window.DW_HELP = {"title":"شرح لعبة: مزاد الديوانية — ديوانية بلس","subtitle":"مزاد علني وسري وعكسي على صناديق غامضة بميزانية لكل فريق","tabs":[{"label":"فكرة اللعبة","lead":"تُعرض صناديق وعناصر غامضة، ويتنافس اللاعبون بميزانيتهم في ٣ أنماط: مزاد علني، مزاد سري بالظرف، ومزاد التسمية العكسي في ٣٠ ثانية!","steps":[{"h":"١. إدارة الميزانية","t":"احذر أن تزايد بأكثر من القيمة الحقيقية للصندوق حتى لا تخسر الفرق من رصيدك!"}]}]};</script>
 <div id="gameRoot"></div>
 <div id="qrModal" class="modal-bg">
   <div class="modal-card" style="text-align:center">
@@ -730,7 +731,7 @@ window.GAME_CONFIG = {"slug":"diwaniya_auction","title":"مزاد الديوان
 
   var ST = {
     roomCode: 'DW-' + Math.floor(1000 + Math.random() * 9000),
-    viewMode: (window.innerWidth >= 960 || (window.innerWidth >= 640 && window.innerWidth > window.innerHeight)) ? 'both' : 'board',
+    viewMode: 'phone',
     round: 1,
     players: [
       { id: 'p1', name: 'أنت', score: 0, budget: 1000, alive: true, team: 1 },
@@ -1952,6 +1953,51 @@ window.GAME_CONFIG = {"slug":"diwaniya_auction","title":"مزاد الديوان
   });
 
   initGameEngine();
+/*dw-intro*/
+  // Explanation first, then the host's own screen («التحكم»).
+  (function () {
+    var H = window.DW_HELP || { title: CFG.title, tabs: [] };
+    var screens = { label: 'الشاشات', lead: 'تحت الصفحة فيه ٣ أزرار، تطلع عندك أنت بس (اللي فاتح اللعبة):', steps: [
+      { h: '🎮 التحكم', t: 'شاشتك أنت: فيها أزرار اللعب والأسرار (مثل الكلمة السرية أو خريطة الألوان). لا تعرضها للاعبين.' },
+      { h: '📺 الشاشة', t: 'اعرضها على التلفزيون أو الشاشة الكبيرة عشان يشوفها الكل. ما فيها أي سر.' },
+      { h: '🖥️ الاثنين', t: 'التحكم والشاشة جنب بعض، للآيباد أو اللابتوب إذا كنت المشرف وما فيه تلفزيون.' },
+      { h: 'نصيحة', t: 'وصّل جوالك أو الآيباد بالتلفزيون واختر «الشاشة»، وإذا تبي تضغط أزرار ارجع لـ«التحكم».' }
+    ] };
+    var pages = (H.tabs || []).concat([screens]), at = 0;
+    var css = document.createElement('style');
+    css.textContent = '.dwi-bg{position:fixed;inset:0;z-index:9999;background:rgba(5,8,22,.86);display:grid;place-items:center;padding:16px;backdrop-filter:blur(4px)}' +
+      '.dwi{width:min(620px,100%);max-height:92vh;overflow:auto;background:linear-gradient(165deg,#161d3d,#0b1026);border:1px solid rgba(245,185,66,.5);border-radius:22px;padding:20px;color:#fff;display:grid;gap:12px;box-shadow:0 20px 60px rgba(0,0,0,.6)}' +
+      '.dwi h2{margin:0;font-size:22px;color:#ffd978}.dwi .sub{color:#aab2d1;font-size:13.5px;line-height:1.7;margin:0}' +
+      '.dwi .tabs{display:flex;gap:6px;flex-wrap:wrap}.dwi .tabs button{border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.05);color:#dfe5ff;border-radius:999px;padding:6px 12px;font:700 13px inherit;cursor:pointer}' +
+      '.dwi .tabs button.on{background:#f5b942;color:#0a0f24;border-color:#f5b942}.dwi .lead{font-weight:800;font-size:16px;line-height:1.7}' +
+      '.dwi ol{margin:0;padding:0;list-style:none;display:grid;gap:8px}.dwi li{line-height:1.7;font-size:14.5px}.dwi li b{color:#ffd978}' +
+      '.dwi .nav{display:flex;gap:8px;justify-content:space-between;flex-wrap:wrap}.dwi .nav button{border:0;border-radius:14px;padding:11px 18px;font:900 15px inherit;cursor:pointer}' +
+      '.dwi .go{background:linear-gradient(135deg,#ffe08a,#f5b942);color:#0a0f24;flex:1}.dwi .sec{background:rgba(255,255,255,.08);color:#fff}' +
+      '.dwi-fab{position:fixed;left:12px;bottom:72px;z-index:50;width:44px;height:44px;border-radius:50%;border:1px solid rgba(245,185,66,.6);background:#141b3a;color:#ffd978;font:900 20px inherit;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.4)}';
+    document.head.appendChild(css);
+    var bg = document.createElement('div'); bg.className = 'dwi-bg'; bg.id = 'dwIntro';
+    function esc2(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+    function draw() {
+      var P = pages[at] || screens;
+      bg.innerHTML = '<div class="dwi" role="dialog" aria-label="شرح اللعبة"><h2>' + esc2(H.title || CFG.title) + '</h2>' + (H.subtitle ? '<p class="sub">' + esc2(H.subtitle) + '</p>' : '') +
+        '<div class="tabs">' + pages.map(function (p, i) { return '<button data-dwi="' + i + '" class="' + (i === at ? 'on' : '') + '">' + esc2(p.label) + '</button>'; }).join('') + '</div>' +
+        (P.lead ? '<div class="lead">' + esc2(P.lead) + '</div>' : '') +
+        '<ol>' + (P.steps || []).map(function (s) { return '<li><b>' + esc2(s.h) + ':</b> ' + esc2(s.t) + '</li>'; }).join('') + '</ol>' +
+        '<div class="nav">' + (at < pages.length - 1 ? '<button class="sec" data-dwi="' + (at + 1) + '">التالي ←</button>' : '') + '<button class="go" data-dwi="go">فهمت، يلا نبدأ ✅</button></div></div>';
+    }
+    bg.addEventListener('click', function (e) {
+      var t = e.target.closest('[data-dwi]'); if (!t) return;
+      var k = t.getAttribute('data-dwi');
+      if (k === 'go') { bg.remove(); ST.viewMode = 'phone'; renderAll(); return; }
+      at = Number(k); draw();
+    });
+    function open() { at = 0; draw(); if (!bg.parentNode) document.body.appendChild(bg); }
+    var fab = document.createElement('button'); fab.className = 'dwi-fab'; fab.textContent = '؟'; fab.title = 'شرح اللعبة'; fab.addEventListener('click', open);
+    document.body.appendChild(fab);
+    window.__dwIntro = { open: open, close: function () { if (bg.parentNode) { bg.remove(); ST.viewMode = 'phone'; renderAll(); } } };
+    open();
+  })();
+/*dw-intro-end*/
 })();
 </script>
 
