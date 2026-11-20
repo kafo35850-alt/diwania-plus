@@ -2514,15 +2514,16 @@ function load_harf() {
 /* games/harf/engine.js */
 /* ديوانية بلس — حرف ونص: محرك اللعبة (منطق صرف، يشتغل في Node والمتصفح وCloudflare).
  * حرف عشوائي، وكل لاعب يكتب كلمة تبدأ فيه لكل خانة (إنسان، حيوان، نبات…).
- * أول من يخلّص يوقف الكل بعد ١٠ ثواني. بعدها الكل يراجع ويرفض الإجابات الغلط بالتصويت.
+ * عد تنازلي ثم يطلع الحرف. أول من يخلّص يوقف الكل بعد ١٠ ثواني.
+ * بعدها المضيف يحكم على كل إجابة (صح ✅ أو غلط ❌)، وما ينتقل للنقاط إلا لما يحكم على الكل.
  * النقاط: إجابة صحيحة ما كتبها غيرك = ١٠، صحيحة ومكررة = ٥.
- * المراحل: lobby → write → review → result → … → ended */
+ * المراحل: lobby → countdown → write → review → result → … → ended */
 (function (root, factory) {
   if (typeof module === 'object' && module.exports) module.exports = factory(root.DiwaniyaLobby, root.MG.harfData);
   else { root.MG = root.MG || {}; root.MG.harf = factory(root.DiwaniyaLobby, root.MG.harfData); }
 })(typeof self !== 'undefined' ? self : this, function (L, D) {
   'use strict';
-  const MIN = 2, MAX = 40, STOP_MS = 10000, REVIEW_MS = 45000;
+  const MIN = 2, MAX = 40, STOP_MS = 10000, COUNT_MS = 4000;
   const ALLOWED = { rounds: [3, 5, 8], sec: [60, 90, 120], set: D.ORDER };
   const PTS = { unique: 10, shared: 5 };
   const ok = L.ok, fail = L.fail, byId = L.byId;
@@ -2539,7 +2540,7 @@ function load_harf() {
 
   function createGame(code) {
     const g = L.base(code, { min: MIN, max: MAX, settings: { rounds: 5, sec: 90, set: 'classic' } });
-    Object.assign(g, { letter: null, usedLetters: [], answers: {}, done: {}, stopBy: null, rejects: {}, result: null });
+    Object.assign(g, { letter: null, usedLetters: [], answers: {}, done: {}, stopBy: null, marks: {}, result: null });
     return g;
   }
   const join = (g, name) => L.join(g, name);
@@ -2554,7 +2555,11 @@ function load_harf() {
     g.round++;
     const fresh = D.LETTERS.filter((l) => g.usedLetters.indexOf(l) < 0), pool = fresh.length ? fresh : D.LETTERS;
     g.letter = pool[Math.floor(rng() * pool.length)]; g.usedLetters.push(g.letter);
-    g.answers = {}; g.done = {}; g.stopBy = null; g.rejects = {}; g.result = null;
+    g.answers = {}; g.done = {}; g.stopBy = null; g.marks = {}; g.result = null;
+    // ٣… ٢… ١… ثم يطلع الحرف
+    L.setPhase(g, 'countdown', now, COUNT_MS);
+  }
+  function toWrite(g, now) {
     L.setPhase(g, 'write', now, g.settings.sec * 1000);
     L.ev(g, { k: 'round', letter: g.letter });
   }
@@ -2564,6 +2569,7 @@ function load_harf() {
     return out;
   }
   function save(g, id, arr) {
+    if (g.phase === 'countdown') return fail('bad_phase');
     if (g.phase !== 'write') return fail('bad_phase');
     g.answers[id] = cleanAnswers(g, arr); return ok();
   }
@@ -2579,28 +2585,30 @@ function load_harf() {
     return ok();
   }
   function toReview(g, now) {
-    L.setPhase(g, 'review', now, REVIEW_MS);
+    L.setPhase(g, 'review', now, 0);
     L.ev(g, { k: 'review' });
   }
   const cellKey = (pid, i) => pid + ':' + i;
-  function reject(g, id, target, i) {
+  // المضيف يحكم: صح (ok) أو غلط (no). الضغط مرة ثانية على نفس الحكم يلغيه.
+  function mark(g, id, target, i, val) {
+    if (g.hostId !== id) return fail('not_host');
     if (g.phase !== 'review') return fail('bad_phase');
     i = Number(i);
-    if (!byId(g, target) || target === id || !(i >= 0 && i < fields(g).length)) return fail('bad_target');
-    const k = cellKey(target, i); g.rejects[k] = g.rejects[k] || {};
-    if (g.rejects[k][id]) delete g.rejects[k][id]; else g.rejects[k][id] = true;
+    if (!byId(g, target) || !(i >= 0 && i < fields(g).length)) return fail('bad_target');
+    if (!((g.answers[target] || [])[i])) return fail('bad_target');
+    const k = cellKey(target, i);
+    if (val !== 'ok' && val !== 'no') return fail('bad_target');
+    if (g.marks[k] === val) delete g.marks[k]; else g.marks[k] = val;
     return ok();
   }
-  // حالة كل خانة: empty | letter (ما تبدأ بالحرف) | rejected | ok
+  // حالة كل خانة: empty | pending (ما انحكم عليها) | rejected | ok
   function cellStatus(g, pid, i) {
     const a = (g.answers[pid] || [])[i] || '';
     if (!a) return 'empty';
-    if (!startsWith(a, g.letter)) return 'letter';
-    const votes = Object.keys(g.rejects[cellKey(pid, i)] || {}).filter((v) => byId(g, v) && byId(g, v).connected).length;
-    const judges = Math.max(1, live(g).filter((p) => p.id !== pid).length);
-    if (votes * 2 > judges) return 'rejected';
-    return 'ok';
+    const m = g.marks[cellKey(pid, i)];
+    return m === 'ok' ? 'ok' : m === 'no' ? 'rejected' : 'pending';
   }
+  const pendingCount = (g) => g.players.reduce((n, p) => n + fields(g).filter((_, i) => cellStatus(g, p.id, i) === 'pending').length, 0);
   function score(g, now) {
     const n = fields(g).length, delta = {}, cells = {};
     g.players.forEach((p) => { delta[p.id] = 0; cells[p.id] = []; });
@@ -2625,22 +2633,23 @@ function load_harf() {
   }
   function skip(g, id, now, rng) {
     if (g.hostId !== id) return fail('not_host');
+    if (g.phase === 'countdown') { toWrite(g, now); return ok(); }
     if (g.phase === 'write') { toReview(g, now); return ok(); }
-    if (g.phase === 'review') { score(g, now); return ok(); }
+    if (g.phase === 'review') { if (pendingCount(g)) return fail('need_marks'); score(g, now); return ok(); }
     if (g.phase === 'result') return next(g, id, now, rng);
     return fail('bad_phase');
   }
   function tick(g, now, rng) {
     if (!g.deadline || now < g.deadline) return false;
+    if (g.phase === 'countdown') { toWrite(g, now); return true; }
     if (g.phase === 'write') { toReview(g, now); return true; }
-    if (g.phase === 'review') { score(g, now); return true; }
     return false;
   }
   function act(g, id, m, now, rng) {
     switch (m.a) {
       case 'save': return save(g, id, m.answers);
       case 'done': return finishWriting(g, id, m.answers, now);
-      case 'reject': return reject(g, id, m.target, m.i);
+      case 'mark': return mark(g, id, m.target, m.i, m.v);
       case 'skip': return skip(g, id, now, rng);
       case 'next': return next(g, id, now, rng);
       case 'again': { if (g.hostId !== id) return fail('not_host'); if (g.phase !== 'ended') return fail('bad_phase'); g.round = 0; g.usedLetters = []; g.players.forEach((p) => { p.score = 0; }); newRound(g, now, rng); return ok(); }
@@ -2655,7 +2664,8 @@ function load_harf() {
     v.rounds = g.settings.rounds; v.setNames = D.NAMES; v.setOrder = D.ORDER;
     v.players.forEach((p) => { p.done = !!g.done[p.id]; });
     if (inGame) {
-      v.letter = g.letter; v.fields = fields(g); v.stopBy = g.stopBy;
+      // الحرف ما ينكشف وقت العد التنازلي
+      v.letter = g.phase === 'countdown' ? null : g.letter; v.fields = fields(g); v.stopBy = g.stopBy;
       v.doneCount = live(g).filter((p) => g.done[p.id]).length; v.liveCount = live(g).length;
       // الإجابات تنكشف للكل بعد ما ينتهي وقت الكتابة فقط
       if (g.phase === 'review' || g.phase === 'result' || g.phase === 'ended') {
@@ -2663,8 +2673,10 @@ function load_harf() {
           id: p.id,
           answers: (g.answers[p.id] || []).slice(),
           status: fields(g).map((_, i) => cellStatus(g, p.id, i)),
-          rejects: fields(g).map((_, i) => Object.keys(g.rejects[cellKey(p.id, i)] || {}).length)
+          // تنبيه للمضيف: الكلمة ما تبدأ بالحرف
+          off: fields(g).map((_, i) => { const a = (g.answers[p.id] || [])[i]; return !!a && !startsWith(a, g.letter); })
         }));
+        v.pending = pendingCount(g);
       }
       if (g.phase === 'result' || g.phase === 'ended') v.result = g.result;
     }
@@ -2673,7 +2685,6 @@ function load_harf() {
       v.me = { id: p.id, name: p.name, host: g.hostId === p.id, done: !!g.done[p.id] };
       if (inGame) {
         v.me.answers = (g.answers[p.id] || []).slice();
-        if (g.phase === 'review') v.me.myRejects = Object.keys(g.rejects).filter((k) => g.rejects[k][p.id]);
       }
     }
     return v;
