@@ -1,10 +1,16 @@
 {
  "custom_celebs_arab": {
+  "1": {
+   "am": "hj_custom_celebs_arab_2_a"
+  },
   "4": {
    "am": "hj_custom_celebs_arab_5_a"
   },
   "13": {
    "qm": "hj_custom_celebs_arab_14_q"
+  },
+  "15": {
+   "qm": "hj_custom_celebs_arab_16_q"
   }
  },
  "custom_tb_ramadan": {
@@ -46,6 +52,21 @@
   }
  },
  "music_tarab_classics": {
+  "6": {
+   "qm": "hj_music_tarab_classics_7_q"
+  },
+  "7": {
+   "qm": "hj_music_tarab_classics_8_q"
+  },
+  "11": {
+   "qm": "hj_music_tarab_classics_12_q"
+  },
+  "12": {
+   "qm": "hj_music_tarab_classics_13_q"
+  },
+  "13": {
+   "qm": "hj_music_tarab_classics_14_q"
+  },
   "14": {
    "am": "hj_music_tarab_classics_15_a"
   },
