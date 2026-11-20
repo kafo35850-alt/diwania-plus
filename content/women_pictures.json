@@ -17,6 +17,34 @@
    "am": "hj_gulf_kuwait_theater_5_a"
   }
  },
+ "movies_godfather": {
+  "8": {
+   "am": "hj_movies_godfather_9_a"
+  }
+ },
+ "movies_harry_potter": {
+  "10": {
+   "qm": "hj_movies_harry_potter_11_q"
+  }
+ },
+ "movies_john_wick": {
+  "13": {
+   "am": "hj_movies_john_wick_14_a"
+  }
+ },
+ "movies_matrix": {
+  "7": {
+   "am": "hj_movies_matrix_8_a"
+  },
+  "9": {
+   "am": "hj_movies_matrix_10_a"
+  }
+ },
+ "movies_pirates": {
+  "17": {
+   "am": "hj_movies_pirates_18_a"
+  }
+ },
  "music_tarab_classics": {
   "14": {
    "am": "hj_music_tarab_classics_15_a"
@@ -55,6 +83,11 @@
   },
   "10": {
    "am": "hj_series_egypt_general_11_a"
+  }
+ },
+ "series_foreign_general": {
+  "10": {
+   "am": "hj_series_foreign_general_11_a"
   }
  },
  "series_friends": {
@@ -156,11 +189,25 @@
   },
   "10": {
    "am": "hj_series_sherlock_11_a"
+  },
+  "12": {
+   "am": "hj_series_sherlock_13_a"
+  },
+  "14": {
+   "am": "hj_series_sherlock_15_a"
   }
  },
  "series_squid_game": {
   "15": {
    "am": "hj_series_squid_game_16_a"
+  }
+ },
+ "series_stranger_things": {
+  "0": {
+   "am": "hj_series_stranger_things_1_a"
+  },
+  "5": {
+   "am": "hj_series_stranger_things_6_a"
   }
  },
  "series_the_office": {
