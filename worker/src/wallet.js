@@ -8,12 +8,20 @@ import { ROOM_GAMES, verifyPlayToken, gameRoomExists, relayHostConnected, prepar
 
 const PLAY_TOKEN_TTL_MS = 12 * 60 * 60 * 1000;
 const IDEM_RE = /^[A-Za-z0-9_.:-]{8,120}$/;
+const MAX_PENDING_TRIES = 3;
+
+// Called when a launched free trial really starts: from then on the trial counts as used.
+export async function confirmTrialStart(env, session, body) {
+  const slug = String((body && body.slug) || '').slice(0, 60);
+  const r = await env.DB.prepare("UPDATE game_trials SET state = 'used' WHERE user_id = ? AND game_slug = ? AND state = 'pending'").bind(session.user.id, slug).run();
+  return { ok: true, confirmed: r.meta.changes === 1 };
+}
 
 export async function walletSnapshot(env, userId) {
   const [w, txs, trials, pays] = await env.DB.batch([
     env.DB.prepare('SELECT balance, total_purchased, total_consumed FROM wallets WHERE user_id = ?').bind(userId),
     env.DB.prepare('SELECT * FROM wallet_transactions WHERE user_id = ? ORDER BY created_at DESC LIMIT 100').bind(userId),
-    env.DB.prepare('SELECT game_slug, created_at FROM game_trials WHERE user_id = ?').bind(userId),
+    env.DB.prepare("SELECT game_slug, created_at FROM game_trials WHERE user_id = ? AND state = 'used'").bind(userId),
     env.DB.prepare('SELECT * FROM payments WHERE user_id = ? ORDER BY created_at DESC LIMIT 100').bind(userId)
   ]);
   const wallet = (w.results && w.results[0]) || { balance: 0, total_purchased: 0, total_consumed: 0 };
@@ -65,9 +73,17 @@ export async function launchGame(env, session, slug, body) {
   // Games priced at 0 are always free and keep the account's one-time trial untouched.
   const alwaysFree = cost === 0;
   const trialsOn = !!(await getSettings(env)).free_trials;
-  const trial = alwaysFree || !trialsOn ? null : await env.DB.prepare('INSERT INTO game_trials (user_id, game_slug, created_at) VALUES (?, ?, ?) ON CONFLICT DO NOTHING')
-    .bind(uid, slug, iso).run();
-  const isFreeTrial = !!trial && trial.meta.changes === 1;
+  // The trial is only reserved here ("pending"); it is used up when the game really starts (see confirmTrialStart).
+  // A pending trial can be reopened a few times, so closing the game early never wastes it.
+  const trial = alwaysFree || !trialsOn ? null : await env.DB.prepare(
+    "INSERT INTO game_trials (user_id, game_slug, created_at, state, tries) VALUES (?, ?, ?, 'pending', 1) " +
+    "ON CONFLICT(user_id, game_slug) DO UPDATE SET tries = tries + 1, created_at = excluded.created_at WHERE game_trials.state = 'pending' AND game_trials.tries < ? RETURNING tries"
+  ).bind(uid, slug, iso, MAX_PENDING_TRIES).first();
+  const isFreeTrial = !!trial;
+  // Reopened too many times without starting: the trial now counts as used.
+  if (!isFreeTrial && !alwaysFree && trialsOn) {
+    await env.DB.prepare("UPDATE game_trials SET state = 'used' WHERE user_id = ? AND game_slug = ? AND state = 'pending'").bind(uid, slug).run();
+  }
 
   let balanceBefore;
   let balanceAfter;
