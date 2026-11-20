@@ -10,6 +10,8 @@ const seedPath = join(root, 'worker/src/seed.json');
 const seed = JSON.parse(readFileSync(seedPath, 'utf8'));
 const cats = JSON.parse(readFileSync(join(root, 'content/eight_categories.json'), 'utf8'));
 seed.catQuestionsOverrides = seed.catQuestionsOverrides || {};
+// Pictures from content/media/<key>.jpg are loaded into the database by scripts/seed-media.mjs as /media/med_seed_<key>.
+const pic = (key) => (key ? { t: 'image', u: '/media/med_seed_' + key } : null);
 const extra = [];
 cats.forEach((c, i) => {
   extra.push({
@@ -19,7 +21,7 @@ cats.forEach((c, i) => {
     sort_order: i + 1, is_visible: 1, item_count: c.questions.length
   });
   seed.catQuestionsOverrides[c.slug] = c.questions.map((q, n) => ({
-    uid: c.slug + '_' + (n + 1) + '_' + q.points, points: q.points, q: q.q, a: q.a, hint: q.hint || '', info: q.hint || '', qm: null, am: null
+    uid: c.slug + '_' + (n + 1) + '_' + q.points, points: q.points, q: q.q, a: q.a, hint: q.hint || '', info: q.hint || '', qm: pic(q.qm), am: pic(q.am)
   }));
 });
 const slugs = new Set(extra.map((c) => c.slug));

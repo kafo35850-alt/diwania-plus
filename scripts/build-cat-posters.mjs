@@ -205,6 +205,25 @@ Object.assign(POSTERS, {
     ${[[110, 40], [214, 120], [96, 118], [236, 30]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="2.5" fill="${GOLD2}"/>`).join('')}`, 'grid')
 });
 
+// Picture categories: a sports car on a lit road, and a vanity of makeup tools (generic shapes, no brands).
+Object.assign(POSTERS, {
+  cars: frame('s', ['#0b1120', '#7f1d1d'], '#f87171', `
+    <path d="M0 170 L320 150 V200 H0 Z" fill="#111827"/>
+    <path d="M40 176 L120 168 M160 164 L240 157 M270 155 L310 151" stroke="${GOLD}" stroke-width="4" stroke-linecap="round"/>
+    <path d="M58 132 q8 -26 46 -30 l40 -24 q30 -14 76 -6 l40 22 q30 4 40 22 l2 18 q-2 8 -12 8 H66 q-10 0 -8 -10 z" fill="#dc2626"/>
+    <path d="M150 82 q26 -8 62 -2 l24 18 H136 z" fill="#0f172a" stroke="#fecaca" stroke-opacity=".5" stroke-width="2"/>
+    <path d="M70 124 h170" stroke="#fecaca" stroke-opacity=".45" stroke-width="2"/>
+    <path d="M250 118 h20" stroke="${GOLD2}" stroke-width="5" stroke-linecap="round"/>
+    ${[100, 222].map((x) => `<circle cx="${x}" cy="150" r="20" fill="#0f172a"/><circle cx="${x}" cy="150" r="10" fill="#94a3b8"/><circle cx="${x}" cy="150" r="3" fill="${INK}"/>`).join('')}
+    <path d="M270 112 l40 -10 v22 z" fill="${GOLD2}" opacity=".35"/>`, 'grid'),
+  makeup: frame('t', ['#3b0a2a', '#9d174d'], '#f9a8d4', `
+    <rect x="44" y="96" width="120" height="78" rx="10" fill="#1f2937" stroke="${GOLD}" stroke-width="3"/>
+    ${[['#f5d0b5', 58, 108], ['#e8b48f', 94, 108], ['#c8875e', 130, 108], ['#fda4af', 58, 140], ['#be185d', 94, 140], ['#7c3aed', 130, 140]].map(([c, x, y]) => `<rect x="${x}" y="${y}" width="26" height="24" rx="6" fill="${c}"/>`).join('')}
+    <g transform="translate(206 60) rotate(12)"><rect x="-14" y="40" width="28" height="74" rx="4" fill="#111827" stroke="${GOLD}" stroke-width="2"/><rect x="-12" y="20" width="24" height="22" rx="3" fill="${GOLD}"/><path d="M-10 20 v-26 q10 -14 20 -6 v32 z" fill="#e11d48"/></g>
+    <g transform="translate(262 72) rotate(24)"><path d="M-10 -34 q10 -20 20 0 l-3 20 h-14 z" fill="#f9a8d4"/><rect x="-7" y="-14" width="14" height="10" fill="${GOLD}"/><rect x="-4" y="-4" width="8" height="96" rx="4" fill="#0f172a"/></g>
+    ${[[70, 52], [120, 40], [150, 70], [290, 160]].map(([x, y]) => `<path d="M${x} ${y - 7} l2 5 l5 2 l-5 2 l-2 5 l-2 -5 l-5 -2 l5 -2 z" fill="${GOLD2}"/>`).join('')}`)
+});
+
 for (const [name, svg] of Object.entries(POSTERS)) {
   writeFileSync(join(out, name + '.svg'), svg.replace(/\n\s*/g, '\n') + '\n');
 }
