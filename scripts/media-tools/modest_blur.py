@@ -5,6 +5,14 @@ def modest(src, dst):
     g = cv2.equalizeHist(cv2.cvtColor(im, cv2.COLOR_BGR2GRAY))
     det = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
     faces = det.detectMultiScale(g, 1.08, 6, minSize=(w // 12, w // 12))
+    # fallbacks: a looser frontal detector, then side faces (both directions)
+    for name, nb in (('haarcascade_frontalface_alt2.xml', 3), ('haarcascade_profileface.xml', 3)):
+        if len(faces): break
+        c = cv2.CascadeClassifier(cv2.data.haarcascades + name)
+        faces = c.detectMultiScale(g, 1.05, nb, minSize=(w // 14, w // 14))
+        if not len(faces) and 'profile' in name:
+            fl = c.detectMultiScale(cv2.flip(g, 1), 1.05, nb, minSize=(w // 14, w // 14))
+            faces = [(w - x - fw, y, fw, fh) for (x, y, fw, fh) in fl]
     if len(faces) == 0: return False
     mask = np.zeros((h, w), np.float32)
     big = max(f[2] for f in faces)
