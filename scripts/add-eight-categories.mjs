@@ -18,7 +18,7 @@ cats.filter((c) => !c.draft).forEach((c, i) => {
   extra.push({
     id: 'cat_' + c.slug, slug: c.slug, name: c.name,
     macro_group: 'فئات الديوانية', sub_group: c.group, description: c.description, icon: c.icon,
-    posterTheme: 'country_saudi', poster: '/cat-posters/' + c.poster + '.svg',
+    posterTheme: 'country_saudi', poster: c.posterMedia ? '/media/med_seed_' + c.posterMedia : '/cat-posters/' + c.poster + '.svg',
     sort_order: i + 1, is_visible: 1, item_count: c.questions.length
   });
   seed.catQuestionsOverrides[c.slug] = c.questions.map((q, n) => ({
