@@ -72,7 +72,8 @@ for (const f of files) {
   if (!html.includes('data-act="set-view" data-v="both"') || !html.includes('window.GAME_CONFIG')) continue;
   const slug = f.replace('.html', '');
   html = html.replace(DEFAULT_VIEW, "viewMode: 'phone',");
-  const help = GUIDES[slug] ? { title: GUIDES[slug].title, subtitle: GUIDES[slug].subtitle, tabs: GUIDES[slug].tabs.map((t) => ({ label: t.label, lead: t.lead, steps: t.steps })) } : null;
+  const g0 = GUIDES[slug];
+  const help = g0 ? { title: g0.title, subtitle: g0.subtitle, tabs: g0.tabs.map((t) => ({ label: t.label, lead: t.lead, steps: t.steps })) } : null;
   const data = '<script id="dwHelpData">window.DW_HELP = ' + JSON.stringify(help).replace(/</g, '\\u003c') + ';</script>\n';
   html = html.replace(/<script id="dwHelpData">[\s\S]*?<\/script>\n/, '');
   html = html.replace('<div id="gameRoot"></div>', data + '<div id="gameRoot"></div>');

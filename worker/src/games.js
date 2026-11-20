@@ -5,6 +5,7 @@ import chancellor from '../../games/chancellor.html';
 import dakhil from '../../games/dakhil.html';
 import diwaniya_auction from '../../games/diwaniya_auction.html';
 import draw_guess from '../../games/draw_guess.html';
+import draw_classic from '../../games/draw_classic.html';
 import eight from '../../games/eight.html';
 import fake_artist from '../../games/fake_artist.html';
 import fortune_wheel from '../../games/fortune_wheel.html';
@@ -33,6 +34,7 @@ export const GAMES = {
   dakhil,
   diwaniya_auction,
   draw_guess,
+  draw_classic,
   eight,
   fake_artist,
   fortune_wheel,

@@ -170,7 +170,9 @@ export async function servePlay(env, request, session, slug) {
   const resolved = game && resolveGameHtml(game);
   if (!resolved) return htmlPage(404, 'اللعبة غير متاحة حالياً.');
 
-  let html = resolved.html;
+  // «رسّام الديوانية»: the room mode is the main one; ?mode=classic opens the old one-screen mode (players who paid only).
+  const classic = slug === 'draw_guess' && !guest && url.searchParams.get('mode') === 'classic' && !!GAMES.draw_classic;
+  let html = classic ? GAMES.draw_classic : resolved.html;
   if (resolved.retitle) html = html.replace(/ديوانية بلس — [^<]+/g, 'ديوانية بلس — ' + game.title.replace(/[<>&]/g, ''));
 
   // Owner-edited content the games read at start-up (guests of the Eight buzzer never get questions).
@@ -186,10 +188,10 @@ export async function servePlay(env, request, session, slug) {
     hiddenCats: slug !== 'eight' ? [] : categories.filter((c) => !c.is_visible).map((c) => c.slug),
     qaftah: gameContent.filter((x) => x.game_id === 'game_qaftah' && x.is_active !== 0)
   };
-  if (ROOM_GAMES[slug]) html = prepareRoomGame(html, slug, url, { token, demo: !guest && url.searchParams.get('demo') === '1' });
+  if (ROOM_GAMES[slug] && !classic) html = prepareRoomGame(html, slug, url, { token, demo: !guest && url.searchParams.get('demo') === '1' });
   if (slug === 'eight') html = prepareEight(html, url, { token, guest });
   // Phone-room games are laid out for phones: scale them up when the host shows them on a big screen.
-  if (ROOM_GAMES[slug]) {
+  if (ROOM_GAMES[slug] && !classic) {
     html = html.replace('</head>', '<style>/*dw-tv*/@media (min-width:1280px) and (min-height:700px){body{zoom:1.25}}@media (min-width:1700px) and (min-height:900px){body{zoom:1.55}}@media (min-width:2400px) and (min-height:1300px){body{zoom:2.1}}</style></head>');
   }
   content.voice = await voiceForGame(env, slug);

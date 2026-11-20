@@ -3076,11 +3076,423 @@ function load_qaddirha() {
   return { Hub: self.MafiaHub, E: self.MG.qaddirha };
 }
 
+function load_draw_guess() {
+  const self = {};
+/* hub.js */
+/* ديوانية بلس مافيا — مركز الغرف (hub): بروتوكول الرسائل + الغرف + المؤقتات، بدون أي شبكة.
+ * يشتغل في Node (server.js) وفي المتصفح (النسخة التجريبية) وفي Cloudflare Durable Object لاحقاً.
+ * الناقل (WebSocket أو غيره) يعطي كل اتصال كائن conn فيه: send(obj) و close(code).
+ *
+ * رسائل العميل -> الخادم (JSON):
+ *   {t:'create', name, dev?}          إنشاء غرفة (المنشئ هو المضيف)
+ *   {t:'join', code, name}            دخول بالرمز
+ *   {t:'resume', code, token}         رجوع بعد انقطاع / قفل الجوال
+ *   {t:'board', code}                 شاشة عرض عامة (بدون دور)
+ *   {t:'act', a, ...}                 a = ready | night{target,kind?} | confirm{on?} | task | vote | voteReady | start | skip | settings | kick | reset | leave
+ *                                     (الليل: المافيا تقترح بـnight ثم تؤكد بـconfirm · بقية اللاعبين اللي ما عندهم قدرة ينفذون مهمة ويبلّغون بـtask)
+ *                                     وضع المقدّم: hostPick{kind,target} | hostNext | hostTimer{sec}
+ *   {t:'ping'}
+ * الخادم -> العميل: {t:'joined',code,id,token} | {t:'view',view} | {t:'err',err} | {t:'pong'} | {t:'kicked'} | {t:'left'}
+ */
+(function (root, factory) {
+  if (typeof module === 'object' && module.exports) module.exports = factory();
+  else root.MafiaHub = factory();
+})(typeof self !== 'undefined' ? self : this, function () {
+  'use strict';
+  const LOBBY_GRACE_MS = 90 * 1000, ROOM_IDLE_MS = 6 * 3600 * 1000, EMPTY_ROOM_MS = 30 * 60 * 1000;
+
+  /* opts: { E (المحرك), rng(), randInt(min,max), token(), now(), wallet, allowDev, maxRooms } */
+  function createHub(opts) {
+    const E = opts.E, rng = opts.rng, now = opts.now || Date.now, maxRooms = opts.maxRooms || 500;
+    const wallet = opts.wallet || { async charge() { return true; } };   // مكان ربط الرصيد: يُخصم قيم واحد من المضيف عند البدء
+    const rooms = new Map();
+
+    const newCode = () => { for (let i = 0; i < 50; i++) { const c = String(opts.randInt(1000, 10000)); if (!rooms.has(c)) return c; } return null; };
+
+    function sendViews(room) {
+      const t = now();
+      room.conns.forEach((c) => { if (!c.closed) c.send({ t: 'view', view: E.viewFor(room.g, c.pid, t) }); });
+    }
+    function bind(room, conn, pid) {
+      // اتصال قديم لنفس اللاعب؟ نقفله
+      room.conns.forEach((c) => { if (c !== conn && pid && c.pid === pid) { c.pid = null; room.conns.delete(c); c.close(4000); } });
+      conn.code = room.g.code; conn.pid = pid; conn.board = !pid; room.conns.add(conn);
+      if (pid) { E.setConnected(room.g, pid, true); delete room.discAt[pid]; }
+    }
+    function closed(conn) {
+      const room = conn.code && rooms.get(conn.code); if (!room) return;
+      room.conns.delete(conn);
+      if (conn.pid && E.byId(room.g, conn.pid)) {
+        const still = [...room.conns].some((c) => c.pid === conn.pid);
+        if (!still) { E.setConnected(room.g, conn.pid, false); room.discAt[conn.pid] = now(); sendViews(room); }
+      }
+    }
+
+    function message(conn, m) {
+      const t0 = now();
+      const err = (e) => conn.send({ t: 'err', err: e });
+      switch (m.t) {
+        case 'ping': return conn.send({ t: 'pong' });
+        case 'create': {
+          if (rooms.size >= maxRooms) return err('server_busy');
+          const code = newCode(); if (!code) return err('server_busy');
+          const g = E.createGame(code, { minPlayers: m.dev && opts.allowDev ? 3 : 5 });
+          const room = { g, conns: new Set(), tokens: {}, discAt: {}, created: t0, last: t0 };
+          const r = E.join(g, m.name, t0); if (!r.ok) return err(r.err);
+          rooms.set(code, room); const tk = opts.token(); room.tokens[tk] = r.id;
+          bind(room, conn, r.id); conn.send({ t: 'joined', code, id: r.id, token: tk }); return sendViews(room);
+        }
+        case 'join': {
+          const room = rooms.get(String(m.code || '')); if (!room) return err('no_room');
+          const r = E.join(room.g, m.name, t0); if (!r.ok) return err(r.err);
+          const tk = opts.token(); room.tokens[tk] = r.id; room.last = t0;
+          bind(room, conn, r.id); conn.send({ t: 'joined', code: room.g.code, id: r.id, token: tk }); return sendViews(room);
+        }
+        case 'resume': {
+          const room = rooms.get(String(m.code || '')); if (!room) return err('no_room');
+          const pid = room.tokens[String(m.token || '')]; if (!pid || !E.byId(room.g, pid)) return err('bad_token');
+          bind(room, conn, pid); conn.send({ t: 'joined', code: room.g.code, id: pid, token: m.token, resumed: true }); return sendViews(room);
+        }
+        case 'board': {
+          const room = rooms.get(String(m.code || '')); if (!room) return err('no_room');
+          bind(room, conn, null); return conn.send({ t: 'view', view: E.viewFor(room.g, null, t0) });
+        }
+        case 'act': {
+          const room = conn.code && rooms.get(conn.code); if (!room || !conn.pid) return err('not_joined');
+          const g = room.g, id = conn.pid; let r = { ok: true }; room.last = t0;
+          // محرك عام (مثل المستشار السري): كل أفعال اللعب تروح لـ E.act، ما عدا الطرد والبدء والخروج (لها شغل اتصالات هنا)
+          if (E.act && m.a !== 'kick' && m.a !== 'start' && m.a !== 'leave') { const r0 = E.act(g, id, m, t0, rng); if (!r0.ok) err(r0.err); return sendViews(room); }
+          switch (m.a) {
+            case 'ready': r = E.ready(g, id, t0); break;
+            case 'night': r = E.nightAct(g, id, m.target === undefined ? null : m.target, t0, m.kind, rng); break;
+            case 'confirm': r = E.nightConfirm(g, id, t0, rng, m.on !== false); break;
+            case 'task': r = E.nightTask(g, id, t0, rng); break;
+            case 'vote': r = E.vote(g, id, m.target, t0); break;
+            case 'voteReady': r = E.voteReady(g, id, t0); break;
+            case 'settings': r = E.setSettings(g, id, m.patch || {}); break;
+            case 'skip': r = E.skip(g, id, t0, rng); break;
+            case 'hostPick': r = E.hostPick(g, id, m.kind, m.target === undefined ? null : m.target); break;
+            case 'hostNext': r = E.hostNext(g, id, t0); break;
+            case 'hostTimer': r = E.hostTimer(g, id, m.sec, t0); break;
+            case 'kick': { const victim = [...room.conns].find((c) => c.pid === m.target); r = E.kick(g, id, m.target); if (r.ok && victim) { victim.pid = null; room.conns.delete(victim); victim.send({ t: 'kicked' }); victim.close(4001); } break; }
+            case 'reset': r = E.reset(g, id); break;
+            case 'start': {
+              if (g.hostId !== id) { r = { ok: false, err: 'not_host' }; break; }
+              if (g.phase !== 'lobby') { r = { ok: false, err: 'already_started' }; break; }
+              if (E.need(g) > 0) { r = { ok: false, err: 'need_players' }; break; }
+              // هنا يُخصم قيم واحد من رصيد المضيف (من الخادم، مو من الجوال).
+              Promise.resolve(wallet.charge(room)).then((okc) => {
+                if (!okc) { conn.send({ t: 'err', err: 'no_credit' }); return; }
+                const rr = E.start(g, id, now(), rng); if (!rr.ok) conn.send({ t: 'err', err: rr.err });
+                sendViews(room);
+              }).catch(() => conn.send({ t: 'err', err: 'wallet_error' }));
+              return;
+            }
+            case 'leave': { r = E.leave(g, id); const tkn = Object.keys(room.tokens).find((k) => room.tokens[k] === id); if (tkn) delete room.tokens[tkn]; conn.pid = null; conn.send({ t: 'left' }); break; }
+            default: r = { ok: false, err: 'bad_action' };
+          }
+          if (!r.ok) err(r.err);
+          return sendViews(room);
+        }
+      }
+    }
+
+    // مؤقتات اللعبة + تنظيف الغرف (يُستدعى كل ~500ms)
+    function tick() {
+      const t = now();
+      rooms.forEach((room, code) => {
+        const g = room.g; let changed = false;
+        try { changed = E.tick(g, t, rng); } catch (e) { if (typeof console !== 'undefined') console.error('tick error', code, e); }
+        if (g.phase === 'lobby') Object.keys(room.discAt).forEach((pid) => { if (t - room.discAt[pid] > LOBBY_GRACE_MS) { E.leave(g, pid); delete room.discAt[pid]; changed = true; } });
+        if (changed) sendViews(room);
+        if ((room.conns.size === 0 && t - room.last > EMPTY_ROOM_MS) || t - room.last > ROOM_IDLE_MS) rooms.delete(code);
+      });
+    }
+
+    return { rooms, message, closed, tick, sendViews };
+  }
+
+  return { createHub };
+});
+
+
+/* kit/lobby.js */
+/* ديوانية بلس — أساس مشترك لمحركات الألعاب الجماعية: اللاعبين واللوبي والمضيف والمراحل.
+ * يشتغل في Node والمتصفح وCloudflare. كل لعبة تبني محركها فوقه وتعطي نفس واجهة hub.js
+ * (createGame, join, leave, kick, setConnected, need, start, tick, viewFor, act, byId). */
+(function (root, factory) {
+  if (typeof module === 'object' && module.exports) module.exports = factory();
+  else root.DiwaniyaLobby = factory();
+})(typeof self !== 'undefined' ? self : this, function () {
+  'use strict';
+  const COLORS = ['#f26538', '#38bdf8', '#a78bfa', '#34d399', '#fbbf24', '#f472b6', '#60a5fa', '#fb7185', '#2dd4bf', '#c084fc', '#facc15', '#4ade80', '#f97316', '#22d3ee', '#e879f9', '#94a3b8'];
+  const ok = (x) => Object.assign({ ok: true }, x || {});
+  const fail = (err) => ({ ok: false, err });
+  const cleanName = (s) => String(s == null ? '' : s).replace(/[\u0000-\u001f\u007f<>]/g, '').replace(/\s+/g, ' ').trim().slice(0, 14);
+  const cleanText = (s, n) => String(s == null ? '' : s).replace(/[\u0000-\u001f\u007f<>]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, n || 80);
+  const byId = (g, id) => g.players.find((p) => p.id === id) || null;
+  const shuffle = (a, rng) => { a = a.slice(); rng = rng || Math.random; for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(rng() * (i + 1)); const t = a[i]; a[i] = a[j]; a[j] = t; } return a; };
+
+  // opts: { min, max, settings }
+  function base(code, opts) {
+    return { code: String(code), min: opts.min, max: opts.max, settings: Object.assign({}, opts.settings || {}), players: [], hostId: null, nextId: 1, phase: 'lobby', round: 0, deadline: null, timerTotal: null, phaseSince: 0, events: [] };
+  }
+  function join(g, name) {
+    if (g.phase !== 'lobby') return fail('game_started');
+    if (g.players.length >= g.max) return fail('room_full');
+    let nm = cleanName(name); if (!nm) return fail('name_required');
+    const b = nm; let k = 2;
+    while (g.players.some((p) => p.name === nm)) { nm = b.slice(0, 12) + ' ' + k; k++; }
+    const used = new Set(g.players.map((p) => p.color));
+    const color = COLORS.find((c) => !used.has(c)) || COLORS[g.players.length % COLORS.length];
+    const p = { id: 'p' + (g.nextId++), name: nm, color, connected: true, score: 0 };
+    g.players.push(p); if (!g.hostId) g.hostId = p.id;
+    return ok({ id: p.id });
+  }
+  function passHost(g) { const n = g.players.find((p) => p.connected && p.id !== g.hostId); if (n) g.hostId = n.id; }
+  function leave(g, id) {
+    const p = byId(g, id); if (!p) return fail('no_player');
+    if (g.phase === 'lobby') { g.players = g.players.filter((x) => x.id !== id); if (g.hostId === id) g.hostId = g.players.length ? g.players[0].id : null; }
+    else { p.connected = false; if (g.hostId === id) passHost(g); }
+    return ok();
+  }
+  function setConnected(g, id, v) { const p = byId(g, id); if (p) p.connected = !!v; }
+  function kick(g, hostId, targetId) {
+    if (g.hostId !== hostId) return fail('not_host'); if (g.phase !== 'lobby') return fail('game_started');
+    if (targetId === hostId) return fail('cannot_kick_self');
+    return leave(g, targetId);
+  }
+  const need = (g) => Math.max(0, g.min - g.players.length);
+  function setPhase(g, ph, now, ms) { g.phase = ph; g.phaseSince = now; g.deadline = ms ? now + ms : null; g.timerTotal = ms || null; }
+  const ev = (g, e) => { e.round = g.round; g.events.push(e); if (g.events.length > 60) g.events.splice(0, g.events.length - 60); };
+  // إعداد من قائمة مسموحة: allowed = { key: [values...] }
+  function setSettings(g, hostId, patch, allowed) {
+    if (g.hostId !== hostId) return fail('not_host'); if (g.phase !== 'lobby') return fail('game_started');
+    for (const k in (patch || {})) { if (!allowed[k]) return fail('bad_setting'); const v = patch[k]; if (allowed[k].indexOf(v) < 0) return fail('bad_setting'); g.settings[k] = v; }
+    return ok();
+  }
+  // رجوع للوبي (يبقى المتصلين فقط)
+  function toLobby(g, hostId) {
+    if (g.hostId !== hostId) return fail('not_host');
+    g.players = g.players.filter((p) => p.connected);
+    if (!g.players.some((p) => p.id === g.hostId)) g.hostId = g.players.length ? g.players[0].id : null;
+    g.players.forEach((p) => { p.score = 0; });
+    g.phase = 'lobby'; g.round = 0; g.deadline = null; g.timerTotal = null; g.events = [];
+    return ok();
+  }
+  const pubPlayer = (g, p) => ({ id: p.id, name: p.name, color: p.color, connected: p.connected, host: p.id === g.hostId, score: p.score || 0 });
+  const baseView = (g, now) => ({ now, code: g.code, phase: g.phase, round: g.round, settings: g.settings, deadline: g.deadline, timerTotal: g.timerTotal, minPlayers: g.min, maxPlayers: g.max, need: need(g), players: g.players.map((p) => pubPlayer(g, p)), events: g.events.slice(-25) });
+  const timeUp = (g, now) => !!(g.deadline && now >= g.deadline && g.phase !== 'lobby');
+
+  return { COLORS, ok, fail, cleanName, cleanText, byId, shuffle, base, join, leave, kick, setConnected, need, setPhase, ev, setSettings, toLobby, pubPlayer, baseView, timeUp };
+});
+
+
+/* games/draw_guess/data.js */
+/* رسّام الديوانية — بنك كلمات وضع «برا السالفة»: كل فئة كلمات سهلة الرسم.
+ * الكل يعرف الفئة، والكل يعرف الكلمة إلا اللي برا السالفة. */
+(function (root, factory) {
+  if (typeof module === 'object' && module.exports) module.exports = factory();
+  else { root.MG = root.MG || {}; root.MG.draw_guessData = factory(); }
+})(typeof self !== 'undefined' ? self : this, function () {
+  'use strict';
+  const CATS = [
+    { c: 'حيوانات', w: ['جمل', 'صقر', 'أسد', 'زرافة', 'فيل', 'سمكة', 'قطوة', 'حصان', 'بطريق', 'ثعبان', 'سلحفاة', 'أرنب'] },
+    { c: 'أكل وسفرة', w: ['كبسة', 'بيتزا', 'برجر', 'آيسكريم', 'دلة قهوة', 'تمر', 'شاورما', 'كيك', 'موز', 'بطيخ', 'بيض', 'سمبوسة'] },
+    { c: 'أشياء في البيت', w: ['مكيف', 'تلفزيون', 'كنبة', 'سرير', 'ثلاجة', 'مروحة', 'ساعة', 'مفتاح', 'مظلة', 'مراية', 'لمبة', 'كرسي'] },
+    { c: 'مواصلات', w: ['طيارة', 'سيارة', 'سفينة', 'دراجة', 'قطار', 'صاروخ', 'هليكوبتر', 'باص', 'غواصة', 'دباب', 'قارب', 'تاكسي'] },
+    { c: 'أماكن', w: ['مسجد', 'برج', 'مستشفى', 'مدرسة', 'ملعب', 'بحر', 'جبل', 'صحراء', 'خيمة', 'مطار', 'حديقة', 'قلعة'] },
+    { c: 'رياضة', w: ['كرة قدم', 'سباحة', 'بولينغ', 'تنس', 'سلة', 'ملاكمة', 'جولف', 'تزلج', 'دراجات', 'شطرنج', 'رماية', 'غطس'] },
+    { c: 'مهن', w: ['طبيب', 'طيار', 'شرطي', 'طباخ', 'رسام', 'مزارع', 'إطفائي', 'نجار', 'حلاق', 'معلم', 'مصور', 'غواص'] },
+    { c: 'طبيعة وطقس', w: ['شمس', 'قمر', 'مطر', 'برق', 'قوس قزح', 'نخلة', 'وردة', 'بركان', 'شلال', 'ثلج', 'غيمة', 'نجمة'] },
+    { c: 'أجهزة', w: ['جوال', 'لابتوب', 'كاميرا', 'سماعة', 'ريموت', 'بلايستيشن', 'ميكروفون', 'شاحن', 'ساعة ذكية', 'طابعة', 'درون', 'روبوت'] }
+  ];
+  return { CATS };
+});
+
+/* games/draw_guess/engine.js */
+/* ديوانية بلس — رسّام الديوانية (وضع برا السالفة): محرك اللعبة (منطق صرف، يشتغل في Node والمتصفح وCloudflare).
+ * الكل يعرف الكلمة إلا واحد «برا السالفة». كل لاعب بدوره يرسم خط واحد بس بجواله، ويكمّل على رسمة اللي قبله.
+ * بعد اللفّات يصوّت الكل على اللي برا السالفة. إذا انكشف، يحاول يخمّن الكلمة.
+ * النقاط: برا السالفة ما انكشف = ٣ له. انكشف وخمّن الكلمة صح = ٣ له. انكشف وخمّن غلط = ٢ لكل واحد ثاني.
+ * المراحل: lobby → word → draw → vote → guess → result → … → ended */
+(function (root, factory) {
+  if (typeof module === 'object' && module.exports) module.exports = factory(root.DiwaniyaLobby, root.MG.draw_guessData);
+  else { root.MG = root.MG || {}; root.MG.draw_guess = factory(root.DiwaniyaLobby, root.MG.draw_guessData); }
+})(typeof self !== 'undefined' ? self : this, function (L, D) {
+  'use strict';
+  const MIN = 3, MAX = 12, WORD_MS = 20000, VOTE_MS = 60000, GUESS_MS = 30000, MAX_PTS = 400;
+  const ALLOWED = { rounds: [3, 5, 8], laps: [1, 2, 3], turn: [20, 30, 45] };
+  const ok = L.ok, fail = L.fail, byId = L.byId;
+  const live = (g) => g.players.filter((p) => p.connected);
+
+  function createGame(code) {
+    const g = L.base(code, { min: MIN, max: MAX, settings: { rounds: 5, laps: 2, turn: 30 } });
+    Object.assign(g, { cat: null, word: null, outsider: null, order: [], turnIdx: 0, strokes: [], ready: {}, votes: {}, accused: null, guess: null, options: [], result: null, usedWords: [] });
+    return g;
+  }
+  const join = (g, name) => L.join(g, name);
+
+  function start(g, hostId, now, rng) {
+    if (g.hostId !== hostId) return fail('not_host'); if (g.phase !== 'lobby') return fail('already_started');
+    if (L.need(g) > 0) return fail('need_players');
+    g.round = 0; g.usedWords = []; g.players.forEach((p) => { p.score = 0; });
+    newRound(g, now, rng); return ok();
+  }
+  function newRound(g, now, rng) {
+    g.round++;
+    const cat = D.CATS[Math.floor(rng() * D.CATS.length)];
+    const fresh = cat.w.filter((w) => g.usedWords.indexOf(w) < 0), pool = fresh.length ? fresh : cat.w;
+    g.cat = cat.c; g.word = pool[Math.floor(rng() * pool.length)]; g.usedWords.push(g.word);
+    const ps = live(g);
+    g.outsider = ps[Math.floor(rng() * ps.length)].id;
+    g.order = L.shuffle(ps.map((p) => p.id), rng);
+    // برا السالفة ما يبدأ أول عشان ما ينكشف من أول خط
+    if (g.order[0] === g.outsider && g.order.length > 1) { g.order.push(g.order.shift()); }
+    g.turnIdx = 0; g.strokes = []; g.ready = {}; g.votes = {}; g.accused = null; g.guess = null; g.result = null;
+    g.options = L.shuffle([g.word].concat(L.shuffle(cat.w.filter((w) => w !== g.word), rng).slice(0, 5)), rng);
+    L.setPhase(g, 'word', now, WORD_MS);
+    L.ev(g, { k: 'round' });
+  }
+  const totalTurns = (g) => g.order.length * g.settings.laps;
+  const drawer = (g) => g.order[g.turnIdx % g.order.length];
+  function toDraw(g, now) { L.setPhase(g, 'draw', now, g.settings.turn * 1000); L.ev(g, { k: 'draw' }); }
+  function ready(g, id, now) {
+    if (g.phase !== 'word') return fail('bad_phase');
+    g.ready[id] = true;
+    if (live(g).every((p) => g.ready[p.id])) toDraw(g, now);
+    return ok();
+  }
+  function cleanStroke(pts) {
+    if (!Array.isArray(pts)) return null;
+    const out = [];
+    for (const pt of pts.slice(0, MAX_PTS)) {
+      if (!Array.isArray(pt) || pt.length < 2) continue;
+      const x = Math.round(Number(pt[0])), y = Math.round(Number(pt[1]));
+      if (!isFinite(x) || !isFinite(y)) continue;
+      out.push([Math.max(0, Math.min(1000, x)), Math.max(0, Math.min(1000, y))]);
+    }
+    return out.length ? out : null;
+  }
+  function nextTurn(g, now) {
+    g.turnIdx++;
+    // نتخطى اللي طلعوا من الغرفة
+    while (g.turnIdx < totalTurns(g) && !(byId(g, drawer(g)) || {}).connected) g.turnIdx++;
+    if (g.turnIdx >= totalTurns(g)) { L.setPhase(g, 'vote', now, VOTE_MS); L.ev(g, { k: 'vote' }); return; }
+    L.setPhase(g, 'draw', now, g.settings.turn * 1000);
+  }
+  function stroke(g, id, pts, now) {
+    if (g.phase !== 'draw') return fail('bad_phase');
+    if (drawer(g) !== id) return fail('not_your_turn');
+    const s = cleanStroke(pts); if (!s) return fail('empty_stroke');
+    const p = byId(g, id);
+    g.strokes.push({ by: id, c: p ? p.color : '#fff', pts: s });
+    nextTurn(g, now); return ok();
+  }
+  function vote(g, id, target, now) {
+    if (g.phase !== 'vote') return fail('bad_phase');
+    if (!byId(g, target) || target === id) return fail('bad_target');
+    g.votes[id] = target;
+    if (live(g).every((p) => g.votes[p.id])) closeVote(g, now);
+    return ok();
+  }
+  function closeVote(g, now) {
+    const count = {};
+    Object.keys(g.votes).forEach((v) => { const t = g.votes[v]; count[t] = (count[t] || 0) + 1; });
+    const top = Object.keys(count).sort((a, b) => count[b] - count[a]);
+    // التعادل على المركز الأول = ما انكشف أحد
+    g.accused = top.length && (top.length === 1 || count[top[0]] > count[top[1]]) ? top[0] : null;
+    if (g.accused === g.outsider) { L.setPhase(g, 'guess', now, GUESS_MS); L.ev(g, { k: 'caught' }); }
+    else finish(g, now, false);
+  }
+  function guessWord(g, id, w, now) {
+    if (g.phase !== 'guess') return fail('bad_phase');
+    if (id !== g.outsider) return fail('not_outsider');
+    if (g.options.indexOf(w) < 0) return fail('bad_target');
+    g.guess = w; finish(g, now, true); return ok();
+  }
+  function finish(g, now, caught) {
+    const delta = {}; g.players.forEach((p) => { delta[p.id] = 0; });
+    let how;
+    if (!caught) { delta[g.outsider] = 3; how = 'escaped'; }
+    else if (g.guess === g.word) { delta[g.outsider] = 3; how = 'guessed'; }
+    else { g.players.forEach((p) => { if (p.id !== g.outsider) delta[p.id] = 2; }); how = 'caught'; }
+    g.players.forEach((p) => { p.score += delta[p.id]; });
+    const tally = {}; Object.keys(g.votes).forEach((v) => { tally[g.votes[v]] = (tally[g.votes[v]] || 0) + 1; });
+    g.result = { how, delta, outsider: g.outsider, word: g.word, accused: g.accused, guess: g.guess, tally };
+    L.setPhase(g, 'result', now, 0); L.ev(g, { k: 'result', how });
+  }
+  function next(g, id, now, rng) {
+    if (g.hostId !== id) return fail('not_host'); if (g.phase !== 'result') return fail('bad_phase');
+    if (g.round >= g.settings.rounds) { L.setPhase(g, 'ended', now, 0); return ok(); }
+    newRound(g, now, rng); return ok();
+  }
+  function skip(g, id, now, rng) {
+    if (g.hostId !== id) return fail('not_host');
+    if (g.phase === 'word') { toDraw(g, now); return ok(); }
+    if (g.phase === 'draw') { nextTurn(g, now); return ok(); }
+    if (g.phase === 'vote') { closeVote(g, now); return ok(); }
+    if (g.phase === 'guess') { finish(g, now, true); return ok(); }
+    if (g.phase === 'result') return next(g, id, now, rng);
+    return fail('bad_phase');
+  }
+  function tick(g, now) {
+    if (!g.deadline || now < g.deadline) return false;
+    if (g.phase === 'word') { toDraw(g, now); return true; }
+    if (g.phase === 'draw') { nextTurn(g, now); return true; }
+    if (g.phase === 'vote') { closeVote(g, now); return true; }
+    if (g.phase === 'guess') { finish(g, now, true); return true; }
+    return false;
+  }
+  function act(g, id, m, now, rng) {
+    switch (m.a) {
+      case 'ready': return ready(g, id, now);
+      case 'stroke': return stroke(g, id, m.pts, now);
+      case 'vote': return vote(g, id, m.target, now);
+      case 'guess': return guessWord(g, id, m.w, now);
+      case 'skip': return skip(g, id, now, rng);
+      case 'next': return next(g, id, now, rng);
+      case 'again': { if (g.hostId !== id) return fail('not_host'); if (g.phase !== 'ended') return fail('bad_phase'); g.round = 0; g.usedWords = []; g.players.forEach((p) => { p.score = 0; }); newRound(g, now, rng); return ok(); }
+      case 'lobby': return L.toLobby(g, id);
+      case 'settings': return L.setSettings(g, id, m.patch || {}, ALLOWED);
+      default: return fail('bad_action');
+    }
+  }
+  function viewFor(g, pid, now) {
+    const v = L.baseView(g, now), inGame = g.phase !== 'lobby';
+    v.rounds = g.settings.rounds;
+    if (inGame && g.cat) {
+      v.cat = g.cat; v.strokes = g.strokes; v.order = g.order;
+      v.turn = g.phase === 'draw' ? drawer(g) : null; v.turnIdx = g.turnIdx; v.turns = totalTurns(g);
+      v.readyCount = live(g).filter((p) => g.ready[p.id]).length; v.liveCount = live(g).length;
+      v.votedCount = live(g).filter((p) => g.votes[p.id]).length;
+      v.players.forEach((p) => { p.ready = !!g.ready[p.id]; p.voted = !!g.votes[p.id]; });
+      if (g.phase === 'guess') { v.accused = g.accused; v.options = g.options; }
+      if (g.phase === 'result' || g.phase === 'ended') { v.result = g.result; v.options = g.options; }
+    }
+    const p = pid && byId(g, pid);
+    if (p) {
+      v.me = { id: p.id, name: p.name, host: g.hostId === p.id };
+      if (inGame && g.cat) {
+        v.me.outsider = g.outsider === p.id;
+        v.me.word = v.me.outsider ? null : g.word;
+        v.me.ready = !!g.ready[p.id]; v.me.vote = g.votes[p.id] || null;
+      }
+    }
+    return v;
+  }
+  return Object.assign({ MIN, MAX, ALLOWED, createGame, join, start, tick, act, viewFor }, { leave: L.leave, kick: L.kick, setConnected: L.setConnected, need: L.need, byId: L.byId });
+});
+
+  return { Hub: self.MafiaHub, E: self.MG.draw_guess };
+}
+
 export const ROOM_ENGINES = {
   dakhil: load_dakhil,
   mafia: load_mafia,
   qaftah: load_qaftah,
   chancellor: load_chancellor,
   harf: load_harf,
-  qaddirha: load_qaddirha
+  qaddirha: load_qaddirha,
+  draw_guess: load_draw_guess
 };

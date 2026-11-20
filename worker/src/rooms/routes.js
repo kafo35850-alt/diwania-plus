@@ -10,7 +10,8 @@ export const ROOM_GAMES = {
   qaftah: { flag: 'QF_DEMO', urlVar: 'QF_WS_URL', demoScripts: ['qf/loopback.js'] },
   chancellor: { flag: 'SH_DEMO', urlVar: 'SH_WS_URL', demoScripts: ['sh/loopback.js'] },
   harf: { flag: 'DIWANIYA_DEMO', urlVar: 'DIWANIYA_WS_URL', urlIsFunction: true, demoScripts: ['kit/loopback.js', 'games/harf/bots.js'] },
-  qaddirha: { flag: 'DIWANIYA_DEMO', urlVar: 'DIWANIYA_WS_URL', urlIsFunction: true, demoScripts: ['kit/loopback.js', 'games/qaddirha/bots.js'] }
+  qaddirha: { flag: 'DIWANIYA_DEMO', urlVar: 'DIWANIYA_WS_URL', urlIsFunction: true, demoScripts: ['kit/loopback.js', 'games/qaddirha/bots.js'] },
+  draw_guess: { flag: 'DIWANIYA_DEMO', urlVar: 'DIWANIYA_WS_URL', urlIsFunction: true, demoScripts: ['kit/loopback.js', 'games/draw_guess/bots.js'] }
 };
 
 const GAME_CODE_RE = /^\d{4}$/;

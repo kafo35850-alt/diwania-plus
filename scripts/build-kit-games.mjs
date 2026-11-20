@@ -8,7 +8,8 @@ import { dirname, join } from 'node:path';
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 export const KIT_GAMES = {
   harf: { title: 'حروف الديوانية' },
-  qaddirha: { title: 'تقدير الديوانية' }
+  qaddirha: { title: 'تقدير الديوانية' },
+  draw_guess: { title: 'رسّام الديوانية' }
 };
 const SLOTS = [
   ['games/dakhil/words.js', 'data.js'],
