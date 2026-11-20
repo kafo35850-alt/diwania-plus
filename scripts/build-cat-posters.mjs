@@ -224,6 +224,14 @@ Object.assign(POSTERS, {
     ${[[70, 52], [120, 40], [150, 70], [290, 160]].map(([x, y]) => `<path d="M${x} ${y - 7} l2 5 l5 2 l-5 2 l-2 5 l-2 -5 l-5 -2 l5 -2 z" fill="${GOLD2}"/>`).join('')}`)
 });
 
+// Career path: a trail of shields joined by arrows, ending in a glowing question mark.
+POSTERS.career = frame('u', ['#052e16', '#0f172a'], '#4ade80', `
+    <path d="M20 176 Q160 150 300 176 V200 H20 Z" fill="#14532d"/>
+    ${[[52, 120, '#dc2626'], [112, 96, '#1d4ed8'], [172, 120, '#facc15'], [232, 96, '#f8fafc']].map(([x, y, c]) => `<g transform="translate(${x} ${y})"><path d="M-20 -24 H20 V2 Q20 22 0 32 Q-20 22 -20 2 Z" fill="${c}" stroke="${GOLD}" stroke-width="3"/><path d="M-20 -6 H20" stroke="#0a0f24" stroke-opacity=".25" stroke-width="5"/></g>`).join('')}
+    ${[[76, 108], [136, 108], [196, 108]].map(([x, y]) => `<path d="M${x} ${y} h14 m-6 -6 l6 6 l-6 6" fill="none" stroke="${GOLD2}" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>`).join('')}
+    <g transform="translate(284 70)"><circle r="22" fill="#1a1405" stroke="${GOLD}" stroke-width="4"/><path d="M-7 -6 q0 -10 8 -10 q9 0 9 8 q0 6 -7 9 q-3 1 -3 6" fill="none" stroke="${GOLD2}" stroke-width="5" stroke-linecap="round"/><circle cx="0" cy="13" r="3" fill="${GOLD2}"/></g>
+    <g transform="translate(160 168)"><circle r="13" fill="${WHITE}"/><path d="M0 -6 l6 4 l-2 7 h-8 l-2 -7 z" fill="${INK}"/></g>`, 'grid');
+
 for (const [name, svg] of Object.entries(POSTERS)) {
   writeFileSync(join(out, name + '.svg'), svg.replace(/\n\s*/g, '\n') + '\n');
 }
