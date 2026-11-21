@@ -587,7 +587,8 @@
     "a": "١٣١٩هـ (١٩٠٢م)",
     "hint": "بداية توحيد المملكة."
    }
-  ]
+  ],
+  "posterMedia": "poster_custom_uni_kau"
  },
  {
   "slug": "custom_uni_others",
@@ -705,7 +706,8 @@
     "a": "الخرج",
     "hint": "جنوب الرياض."
    }
-  ]
+  ],
+  "posterMedia": "poster_custom_uni_others"
  },
  {
   "slug": "custom_uni_life",
@@ -823,7 +825,8 @@
     "a": "التحويل الداخلي",
     "hint": "والانتقال لجامعة ثانية اسمه التحويل الخارجي."
    }
-  ]
+  ],
+  "posterMedia": "poster_custom_uni_life"
  },
  {
   "slug": "custom_major_med",
@@ -941,7 +944,8 @@
     "a": "الفرز (Triage)",
     "hint": "عشان كذا اللي جاي بزكام ينتظر 😄"
    }
-  ]
+  ],
+  "posterMedia": "poster_custom_major_medicine"
  },
  {
   "slug": "custom_major_eng",
@@ -1059,7 +1063,8 @@
     "a": "IPv6",
     "hint": "لأن عناوين IPv4 قربت تخلص."
    }
-  ]
+  ],
+  "posterMedia": "poster_custom_major_cs"
  },
  {
   "slug": "custom_major_biz",
@@ -1177,7 +1182,8 @@
     "a": "المعايير الدولية لإعداد التقارير المالية",
     "hint": "تطبقها الشركات المدرجة في السعودية."
    }
-  ]
+  ],
+  "posterMedia": "poster_custom_major_business"
  },
  {
   "slug": "custom_qiyas",
@@ -1413,7 +1419,8 @@
     "a": "كامبريدج (ولاية ماساتشوستس)",
     "hint": "جنب بوسطن."
    }
-  ]
+  ],
+  "posterMedia": "poster_custom_abroad"
  },
  {
   "slug": "custom_new_job",
@@ -1531,7 +1538,8 @@
     "a": "أجر الساعة + ٥٠٪",
     "hint": "يعني الساعة الإضافية بساعة ونص."
    }
-  ]
+  ],
+  "posterMedia": "poster_custom_new_job"
  },
  {
   "slug": "custom_coffee_finals",
@@ -1649,7 +1657,8 @@
     "a": "روبوستا",
     "hint": "تقريباً ضعف الأرابيكا."
    }
-  ]
+  ],
+  "posterMedia": "poster_custom_coffee_finals"
  },
  {
   "slug": "custom_football_world",
@@ -2412,7 +2421,8 @@
     "hint": "انطلقت على صاروخ فالكون هيفي.",
     "qm": "car_tesla"
    }
-  ]
+  ],
+  "posterMedia": "poster_custom_cars"
  },
  {
   "slug": "custom_makeup",
@@ -2552,7 +2562,8 @@
     "hint": "انسجّلت في أمريكا يوم 7 أبريل 1931.",
     "qm": "mkd_curler"
    }
-  ]
+  ],
+  "posterMedia": "poster_custom_makeup"
  },
  {
   "slug": "custom_career",
@@ -2706,7 +2717,8 @@
     "qm": "career_borini_q",
     "am": "career_borini_a"
    }
-  ]
+  ],
+  "posterMedia": "poster_custom_career"
  },
  {
   "slug": "custom_major_medicine",
@@ -2789,7 +2801,8 @@
     "hint": "يطلع من البطين الأيسر."
    }
   ],
-  "draft": true
+  "draft": true,
+  "posterMedia": "poster_custom_major_medicine"
  },
  {
   "slug": "custom_major_health",
@@ -2872,7 +2885,8 @@
     "hint": "Aspirin."
    }
   ],
-  "draft": true
+  "draft": true,
+  "posterMedia": "poster_custom_major_health"
  },
  {
   "slug": "custom_major_engineering",
@@ -2955,7 +2969,8 @@
     "hint": "أساس مادة الديناميكا."
    }
   ],
-  "draft": true
+  "draft": true,
+  "posterMedia": "poster_custom_major_engineering"
  },
  {
   "slug": "custom_major_cs",
@@ -3038,7 +3053,8 @@
     "hint": "لأن عناوين IPv4 قربت تخلص."
    }
   ],
-  "draft": true
+  "draft": true,
+  "posterMedia": "poster_custom_major_cs"
  },
  {
   "slug": "custom_major_business",
@@ -3121,7 +3137,8 @@
     "hint": "تطبقها الشركات المدرجة في السعودية."
    }
   ],
-  "draft": true
+  "draft": true,
+  "posterMedia": "poster_custom_major_business"
  },
  {
   "slug": "custom_major_law",
@@ -3204,7 +3221,8 @@
     "hint": "شائع في العقود التجارية."
    }
   ],
-  "draft": true
+  "draft": true,
+  "posterMedia": "poster_custom_major_law"
  },
  {
   "slug": "custom_major_media",
@@ -3287,6 +3305,7 @@
     "hint": "Cost Per Mille."
    }
   ],
-  "draft": true
+  "draft": true,
+  "posterMedia": "poster_custom_major_media"
  }
 ]
