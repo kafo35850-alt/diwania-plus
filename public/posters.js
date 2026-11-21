@@ -242,8 +242,9 @@
    'friends_court','last_one_standing','silent_library','who_knows_friend','draw_guess','stadium_esports','how_much_price','pressure_seat',
    'mazad30','fake_artist','liars_table','vault50','radar_guess','alibi_court'].forEach(function (k) {
     var old = P[k] || '';
-    P[k] = '<div style="position:relative;width:100%;height:100%;background:#0b1030">' + (old ? '<div style="position:absolute;inset:0">' + old + '</div>' : '') +
-      '<img src="/media/med_seed_game_' + k + '" alt="" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block" onerror="this.remove()"></div>';
+    // Only the picture (on the same navy as its own background); the old drawing peeked out at odd sizes while it loaded.
+    P[k] = '<div style="position:relative;width:100%;height:100%;background:#151d4a">' +
+      '<img src="/media/med_seed_game_' + k + '?v=3" alt="" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block"></div>';
   });
   window.DW_POSTERS = P;
 })();

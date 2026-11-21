@@ -1053,7 +1053,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
 
 <script src="/m8p.js?v=2"></script>
 <script src="/qr.js"></script>
-<script src="/posters.js?v=2"></script>
+<script src="/posters.js?v=3"></script>
 <script>
 /* ============================================================================
  * ديوانية بلس (Diwaniya+) — Frontend Storefront, Wallet, Auth, Guides & Admin
@@ -2447,7 +2447,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
     var art = ['eight', 'mafia', 'harf', 'qaftah'].map(function (s, i) {
       var l = getLogoForGame(s);
       return '<div class="tile t' + (i + 1) + '" style="background:' + l.bg + ';overflow:hidden">' + l.svg +
-        '<img src="/media/med_seed_game_' + s + '" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" onerror="this.remove()"></div>';
+        '<img src="/media/med_seed_game_' + s + '?v=3" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" onerror="this.remove()"></div>';
     }).join('');
 
     var html = installBannerHtml() + '<section class="hero2">' +

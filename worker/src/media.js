@@ -120,7 +120,9 @@ const MEDIA_HEADERS = {
 
 export async function serveMedia(env, request, id) {
   const row = await env.DB.prepare('SELECT mime, size, chunks, store, CASE WHEN chunks = 0 AND store = \'d1\' THEN data END AS data FROM media WHERE id = ?').bind(id).first();
-  if (!row) return new Response('Not found', { status: 404 });
+  if (!row) return new Response('Not found', { status: 404, headers: { 'cache-control': 'no-store' } });
+  // Shipped pictures (med_seed_*) can be replaced by a later release under the same name: keep them only an hour.
+  const seedCache = id.startsWith('med_seed_') ? { 'cache-control': 'public, max-age=3600' } : {};
   if (row.store === 'r2') {
     if (!env.MEDIA_BUCKET) return new Response('Storage not connected', { status: 503 });
     const obj = await env.MEDIA_BUCKET.get(id, { range: request.headers, onlyIf: request.headers });
@@ -168,7 +170,7 @@ export async function serveMedia(env, request, id) {
     for (const p of pieces) { joined.set(p, off); off += p.length; }
     body = joined.subarray(start - first * CHUNK, end - first * CHUNK + 1);
   }
-  const headers = { ...MEDIA_HEADERS, 'content-type': row.mime, 'content-length': String(body.length) };
+  const headers = { ...MEDIA_HEADERS, ...seedCache, 'content-type': row.mime, 'content-length': String(body.length) };
   if (partial) headers['content-range'] = 'bytes ' + start + '-' + end + '/' + size;
   return new Response(head ? null : body, { status: partial ? 206 : 200, headers });
 }
