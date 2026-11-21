@@ -1,1 +1,15 @@
-{"arab_youtubers":"/media/med_seed_poster_arab_youtubers","who_is_player":"/media/med_seed_poster_football_world"}
+{
+"arab_youtubers": "/media/med_seed_poster_arab_youtubers",
+"who_is_player": "/media/med_seed_poster_football_world",
+"series_jaafar": "/media/med_seed_poster_series_jaafar",
+"series_bab_alhara": "/media/med_seed_poster_series_bab_alhara",
+"series_tash_ma_tash": "/media/med_seed_poster_series_tash_ma_tash",
+"series_la_casa": "/media/med_seed_poster_series_la_casa",
+"series_shabab_albomb": "/media/med_seed_poster_series_shabab_albomb",
+"series_friends": "/media/med_seed_poster_series_friends",
+"series_peaky_blinders": "/media/med_seed_poster_series_peaky_blinders",
+"series_sherlock": "/media/med_seed_poster_series_sherlock",
+"series_vikings": "/media/med_seed_poster_series_vikings",
+"series_lan_aeesh": "/media/med_seed_poster_series_lan_aeesh",
+"movies_godfather": "/media/med_seed_poster_movies_godfather"
+}
