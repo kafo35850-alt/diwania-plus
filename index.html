@@ -881,13 +881,13 @@ button:disabled {
   var GAME_GUIDES = {
     eight: {
       title: 'شرح لعبة: تحدي الثمانية — ديوانية بلس',
-      subtitle: 'المسابقة الثقافية والتفاعلية الكبرى بين فريقين (١٥٢ فئة · ٢,٧٣٦ سؤالاً)',
+      subtitle: 'المسابقة الثقافية والتفاعلية الكبرى بين فريقين',
       tabs: [
         {
           id: 'idea', label: 'فكرة اللعبة',
           lead: 'مواجهة حماسية بين فريقين على شاشة كبيرة (تلفزيون أو آيباد) مع إمكانية ربط جوالات اللاعبين كأجراس سرعة عبر الـ QR Code.',
           steps: [
-            { h: 'اختيار ٨ فئات للمباراة', t: 'يختار الفريقان ٨ فئات من أصل ١٥٢ فئة مصورة (مسلسلات، رياضة، ملاعب، دول، أنمي، علوم، بدون كلام، خلية الحروف...).' },
+            { h: 'اختيار ٨ فئات للمباراة', t: 'يختار الفريقان ٨ فئات من موسوعة الفئات المصورة المتاحة (مسلسلات، رياضة، ملاعب، دول، أنمي، علوم، بدون كلام، خلية الحروف...).' },
             { h: '٣ مستويات صعوبة لكل فئة', t: 'كل فئة تضم ٦ أسئلة موزعة على ٣ مستويات: ٢٠٠ نقطة (سهل)، ٤٠٠ نقطة (متوسط)، ٦٠٠ نقطة (صعب).' },
             { h: 'تحديات خاصة ومبتكرة', t: 'في تحدي الملاعب والصور تكون أسئلة ٢٠٠ واضحة، و٤٠٠ بتغبيش خفيف، و٦٠٠ بتغبيش أقوى، وتظهر الصورة الحقيقية كاملة بعد الإجابة!' }
           ]
@@ -1326,7 +1326,7 @@ button:disabled {
         "id": "game_eight",
         "slug": "eight",
         "title": "تحدي الثمانية — ديوانية بلس",
-        "subtitle": "١٥٢ فئة مصورة · ٢,٧٣٦ سؤالاً · حتى ٦٠ لاعباً",
+        "subtitle": "موسوعة الفئات المصورة · ٢,٧٣٦ سؤالاً · حتى ٦٠ لاعباً",
         "description": "المسابقة الجماعية الكبرى بين فريقين: اختيار ٨ فئات، ٣ مستويات صعوبة (٢٠٠ / ٤٠٠ / ٦٠٠)، تحدي الصور والملاعب بتغبيش متدرج، بدون كلام بالـ QR، وسباق الجرس السريع.",
         "engine_type": "eight_grid",
         "cost_credits": 1,
@@ -2196,7 +2196,8 @@ button:disabled {
 
       var trialKey = uid + ':' + gameSlug;
       var hasUsedTrial = !!db.user_game_trials[trialKey];
-      var isFreeTrial = !hasUsedTrial;
+      var isAlwaysFree = Number(game.cost_credits || 0) === 0;
+      var isFreeTrial = !isAlwaysFree && !hasUsedTrial;
       var cost = isFreeTrial ? 0 : Number(game.cost_credits || 1);
       var walletRec = db.wallets[uid] || { user_id: uid, balance: 0, total_purchased: 0, total_consumed: 0 };
       var balanceBefore = Number(walletRec.balance || 0);
@@ -2223,7 +2224,7 @@ button:disabled {
           description: '🎁 تشغيل مجاني (قيم التجربة الوحيد للحساب): ' + game.title + ' [' + idempotencyKey + ']',
           created_at: nowIso
         });
-      } else {
+      } else if (!isAlwaysFree) {
         walletRec.balance = balanceBefore - cost;
         walletRec.total_consumed = Number(walletRec.total_consumed || 0) + cost;
         db.wallets[uid] = walletRec;
@@ -2437,11 +2438,14 @@ button:disabled {
         var gsort = parseInt(payload.sortOrder, 10) || (db.games.length + 1);
         var grules = String(payload.rules || '').trim();
         var gdesc = String(payload.description || '').trim();
+        var gimage = String(payload.imageUrl || '').trim();
         if (!gt || !gs) return { ok: false, status: 400, error: 'أدخل اسم اللعبة والمعرف النصي (Slug).' };
         var existingGame = db.games.find(function (g) { return g.slug === gs; });
         if (existingGame) {
           existingGame.title = gt;
           existingGame.description = gdesc || existingGame.description;
+          if (gimage) existingGame.image_url = gimage;
+          else if (payload.imageUrl === '') delete existingGame.image_url;
           existingGame.cost_credits = gc;
           existingGame.min_players = gmin;
           existingGame.max_players = gmax;
@@ -2454,6 +2458,7 @@ button:disabled {
             subtitle: 'من ' + gmin + ' إلى ' + gmax + ' لاعباً · ' + (grules || 'تحدي جماعي تفاعلي'),
             description: gdesc || 'لعبة جماعية تفاعلية مضافة من نظام إدارة الألعاب.',
             engine_type: gEng,
+            image_url: gimage,
             cost_credits: gc,
             min_players: gmin,
             max_players: gmax,
@@ -2828,11 +2833,18 @@ button:disabled {
   function remainingFreeTrialsCount() {
     if (!STATE.user) return 0;
     var used = (STATE.wallet && STATE.wallet.freeTrialsUsed) || {};
-    var active = STATE.games.filter(function (g) { return g.is_enabled; });
+    var active = STATE.games.filter(function (g) { return g.is_enabled && Number(g.cost_credits || 0) > 0; });
     return active.filter(function (g) { return !used[g.slug]; }).length;
   }
 
   function getLogoForGame(slug) {
+    var game = STATE.games && STATE.games.find(function (g) { return g.slug === slug; });
+    if (game && game.image_url) {
+      return {
+        bg: 'radial-gradient(circle at 50% 35%, #1c2949 0%, #090d1b 75%)',
+        svg: '<img src="' + esc(game.image_url) + '" alt="' + esc(game.title || '') + '" style="width:100%;height:100%;object-fit:cover">'
+      };
+    }
     return LUXURY_LOGOS[slug] || LUXURY_LOGOS.eight;
   }
 
@@ -2866,6 +2878,7 @@ button:disabled {
 
   function renderStoreTab() {
     var activeGames = STATE.games.filter(function (g) { return g.is_enabled; }).sort(function (a, b) { return a.sort_order - b.sort_order; });
+    var trialGames = activeGames.filter(function (g) { return Number(g.cost_credits || 0) > 0; });
     var usedTrials = (STATE.wallet && STATE.wallet.freeTrialsUsed) || {};
     var freeLeft = remainingFreeTrialsCount();
 
@@ -2885,7 +2898,7 @@ button:disabled {
         '<div style="font-size:13px;color:var(--text-muted)">' + (STATE.user ? 'رصيد محفظتك الموثق في الخادم' : 'حالة الحساب والمحفظة') + '</div>' +
         (STATE.user
           ? '<div style="font-size:38px;font-weight:900;color:var(--gold)">' + arNum(STATE.wallet.balance) + ' <span style="font-size:17px">أقيام</span></div>' +
-            '<div style="font-size:13px;color:var(--teal);font-weight:800;background:rgba(45,212,191,0.12);padding:6px 10px;border-radius:10px;border:1px solid rgba(45,212,191,0.35)">🎁 لك قيم مجاني واحد لكل لعبة (' + arNum(freeLeft) + ' من ' + arNum(activeGames.length) + ' متبقية)</div>' +
+            '<div style="font-size:13px;color:var(--teal);font-weight:800;background:rgba(45,212,191,0.12);padding:6px 10px;border-radius:10px;border:1px solid rgba(45,212,191,0.35)">🎁 لك قيم مجاني واحد لكل لعبة تجريبية (' + arNum(freeLeft) + ' من ' + arNum(trialGames.length) + ' متبقية)</div>' +
             '<button class="dw-btn dw-btn-sec dw-btn-sm" data-nav="wallet">عرض سجل المحفظة الموثق</button>'
           : '<div style="font-size:18px;font-weight:900;color:var(--gold);margin:8px 0">غير مسجل الدخول</div>' +
             '<div style="font-size:12.5px;color:var(--text-muted);line-height:1.6">سجّل دخولك عبر رمز التحقق (OTP) لتفعيل محفظتك والحصول على قيم مجاني لمرة واحدة في كل لعبة.</div>' +
@@ -2893,29 +2906,37 @@ button:disabled {
       '</div>' +
     '</section>';
 
-    html += '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">' +
+    html += activeGames.length ? '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">' +
       '<div><h3 style="margin:0;font-size:24px;font-weight:900">ألعاب منصة ديوانية بلس (' + arNum(activeGames.length) + ' لعبة كاملة بشعارات فخمة)</h3>' +
       '<p style="margin:4px 0 0;color:var(--text-muted);font-size:14px">جميع المحركات الـ ٢٤ مربوطة بالكامل مع شرح خارجي مفصل، حماية عدم التكرار (Idempotency)، ودعم غرف الـ QR</p></div>' +
-    '</div>';
+    '</div>' : '';
 
     html += '<div class="dw-grid-3">' + activeGames.map(function (g) {
       var logo = getLogoForGame(g.slug);
-      var hasFreeTrial = STATE.user ? !usedTrials[g.slug] : true;
+      var isTrialEligible = Number(g.cost_credits || 0) > 0;
+      var hasFreeTrial = isTrialEligible && (STATE.user ? !usedTrials[g.slug] : true);
       var trialUsedByUser = STATE.user && !!usedTrials[g.slug];
+      var gameSubtitle = g.slug === 'eight'
+        ? arNum(STATE.categories.filter(function (c) { return c.is_visible; }).length) + ' فئة مصورة · ٢,٧٣٦ سؤالاً · حتى ٦٠ لاعباً'
+        : g.subtitle;
       return '<div class="dw-card" data-game-card="' + esc(g.slug) + '">' +
         '<div class="dw-crest-banner" style="background:' + logo.bg + '">' +
-          (trialUsedByUser
+          (!isTrialEligible
+            ? '<span class="dw-free-ribbon">♾️ هذه اللعبة مجانية دائماً</span>'
+            : trialUsedByUser
             ? '<span class="dw-used-ribbon">تم استهلاك التجربة · التكلفة: ' + arNum(g.cost_credits) + ' قيم</span>'
             : '<span class="dw-free-ribbon">🎁 ' + (STATE.user ? 'لك قيم مجاني للتجربة!' : 'أول قيم مجاناً بعد الدخول!') + '</span>') +
           logo.svg +
         '</div>' +
         '<div>' +
           '<h4 style="margin:0;font-size:21px;font-weight:900">' + esc(g.title) + '</h4>' +
-          '<div style="color:var(--gold);font-size:13px;font-weight:800;margin-top:4px">' + esc(g.subtitle) + '</div>' +
+          '<div style="color:var(--gold);font-size:13px;font-weight:800;margin-top:4px">' + esc(gameSubtitle) + '</div>' +
         '</div>' +
         '<p style="margin:0;color:var(--text-muted);font-size:14px;line-height:1.75;flex:1">' + esc(g.description) + '</p>' +
         '<div style="display:flex;gap:6px;flex-wrap:wrap">' +
-          (!trialUsedByUser
+          (!isTrialEligible
+            ? '<span class="dw-chip teal">مجانية دائماً ♾️</span>'
+            : !trialUsedByUser
             ? '<span class="dw-chip teal">أول قيم مجاناً 🎁</span>'
             : '<span class="dw-chip gold">التكلفة: ' + arNum(g.cost_credits) + ' قيم</span>') +
           '<span class="dw-chip">' + arNum(g.min_players) + ' إلى ' + arNum(g.max_players) + ' لاعب</span>' +
@@ -2990,7 +3011,7 @@ button:disabled {
     return '<div class="dw-card">' +
       '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">' +
         '<div><h3 style="margin:0;font-size:24px;font-weight:900">موسوعة الفئات الكاملة بملصقاتها المرسومة (' + arNum(visibleCats.length) + ' فئة)</h3>' +
-        '<p style="margin:4px 0 0;color:var(--text-muted);font-size:14px">جميع فئاتك الـ ١٥٢ وأسئلتها الـ ٢,٧٣٦ محفوظة بالكامل مع رسوماتها الكرتونية الخاصة (بدون ملامح وجه) وقابلة للمعاينة والتعديل</p></div>' +
+        '<p style="margin:4px 0 0;color:var(--text-muted);font-size:14px">جميع فئاتك الـ ' + arNum(STATE.categories.filter(function(c){return c.is_visible;}).length) + ' وأسئلتها محفوظة بالكامل مع رسوماتها الكرتونية الخاصة (بدون ملامح وجه) وقابلة للمعاينة والتعديل</p></div>' +
         '<input id="dwCatSearchInp" class="dw-input" style="max-width:300px" placeholder="ابحث عن أي فئة (مثال: السعودية، أنمي، ملاعب...)" value="' + esc(STATE.catSearch) + '">' +
       '</div>' +
       '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:6px">' +
@@ -3026,7 +3047,7 @@ button:disabled {
       '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">' +
         '<div>' +
           '<h3 style="margin:0;font-size:24px;font-weight:900">باقات شحن الأقيام (Credits)</h3>' +
-          '<p style="margin:4px 0 0;color:var(--text-muted);font-size:14.5px">يحصل كل مستخدم على <b>قيم مجاني تجريبي في كل لعبة من الألعاب الـ ٢٤</b>، وبعدها يمكن طلب شحن أي باقة من الباقات التالية:</p>' +
+          '<p style="margin:4px 0 0;color:var(--text-muted);font-size:14.5px">لكل الشلة. يحصل كل مستخدم على <b>قيم مجاني تجريبي في كل لعبة تجريبية</b>، وبعدها يمكن طلب شحن باقة من الباقات التالية:</p>' +
         '</div>' +
         '<span class="dw-chip gold" style="font-size:12.5px">⚠️ بوابة الدفع في وضع التجهيز — لا تُضاف الأقيام إلا بعد تأكيد Webhook موثق</span>' +
       '</div>' +
@@ -3063,9 +3084,10 @@ button:disabled {
     }
     var w = STATE.wallet;
     var freeLeft = remainingFreeTrialsCount();
+    var trialGamesCount = STATE.games.filter(function (g) { return g.is_enabled && Number(g.cost_credits || 0) > 0; }).length;
     return '<div class="dw-grid-4">' +
       '<div class="dw-card"><div style="color:var(--text-muted);font-size:13px">رصيد الأقيام الأساسي (في الخادم)</div><div style="font-size:34px;font-weight:900;color:var(--gold)">' + arNum(w.balance) + ' أقيام</div></div>' +
-      '<div class="dw-card"><div style="color:var(--text-muted);font-size:13px">الأقيام المجانية المتبقية للحساب</div><div style="font-size:34px;font-weight:900;color:var(--teal)">' + arNum(freeLeft) + ' من ٢٤</div></div>' +
+      '<div class="dw-card"><div style="color:var(--text-muted);font-size:13px">التجارب المجانية المتبقية للحساب</div><div style="font-size:34px;font-weight:900;color:var(--teal)">' + arNum(freeLeft) + ' من ' + arNum(trialGamesCount) + '</div></div>' +
       '<div class="dw-card"><div style="color:var(--text-muted);font-size:13px">إجمالي الأقيام المضافة</div><div style="font-size:34px;font-weight:900">' + arNum(w.totalPurchased) + ' أقيام</div></div>' +
       '<div class="dw-card"><div style="color:var(--text-muted);font-size:13px">إجمالي الأقيام المستهلكة</div><div style="font-size:34px;font-weight:900;color:var(--coral)">' + arNum(w.totalConsumed) + ' أقيام</div></div>' +
     '</div>' +
@@ -3097,8 +3119,18 @@ button:disabled {
         '<thead><tr><th>النوع</th><th>المقدار</th><th>الرصيد قبل</th><th>الرصيد بعد</th><th>التفاصيل ومفتاح Idempotency</th><th>التاريخ</th></tr></thead>' +
         '<tbody>' + w.transactions.map(function (tx) {
           var isPos = tx.amount > 0, isFree = tx.amount === 0;
+          var txTypeLabels = {
+            refund: 'استرداد',
+            free_trial: 'تجربة مجانية',
+            consume: 'استهلاك',
+            bonus: 'هدية',
+            purchase: 'شراء',
+            admin_add: 'إضافة إدارية',
+            admin_deduct: 'خصم إداري'
+          };
+          var txTypeLabel = txTypeLabels[String(tx.type || '').toLowerCase()] || tx.type;
           return '<tr>' +
-            '<td><span class="dw-chip ' + (isPos || isFree ? 'teal' : 'gold') + '">' + esc(tx.type) + '</span></td>' +
+            '<td><span class="dw-chip ' + (isPos || isFree ? 'teal' : 'gold') + '">' + esc(txTypeLabel) + '</span></td>' +
             '<td style="font-weight:900;color:' + (isFree ? 'var(--teal)' : isPos ? 'var(--teal)' : 'var(--rose)') + '" dir="ltr">' + (isFree ? 'FREE (0)' : (isPos ? '+' : '') + tx.amount) + '</td>' +
             '<td>' + arNum(tx.balance_before) + '</td>' +
             '<td style="font-weight:900">' + arNum(tx.balance_after) + '</td>' +
@@ -3139,15 +3171,16 @@ button:disabled {
       return '<div class="dw-card" style="text-align:center;padding:40px"><h3>🚫 غير مصرح لك بالوصول إلى لوحة الإدارة (403 Server Role Check)</h3><p style="color:var(--text-muted)">يتم التحقق من صلاحية المالك (Owner) من قاعدة بيانات الخادم فقط.</p></div>';
     }
     var st = STATE.adminSubTab;
+    var visibleCategoryCount = STATE.categories.filter(function (c) { return c.is_visible; }).length;
     var nav = '<div class="dw-card" style="padding:14px">' +
       '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">' +
-        '<div><span class="dw-badge">محمية بصلاحيات الخادم (Server-Enforced Owner Role)</span><h3 style="margin:4px 0 0;font-size:22px;font-weight:900">لوحة تحكم المالك ونظام إدارة الألعاب والـ ١٥٢ فئة</h3></div>' +
+        '<div><span class="dw-badge">محمية بصلاحيات الخادم (Server-Enforced Owner Role)</span><h3 style="margin:4px 0 0;font-size:22px;font-weight:900">لوحة تحكم المالك ونظام إدارة الألعاب والـ ' + arNum(visibleCategoryCount) + ' فئة ظاهرة</h3></div>' +
         '<div style="display:flex;gap:6px;flex-wrap:wrap">' +
           '<button class="dw-tab-btn ' + (st === 'overview' ? 'active' : '') + '" data-adm-tab="overview">📊 الإحصائيات</button>' +
           '<button class="dw-tab-btn ' + (st === 'users' ? 'active' : '') + '" data-adm-tab="users">👥 المستخدمين والأرصدة</button>' +
           '<button class="dw-tab-btn ' + (st === 'packages' ? 'active' : '') + '" data-adm-tab="packages">💎 إدارة الباقات</button>' +
           '<button class="dw-tab-btn ' + (st === 'games' ? 'active' : '') + '" data-adm-tab="games">🎮 إدارة الألعاب (' + arNum(STATE.games.length) + ')</button>' +
-          '<button class="dw-tab-btn ' + (st === 'editor' ? 'active' : '') + '" data-adm-tab="editor">✏️ محرر الأسئلة والفئات (١٥٢ فئة + ٢٤ لعبة)</button>' +
+          '<button class="dw-tab-btn ' + (st === 'editor' ? 'active' : '') + '" data-adm-tab="editor">✏️ محرر الأسئلة والفئات (' + arNum(visibleCategoryCount) + ' فئة ظاهرة + ' + arNum(STATE.games.length) + ' لعبة)</button>' +
           '<button class="dw-tab-btn ' + (st === 'categories' ? 'active' : '') + '" data-adm-tab="categories">🗂️ إدارة الفئات (' + arNum(STATE.categories.length) + ')</button>' +
           '<button class="dw-tab-btn ' + (st === 'logs' ? 'active' : '') + '" data-adm-tab="logs">🛡️ سجل الأمان</button>' +
         '</div>' +
@@ -3249,18 +3282,22 @@ button:disabled {
             '<div><label style="font-size:12px;color:var(--text-muted)">قواعد اللعبة المختصرة</label><input id="gmRules" class="dw-input" placeholder="قواعد وشروط الفوز..."></div>' +
           '</div>' +
           '<input id="gmDesc" class="dw-input" placeholder="وصف اللعبة وقواعدها المختصرة...">' +
+          '<input id="gmImage" class="dw-input" type="url" dir="ltr" placeholder="رابط صورة اللعبة (اختياري) — https://...">' +
           '<div><button class="dw-btn dw-btn-gold dw-btn-sm" data-act="adm-save-game">+ إضافة / تحديث اللعبة في النظام</button></div>' +
           '<div class="dw-table-wrap"><table class="dw-table"><thead><tr><th>#</th><th>اللعبة</th><th>Slug</th><th>نوع المحرك</th><th>التكلفة (أقيام)</th><th>اللاعبين</th><th>الحالة</th><th>إجراءات</th></tr></thead><tbody>' +
             STATE.games.map(function (g, idx) {
               return '<tr>' +
                 '<td>' + arNum(idx + 1) + '</td>' +
-                '<td><b>' + esc(g.title) + '</b><div style="font-size:12px;color:var(--text-muted)">' + esc(g.subtitle) + '</div></td>' +
+                '<td><b>' + esc(g.title) + '</b><div style="font-size:12px;color:var(--text-muted)">' + esc(g.slug === 'eight' ? arNum(visibleCategoryCount) + ' فئة مصورة · ٢,٧٣٦ سؤالاً · حتى ٦٠ لاعباً' : g.subtitle) + '</div></td>' +
                 '<td><code>' + esc(g.slug) + '</code></td>' +
                 '<td><code>' + esc(g.engine_type) + '</code></td>' +
                 '<td><input type="number" class="dw-input" style="width:80px;padding:6px" value="' + g.cost_credits + '" data-act-change-cost="' + esc(g.id) + '"></td>' +
                 '<td>' + arNum(g.min_players) + ' - ' + arNum(g.max_players) + '</td>' +
                 '<td>' + (g.is_enabled ? '<span class="dw-chip teal">متاحة للعملاء</span>' : '<span class="dw-chip">مخفية</span>') + '</td>' +
-                '<td><button class="dw-btn dw-btn-sec dw-btn-sm" data-act="adm-toggle-game" data-id="' + esc(g.id) + '">' + (g.is_enabled ? 'إخفاء / تعطيل' : 'تفعيل') + '</button></td>' +
+                '<td><div style="display:flex;gap:6px;flex-wrap:wrap">' +
+                  '<button class="dw-btn dw-btn-gold dw-btn-sm" data-act="adm-edit-game" data-id="' + esc(g.id) + '">✏️ تعديل</button>' +
+                  '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="adm-toggle-game" data-id="' + esc(g.id) + '">' + (g.is_enabled ? 'إخفاء / تعطيل' : 'تفعيل') + '</button>' +
+                '</div></td>' +
               '</tr>';
             }).join('') +
           '</tbody></table></div>' +
@@ -3278,8 +3315,8 @@ button:disabled {
       return nav +
         '<div class="dw-card">' +
           '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">' +
-            '<div><h4 style="margin:0;font-size:19px">محرر محتوى جميع الألعاب الـ ٢٤ والفئات الـ ١٥٢ (حفظ دائم في D1 + استيراد وتصدير JSON)</h4>' +
-            '<p style="margin:4px 0 0;color:var(--text-muted);font-size:13.5px">اختر أي لعبة أو أي فئة من الـ ١٥٢ فئة لعرض أسئلتها الحقيقية، إضافة سؤال جديد، تعديل سؤال حالي، أو الحذف والاستيراد والتصدير.</p></div>' +
+            '<div><h4 style="margin:0;font-size:19px">محرر محتوى جميع الألعاب الـ ' + arNum(STATE.games.length) + ' والفئات الـ ' + arNum(visibleCategoryCount) + ' الظاهرة (حفظ دائم في D1 + استيراد وتصدير JSON)</h4>' +
+            '<p style="margin:4px 0 0;color:var(--text-muted);font-size:13.5px">اختر أي لعبة أو أي فئة من الـ ' + arNum(visibleCategoryCount) + ' فئة الظاهرة لعرض أسئلتها الحقيقية، إضافة سؤال جديد، تعديل سؤال حالي، أو الحذف والاستيراد والتصدير.</p></div>' +
             '<div style="display:flex;gap:8px;flex-wrap:wrap">' +
               '<label class="dw-btn dw-btn-sec dw-btn-sm" style="cursor:pointer">⬆️ استيراد JSON<input type="file" id="admImportJsonInp" accept=".json,application/json" style="display:none"></label>' +
               '<button class="dw-btn dw-btn-teal dw-btn-sm" data-act="adm-export-json">⬇️ تصدير المحتوى الحالي (JSON)</button>' +
@@ -3395,7 +3432,8 @@ button:disabled {
     var tabs = gInfo.tabs || [];
     var activeTab = tabs[STATE.guideTabIdx] || tabs[0];
     var usedTrials = (STATE.wallet && STATE.wallet.freeTrialsUsed) || {};
-    var hasFree = STATE.user ? !usedTrials[STATE.guideSlug] : true;
+    var isAlwaysFree = Number(gameObj.cost_credits || 0) === 0;
+    var hasFree = isAlwaysFree || (STATE.user ? !usedTrials[STATE.guideSlug] : true);
 
     inner.innerHTML =
       '<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">' +
@@ -3790,6 +3828,7 @@ button:disabled {
             '<div style="display:flex;flex-direction:column;gap:8px">' +
               '<div style="font-size:13.5px;color:var(--text-muted)">رابط انضمام الجوالات المباشر:</div>' +
               '<code style="background:rgba(255,255,255,0.06);padding:8px 12px;border-radius:10px;color:var(--teal);font-size:12.5px;word-break:break-all" dir="ltr">' + esc(joinUrl) + '</code>' +
+                '<div style="font-size:12.5px;color:var(--text-muted);line-height:1.6">فتح هذا الرابط مباشرةً على الجوال يفتح الغرفة تلقائياً؛ لا حاجة لكتابة رمز الغرفة.</div>' +
               '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px">' +
                 '<input id="hostQuickPlayerName" class="dw-input" style="max-width:210px" placeholder="اسم لاعب من الجوال...">' +
                 '<button class="dw-btn dw-btn-teal dw-btn-sm" data-act="room-quick-add-human">+ تسجيل لاعب حقيقي</button>' +
@@ -4230,7 +4269,8 @@ button:disabled {
         maxPlayers: (document.getElementById('gmMaxP') || {}).value,
         sortOrder: (document.getElementById('gmSort') || {}).value,
         rules: (document.getElementById('gmRules') || {}).value,
-        description: (document.getElementById('gmDesc') || {}).value
+        description: (document.getElementById('gmDesc') || {}).value,
+        imageUrl: (document.getElementById('gmImage') || {}).value
       });
       if (!sgRes.ok) { showToast(sgRes.error); return; }
       if (window.__EMBEDDED_GAMES && window.__EMBEDDED_GAMES[gEngVal] && !window.__EMBEDDED_GAMES[gsSlug]) {
@@ -4246,6 +4286,29 @@ button:disabled {
       STORE_AUDIO.playSfx(680);
       render();
       showToast(sgRes.message);
+    } else if (act === 'adm-edit-game') {
+      var editGame = STATE.games.find(function (g) { return g.id === actBtn.getAttribute('data-id'); });
+      if (!editGame) { showToast('تعذر العثور على اللعبة للتعديل.'); return; }
+      var gmTitle = document.getElementById('gmTitle');
+      var gmSlug = document.getElementById('gmSlug');
+      var gmDesc = document.getElementById('gmDesc');
+      var gmImage = document.getElementById('gmImage');
+      var gmCost = document.getElementById('gmCost');
+      var gmMinP = document.getElementById('gmMinP');
+      var gmMaxP = document.getElementById('gmMaxP');
+      var gmSort = document.getElementById('gmSort');
+      if (gmTitle) gmTitle.value = editGame.title || '';
+      if (gmSlug) gmSlug.value = editGame.slug || '';
+      if (gmDesc) gmDesc.value = editGame.description || '';
+      if (gmImage) gmImage.value = editGame.image_url || '';
+      if (gmCost) gmCost.value = editGame.cost_credits || 0;
+      if (gmMinP) gmMinP.value = editGame.min_players || 2;
+      if (gmMaxP) gmMaxP.value = editGame.max_players || 20;
+      if (gmSort) gmSort.value = editGame.sort_order || 1;
+      var gmEngine = document.getElementById('gmEngineSel');
+      if (gmEngine) gmEngine.value = editGame.slug;
+      if (gmTitle) gmTitle.focus();
+      showToast('تم تحميل بيانات «' + editGame.title + '» للتعديل والحفظ.');
     } else if (act === 'adm-toggle-game') {
       var tgmRes = DiwaniyaServerKernel.executeAdminAction(STATE.sessionToken, STATE.user ? STATE.user.csrfToken : '', 'toggle_game', { gameId: actBtn.getAttribute('data-id') });
       if (!tgmRes.ok) { showToast(tgmRes.error); return; }
