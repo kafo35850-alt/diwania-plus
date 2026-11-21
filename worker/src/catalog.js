@@ -26,7 +26,16 @@ export async function getDoc(env, key) {
     // …and so do their questions. A ready-made category nobody edited also gets the newer shipped questions.
     if (key === 'catQuestionsOverrides' && stored && typeof stored === 'object') {
       for (const [slug, list] of Object.entries(SEED.catQuestionsOverrides || {})) {
-        if (!(slug in stored) || isUntouchedOlderSeed(slug, stored[slug], list)) stored[slug] = structuredClone(list);
+        if (!(slug in stored) || isUntouchedOlderSeed(slug, stored[slug], list)) { stored[slug] = structuredClone(list); continue; }
+        // A saved copy made before the shipped pictures existed: give its unchanged questions those pictures.
+        if (!Array.isArray(stored[slug])) continue;
+        const shipped = new Map(list.map((q) => [q.q + '\u0000' + q.a, q]));
+        for (const q of stored[slug]) {
+          const s = q && shipped.get(q.q + '\u0000' + q.a);
+          if (!s) continue;
+          if (!q.qm && s.qm) q.qm = structuredClone(s.qm);
+          if (!q.am && s.am) q.am = structuredClone(s.am);
+        }
       }
     }
     if (key === 'categories' && Array.isArray(stored)) {

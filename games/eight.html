@@ -8426,7 +8426,7 @@ try { visualControls.firstElementChild.textContent = '🖼️ الصورة تت�
 visualStage.className = 'max-w-md mx-auto rounded-2xl overflow-hidden border border-emerald-300 bg-emerald-50/40 p-2 space-y-1 shadow-inner';
 visualArt.className = 'min-h-[120px] rounded-xl flex items-center justify-center overflow-visible';
 visualArt.innerHTML = renderRebusPuzzleHtml(qObj);
-} else if (qObj.scenePhoto || qObj.customImageDataUrl) {
+} else if ((qObj.scenePhoto && qObj.scenePhoto.src) || qObj.customImageDataUrl) {   // a drawn scene can give the answer away: it shows after the answer only
 visualStage.className = ((qObj.scenePhoto && qObj.scenePhoto.real) ? 'max-w-md' : 'max-w-xs') + ' mx-auto rounded-xl overflow-hidden border border-slate-200 bg-slate-50/70 p-1.5 shadow-sm';
 visualArt.className = 'rounded-lg flex items-center justify-center overflow-visible';
 visualArt.innerHTML = renderScenePhotoCard(qObj);
