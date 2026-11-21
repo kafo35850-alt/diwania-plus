@@ -948,7 +948,8 @@
     "a": "القص",
     "hint": "بالقدرات ينكتب كذا: «قلم : كتابة» مثل «مقص : قص»."
    }
-  ]
+  ],
+  "posterMedia": "poster_custom_qiyas"
  },
  {
   "slug": "custom_abroad",
