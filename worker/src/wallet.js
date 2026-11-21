@@ -5,6 +5,7 @@ import { HttpError, nowMs, nowIso, randomToken, randomId, sha256Hex } from './ut
 import { getDoc } from './catalog.js';
 import { GAMES } from './games.js';
 import PICS from './pictures.json'; // uid → [question picture, answer picture] for the built-in Eight questions
+import CAT_POSTERS from './cat_posters.json'; // built-in category id → poster picture
 import { ROOM_GAMES, verifyPlayToken, gameRoomExists, relayHostConnected, prepareRoomGame, prepareEight } from './rooms/routes.js';
 
 const PLAY_TOKEN_TTL_MS = 12 * 60 * 60 * 1000;
@@ -216,6 +217,7 @@ export async function servePlay(env, request, session, slug) {
     })),
     hiddenCats: slug !== 'eight' ? [] : categories.filter((c) => !c.is_visible).map((c) => c.slug),
     pics: slug === 'eight' && !guest ? PICS : {},
+    catPosters: slug === 'eight' ? CAT_POSTERS : {},
     qaftah: gameContent.filter((x) => x.game_id === 'game_qaftah' && x.is_active !== 0)
   };
   if (ROOM_GAMES[slug] && !classic) html = prepareRoomGame(html, slug, url, { token, demo: !guest && url.searchParams.get('demo') === '1' });

@@ -42,6 +42,8 @@ export async function getDoc(env, key) {
       for (const c of stored) {
         const fresh = SEED.catQuestionsOverrides && SEED.catQuestionsOverrides[c.slug];
         if (fresh && (c.item_count || 0) < fresh.length) c.item_count = fresh.length;
+        const shipped = SEED.categories.find((s) => s.slug === c.slug);
+        if (shipped && shipped.poster && String(c.poster || '').startsWith('/cat-posters/') && c.poster !== shipped.poster) c.poster = shipped.poster;
       }
     }
     return stored;

@@ -1803,7 +1803,8 @@
     "qm": "fw_18_q",
     "am": "fw_18_a"
    }
-  ]
+  ],
+  "posterMedia": "poster_football_world"
  },
  {
   "slug": "custom_football_arab",
@@ -1957,7 +1958,8 @@
     "qm": "fa_18_q",
     "am": "fa_18_a"
    }
-  ]
+  ],
+  "posterMedia": "poster_football_arab"
  },
  {
   "slug": "custom_celebs_arab",
@@ -2265,7 +2267,8 @@
     "qm": "cw_18_q",
     "am": "cw_18_a"
    }
-  ]
+  ],
+  "posterMedia": "poster_celebs_world"
  },
  {
   "slug": "custom_cars",
