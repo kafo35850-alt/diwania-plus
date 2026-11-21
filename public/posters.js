@@ -237,5 +237,13 @@
     R(210, 76, 70, 92, 12, '#0f172a', ' stroke="#f472b6" stroke-width="2"') + T(245, 104, 10, '«كنا في', '#fbcfe8', 600) + T(245, 120, 10, 'الحوش»', '#fbcfe8', 600) + T(245, 150, 18, '📱') +
     T(160, 126, 30, '❗'));
 
+  // Drawn game pictures (loaded into the database as /media/med_seed_game_<slug>); the drawing above stays as a fallback.
+  ['eight','qaftah','chancellor','harf','qaddirha','dakhil','mafia','shifra','mystery_button','golden_vault','diwaniya_auction','fortune_wheel',
+   'friends_court','last_one_standing','silent_library','who_knows_friend','draw_guess','stadium_esports','how_much_price','pressure_seat',
+   'mazad30','fake_artist','liars_table','vault50','radar_guess','alibi_court'].forEach(function (k) {
+    var old = P[k] || '';
+    P[k] = '<div style="position:relative;width:100%;height:100%;background:#0b1030">' + (old ? '<div style="position:absolute;inset:0">' + old + '</div>' : '') +
+      '<img src="/media/med_seed_game_' + k + '" alt="" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block" onerror="this.remove()"></div>';
+  });
   window.DW_POSTERS = P;
 })();
