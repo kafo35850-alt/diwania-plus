@@ -2,6 +2,7 @@
 // as /media/med_seed_<key>, so they are served like any uploaded picture and the owner can swap them in the editor.
 //   node scripts/seed-media.mjs --local     (test database)
 //   node scripts/seed-media.mjs --remote    (live database)
+//   node scripts/seed-media.mjs --remote --only=game_,poster_   (just the pictures whose name starts with these)
 // Each picture is kept under ~46KB so one SQL statement stays below D1's 100KB limit.
 import { readdirSync, readFileSync, writeFileSync, mkdtempSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
@@ -13,9 +14,10 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const dir = join(root, 'content', 'media');
 const target = process.argv.includes('--remote') ? '--remote' : '--local';
 const extra = process.argv.filter((a) => a.startsWith('--persist-to='));
+const only = (process.argv.find((a) => a.startsWith('--only=')) || '').slice(7).split(',').filter(Boolean);
 const now = new Date().toISOString();
 const lines = [];
-for (const f of readdirSync(dir).filter((x) => x.endsWith('.jpg')).sort()) {
+for (const f of readdirSync(dir).filter((x) => x.endsWith('.jpg') && (!only.length || only.some((o) => x.startsWith(o)))).sort()) {
   const buf = readFileSync(join(dir, f));
   if (buf.length > 47000) throw new Error(f + ' is too big (' + buf.length + ' bytes)');
   const id = 'med_seed_' + f.replace(/\.jpg$/, '');
@@ -27,7 +29,11 @@ const extraArgs = extra.flatMap((a) => a.split('=').length > 1 ? [a.slice(0, a.i
 for (let i = 0; i < lines.length; i += 6) {
   const sqlPath = join(tmp, 'seed-media-' + i + '.sql');
   writeFileSync(sqlPath, lines.slice(i, i + 6).join('\n') + '\n');
-  execFileSync('npx', ['wrangler', 'd1', 'execute', 'diwaniya-plus', target, '--file', sqlPath, ...extraArgs], { cwd: root, stdio: ['ignore', 'ignore', 'inherit'] });
+  // The live database throttles bursts of imports: wait and try again a few times.
+  for (let k = 0; ; k++) {
+    try { execFileSync('npx', ['wrangler', 'd1', 'execute', 'diwaniya-plus', target, '--file', sqlPath, ...extraArgs], { cwd: root, stdio: ['ignore', 'ignore', 'inherit'] }); break; }
+    catch (e) { if (k >= 5) throw e; execFileSync('sleep', [String(20 * (k + 1))]); }
+  }
   console.log('loaded', Math.min(i + 6, lines.length), 'of', lines.length);
 }
 console.log('pictures loaded:', lines.length, target);
