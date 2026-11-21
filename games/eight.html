@@ -6099,13 +6099,36 @@ S('q16_600', (c) => skyDay(c) + pl(c, 'sun', 62, 52, .66) + cl(c, 320, 66, 1.0) 
 S('q17_600', (c) => skyDay(c) + pl(c, 'sun', 340, 54, .62) + cl(c, 190, 60, 1.7) + pl(c, 'tree', 190, 92, 1.3, 180, { inv: true }) + hills(c, 272));
 S('q18_600', (c) => skyDay(c) + pl(c, 'sun', 62, 54, .7) + cl(c, 320, 70, 1.1) + cl(c, 80, 250, 1.4, .9) + cl(c, 340, 250, 1.1, .9) + pl(c, 'bunch', 200, 172, 1.25) + pl(c, 'cat', 200, 218, 1.15));
 })(M8F);
+// Drawn posters for our ready-made categories (they win over the plain /cat-posters/*.svg).
+(function () {
+if (typeof M8P === 'undefined') return;
+const S = (id, bg, items) => { M8P.POSTERS[id] = { bg: bg, items: items }; };
+S('custom_football_world', 'blue', [['stad_wembley', 130, 128, 1.15], ['football', 200, 60, .7], ['trophy', 56, 64, .7]]);
+S('custom_football_arab', 'mint', [['stad_kingfahd', 130, 128, 1.15], ['football', 204, 58, .7], ['falcon', 56, 62, .65]]);
+S('custom_celebs_arab', 'pink', [['oud', 74, 138, 1.15], ['mic', 186, 132, 1.25], ['star', 130, 56, .8]]);
+S('custom_celebs_world', 'lilac', [['camera', 82, 138, 1.15], ['film', 190, 140, 1.05], ['star', 130, 56, .85]]);
+S('custom_new_job', 'yellow', [['laptop', 130, 140, 1.4], ['clipboard', 46, 150, .7], ['finjan', 212, 168, .7], ['clock', 208, 58, .55]]);
+S('custom_coffee_finals', 'peach', [['finjan', 92, 150, 1.25], ['book', 186, 150, 1.05], ['moon', 200, 54, .6], ['lantern', 52, 62, .6]]);
+S('custom_qiyas', 'blue', [['clipboard', 130, 128, 1.45], ['pencil', 210, 160, .8], ['bulb', 52, 64, .65], ['clock', 206, 56, .55]]);
+S('custom_abroad', 'teal', [['plane', 130, 78, 1.2], ['suitcase', 90, 168, 1.05], ['bigben', 196, 150, .85]]);
+S('custom_major_med', 'mint', [['stetho', 130, 132, 1.5], ['heart', 206, 58, .65], ['flask', 52, 66, .65]]);
+S('custom_major_eng', 'navy', [['laptop', 130, 146, 1.35], ['gear', 56, 62, .7], ['robot', 206, 62, .6]]);
+S('custom_major_biz', 'yellow', [['scale', 130, 130, 1.4], ['chart', 52, 164, .7], ['megaphone', 208, 164, .7]]);
+S('custom_uni_life', 'lilac', [['house', 130, 140, 1.25], ['book', 50, 168, .7], ['finjan', 210, 172, .65], ['moon', 204, 54, .55]]);
+})();
+(function () {
+if (typeof M8P === 'undefined') return;
+const S = (id, bg, items) => { M8P.POSTERS[id] = Object.assign({}, M8P.POSTERS[id] || {}, { bg: bg, items: items }); };
+S('anime_naruto', 'peach', [['shuriken', 130, 112, 1.6], ['scroll', 50, 168, .85], ['bowl', 212, 170, .8], ['leaf', 56, 58, .6]]);
+S('anime_dragon_ball', 'yellow', [['orb', 130, 116, 1.6], ['orb', 52, 168, .7], ['orb', 208, 168, .7], ['orb', 56, 60, .5], ['orb', 206, 58, .55]]);
+})();
 const POSTER_THEMES_68 = {};
 const V13_POSTER_THEMES = {};
 function getCategoryCartoonSceneSvg(catId, name) {
 return M8P.render(catId, name || '');
 }
 function renderCategoryIllustrationSVG(cat) {
-if (cat && cat.customPosterDataUrl) {
+if (cat && cat.customPosterDataUrl && !(/^\/cat-posters\//.test(cat.customPosterDataUrl) && typeof M8P !== 'undefined' && M8P.POSTERS[cat.id])) {
 return `
 <div class="relative w-full h-full overflow-hidden select-none bg-slate-900">
 <img src="${cat.customPosterDataUrl}" alt="${cat.name || ''}" class="w-full h-full object-cover block" />
