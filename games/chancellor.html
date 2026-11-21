@@ -1308,21 +1308,21 @@ body.show-both .tabs{left:calc(50% - 215px)}
     liberal: (c) => S('0 0 100 100', '<circle cx="50" cy="50" r="48" fill="' + (c || '#0b3a5e') + '"/><circle cx="50" cy="50" r="44" fill="none" stroke="#7dd3fc" stroke-width="2.5" opacity=".7"/>' +
       '<path d="M22 58c10-2 18-8 24-18 3-6 8-10 15-10 6 0 10 4 11 9l9 3-9 3c-1 10-8 19-19 23-9 3-21 1-31-10z" fill="#e6f6ff"/>' +
       '<path d="M40 52c-6-10-6-21 2-30 4 9 7 17 6 26z" fill="#bfe6ff"/><circle cx="64" cy="38" r="2.3" fill="#0b3a5e"/>' +
-      '<path d="M30 70c8 2 14 2 20 0" stroke="#7dd3fc" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M73 49c4 2 8 2 11 1" stroke="#34d399" stroke-width="3" stroke-linecap="round"/><ellipse cx="82" cy="47" rx="4" ry="2" fill="#34d399"/>'),
+      '<path d="M30 70c8 2 14 2 20 0" stroke="#7dd3fc" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M73 49c4 2 8 2 11 1" stroke="#34d399" stroke-width="3" stroke-linecap="round"/><ellipse cx="82" cy="47" rx="4" ry="2" fill="#34d399"/><defs><clipPath id="shc"><rect width="100" height="100" rx="20"/></clipPath></defs><image href="/media/med_seed_chan_liberal" width="100" height="100" preserveAspectRatio="xMidYMid slice" clip-path="url(#shc)"/>'),
     // غراب أسود على أحمر (الفاسدين)
     fascist: (c) => S('0 0 100 100', '<circle cx="50" cy="50" r="48" fill="' + (c || '#5a0f18') + '"/><circle cx="50" cy="50" r="44" fill="none" stroke="#ff8a8e" stroke-width="2.5" opacity=".7"/>' +
       '<path d="M20 66c8-14 20-24 34-28l6-12c6-2 12 1 14 6l10 2-9 5c0 14-8 26-22 31-12 4-25 2-33-4z" fill="#14060b"/>' +
       '<path d="M34 60c6-12 14-18 24-20-4 8-10 16-24 20z" fill="#3a0e18"/><circle cx="67" cy="31" r="2.5" fill="#e5484d"/>' +
-      '<path d="M44 72l-4 10M54 72l2 10" stroke="#14060b" stroke-width="4" stroke-linecap="round"/>'),
+      '<path d="M44 72l-4 10M54 72l2 10" stroke="#14060b" stroke-width="4" stroke-linecap="round"/><defs><clipPath id="shc"><rect width="100" height="100" rx="20"/></clipPath></defs><image href="/media/med_seed_chan_fascist" width="100" height="100" preserveAspectRatio="xMidYMid slice" clip-path="url(#shc)"/>'),
     // الزعيم: ظل شخص بقبعة عسكرية، بدون ملامح
     leader: (c) => S('0 0 100 100', '<circle cx="50" cy="50" r="48" fill="' + (c || '#2a0a12') + '"/><circle cx="50" cy="50" r="44" fill="none" stroke="#f2c14e" stroke-width="2.5" opacity=".8"/>' +
       '<path d="M18 96c2-18 14-28 32-28s30 10 32 28z" fill="#3a3a44"/><path d="M42 68h16l-8 14z" fill="#e5484d"/>' +
       '<ellipse cx="50" cy="46" rx="15" ry="18" fill="#c99a78"/><path d="M33 34c2-10 9-14 17-14s15 4 17 14z" fill="#2a2a32"/><path d="M28 36c8-4 36-4 44 0-2 4-40 4-44 0z" fill="#16161c"/>' +
-      '<circle cx="50" cy="27" r="3" fill="#f2c14e"/>'),
+      '<circle cx="50" cy="27" r="3" fill="#f2c14e"/><defs><clipPath id="shc"><rect width="100" height="100" rx="20"/></clipPath></defs><image href="/media/med_seed_chan_leader" width="100" height="100" preserveAspectRatio="xMidYMid slice" clip-path="url(#shc)"/>'),
     // الرئيس: تاج من غصن
-    pres: () => S('0 0 100 100', '<path d="M18 70l6-38 16 18 10-26 10 26 16-18 6 38z" fill="#f2c14e" stroke="#7a5200" stroke-width="3" stroke-linejoin="round"/><rect x="18" y="70" width="64" height="10" rx="4" fill="#d9a21e"/><circle cx="50" cy="22" r="5" fill="#fff6dc"/>'),
+    pres: () => S('0 0 100 100', '<defs><clipPath id="shc"><rect width="100" height="100" rx="20"/></clipPath></defs><image href="/media/med_seed_chan_pres" width="100" height="100" preserveAspectRatio="xMidYMid slice" clip-path="url(#shc)"/>'),   // drawn picture
     // المستشار: وسام
-    chan: () => S('0 0 100 100', '<path d="M34 6h12l10 34H44z" fill="#2b6cd9"/><path d="M66 6H54L44 40h12z" fill="#e5484d"/><circle cx="50" cy="62" r="28" fill="#cfd6e8" stroke="#6b7395" stroke-width="3"/><path d="M50 44l5 11 12 1-9 8 3 12-11-6-11 6 3-12-9-8 12-1z" fill="#6b7395"/>'),
+    chan: () => S('0 0 100 100', '<defs><clipPath id="shc"><rect width="100" height="100" rx="20"/></clipPath></defs><image href="/media/med_seed_chan_chan" width="100" height="100" preserveAspectRatio="xMidYMid slice" clip-path="url(#shc)"/>'),   // drawn picture
     // قدرات
     investigate: () => S('0 0 100 100', '<circle cx="42" cy="42" r="24" fill="none" stroke="currentColor" stroke-width="9"/><path d="M60 60l22 22" stroke="currentColor" stroke-width="11" stroke-linecap="round"/>'),
     peek: () => S('0 0 100 100', '<path d="M6 50c12-20 28-30 44-30s32 10 44 30c-12 20-28 30-44 30S18 70 6 50z" fill="none" stroke="currentColor" stroke-width="7"/><circle cx="50" cy="50" r="13" fill="currentColor"/>'),
