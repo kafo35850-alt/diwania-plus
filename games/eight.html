@@ -6139,7 +6139,7 @@ if (!cat) {
 return `<div class="w-full h-full bg-slate-900"></div>`;
 }
 const dwCP = ((window.__DW_CONTENT || {}).catPosters || {})[cat.id];
-if (dwCP && /^\/media\/med_[A-Za-z0-9_-]+$/.test(dwCP)) return `<div class="relative w-full h-full overflow-hidden select-none bg-slate-900"><img src="${dwCP}" alt="" class="w-full h-full object-cover block" /></div>`;
+if (dwCP && /^\/media\/med_[A-Za-z0-9_-]+$/.test(dwCP)) return `<div class="relative w-full h-full overflow-hidden select-none bg-slate-900" style="isolation:isolate"><img src="${dwCP}" alt="" class="w-full h-full object-cover block" onerror="this.style.display='none'" /><div class="absolute inset-0" style="z-index:-1">${M8P.render(cat.id, cat.name || '', null, cat.icon)}</div></div>`;
 const catId = cat.id || (cat.posterTheme ? cat.posterTheme.replace(/^poster_/, '') : 'country_saudi');
 return M8P.render(catId, cat.name || '', null, cat.icon);
 }
