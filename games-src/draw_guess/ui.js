@@ -3,7 +3,7 @@
   'use strict';
   const MG = root.MG, esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const AR = (n) => String(n).replace(/\d/g, (d) => '٠١٢٣٤٥٦٧٨٩'[d]);
-  const ICON = '<svg viewBox="0 0 100 100"><defs><linearGradient id="dgg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFE08A"/><stop offset="1" stop-color="#F5B942"/></linearGradient></defs><rect x="8" y="8" width="84" height="84" rx="20" fill="#111936" stroke="url(#dgg)" stroke-width="4"/><path d="M24 70 q14 -34 28 -10 t26 -24" fill="none" stroke="#2DD4BF" stroke-width="6" stroke-linecap="round"/><path d="M62 22 l16 16 l-30 30 l-20 4 l4 -20 z" fill="url(#dgg)"/><circle cx="30" cy="30" r="7" fill="#F43F5E"/></svg>';
+  const ICON = '<img src="/media/med_seed_game_draw_guess?v=3" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:22px;display:block">';
   const nm = (v, id) => { const p = v.players.find((x) => x.id === id); return p ? esc(p.name) : '؟'; };
   const col = (v, id) => { const p = v.players.find((x) => x.id === id); return p ? p.color : '#fff'; };
   const CSS = '.dg-wrap{position:relative;background:#fbf7ee;border-radius:18px;border:3px solid #f5b942;box-shadow:0 10px 30px rgba(0,0,0,.4);overflow:hidden;touch-action:none}' +

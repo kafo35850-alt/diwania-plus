@@ -3,7 +3,7 @@
   'use strict';
   const MG = root.MG, esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const AR = (n) => String(n).replace(/\d/g, (d) => '٠١٢٣٤٥٦٧٨٩'[d]);
-  const ICON = '<svg viewBox="0 0 100 100"><defs><linearGradient id="hfg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFE08A"/><stop offset="1" stop-color="#F5B942"/></linearGradient></defs><rect x="6" y="6" width="88" height="88" rx="22" fill="#111936" stroke="url(#hfg)" stroke-width="4"/><text x="50" y="66" text-anchor="middle" font-size="52" font-weight="900" fill="url(#hfg)" font-family="Tahoma,Arial">ح</text><rect x="22" y="76" width="56" height="6" rx="3" fill="#2DD4BF"/></svg>';
+  const ICON = '<img src="/media/med_seed_game_harf?v=3" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:22px;display:block">';
   const STATUS = { ok: ['g', 'صح ✅'], empty: ['', 'فاضية'], pending: ['', 'ينتظر المضيف'], rejected: ['r', 'غلط ❌'] };
   // العد التنازلي: كم ثانية باقية قبل ما يطلع الحرف
   const cdLeft = (v, K) => { const ms = K && K.remaining ? K.remaining(v) : Math.max(0, (v.deadline || 0) - Date.now()); return Math.max(1, Math.min(3, Math.ceil((ms - 1000) / 1000))); };

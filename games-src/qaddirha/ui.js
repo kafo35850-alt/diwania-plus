@@ -4,7 +4,7 @@
   const MG = root.MG, esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const AR = (n) => String(n).replace(/\d/g, (d) => '٠١٢٣٤٥٦٧٨٩'[d]);
   const NUM = (n) => AR(Number(n).toLocaleString('en-US', { maximumFractionDigits: 3 })).replace(/,/g, '٬').replace(/\./g, '٫');
-  const ICON = '<svg viewBox="0 0 100 100"><defs><linearGradient id="qdg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFE08A"/><stop offset="1" stop-color="#F5B942"/></linearGradient></defs><circle cx="50" cy="50" r="44" fill="#111936" stroke="url(#qdg)" stroke-width="4"/><circle cx="50" cy="50" r="28" fill="none" stroke="#2DD4BF" stroke-width="4"/><circle cx="50" cy="50" r="12" fill="url(#qdg)"/><path d="M50 50 L78 22" stroke="#fff" stroke-width="5" stroke-linecap="round"/></svg>';
+  const ICON = '<img src="/media/med_seed_game_qaddirha?v=3" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:22px;display:block">';
   // السنوات تنعرض بدون فاصل آلاف
   const VAL = (v, n) => (v.question && v.question.y ? AR(String(n)) : NUM(n));
   const nm = (v, id) => { const p = v.players.find((x) => x.id === id); return p ? esc(p.name) : '؟'; };
