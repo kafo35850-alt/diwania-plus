@@ -1928,6 +1928,11 @@ html.dw-game-open #dwApp { visibility: hidden; }
     if (catObj && safeMediaUrl(catObj.poster)) {
       return '<img src="' + esc(safeMediaUrl(catObj.poster)) + '" alt="" referrerpolicy="no-referrer" style="width:100%;height:100%;object-fit:cover;display:block">';
     }
+    var cpSlug = ((catObj && (catObj.slug || catObj.id)) || '').replace(/^cat_/, '');
+    var cp = (window.DW_CAT_POSTERS || {})[cpSlug];
+    if (cp && safeMediaUrl(cp)) {
+      return '<img src="' + esc(safeMediaUrl(cp)) + '" alt="" style="width:100%;height:100%;object-fit:cover;display:block">';
+    }
     try {
       if (window.M8P && typeof window.M8P.render === 'function') {
         var rawSlug = (catObj.slug || catObj.id || '').replace(/^cat_/, '');
@@ -1991,6 +1996,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
           ['games', 'packages', 'categories', 'settings'].forEach(function (k) {
             if (d[k] !== undefined) CACHE[k] = d[k];
           });
+          if (d.catPosters) window.DW_CAT_POSTERS = d.catPosters;
           CACHE.gatewayConnected = !!d.gatewayConnected;
           if (d.media) CACHE.media = d.media;
         }

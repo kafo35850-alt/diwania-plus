@@ -3,6 +3,7 @@ import { getSettings, publicSettings } from './settings.js';
 // Admin-editable catalog documents. Anything the owner has not edited yet
 // falls back to the defaults bundled in seed.json.
 import SEED from './seed.json';
+import CAT_POSTERS from './cat_posters.json'; // built-in category id → drawn poster picture
 import { nowIso } from './util.js';
 import { gatewayConfigured } from './payments.js';
 
@@ -87,5 +88,5 @@ export async function getCatalog(env) {
     getDoc(env, 'categories'),
   ]);
   const settings = publicSettings(await getSettings(env));
-  return { games, packages, categories: categories.filter((c) => !c.deleted), settings, gatewayConnected: gatewayConfigured(env), media: mediaLimits(env) };
+  return { games, packages, categories: categories.filter((c) => !c.deleted), catPosters: CAT_POSTERS, settings, gatewayConnected: gatewayConfigured(env), media: mediaLimits(env) };
 }
