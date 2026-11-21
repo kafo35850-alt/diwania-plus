@@ -1,7 +1,7 @@
 /* Diwaniya+ service worker: makes repeat visits faster and keeps the app shell available offline.
    It never touches anything live: the API (balance, login, payments), game launches, rooms and payment pages
    always go straight to the network. */
-const VERSION = 'dw-shell-v3';
+const VERSION = 'dw-shell-v4';
 const SHELL = ['/', '/posters.js?v=3', '/qr.js', '/m8p.js?v=2', '/favicon.svg', '/manifest.webmanifest', '/icons/icon-192.png', '/icons/icon-512.png'];
 const NEVER = /^\/(api|play|rooms|payments|media)\//;
 
