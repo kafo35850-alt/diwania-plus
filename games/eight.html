@@ -6358,6 +6358,12 @@ const target = written && (!first || written === first || written === withoutArt
 return target === 'ا' ? 'أ' : target;
 }
 function m8QuestionPrompt(col, q) {
+if (col.id === 'custom_photo_closeup') {
+if (String(q.uid || '').startsWith('custom_photo_closeup_flag_')) return 'وش علم هالدولة؟';
+if (String(q.uid || '').startsWith('custom_photo_closeup_stadium')) return 'وش اسم هالملعب؟';
+return 'وش اسم هالمعلم؟';
+}
+if (col.id === 'arab_stadiums_photo' || col.id === 'world_stadiums_photo') return 'وش اسم هالملعب؟';
 if (!col.isLetterHoneycomb || !M8_LETTER_PREFIX.test(q.q)) return q.q;
 const letter = m8HoneycombLetter(q, col.letterLang || 'ar');
 return letter ? q.q.replace(M8_LETTER_PREFIX, 'حرف (' + letter + '): ') : q.q;
