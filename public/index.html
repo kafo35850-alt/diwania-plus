@@ -2088,6 +2088,9 @@ html.dw-game-open #dwApp { visibility: hidden; }
       ping: function () { return api('POST', '/api/ping', {}); },
       trialStarted: function (slug) { return api('POST', '/api/play/started', { slug: slug }); },
       cancelLaunch: function (key) { return api('POST', '/api/play/cancel', { idempotencyKey: key }); },
+      support: function (owner, payload) {
+        return api(payload ? 'POST' : 'GET', owner ? '/api/admin/support' : '/api/support', payload);
+      },
       analytics: function () { return api('GET', '/api/admin/analytics'); },
       analyticsUser: function (id) { return api('GET', '/api/admin/analytics/user/' + encodeURIComponent(id)); },
       checkPromo: function (code, pkgId) { return api('POST', '/api/promo/check', { code: code, pkgId: pkgId }); },
@@ -3018,7 +3021,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
       trialsOn() ? ['هل فيه تجربة مجانية؟', 'إيه، أول مرة في كل لعبة مجانية لكل حساب. يعني تقدر تجرب كل الألعاب قبل ما تشتري أي باقة.'] : ['هل فيه ألعاب مجانية؟', 'إيه، فيه ألعاب مجانية دايماً تقدر تلعبها بقد ما تبي، وتلقاها بزر «🆓 مجانية» في المتجر.'],
       ['هل الأقيام تنتهي؟', 'لا، الأقيام تبقى في محفظتك لين تستخدمها.'],
       ['وش طرق الدفع المتاحة؟', 'مدى، Apple Pay، وبطاقات فيزا وماستركارد، عن طريق بوابة Moyasar الآمنة.'],
-      ['كيف أتواصل معكم؟', whatsappLink() ? 'كلمنا على الواتساب من زر «💬 تواصل معنا» تحت في الصفحة، ونرد عليك بأسرع وقت.' : 'من خانة «عندك فكرة لعبة؟» في الصفحة الرئيسية، أو من صفحة السياسات.'],
+      ['كيف أتواصل معكم؟', whatsappLink() ? 'كلمنا على الواتساب من زر «💬 تواصل معنا» تحت في الصفحة، ونرد عليك بأسرع وقت.' : 'اضغط «تواصل معنا» أسفل الصفحة وأرسل رسالتك. تقدر ترجع لنفس المتصفح وتشوف الرد.'],
       ['أحتاج أحمّل تطبيق؟', 'لا، كل شي يشتغل من المتصفح على أي جهاز: جوال، آيباد، لابتوب، أو تلفزيون ذكي.']
     ];
     return '<section style="margin-top:10px">' +
@@ -3115,6 +3118,61 @@ html.dw-game-open #dwApp { visibility: hidden; }
     return STATE.gameContent.filter(function (it) { return it.game_id === STATE.editorGameId; });
   }
 
+  var support = { visitor: null, inbox: null, selected: '', loading: false, sending: false, notice: '', name: '', message: '', reply: '' };
+
+  function loadSupport(owner) {
+    if (support.loading) return;
+    support.loading = true;
+    support.notice = '';
+    render();
+    DiwaniyaServerKernel.support(owner).then(function (data) {
+      support.loading = false;
+      if (data.ok) {
+        if (owner) support.inbox = data.threads;
+        else support.visitor = data.thread;
+      } else {
+        support.notice = data.error || 'تعذر تحميل المحادثة.';
+      }
+      render();
+    });
+  }
+
+  function renderSupportMessages(thread) {
+    if (!thread || !thread.messages.length) return '<p>ما فيه رسائل للحين.</p>';
+    return '<div class="dw-card" style="max-height:420px;overflow:auto">' +
+      thread.messages.map(function (message) {
+        return '<div><b>' + (message.from === 'owner' ? 'دعم ديوانية بلس' : esc(thread.name)) + '</b>' +
+          '<div style="white-space:pre-wrap;overflow-wrap:anywhere">' + esc(message.text) + '</div></div>';
+      }).join('') + '</div>';
+  }
+
+  function renderSupport(owner) {
+    var thread = support.visitor;
+    var inbox = '';
+    if (owner) {
+      var threads = support.inbox || [];
+      thread = threads.find(function (item) { return item.id === support.selected; });
+      inbox = threads.length ? '<div style="display:flex;flex-wrap:wrap;gap:6px">' + threads.map(function (item) {
+        var last = item.messages[item.messages.length - 1];
+        return '<button type="button" class="dw-tab-btn ' + (item.id === support.selected ? 'active' : '') +
+          '" data-act="support-select" data-thread="' + esc(item.id) + '">' + esc(item.name) + ' · ' +
+          esc(new Date(item.updatedAt).toLocaleString('ar-SA')) + (last && last.from === 'visitor' ? ' · بانتظار الرد' : '') + '</button>';
+      }).join('') + '</div>' : '<p>ما وصلت محادثات للحين.</p>';
+    }
+    return '<section class="dw-card"><h3 style="margin:0">' + (owner ? 'محادثات الدعم' : 'تواصل معنا') + '</h3>' +
+      (owner ? inbox : '<p>اكتب لنا هنا. تقدر ترجع لنفس الصفحة من نفس المتصفح عشان تشوف ردنا.</p>') +
+      '<div><button type="button" class="dw-btn dw-btn-sec dw-btn-sm" data-act="support-refresh"' +
+        (support.loading || support.sending ? ' disabled' : '') + '>تحديث الرسائل</button></div>' +
+      '<p role="status" style="margin:0">' + esc(support.loading ? 'جاري تحميل الرسائل…' : support.notice) + '</p>' +
+      ((!owner || thread) ? renderSupportMessages(thread) +
+        '<form id="dwSupportForm" style="display:grid;gap:8px">' +
+        (!owner && !thread ? '<label for="dwSupportName">اسمك</label><input id="dwSupportName" class="dw-input" name="name" data-support-field="name" maxlength="60" autocomplete="name" required value="' + esc(support.name) + '">' : '') +
+        '<label for="dwSupportMessage">' + (owner ? 'ردّك' : 'رسالتك') + '</label>' +
+        '<textarea id="dwSupportMessage" class="dw-input" name="message" data-support-field="' + (owner ? 'reply' : 'message') + '" rows="4" maxlength="2000" required>' + esc(owner ? support.reply : support.message) + '</textarea>' +
+        '<button type="submit" class="dw-btn dw-btn-gold"' + (support.loading || support.sending ? ' disabled' : '') + '>إرسال</button></form>' : '') +
+      '</section>';
+  }
+
   function renderAdminTab() {
     // Double check against server kernel so client-side console tampering with STATE.user.adminRole cannot reveal or use Admin
     var verifyAuth = DiwaniyaServerKernel.getSessionUser();
@@ -3138,10 +3196,13 @@ html.dw-game-open #dwApp { visibility: hidden; }
           '<button class="dw-tab-btn ' + (st === 'ideas' ? 'active' : '') + '" data-adm-tab="ideas">📝 أفكار الألعاب' + (function () { var n = (DiwaniyaServerKernel.loadDB().suggestions || []).filter(function (x) { return x.status !== 'تمت المراجعة'; }).length; return n ? ' (' + arNum(n) + ')' : ''; })() + '</button>' +
           '<button class="dw-tab-btn ' + (st === 'catsug' ? 'active' : '') + '" data-adm-tab="catsug">💡 اقتراحات الفئات' + (function () { var n = (DiwaniyaServerKernel.loadDB().cat_suggestions || []).filter(function (x) { return x.status === 'pending'; }).length; return n ? ' (' + arNum(n) + ')' : ''; })() + '</button>' +
           '<button class="dw-tab-btn ' + (st === 'payments' ? 'active' : '') + '" data-adm-tab="payments">💳 المدفوعات</button>' +
+          '<button class="dw-tab-btn ' + (st === 'support' ? 'active' : '') + '" data-adm-tab="support">💬 محادثات الدعم</button>' +
           '<button class="dw-tab-btn ' + (st === 'logs' ? 'active' : '') + '" data-adm-tab="logs">🛡️ سجل الأمان</button>' +
         '</div>' +
       '</div>' +
     '</div>';
+
+    if (st === 'support') return nav + renderSupport(true);
 
     if (st === 'overview') {
       var totalSold = STATE.usersList.reduce(function (a, u) { return a + (u.total_purchased || 0); }, 0);
@@ -3835,6 +3896,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
           STATE.room.isHost = !!m.host;
         } else if (m.t === 'state' && m.room) {
           STATE.room.players = m.room.players || [];
+          STATE.room.totalJoins = m.room.totalJoins ?? STATE.room.players.length;
           STATE.room.buzzerOrder = m.room.buzzerOrder || [];
           STATE.room.buzzerLockedBy = m.room.buzzerLockedBy || null;
           STATE.room.currentPrompt = m.room.currentPrompt || '';
@@ -3892,7 +3954,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
       if (this.ws) { try { this.ws.close(); } catch (e) {} }
       try { window.sessionStorage.removeItem('dw_host_room_code'); } catch (e) {}
       STATE.room.code = '';
-      STATE.room.players = []; STATE.room.buzzerOrder = []; STATE.room.buzzerLockedBy = null;
+      STATE.room.players = []; STATE.room.totalJoins = 0; STATE.room.buzzerOrder = []; STATE.room.buzzerLockedBy = null;
       this.init();
     }
   };
@@ -3953,11 +4015,12 @@ html.dw-game-open #dwApp { visibility: hidden; }
       var me = players.find(function (p) { return p.id === R.myPlayerId; });
       var body;
       if (!me) {
-        body = '<div class="dw-card">' +
-          '<label style="font-size:13px;color:var(--text-muted)">اسمك</label><input id="mobPlayerName" class="dw-input" maxlength="30" placeholder="مثال: فهد / نورة">' +
-          '<label style="font-size:13px;color:var(--text-muted)">الفريق</label><select id="mobPlayerTeam" class="dw-select"><option value="الفريق الأول 🔵">الفريق الأول 🔵</option><option value="الفريق الثاني 🟠">الفريق الثاني 🟠</option></select>' +
-          '<button class="dw-btn dw-btn-gold" style="width:100%;margin-top:8px" data-act="room-join-human">ادخل الغرفة</button>' +
-        '</div>';
+        var draft = inner.querySelector('#dwRoomPlayerForm');
+        body = '<form id="dwRoomPlayerForm" class="dw-card">' +
+          '<label for="mobPlayerName">اسمك (مطلوب)</label><input id="mobPlayerName" name="name" class="dw-input" required autocomplete="nickname" maxlength="30" placeholder="مثال: فهد / نورة" value="' + esc(draft ? draft.elements.namedItem('name').value : '') + '">' +
+          '<label for="mobPlayerTeam">الفريق</label><select id="mobPlayerTeam" name="team" class="dw-select"><option value="الفريق الأول 🔵">الفريق الأول 🔵</option><option value="الفريق الثاني 🟠"' +
+          (draft && draft.elements.namedItem('team').selectedIndex === 1 ? ' selected' : '') + '>الفريق الثاني 🟠</option></select>' +
+          '<button class="dw-btn dw-btn-gold" type="submit" style="width:100%;margin-top:8px">ادخل الغرفة</button></form>';
       } else {
         var myRank = order.findIndex(function (b) { return b.playerId === me.id; });
         body = '<div class="dw-card" style="border:2px solid var(--teal)">' +
@@ -3997,6 +4060,8 @@ html.dw-game-open #dwApp { visibility: hidden; }
         '</div>'
       ) : '') +
       '<div class="dw-card" style="padding:14px">' +
+        '<div style="display:flex;gap:8px;flex-wrap:wrap"><span class="dw-chip teal">متصلون الآن: ' + arNum(players.filter(function (p) { return p.connected; }).length) +
+        '</span><span class="dw-chip">مرات الانضمام: ' + arNum(R.totalJoins ?? players.length) + '</span></div>' +
         '<div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center"><b>🔔 الجرس:</b> ' + orderHtml + '</div>' +
         '<div class="dw-table-wrap" style="max-height:300px;overflow-y:auto;margin-top:10px"><table class="dw-table"><thead><tr><th>اللاعب</th><th>الفريق</th><th>الحالة</th><th>النقاط</th><th>آخر إجابة / تصويت</th><th></th></tr></thead><tbody>' +
           (players.length ? players.map(function (p) {
@@ -4021,6 +4086,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
     else if (STATE.tab === 'packages') bodyHtml = renderPackagesTab();
     else if (STATE.tab === 'wallet') bodyHtml = renderWalletTab();
     else if (STATE.tab === 'admin') bodyHtml = renderAdminTab();
+    else if (STATE.tab === 'support') bodyHtml = renderSupport(false);
     else bodyHtml = renderStoreTab();
 
     var ann = siteSettings().announce;
@@ -4033,6 +4099,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
           '<button class="lnk" data-nav="store">الألعاب</button>' +
           '<button class="lnk" data-nav="categories">فئات الثمانية</button>' +
           '<button class="lnk" data-nav="packages">الباقات والأسعار</button>' +
+          '<button class="lnk" data-nav="support">تواصل معنا</button>' +
           '<button class="lnk" data-act="open-room-hub">غرفة QR والجرس</button>' +
           (whatsappLink() ? '<a href="' + esc(whatsappLink()) + '" target="_blank" rel="noopener" class="foot-wa">💬 تواصل معنا (واتساب)</a>' : '') + '</div>' +
         '<div><h5>السياسات</h5>' +
@@ -4163,6 +4230,50 @@ html.dw-game-open #dwApp { visibility: hidden; }
 
   document.addEventListener('submit', async function (event) {
     var form = event.target;
+    if (form.id === 'dwSupportForm') {
+      event.preventDefault();
+      if (support.sending || support.loading) return;
+      var owner = STATE.tab === 'admin';
+      var fields = new FormData(form);
+      var message = String(fields.get('message') || '').trim();
+      var name = String(fields.get('name') || '').trim();
+      if (!message || (!owner && !support.visitor && !name)) {
+        support.notice = 'اكتب اسمك ورسالتك.';
+        render();
+        return;
+      }
+      support.sending = true;
+      support.notice = '';
+      render();
+      var response = await DiwaniyaServerKernel.support(owner, { id: support.selected, name: name, message: message });
+      support.sending = false;
+      if (response.ok) {
+        if (owner) {
+          support.inbox = support.inbox.map(function (item) {
+            return item.id === support.selected ? Object.assign({}, item, response.thread) : item;
+          });
+          support.reply = '';
+        } else {
+          support.visitor = response.thread;
+          support.message = '';
+        }
+      }
+      support.notice = response.ok ? 'تم إرسال الرسالة.' : response.error || 'تعذر إرسال الرسالة.';
+      render();
+      return;
+    }
+    if (form.id === 'dwRoomPlayerForm') {
+      event.preventDefault();
+      var player = new FormData(form);
+      var playerName = String(player.get('name') || '').trim();
+      if (!playerName) {
+        showToast('اكتب اسمك أولاً');
+        form.elements.namedItem('name').focus();
+        return;
+      }
+      ROOM_SYNC.send({ t: 'join', name: playerName, team: player.get('team') });
+      return;
+    }
     if (form.id !== 'dwJoinRoomForm') return;
     event.preventDefault();
 
@@ -4239,7 +4350,8 @@ html.dw-game-open #dwApp { visibility: hidden; }
       }
       var tabChanged = STATE.tab !== targetTab;
       STATE.tab = targetTab;
-      render();
+      if (targetTab === 'support') loadSupport(false);
+      else render();
       if (tabChanged || navBtn.closest('.site-foot')) window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
@@ -4247,7 +4359,8 @@ html.dw-game-open #dwApp { visibility: hidden; }
     var admTabBtn = base.closest('[data-adm-tab]');
     if (admTabBtn) {
       STATE.adminSubTab = admTabBtn.getAttribute('data-adm-tab');
-      render();
+      if (STATE.adminSubTab === 'support') loadSupport(true);
+      else render();
       return;
     }
 
@@ -4255,7 +4368,14 @@ html.dw-game-open #dwApp { visibility: hidden; }
     if (!actBtn) return;
     var act = actBtn.getAttribute('data-act');
 
-    if (act === 'launch-game' || act === 'launch-from-guide') {
+    if (act === 'support-refresh') {
+      loadSupport(STATE.tab === 'admin');
+    } else if (act === 'support-select' && !support.sending) {
+      support.selected = actBtn.getAttribute('data-thread');
+      support.reply = '';
+      support.notice = '';
+      render();
+    } else if (act === 'launch-game' || act === 'launch-from-guide') {
       launchGameWithCreditCheck(actBtn.getAttribute('data-slug'));
     } else if (act === 'game-filter') {
       STATE.gameFilter = actBtn.getAttribute('data-f') || 'all';
@@ -4330,11 +4450,6 @@ html.dw-game-open #dwApp { visibility: hidden; }
     } else if (act === 'room-copy-link') {
       var link = window.location.origin + '/?room=' + encodeURIComponent(STATE.room.code);
       if (navigator.clipboard) navigator.clipboard.writeText(link).then(function () { showToast('تم نسخ الرابط'); });
-    } else if (act === 'room-join-human') {
-      var pName = ((document.getElementById('mobPlayerName') || {}).value || '').trim();
-      var pTeam = (document.getElementById('mobPlayerTeam') || {}).value || 'الفريق الأول 🔵';
-      if (!pName) { showToast('اكتب اسمك أولاً'); return; }
-      ROOM_SYNC.send({ t: 'join', name: pName, team: pTeam });
     } else if (act === 'room-buzz-now') {
       if (navigator.vibrate) { try { navigator.vibrate(60); } catch (e2) {} }
       ROOM_SYNC.send({ t: 'buzz' });
@@ -4922,6 +5037,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
   document.addEventListener('input', function (e) {
     var t = e.target;
     if (!t) return;
+    if (t.hasAttribute && t.hasAttribute('data-support-field')) support[t.getAttribute('data-support-field')] = t.value;
     if (t.id === 'dwCatSearchInp') {
       STATE.catSearch = t.value;
       updateCategoryResults();

@@ -223,6 +223,7 @@ export class BuzzerRoomDO {
       currentPrompt: r.currentPrompt,
       buzzerLockedBy: r.buzzerOrder[0] || null,
       buzzerOrder: r.buzzerOrder,
+      totalJoins: r.totalJoins ?? r.players.length,
       players: r.players.map((p) => ({
         id: p.id, name: p.name, team: p.team, score: p.score,
         lastAnswer: p.lastAnswer, lastVote: p.lastVote, connected: online.has(p.id), isBot: false
@@ -291,6 +292,7 @@ export class BuzzerRoomDO {
         if (r.players.length >= MAX_PLAYERS) return err('الغرفة ممتلئة');
         const id = 'p_' + randomToken(6);
         const token = randomToken(18);
+        r.totalJoins = (r.totalJoins ?? r.players.length) + 1;
         r.players.push({ id, name, team: cleanStr(m.team, 30) || 'الفريق الأول 🔵', score: 0, lastAnswer: '', lastVote: '' });
         r.tokens[token] = id;
         conn.pid = id;
