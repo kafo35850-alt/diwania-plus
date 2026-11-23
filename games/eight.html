@@ -8594,11 +8594,12 @@ grid.appendChild(unit);
 });
 try { m8FitBoardPosters(); } catch (e) { }
 }
-function m8SetPhotoCrop(cropped, scale = 2.6) {
+function m8SetPhotoCrop(cropped, scale = 2.6, fixedCrop = false) {
 const img = document.querySelector('#visualArtContainer img');
 if (!img) return;
 img.style.transform = cropped ? `scale(${scale})` : '';
 img.style.transformOrigin = 'center';
+img.style.clipPath = cropped && fixedCrop ? `inset(${(1 - 1 / scale) * 50}%)` : '';
 state.modal.photoCropped = cropped;
 document.getElementById('m8PhotoChallengeToggle').setAttribute('aria-pressed', String(cropped));
 }
@@ -8619,7 +8620,7 @@ visualArt.className = 'rounded-xl flex flex-col items-center justify-center gap-
 const questionMedia = dwQMedia(qObj);
 visualArt.innerHTML = dwMediaHtml(questionMedia);
 if (questionMedia.t === 'image' && col.id === 'custom_photo_closeup') {
-m8SetPhotoCrop(true, Number(qObj.points) >= 400 ? 1.8 : 1.45);
+m8SetPhotoCrop(true, Number(qObj.points) >= 400 ? 1.8 : 1.45, true);
 } else if (questionMedia.t === 'image' && !col.isCharades && !qObj.photo && !qObj.rebus && !qObj.fantasy && !state.modal.answerRevealed) {
 cropControls.classList.remove('hidden');
 m8SetPhotoCrop(false);
