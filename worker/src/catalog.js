@@ -6,6 +6,7 @@ import SEED from './seed.json';
 import CAT_POSTERS from './cat_posters.json'; // built-in category id → drawn poster picture
 import { HttpError, nowIso } from './util.js';
 import { gatewayConfigured } from './payments.js';
+import { eightRawQuestions } from './games.js';
 
 export const DOC_KEYS = ['games', 'packages', 'categories', 'game_content', 'suggestions', 'catQuestionsOverrides'];
 
@@ -63,6 +64,17 @@ async function getEightQuestions(env) {
       if (!q.qm && original.qm) q.qm = structuredClone(original.qm);
       if (!q.am && original.am) q.am = structuredClone(original.am);
     }
+  }
+  if (Array.isArray(stored.charades_general)) {
+    // Replace old built-in scenes in saved copies of the general category.
+    // Keep administrator-authored questions and answers.
+    const general = eightRawQuestions('charades_general').slice(12);
+    const moved = eightRawQuestions('charades_imaginary').slice(4);
+    const replacements = new Map(general.map((q, i) => [q.uid, { question: q, oldAnswer: moved[i].a }]));
+    stored.charades_general = stored.charades_general.map((q) => {
+      const replacement = replacements.get(q?.uid);
+      return replacement && q.a === replacement.oldAnswer ? replacement.question : q;
+    });
   }
   return stored;
 }

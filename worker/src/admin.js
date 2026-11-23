@@ -2,7 +2,7 @@
 // Managing admins is reserved for owners.
 import { HttpError, nowIso, randomId, cleanText, toInt } from './util.js';
 import { getDoc, putDoc, isShippedCategory, saveEightQuestions } from './catalog.js';
-import { GAMES } from './games.js';
+import { GAMES, eightRawQuestions } from './games.js';
 import { verifyOrder } from './payments.js';
 import { cleanMedia, legacyMedia, mediaBytesUsed } from './media.js';
 import { promoConfig, APP_CODE } from './promo.js';
@@ -51,34 +51,10 @@ export async function adminData(env) {
   };
 }
 
-// The built-in questions of a category exactly as the game stores them (photos and all).
-function eightRawQuestions(catSlug) {
-  const html = GAMES.eight || '';
-  const marker = 'id="m8_cat_' + catSlug + '"';
-  const pos = html.indexOf(marker);
-  if (pos === -1) return [];
-  const gt = html.indexOf('>', pos);
-  const lt = html.indexOf('</script>', gt);
-  if (gt === -1 || lt === -1) return [];
-  try {
-    const arr = JSON.parse(html.slice(gt + 1, lt).trim());
-    return Array.isArray(arr) ? arr.map((q, i) => ({ ...q, uid: q.uid || (catSlug + '_q' + (i + 1) + '_' + (q.points || 200)) })) : [];
-  } catch (e) { return []; }
-}
-
 // Built-in questions of one Eight category, read from the game file (owner editor only).
 export function eightCategoryQuestions(catSlug) {
-  const html = GAMES.eight || '';
-  const marker = 'id="m8_cat_' + catSlug + '"';
-  const pos = html.indexOf(marker);
-  if (pos === -1) return [];
-  const gt = html.indexOf('>', pos);
-  const lt = html.indexOf('</script>', gt);
-  if (gt === -1 || lt === -1) return [];
-  let arr;
-  try { arr = JSON.parse(html.slice(gt + 1, lt).trim()); } catch (e) { return []; }
-  return arr.map((q, idx) => ({
-    id: q.uid || (catSlug + '_q' + (idx + 1) + '_' + (q.points || 200)),
+  return eightRawQuestions(catSlug).map((q, idx) => ({
+    id: q.uid,
     game_id: 'game_eight',
     cat: catSlug,
     content_type: 'trivia_question',
