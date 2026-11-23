@@ -2,7 +2,7 @@ import { getSettings } from './settings.js';
 import { voiceForGame } from './voice.js';
 // Wallet, game launches (credit / free-trial deduction) and protected game delivery.
 import { HttpError, nowMs, nowIso, randomToken, randomId, sha256Hex } from './util.js';
-import { getDoc, EIGHT_POSTERS, EIGHT_STADIUM_CATEGORIES } from './catalog.js';
+import { getDoc, EIGHT_POSTERS, EIGHT_STADIUM_CATEGORIES, EIGHT_CATEGORY_MERGES } from './catalog.js';
 import { GAMES } from './games.js';
 import PICS from './pictures.json'; // uid → [question picture, answer picture] for the built-in Eight questions
 import { ROOM_GAMES, verifyPlayToken, gameRoomExists, relayHostConnected, prepareRoomGame, prepareEight } from './rooms/routes.js';
@@ -213,7 +213,7 @@ export async function servePlay(env, request, session, slug) {
   const content = {
     catQuestionsOverrides: overrides,
     // Categories added from the admin panel (or approved suggestions), and built-ins the owner hid.
-    customCats: slug !== 'eight' ? [] : categories.filter((c) => (String(c.slug).startsWith('custom_') || EIGHT_STADIUM_CATEGORIES.has(c.slug)) && c.is_visible && Array.isArray(overrides[c.slug]) && overrides[c.slug].length >= 6).map((c) => ({
+    customCats: slug !== 'eight' ? [] : categories.filter((c) => (String(c.slug).startsWith('custom_') || EIGHT_STADIUM_CATEGORIES.has(c.slug)) && c.is_visible && !Object.hasOwn(EIGHT_CATEGORY_MERGES, c.slug) && Array.isArray(overrides[c.slug]) && overrides[c.slug].length >= 6).map((c) => ({
       id: c.slug, name: c.name, icon: c.icon || '🎯', group: c.sub_group || 'فئات الديوانية', tag: c.sub_group || 'فئات الديوانية',
       desc: c.description || '', questionCount: overrides[c.slug].length, qCount: overrides[c.slug].length,
       ...(c.poster ? { customPosterDataUrl: c.poster } : {}),
@@ -222,6 +222,7 @@ export async function servePlay(env, request, session, slug) {
     hiddenCats: slug !== 'eight' ? [] : categories.filter((c) => !c.is_visible).map((c) => c.slug),
     pics: slug === 'eight' && !guest ? PICS : {},
     catPosters: slug === 'eight' ? EIGHT_POSTERS : {},
+    categoryMerges: slug === 'eight' ? EIGHT_CATEGORY_MERGES : {},
     qaftah: gameContent.filter((x) => x.game_id === 'game_qaftah' && x.is_active !== 0)
   };
   if (ROOM_GAMES[slug] && !classic) html = prepareRoomGame(html, slug, url, { token, demo: !guest && url.searchParams.get('demo') === '1' });

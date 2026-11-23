@@ -7605,19 +7605,21 @@ async function m8ResumeSaved() {
 const d = m8ReadSaved();
 if (!d) { showToast('لا توجد مباراة محفوظة صالحة.', 'warn'); m8ClearSaved(); return false; }
 try {
-const sel = d.cols.map(c => ({ id: c.id, owner: c.owner }));
+const aliases = (window.__DW_CONTENT || {}).categoryMerges || {};
+const sel = d.cols.map(c => ({ id: aliases[c.id] || c.id, owner: c.owner }));
 await ensureSelectedCategoriesLoaded(sel);
 const columns = d.cols.map((sc, colIdx) => {
-const cat = state.categories.find(c => c.id === sc.id);
+const cat = state.categories.find(c => c.id === sel[colIdx].id);
 if (!cat) throw new Error('missing category ' + sc.id);
+const originalCategory = aliases[sc.id] ? { id: sc.id, questions: (window.__DW_CONTENT || {}).catQuestionsOverrides?.[sc.id] } : cat;
 const qs = sc.qs.map(sq => {
-const base = m8RawQuestion(cat, sq.uid);
+const base = m8RawQuestion(originalCategory, sq.uid) || m8RawQuestion(cat, sq.uid);
 if (!base) throw new Error('missing question ' + sq.uid);
 return { ...base, options: sq.options || base.options, correctIndex: sq.correctIndex == null ? base.correctIndex : sq.correctIndex, qIdx: sq.qIdx, used: !!sq.used, answeredBy: sq.answeredBy, surprise: sq.surprise || null };
 });
 const reserve = { 200: [], 400: [], 600: [] };
-[200, 400, 600].forEach(t => { (sc.reserve[t] || []).forEach(uid => { const b = m8RawQuestion(cat, uid); if (b) reserve[t].push(b); }); });
-return { colIdx, id: cat.id, name: cat.name, icon: cat.icon, tag: cat.tag, owner: sc.owner, isCharades: Boolean(cat.isCharades), isImagine: Boolean(cat.isImagine), isVisual: Boolean(cat.isVisual), isRebus: Boolean(cat.isRebus), isLetterHoneycomb: Boolean(cat.isLetterHoneycomb), letterLang: cat.letterLang || 'ar', reserve: reserve, questions: qs };
+[200, 400, 600].forEach(t => { (sc.reserve[t] || []).forEach(uid => { const b = m8RawQuestion(originalCategory, uid) || m8RawQuestion(cat, uid); if (b) reserve[t].push(b); }); });
+return { colIdx, id: sc.id, name: cat.name, icon: cat.icon, tag: cat.tag, owner: sc.owner, isCharades: Boolean(cat.isCharades), isImagine: Boolean(cat.isImagine), isVisual: Boolean(cat.isVisual), isRebus: Boolean(cat.isRebus), isLetterHoneycomb: Boolean(cat.isLetterHoneycomb), letterLang: cat.letterLang || 'ar', reserve: reserve, questions: qs };
 });
 state.selectedForMatch = sel;
 Object.assign(state.match, d.m, { active: true, boardColumns: columns, activeCell: null, armedLifelines: null, history: d.m.history || [], undoStack: d.m.undoStack || [] });

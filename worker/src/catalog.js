@@ -13,6 +13,8 @@ export const DOC_KEYS = ['games', 'packages', 'categories', 'game_content', 'sug
 
 const EIGHT_QUESTIONS_PREFIX = 'eight_questions:';
 const expandedDefaults = new Map();
+export const EIGHT_CATEGORY_MERGES = { custom_1795179696757: 'quran_kareem' };
+const mergedTargets = new Set(Object.values(EIGHT_CATEGORY_MERGES));
 export const EIGHT_STADIUM_CATEGORIES = new Set(['world_stadiums_photo', 'arab_stadiums_photo']);
 export const EIGHT_POSTERS = {
   ...CAT_POSTERS,
@@ -58,12 +60,14 @@ async function getEightQuestions(env) {
   const stored = Object.assign(Object.create(null), JSON.parse(legacy.results[0]?.json || '{}'));
   // New writes are scoped to one category. An empty saved list also masks a legacy list.
   const savedAfterExpansion = new Set();
+  const savedAfterMerge = new Set();
   for (const row of saved.results) {
     const slug = row.key.slice(EIGHT_QUESTIONS_PREFIX.length);
     const value = JSON.parse(row.json);
-    if (value?.includesDriveExpansion === true && Array.isArray(value.questions)) {
+    if (Array.isArray(value?.questions)) {
       stored[slug] = value.questions;
-      savedAfterExpansion.add(slug);
+      if (value.includesDriveExpansion === true) savedAfterExpansion.add(slug);
+      if (value.includesCategoryMerge === true) savedAfterMerge.add(slug);
     } else {
       stored[slug] = value;
     }
@@ -107,6 +111,10 @@ async function getEightQuestions(env) {
     if (!databaseSlugs.has(slug)) expandedDefaults.set(slug, structuredClone(expanded));
     stored[slug] = expanded;
   }
+  for (const [source, target] of Object.entries(EIGHT_CATEGORY_MERGES)) {
+    if (savedAfterMerge.has(target) || !stored[source]?.length) continue;
+    stored[target] = mergeEightQuestionLists(stored[target] || eightRawQuestions(target), stored[source]);
+  }
   return stored;
 }
 
@@ -115,6 +123,33 @@ function questionWords(text) {
     .replace(/[\p{M}ـ]/gu, '').replace(/ى/g, 'ي').replace(/ة/g, 'ه')
     .replace(/[٠-٩۰-۹]/g, (n) => String(n.charCodeAt(0) & 15))
     .replace(/[^\p{L}\p{N}]+/gu, ' ').trim();
+}
+
+function mergeEightQuestionLists(target, source) {
+  const key = (q) => [questionWords(q.q), questionWords(q.a)].join('\u0000');
+  const infoFields = ['qm', 'am', 'img', 'video', 'photo', 'hint', 'info'];
+  const merged = target.slice();
+  const indices = new Map(target.map((q, index) => [key(q), index]));
+  for (const q of source) {
+    const index = indices.get(key(q));
+    if (index === undefined) {
+      indices.set(key(q), merged.length);
+      merged.push(q);
+      continue;
+    }
+    const original = merged[index];
+    // A second version with different media is useful as a separate question.
+    if (infoFields.slice(0, 5).some((field) => original[field] && q[field] &&
+      JSON.stringify(original[field]) !== JSON.stringify(q[field]))) {
+      merged.push(q);
+      continue;
+    }
+    merged[index] = { ...original };
+    for (const field of infoFields) {
+      if (!original[field] && q[field]) merged[index][field] = q[field];
+    }
+  }
+  return merged;
 }
 
 function includeEightExpansion(slug, questions, { media = [], questions: additions = [] }) {
@@ -170,7 +205,11 @@ export async function putDoc(env, key, value) {
 }
 
 export async function saveEightQuestions(env, slug, questions, catalogChanges = {}) {
-  const value = EIGHT_EXPANSION[slug] ? { questions, includesDriveExpansion: true } : questions;
+  const includesDriveExpansion = Boolean(EIGHT_EXPANSION[slug]);
+  const includesCategoryMerge = mergedTargets.has(slug);
+  const value = includesDriveExpansion || includesCategoryMerge
+    ? { questions, includesDriveExpansion, includesCategoryMerge }
+    : questions;
   const json = JSON.stringify(value);
   // Leave room for the row key and timestamp within D1's 2 MB record limit.
   if (new TextEncoder().encode(json).length > 1_900_000) {
@@ -200,5 +239,5 @@ export async function getCatalog(env) {
     getDoc(env, 'categories'),
   ]);
   const settings = publicSettings(await getSettings(env));
-  return { games, packages, categories: categories.filter((c) => !c.deleted), catPosters: EIGHT_POSTERS, settings, gatewayConnected: gatewayConfigured(env), media: mediaLimits(env) };
+  return { games, packages, categories: categories.filter((c) => !c.deleted && !Object.hasOwn(EIGHT_CATEGORY_MERGES, c.slug)), catPosters: EIGHT_POSTERS, settings, gatewayConnected: gatewayConfigured(env), media: mediaLimits(env) };
 }
