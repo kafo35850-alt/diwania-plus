@@ -3,7 +3,8 @@ import { getSettings, publicSettings } from './settings.js';
 // Admin-editable catalog documents. Anything the owner has not edited yet
 // falls back to the defaults bundled in seed.json.
 import SEED from './seed.json';
-import CAT_POSTERS from './cat_posters.json'; // built-in category id → drawn poster picture
+import CAT_POSTERS from './cat_posters.json';
+import EIGHT_EXPANSION from './eight_expansion.json';
 import { HttpError, nowIso } from './util.js';
 import { gatewayConfigured } from './payments.js';
 import { eightRawQuestions } from './games.js';
@@ -11,6 +12,14 @@ import { eightRawQuestions } from './games.js';
 export const DOC_KEYS = ['games', 'packages', 'categories', 'game_content', 'suggestions', 'catQuestionsOverrides'];
 
 const EIGHT_QUESTIONS_PREFIX = 'eight_questions:';
+const expandedDefaults = new Map();
+export const EIGHT_STADIUM_CATEGORIES = new Set(['world_stadiums_photo', 'arab_stadiums_photo']);
+export const EIGHT_POSTERS = {
+  ...CAT_POSTERS,
+  ...Object.fromEntries(Object.entries(EIGHT_EXPANSION)
+    .filter(([, bundle]) => bundle.poster)
+    .map(([slug, bundle]) => [slug, bundle.poster]))
+};
 
 export async function getDoc(env, key) {
   if (key === 'catQuestionsOverrides') return getEightQuestions(env);
@@ -48,15 +57,24 @@ async function getEightQuestions(env) {
   ]);
   const stored = Object.assign(Object.create(null), JSON.parse(legacy.results[0]?.json || '{}'));
   // New writes are scoped to one category. An empty saved list also masks a legacy list.
+  const savedAfterExpansion = new Set();
   for (const row of saved.results) {
-    stored[row.key.slice(EIGHT_QUESTIONS_PREFIX.length)] = JSON.parse(row.json);
+    const slug = row.key.slice(EIGHT_QUESTIONS_PREFIX.length);
+    const value = JSON.parse(row.json);
+    if (value?.includesDriveExpansion === true && Array.isArray(value.questions)) {
+      stored[slug] = value.questions;
+      savedAfterExpansion.add(slug);
+    } else {
+      stored[slug] = value;
+    }
   }
+  const databaseSlugs = new Set(Object.keys(stored));
   for (const [slug, list] of Object.entries(SEED.catQuestionsOverrides || {})) {
-    if (!(slug in stored) || isUntouchedOlderSeed(slug, stored[slug], list)) {
+    if (!(slug in stored) || (!savedAfterExpansion.has(slug) && isUntouchedOlderSeed(slug, stored[slug], list))) {
       stored[slug] = structuredClone(list);
       continue;
     }
-    if (!Array.isArray(stored[slug])) continue;
+    if (savedAfterExpansion.has(slug) || !Array.isArray(stored[slug])) continue;
     const shipped = new Map(list.map((q) => [q.q + '\u0000' + q.a, q]));
     for (const q of stored[slug]) {
       const original = q && shipped.get(q.q + '\u0000' + q.a);
@@ -76,7 +94,57 @@ async function getEightQuestions(env) {
       return replacement && q.a === replacement.oldAnswer ? replacement.question : q;
     });
   }
+  for (const [slug, bundle] of Object.entries(EIGHT_EXPANSION)) {
+    if (savedAfterExpansion.has(slug)) continue;
+    if (!databaseSlugs.has(slug) && expandedDefaults.has(slug)) {
+      stored[slug] = structuredClone(expandedDefaults.get(slug));
+      continue;
+    }
+    const hasSavedList = Array.isArray(stored[slug]);
+    const questions = hasSavedList ? stored[slug] : eightRawQuestions(slug);
+    if (!questions.length && (hasSavedList || !EIGHT_STADIUM_CATEGORIES.has(slug))) continue;
+    const expanded = includeEightExpansion(slug, questions, bundle);
+    if (!databaseSlugs.has(slug)) expandedDefaults.set(slug, structuredClone(expanded));
+    stored[slug] = expanded;
+  }
   return stored;
+}
+
+function questionWords(text) {
+  return String(text || '').normalize('NFKD').toLowerCase()
+    .replace(/[\p{M}ـ]/gu, '').replace(/ى/g, 'ي').replace(/ة/g, 'ه')
+    .replace(/[٠-٩۰-۹]/g, (n) => String(n.charCodeAt(0) & 15))
+    .replace(/[^\p{L}\p{N}]+/gu, ' ').trim();
+}
+
+function includeEightExpansion(slug, questions, { media = [], questions: additions = [] }) {
+  const sources = media.map((source) => ({ ...source, key: questionWords(source.answer) }));
+  const withMedia = questions.map((q) => {
+    const key = questionWords(q?.a);
+    if (!key) return q;
+    const exact = sources.filter((source) => source.key === key);
+    const matches = exact.length ? exact : sources.filter((source) =>
+      source.key.length >= 5 && key.length >= 5 &&
+      ((' ' + key + ' ').includes(' ' + source.key + ' ') ||
+        (' ' + source.key + ' ').includes(' ' + key + ' ')));
+    if (matches.length !== 1) return q;
+    const source = matches[0];
+    const next = { ...q };
+    if (!q.qm && !q.img && !q.video && source.qm) next.qm = { t: 'image', u: source.qm };
+    if (!q.am && source.am) next.am = { t: 'image', u: source.am };
+    return next;
+  });
+  const questionKey = slug.startsWith('charades_') ? (q) => questionWords(q?.a) : (q) => questionWords(q?.q);
+  const keys = new Set(withMedia.map(questionKey));
+  const ids = new Set(withMedia.map((q) => q?.uid));
+  for (const { useCategoryPoster, ...q } of additions) {
+    const key = questionKey(q);
+    if (keys.has(key) || ids.has(q.uid)) continue;
+    if (useCategoryPoster && EIGHT_POSTERS[slug]) q.qm = { t: 'image', u: EIGHT_POSTERS[slug] };
+    withMedia.push(q);
+    keys.add(key);
+  }
+  return withMedia;
 }
 
 export function isShippedCategory(slug) {
@@ -102,7 +170,8 @@ export async function putDoc(env, key, value) {
 }
 
 export async function saveEightQuestions(env, slug, questions, catalogChanges = {}) {
-  const json = JSON.stringify(questions);
+  const value = EIGHT_EXPANSION[slug] ? { questions, includesDriveExpansion: true } : questions;
+  const json = JSON.stringify(value);
   // Leave room for the row key and timestamp within D1's 2 MB record limit.
   if (new TextEncoder().encode(json).length > 1_900_000) {
     throw new HttpError(413, 'أسئلة الفئة كبيرة جدًا. قلّل عدد الأسئلة أو اختصر النصوص الطويلة ثم حاول مرة ثانية.');
@@ -131,5 +200,5 @@ export async function getCatalog(env) {
     getDoc(env, 'categories'),
   ]);
   const settings = publicSettings(await getSettings(env));
-  return { games, packages, categories: categories.filter((c) => !c.deleted), catPosters: CAT_POSTERS, settings, gatewayConnected: gatewayConfigured(env), media: mediaLimits(env) };
+  return { games, packages, categories: categories.filter((c) => !c.deleted), catPosters: EIGHT_POSTERS, settings, gatewayConnected: gatewayConfigured(env), media: mediaLimits(env) };
 }

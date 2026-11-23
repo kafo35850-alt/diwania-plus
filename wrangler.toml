@@ -11,8 +11,12 @@ routes = [
   { pattern = "www.diwaniyaplus.com", custom_domain = true }
 ]
 
-# Everything is bundled into the Worker: the public site (public/, via scripts/build-static.mjs)
-# and the private game files (games/), so a deploy is a single upload.
+# Keep large game images in Workers Static Assets so they do not count toward the script bundle size.
+[assets]
+directory = "./assets"
+html_handling = "none"
+
+# The public interface and the private game files are bundled into the Worker.
 [[rules]]
 type = "Text"
 globs = ["**/*.html"]

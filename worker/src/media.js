@@ -181,6 +181,7 @@ export function cleanMedia(raw) {
   const u = String(raw.u || '').trim();
   let t = String(raw.t || '').trim();
   if (!u) return null;
+  if (/^\/eight-media\/[a-f0-9]{20}\.webp$/.test(u)) return { t: 'image', u };
   if (MEDIA_RE.test(u)) return ['image', 'audio', 'video'].includes(t) ? { t, u } : { t: 'image', u };
   const link = httpsUrl(u, 600);
   if (!link) return null;
