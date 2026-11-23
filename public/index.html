@@ -2598,7 +2598,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
           '<span class="qe-up">⬆️</span><b>اضغط لرفع صورة أو صوت أو فيديو</b><small>' + formats + '</small></label>' +
         '<button class="dw-btn dw-btn-sec qe-mic" data-act="qe-rec" data-slot="' + slot + '"' + (e.recording ? ' disabled' : '') + '>🎙️ سجّل صوت بالمايك</button>' +
         '<div class="qe-link"><input class="dw-input" dir="ltr" data-qe-link="' + slot + '" placeholder="أو الصق رابط يوتيوب أو رابط ملف"><button class="dw-btn dw-btn-sec dw-btn-sm" data-act="qe-link" data-slot="' + slot + '">إضافة</button></div>' +
-        (slot === 'am' && e.qm ? '<p class="qe-note">💡 إذا تركتها فاضية، تطلع وسائط السؤال نفسها مع الإجابة.</p>' : '');
+        (slot === 'am' && e.qm && !e.qm.u.startsWith('/eight-media/') ? '<p class="qe-note">💡 إذا تركتها فاضية، تطلع وسائط السؤال نفسها مع الإجابة.</p>' : '');
     }
     return '<section class="qe-box"><h5>' + title + '</h5><p>' + sub + '</p>' + body + '</section>';
   }

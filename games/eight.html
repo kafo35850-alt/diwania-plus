@@ -7843,7 +7843,14 @@ if (q.img && dwOkUrl(q.img)) return { t: 'image', u: q.img };
 if (q.video && dwOkUrl(q.video)) return { t: dwYouTubeId(q.video) ? 'youtube' : (/\.(mp3|m4a|aac|wav|ogg)(\?|#|$)/i.test(q.video) ? 'audio' : 'video'), u: q.video };
 return null;
 }
-function dwAMedia(q) { return (q && q.am && dwOkUrl(q.am.u)) ? q.am : dwQMedia(q); }
+function dwImportedQuestionImage(q) {
+const media = dwQMedia(q);
+return media && media.t === 'image' && media.u.startsWith('/eight-media/');
+}
+function dwAMedia(q) {
+if (q && q.am && dwOkUrl(q.am.u)) return q.am;
+return dwImportedQuestionImage(q) ? null : dwQMedia(q);
+}
 function dwMediaHtml(m) {
 if (!m) return '';
 var u = dwOkUrl(m.u);
@@ -8889,9 +8896,11 @@ portraitBox.innerHTML = renderAnswerVisualPortraitHtml(qObj, m.boardColumns[cell
 if (qObj.rebus && qObj.rebus.pics) { const st = document.getElementById('qModalVisualStage'); if (st) st.classList.add('hidden'); }
 if (qObj.fantasy) { const cb = document.getElementById('qModalCharadesBox'); if (cb) cb.classList.add('hidden'); }
 const dwAM = dwAMedia(qObj);
-if (dwAM) {
-// The answer media replaces the question media on screen (this also stops a question clip that is still playing).
+if (dwAM || dwImportedQuestionImage(qObj)) {
+// Keep the imported question image on the question screen and stop any playing clip.
 const st = document.getElementById('qModalVisualStage'); if (st) { st.classList.add('hidden'); const va = document.getElementById('visualArtContainer'); if (va) va.innerHTML = ''; }
+}
+if (dwAM) {
 portraitBox.innerHTML = '<div style="margin-top:8px;padding:6px;border-radius:14px;background:#0b1220">' + dwMediaHtml(dwAM) + '</div>';
 }
 }

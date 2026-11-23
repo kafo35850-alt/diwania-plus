@@ -170,14 +170,27 @@ function includeEightExpansion(slug, questions, { media = [], questions: additio
     return next;
   });
   const questionKey = slug.startsWith('charades_') ? (q) => questionWords(q?.a) : (q) => questionWords(q?.q);
-  const keys = new Set(withMedia.map(questionKey));
-  const ids = new Set(withMedia.map((q) => q?.uid));
+  const indices = new Map(withMedia.map((q, index) => [questionKey(q), index]));
+  const indicesById = new Map(withMedia.map((q, index) => [q?.uid, index]));
   for (const { useCategoryPoster, ...q } of additions) {
     const key = questionKey(q);
-    if (keys.has(key) || ids.has(q.uid)) continue;
+    const index = indicesById.get(q.uid) ?? indices.get(key);
+    if (index !== undefined) {
+      const existing = withMedia[index];
+      // A previously saved copy still gets the supplied images if the slot is empty
+      // and the question and answer still identify the same card.
+      if (questionKey(existing) !== key || questionWords(existing.a) !== questionWords(q.a)) continue;
+      withMedia[index] = {
+        ...existing,
+        ...(!existing.qm && !existing.img && !existing.video && q.qm ? { qm: q.qm } : {}),
+        ...(!existing.am && q.am ? { am: q.am } : {})
+      };
+      continue;
+    }
     if (useCategoryPoster && EIGHT_POSTERS[slug]) q.qm = { t: 'image', u: EIGHT_POSTERS[slug] };
+    indices.set(key, withMedia.length);
+    indicesById.set(q.uid, withMedia.length);
     withMedia.push(q);
-    keys.add(key);
   }
   return withMedia;
 }
