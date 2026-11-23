@@ -234,6 +234,22 @@ export async function adminAction(env, session, action, payload) {
       return { ok: true, message: 'تم حفظ اللعبة.' };
     }
 
+    case 'update_game_details': {
+      const title = cleanText(payload.title, 80);
+      const description = cleanText(payload.description, 600);
+      const posterUrl = String(payload.posterUrl || '').trim();
+      const poster = cleanMedia({ t: 'image', u: posterUrl });
+      if (!title) throw new HttpError(400, 'أدخل اسم اللعبة.');
+      if (posterUrl && poster?.t !== 'image') throw new HttpError(400, 'ارفع صورة أو أدخل رابط صورة يبدأ بـ HTTPS.');
+      const games = await getDoc(env, 'games');
+      const game = games.find((g) => g.id === payload.gameId);
+      if (!game) throw new HttpError(404, 'اللعبة غير موجودة.');
+      Object.assign(game, { title, description, poster: poster?.u || '' });
+      await putDoc(env, 'games', games);
+      await log(env, admin, 'update_game_details', 'game', game.slug, title);
+      return { ok: true, message: 'تم حفظ تفاصيل اللعبة.' };
+    }
+
     case 'toggle_game': {
       const games = await getDoc(env, 'games');
       const game = games.find((g) => g.id === payload.gameId);

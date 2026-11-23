@@ -1291,6 +1291,94 @@ body.board-mode-active .m8-banner { min-height: 0; }
   body.board-mode-active #boardTeamsBar .m8-team-card button { transform: scale(.8); }
   body.board-mode-active #boardCategoriesGrid[data-count="8"] > .m8-board-unit.m8-banner-unit { min-height: 29vh; }
 }
+/* Keep the board compact on touch phones held sideways. */
+@media (orientation: landscape) and (max-height: 560px) and (pointer: coarse) {
+  body.board-mode-active main {
+    padding: 4px max(8px, env(safe-area-inset-right)) max(4px, env(safe-area-inset-bottom)) max(8px, env(safe-area-inset-left)) !important;
+  }
+  body.board-mode-active #viewBoard > * { margin: 0 !important; }
+  body.board-mode-active #viewBoard:not(.hidden) { display: flex; flex-direction: column; gap: 4px !important; }
+
+  body.board-mode-active #boardTopBar {
+    min-height: 32px; flex-wrap: nowrap !important; padding: 1px 5px !important;
+    gap: 4px !important; overflow-x: auto; scrollbar-width: none;
+    scroll-behavior: smooth; overscroll-behavior-inline: contain;
+  }
+  body.board-mode-active #boardTopBar::-webkit-scrollbar { display: none; }
+  body.board-mode-active #boardTopBar > div { flex: 0 0 auto; flex-wrap: nowrap !important; gap: 4px !important; }
+  body.board-mode-active #boardTopBar button,
+  body.board-mode-active #boardTopBar > div > span {
+    min-height: 28px; display: inline-flex; align-items: center; gap: 2px;
+    font-size: 10px !important; padding: 0 6px !important; white-space: nowrap;
+  }
+  body.board-mode-active #boardTopBar button.hidden { display: none; }
+
+  body.board-mode-active #boardCategoriesGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    grid-auto-rows: minmax(0, 1fr); min-height: 0; gap: 4px !important;
+  }
+  body.board-mode-active #boardCategoriesGrid[data-count="8"] { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; }
+  body.board-mode-active #boardCategoriesGrid > .m8-board-unit.m8-banner-unit,
+  body.board-mode-active #boardCategoriesGrid[data-count="8"] > .m8-board-unit.m8-banner-unit {
+    flex-direction: column !important; height: auto; min-height: 0; gap: 2px !important; padding: 2px !important;
+  }
+  body.board-mode-active .m8-banner {
+    display: flex; flex-direction: column; flex: none; border-radius: 6px;
+  }
+  body.board-mode-active #boardCategoriesGrid .m8-banner .board-poster-box {
+    position: relative !important; inset: auto; flex: none;
+    height: clamp(44px, 12vh, 52px) !important;
+  }
+  body.board-mode-active .m8-banner-name {
+    position: static; display: block; padding: 0 3px; background: #0b1020;
+    font-size: 11px; line-height: 12px; text-align: center;
+    white-space: nowrap; text-overflow: ellipsis;
+  }
+  body.board-mode-active #boardCategoriesGrid .m8-pill-grid {
+    flex: none; height: auto !important; gap: 2px; grid-auto-rows: clamp(14px, 5vh, 17px) !important;
+  }
+  body.board-mode-active #boardCategoriesGrid .m8-pill-grid .m8-point-pill {
+    height: 100%; font-size: 11px !important; padding: 0 !important; border-radius: 6px !important;
+  }
+
+  body.board-mode-active #boardCategoriesGrid .m8-point-pill::after { inset: 0; border-radius: inherit; }
+
+  body.board-mode-active #boardTeamsBar { gap: 4px !important; padding: 0 !important; }
+  body.board-mode-active #boardTeamsBar .m8-team-card {
+    flex-flow: row nowrap !important; align-items: center !important;
+    min-width: 0; height: 42px; padding: 2px 4px !important; gap: 4px !important;
+  }
+  body.board-mode-active #boardTeamsBar .m8-team-card > div:first-child {
+    display: flex; flex: 1 1 auto; align-items: center; gap: 4px;
+    width: auto !important; min-width: 0 !important;
+  }
+  body.board-mode-active #boardTeamsBar .m8-team-card > div:last-child { flex: none; }
+  body.board-mode-active #boardTeamsBar .m8-team-pill {
+    min-width: 0; padding: 2px 4px !important; font-size: 10px;
+  }
+  body.board-mode-active #boardTeamsBar .m8-team-pill > span:first-child {
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  body.board-mode-active #boardTeamsBar [id$="TurnBadge"],
+  body.board-mode-active #boardTeamsBar [id$="Players"],
+  body.board-mode-active #boardTeamsBar .m8-life-label { display: none; }
+  body.board-mode-active #boardTeamsBar .m8-team-card > div:first-child > div:last-child {
+    flex: none; gap: 2px; margin: 0; padding: 0;
+  }
+  body.board-mode-active #boardTeamsBar .m8-team-score {
+    min-width: 25px !important; font-size: 13px !important; text-align: center;
+  }
+  body.board-mode-active #boardTeamsBar .m8-life-wrap { gap: 2px; margin: 0; flex-wrap: nowrap; }
+  body.board-mode-active #boardTeamsBar .m8-team-pm {
+    width: 19px; height: 19px; font-size: 14px; transform: none !important;
+  }
+  body.board-mode-active #boardTeamsBar .m8-life {
+    width: 24px !important; height: 24px !important; transform: none !important;
+  }
+  body.board-mode-active #boardTeamsBar[data-teams="3"],
+  body.board-mode-active #boardTeamsBar[data-teams="4"] { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  body.board-mode-active #armedLifelinesBoardBanner { padding: 2px 4px; line-height: 1.2; }
+}
 </style>
 </head>
 <body class="selection:bg-orange-500 selection:text-white">

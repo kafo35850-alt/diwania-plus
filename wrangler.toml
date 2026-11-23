@@ -1,8 +1,9 @@
 name = "diwaniya-plus"
-main = "worker/src/index.js"
+main = "worker.js"
 compatibility_date = "2025-09-01"
 
 workers_dev = true
+keep_vars = true
 
 # The site's own domain (the zone lives in the same Cloudflare account). workers.dev keeps working too.
 routes = [
@@ -59,3 +60,6 @@ DEV_MODE = "false"
 #   RESEND_API_KEY          API key from resend.com
 #   MOYASAR_SECRET_KEY      secret API key from the Moyasar dashboard (sk_test_… or sk_live_…)
 #   MOYASAR_WEBHOOK_SECRET  the "secret token" you type when adding the webhook in the Moyasar dashboard
+
+[build]
+command = "npm run build"

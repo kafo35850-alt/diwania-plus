@@ -529,6 +529,12 @@ button:disabled {
   .fb-btn .lbl { display: none; }
   .fb-title { font-size: 14px; }
 }
+@media (orientation: landscape) and (max-height: 360px) and (pointer: coarse) {
+  .dw-game-frame-wrap[data-game-slug="eight"] .dw-game-frame-bar {
+    min-height: 30px; padding-block: max(1px, env(safe-area-inset-top)) 1px;
+  }
+  .dw-game-frame-wrap[data-game-slug="eight"] .fb-btn { height: 27px; }
+}
 .dw-game-frame-wrap:fullscreen { width: 100vw; height: 100vh; }
 .dw-toast.in-game { bottom: auto; top: calc(58px + env(safe-area-inset-top)); padding: 8px 14px; font-size: 13px; max-width: min(92vw, 440px); text-align: center; border-radius: 12px; }
 
@@ -701,6 +707,10 @@ html, body { font-family: "IBM Plex Sans Arabic", -apple-system, "SF Arabic", "S
 .g-tags { display: flex; gap: 6px; flex-wrap: wrap; }
 .g-tags:empty { display: none; }
 .g-art.g-poster { height: auto; aspect-ratio: 16 / 9; background: #0A0F24; }
+.mf-prev .game-custom-poster { width: auto; max-width: 100%; height: 80px; border-radius: 8px; }
+.hero-art .game-custom-poster { position: absolute; inset: 0; }
+.game-custom-poster { width: 100%; height: 100%; display: block; object-fit: cover; }
+.dw-modal-close-icon { font-family: "Segoe UI Symbol", "Apple Symbols", "DejaVu Sans", sans-serif; }
 .g-art.g-poster > svg, .guide-poster svg { width: 100%; height: 100%; display: block; filter: none; }
 
 /* phones: guide steps stack, wide tables scroll sideways instead of squeezing */
@@ -1315,13 +1325,13 @@ html.dw-game-open #dwApp { visibility: hidden; }
     },
     eight: {
       title: 'شرح لعبة: ديوانية الثمانية — ديوانية بلس',
-      subtitle: 'المسابقة الثقافية والتفاعلية الكبرى بين فريقين (١٥٢ فئة · ٢,٧٣٦ سؤالاً)',
+      subtitle: 'المسابقة الثقافية والتفاعلية الكبرى بين فريقين',
       tabs: [
         {
           id: 'idea', label: 'فكرة اللعبة',
           lead: 'مواجهة حماسية بين فريقين على شاشة كبيرة (تلفزيون أو آيباد) مع إمكانية ربط جوالات اللاعبين كأجراس سرعة عبر الـ QR Code.',
           steps: [
-            { h: 'اختيار ٨ فئات للمباراة', t: 'يختار الفريقان ٨ فئات من أصل ١٥٢ فئة مصورة (مسلسلات، رياضة، ملاعب، دول، أنمي، علوم، بدون كلام، خلية الحروف...).' },
+            { h: 'اختيار ٨ فئات للمباراة', t: 'يختار الفريقان ٨ فئات من الفئات المصورة (مسلسلات، رياضة، ملاعب، دول، أنمي، علوم، بدون كلام، خلية الحروف...).' },
             { h: '٣ مستويات صعوبة لكل فئة', t: 'كل فئة تضم ٦ أسئلة موزعة على ٣ مستويات: ٢٠٠ نقطة (سهل)، ٤٠٠ نقطة (متوسط)، ٦٠٠ نقطة (صعب).' },
             { h: 'تحديات خاصة ومبتكرة', t: 'في تحدي الملاعب والصور تكون أسئلة ٢٠٠ واضحة، و٤٠٠ بتغبيش خفيف، و٦٠٠ بتغبيش أقوى، وتظهر الصورة الحقيقية كاملة بعد الإجابة!' }
           ]
@@ -1860,17 +1870,24 @@ html.dw-game-open #dwApp { visibility: hidden; }
     var file = fileInput.files && fileInput.files[0];
     if (!target || !file) return;
     if (!STATE.user) { showToast('سجّل دخول عشان ترفع صور.'); return; }
+    var saveGame = targetId === 'gameEditPoster' && document.querySelector('[data-act="adm-save-game-details"]');
+    if (saveGame) {
+      if (saveGame.disabled) { fileInput.value = ''; return; }
+      saveGame.disabled = true;
+    }
     showToast('⏳ جاري رفع الصورة...');
     compressImageFile(file).then(function (blob) {
       return DiwaniyaServerKernel.uploadMedia(blob);
     }).then(function (d) {
       if (!d || !d.ok || !d.url) { showToast((d && d.error) || 'تعذر رفع الصورة.'); return; }
+      if (!target.isConnected) return;
       target.value = d.url;
       target.dispatchEvent(new Event('input', { bubbles: true }));
       var pv = document.getElementById(targetId + 'Preview');
       if (pv) pv.innerHTML = '<span class="qmedia-chip"><span class="mt">' + mediaThumb({ t: 'image', u: d.url }) + '</span>🖼️ صورة الغلاف</span>';
       showToast('✅ انرفعت الصورة');
-    }).catch(function (e) { showToast(e.message || 'تعذر رفع الصورة.'); });
+    }).catch(function (e) { showToast(e.message || 'تعذر رفع الصورة.'); })
+      .finally(function () { if (saveGame) saveGame.disabled = false; });
     fileInput.value = '';
   }
   function safeMediaUrl(u) {
@@ -1997,6 +2014,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
             if (d[k] !== undefined) CACHE[k] = d[k];
           });
           if (d.catPosters) window.DW_CAT_POSTERS = d.catPosters;
+          CACHE.catalogReady = true;
           CACHE.gatewayConnected = !!d.gatewayConnected;
           if (d.media) CACHE.media = d.media;
         }
@@ -2111,7 +2129,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
   // Admin action helper: sends the action, then runs onOk with the server reply.
   function adminCall(action, payload, onOk) {
     payload = payload || {};
-    DiwaniyaServerKernel.executeAdminAction(action, payload).then(function (res) {
+    return DiwaniyaServerKernel.executeAdminAction(action, payload).then(function (res) {
       if (!res.ok) { showToast(res.error || 'تعذر تنفيذ العملية.'); return; }
       onOk(res);
     });
@@ -2153,6 +2171,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
     editorCatSlug: 'honeycomb_ar',
     editorSearch: '',
     editingItemId: null,
+    editingGameId: null,
     pendingOtpEmail: '',
     launchInFlight: false,
     storeVoiceOn: true,
@@ -2307,12 +2326,19 @@ html.dw-game-open #dwApp { visibility: hidden; }
     }
   }
 
-  function remainingFreeTrialsCount() {
-    if (!STATE.user) return 0;
-    var used = (STATE.wallet && STATE.wallet.freeTrialsUsed) || {};
-    var active = STATE.games.filter(function (g) { return g.is_enabled; });
-    if (!trialsOn()) return 0;
-    return active.filter(function (g) { return !isFreeGame(g) && !used[g.slug]; }).length;
+  function visibleEightCategories() {
+    return STATE.categories.filter(function (c) { return c.is_visible && !c.deleted; });
+  }
+
+  function gamesWithFreeTrials() {
+    return trialsOn() ? STATE.games.filter(function (g) {
+      return g.is_enabled && Number(g.cost_credits) > 0;
+    }) : [];
+  }
+
+  function customGamePoster(g) {
+    var url = safeMediaUrl(g.poster);
+    return url ? '<img class="game-custom-poster" src="' + esc(url) + '" alt="">' : '';
   }
 
   function getLogoForGame(slug) {
@@ -2397,22 +2423,25 @@ html.dw-game-open #dwApp { visibility: hidden; }
     var trialLeft = free || (trialsOn() && (!STATE.user || !used[g.slug]));
     var players = 'من ' + arNum(g.min_players) + ' إلى ' + arNum(g.max_players) + ' لاعب';
     var playLabel = free ? '▶ العب مجاناً' : (!STATE.user ? (trialsOn() ? '▶ جرّبها مجاناً' : '▶ العب · ' + arNum(g.cost_credits) + ' قيم') : (trialLeft ? '▶ العب مجاناً' : '▶ العب · ' + arNum(g.cost_credits) + ' قيم'));
+    var poster = customGamePoster(g) || (window.DW_POSTERS && window.DW_POSTERS[baseSlug(g.slug)]);
+    var eightCount = g.slug === 'eight' ? arNum(visibleEightCategories().length) : '';
+    var categoryCount = eightCount ? '<span>🗂️ ' + eightCount + ' فئة</span>' : '';
+    var description = g.description || '';
+    if (eightCount) description = description.replace('٨ فئات من ١٥٢،', '٨ فئات من بين ' + eightCount + ' فئة،');
     var ribbon = free ? ['free', '🆓 مجانية'] : GAME_RIBBONS[g.slug];
     return '<article class="g-card" data-game-card="' + esc(g.slug) + '">' +
-      (window.DW_POSTERS && window.DW_POSTERS[baseSlug(g.slug)]
-        ? '<div class="g-art g-poster">'
-        : '<div class="g-art" style="background:' + logo.bg + '">') +
-        ((window.DW_POSTERS && window.DW_POSTERS[baseSlug(g.slug)]) || logo.svg) +
+      (poster ? '<div class="g-art g-poster">' : '<div class="g-art" style="background:' + logo.bg + '">') +
+        (poster || logo.svg) +
         (ribbon ? '<span class="g-ribbon ' + ribbon[0] + '">' + ribbon[1] + '</span>' : '') +
       '</div>' +
       '<div class="g-body">' +
         '<h4>' + esc(cleanTitle(g.title)) + '</h4>' +
-        '<div class="g-meta"><span>👥 ' + players + '</span>' + (trialLeft ? '' : '<span>💎 ' + arNum(g.cost_credits) + ' قيم</span>') + '</div>' +
+        '<div class="g-meta"><span>👥 ' + players + '</span>' + categoryCount + (trialLeft ? '' : '<span>💎 ' + arNum(g.cost_credits) + ' قيم</span>') + '</div>' +
         '<div class="g-tags">' +
           (isPhoneGame(g.slug) ? '<span class="g-badge phones">📱 كل واحد بجواله</span>' : '') +
           (free ? '<span class="g-badge free">🆓 مجانية دايماً</span>' : (trialLeft ? '<span class="g-badge free">🎁 تجربة مجانية</span>' : '')) +
         '</div>' +
-        '<p class="g-desc">' + esc(g.description) + '</p>' +
+        '<p class="g-desc">' + esc(description) + '</p>' +
         '<div class="g-actions">' +
           '<button class="dw-btn ' + (trialLeft ? 'dw-btn-teal' : 'dw-btn-gold') + ' play" data-act="launch-game" data-slug="' + esc(g.slug) + '"' + (STATE.launchInFlight ? ' disabled' : '') + '>' + playLabel + '</button>' +
           '<button class="dw-btn dw-btn-sec how-btn" data-act="explain-game" data-slug="' + esc(g.slug) + '">طريقة اللعب</button>' +
@@ -2447,7 +2476,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
     var art = ['eight', 'mafia', 'harf', 'qaftah'].map(function (s, i) {
       var l = getLogoForGame(s);
       return '<div class="tile t' + (i + 1) + '" style="background:' + l.bg + ';overflow:hidden">' + l.svg +
-        '<img src="/media/med_seed_game_' + s + '?v=3" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" onerror="this.remove()"></div>';
+        (customGamePoster(STATE.games.find(function (g) { return g.slug === s; }) || {}) || '<img src="/media/med_seed_game_' + s + '?v=3" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" onerror="this.remove()">') + '</div>';
     }).join('');
 
     var html = installBannerHtml() + '<section class="hero2">' +
@@ -2473,10 +2502,10 @@ html.dw-game-open #dwApp { visibility: hidden; }
     '</section>';
 
     html += '<div class="sec-head" id="dwGamesTop">' +
-      '<div>' + (collapsed ? '<span class="sec-kicker">🔥 الأشهر في الديوانيات</span>' : '') + '<h3>' + (collapsed ? 'ابدأ بهذي' : 'الألعاب') + '</h3><p>' +
-        (collapsed ? 'أقوى ' + arNum(shown.length) + ' ألعاب عندنا — ومنها ' + arNum(shown.filter(isFreeGame).length) + ' مجانية دايماً'
+      '<div>' + (collapsed ? '<span class="sec-kicker">🔥 الأشهر في الديوانيات</span>' : '') + '<h3>' + (collapsed ? 'ابدأ بهذي' : 'الألعاب') + '</h3>' +
+        (DiwaniyaServerKernel.loadDB().catalogReady ? '<p>' + (collapsed ? 'أقوى ' + arNum(shown.length) + ' ألعاب عندنا — ومنها ' + arNum(shown.filter(isFreeGame).length) + ' مجانية دايماً'
           : filter === 'free' ? arNum(shown.length) + ' ألعاب مجانية دايماً — العبها بقد ما تبي'
-          : arNum(shown.length) + ' لعبة' + (filter === 'phones' ? ' — كل لاعب يلعب من جواله' : '')) + '</p></div>' +
+          : arNum(shown.length) + ' لعبة' + (filter === 'phones' ? ' — كل لاعب يلعب من جواله' : '')) + '</p>' : '') + '</div>' +
       '<div class="filters">' + GAME_FILTERS.map(function (f) {
         return '<button class="' + (filter === f[0] ? 'on' : '') + '" data-act="game-filter" data-f="' + f[0] + '">' + f[1] + '</button>';
       }).join('') + '</div>' +
@@ -2825,7 +2854,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
   }
 
   function renderCategoriesTab() {
-    var visibleCats = STATE.categories.filter(function (c) { return c.is_visible; });
+    var visibleCats = visibleEightCategories();
     var groups = ['الكل'];
     visibleCats.forEach(function (c) {
       if (groups.indexOf(c.sub_group) === -1) groups.push(c.sub_group);
@@ -2954,7 +2983,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
     return '<section style="text-align:center;padding:10px 0 4px">' +
         '<span class="sec-kicker">الباقات</span>' +
         '<h2 style="margin:0;font-size:32px">اشحن أقيامك وابدأ السهرة</h2>' +
-        '<p style="margin:8px auto 0;max-width:620px;color:#c9d2e6;line-height:1.8">القيم الواحد يشغّل لعبة كاملة لكل الشلة. كل ما كبرت الباقة نزل سعر القيم.' + (trialsOn() ? ' وأول مرة في كل لعبة <b style="color:var(--teal)">مجانية</b>.' : '') + '</p>' +
+        '<p style="margin:8px auto 0;max-width:620px;color:#c9d2e6;line-height:1.8">القيم الواحد يشغّل لعبة كاملة لكل الشلة.&#160;كل ما كبرت الباقة نزل سعر القيم.' + (trialsOn() ? ' وأول مرة في كل لعبة <b style="color:var(--teal)">مجانية</b>.' : '') + '</p>' +
       '</section>' +
       promoBoxHtml() +
       '<div style="padding-top:14px">' + renderPriceCards() + '</div>' +
@@ -2982,7 +3011,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
     '</section>';
   }
 
-  var TX_TYPES = { bonus: 'هدية', free_play: 'لعبة مجانية', free_trial: 'تجربة مجانية', consume: 'تشغيل لعبة', purchase: 'شراء باقة', admin_add: 'إضافة من الإدارة', admin_deduct: 'خصم من الإدارة' };
+  var TX_TYPES = { refund: 'استرداد', bonus: 'هدية', free_play: 'لعبة مجانية', free_trial: 'تجربة مجانية', consume: 'تشغيل لعبة', purchase: 'شراء باقة', admin_add: 'إضافة من الإدارة', admin_deduct: 'خصم من الإدارة' };
   function renderWalletTab() {
     if (!STATE.user) {
       return '<div class="dw-card" style="text-align:center;padding:40px">' +
@@ -2992,10 +3021,12 @@ html.dw-game-open #dwApp { visibility: hidden; }
       '</div>';
     }
     var w = STATE.wallet;
-    var freeLeft = remainingFreeTrialsCount();
+    var eligibleTrials = gamesWithFreeTrials();
+    var usedTrials = w.freeTrialsUsed || {};
+    var freeLeft = eligibleTrials.filter(function (g) { return !usedTrials[g.slug]; }).length;
     return '<div class="dw-grid-4">' +
       '<div class="dw-card"><div style="color:var(--text-muted);font-size:13px">رصيدك</div><div style="font-size:34px;font-weight:900;color:var(--gold)">' + arNum(w.balance) + ' أقيام</div></div>' +
-      '<div class="dw-card"><div style="color:var(--text-muted);font-size:13px">التجارب المجانية المتبقية</div><div style="font-size:34px;font-weight:900;color:var(--teal)">' + arNum(freeLeft) + ' من ' + arNum(STATE.games.filter(function (g) { return g.is_enabled; }).length) + '</div></div>' +
+      '<div class="dw-card"><div style="color:var(--text-muted);font-size:13px">التجارب المجانية المتبقية</div><div style="font-size:34px;font-weight:900;color:var(--teal)">' + arNum(freeLeft) + ' من ' + arNum(eligibleTrials.length) + '</div></div>' +
       '<div class="dw-card"><div style="color:var(--text-muted);font-size:13px">إجمالي الأقيام المضافة</div><div style="font-size:34px;font-weight:900">' + arNum(w.totalPurchased) + ' أقيام</div></div>' +
       '<div class="dw-card"><div style="color:var(--text-muted);font-size:13px">إجمالي الأقيام المستهلكة</div><div style="font-size:34px;font-weight:900;color:var(--coral)">' + arNum(w.totalConsumed) + ' أقيام</div></div>' +
     '</div>' +
@@ -3075,7 +3106,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
     var st = STATE.adminSubTab;
     var nav = '<div class="dw-card" style="padding:14px">' +
       '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">' +
-        '<div><span class="dw-badge">لوحة المالك</span><h3 style="margin:4px 0 0;font-size:22px;font-weight:900">لوحة تحكم المالك ونظام إدارة الألعاب والـ ١٥٢ فئة</h3></div>' +
+        '<div><span class="dw-badge">لوحة المالك</span><h3 style="margin:4px 0 0;font-size:22px;font-weight:900">لوحة تحكم المالك وإدارة الألعاب · ' + arNum(visibleEightCategories().length) + ' فئة ظاهرة</h3></div>' +
         '<div style="display:flex;gap:6px;flex-wrap:wrap">' +
           '<button class="dw-tab-btn ' + (st === 'overview' ? 'active' : '') + '" data-adm-tab="overview">📊 الإحصائيات</button>' +
           '<button class="dw-tab-btn ' + (st === 'analytics' ? 'active' : '') + '" data-adm-tab="analytics">📈 تحليل العملاء</button>' +
@@ -3083,7 +3114,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
           '<button class="dw-tab-btn ' + (st === 'packages' ? 'active' : '') + '" data-adm-tab="packages">💎 إدارة الباقات</button>' +
           '<button class="dw-tab-btn ' + (st === 'games' ? 'active' : '') + '" data-adm-tab="games">🎮 إدارة الألعاب (' + arNum(STATE.games.length) + ')</button>' +
           '<button class="dw-tab-btn ' + (st === 'editor' ? 'active' : '') + '" data-adm-tab="editor">✏️ محرر الأسئلة والفئات </button>' +
-          '<button class="dw-tab-btn ' + (st === 'categories' ? 'active' : '') + '" data-adm-tab="categories">🗂️ إدارة الفئات (' + arNum(STATE.categories.length) + ')</button>' +
+          '<button class="dw-tab-btn ' + (st === 'categories' ? 'active' : '') + '" data-adm-tab="categories">🗂️ إدارة الفئات (' + arNum(visibleEightCategories().length) + ')</button>' +
           '<button class="dw-tab-btn ' + (st === 'settings' ? 'active' : '') + '" data-adm-tab="settings">⚙️ إعدادات المتجر</button>' +
           '<button class="dw-tab-btn ' + (st === 'voice' ? 'active' : '') + '" data-adm-tab="voice">🎙️ أصوات الراوي</button>' +
           '<button class="dw-tab-btn ' + (st === 'ideas' ? 'active' : '') + '" data-adm-tab="ideas">📝 أفكار الألعاب' + (function () { var n = (DiwaniyaServerKernel.loadDB().suggestions || []).filter(function (x) { return x.status !== 'تمت المراجعة'; }).length; return n ? ' (' + arNum(n) + ')' : ''; })() + '</button>' +
@@ -3201,7 +3232,18 @@ html.dw-game-open #dwApp { visibility: hidden; }
     }
 
     if (st === 'games') {
+      var editingGame = STATE.games.find(function (g) { return g.id === STATE.editingGameId; });
       return nav +
+        (editingGame ? '<div class="dw-card" id="gameDetailsEditor">' +
+          '<h4 style="margin:0">تعديل ' + esc(editingGame.title) + '</h4>' +
+          '<label for="gameEditTitle">اسم اللعبة</label><input id="gameEditTitle" class="dw-input" maxlength="80" value="' + esc(editingGame.title) + '">' +
+          '<label for="gameEditDescription">الوصف</label><textarea id="gameEditDescription" class="dw-input" maxlength="600">' + esc(editingGame.description) + '</textarea>' +
+          '<label for="gameEditPoster">صورة اللعبة</label><div class="mf-row">' +
+          '<input id="gameEditPoster" class="dw-input" dir="ltr" placeholder="ارفع صورة أو الصق رابط https" value="' + esc(editingGame.poster || '') + '">' +
+          '<label class="dw-btn dw-btn-sec dw-btn-sm mf-up">⬆️ رفع<input type="file" accept="image/*" data-upload-target="gameEditPoster" hidden></label></div>' +
+          '<div id="gameEditPosterPreview" class="mf-prev">' + customGamePoster(editingGame) + '</div>' +
+          '<div><button class="dw-btn dw-btn-gold dw-btn-sm" data-act="adm-save-game-details">حفظ التعديل</button> ' +
+          '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="adm-cancel-game-edit">إلغاء</button></div></div>' : '') +
         '<div class="dw-card">' +
           '<h4 style="margin:0;font-size:19px">نظام إدارة الألعاب (Game Management System) — جميع الألعاب الـ ' + arNum(STATE.games.length) + '</h4>' +
           '<div class="dw-grid-4" style="background:rgba(0,0,0,0.25);padding:16px;border-radius:16px">' +
@@ -3232,7 +3274,8 @@ html.dw-game-open #dwApp { visibility: hidden; }
                 '<td><input type="number" class="dw-input" style="width:80px;padding:6px" value="' + g.cost_credits + '" data-act-change-cost="' + esc(g.id) + '"></td>' +
                 '<td>' + arNum(g.min_players) + ' - ' + arNum(g.max_players) + '</td>' +
                 '<td>' + (g.is_enabled ? '<span class="dw-chip teal">ظاهرة</span>' : '<span class="dw-chip">مخفية</span>') + (isFreeGame(g) ? ' <span class="dw-chip teal">🆓 مجانية</span>' : '') + (g.featured ? ' <span class="dw-chip gold">⭐ مميزة</span>' : '') + '</td>' +
-                '<td style="white-space:nowrap"><button class="dw-btn dw-btn-sec dw-btn-sm" data-act="adm-toggle-game" data-id="' + esc(g.id) + '">' + (g.is_enabled ? 'إخفاء' : 'إظهار') + '</button> ' +
+                '<td style="white-space:nowrap"><button class="dw-btn dw-btn-sec dw-btn-sm" data-act="adm-edit-game" data-id="' + esc(g.id) + '">✏️ تعديل</button> ' +
+                  '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="adm-toggle-game" data-id="' + esc(g.id) + '">' + (g.is_enabled ? 'إخفاء' : 'إظهار') + '</button> ' +
                   '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="adm-toggle-free" data-id="' + esc(g.id) + '">' + (isFreeGame(g) ? '💎 خلّها مدفوعة' : '🆓 خلّها مجانية') + '</button> ' +
                   '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="adm-toggle-featured" data-id="' + esc(g.id) + '">' + (g.featured ? '☆ شيلها من المميزة' : '⭐ خلّها مميزة') + '</button></td>' +
               '</tr>';
@@ -3418,7 +3461,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
     if (st === 'categories') {
       return nav +
         '<div class="dw-card">' +
-          '<h4 style="margin:0;font-size:19px">إدارة الفئات الـ ' + arNum(STATE.categories.length) + ' (مع الملصق البصري وعدد الأسئلة الفعلي المحفوظ)</h4>' +
+          '<h4 style="margin:0;font-size:19px">إدارة الفئات · ' + arNum(visibleEightCategories().length) + ' فئة ظاهرة</h4>' +
           '<div class="dw-grid-4" style="background:rgba(0,0,0,0.25);padding:16px;border-radius:16px">' +
             '<div><label style="font-size:12px;color:var(--text-muted)">اسم الفئة</label><input id="catNewName" class="dw-input" placeholder="مثال: كأس العالم ٢٠٣٤"></div>' +
             '<div><label style="font-size:12px;color:var(--text-muted)">التصنيف الفرعي</label><input id="catNewGroup" class="dw-input" value="رياضة"></div>' +
@@ -3609,7 +3652,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
     var gInfo = GAME_GUIDES[gKey];
     var gameObj = STATE.games.find(function (g) { return g.slug === STATE.guideSlug; }) || { title: gInfo.title, cost_credits: 1, slug: STATE.guideSlug };
     var logo = getLogoForGame(gKey);
-    var guidePoster = window.DW_POSTERS && window.DW_POSTERS[gKey];
+    var guidePoster = customGamePoster(gameObj) || (window.DW_POSTERS && window.DW_POSTERS[gKey]);
     var tabs = gInfo.tabs || [];
     var activeTab = tabs[STATE.guideTabIdx] || tabs[0];
     var usedTrials = (STATE.wallet && STATE.wallet.freeTrialsUsed) || {};
@@ -3625,10 +3668,10 @@ html.dw-game-open #dwApp { visibility: hidden; }
           '<div>' +
             '<span class="dw-badge">📖 الدليل الشامل لقواعد اللعبة</span>' +
             '<h3 style="margin:4px 0 0;font-size:21px;font-weight:900">طريقة لعب ' + esc(cleanTitle(gameObj.title)) + '</h3>' +
-            '<div style="font-size:13px;color:var(--gold);font-weight:700">' + esc(gInfo.subtitle) + '</div>' +
+            '<div style="font-size:13px;color:var(--gold);font-weight:700">' + esc(gInfo.subtitle) + (gameObj.slug === 'eight' ? ' · ' + arNum(visibleEightCategories().length) + ' فئة' : '') + '</div>' +
           '</div>' +
         '</div>' +
-        '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="close-guide">✕ إغلاق الشرح</button>' +
+        '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="close-guide"><span class="dw-modal-close-icon" aria-hidden="true">✕</span> إغلاق الشرح</button>' +
       '</div>' +
       '<div class="dw-guide-tabs">' +
         tabs.map(function (t, idx) {
@@ -3855,7 +3898,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
         '<div><span class="dw-badge">📱 غرفة الجرس والإجابات</span>' +
         '<h3 style="margin:4px 0 0;font-size:21px;font-weight:900">' + (R.code ? 'رمز الغرفة: <span style="color:var(--gold)" dir="ltr">' + esc(R.code) + '</span>' : 'غرفة اللعب الجماعي') + '</h3></div>' +
         '<div style="display:flex;gap:8px;align-items:center">' + statusHtml +
-          '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="close-room-hub">✕ إغلاق</button></div>' +
+          '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="close-room-hub"><span class="dw-modal-close-icon" aria-hidden="true">✕</span> إغلاق</button></div>' +
       '</div>';
 
     if (st === 'needs_login') {
@@ -3913,7 +3956,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
           '<div style="text-align:center">' + generateQrSvg(joinUrl) +
             '<div style="font-size:12px;color:var(--gold);font-weight:800;margin-top:6px">امسح الرمز بكاميرا الجوال</div></div>' +
           '<div style="display:flex;flex-direction:column;gap:8px;min-width:0">' +
-            '<div style="font-size:13.5px;color:var(--text-muted)">أو افتح الرابط واكتب الرمز:</div>' +
+            '<div style="font-size:13.5px;color:var(--text-muted)">الرابط المباشر يفتح الغرفة تلقائياً بدون كتابة الرمز.</div>' +
             '<code style="background:rgba(255,255,255,0.06);padding:8px 12px;border-radius:10px;color:var(--teal);font-size:13px;word-break:break-all" dir="ltr">' + esc(joinUrl) + '</code>' +
             '<div style="display:flex;gap:8px;flex-wrap:wrap">' +
               '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="room-copy-link">📋 نسخ الرابط</button>' +
@@ -4076,6 +4119,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
         TRIAL_WATCH.arm(!res.deduplicated && (res.isFreeTrial || res.costDeducted > 0) ? slug : null, res.costDeducted > 0 ? idemKey : null);
         iframe.removeAttribute('srcdoc');
         iframe.src = res.playUrl;
+        frameWrap.dataset.gameSlug = slug;
         frameWrap.classList.add('open');
         document.documentElement.classList.add('dw-game-open');
         var tEl = document.getElementById('dwToast'); if (tEl) tEl.classList.add('in-game');
@@ -4419,6 +4463,27 @@ html.dw-game-open #dwApp { visibility: hidden; }
         render();
         showToast('✅ شكراً! وصلت فكرتك لفريقنا.');
       });
+    } else if (act === 'adm-edit-game') {
+      STATE.editingGameId = actBtn.getAttribute('data-id');
+      render();
+      document.getElementById('gameEditTitle').focus();
+      document.getElementById('gameDetailsEditor').scrollIntoView({ block: 'nearest' });
+    } else if (act === 'adm-cancel-game-edit') {
+      STATE.editingGameId = null;
+      render();
+    } else if (act === 'adm-save-game-details') {
+      var editingId = STATE.editingGameId;
+      actBtn.disabled = true;
+      adminCall('update_game_details', {
+        gameId: editingId,
+        title: document.getElementById('gameEditTitle').value,
+        description: document.getElementById('gameEditDescription').value,
+        posterUrl: document.getElementById('gameEditPoster').value
+      }, function (result) {
+        if (STATE.editingGameId === editingId) STATE.editingGameId = null;
+        render();
+        showToast(result.message);
+      }).finally(function () { actBtn.disabled = false; });
     } else if (act === 'adm-save-game') {
       var gsSlug = ((document.getElementById('gmSlug') || {}).value || '').trim().toLowerCase().replace(/[^a-z0-9_]/g, '_');
       var gEngVal = ((document.getElementById('gmEngineSel') || {}).value || 'mystery_button');
@@ -4761,7 +4826,6 @@ html.dw-game-open #dwApp { visibility: hidden; }
 
   render();
   DiwaniyaServerKernel.refreshAll().then(function () {
-    STATE.catalogLoaded = true;
     render();
     afterSignIn();
     if (RETURN_PARAMS && RETURN_PARAMS.payment && RETURN_PARAMS.order && STATE.user) {
