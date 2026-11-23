@@ -2091,6 +2091,9 @@ html.dw-game-open #dwApp { visibility: hidden; }
       support: function (owner, payload) {
         return api(payload ? 'POST' : 'GET', owner ? '/api/admin/support' : '/api/support', payload);
       },
+      eightStats: function (category) {
+        return api('GET', '/api/admin/eight-stats' + (category ? '?category=' + encodeURIComponent(category) : ''));
+      },
       analytics: function () { return api('GET', '/api/admin/analytics'); },
       analyticsUser: function (id) { return api('GET', '/api/admin/analytics/user/' + encodeURIComponent(id)); },
       checkPromo: function (code, pkgId) { return api('POST', '/api/promo/check', { code: code, pkgId: pkgId }); },
@@ -3173,6 +3176,43 @@ html.dw-game-open #dwApp { visibility: hidden; }
       '</section>';
   }
 
+  var eightStats = { category: '', data: null, loading: false };
+
+  function loadEightStats() {
+    if (eightStats.loading) return;
+    eightStats.loading = true;
+    render();
+    DiwaniyaServerKernel.eightStats(eightStats.category).then(function (data) {
+      eightStats.data = data;
+      eightStats.loading = false;
+      render();
+    });
+  }
+
+  function renderEightStats() {
+    var labels = new Map(STATE.categories.map(function (cat) { return [cat.slug, cat.name]; }));
+    var data = eightStats.data;
+    var rows = data && data.questions || [];
+    return '<section class="dw-card"><h4 style="margin:0">صعوبة أسئلة الثمانية</h4>' +
+      '<p>نسبة الصح = الجولات الصحيحة ÷ الجولات اللي سجّل المضيف نتيجتها. عرض السؤال وحده يدخل في عدّاد العرض.</p>' +
+      '<div style="display:flex;gap:8px;flex-wrap:wrap"><label>الفئة <select id="dwEightStatsCategory" class="dw-select"' + (eightStats.loading ? ' disabled' : '') + '>' +
+      '<option value="">كل الفئات</option>' + STATE.categories.map(function (cat) {
+        return '<option value="' + esc(cat.slug) + '"' + (cat.slug === eightStats.category ? ' selected' : '') + '>' + esc(cat.name) + '</option>';
+      }).join('') + '</select></label><button type="button" class="dw-btn dw-btn-sec dw-btn-sm" data-act="eight-stats-refresh"' +
+      (eightStats.loading ? ' disabled' : '') + '>تحديث</button></div>' +
+      (eightStats.loading ? '<p role="status">جاري تحميل الإحصائيات…</p>' :
+      !data || !data.ok ? '<p role="status">' + esc(data && data.error || 'تعذر تحميل الإحصائيات.') + '</p>' :
+      !rows.length ? '<p>ما فيه محاولات مسجلة إلى الآن.</p>' :
+      '<p style="font-size:13px;color:var(--text-muted)">تعرض القائمة حتى ٥٠٠ سؤال حسب عدد النتائج المسجلة. استخدم فلتر الفئة للمراجعة.</p>' +
+      '<div class="dw-table-wrap"><table class="dw-table"><thead><tr><th>الفئة</th><th>السؤال</th><th>النقاط</th><th>العرض</th><th>نتيجة مسجلة</th><th>صح</th><th>نسبة الصح</th></tr></thead><tbody>' +
+      rows.map(function (row) {
+        return '<tr><td>' + esc(labels.get(row.category) || row.category) + '</td><td>' + esc(row.prompt || row.question) + '</td><td>' + arNum(row.points) +
+          '</td><td>' + arNum(row.shown) + '</td><td>' + arNum(row.resolved) + '</td><td>' + arNum(row.correct) + '</td><td>' +
+          (row.resolved ? arNum(Math.round(100 * row.correct / row.resolved)) + '٪' : '—') +
+          (row.resolved < 20 ? '<br><small>عينة محدودة</small>' : '') + '</td></tr>';
+      }).join('') + '</tbody></table></div>') + '</section>';
+  }
+
   function renderAdminTab() {
     // Double check against server kernel so client-side console tampering with STATE.user.adminRole cannot reveal or use Admin
     var verifyAuth = DiwaniyaServerKernel.getSessionUser();
@@ -3185,6 +3225,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
         '<div><span class="dw-badge">لوحة المالك</span><h3 style="margin:4px 0 0;font-size:22px;font-weight:900">لوحة تحكم المالك وإدارة الألعاب · ' + arNum(visibleEightCategories().length) + ' فئة ظاهرة</h3></div>' +
         '<div style="display:flex;gap:6px;flex-wrap:wrap">' +
           '<button class="dw-tab-btn ' + (st === 'overview' ? 'active' : '') + '" data-adm-tab="overview">📊 الإحصائيات</button>' +
+          '<button class="dw-tab-btn ' + (st === 'eight-stats' ? 'active' : '') + '" data-adm-tab="eight-stats">صعوبة أسئلة الثمانية</button>' +
           '<button class="dw-tab-btn ' + (st === 'analytics' ? 'active' : '') + '" data-adm-tab="analytics">📈 تحليل العملاء</button>' +
           '<button class="dw-tab-btn ' + (st === 'users' ? 'active' : '') + '" data-adm-tab="users">👥 المستخدمين والأرصدة</button>' +
           '<button class="dw-tab-btn ' + (st === 'packages' ? 'active' : '') + '" data-adm-tab="packages">💎 إدارة الباقات</button>' +
@@ -3201,6 +3242,8 @@ html.dw-game-open #dwApp { visibility: hidden; }
         '</div>' +
       '</div>' +
     '</div>';
+
+    if (st === 'eight-stats') return nav + renderEightStats();
 
     if (st === 'support') return nav + renderSupport(true);
 
@@ -4360,6 +4403,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
     if (admTabBtn) {
       STATE.adminSubTab = admTabBtn.getAttribute('data-adm-tab');
       if (STATE.adminSubTab === 'support') loadSupport(true);
+      else if (STATE.adminSubTab === 'eight-stats') loadEightStats();
       else render();
       return;
     }
@@ -4368,7 +4412,9 @@ html.dw-game-open #dwApp { visibility: hidden; }
     if (!actBtn) return;
     var act = actBtn.getAttribute('data-act');
 
-    if (act === 'support-refresh') {
+    if (act === 'eight-stats-refresh') {
+      loadEightStats();
+    } else if (act === 'support-refresh') {
       loadSupport(STATE.tab === 'admin');
     } else if (act === 'support-select' && !support.sending) {
       support.selected = actBtn.getAttribute('data-thread');
@@ -4978,6 +5024,13 @@ html.dw-game-open #dwApp { visibility: hidden; }
       render();
       var again = document.getElementById('admCatSearch');
       if (again) { again.focus(); try { again.setSelectionRange(pos, pos); } catch (er) {} }
+    }
+  });
+
+  document.addEventListener('change', function (e) {
+    if (e.target.id === 'dwEightStatsCategory') {
+      eightStats.category = e.target.value;
+      loadEightStats();
     }
   });
 

@@ -2667,6 +2667,9 @@ body.board-mode-active .m8-banner { min-height: 0; }
 🔍 توضيح الصورة قليلاً
 </button>
 </div>
+<div id="m8PhotoChallenge" class="hidden flex items-center justify-center gap-2">
+<button id="m8PhotoChallengeToggle" type="button" aria-pressed="false" class="px-3 py-1 rounded-full bg-amber-100 text-slate-900 font-bold text-xs">تحدّي الصورة المقرّبة</button>
+</div>
 <div id="visualArtContainer" class="h-36 sm:h-44 rounded-xl flex items-center justify-center overflow-hidden visual-blur-stage">
 </div>
 </div>
@@ -7489,6 +7492,10 @@ if (rec.kind === 'result') {
 const col = m.boardColumns[rec.colIdx];
 const q = col && col.questions[rec.qIdx];
 if (q) { q.used = rec.preQ.used; q.answeredBy = rec.preQ.answeredBy; }
+if (rec.statAttempt) {
+rec.statAttempt.revision++;
+m8RecordAttempt(rec.statAttempt, 'open');
+}
 m.currentTurn = rec.preTurn;
 }
 const orig = m.history.find(h => h.id === rec.entryId);
@@ -7509,7 +7516,7 @@ const rec = st[st.length - 1];
 if (!rec || rec.kind !== 'result') { showToast('لا توجد نتيجة سؤال لتعديلها.', 'info'); return; }
 if (!m8UndoLast(true)) return;
 document.getElementById('historyModal').classList.add('hidden');
-openQuestionModal(rec.colIdx, rec.qIdx);
+openQuestionModal(rec.colIdx, rec.qIdx, rec.statAttempt);
 setTimeout(() => { try { revealAnswerAndSurprise(); } catch (e) { } }, 80);
 showToast('✏️ أُعيد فتح السؤال — اختاروا النتيجة الصحيحة.', 'info');
 }
@@ -8587,18 +8594,34 @@ grid.appendChild(unit);
 });
 try { m8FitBoardPosters(); } catch (e) { }
 }
+function m8SetPhotoCrop(cropped) {
+const img = document.querySelector('#visualArtContainer img');
+if (!img) return;
+img.style.transform = cropped ? 'scale(2.6)' : '';
+img.style.transformOrigin = 'center';
+state.modal.photoCropped = cropped;
+document.getElementById('m8PhotoChallengeToggle').setAttribute('aria-pressed', String(cropped));
+}
 function renderQuestionVisual(m, col, qObj) {
 const visualStage = document.getElementById('qModalVisualStage');
 const visualControls = document.getElementById('qModalVisualControls');
 const visualArt = document.getElementById('visualArtContainer');
 visualStage.classList.remove('hidden');
 visualControls.classList.add('hidden');
+const cropControls = document.getElementById('m8PhotoChallenge');
+cropControls.classList.add('hidden');
+state.modal.photoCropped = false;
 visualArt.style.filter = 'blur(0px)';
 if (!qObj.photo) window.__m8Pix = null;
 if (dwQMedia(qObj)) {
 visualStage.className = 'max-w-xl mx-auto rounded-2xl overflow-hidden border border-amber-300 bg-slate-900 p-1.5 shadow-inner';
 visualArt.className = 'rounded-xl flex flex-col items-center justify-center gap-2 overflow-hidden';
-visualArt.innerHTML = dwMediaHtml(dwQMedia(qObj));
+const questionMedia = dwQMedia(qObj);
+visualArt.innerHTML = dwMediaHtml(questionMedia);
+if (questionMedia.t === 'image' && !col.isCharades && !qObj.photo && !qObj.rebus && !qObj.fantasy && !state.modal.answerRevealed) {
+cropControls.classList.remove('hidden');
+m8SetPhotoCrop(false);
+}
 } else if (col.isLetterHoneycomb || qObj.letter) {
 visualStage.className = 'max-w-lg mx-auto rounded-2xl overflow-hidden border border-orange-200 bg-white p-2 space-y-1 shadow-inner';
 visualArt.className = 'min-h-[160px] rounded-xl flex items-center justify-center overflow-visible';
@@ -8775,11 +8798,28 @@ try { if (navigator.vibrate) navigator.vibrate([70, 40, 70]); } catch (e) { }
 }
 }
 }
-function openQuestionModal(colIdx, qIdx) {
+function m8RecordAttempt(attempt, result) {
+const token = new URLSearchParams(location.search).get('t');
+if (!token || !attempt) return;
+const body = JSON.stringify({ ...attempt, result, token });
+fetch('/api/play/eight-question', {
+method: 'POST', headers: { 'Content-Type': 'application/json' }, credentials: 'same-origin', body, keepalive: true
+}).catch(() => {});
+}
+function m8OpenAttempt(col, question, previous) {
+const token = new URLSearchParams(location.search).get('t');
+state.modal.statAttempt = token && globalThis.crypto?.randomUUID && question.uid && col.id
+  ? previous || { attempt: crypto.randomUUID(), revision: 0, category: String(col.id),
+    question: String(question.uid), points: Number(question.points), prompt: String(question.q || '').slice(0, 300) }
+  : null;
+if (!previous) m8RecordAttempt(state.modal.statAttempt, 'open');
+}
+function openQuestionModal(colIdx, qIdx, previousAttempt) {
 const m = state.match;
 const col = m.boardColumns[colIdx];
 const qObj = col.questions[qIdx];
 markQuestionAsSeen(qObj.uid);
+m8OpenAttempt(col, qObj, previousAttempt);
 state.match.activeCell = { colIdx, qIdx };
 state.modal.answeringTeam = m.currentTurn;
 state.modal.chooserTeam = m.currentTurn;
@@ -8917,7 +8957,10 @@ if (portraitBox) {
 portraitBox.innerHTML = renderAnswerVisualPortraitHtml(qObj, m.boardColumns[cell.colIdx]);
 if (qObj.rebus && qObj.rebus.pics) { const st = document.getElementById('qModalVisualStage'); if (st) st.classList.add('hidden'); }
 if (qObj.fantasy) { const cb = document.getElementById('qModalCharadesBox'); if (cb) cb.classList.add('hidden'); }
-const dwAM = dwAMedia(qObj);
+const wasCropped = state.modal.photoCropped;
+if (wasCropped) m8SetPhotoCrop(false);
+document.getElementById('m8PhotoChallenge').classList.add('hidden');
+const dwAM = dwAMedia(qObj) || (wasCropped ? dwQMedia(qObj) : null);
 if (dwAM || dwImportedQuestionImage(qObj)) {
 // Keep the imported question image on the question screen and stop any playing clip.
 const st = document.getElementById('qModalVisualStage'); if (st) { st.classList.add('hidden'); const va = document.getElementById('visualArtContainer'); if (va) va.innerHTML = ''; }
@@ -9004,6 +9047,7 @@ const keep = { qIdx: qObj.qIdx, used: qObj.used, answeredBy: qObj.answeredBy, su
 Object.keys(qObj).forEach(k => { delete qObj[k]; });
 const opt = prepareChoiceOptions(nq);
 Object.assign(qObj, nq, { options: opt.options, correctIndex: opt.correctIndex }, keep);
+m8OpenAttempt(col, qObj);
 document.getElementById('qModalQuestionText').textContent = m8QuestionPrompt(col, qObj);
 document.getElementById('qModalAnswerText').textContent = qObj.a;
 document.getElementById('qModalVerifyText').textContent = qObj.info;
@@ -9287,7 +9331,12 @@ logText += ` ↪️ (بعد تمرير السؤال من «${getTeamName(state.m
 }
 qObj.used = true;
 const __entry = m8PushHistory({ kind: 'result', text: logText, delta: m8DeltaFrom(__pre), q: { col: cell.colIdx, qIdx: cell.qIdx, points: qObj.points, cat: col.name } });
-m8PushUndo({ kind: 'result', colIdx: cell.colIdx, qIdx: cell.qIdx, pre: __pre, preTurn: __preTurn, preQ: __preQ, entryId: __entry.id, label: logText });
+const statAttempt = state.modal.statAttempt;
+if (statAttempt) {
+statAttempt.revision++;
+m8RecordAttempt(statAttempt, qObj.answeredBy === 'none' ? 'missed' : 'correct');
+}
+m8PushUndo({ kind: 'result', colIdx: cell.colIdx, qIdx: cell.qIdx, pre: __pre, preTurn: __preTurn, preQ: __preQ, entryId: __entry.id, label: logText, statAttempt });
 const activeTeamsOrder = activeTeamKeys();
 const chargedTeam = (state.modal && activeTeamsOrder.indexOf(state.modal.answeringTeam) >= 0) ? state.modal.answeringTeam : m.currentTurn;
 let curIdx = activeTeamsOrder.indexOf(chargedTeam);
@@ -10688,6 +10737,9 @@ state.modal.timerRemaining += 15;
 updateTimerUI();
 });
 document.getElementById('passToOtherTeamBtn').addEventListener('click', () => passQuestionToOtherTeam());
+document.getElementById('m8PhotoChallengeToggle').addEventListener('click', () => {
+if (!state.modal.answerRevealed) m8SetPhotoCrop(!state.modal.photoCropped);
+});
 document.getElementById('reduceBlurBtn').addEventListener('click', () => {
 playSound('click');
 if (window.__m8Pix && m8PixBoost()) return;
