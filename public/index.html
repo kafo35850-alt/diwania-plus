@@ -3909,7 +3909,8 @@ html.dw-game-open #dwApp { visibility: hidden; }
       ? '<span class="dw-chip teal">🟢 متصل بخادم الغرف</span>'
       : st === 'creating' ? '<span class="dw-chip gold">⏳ جاري إنشاء الغرفة…</span>'
       : st === 'gone' ? '<span class="dw-chip">انتهت هذه الغرفة</span>'
-      : st === 'needs_login' ? '<span class="dw-chip gold">سجّل دخولك لإنشاء غرفة</span>'
+      : st === 'error' ? '<span class="dw-chip">تعذر إنشاء الغرفة</span>'
+      : !R.code || st === 'needs_login' ? ''
       : '<span class="dw-chip gold">⏳ جاري الاتصال…</span>';
     var head =
       '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">' +
@@ -3919,9 +3920,18 @@ html.dw-game-open #dwApp { visibility: hidden; }
           '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="close-room-hub"><span class="dw-modal-close-icon" aria-hidden="true">✕</span> إغلاق</button></div>' +
       '</div>';
 
-    if (st === 'needs_login') {
-      inner.innerHTML = head + '<div class="dw-card" style="text-align:center"><p>إنشاء غرفة يحتاج تسجيل دخول المضيف. اللاعبين يدخلون من جوالاتهم بدون حساب.</p>' +
-        '<button class="dw-btn dw-btn-gold" data-act="open-auth">تسجيل الدخول</button></div>';
+    if (!R.code && st !== 'creating') {
+      inner.innerHTML = head +
+        '<form class="dw-card" id="dwJoinRoomForm">' +
+          '<label for="dwJoinRoomCode"><b>انضم برمز</b></label>' +
+          '<p style="margin:0;color:var(--text-muted)">خذ رمز الغرفة من المضيف. تقدر تنضم بدون حساب.</p>' +
+          '<input id="dwJoinRoomCode" class="dw-input" dir="ltr" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="ABC234" aria-describedby="dwJoinRoomStatus">' +
+          '<p id="dwJoinRoomStatus" role="status" style="margin:0;color:var(--rose)"></p>' +
+          '<button type="submit" class="dw-btn dw-btn-gold">انضم للغرفة</button>' +
+        '</form>' +
+        '<div class="dw-card"><p style="margin:0">تبغى تستضيف؟ إنشاء غرفة يحتاج تسجيل الدخول.</p>' +
+          (STATE.user ? '<button class="dw-btn dw-btn-sec" data-act="room-create-host">إنشاء غرفة</button>' :
+            '<button class="dw-btn dw-btn-sec" data-act="open-auth">تسجيل الدخول للمضيف</button>') + '</div>';
       return;
     }
     if (st === 'gone') {
@@ -4151,6 +4161,46 @@ html.dw-game-open #dwApp { visibility: hidden; }
 
   window.launchGameWithCreditCheck = launchGameWithCreditCheck;
 
+  document.addEventListener('submit', async function (event) {
+    var form = event.target;
+    if (form.id !== 'dwJoinRoomForm') return;
+    event.preventDefault();
+
+    var input = form.querySelector('input');
+    var status = form.querySelector('[role="status"]');
+    var submit = form.querySelector('button[type="submit"]');
+    if (submit.disabled) return;
+    var code = input.value.trim().replace(/[٢-٩۲-۹]/g, function (digit) {
+      return String(digit.charCodeAt(0) & 15);
+    }).toUpperCase();
+    if (!/^[A-Z2-9]{6}$/.test(code)) {
+      status.textContent = 'تأكد إن الرمز ٦ خانات، من حروف إنجليزية أو أرقام من ٢ إلى ٩.';
+      input.setAttribute('aria-invalid', 'true');
+      input.focus();
+      return;
+    }
+
+    input.removeAttribute('aria-invalid');
+    submit.disabled = true;
+    status.textContent = 'جاري التحقق من الغرفة…';
+    try {
+      var response = await fetch('/api/rooms/status?code=' + encodeURIComponent(code), { cache: 'no-store' });
+      if (!response.ok) throw new Error('Room status unavailable');
+      var result = await response.json();
+      if (!form.isConnected || !form.closest('.dw-modal-backdrop.open') || form.closest('[inert]')) return;
+      if (!result.exists) {
+        status.textContent = 'ما لقينا الغرفة. تأكد من الرمز مع المضيف.';
+        input.focus();
+        return;
+      }
+      window.location.assign('/?room=' + encodeURIComponent(code));
+    } catch (error) {
+      status.textContent = 'تعذر التحقق من الغرفة. جرّب مرة ثانية.';
+    } finally {
+      submit.disabled = false;
+    }
+  });
+
   // Check URL query parameters for QR room join (?room=XXXX&game=SLUG)
   (function checkUrlRoomJoin() {
     try {
@@ -4268,8 +4318,10 @@ html.dw-game-open #dwApp { visibility: hidden; }
     } else if (act === 'open-room-hub') {
       var rmMod = document.getElementById('dwRoomModal');
       if (rmMod) setStoreModal(rmMod, true);
-      ROOM_SYNC.init();
+      if (STATE.room.code || STATE.activeGameSlug) ROOM_SYNC.init();
       renderRoomModal();
+    } else if (act === 'room-create-host') {
+      ROOM_SYNC.init();
     } else if (act === 'close-room-hub') {
       var rmMod2 = document.getElementById('dwRoomModal');
       if (rmMod2) setStoreModal(rmMod2, false);
