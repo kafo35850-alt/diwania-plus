@@ -1,5 +1,5 @@
 import { getSettings } from './settings.js';
-import { voiceForGame } from './voice.js';
+import { voiceForGame, voiceTokensForGame } from './voice.js';
 // Wallet, game launches (credit / free-trial deduction) and protected game delivery.
 import { HttpError, nowMs, nowIso, randomToken, randomId, sha256Hex } from './util.js';
 import { getDoc, EIGHT_POSTERS, EIGHT_STADIUM_CATEGORIES, EIGHT_CATEGORY_MERGES } from './catalog.js';
@@ -231,8 +231,10 @@ export async function servePlay(env, request, session, slug) {
   if (ROOM_GAMES[slug] && !classic) {
     html = html.replace('</head>', '<style>/*dw-tv*/@media (min-width:1280px) and (min-height:700px){body{zoom:1.25}}@media (min-width:1700px) and (min-height:900px){body{zoom:1.55}}@media (min-width:2400px) and (min-height:1300px){body{zoom:2.1}}</style></head>');
   }
-  content.voice = await voiceForGame(env, slug);
-  html = html.replace(/<head([^>]*)>/i, (m) => m + '\n<script>window.__DW_CONTENT = ' + scriptJson(content) + ';</script>' + (content.voice.length ? '<script src="/voice-player.js"></script>' : ''));
+  const narrator = resolved.retitle ? game.engine_type : slug;
+  content.voice = await voiceForGame(env, narrator);
+  if (content.voice.length) content.voiceTokens = voiceTokensForGame(narrator);
+  html = html.replace(/<head([^>]*)>/i, (m) => m + '\n<script>window.__DW_CONTENT = ' + scriptJson(content) + ';</script><script src="/voice-player.js?v=2"></script>');
   html = html.replace('</head>', '<style>@media (max-width:700px){.dw-FloatingAudioBar{display:none!important}}html.dw-in-frame .dw-FloatingAudioBar{display:none!important}</style><script>try{if(window.top!==window)document.documentElement.classList.add(\'dw-in-frame\')}catch(e){}</script></head>');
 
   return new Response(html, {

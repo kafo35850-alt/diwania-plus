@@ -1,25 +1,38 @@
 // The owner's own narrator recordings. Lines live in content/voice_lines.json; "{}" marks a name or number that the
 // device voice says. Every other piece of a line is one recording, kept in the 'voice' document as { lineId: [url, ...] }.
 import LINES from '../../content/voice_lines.json';
+import PACK from '../../content/narration_pack.json';
 import { HttpError } from './util.js';
 import { getDoc, putDoc } from './catalog.js';
 import { MEDIA_RE } from './media.js';
 
-const SPOKEN = /[؀-ۿA-Za-z0-9٠-٩]/;
+const SPOKEN = /[\p{L}\p{N}]/u;
+const FEMALE_NARRATOR_GAMES = new Set(['dakhil', 'draw_guess', 'qaftah']);
+export function voiceTokensForGame(slug) {
+  return FEMALE_NARRATOR_GAMES.has(slug) ? PACK.femaleTokens : PACK.tokens;
+}
 export function voicePieces(text) {
   return String(text).replace(/\s+/g, ' ').trim().split('{}').filter((s) => SPOKEN.test(s)).map((s) => s.trim());
 }
 export const VOICE_LINES = LINES.map((l) => ({ ...l, pieces: voicePieces(l.text) }));
 
-// Lines of one game whose every piece is recorded: those the game plays in the owner's voice.
+// Complete recordings from the owner take priority over the bundled narrator.
 export async function voiceForGame(env, slug) {
-  const rec = (await getDoc(env, 'voice')) || {};
-  return VOICE_LINES.filter((l) => l.games.includes(slug))
-    .map((l) => ({ text: l.text, parts: rec[l.id] || [] }))
-    .filter((l, i, all) => {
-      const need = voicePieces(l.text).length;
-      return need > 0 && l.parts.length >= need && l.parts.slice(0, need).every(Boolean);
-    });
+  const lines = VOICE_LINES.filter((line) => line.games.includes(slug) ||
+    (line.id === 'screen_code' && PACK.codeGames.includes(slug)));
+  const extra = PACK.extra.filter((line) => line.games.includes(slug));
+  if (!lines.length && !extra.length) return [];
+  const recordings = (await getDoc(env, 'voice')) || {};
+  return [
+    ...lines.map((line) => {
+      const custom = recordings[line.id];
+      const need = line.pieces.length;
+      const parts = Array.isArray(custom) && custom.length >= need && custom.slice(0, need).every(Boolean)
+        ? custom : PACK.clips[line.id];
+      return { text: line.text, parts };
+    }),
+    ...extra.map(({ text, parts }) => ({ text, parts }))
+  ];
 }
 
 export async function voiceAdminData(env) {

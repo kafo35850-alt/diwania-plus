@@ -617,10 +617,11 @@ body.show-both .tabs{left:calc(50% - 215px)}
   function pickVoice() {
     if (!hasVoiceApi()) return null;
     const vs = root.speechSynthesis.getVoices() || [], ar = vs.filter((v) => /^ar/i.test(v.lang) || /arab|عرب/i.test(v.name));
-    return ar.find((v) => /majed|maged|tarik|hamed|male/i.test(v.name)) || ar.find((v) => /SA/i.test(v.lang)) || ar[0] || null;
+    return ar.find((v) => /premium|enhanced|neural|natural/i.test(v.name)) || ar.find((v) => /majed|maged|tarik|hamed|male/i.test(v.name)) || ar.find((v) => /SA/i.test(v.lang)) || ar[0] || null;
   }
   function unlock() {
     const c = ensure(); S.unlocked = true;
+    if (root.__dwVoice) root.__dwVoice.unlock(c);
     if (c) { try { if (c.state === 'suspended') c.resume(); const b = c.createBuffer(1, 1, 22050), s = c.createBufferSource(); s.buffer = b; s.connect(c.destination); s.start(0); } catch (e) { } }
     if (hasVoiceApi()) { try { root.speechSynthesis.getVoices(); const u = new root.SpeechSynthesisUtterance(' '); u.volume = 0; root.speechSynthesis.speak(u); } catch (e) { } }
     return !!c;
@@ -630,6 +631,7 @@ body.show-both .tabs{left:calc(50% - 215px)}
     try { if (c.state === 'suspended') c.resume(); } catch (e) { }
     const t = c.currentTime + 0.03;
     if (S.buffers[name]) { const s = c.createBufferSource(); s.buffer = S.buffers[name]; const g = c.createGain(); g.gain.value = (p && p.gain) || 1; s.connect(g); g.connect(S.sfx); s.start(t); return true; }
+    if (root.__dwVoice && root.__dwVoice.effect(name, c, S.sfx, t)) return true;
     if (!R[name]) return false;
     try { R[name](c, S.sfx, t, p); } catch (e) { if (root.console) console.error('sfx', name, e); return false; }
     return true;
@@ -654,7 +656,7 @@ body.show-both .tabs{left:calc(50% - 215px)}
   function say(text, o) {
     o = o || {};
     if (!S.enabled.voice) return false;
-    if (window.__dwVoice && window.__dwVoice.play(String(text))) return true;
+    if (window.__dwVoice && window.__dwVoice.play(String(text), { volume: S.vol, duck })) return true;
     if (o.key && S.narr[o.key] && S.ctx) { const c = S.ctx, s = c.createBufferSource(); s.buffer = S.narr[o.key]; s.connect(S.sfx); duck(true); s.onended = () => duck(false); s.start(); return true; }
     if (!hasVoiceApi()) return false; const v = pickVoice(); if (!v) return false;
     try {
@@ -688,7 +690,7 @@ body.show-both .tabs{left:calc(50% - 215px)}
     return oc.startRendering().then((b) => b.getChannelData(0));
   }
 
-  return { unlock, play, ambient, say, shutUp, stopAll, setVolume, setEnabled, useFiles, useData, hasPack: () => Object.keys(S.narr).length > 0, render, names: Object.keys(R), DUR, state: S, hasVoice: () => !!pickVoice(), hasVoiceApi, supported: !!AC };
+  return { unlock, play, ambient, say, shutUp, stopAll, setVolume, setEnabled, useFiles, useData, hasPack: () => Object.keys(S.narr).length > 0 || !!(root.__dwVoice && root.__dwVoice.count), render, names: Object.keys(R), DUR, state: S, hasVoice: () => !!pickVoice(), hasVoiceApi, supported: !!AC };
 });
 
 </script>
