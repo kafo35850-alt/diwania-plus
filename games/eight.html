@@ -7883,8 +7883,10 @@ function dwImportedQuestionImage(q) {
 const media = dwQMedia(q);
 return media && media.t === 'image' && media.u.startsWith('/eight-media/');
 }
-function dwAMedia(q) {
+function dwAMedia(q, col) {
 if (q && q.am && dwOkUrl(q.am.u)) return q.am;
+// Series reveal images must be deliberately selected, never reuse the question photo.
+if (col && String(col.id || '').startsWith('series_')) return null;
 return dwImportedQuestionImage(q) ? null : dwQMedia(q);
 }
 function dwMediaHtml(m) {
@@ -8628,7 +8630,7 @@ const questionMedia = dwQMedia(qObj);
 visualArt.innerHTML = dwMediaHtml(questionMedia);
 if (questionMedia.t === 'image' && col.id === 'custom_photo_closeup') {
 m8SetPhotoCrop(true, Number(qObj.points) >= 400 ? 1.8 : 1.45, true);
-} else if (questionMedia.t === 'image' && !col.isCharades && !qObj.photo && !qObj.rebus && !qObj.fantasy && !state.modal.answerRevealed) {
+} else if (questionMedia.t === 'image' && !String(col.id || '').startsWith('series_') && !col.isCharades && !qObj.photo && !qObj.rebus && !qObj.fantasy && !state.modal.answerRevealed) {
 cropControls.classList.remove('hidden');
 m8SetPhotoCrop(false);
 }
@@ -8970,7 +8972,8 @@ if (qObj.fantasy) { const cb = document.getElementById('qModalCharadesBox'); if 
 const wasCropped = state.modal.photoCropped;
 if (wasCropped) m8SetPhotoCrop(false);
 document.getElementById('m8PhotoChallenge').classList.add('hidden');
-const dwAM = dwAMedia(qObj) || (wasCropped ? dwQMedia(qObj) : null);
+const revealCol = m.boardColumns[cell.colIdx];
+const dwAM = dwAMedia(qObj, revealCol) || (wasCropped && !String(revealCol.id || '').startsWith('series_') ? dwQMedia(qObj) : null);
 if (dwAM || dwImportedQuestionImage(qObj)) {
 // Keep the imported question image on the question screen and stop any playing clip.
 const st = document.getElementById('qModalVisualStage'); if (st) { st.classList.add('hidden'); const va = document.getElementById('visualArtContainer'); if (va) va.innerHTML = ''; }
