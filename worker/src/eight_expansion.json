@@ -5698,35 +5698,55 @@
         "points": 600,
         "q": "ما اسم الصحيفة الحديثية التي كتبها الصحابي عبدالله بن عمرو بن العاص رضي الله عنهما عن النبي ﷺ في حياته؟",
         "a": "الصحيفة الصادقة",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://cdn.salla.sa/YOGll/XDaurZ2eHnpZnDaI1cIPtrd1wsjonsFDQJoIP17v.jpg"
+        }
       },
       {
         "uid": "custom_1795334158059_drive_q21_600",
         "points": 600,
         "q": "ما المصطلح في علم مصطلح الحديث الذي يُطلق على الحديث الذي سقط من إسناده الصحابي ورفعه التابعي مباشرة إلى النبي ﷺ؟",
         "a": "الحديث المرسل",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://image.slideserve.com/663307/isnad-types-1-l.jpg"
+        }
       },
       {
         "uid": "custom_1795334158059_drive_q22_600",
         "points": 600,
         "q": "من هو الخليفة الذي أمر الإمام محمد بن شهاب الزهري بتدوين السنة النبوية رسمياً للمرة الأولى؟",
         "a": "عمر بن عبدالعزيز رحمه الله",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://images.vcoins.com/product_image/282/8/6/8Xbjac5TrCQ6H73mq2DEXs9Wy4KnRo.jpg"
+        }
       },
       {
         "uid": "custom_1795334158059_drive_q23_600",
         "points": 600,
         "q": "ما المصطلح في علم الحديث الذي يُطلق على الحديث الذي سقط من إسناده راويان فأكثر على التوالي؟",
         "a": "الحديث المُعْضَل",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://image1.slideserve.com/1774079/hadith-mu-dal-l.jpg"
+        }
       },
       {
         "uid": "custom_1795334158059_drive_q24_600",
         "points": 600,
         "q": "من هو الإمام صاحب أكبر مسند حديثي معروف يضم نحو 27 ألف حديث مرتبة على أسماء الصحابة؟",
         "a": "الإمام أحمد بن حنبل رحمه الله (مسند الإمام أحمد)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://media.alreq.com/acb7060e-ec73-4f5a-8a3a-1a8552c5c193-ManuscriptCopyThumbnail.jpg"
+        }
       }
     ]
   },
@@ -5873,35 +5893,55 @@
         "points": 600,
         "q": "ما السورة الوحيدة في جزء عمّ التي ورد فيها اسما النبيين «إبراهيم وموسى» عليهما السلام معاً في آية واحدة؟",
         "a": "سورة الأعلى («صحف إبراهيم وموسى»)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://assets.catawiki.com/image/cw_ldp_l/plain/assets/catawiki/assets/2025/2/21/b/5/c/b5cdbb6c-80c2-4c08-81d1-f7e668d6dd83.jpg"
+        }
       },
       {
         "uid": "custom_1795334319478_drive_q21_600",
         "points": 600,
         "q": "ما معنى كلمة «أبّاً» في قوله تعالى في سورة عبس: «وفاكهةً وأبّاً»؟",
         "a": "المرعى والكلأ (ما تأكله الأنعام والدواب من العشب)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://surahquran.com/img/ayah/80-31.png"
+        }
       },
       {
         "uid": "custom_1795334319478_drive_q22_600",
         "points": 600,
         "q": "ما معنى كلمة «العِشار» في قوله تعالى في سورة التكوير: «وإذا العِشار عُطّلت»؟",
         "a": "النوق الحوامل التي أتى عليها عشرة أشهر في حملها",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://img.yumpu.com/34680478/1/500x640/81-at-takwir-tafsir-fi-zilal-al-quran.jpg"
+        }
       },
       {
         "uid": "custom_1795334319478_drive_q23_600",
         "points": 600,
         "q": "ما معنى كلمة «غسّاقاً» في قوله تعالى في سورة النبأ: «إلا حميماً وغسّاقاً»؟",
         "a": "صديد أهل النار البارد المنتن الذي يسيل من جلودهم",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://surahquran.com/img/Ayat-green/verse-25-surah-78.png"
+        }
       },
       {
         "uid": "custom_1795334319478_drive_q24_600",
         "points": 600,
         "q": "ما المقصود بـ «الموريات قدحاً» في سورة العاديات؟",
         "a": "الخيل التي تقدح بحوافرها الحجارة فتُخرج منها الشرر أثناء العدو الشديد",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://i1.sndcdn.com/artworks-000668897239-e9yqv1-t1080x1080.jpg"
+        }
       }
     ]
   },
@@ -6053,28 +6093,44 @@
         "points": 600,
         "q": "ما السورة التي لم يُذكر فيها حرف «الفاء» مطلقاً في أي آية من آياتها؟",
         "a": "سورة الفاتحة",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://cdn2.picryl.com/photo/2021/09/13/al-fatihah-naskh-script-6inchx300dpi-524ce4-640.jpg"
+        }
       },
       {
         "uid": "custom_1795335071786_drive_q22_600",
         "points": 600,
         "q": "ما السورة التي سُمّيت في السنة النبوية بـ «الفاضحة» لأنها كشفت أسرار وأحوال المنافقين؟",
         "a": "سورة التوبة",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://collections.louvre.fr/media/cache/crops/0000000021/0000485885/0000666451_OG.JPG"
+        }
       },
       {
         "uid": "custom_1795335071786_drive_q23_600",
         "points": 600,
         "q": "ما السورة التي ذُكر فيها الأنبياء «إسماعيل وإدريس وذو الكفل» معاً في آية واحدة، وتلتها قصة «ذي النون» يونس عليه السلام؟",
         "a": "سورة الأنبياء (الآيات 85–87)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.quran-wiki.com/surahimages/296069-5dea561f-112c-4973-a38d-34ff1ac525b2.jpg"
+        }
       },
       {
         "uid": "custom_1795335071786_drive_q24_600",
         "points": 600,
         "q": "ما السورة الوحيدة في القرآن الكريم التي تبدأ بكلمة ﴿سُورَةٌ﴾ في مطلع آيتها الأولى؟",
         "a": "سورة النور (﴿سُورَةٌ أَنزَلْنَاهَا وَفَرَضْنَاهَا...﴾)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://tafsir.app/scans/m-qatar/357.jpg"
+        }
       }
     ]
   },
@@ -6221,35 +6277,55 @@
         "points": 600,
         "q": "من هو الصحابي الجليل الذي عُرف بـ «صاحب سرّ رسول الله ﷺ» لمعرفته بأسماء المنافقين؟",
         "a": "حذيفة بن اليمان رضي الله عنه",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://upload.wikimedia.org/wikipedia/commons/5/5f/Makam_Hudzaifah_bin_Yaman.png"
+        }
       },
       {
         "uid": "custom_1795335231236_drive_q21_600",
         "points": 600,
         "q": "في أي سنة هجرية حُوّلت القبلة من المسجد الأقصى إلى الكعبة المشرفة؟",
         "a": "السنة الثانية للهجرة",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://portalcdn.spa.gov.sa/backend/original/201905/add73f8a7886384bde08b1655dac6614.jpeg"
+        }
       },
       {
         "uid": "custom_1795335231236_drive_q22_600",
         "points": 600,
         "q": "من هو الصحابي الذي استشهد في غزوة أحد ولُقّب بـ «غسيل الملائكة»؟",
         "a": "حنظلة بن أبي عامر رضي الله عنه",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://img.express.pk/media/images/hazrat-hunzela-rz1742177333-0/hazrat-hunzela-rz1742177333-0.jpg"
+        }
       },
       {
         "uid": "custom_1795335231236_drive_q23_600",
         "points": 600,
         "q": "ما اسم أول سرية في تاريخ الإسلام التي بعثها النبي ﷺ بقيادة حمزة بن عبدالمطلب رضي الله عنه في السنة الأولى للهجرة؟",
         "a": "سرية سيف البحر (العيص)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://assets.zyrosite.com/cdn-cgi/image/format%3Dauto%2Cw%3D1024%2Ch%3D558%2Cfit%3Dcrop/Yyv0e1a70bfVPQqL/the-expedition-of-hamza-ibn-abd-al-muttalib-the-first-banner-of-islam-0D9PoKqx7Xn4OowZ.png"
+        }
       },
       {
         "uid": "custom_1795335231236_drive_q24_600",
         "points": 600,
         "q": "من هو التابعي الجليل الذي يُعد أول من وضع نقط الإعراب (الشكل) في المصحف الشريف؟",
         "a": "أبو الأسود الدؤلي",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Arabic_script_evolution.svg/1920px-Arabic_script_evolution.svg.png"
+        }
       }
     ]
   },
