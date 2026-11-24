@@ -13311,35 +13311,55 @@
         "points": 200,
         "q": "ما اسم السفينة الشهيرة التي تدور حول غرقها أحداث فيلم المخرج جيمس كاميرون الصادر عام 1997؟",
         "a": "تيتانيك (Titanic)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://cloudfront-eu-central-1.images.arcpublishing.com/madsack/7Z25A72FBZ34YB7B3C64A7Z65D.jpg"
+        }
       },
       {
         "uid": "movies_general_drive_q21_400",
         "points": 400,
         "q": "ما هو أول فيلم غير ناطق باللغة الإنجليزية يفوز بجائزة الأوسكار لأفضل فيلم (Best Picture) في التاريخ؟",
         "a": "فيلم «طفيلي» (Parasite) للمخرج بونغ جون هو",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.watershed.co.uk/sites/default/files/styles/inline_image/public/blog/blog_image/1554/2020-03-03/parasite-1.jpg?itok=ibpjehut"
+        }
       },
       {
         "uid": "movies_general_drive_q22_400",
         "points": 400,
         "q": "في فيلم «ذا شوشانك ريدمبشن» (The Shawshank Redemption)، ما اسم المدينة الساحلية المكسيكية التي يخطط آندي دوفرين للانتقال إليها بعد هروبه؟",
         "a": "زيهواتانيخو (Zihuatanejo)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.looper.com/img/gallery/the-ending-of-the-shawshank-redemption-explained-upgrade/what-tim-robbins-thinks-about-the-ending-1686835384.jpg"
+        }
       },
       {
         "uid": "movies_general_drive_q23_600",
         "points": 600,
         "q": "ما هما الفيلمان اللذان يتقاسمان مع فيلم «بن هور» (Ben-Hur) الرقم القياسي لأكبر عدد من جوائز الأوسكار لفيلم واحد (11 جائزة)؟",
         "a": "«تيتانيك» (Titanic - 1997) و«سيد الخواتم: عودة الملك» (The Lord of the Rings: The Return of the King - 2003)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://static.kinoafisha.info/k/articles/1200/upload/articles/505286343674.jpg"
+        }
       },
       {
         "uid": "movies_general_drive_q24_600",
         "points": 600,
         "q": "في فيلم «المواطن كين» (Citizen Kane - 1941)، ما هي الكلمة الأخيرة التي ينطق بها تشارلز فوستر كين قبل وفاته، وإلى ماذا كانت ترمز في الحقيقة؟",
         "a": "كلمة «روزباد» (Rosebud)، وكانت اسم الزلاجة الخشبية التي كان يلعب بها في طفولته",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://nofilmschool.com/media-library/image.jpg?coordinates=0%2C39%2C0%2C39&height=600&id=61628219&width=1200"
+        }
       }
     ]
   },
@@ -13360,35 +13380,55 @@
         "points": 200,
         "q": "من هما الممثلان اللذان جسّدا شخصيتَي «دون فيتو كورليوني» وابنه «مايكل كورليوني» في الجزء الأول؟",
         "a": "مارلون براندو (فيتو) — وآل باتشينو (مايكل)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://cdn2.i-scmp.com/sites/default/files/images/methode/2018/11/30/0c2eddd2-f39b-11e8-bbe8-afaa0960a632_1320x770_185911.jpg"
+        }
       },
       {
         "uid": "movies_godfather_drive_q21_400",
         "points": 400,
         "q": "من هو مخرج ثلاثية «العراب»، ومن هو مؤلف الرواية الأصلية التي اقتُبس منها الفيلم؟",
         "a": "المخرج فرانسيس فورد كوبولا — والروائي ماريو بوزو (Mario Puzo)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://i.pinimg.com/originals/7a/cf/fb/7acffb6f44339f993a791268dca072de.jpg"
+        }
       },
       {
         "uid": "movies_godfather_drive_q22_400",
         "points": 400,
         "q": "من هو الممثل الذي جسّد شخصية «فيتو كورليوني» في شبابه في الجزء الثاني وحصد عنه جائزة الأوسكار؟",
         "a": "روبرت دي نيرو (Robert De Niro)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.virtual-history.com/movie/photo/pr30/large/robert_de_niro4.jpg"
+        }
       },
       {
         "uid": "movies_godfather_drive_q23_600",
         "points": 600,
         "q": "ما اسم المستشار القانوني (الكونسيليري / Consigliere) لعائلة كورليوني الذي تبنّاه دون فيتو في طفولته وأدّى دوره روبرت دوفال؟",
         "a": "توم هاغن (Tom Hagen)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://m.media-amazon.com/images/M/MV5BZTFlZTlhYmMtZDMwNy00YWYwLTlkNDctYmEwNTgwY2QzN2RjXkEyXkFqcGc%40._V1_.jpg"
+        }
       },
       {
         "uid": "movies_godfather_drive_q24_600",
         "points": 600,
         "q": "من هو الموسيقار الإيطالي الذي ألّف المقطوعة الموسيقية الخالدة لفيلم «العراب»، وما اسم القرية الصقلية التي حمل فيتو أندوليني اسمها عند هجرته لأمريكا؟",
         "a": "الموسيقار نينو روتا (Nino Rota) — وقرية كورليوني (Corleone) في صقلية",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://static.wikia.nocookie.net/godfather/images/0/09/Vlcsnap-2010-02-28-19h51m08s99.png/revision/latest/scale-to-width-down/1200?cb=20170805131200"
+        }
       }
     ]
   },
@@ -13409,35 +13449,55 @@
         "points": 200,
         "q": "ما اسم البومة الثلجية البيضاء التي رافقت هاري بوتر منذ سنته الأولى؟",
         "a": "هيدويغ (Hedwig)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://images6.alphacoders.com/121/1218747.jpg"
+        }
       },
       {
         "uid": "movies_harry_potter_drive_q21_400",
         "points": 400,
         "q": "ما الاسم الحقيقي الكامل للورد فولدمورت قبل تحوّله؟",
         "a": "توم مارفولو ريدل (Tom Marvolo Riddle)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://i.pinimg.com/originals/f2/42/ab/f242abbe9ac6d42f58f70304beb1f73d.jpg"
+        }
       },
       {
         "uid": "movies_harry_potter_drive_q22_400",
         "points": 400,
         "q": "ما اسم الشارع السحري المخفي في لندن الذي يشتري منه السحرة مستلزماتهم الدراسية وعصيّهم السحرية؟",
         "a": "حارة دياغون (Diagon Alley)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://imgix.bustle.com/uploads/image/2022/2/28/bcc3e83f-97a8-47f3-8c00-46aa3da855cd-diagonalley_wb_f1_hagridandharrydiagonalley_v2_still_100615_land-1.jpeg?crop=faces&dpr=2&fit=crop&h=720&w=1100"
+        }
       },
       {
         "uid": "movies_harry_potter_drive_q23_600",
         "points": 600,
         "q": "ما الاسم اللاتيني للجرعة السحرية الذهبية المعروفة بـ «الحظ السائل» التي فاز بها هاري بوتر من البروفيسور سلوغهورن في الجزء السادس؟",
         "a": "فيليكس فيليسيس (Felix Felicis)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.looper.com/img/gallery/11-harry-potter-moments-that-are-better-in-the-movies-than-in-the-books/felix-felicis-1641848457.jpg"
+        }
       },
       {
         "uid": "movies_harry_potter_drive_q24_600",
         "points": 600,
         "q": "ما الاسم الكامل لشقيق سيريوس بلاك الأصغر الذي سرق قلادة سليذرين (أحد الهوركروكسات) وترك رسالة موقّعة بالأحرف «R.A.B.»؟",
         "a": "ريغولوس أركتوروس بلاك (Regulus Arcturus Black)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://img.netzwelt.de/dw1600_dh900_sw0_sh0_sx0_sy0_sr16x9_nu0/picture/original/2024/12/harry-potter-halbblutprinz-medaillon-salazar-slytherin-faelschung-nachricht-rab-421373.png"
+        }
       }
     ]
   },
@@ -13458,35 +13518,55 @@
         "points": 200,
         "q": "ما اللقب الروسي الأسطوري الذي يُعرف به جون ويك في عالم الجريمة؟",
         "a": "بابا ياغا (Baba Yaga)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://cdn-3.expansion.mx/dims4/default/ee13368/2147483647/strip/true/crop/800x450%2B0%2B0/resize/800x450%21/format/webp/quality/80/?url=https%3A%2F%2Fcdn-3.expansion.mx%2F78%2F3e%2Fcb1b601b41b7bacd5f78c901348a%2Fjohn-wick-1.jpg"
+        }
       },
       {
         "uid": "movies_john_wick_drive_q21_400",
         "points": 400,
         "q": "ما نوع العملة الخاصة التي يتعامل بها القتلة المأجورون في عالم جون ويك لدفع ثمن الخدمات؟",
         "a": "العملات الذهبية (Gold Coins)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://ik.imagekit.io/870xgzp1i/cloudtek-cdn/01/21/og-13912-the-enigmatic-world-of-john-wick-coins?tr=w-600%2Ch-400"
+        }
       },
       {
         "uid": "movies_john_wick_drive_q22_400",
         "points": 400,
         "q": "ما اسم مدير فندق «ذا كونتيننتال» في نيويورك الذي أدّى دوره الممثل إيان ماكشين؟",
         "a": "وينستون سكوت (Winston Scott)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://ovicio.com.br/wp-content/uploads/2021/07/20210715-ian-mcshane_believes_john-wick-4-shoots-in-2021_keanu-reeves_-555x555.jpg"
+        }
       },
       {
         "uid": "movies_john_wick_drive_q23_600",
         "points": 600,
         "q": "ما الاسم الحقيقي الكامل لجون ويك عند ولادته في بيلاروسيا كما كُشف عنه في الجزء الثالث «Parabellum»؟",
         "a": "جارداني جوفونوفيتش (Jardani Jovonovich)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://wl-genial.cf.tsp.li/resize/1200x630/jpg/3b9/8ab/5680ed50738b97c38ee0540edc.jpg"
+        }
       },
       {
         "uid": "movies_john_wick_drive_q24_600",
         "points": 600,
         "q": "ما اسم مسؤول الاستقبال المخلص في فندق كونتيننتال نيويورك الذي اعتنى بكلب جون ويك، وما اسم الممثل الراحل الذي جسّد دوره؟",
         "a": "شارون (Charon) — وجسّد دوره الممثل الراحل لانس ريديك (Lance Reddick)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://stat.ameba.jp/user_images/20230318/14/jumbooomori/66/d8/j/o0999056215256975541.jpg"
+        }
       }
     ]
   },
