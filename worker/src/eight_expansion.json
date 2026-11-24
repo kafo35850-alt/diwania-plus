@@ -15743,28 +15743,44 @@
         "points": 400,
         "q": "ما اسم السلسلة الكوميدية السورية الناقدة الشهيرة التي قدّمها الفنان ياسر العظمة منذ عام 1982؟",
         "a": "مرايا",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://backend.roya-tv.com/imagechanger/Size02Q40R169M/images/programs/1457/gRpax0QAbIrph23.jpg"
+        }
       },
       {
         "uid": "series_levant_general_drive_q22_400",
         "points": 400,
         "q": "ما اسم المسلسل السوري الكوميدي الاجتماعي الذي دارت أحداثه في قرية «أم الطنافس الفوقا» من بطولة باسم ياخور ونضال سيجري؟",
         "a": "ضيعة ضايعة",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://m.media-amazon.com/images/M/MV5BZmQ1YWFkOGQtNTVlOS00MzgyLThiOGQtNWM0ZjRjNjM5Yzk4XkEyXkFqcGc%40._V1_QL75_UX658_.jpg"
+        }
       },
       {
         "uid": "series_levant_general_drive_q23_600",
         "points": 600,
         "q": "ما اسم مسلسل البيئة الشامية الرائد الصادر عام 1992 الذي أخرجه بسام الملا وكتبه أكرم شريم ويُعدّ حجر الأساس لموجة دراما البيئة الشامية؟",
         "a": "أيام شامية",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://syrmh.com/wp-content/uploads/2021/07/13166012_648124478676026_434899926586049364_n.jpg"
+        }
       },
       {
         "uid": "series_levant_general_drive_q24_600",
         "points": 600,
         "q": "من هو المخرج السوري الراحل الذي أخرج ثلاثية الأندلس التاريخية («صقر قريش»، «ربيع قرطبة»، «ملوك الطوائف») ومسلسل «التغريبة الفلسطينية»، ومن هو الكاتب الذي ألّف جميع هذه الأعمال؟",
         "a": "المخرج حاتم علي — والكاتب وليد سيف",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.7elwa.com/sites/default/files/images/editor/%D8%A7%D9%84%D8%AA%D8%BA%D8%B1%D9%8A%D8%A8%D8%A9%20%D8%A7%D9%84%D9%81%D9%84%D8%B3%D8%B7%D9%8A%D9%86%D9%8A%D8%A9_1.jpg"
+        }
       }
     ]
   },
