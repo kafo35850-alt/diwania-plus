@@ -5639,14 +5639,22 @@
         "points": 200,
         "q": "في أي جهة جغرافية من المملكة العربية السعودية تقع منطقة نجران؟",
         "a": "الجنوب (الجنوب الغربي على الحدود مع اليمن)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Najran_Region_-_Saudi_Arabia.svg/1280px-Najran_Region_-_Saudi_Arabia.svg.png"
+        }
       },
       {
         "uid": "custom_1795333659132_drive_q9_200",
         "points": 200,
         "q": "ما اسم الوادي العظيم الذي يشق منطقة نجران وتنتشر على ضفافه مزارع النخيل والحمضيات؟",
         "a": "وادي نجران",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "/eight-media/f985fcfc44841a3f4dbc.webp"
+        }
       },
       {
         "uid": "custom_1795333659132_drive_q10_200",
@@ -5663,21 +5671,33 @@
         "points": 200,
         "q": "ما المحصول الزراعي الشهير الذي تتميز به مزارع نجران بجودة عالية إلى جانب التمور؟",
         "a": "الحمضيات (البرتقال واليوسفي والليمون)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://portalcdn.spa.gov.sa/backend/original/201212/ac1561ad3dbe03b4b450e35b07d3d4de.jpeg"
+        }
       },
       {
         "uid": "custom_1795333659132_drive_q12_200",
         "points": 200,
         "q": "ما اسم السد الضخم الواقع في منطقة نجران ويُعد من أكبر السدود في المملكة؟",
         "a": "سد وادي نجران",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "/eight-media/2a1b1b60e0b6fca5226c.webp"
+        }
       },
       {
         "uid": "custom_1795333659132_drive_q13_400",
         "points": 400,
         "q": "ما اسم المنطقة الأثرية الثقافية في نجران المسجلة في قائمة اليونسكو للتراث العالمي عام 2021؟",
         "a": "منطقة حمى الثقافية (آبار حمى)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "/eight-media/f56be6c5cc932b396ef0.webp"
+        }
       },
       {
         "uid": "custom_1795333659132_drive_q14_400",
@@ -5694,28 +5714,44 @@
         "points": 400,
         "q": "ما اسم الأكلة الشعبية النجرانية الأشهر المصنوعة من خبز البر المسقى بالمرق والسمن وتُقدّم ساخنة في إناء حجري؟",
         "a": "الرقش",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://portalcdn.spa.gov.sa/backend/original/202512/WgrJ8noweeqoTIsMcPZPFRQNJjQUqWseYYmn2k4Y.jpg"
+        }
       },
       {
         "uid": "custom_1795333659132_drive_q16_400",
         "points": 400,
         "q": "ما اسم الفنين الشعبيين التراثيين الأشهر في نجران اللذين يُؤديان بالصفوف والطبول والجنابي؟",
         "a": "الزامل والرزفة النجرانية",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://portalcdn.spa.gov.sa/backend/original/202411/0zCY7CdY9sTr2YW951auICLoaeqFcEofer3Pu8h5.jpg"
+        }
       },
       {
         "uid": "custom_1795333659132_drive_q17_400",
         "points": 400,
         "q": "ما اسم المحافظة النجرانية الواقعة على أطراف الربع الخالي وتُلقب بـ «عروس الربع الخالي»؟",
         "a": "محافظة شرورة",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://portalcdn.spa.gov.sa/backend/original/202601/4opQdfkIIUtI0vgzB4jmil6lucVvIuKLTYl0jgJU.jpg"
+        }
       },
       {
         "uid": "custom_1795333659132_drive_q18_400",
         "points": 400,
         "q": "ما اسم القصر الطيني التراثي الشهير في نجران المبني فوق جبل العان ويعود تاريخه لأكثر من 300 عام؟",
         "a": "قصر العان (قصر سعدان)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://portalcdn.spa.gov.sa/backend/original/201702/80f422c2650b298f5c48851d581b1b74.jpeg"
+        }
       },
       {
         "uid": "custom_1795333659132_drive_q19_600",
