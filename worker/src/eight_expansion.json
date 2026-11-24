@@ -6568,14 +6568,22 @@
         "points": 200,
         "q": "ما السورة التي وردت فيها «آية الكرسي» أعظم آية في كتاب الله، وهي أطول سورة في القرآن الكريم؟",
         "a": "سورة البقرة",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/Surah_Al-Baqara.png?width=1280"
+        }
       },
       {
         "uid": "custom_1795335071786_drive_q10_200",
         "points": 200,
         "q": "ما السورة التي تُعرف بـ «عروس القرآن» وتكررت فيها الآية الكريمة ﴿فَبِأَيِّ آلَاءِ رَبِّكُمَا تُكَذِّبَانِ﴾ 31 مرة؟",
         "a": "سورة الرحمن",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "/eight-media/479be8b7c62268237840.webp"
+        }
       },
       {
         "uid": "custom_1795335071786_drive_q11_200",
@@ -6592,14 +6600,22 @@
         "points": 200,
         "q": "ما السورة الوحيدة في القرآن الكريم التي تبدأ دون «البسملة» في مطلعها؟",
         "a": "سورة التوبة (براءة)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "/eight-media/1f01df3e382333f2f02f.webp"
+        }
       },
       {
         "uid": "custom_1795335071786_drive_q13_200",
         "points": 200,
         "q": "ما السورة التي سُردت فيها قصة نبي الله يوسف عليه السلام كاملةً في موضع واحد ووصفت بـ «أحسن القصص»؟",
         "a": "سورة يوسف",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/Surah_Yusuf.png?width=1280"
+        }
       },
       {
         "uid": "custom_1795335071786_drive_q14_400",
@@ -6616,35 +6632,55 @@
         "points": 400,
         "q": "ما السورة التي وردت فيها «البسملة» مرتين (في مطلعها وفي ثناياها ضمن كتاب سليمان عليه السلام)؟",
         "a": "سورة النمل",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "/eight-media/3fdaafb727598b66fc27.webp"
+        }
       },
       {
         "uid": "custom_1795335071786_drive_q16_400",
         "points": 400,
         "q": "ما السورة التي ورد فيها لفظ الجلالة «الله» في كل آية من آياتها جميعاً دون استثناء؟",
         "a": "سورة المجادلة",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "/eight-media/5c08f9bc0ad8e6cc69b9.webp"
+        }
       },
       {
         "uid": "custom_1795335071786_drive_q17_400",
         "points": 400,
         "q": "ما السورة التي سُمّيت باسم المرأة الوحيدة التي ذُكر اسمها صراحةً في القرآن الكريم؟",
         "a": "سورة مريم",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/Surah_Maryam.png?width=1280"
+        }
       },
       {
         "uid": "custom_1795335071786_drive_q18_400",
         "points": 400,
         "q": "ما السورة الوحيدة في القرآن الكريم التي تحتوي على سجدتي تلاوة (اثنتين)؟",
         "a": "سورة الحج",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "/eight-media/45180ce21577455bc057.webp"
+        }
       },
       {
         "uid": "custom_1795335071786_drive_q19_400",
         "points": 400,
         "q": "ما السورة التي تُعرف أيضاً باسم «سورة بني إسرائيل» وتبدأ بذكر معجزة الإسراء؟",
         "a": "سورة الإسراء",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/Surah_Al-Isra.png?width=1280"
+        }
       },
       {
         "uid": "custom_1795335071786_drive_q20_600",
