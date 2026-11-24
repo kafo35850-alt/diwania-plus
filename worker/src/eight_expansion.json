@@ -15852,6 +15852,10 @@
         "qm": {
           "t": "image",
           "u": "/eight-media/e71421fbb8a345951c6a.webp"
+        },
+        "am": {
+          "t": "image",
+          "u": "https://upload.wikimedia.org/wikipedia/commons/4/40/Al_Khazneh_The_Treasury_at_Petra.jpg"
         }
       },
       {
@@ -15862,6 +15866,10 @@
         "qm": {
           "t": "image",
           "u": "/eight-media/e77a9598389495e781e2.webp"
+        },
+        "am": {
+          "t": "image",
+          "u": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Taj_Mahal%2C_Agra%2C_India.jpg/1280px-Taj_Mahal%2C_Agra%2C_India.jpg"
         }
       },
       {
@@ -15872,6 +15880,10 @@
         "qm": {
           "t": "image",
           "u": "/eight-media/10c436c7993d05f1930d.webp"
+        },
+        "am": {
+          "t": "image",
+          "u": "https://static.travelstride.com/store/main_image/6173435/attachment/70c3bda40aae29c8217eb3bac4c9fdcf.jpg"
         }
       },
       {
@@ -15882,6 +15894,10 @@
         "qm": {
           "t": "image",
           "u": "/eight-media/8f86a287f159a149f57f.webp"
+        },
+        "am": {
+          "t": "image",
+          "u": "https://www.unesco.org/sites/default/files/styles/best_image/public/structured_data/rome.jpg.webp?itok=4tiPH4gP"
         }
       },
       {
@@ -15892,6 +15908,10 @@
         "qm": {
           "t": "image",
           "u": "/eight-media/ba933dbe943a6c145d1a.webp"
+        },
+        "am": {
+          "t": "image",
+          "u": "https://content.eturia.ro/images/product/88e6e0a5-d21b-41e5-86e0-e970bdc459b0/5e4f8588da42921130108fba9ff9b324/original_1.jpg"
         }
       },
       {
@@ -15902,6 +15922,10 @@
         "qm": {
           "t": "image",
           "u": "/eight-media/0cfae7e5a025504eb0b2.webp"
+        },
+        "am": {
+          "t": "image",
+          "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/91/Mont_St_Michel_Abbey.jpg/1280px-Mont_St_Michel_Abbey.jpg"
         }
       }
     ]
