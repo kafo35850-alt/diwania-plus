@@ -13881,55 +13881,35 @@
         "points": 200,
         "q": "ما اسم الفريق الإيطالي العريق ذي اللون الأحمر الشهير الذي يُعد الأكثر تتويجاً ببطولة الصانعين في تاريخ الفورمولا 1؟",
         "a": "فيراري (Scuderia Ferrari)",
-        "useCategoryPoster": true,
-        "am": {
-          "t": "image",
-          "u": "https://ferrari.scene7.com/is/image/ferrari/65fab4f33be2600056a639b3-scuderia-ferrari-australian-gp-2024-preview-land"
-        }
+        "useCategoryPoster": true
       },
       {
         "uid": "formula_1_drive_q21_400",
         "points": 400,
         "q": "ما اسم نظام تقليل السحب الهوائي الموجود في الجناح الخلفي لسيارات الفورمولا 1 والذي يُستخدم للمساعدة في التجاوز على المقاطع المستقيمة؟",
         "a": "نظام DRS (Drag Reduction System)",
-        "useCategoryPoster": true,
-        "am": {
-          "t": "image",
-          "u": "https://s2-autoesporte.glbimg.com/Tf8kaHlFuqIPyrx_LW1EP-xIymE%3D/0x0%3A700x411/984x0/smart/filters%3Astrip_icc%28%29/i.s3.glbimg.com/v1/AUTH_cf9d035bf26b4646b105bd958f32089d/internal_photos/bs/2024/q/C/ezcUZQSViBWHQ0M0LMLQ/f1-red-bull-2023-drs-aberto.jpg"
-        }
+        "useCategoryPoster": true
       },
       {
         "uid": "formula_1_drive_q22_400",
         "points": 400,
         "q": "كم عدد الألقاب العالمية القياسي الذي يتقاسمه كل من مايكل شوماخر ولويس هاميلتون في بطولة سائقي الفورمولا 1؟",
         "a": "7 ألقاب عالمية",
-        "useCategoryPoster": true,
-        "am": {
-          "t": "image",
-          "u": "https://cloudfront-us-east-1.images.arcpublishing.com/copesa/T262BU6GTBC4XAF6VJILIV3D44.jpg"
-        }
+        "useCategoryPoster": true
       },
       {
         "uid": "formula_1_drive_q23_600",
         "points": 600,
         "q": "من هو أول بطل عالم في تاريخ بطولة الفورمولا 1 الرسمية عام 1950، ومع أي فريق حقق اللقب؟",
         "a": "جوزيبي فارينا (Giuseppe Farina) مع فريق ألفا روميو (Alfa Romeo)",
-        "useCategoryPoster": true,
-        "am": {
-          "t": "image",
-          "u": "https://s2-ge.glbimg.com/5lBGbI2OXjP6YRUXn70oSMBdDGY%3D/1200x/smart/filters%3Acover%28%29%3Astrip_icc%28%29/i.s3.glbimg.com/v1/AUTH_bc8228b6673f488aa253bbcb03c80ec5/internal_photos/bs/2019/c/m/CioIETSua8M3AkhBiCWA/giuseppefarina-1950.jpg"
-        }
+        "useCategoryPoster": true
       },
       {
         "uid": "formula_1_drive_q24_600",
         "points": 600,
         "q": "ما الفريق الاستثنائي الذي شارك لموسم واحد فقط في الفورمولا 1 عام 2009 وحقق فيه بطولتي السائقين والصانعين معاً قبل أن تشتريه مرسيدس؟",
         "a": "براون جي بي (Brawn GP)",
-        "useCategoryPoster": true,
-        "am": {
-          "t": "image",
-          "u": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Jenson_Button_2009_Germany_2.jpg/960px-Jenson_Button_2009_Germany_2.jpg"
-        }
+        "useCategoryPoster": true
       }
     ]
   },
