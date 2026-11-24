@@ -16,35 +16,55 @@
         "points": 200,
         "q": "من هو القائد الأموي الملقب بـ «صقر قريش» الذي أسس الإمارة الأموية في الأندلس عام 756م؟",
         "a": "عبد الرحمن الداخل (عبد الرحمن بن معاوية)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://upload.wikimedia.org/wikipedia/commons/0/0e/Abd_ar-Rahman_I.jpg"
+        }
       },
       {
         "uid": "abbasid_andalus_drive_q21_400",
         "points": 400,
         "q": "في أي عام سقطت مدينة غرناطة، آخر معاقل المسلمين في الأندلس، ومن كان آخر ملوكها؟",
         "a": "عام 1492م (897هـ)، وآخر ملوكها أبو عبد الله محمد الثاني عشر (المعروف بأبي عبد الله الصغير)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://upload.wikimedia.org/wikipedia/commons/d/dd/Exterior_Alhambra_Granada.jpg"
+        }
       },
       {
         "uid": "abbasid_andalus_drive_q22_400",
         "points": 400,
         "q": "ما اسم المدينة الملكية الفخمة التي بناها الخليفة عبد الرحمن الناصر بالقرب من قرطبة لتكون مقراً للخلافة في الأندلس؟",
         "a": "مدينة الزهراء",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://upload.wikimedia.org/wikipedia/commons/e/e1/Madinat_al-Zahra_Dar_al_Jund_or_Upper_Hall_DSCF6655.jpg"
+        }
       },
       {
         "uid": "abbasid_andalus_drive_q23_600",
         "points": 600,
         "q": "ما اسم المعركة الحاسمة التي وقعت عام 132هـ (750م) وأدت إلى سقوط الدولة الأموية وقيام الدولة العباسية؟",
         "a": "معركة الزاب (الزاب الكبير)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://upload.wikimedia.org/wikipedia/commons/8/88/Battle_of_Al-Zab.png"
+        }
       },
       {
         "uid": "abbasid_andalus_drive_q24_600",
         "points": 600,
         "q": "ما اسم المعركة الكبرى التي انتصر فيها يوسف بن تاشفين والمعتمد بن عباد على ألفونسو السادس ملك قشتالة عام 1086م؟",
         "a": "معركة الزلّاقة",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://upload.wikimedia.org/wikipedia/commons/2/2a/Battle_of_Zalaca%2C_1086_%28J._Serra%29.png"
+        }
       }
     ]
   },
