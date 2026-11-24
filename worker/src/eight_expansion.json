@@ -18435,35 +18435,55 @@
         "points": 200,
         "q": "في أي عام استحوذت شركة فيسبوك (ميتا حالياً) على تطبيق إنستغرام؟",
         "a": "عام 2012.",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://apponward.com/wp-content/uploads/2023/09/2012.png"
+        }
       },
       {
         "uid": "social_media_platforms_drive_q21_400",
         "points": 400,
         "q": "ما عنوان أول فيديو رُفع في تاريخ منصة يوتيوب في 23 أبريل 2005 من قِبل الشريك المؤسس جاويد كريم؟",
         "a": "أنا في حديقة الحيوان (Me at the zoo).",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://images.moneycontrol.com/static-mcnews/2022/04/JK.jpg?height=431&impolicy=website&width=770"
+        }
       },
       {
         "uid": "social_media_platforms_drive_q22_400",
         "points": 400,
         "q": "ما الاسم الأصلي الذي أُطلق به تطبيق سناب شات (Snapchat) عند صدوره الأول في يوليو 2011 قبل تغييره بعد شهرين؟",
         "a": "بيكابو (Picaboo).",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://miro.medium.com/v2/resize%3Afit%3A1200/1%2AJHzlnlz_64Qi6kJQELXdpg.png"
+        }
       },
       {
         "uid": "social_media_platforms_drive_q23_600",
         "points": 600,
         "q": "ما اسم تطبيق الفيديوهات القصيرة الذي كان يتيح مقاطع متكررة مدتها 6 ثوانٍ فقط، واستحوذت عليه تويتر عام 2012 قبل أن تُغلقه رسمياً في يناير 2017؟",
         "a": "فاين (Vine).",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://3.bp.blogspot.com/-tfSAKSV5OOM/Who5WNTEvnI/AAAAAAAAABE/iTTt8ikNTrQLuFtZ6MswuvDLeXrA18hZACLcBGAs/s1600/Vine_logo.svg.png"
+        }
       },
       {
         "uid": "social_media_platforms_drive_q24_600",
         "points": 600,
         "q": "في أي عام أُطلقت فكرة «الهاشتاغ» (#) لأول مرة باقتراح من المصمم كريس ميسينا (Chris Messina) في تغريدة على تويتر؟",
         "a": "عام 2007 (في 23 أغسطس 2007).",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.repstatic.it/content/contenthub/img/2021/08/23/171253163-aeaf72e5-2ba3-4384-967e-b42fbe811933.jpg"
+        }
       }
     ]
   },
@@ -18728,35 +18748,55 @@
         "points": 200,
         "q": "ما اسم لعبة البناء والاستكشاف ذات المكعبات التي تُعد الأكثر مبيعاً في تاريخ ألعاب الفيديو؟",
         "a": "ماينكرافت (Minecraft)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://gaming-cdn.com/images/products/5657/screenshot/minecraft-windows-10-edition-windows-10-edition-pc-jeu-microsoft-store-wallpaper-4.jpg?v=1747754625"
+        }
       },
       {
         "uid": "video_games_drive_q21_400",
         "points": 400,
         "q": "ما اسم الاستوديو الياباني المطوّر لسلسلة ألعاب «دارك سولز» (Dark Souls) ولعبة «إلدن رينغ» (Elden Ring)؟",
         "a": "فروم سوفتوير (FromSoftware)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://1.bp.blogspot.com/-3PvvKyFpqT8/Xv_xt_OU8PI/AAAAAAAAEi8/fgGi7aXRUg85Ou_9_OGr2ecwY5PfDqpZwCLcBGAsYHQ/s1600/FromSoftware_logo.png"
+        }
       },
       {
         "uid": "video_games_drive_q22_400",
         "points": 400,
         "q": "في أي عام صدر جهاز «بلايستيشن 2» (PlayStation 2) لأول مرة في اليابان؟",
         "a": "عام 2000",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://upload.wikimedia.org/wikipedia/commons/c/c3/Sony-PlayStation-2-30001-wController-L.jpg"
+        }
       },
       {
         "uid": "video_games_drive_q23_600",
         "points": 600,
         "q": "ما الاسم الأصلي الذي عُرفت به شخصية «ماريو» عند أول ظهور لها في لعبة الأركيد Donkey Kong عام 1981؟",
         "a": "جامبمان (Jumpman)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.colorado.edu/asmagazine/sites/default/files/styles/large_image_style/public/2025-10/Donkey%20Kong.png?itok=FWjgM1WI"
+        }
       },
       {
         "uid": "video_games_drive_q24_600",
         "points": 600,
         "q": "ما اسم أول لعبة فيديو على الإطلاق تفوز بجائزة «لعبة العام» (Game of the Year) في النسخة الافتتاحية لحفل The Game Awards عام 2014؟",
         "a": "دراغون إيج: إنكويزيشن (Dragon Age: Inquisition)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://cdn.awsli.com.br/2500x2500/53/53761/produto/25954494/2dcf5e3337.jpg"
+        }
       }
     ]
   },
