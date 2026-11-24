@@ -14915,28 +14915,44 @@
         "points": 400,
         "q": "ما اسم شقيق الزير سالم الذي أشعل مقتله شرارة الحرب، ومن الفنان السوري الراحل الذي جسّد دوره؟",
         "a": "كليب بن ربيعة — وجسّد دوره الفنان الراحل خالد تاجا",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://s1.dmcdn.net/v/PiDS21eotAKs3pYnT/x720"
+        }
       },
       {
         "uid": "series_alzeer_salem_drive_q22_400",
         "points": 400,
         "q": "من هو الفنان الذي أدّى شخصية «جساس بن مرة» في مسلسل «الزير سالم»؟",
         "a": "عابد فهد",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://s1.dmcdn.net/v/PiDS21eotAKs3pYnT/x720"
+        }
       },
       {
         "uid": "series_alzeer_salem_drive_q23_600",
         "points": 600,
         "q": "من هو الكاتب السوري الذي ألّف سيناريو مسلسل «الزير سالم» عام 2000، ومن هو المخرج الذي أخرج العمل؟",
         "a": "الكاتب ممدوح عدوان — والمخرج حاتم علي",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://snacksyrian.com/wp-content/uploads/2021/07/%D9%85%D9%85%D8%AF%D9%88%D8%AD-%D8%B9%D8%AF%D9%88%D8%A7%D9%86.jpg"
+        }
       },
       {
         "uid": "series_alzeer_salem_drive_q24_600",
         "points": 600,
         "q": "من هو الموسيقار السوري الذي ألّف الموسيقى التصويرية الشهيرة لمسلسل «الزير سالم»، ومن هو الفنان الذي جسّد شخصية «الجرو» (هجرس بن كليب) في المسلسل؟",
         "a": "الموسيقار طاهر مامللي — والفنان تيم حسن",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://almashhadonline.net/uploads/article/thumbs/ARTICLE_5c6d2b175e024.jpeg"
+        }
       }
     ]
   },
@@ -15048,21 +15064,33 @@
         "points": 400,
         "q": "ما الاسم الحقيقي للمحامي «سول غودمان» قبل تغييره لاسمه المهني؟",
         "a": "جيمي ماكغيل (James Morgan \"Jimmy\" McGill)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://townsquare.media/site/442/files/2016/03/better-call-saul-walter-pic.jpg"
+        }
       },
       {
         "uid": "series_breaking_bad_drive_q23_600",
         "points": 600,
         "q": "ما اسم الشركة التكنولوجية التي شارك والتر وايت في تأسيسها مع صديقه إليوت شوارتز في شبابه قبل أن يبيع حصته فيها مقابل 5,000 دولار فقط؟",
         "a": "غراي ماتر تكنولوجيز (Gray Matter Technologies)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://breakingyarn.com/cdn/shop/products/GrayMatterTechnologies_1024x1024%402x.jpg?v=1609680725"
+        }
       },
       {
         "uid": "series_breaking_bad_drive_q24_600",
         "points": 600,
         "q": "ما عنوان الحلقة الرابعة عشرة من الموسم الخامس التي أخرجها ريان جونسون واقتُبس اسمها من قصيدة للشاعر الإنجليزي بيرسي بيش شيلي وحققت تقييم 10/10 على IMDb؟",
         "a": "أوزيماندياس (Ozymandias)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://resizer.ladbiblegroup.com/ogimage/v3/assets/bltcd74acc1d0a99f3a/blt7ef653628956f787/67d2fb1e17626917050c8fe7/breaking-bad-5x13-ozymandias.jpg"
+        }
       }
     ]
   },
