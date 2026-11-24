@@ -18657,28 +18657,44 @@
         "points": 400,
         "q": "في مسلسل «العشق الممنوع»، ما اسم العائلة الثرية التي ينتمي إليها «عدنان بك» وتدور أحداث المسلسل في قصرها المطل على مضيق البوسفور؟",
         "a": "عائلة زياكيل (آل زياكيل)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://koza24com.teimg.com/crop/1280x720/koza24-com/wp/uploads/yi/yillar-sonra-gelen-ask-i-memnu-itirafi_981a9.jpg"
+        }
       },
       {
         "uid": "turkish_drama_series_drive_q22_400",
         "points": 400,
         "q": "ما اسم الشخصية التي جسدها الممثل التركي «أراس بولوت إينيملي» في مسلسل «الحفرة» (Çukur) وتولّت حماية الحي وإدارته؟",
         "a": "ياماش كوشوفالي",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://s.hawacom.tv/storage/attachments/14/489563Image1-1180x677_d_214673.jpg/r/1800/489563Image1-1180x677_d_214673.jpg"
+        }
       },
       {
         "uid": "turkish_drama_series_drive_q23_600",
         "points": 600,
         "q": "ما اسم المخرج التركي الذي تُوّج بجائزة السعفة الذهبية في مهرجان كان السينمائي عام 2014 عن فيلمه «البيات الشتوي» (Winter Sleep)؟",
         "a": "نوري بيلج جيلان (Nuri Bilge Ceylan)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://static.independent.co.uk/s3fs-public/thumbnails/image/2012/03/17/20/Nuri-Bilge-AFP.jpg?fit=crop&height=1200&width=1200"
+        }
       },
       {
         "uid": "turkish_drama_series_drive_q24_600",
         "points": 600,
         "q": "ما اسم الأديب التركي الذي كتب رواية «العشق الممنوع» عام 1899 والتي اقتُبس منها المسلسل التركي الشهير لاحقاً؟",
         "a": "خالد ضياء أوشاقلي غيل (Halid Ziya Uşaklıgil)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://tamadres.com/media/magefan_blog/halit-ziya-uaskligil-kitaplari.jpg"
+        }
       }
     ]
   },
