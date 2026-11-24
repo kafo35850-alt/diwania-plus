@@ -19399,35 +19399,55 @@
         "points": 200,
         "q": "ما الاسم الذي أُطلق على الهجوم الجوي الياباني المفاجئ على القاعدة البحرية الأمريكية في هاواي بتاريخ 7 ديسمبر 1941؟",
         "a": "الهجوم على بيرل هاربر (Pearl Harbor).",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/USS_Arizona_burning_Pearl_Harbor.jpg/1276px-USS_Arizona_burning_Pearl_Harbor.jpg"
+        }
       },
       {
         "uid": "world_war_2_drive_q21_400",
         "points": 400,
         "q": "ما الاسم الرمزي (Code Name) لعملية الغزو الألماني للاتحاد السوفيتي التي انطلقت في 22 يونيو 1941؟",
         "a": "عملية بربروسا (Operation Barbarossa).",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://s3.amazonaws.com/s3.timetoast.com/public/uploads/photo/8401561/image/eed7e0b20786af07338cd6ebd5761afc"
+        }
       },
       {
         "uid": "world_war_2_drive_q22_400",
         "points": 400,
         "q": "ما اسم القاذفة الأمريكية من طراز B-29 التي أسقطت القنبلة النووية الأولى «الولد الصغير» على مدينة هيروشيما في 6 أغسطس 1945؟",
         "a": "إينولا غاي (Enola Gay).",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://ids.si.edu/ids/download?id=NASM-SI-2005-6309"
+        }
       },
       {
         "uid": "world_war_2_drive_q23_600",
         "points": 600,
         "q": "ما الاسم الرمزي لعملية الخداع الاستخباراتي البريطانية عام 1943 التي استخدمت جثة مزيفة لضابط يحمل وثائق مضللة لإقناع ألمانيا بأن الحلفاء سيغزون اليونان وسردينيا بدلاً من صقلية؟",
         "a": "عملية اللحم المفروم (Operation Mincemeat).",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://d2kdkfqxnvpuu9.cloudfront.net/images/thumb/87373/133ae192fc9b.jpg"
+        }
       },
       {
         "uid": "world_war_2_drive_q24_600",
         "points": 600,
         "q": "ما اسم المعركة البحرية والجوية التي وقعت في يونيو 1944 واشتُهرت بلقب «مجزرة الديك الرومي الكبرى في ماريانا» بسبب الخسائر الكاسحة للطيران البحري الياباني أمام الولايات المتحدة؟",
         "a": "معركة بحر الفلبين (Battle of the Philippine Sea).",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.history.navy.mil/content/history/nhhc/our-collections/photography/numerical-list-of-images/nhhc-series/nh-series/80-G-236000/80-G-236945/_jcr_content/mediaitem/image.img.jpg/1439250220181.jpg"
+        }
       }
     ]
   },
