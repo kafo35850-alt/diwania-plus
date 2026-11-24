@@ -15360,7 +15360,11 @@
         "points": 600,
         "q": "من هو الكاتب الذي شارك المخرج محمد سامي في كتابة السيناريو والحوار لمسلسل «جعفر العمدة»، وما اسم الشركة المنتجة للعمل؟",
         "a": "الكاتب مهاب طارق — وإنتاج شركة ميديا هب (سعدي – جوهر / Media Hub)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://mediaaws-live.almasryalyoum.com/AMAYLivePictures/portalimages/news/original/2023/05/14/2104473_0.jpeg"
+        }
       }
     ]
   },
