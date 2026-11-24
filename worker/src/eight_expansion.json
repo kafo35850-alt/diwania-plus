@@ -15111,35 +15111,55 @@
         "points": 200,
         "q": "كم عدد السنوات التي تفصل بين كل حقبة زمنية وأخرى في دورات السفر عبر الزمن داخل المسلسل؟",
         "a": "33 عاماً",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://occ-0-3011-1009.1.nflxso.net/dnm/api/v6/E8vDc_W8CLv7-yMQu8KMEC7Rrr8/AAAABcySmbtyvMasdNEtXRDxGODWxkYA0Aq47euDMlofv2pCjeVR0Wo89tLbQjzTjNaXIblhG7yAZfaKrsr8dcG75oW2GRbv.jpg?r=000"
+        }
       },
       {
         "uid": "series_dark_drive_q21_400",
         "points": 400,
         "q": "ما الاسم الذي اتخذه «يوناس كانوالد» في مرحلة شيخوخته كزعيم لمجموعة «Sic Mundus»؟",
         "a": "آدم (Adam)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://vader.news/__export/1596997638426/sites/gadgets/img/2020/08/09/adam_dark_.jpg_1199627642.jpg"
+        }
       },
       {
         "uid": "series_dark_drive_q22_400",
         "points": 400,
         "q": "ما العبارة اللاتينية الشهيرة المحفورة على الباب المعدني داخل كهف فيندن، وما معناها؟",
         "a": "Sic Mundus Creatus Est — وتعني «وهكذا خُلق العالم»",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.dafont.com/forum/attach/orig/9/4/941050.jpg"
+        }
       },
       {
         "uid": "series_dark_drive_q23_600",
         "points": 600,
         "q": "من هو صانع الساعات ومؤلف كتاب «رحلة عبر الزمن» الذي تبيّن في نهاية المسلسل أنه مخترع آلة الزمن الأصلية في «العالم الأصلي»؟",
         "a": "إتش. جي. تانهاوس (H. G. Tannhaus)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://hips.hearstapps.com/digitalspyuk.cdnds.net/17/51/1513611301-tannhaus.png?resize=980%3A%2A"
+        }
       },
       {
         "uid": "series_dark_drive_q24_600",
         "points": 600,
         "q": "من هما المؤلفان الألمانيان اللذان ابتكرا مسلسل «دارك»، وفي أي عام ميلادي وقعت الحادثة في «العالم الأصلي» التي شطرت الواقع إلى عالمَي آدم وإيفا؟",
         "a": "باران بو أودار ويانتيه فريزه (Baran bo Odar & Jantje Friese) — وعام 1986م (21 يونيو 1986م)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://image.stern.de/7828866/t/7w/v3/w1440/r1.7778/-/bora-bo-odar-1.jpg"
+        }
       }
     ]
   },
