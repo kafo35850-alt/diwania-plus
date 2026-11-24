@@ -19276,9 +19276,12 @@
       {
         "uid": "series_squid_game_drive_q20_200",
         "points": 200,
-        "q": "ما اسم اللعبة الأولى التي واجهها اللاعبون في الساحة أمام الدمية العملاقة؟",
+        "q": "شاهد الرسم المتحرك. ما اسم اللعبة الأولى في «لعبة الحبار» التي يتقدّم فيها اللاعبون ثم يتجمّدون مثلما في المقطع؟",
         "a": "الضوء الأحمر، الضوء الأخضر (Red Light, Green Light)",
-        "useCategoryPoster": true,
+        "qm": {
+          "t": "video",
+          "u": "/eight-media/37fe2192d418531b5bf6.mp4"
+        },
         "am": {
           "t": "image",
           "u": "https://dnm.nflximg.net/api/v6/2DuQlx0fM4wd1nzqm5BFBi6ILa8/AAAAQTMiBTPTIq6DgiQrJpQE1oXzfHBUF_wMBB4rJzGl3SCV-W3j7_rQvtV7RzC0x74t7PVcdgltjhrCBNpSdROSrI92VhDwnPH3EKdbYda78pSUEyQLVVRaMdOmu9yZsA6awPsvQYN-3me079QpCg9tIJ5q.jpg?r=246"

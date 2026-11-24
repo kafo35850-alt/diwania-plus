@@ -7871,7 +7871,7 @@ else if (h === 'youtube.com' || h === 'youtube-nocookie.com') id = x.searchParam
 return /^[A-Za-z0-9_-]{6,20}$/.test(id) ? id : '';
 } catch (e) { return ''; }
 }
-function dwOkUrl(u) { u = String(u || ''); return /^\/eight-media\/[a-f0-9]{20}\.webp$/.test(u) || /^\/media\/med_[A-Za-z0-9_-]+$/.test(u) || /^https:\/\//.test(u) ? u : ''; }
+function dwOkUrl(u) { u = String(u || ''); return /^\/eight-media\/[a-f0-9]{20}\.(?:webp|mp4)$/.test(u) || /^\/media\/med_[A-Za-z0-9_-]+$/.test(u) || /^https:\/\//.test(u) ? u : ''; }
 function dwQMedia(q) {
 if (!q) return null;
 if (q.qm && dwOkUrl(q.qm.u)) return q.qm;
