@@ -15258,7 +15258,11 @@
         "points": 400,
         "q": "ما اسم السيف المصنوع من الفولاذ الفاليري الذي أهداه القائد جيور مورمونت إلى جون سنو؟",
         "a": "لونغكلو (Longclaw)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://images.ontheedgebrands.com/cdn-cgi/image/f%3Dauto%2Cheight%3D1000%2Cwidth%3D1000%2Cquality%3D75/images/c43-jl8034/jon-snow-holding-longclaw-sword-game-of-thrones-scene.jpg"
+        }
       },
       {
         "uid": "series_game_of_thrones_drive_q22_400",
