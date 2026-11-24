@@ -18924,35 +18924,55 @@
         "points": 200,
         "q": "ما عاصمة كندا؟",
         "a": "أوتاوا",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://images.squarespace-cdn.com/content/v1/610c60242d9ef15f1ce4bb7a/83bddcd8-2769-44d4-a683-ca0cda6cc987/1920px-Centre_Block_-_Parliament_Hill.jpg?format=2500w"
+        }
       },
       {
         "uid": "world_capitals_drive_q21_400",
         "points": 400,
         "q": "ما اسم العاصمة الإدارية لبوليفيا التي تُعد أعلى مقرّ حكومة في العالم بارتفاع يزيد على 3,600 متر فوق سطح البحر؟",
         "a": "لاباز",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://live.staticflickr.com/65535/54507152699_8951b25a34_c.jpg"
+        }
       },
       {
         "uid": "world_capitals_drive_q22_400",
         "points": 400,
         "q": "ما عاصمة دولة كازاخستان منذ عام 1997 بعد انتقالها من مدينة ألماتي؟",
         "a": "أستانا",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://cache.marriott.com/content/dam/marriott-renditions/TSERZ/tserz-view-6835-hor-wide.jpg?downsize=1336px%3A%2A&interpolation=progressive-bilinear&output-quality=70"
+        }
       },
       {
         "uid": "world_capitals_drive_q23_600",
         "points": 600,
         "q": "ما عاصمة دولة بالاو الجزيرية في المحيط الهادئ، والتي نُقلت إليها العاصمة من كورور عام 2006؟",
         "a": "نغيرولمود",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://images.treccani.it/ext-tool/extra/images/b/b5/b5a3ea2ce67b56fcce17f38783c0b139.jpg"
+        }
       },
       {
         "uid": "world_capitals_drive_q24_600",
         "points": 600,
         "q": "ما عاصمة ولايات ميكرونيسيا الموحدة الواقعة في جزيرة بونبي؟",
         "a": "باليكير",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.infobae.com/resizer/v2/2UGOHJDA4FB4RDEW3D5XISD7XU.jpg?auth=617e6bf74ce5d3f2e1b4659ed0f26ebf069d96451739c6d54267bf81faab5275"
+        }
       }
     ]
   },
