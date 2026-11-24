@@ -18993,35 +18993,55 @@
         "points": 200,
         "q": "ما العملة الرسمية للمملكة المتحدة؟",
         "a": "الجنيه الإسترليني",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://wise.com/imaginary-v2/12b727c90b0da6ebfe77acc75d3c3bd0.jpg?width=1200"
+        }
       },
       {
         "uid": "world_currencies_drive_q21_400",
         "points": 400,
         "q": "ما العملة الرسمية لسويسرا؟",
         "a": "الفرنك السويسري",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://studyinginswitzerland.com/wp-content/uploads/2021/02/swiss-francs.jpg"
+        }
       },
       {
         "uid": "world_currencies_drive_q22_400",
         "points": 400,
         "q": "ما العملة الرسمية لجمهورية البرازيل؟",
         "a": "الريال البرازيلي (Real)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://s2-oglobo.glbimg.com/Z68VrWZK9RlSC84jwcWJn4K_Fws%3D/0x0%3A1920x1280/1008x0/smart/filters%3Astrip_icc%28%29/i.s3.glbimg.com/v1/AUTH_da025474c0c44edd99332dddb09cabe8/internal_photos/bs/2022/3/X/YIh6EgRgSoK9NMLgNBkQ/ballots-gb60e014d1-1920.jpg"
+        }
       },
       {
         "uid": "world_currencies_drive_q23_600",
         "points": 600,
         "q": "ما العملة الرسمية لجمهورية بولندا؟",
         "a": "الزلوتي البولندي (Złoty)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://galeria.bankier.pl/p/8/4/3b3784c39484f0-1200-717-0-42-1000-599.jpg"
+        }
       },
       {
         "uid": "world_currencies_drive_q24_600",
         "points": 600,
         "q": "ما العملة الرسمية لمملكة بوتان في جبال الهيمالايا؟",
         "a": "النغولتروم البوتاني (Ngultrum)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.numiscollection.com/upload/image/bhutan-serial-6-banknotes---1-5-10-20-50-100-ngultrum---unc-p-image-107069-grande.jpg"
+        }
       }
     ]
   },
