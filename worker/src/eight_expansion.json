@@ -6788,14 +6788,22 @@
         "points": 200,
         "q": "كم عدد ركعات الصلوات الخمس المفروضة في اليوم والليلة؟",
         "a": "17 ركعة",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/Salat_times.png?width=1280"
+        }
       },
       {
         "uid": "custom_1795335231236_drive_q9_200",
         "points": 200,
         "q": "من هو أول الخلفاء الراشدين بعد وفاة النبي محمد ﷺ؟",
         "a": "أبو بكر الصديق رضي الله عنه",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/Abu_Bakr_Caliph_Calligraphy.png?width=1280"
+        }
       },
       {
         "uid": "custom_1795335231236_drive_q10_200",
@@ -6812,21 +6820,33 @@
         "points": 200,
         "q": "في أي سنة هجرية فُرض صيام شهر رمضان المبارك؟",
         "a": "السنة الثانية للهجرة",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/Crescent_moon_Ramadan.jpg?width=1280"
+        }
       },
       {
         "uid": "custom_1795335231236_drive_q12_200",
         "points": 200,
         "q": "كم عدد أركان الإيمان في الإسلام؟",
         "a": "6 أركان",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/Six_articles_of_the_Islamic_faith.svg?width=1280"
+        }
       },
       {
         "uid": "custom_1795335231236_drive_q13_400",
         "points": 400,
         "q": "من هو الصحابي الجليل الذي لُقّب بـ «أمين هذه الأمة»؟",
         "a": "أبو عبيدة بن الجراح رضي الله عنه",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/Abu_Ubayda_ibn_al-Jarrah_Masjid_an-Nabawi_Calligraphy.svg?width=1280"
+        }
       },
       {
         "uid": "custom_1795335231236_drive_q14_400",
@@ -6843,28 +6863,44 @@
         "points": 400,
         "q": "في أي سنة هجرية وقعت غزوة بدر الكبرى؟",
         "a": "السنة الثانية للهجرة (17 رمضان 2هـ)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/Battlefield_of_Badr.jpg?width=1280"
+        }
       },
       {
         "uid": "custom_1795335231236_drive_q16_400",
         "points": 400,
         "q": "من هو الصحابي الوحيد الذي ذُكر اسمه صراحةً في القرآن الكريم؟",
         "a": "زيد بن حارثة رضي الله عنه (في سورة الأحزاب)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/Zayd_ibn_Haritha_Masjid_an-Nabawi_Calligraphy.svg?width=1280"
+        }
       },
       {
         "uid": "custom_1795335231236_drive_q17_400",
         "points": 400,
         "q": "في أي سنة هجرية فُتحت مكة المكرمة؟",
         "a": "السنة الثامنة للهجرة (رمضان 8هـ)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/Al-Kaaba_in_Mecca.jpg?width=1280"
+        }
       },
       {
         "uid": "custom_1795335231236_drive_q18_400",
         "points": 400,
         "q": "من هو الصحابي الذي أشار على النبي ﷺ بحفر الخندق حول المدينة في غزوة الأحزاب؟",
         "a": "سلمان الفارسي رضي الله عنه",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/Salman_al-Farisi_Masjid_an-Nabawi_Calligraphy.png?width=1280"
+        }
       },
       {
         "uid": "custom_1795335231236_drive_q19_600",
