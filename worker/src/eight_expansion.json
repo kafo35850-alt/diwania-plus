@@ -3344,35 +3344,55 @@
         "points": 200,
         "q": "ما اسم المدينة التاريخية في حضرموت الملقّبة بـ«مانهاتن الصحراء» لشهرتها بناطحات السحاب الطينية؟",
         "a": "شبام حضرموت",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://idsb.tmgrup.com.tr/ly/uploads/images/2020/12/17/79816.jpg"
+        }
       },
       {
         "uid": "country_yemen_drive_q21_400",
         "points": 400,
         "q": "ما اسم أعلى قمة جبلية في اليمن وشبه الجزيرة العربية بأكملها، ويبلغ ارتفاعها 3,666 متراً؟",
         "a": "جبل النبي شعيب",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://scenenow.com/Content/editor_api/images/artboard%20copy%205-75c60856-13cc-49b9-a8bf-01038e1a741c.jpg"
+        }
       },
       {
         "uid": "country_yemen_drive_q22_400",
         "points": 400,
         "q": "ما اسم القصر التاريخي المبني فوق صخرة شاهقة في وادي ظهر قرب صنعاء ويُعد من أبرز رموز العمارة اليمنية؟",
         "a": "دار الحجر",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/35/Dar_Al_Hajar%2C_Wadi_Dhahr%2C_Yemen_%284325704846%29.jpg/960px-Dar_Al_Hajar%2C_Wadi_Dhahr%2C_Yemen_%284325704846%29.jpg"
+        }
       },
       {
         "uid": "country_yemen_drive_q23_600",
         "points": 600,
         "q": "ما اسم الملكة التي حكمت الدولة الصليحية في اليمن من عاصمتها جبلة، وكانت المرأة الوحيدة التي حظيت بلقب «الحجّة» في المذهب الإسماعيلي؟",
         "a": "الملكـة أروى بنت أحمد الصليحي",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://ye-voice.com/user_images/news/20-06-23-202225251.jpg"
+        }
       },
       {
         "uid": "country_yemen_drive_q24_600",
         "points": 600,
         "q": "ما اسم العاصمة التاريخية لمملكة قتبان القديمة الواقعة في وادي بيحان بمحافظة شبوة اليمنية؟",
         "a": "تمنع",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.monumentaorientalia.org/wp-content/uploads/2020/03/Tamna_6.png"
+        }
       }
     ]
   },
@@ -3533,35 +3553,55 @@
         "points": 600,
         "q": "ما اسم البيت التراثي الشهير في محافظة عنيزة الذي يُعد أحد أروع نماذج العمارة النجدية الفاخرة؟",
         "a": "بيت البسام التراثي",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://scth.scene7.com/is/image/scth/al-bassam-house%3Acrop-1920x1080?defaultImage=al-bassam-house"
+        }
       },
       {
         "uid": "custom_1795331549596_drive_q21_600",
         "points": 600,
         "q": "ما اسم الصخرة الشهيرة في محافظة عيون الجواء بالقصيم التي ارتبطت تاريخياً بالشاعر عنترة بن شداد؟",
         "a": "صخرة عنترة وعبلة",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.arabnews.com/sites/default/files/styles/n_670_395/public/main-image/2020/11/13/2346716-1964259521.jpg?itok=Dlv8GVk0"
+        }
       },
       {
         "uid": "custom_1795331549596_drive_q22_600",
         "points": 600,
         "q": "ما اسم المحافظة القصيمية التي كانت تُعرف قديماً بـ «النباج» وكانت محطة رئيسية على طريق الحج البصري؟",
         "a": "محافظة الأسياح (عين بن فهيد)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.alriyadh.com/media/article/2026/09/24/img/7211457662.jpg"
+        }
       },
       {
         "uid": "custom_1795331549596_drive_q23_600",
         "points": 600,
         "q": "ما اسم السوق الشعبي التراثي الشهير في محافظة عنيزة المبني على الطراز النجدي القديم؟",
         "a": "سوق المسوكف الشعبي",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://assets.bucketlistly.blog/sites/5adf778b6eabcc00190b75b1/content_entry5b155bed5711a8176e9f9783/65eff374b92434000213044f/files/unayzah-saudi-arabia-travel-photo-20240311101710538-photo-thumb.jpg"
+        }
       },
       {
         "uid": "custom_1795331549596_drive_q24_600",
         "points": 600,
         "q": "ما اسم المعركتين التاريخيتين اللتين وقعتا في منطقة القصيم عام 1904م (1322هـ) بين الملك عبدالعزيز وابن رشيد؟",
         "a": "معركة البكيرية ومعركة الشنانة",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://whiteink.info/wp-content/uploads/2021/12/Album_46_02_AR.png"
+        }
       }
     ]
   },
@@ -3708,35 +3748,55 @@
         "points": 600,
         "q": "من هو الصحفي الفرنسي ورئيس تحرير صحيفة «ليكيب» الذي ابتكر فكرة بطولة كأس الأندية الأوروبية البطلة عام 1955؟",
         "a": "غابرييل هانو (Gabriel Hanot)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.lequipe.fr/_medias/img-photo-jpg/gabriel-hanot-en-1951-l-equipe/1500000002174924/0%3A0%2C2000%3A1333-828-552-75/324de"
+        }
       },
       {
         "uid": "custom_1795331767366_drive_q21_600",
         "points": 600,
         "q": "من هو اللاعب الذي سجل أول هدف في تاريخ كأس الأندية الأوروبية البطلة يوم 4 سبتمبر 1955 بقميص سبورتينغ لشبونة؟",
         "a": "جواو باتيستا مارتينز (João Baptista Martins)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://storage.ecodibergamo.it/media/photologue/2024/3/1/photos/stadio-alvalade-lisbona-1955-lo-sporting-gioca-la-prima-pa_a8_eQFpYeo.png"
+        }
       },
       {
         "uid": "custom_1795331767366_drive_q22_600",
         "points": 600,
         "q": "من هو الحارس الروماني الذي تصدى لأربع ركلات ترجيح متتالية في نهائي كأس أوروبا 1986 ليقود ستيوا بوخارست للقب أمام برشلونة؟",
         "a": "هيلموت دوكادام (Helmuth Duckadam)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://cdn.adh.reperio.news/image-f/f0d327d1-a6ea-419b-a67b-9df845275558/index.png?p=a%3D1%26co%3D1.05%26w%3D700%26h%3D750%26r%3Dcontain%26f%3Dwebp"
+        }
       },
       {
         "uid": "custom_1795331767366_drive_q23_600",
         "points": 600,
         "q": "من هو المدرب النمساوي الذي قاد بنفيكا للقبين متتاليين (1961 و1962) وأطلق «اللعنة الشهيرة» بحرمان النادي من الألقاب الأوروبية لمئة عام؟",
         "a": "بيلا غوتمان (Béla Guttmann)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://extratime.world/assets/images/stories/bela-guttmann-benfica-curse/cover.webp"
+        }
       },
       {
         "uid": "custom_1795331767366_drive_q24_600",
         "points": 600,
         "q": "من هو المؤلف الموسيقي البريطاني الذي لحّن نشيد دوري أبطال أوروبا الشهير عام 1992 مستلهماً إياه من مقطوعة هاندل؟",
         "a": "توني بريتن (Tony Britten)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://telegrafi.com/wp-content/uploads/2020/08/toni-britten-1-1200x630.jpg"
+        }
       }
     ]
   },
@@ -3883,35 +3943,55 @@
         "points": 600,
         "q": "كم مجموع «الأبناط» الخام في جولة «الحكم» الواحدة شاملة العشرة الأخيرة (الأرض) قبل تحويلها لنقاط تسجيل؟",
         "a": "162 بنطاً (تُحوّل إلى 16 نقطة)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.okaz.com.sa/uploads/images/2018/10/22/1030420.jpg"
+        }
       },
       {
         "uid": "custom_1795331958055_drive_q21_600",
         "points": 600,
         "q": "كم بنطاً تساوي ورقة «الولد» (Jack) وورقة «التسعة» (9) في نوع الحكم تحديداً؟",
         "a": "الولد يساوي 20 بنطاً، والتسعة تساوي 14 بنطاً",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.catsatcards.com/CImages/Final/CardValuesBaloot.jpg"
+        }
       },
       {
         "uid": "custom_1795331958055_drive_q22_600",
         "points": 600,
         "q": "كم نقطة تُسجّل رسمياً للفريق الذي يحقق «كبوت» في جولة «صن» خالية من المشاريع؟",
         "a": "44 نقطة",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.okaz.com.sa/uploads/images/2018/04/04/787474.jpg"
+        }
       },
       {
         "uid": "custom_1795331958055_drive_q23_600",
         "points": 600,
         "q": "كم نقطة تُسجّل رسمياً للفريق الذي يحقق «كبوت» في جولة «حكم» خالية من المشاريع؟",
         "a": "25 نقطة",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://cdnx.premiumread.com/?f=webp&q=100&url=https%3A%2F%2Fmakkahnewspaper.com%2Fuploads%2Fimages%2F2018%2F03%2F16%2F896408.png&w=900"
+        }
       },
       {
         "uid": "custom_1795331958055_drive_q24_600",
         "points": 600,
         "q": "ما المصطلح الشهير في البلوت الذي يُطلق على مخالفة اللاعب لقواعد اللعب (مثل عدم رمي نفس النوع رغم امتلاكه له) بما يوجب خسارة الجولة؟",
         "a": "قيد (تقييد)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://media.almashhad.com/textEditor/1728687187754_KbiLx.webp"
+        }
       }
     ]
   },
