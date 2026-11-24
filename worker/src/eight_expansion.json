@@ -19330,35 +19330,55 @@
         "points": 200,
         "q": "ما اسم المعاهدة الشهيرة التي وُقِّعت عام 1919 وأنهت رسمياً حالة الحرب بين ألمانيا ودول الحلفاء؟",
         "a": "معاهدة فرساي",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://enrs.eu/uploads/media/5d11f0ded9a00-1280px-treaty-of-versailles-signing-hall-of-mirrors.jpg"
+        }
       },
       {
         "uid": "world_war_1_drive_q21_400",
         "points": 400,
         "q": "ما اسم الدولة التي انضمت في البداية إلى «التحالف الثلاثي» مع ألمانيا والنمسا-المجر ثم انحازت عام 1915 للقتال مع دول الحلفاء؟",
         "a": "إيطاليا",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Flag_of_Italy.svg"
+        }
       },
       {
         "uid": "world_war_1_drive_q22_400",
         "points": 400,
         "q": "في أي معركة كبرى عام 1916 استُخدمت الدبابات لأول مرة في التاريخ العسكري؟",
         "a": "معركة السوم (Battle of the Somme)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://zycie.ca/uploads/1720037923.jpg"
+        }
       },
       {
         "uid": "world_war_1_drive_q23_600",
         "points": 600,
         "q": "ما اسم البرقية السرية الألمانية عام 1917 التي عرضت فيها ألمانيا على المكسيك استعادة أراضٍ أمريكية، وكان اعتراض بريطانيا لها سبباً رئيسياً في دخول الولايات المتحدة الحرب؟",
         "a": "برقية زيمرمان (Zimmermann Telegram)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://s.yimg.com/ny/api/res/1.2/q_XlSBNFONs_Jixpa6exHQ--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD03Nzc7Y2Y9d2VicA--/https%3A/media.zenfs.com/en-US/homerun/time_72/90a8faf4ac5b633923ae69c69dc5a3d8"
+        }
       },
       {
         "uid": "world_war_1_drive_q24_600",
         "points": 600,
         "q": "ما اسم المعاهدة التي وقّعتها روسيا البلشفية مع دول المركز في مارس 1918 لإنهاء مشاركتها في الحرب العالمية الأولى؟",
         "a": "معاهدة بريست ليتوفسك (Treaty of Brest-Litovsk)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.combattentiereduci.it/public/users/Barbara/notiziario/2019%20MARZO/6bis/trattato-di-brest.jpg"
+        }
       }
     ]
   },
