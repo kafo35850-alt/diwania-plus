@@ -6472,35 +6472,55 @@
         "points": 600,
         "q": "كم يوماً استغرق إنجاز التجهيز الأولي لصالة «المملكة أرينا» لتدخل موسوعة غينيس كأسرع ملعب مغطى يتم بناؤه؟",
         "a": "60 يوماً",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://media.coliseum-online.com/2024/01/Coliseum-GSVA-News-Kingdom-Arena-update-January-2024-3.jpg"
+        }
       },
       {
         "uid": "custom_1795335456800_drive_q21_600",
         "points": 600,
         "q": "ما اسم المنطقة الجديدة التي أُضيفت في موسم الرياض 2024 وضمت طائرات «بوينغ 777» حقيقية حُوّلت إلى مطاعم وتجارب؟",
         "a": "بوليفارد رن واي (Boulevard Runway)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://static.hiamag.com/inline-images/%D9%84%D8%AD%D8%B8%D8%A7%D8%AA%20%D8%AD%D9%85%D8%A7%D8%B3%D9%8A%D8%A9%20%D9%8A%D8%B9%D9%8A%D8%B4%D9%87%D8%A7%20%D8%B2%D9%88%D8%A7%D8%B1%20%D9%81%D8%B9%D8%A7%D9%84%D9%8A%D8%A7%D8%AA%20%D8%A8%D9%88%D9%84%D9%8A%D9%81%D8%A7%D8%B1%D8%AF%20%D8%B1%D9%86%20%D9%88%D8%A7%D9%8A.jpg"
+        }
       },
       {
         "uid": "custom_1795335456800_drive_q22_600",
         "points": 600,
         "q": "ما اسم منطقة السفاري والمغامرات الصحراوية التي كانت إحدى مناطق النسخ الأولى لموسم الرياض؟",
         "a": "الرياض سفاري (Riyadh Safari)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://cloudfront-eu-central-1.images.arcpublishing.com/thenational/EIGHR72UVLRNRU6CKUCE2BVVFU.jpg"
+        }
       },
       {
         "uid": "custom_1795335456800_drive_q23_600",
         "points": 600,
         "q": "ما الشعار الإنجليزي الرسمي الذي حملته النسخة الرابعة من موسم الرياض (2023–2024)؟",
         "a": "Big Time",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://etbilarabi.com/sites/default/files/styles/article_landing/public/2023-09/WhatsApp%20Image%202023-09-17%20at%2012.31.48%20AM.jpeg?itok=4snvW-iz"
+        }
       },
       {
         "uid": "custom_1795335456800_drive_q24_600",
         "points": 600,
         "q": "ما اسم بطولة التنس الاستعراضية الكبرى التي استضافها موسم الرياض عام 2024 وجمعت نادال وجوكوفيتش وألكاراز وسينر؟",
         "a": "بطولة الملوك الستة (Six Kings Slam)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://portalcdn.spa.gov.sa/backend/original/202410/ggCYnXkTWWhQnsyBUSza6ewr7lyNeW3Y3MDMkzfz.jpg"
+        }
       }
     ]
   },
@@ -6647,35 +6667,55 @@
         "points": 600,
         "q": "ما اسم شبكة الإنتاج الرقمي السعودية التي تأسست في جدة عام 2010 وأنتجت برنامجي «إيش اللي» و«على الطاير»؟",
         "a": "شبكة يوتيرن (UTURN Entertainment)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://pbs.twimg.com/profile_images/1860655950635405312/HYf6fZe8_400x400.jpg"
+        }
       },
       {
         "uid": "custom_1795335685930_drive_q21_600",
         "points": 600,
         "q": "ما اسم الدمية الساخرة الشهيرة التي أطلقتها «تلفاز 11» على يوتيوب عام 2012 بأداء صوتي من إبراهيم الخيرالله؟",
         "a": "التمساح (برنامج التمساح)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://img.youtube.com/vi/sm_EPzBVawU/hqdefault.jpg"
+        }
       },
       {
         "uid": "custom_1795335685930_drive_q22_600",
         "points": 600,
         "q": "في أي عام ميلادي أُطلقت أول حلقة من برنامج «لا يكثر» لفهد البتيري الذي شكّل شرارة اليوتيوب السعودي؟",
         "a": "عام 2010 (نوفمبر 2010)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://m.media-amazon.com/images/M/MV5BNTY5MjM5YWUtMTMwYS00M2E4LWI1YWItYjE1Y2MwNjJmOWEwXkEyXkFqcGc%40._V1_.jpg"
+        }
       },
       {
         "uid": "custom_1795335685930_drive_q23_600",
         "points": 600,
         "q": "ما عنوان الحلقة الأشهر في تاريخ بودكاست «فنجان» التي دخلت غينيس لأكثر حلقة بودكاست مشاهدة على يوتيوب، ومن كان ضيفها؟",
         "a": "حلقة «كيف تنجح العلاقات» مع ياسر الحزيمي",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.febspot.com/contents/videos_screenshots/1414000/1414970/preview_720p.mp4.jpg"
+        }
       },
       {
         "uid": "custom_1795335685930_drive_q24_600",
         "points": 600,
         "q": "ما اسم السلسلة الكوميدية القصيرة التي أطلقتها «تلفاز 11» عام 2012 بمشاركة علاء يوسف وعلي الكلثمي ومحمد الدوخي؟",
         "a": "خمبلة",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://pbs.twimg.com/media/Bc-yMVPCYAA0pCm.jpg"
+        }
       }
     ]
   },
@@ -6822,35 +6862,55 @@
         "points": 600,
         "q": "في أي عصر عربي إسلامي وردت أقدم الوصفات المدوّنة للقطايف والزلابية في كتاب «الطبيخ» لابن سيار الوراق؟",
         "a": "العصر العباسي (القرن الرابع الهجري / العاشر الميلادي)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.lequotidien.com.tn/images/2021/08/31/Ibn_Sayyar1.jpg"
+        }
       },
       {
         "uid": "custom_1795335953314_drive_q21_600",
         "points": 600,
         "q": "ما اسم الحلوى/المشروب الرمضاني الحجازي الأبيض الدافئ المصنوع أساساً من الحليب ودقيق الأرز واللوز المقشر المطحون والهيل؟",
         "a": "القهوة الحلوة (قهوة اللوز الحجازية)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.sidechef.com/recipe/80c38160-9b24-4a03-8e5e-55f6579c5eac.jpg"
+        }
       },
       {
         "uid": "custom_1795335953314_drive_q22_600",
         "points": 600,
         "q": "ما اسم الحلوى الرمضانية التراثية الشهيرة في جنوب المملكة واليمن المصنوعة من طبقات عجين رقيقة جداً تُخبز وتُسقى بالسمن والعسل؟",
         "a": "بنت الصحن (السبايا)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://d29hmqxeker05q.cloudfront.net/eyJidWNrZXQiOiJpbWFnZXMuY2tiay5jb20iLCJrZXkiOiJpbWFnZXMvY3VpczEzMDc5YzA1czAwMXNzMDAycjAwNGcwMS5qcGciLCJlZGl0cyI6eyJyZXNpemUiOnsid2l0aG91dEVubGFyZ2VtZW50Ijp0cnVlLCJ3aWR0aCI6MTAyNCwiaGVpZ2h0Ijo3NjgsImZpdCI6ImNvdmVyIiwicG9zaXRpb24iOiJlbnRyb3B5In0sImpwZWciOnsicXVhbGl0eSI6OTAsInByb2dyZXNzaXZlIjp0cnVlfX19"
+        }
       },
       {
         "uid": "custom_1795335953314_drive_q23_600",
         "points": 600,
         "q": "في عهد أي دولة تاريخية في مصر ظهرت قصة حلوى «أم علي» الشهيرة في القرن الثالث عشر الميلادي؟",
         "a": "الدولة المملوكية",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://whatworldeats.com/wp-content/uploads/2025/04/FATS-SUGARS-AND-NUTS-Umm-Ali-1000x1000.jpeg"
+        }
       },
       {
         "uid": "custom_1795335953314_drive_q24_600",
         "points": 600,
         "q": "ما اسم الحلوى الخليجية التراثية المصنوعة من دقيق القمح المحمّص والسكر والسمن والهيل والزعفران وماء الورد؟",
         "a": "الخبيصة (الخبيص)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://res.cloudinary.com/dxocatyhb/image/upload/ar_16%3A9%2Cc_fit%2Cw_2000/v1731310698/bahrain-khabeesa.webp"
+        }
       }
     ]
   },
@@ -6997,35 +7057,55 @@
         "points": 600,
         "q": "في أي منطقة سعودية تقع منطقة «آبار حمى» الثقافية المسجلة في قائمة اليونسكو للتراث العالمي؟",
         "a": "منطقة نجران (شمال نجران / محافظة ثار)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://whc.unesco.org/uploads/thumbs/site_1619_0007-1000-666-20210604101306.jpg"
+        }
       },
       {
         "uid": "custom_1795336154339_drive_q21_600",
         "points": 600,
         "q": "في أي منطقة سعودية تقع «أعمدة الرجاجيل» الأثرية التي يعود تاريخها إلى نحو 6,000 عام؟",
         "a": "منطقة الجوف (قرب سكاكا)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://static.hiamag.com/styles/autox754/public/article/20/11/2017/6209436-146520632.jpg?itok=h_uwDPUa"
+        }
       },
       {
         "uid": "custom_1795336154339_drive_q22_600",
         "points": 600,
         "q": "في أي محافظة سعودية تقع «قرية الفاو» الأثرية عاصمة مملكة كندة الأولى والمسجلة في اليونسكو عام 2024؟",
         "a": "محافظة وادي الدواسر (منطقة الرياض)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://i0.wp.com/www.saudiarabiatourismguide.com/wp-content/uploads/2018/06/C90A3237-555.jpg"
+        }
       },
       {
         "uid": "custom_1795336154339_drive_q23_600",
         "points": 600,
         "q": "في أي محافظة ومنطقة سعودية تقع «مغائر شعيب» الأثرية المنحوتة في الصخر؟",
         "a": "محافظة البدع (منطقة تبوك)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://i0.wp.com/www.saudiarabiatourismguide.com/wp-content/uploads/2018/02/DSC_0897-555.jpg"
+        }
       },
       {
         "uid": "custom_1795336154339_drive_q24_600",
         "points": 600,
         "q": "ما اسم أكبر كهف بركاني (أنبوب حمم) مكتشف في السعودية ويقع في حرة خيبر ويبلغ طوله نحو 1.5 كم؟",
         "a": "كهف أم جرسان (Umm Jirsan)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://gizmodo.com/app/uploads/2024/04/02e36e69ba802382474bf39a2df6e134.jpg"
+        }
       }
     ]
   },
