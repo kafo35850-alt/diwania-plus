@@ -537,35 +537,55 @@
         "points": 200,
         "q": "ما هو الاسم الأصلي لـ «غوكو» عند ولادته في كوكب السايان (كوكب فيجيتا)؟",
         "a": "كاكاروت (Kakarot)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://i.blogs.es/4f0fd9/dragon-ball-z_-kakarot_20230112140508/1366_2000.jpeg"
+        }
       },
       {
         "uid": "anime_dragon_ball_drive_q21_400",
         "points": 400,
         "q": "ما اسم الكوكب الذي تحوّل فيه غوكو إلى «سوبر سايان» لأول مرة في تاريخ السلسلة خلال قتاله ضد فريزا؟",
         "a": "كوكب ناميك (Planet Namek)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://imgix.ranker.com/user_node_img/50091/1001800894/original/goku-turns-super-saiyan-for-the-first-time-photo-u1?auto=format&dpr=2&fit=crop&fm=pjpg&q=60&w=500"
+        }
       },
       {
         "uid": "anime_dragon_ball_drive_q22_400",
         "points": 400,
         "q": "ما اسم الغرفة السحرية في قصر كامي التي يعادل فيها اليوم الواحد في العالم الخارجي سنة كاملة من التدريب؟",
         "a": "غرفة الروح والزمن (Hyperbolic Time Chamber)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://m.media-amazon.com/images/M/MV5BNmJkNDI1YjQtNGQ0OC00OTI1LWI3OWMtMmUwYTY1M2VlMmMwXkEyXkFqcGc%40._V1_.jpg"
+        }
       },
       {
         "uid": "anime_dragon_ball_drive_q23_600",
         "points": 600,
         "q": "ما اسم التنين الأسطوري الخاص بكرات التنين في كوكب ناميك، والذي يحقق ثلاث أمنيات؟",
         "a": "بورونغا (Porunga)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://static.wikia.nocookie.net/dragonball/images/8/88/Porunga_is_summoned_by_Dende.png/revision/latest/scale-to-width-down/1200?cb=20250214203821"
+        }
       },
       {
         "uid": "anime_dragon_ball_drive_q24_600",
         "points": 600,
         "q": "ما رقم الكون الذي يمثله غوكو وفيجيتا في «بطولة القوة» (Tournament of Power) في دراغون بول سوبر، ومن هو آخر مقاتل بقي على الحلبة ليفوز بالبطولة؟",
         "a": "الكون السابع (Universe 7)، وآخر مقاتل بقي على الحلبة هو أندرويد 17 (Android 17)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://fr.web.img6.acsta.net/newsv7/18/03/26/10/50/46918650.jpg"
+        }
       }
     ]
   },
@@ -635,35 +655,55 @@
         "points": 200,
         "q": "ما اسم عائلة القتلة المأجورين الشهيرة التي ينتمي إليها كيلوا؟",
         "a": "عائلة زولديك (Zoldyck Family)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://img.hunterxhunter.com.lv/uploads/02a8adfb-fdc0-429f-a23f-4d42302e07a2-1.jpg"
+        }
       },
       {
         "uid": "anime_hunter_x_hunter_drive_q21_400",
         "points": 400,
         "q": "ما هو تصنيف «النين» (Nen) الخاص بكل من غون فريكس وكيلوا زولديك؟",
         "a": "غون من فئة «التعزيز» (Enhancer)، وكيلوا من فئة «التحويل» (Transmuter)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://images.everyeye.it/img-notizie/hunter-x-hunter-cosa-nen-esattamente-power-system-spiegato-v3-696372.jpg"
+        }
       },
       {
         "uid": "anime_hunter_x_hunter_drive_q22_400",
         "points": 400,
         "q": "ما اسم اللعبة الأسطورية التي صممها جين فريكس وأصدقاؤه والتي دخلها غون وكيلوا للبحث عن والده؟",
         "a": "جزيرة الطمع (Greed Island)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.serieously.com/app/uploads/2021/09/hxh-greed-island.jpg"
+        }
       },
       {
         "uid": "anime_hunter_x_hunter_drive_q23_600",
         "points": 600,
         "q": "ما اسم السلسلة التي يستخدمها كورابيكا والمحصور استخدامها على أعضاء «عصابة العناكب» فقط وتجبرهم على حالة «الزيتسو»؟",
         "a": "سلسلة السجن (Chain Jail)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://resize-image.vocus.cc/resize?norotation=true&quality=80&sign=dRFPO0r60LTA_GBErsq8O7kGfWttyv6Na7YB2lX8fNw&url=https%3A%2F%2Fimages.vocus.cc%2Fc07d9916-83d8-4d37-adeb-039b2153e87f.jpg&width=740"
+        }
       },
       {
         "uid": "anime_hunter_x_hunter_drive_q24_600",
         "points": 600,
         "q": "ما اسم اللعبة اللوحية الاستراتيجية التي كان يلعبها ملك نمل الكيميرا «ميريوم» مع الفتاة العمياء «كوموغي» ولم يستطع هزيمتها فيها قط؟",
         "a": "لعبة الغونغي (Gungi)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://images.everyeye.it/img-singole/articolo-148582.jpg"
+        }
       }
     ]
   },
@@ -684,35 +724,55 @@
         "points": 200,
         "q": "ما اسم وحش الذيول التسعة المختوم داخل ناروتو أوزوماكي؟",
         "a": "كوراما (Kurama)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://cmsapi-frontend.naruto-official.com/site/api/naruto/Image/get?path=%2Fnaruto%2Fimport%2Fimages%2Fnaruto02%2F501%EF%BD%9E600%2F562%2FC329.jpg"
+        }
       },
       {
         "uid": "anime_naruto_drive_q21_400",
         "points": 400,
         "q": "من هو الشينوبي الذي ابتكر تقنية «الراسينغان» (Rasengan) قبل أن يتعلمها ناروتو؟",
         "a": "ميناتو ناميكازي (الهوكاجي الرابع)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://static.promediateknologi.id/crop/0x0%3A0x0/0x0/webp/photo/p2/108/2024/01/30/Minato_Namikaze_1677422619649_1684195457143-3390926146.jpg"
+        }
       },
       {
         "uid": "anime_naruto_drive_q22_400",
         "points": 400,
         "q": "ما اسم السيف الحيّ الذي يحمله كيسامي هوشيغاكي ويمتص به التشاكرا من خصومه؟",
         "a": "ساميهادا (Samehada)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.einerd.com/wp-content/uploads/2020/11/Kisame-Hoshigaki-2.png"
+        }
       },
       {
         "uid": "anime_naruto_drive_q23_600",
         "points": 600,
         "q": "من هو الشينوبي الذي ابتكر تقنية «إيدو تينسي» (إعادة الإحياء المحرمة) في تاريخ عالم الشينوبي؟",
         "a": "توبيراما سينجو (الهوكاجي الثاني)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://image.idntimes.com/post/20230308/tobirama-senju-naruto-65c087d2e81f7421307f04afd99bd69b.jpg"
+        }
       },
       {
         "uid": "anime_naruto_drive_q24_600",
         "points": 600,
         "q": "ما اسم البوابة الثامنة والأخيرة من «البوابات الثماني الداخلية» التي فتحها مايت غاي في قتاله ضد مادارا أوتشيها؟",
         "a": "بوابة الموت (Gate of Death)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://i0.wp.com/dailyanimeart.com/wp-content/uploads/2015/07/guys-eight-inner-gate-of-death.jpg?fit=1200%2C675&ssl=1"
+        }
       }
     ]
   },
@@ -733,35 +793,55 @@
         "points": 200,
         "q": "ما اسم السفينة الأولى لطاقم قبعة القش قبل حصولهم على سفينة «ثاوزند ساني»؟",
         "a": "غوينغ ميري (Going Merry)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.dexerto.com/cdn-cgi/image/width%3D3840%2Cquality%3D75%2Cformat%3Dauto/https%3A/editors.dexerto.com/wp-content/uploads/2023/06/23/one-piece-going-merry.jpeg"
+        }
       },
       {
         "uid": "anime_one_piece_drive_q21_400",
         "points": 400,
         "q": "ما اسم الجزيرة الواقعة في البحر الأزرق الجنوبي (South Blue) والتي وُلد فيها بورتغاس دي إيس؟",
         "a": "جزيرة باتيريلا (Baterilla)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://static.wikia.nocookie.net/onepiece/images/1/14/Baterilla_Infobox.png/revision/latest?cb=20121104171115"
+        }
       },
       {
         "uid": "anime_one_piece_drive_q22_400",
         "points": 400,
         "q": "ما هو الاسم الحقيقي للسيف الأسود الأسطوري الذي يحمله أقوى سياف في العالم دراكول ميهوك؟",
         "a": "يورو (Yoru)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://i.pinimg.com/736x/d4/9f/17/d49f17e5277efbb141f9ea2a2d8a9637.jpg"
+        }
       },
       {
         "uid": "anime_one_piece_drive_q23_600",
         "points": 600,
         "q": "ما هي الأسماء الثلاثة لـ «الأسلحة الأثرية» (Ancient Weapons) في عالم ون بيس؟",
         "a": "بلوتون (Pluton)، وبوسيدون (Poseidon)، وأورانوس (Uranus)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://pbs.twimg.com/media/FrIF9gkXgAIbJXZ?format=jpg&name=large"
+        }
       },
       {
         "uid": "anime_one_piece_drive_q24_600",
         "points": 600,
         "q": "من هو الحداد الأسطوري من بلاد وانو الذي صنع سيفَي زورو «وادو إيتشيمونجي» و«إنما»؟",
         "a": "شيموتسوكي كوزابورو (Shimotsuki Kozaburo)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://staticg.sportskeeda.com/editor/2023/04/215e3-16827022610062.webp"
+        }
       }
     ]
   },
