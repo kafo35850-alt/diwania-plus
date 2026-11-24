@@ -7252,35 +7252,55 @@
         "points": 600,
         "q": "في أي عام ميلادي اعتُمد النشيد الوطني السعودي «سارعي للمجد والعلياء» رسمياً بالكلمات لأول مرة؟",
         "a": "عام 1984 (1404هـ)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.alyaum.com/uploads/images/2022/09/21/1471699.jfif"
+        }
       },
       {
         "uid": "custom_1795336323667_drive_q21_600",
         "points": 600,
         "q": "من هو الشاعر السعودي الذي كتب كلمات أغنية «وطني الحبيب وهل أحب سواه» التي غناها ولحنها طلال مداح؟",
         "a": "عبدالرزاق بليلة (مصطفى بليلة)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://i1.sndcdn.com/artworks-000239394061-6e9z1t-t500x500.jpg"
+        }
       },
       {
         "uid": "custom_1795336323667_drive_q22_600",
         "points": 600,
         "q": "من هو الموسيقار السعودي الملقب بـ «عميد الفن السعودي» الذي أسس مدرسة موسيقى الجيش العربي السعودي ولحّن العديد من الأناشيد الوطنية؟",
         "a": "طارق عبدالحكيم",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.arabnews.com/sites/default/files/styles/n_670_395/public/2020/08/19/2235266-1720049112.png?itok=NDJWKbs-"
+        }
       },
       {
         "uid": "custom_1795336323667_drive_q23_600",
         "points": 600,
         "q": "في أي عام قُدّم أوبريت الجنادرية الشهير «فارس التوحيد» احتفاءً بمئوية تأسيس المملكة؟",
         "a": "عام 1999 (1419هـ)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://saudipedia.com/var/site/storage/images/6/3/1/9/6819136-1-ara-SA/7d1b119f353c-89710.jpg"
+        }
       },
       {
         "uid": "custom_1795336323667_drive_q24_600",
         "points": 600,
         "q": "في أي عاصمة عربية عُزف السلام الملكي السعودي للمرة الأولى رسمياً عام 1947 أثناء زيارة الملك عبدالعزيز؟",
         "a": "القاهرة (مصر)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://vid.alarabiya.net/images/2016/04/06/ee908c17-0f62-4cc7-8f12-ae35a814cd82/ee908c17-0f62-4cc7-8f12-ae35a814cd82_16x9_1200x676.jpg"
+        }
       }
     ]
   },
@@ -7427,35 +7447,55 @@
         "points": 600,
         "q": "من هو اللاعب الذي سجل أول هدف في تاريخ الدوري الإسباني يوم 10 فبراير 1929 بقميص إسبانيول؟",
         "a": "خوسيه برات (José Pitus Prat)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://estaticos-cdn.prensaiberica.es/clip/2454155a-6a94-44cc-83e7-b911e9d94c74_original-libre-aspect-ratio_default_0.jpg"
+        }
       },
       {
         "uid": "custom_1795336534041_drive_q21_600",
         "points": 600,
         "q": "ما النادي الأندلسي الذي تُوّج بلقب الدوري الإسباني موسم 1934–1935 قبل توقف البطولة بسبب الحرب الأهلية؟",
         "a": "ريال بيتيس",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://s1.abcstatics.com/abc/sevilla/media/alfinaldelapalmera/2021/04/28/s/betis-liga-35-U02151435112gIO-1248x698%40abc.jpg"
+        }
       },
       {
         "uid": "custom_1795336534041_drive_q22_600",
         "points": 600,
         "q": "ما النادي الذي حقق أكبر انتصار في تاريخ الدوري الإسباني بفوزه 12-1 على برشلونة عام 1931؟",
         "a": "أتلتيك بيلباو",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.mundodeportivo.com/files/article_main_microformat/uploads/2019/02/08/60e724b22fe18.jpeg"
+        }
       },
       {
         "uid": "custom_1795336534041_drive_q23_600",
         "points": 600,
         "q": "من هو المهاجم الإسباني الذي سجل أسرع هدف في تاريخ الدوري الإسباني بعد 7.22 ثانية فقط بقميص بلد الوليد أمام إسبانيول عام 2008؟",
         "a": "خوسيبا يورينتي (Joseba Llorente)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://xcatalunya.cat/filesedc/uploads/image/post/joseba-llorente-valladolid_1200_800.webp"
+        }
       },
       {
         "uid": "custom_1795336534041_drive_q24_600",
         "points": 600,
         "q": "من هو الحارس الذي يحمل الرقم القياسي لأطول سلسلة دقائق متتالية دون استقبال أهداف في الليغا (1,275 دقيقة) بقميص أتلتيكو مدريد عام 1991؟",
         "a": "أبيل ريسينو (Abel Resino)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://cadenaser.com/resizer/v2/UP6O2NSSIRMADF54ZAEDRNYSRI.jpg?auth=187e650ef01cac4b81575bcc2d877f245dae811170e0041f049c843cd3da2ef4&height=675&quality=70&smart=true&width=1200"
+        }
       }
     ]
   },
@@ -7602,35 +7642,55 @@
         "points": 600,
         "q": "من هو اللاعب البحريني الذي سجل أول هدف في تاريخ بطولات كأس الخليج العربي في مباراة الافتتاح عام 1970 أمام قطر؟",
         "a": "أحمد سالمين",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://storage.albiladpress.com/images/news/2021/06/28/f28114308.jpg"
+        }
       },
       {
         "uid": "custom_1795336694896_drive_q21_600",
         "points": 600,
         "q": "من هو صاحب فكرة إقامة بطولة كأس الخليج العربي الذي طرحها على هامش أولمبياد مكسيكو 1968؟",
         "a": "الأمير خالد الفيصل",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://i0.wp.com/wa1al1.com/wp-content/uploads/2024/07/11929444.jpg?fit=750%2C502&ssl=1"
+        }
       },
       {
         "uid": "custom_1795336694896_drive_q22_600",
         "points": 600,
         "q": "في أي نسخة من كأس الخليج سجل ماجد عبدالله «خماسية» (5 أهداف) في مباراة واحدة أمام منتخب قطر؟",
         "a": "خليجي 5 عام 1979 في بغداد (انتهت 7-0)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.aleqt.com/sites/default/files/a/905658_374699.jpg"
+        }
       },
       {
         "uid": "custom_1795336694896_drive_q23_600",
         "points": 600,
         "q": "في أي نسخة من كأس الخليج شارك منتخب اليمن للمرة الأولى في تاريخ البطولة؟",
         "a": "خليجي 16 عام 2003 في الكويت",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://the-gff.com/wp-content/uploads/2021/04/photo_2021-04-02_12-40-52.jpg"
+        }
       },
       {
         "uid": "custom_1795336694896_drive_q24_600",
         "points": 600,
         "q": "ما النسخة التي انسحب منها المنتخب العراقي أثناء البطولة وأُلغيت نتائج مبارياته فيها احتجاجاً على التحكيم؟",
         "a": "خليجي 10 عام 1990 في الكويت",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.kuna.net.kw/NewsPictures/2024/12/21/899779cc-d6f1-49ba-9ae3-25d407984e39.JPG"
+        }
       }
     ]
   },
@@ -7777,35 +7837,55 @@
         "points": 600,
         "q": "ما الاسم الأصلي الذي تأسس به نادي مانشستر يونايتد عام 1878 على يد عمال السكك الحديدية قبل تغيير اسمه عام 1902؟",
         "a": "نيوتن هيث (Newton Heath LYR)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://upload.wikimedia.org/wikipedia/commons/7/75/Newton_Heath_1892-93.jpg"
+        }
       },
       {
         "uid": "custom_1795337140975_drive_q21_600",
         "points": 600,
         "q": "من هو المدرب الذي قاد مانشستر يونايتد لأول لقب دوري إنجليزي في تاريخه عام 1908 وأول كأس اتحاد إنجليزي عام 1909؟",
         "a": "إرنست مانغنال (Ernest Mangnall)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://upload.wikimedia.org/wikipedia/commons/b/b8/Ernest_Mangnall.jpg"
+        }
       },
       {
         "uid": "custom_1795337140975_drive_q22_600",
         "points": 600,
         "q": "ضد أي نادٍ فاز مانشستر يونايتد بنتيجة 4-1 بعد الوقت الإضافي في نهائي كأس أوروبا 1968 في ويمبلي؟",
         "a": "بنفيكا البرتغالي",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://cdn.artphotolimited.com/images/5f60bc53bd40b8173f11e855/1000x1000/manchester-united-team-1968-european-cup-champions.jpg"
+        }
       },
       {
         "uid": "custom_1795337140975_drive_q23_600",
         "points": 600,
         "q": "من هو اللاعب الموهوب البالغ 21 عاماً الذي توفي بعد 15 يوماً من كارثة ميونخ 1958 وكان يُعد أعظم موهبة إنجليزية في جيله؟",
         "a": "دنكان إدواردز (Duncan Edwards)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://assets.manutd.com/AssetPicker/images/0/0/18/66/1196612/Duncan_Edwards_Eternal_book_image_71676971921115_medium.jpg"
+        }
       },
       {
         "uid": "custom_1795337140975_drive_q24_600",
         "points": 600,
         "q": "ما النادي الذي لعب مانشستر يونايتد مبارياته البيتية على ملعبه «ماين رود» بين عامي 1945 و1949 بعد تضرر أولد ترافورد في الحرب العالمية الثانية؟",
         "a": "مانشستر سيتي",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.mediastorehouse.com.au/p/767/english-league-division-match-maine-road-21587426.jpg.webp"
+        }
       }
     ]
   },
