@@ -13863,35 +13863,55 @@
         "points": 200,
         "q": "من هو النجم العالمي الذي جسّد شخصية الكابتن «جاك سبارو»؟",
         "a": "جوني ديب (Johnny Depp)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://cdn.mos.cms.futurecdn.net/QtKfFKFU2XGj6vo7zRNw9X.jpg"
+        }
       },
       {
         "uid": "movies_pirates_drive_q21_400",
         "points": 400,
         "q": "ما اسم السفينة الشبحية الشهيرة التي يقودها «ديفي جونز» في السلسلة؟",
         "a": "الهولندي الطائر (The Flying Dutchman)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://p1-tt.byteimg.com/origin/tos-cn-i-qvj2lq49k0/4d1bd25a45e94ce687b1dfc51e0968d0.jpg"
+        }
       },
       {
         "uid": "movies_pirates_drive_q22_400",
         "points": 400,
         "q": "ما الخاصية السحرية التي تميّز البوصلة التي يحملها جاك سبارو عن البوصلة العادية؟",
         "a": "لا تشير إلى الشمال، بل تشير إلى أكثر شيء يرغب فيه حاملها في هذا العالم",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://cdn.mos.cms.futurecdn.net/QtKfFKFU2XGj6vo7zRNw9X.jpg"
+        }
       },
       {
         "uid": "movies_pirates_drive_q23_600",
         "points": 600,
         "q": "ما اسم الجزيرة الأسطورية المخفية التي كانت تضم كنز ذهب الأزتيك الملعون في الجزء الأول «لعنة اللؤلؤة السوداء»؟",
         "a": "جزيرة الموت (Isla de Muerta)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://allcaptainjacksparrow.com/images/TheCurseOfTheBlackPearl/curse/cap101.jpg"
+        }
       },
       {
         "uid": "movies_pirates_drive_q24_600",
         "points": 600,
         "q": "ما اسم الشركة التجارية التي قادها اللورد «كاتلر بيكيت» للقضاء على القراصنة، وما اسم الوحش البحري العملاق الذي كان يأتمر بأمر ديفي جونز؟",
         "a": "شركة الهند الشرقية التجارية (East India Trading Company) — والوحش هو «الكراكن» (The Kraken)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://clip.cafe/img16x9/advise-brethren.jpg"
+        }
       }
     ]
   },
