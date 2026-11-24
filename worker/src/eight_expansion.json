@@ -15531,21 +15531,33 @@
         "points": 400,
         "q": "ما اسم المسلسل الكويتي الرمضاني الشهير من بطولة سعاد عبدالله الذي جسّدت فيه شخصية السيدة الطيبة «فضة»؟",
         "a": "فضة قلبها أبيض",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://admango.cdn.mangomolo.com/analytics/Recorder/195/2025-02-24/vidQT5uWHnPz8_corrected.mp4.mp4.jpg"
+        }
       },
       {
         "uid": "series_khaleeji_ramadan_drive_q23_600",
         "points": 600,
         "q": "من هو الكاتب الكويتي الذي ألّف سيناريو وحوار مسلسل «درب الزلق» (1977)، ومن هو المخرج المصري الذي أخرجه لتلفزيون الكويت؟",
         "a": "الكاتب عبدالأمير التركي — والمخرج حمدي فريد",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.kuna.net.kw/NewsPictures/2018/8/10/ae53bf85-c05d-4db1-a81a-4c781579cc4a.jpg"
+        }
       },
       {
         "uid": "series_khaleeji_ramadan_drive_q24_600",
         "points": 600,
         "q": "من هي الكاتبة الكويتية التي ألّفت مسلسلَي «أم البنات» (2009) و«زوارة الخميس» (2010)، ومن هو المخرج الذي أخرج مسلسل «خالتي قماشة» (1983)؟",
         "a": "الكاتبة هبة مشاري حمادة — والمخرج حمدي فريد",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://static.sayidaty.net/styles/900_scale/public/2019/05/09/5257911-524397046.jpg.webp"
+        }
       }
     ]
   },
