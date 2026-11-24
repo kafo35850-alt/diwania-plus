@@ -16056,21 +16056,33 @@
         "points": 400,
         "q": "ما رقم اللاعب العجوز «أوه إيل نام» الذي كُشف في نهاية الموسم الأول أنه مؤسس الألعاب؟",
         "a": "الرقم 001",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://s.yimg.com/ny/api/res/1.2/.qjI6WkAkXqcMw8tW38Bxw--/YXBwaWQ9aGlnaGxhbmRlcjt3PTk2MDtoPTgyMDtjZj13ZWJw/https%3A/media.zenfs.com/en/buzzfeed_articles_778/3abde12a650ab8a0bdb79b4a84b2f770"
+        }
       },
       {
         "uid": "series_squid_game_drive_q23_600",
         "points": 600,
         "q": "ما القيمة الإجمالية الدقيقة للجائزة الكبرى بالوون الكوري الجنوبي التي تجمّعت في الحصالة الزجاجية بعد خروج الـ 455 لاعباً؟",
         "a": "45.6 مليار وون كوري جنوبي (45.6 Billion KRW)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://specials-images.forbesimg.com/imageserve/615c45a2933e114dfd9d27ec/960x0.jpg"
+        }
       },
       {
         "uid": "series_squid_game_drive_q24_600",
         "points": 600,
         "q": "ما الاسم الحقيقي الكامل للـ «فرونت مان» (القائد المقنّع للألعاب)، ومن هو المؤلف والمخرج الكوري الجنوبي الذي ابتكر المسلسل؟",
         "a": "هوانغ إين هو (Hwang In-ho) — والمؤلف والمخرج هوانغ دونغ هيوك (Hwang Dong-hyuk)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://dnm.nflximg.net/api/v6/2DuQlx0fM4wd1nzqm5BFBi6ILa8/AAAAQU30F4PFlHIqslspqtdB2Kl4GnjEEt-rXP-TUNSTBMhXBv2B9UWFrDnjkNcTemhv2a8mFfa_rnvyt8dtJqpUcFKADbU0dIk7hcviImkI8TpyoxXJ7eVfkp2v-_Dxd0PPmWLaK19BKbQzdsIeNfSCh2vH.jpg?r=00c"
+        }
       }
     ]
   },
