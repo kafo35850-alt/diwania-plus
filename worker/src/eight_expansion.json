@@ -19184,35 +19184,55 @@
         "points": 200,
         "q": "ما هي الدولة العربية الوحيدة التي تتكون بالكامل من أرخبيل جزر في الخليج العربي؟",
         "a": "مملكة البحرين",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.drm.bh/assets/durrat/img/gallery/1%2817%29.jpg"
+        }
       },
       {
         "uid": "world_islands_drive_q21_400",
         "points": 400,
         "q": "ما هي الجزيرة اليمنية الشهيرة في المحيط الهندي التي تشتهر بشجرة «دم الأخوين» النادرة؟",
         "a": "جزيرة سقطرى",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.yenimesaj.com.tr/resimler/haberler/45/dunyanin-kayip-ve-essiz-cenneti-socotra-adasi-H1577979-11.webp"
+        }
       },
       {
         "uid": "world_islands_drive_q22_400",
         "points": 400,
         "q": "ما هي الجزيرة التي تتقاسم سيادتها ثلاث دول هي إندونيسيا وماليزيا وبروناي؟",
         "a": "جزيرة بورنيو",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://wwfasia.awsassets.panda.org/img/original/aerial-view-of-the-river-kinabatangan-and-riverine-tropical-rainforest--sabah--malays.jpg"
+        }
       },
       {
         "uid": "world_islands_drive_q23_600",
         "points": 600,
         "q": "ما اسم الأرخبيل البركاني النائي في جنوب المحيط الأطلسي الذي يُعد أبعد تجمع سكني مأهول عن أقرب يابسة مأهولة في العالم؟",
         "a": "تريستان دا كونا (Tristan da Cunha)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://projetoalbatroz.org.br/upload/paginainfo/2017/11/1265/big/foto-noti-cias-ilhas-trista-o-da-cunha-4.jpg"
+        }
       },
       {
         "uid": "world_islands_drive_q24_600",
         "points": 600,
         "q": "ما هي الجزيرة النهرية الصغيرة الواقعة في نهر بيداسوا بين فرنسا وإسبانيا والتي تتبادل الدولتان السيادة عليها كل 6 أشهر؟",
         "a": "جزيرة الفزان (Pheasant Island / Île des Faisans)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.bougerabordeaux.com/wp-content/uploads/2025/08/ILE-DES-FAisans-3-1024x683.jpg"
+        }
       }
     ]
   },
