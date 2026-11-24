@@ -1384,35 +1384,55 @@
         "points": 200,
         "q": "ما اسم الكوكب في قناة سبيستون الذي كانت تُعرض عليه مسلسلات «كابتن ماجد» و«سلام دانك»؟",
         "a": "كوكب رياضة",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.aljazeera.net/wp-content/uploads/2018/07/f3a75351-a7da-4f32-8443-521afcffff7b.jpeg?quality=80"
+        }
       },
       {
         "uid": "cartoon_90s_2000s_drive_q21_400",
         "points": 400,
         "q": "ما اسم الاستوديو الدمشقي الشهير الذي تولى دبلجة معظم أعمال سبيستون الكلاسيكية مثل «المحقق كونان» و«دراغون بول» و«القناص»؟",
         "a": "مركز الزهرة (Al-Zahra Center)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://i1.sndcdn.com/artworks-8hgriwMaEkNdVj9h-opMlWA-t500x500.jpg"
+        }
       },
       {
         "uid": "cartoon_90s_2000s_drive_q22_400",
         "points": 400,
         "q": "من هو الفنان والملحن السوري الذي غنّى ولحّن أشهر شارات سبيستون مثل «هزيم الرعد» و«سابق ولاحق» و«أبطال الديجيتال»؟",
         "a": "طارق العربي طرقان",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://media.assettype.com/gulfnews%2Fimport%2F2017%2F4%2F9%2F1_16a0843adb4.2008404_1984300803_16a0843adb4_medium.jpg?ar=40%3A21&auto=format%2Ccompress&enlarge=true&mode=crop&ogImage=true&overlay=false&overlay_position=bottom&overlay_width=100&w=1200"
+        }
       },
       {
         "uid": "cartoon_90s_2000s_drive_q23_600",
         "points": 600,
         "q": "كم عدد الكواكب الأصلية التي قُسّمت إليها قناة سبيستون عند انطلاقتها؟",
         "a": "10 كواكب (أكشن، مغامرات، رياضة، زمردة، بون بون، أبجد، كوميديا، تاريخ، علوم، وأفلام)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/28242ba3-b126-4467-bcdb-cfa78dabd3d0/dgigfai-a3408c96-570b-48d5-a76a-3e4502ee69da.png/v1/fill/w_1191%2Ch_671/spacetoon_tv_channel_logo_2000_to_2017___2__by_meshal11_deviantart_dgigfai-pre.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NzIxIiwicGF0aCI6IlwvZlwvMjgyNDJiYTMtYjEyNi00NDY3LWJjZGItY2ZhNzhkYWJkM2QwXC9kZ2lnZmFpLWEzNDA4Yzk2LTU3MGItNDhkNS1hNzZhLTNlNDUwMmVlNjlkYS5wbmciLCJ3aWR0aCI6Ijw9MTI4MCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.cd8BjIyn-eNKJQJXnM0RrVDSi1fnYij67mYDWA8hEZo"
+        }
       },
       {
         "uid": "cartoon_90s_2000s_drive_q24_600",
         "points": 600,
         "q": "في أي عام وعلى شاشة أي تلفزيون عربي بدأ البث التجريبي الأول لقناة «سبيستون» قبل أن تستقل بقناة فضائية خاصة بها عام 2002؟",
         "a": "عام 2000 (في مارس 2000) عبر شاشة تلفزيون البحرين (Bahrain TV)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.aljazeera.net/wp-content/uploads/2018/07/f3a75351-a7da-4f32-8443-521afcffff7b.jpeg?quality=80"
+        }
       }
     ]
   },
@@ -1436,7 +1456,11 @@
         "q": "🎭 امسح رمز QR بجوال الممثل فقط، ومثّل البطاقة لفريقك بدون كلام!",
         "a": "طاش ما طاش",
         "isCharades": true,
-        "qrPayload": "طاش ما طاش"
+        "qrPayload": "طاش ما طاش",
+        "am": {
+          "t": "image",
+          "u": "https://i.pinimg.com/originals/e1/3d/7a/e13d7a917a354b127bc1787c8bdb768d.jpg"
+        }
       },
       {
         "uid": "charades_arabic_drive_q21_400",
@@ -1444,7 +1468,11 @@
         "q": "🎭 امسح رمز QR بجوال الممثل فقط، ومثّل البطاقة لفريقك بدون كلام!",
         "a": "لا تراجع ولا استسلام",
         "isCharades": true,
-        "qrPayload": "لا تراجع ولا استسلام"
+        "qrPayload": "لا تراجع ولا استسلام",
+        "am": {
+          "t": "image",
+          "u": "https://image.tmdb.org/t/p/original/b7gFI5L2thZy3TzXHRU54wgS8Zu.jpg"
+        }
       },
       {
         "uid": "charades_arabic_drive_q22_400",
@@ -1452,7 +1480,11 @@
         "q": "🎭 امسح رمز QR بجوال الممثل فقط، ومثّل البطاقة لفريقك بدون كلام!",
         "a": "ساق البامبو",
         "isCharades": true,
-        "qrPayload": "ساق البامبو"
+        "qrPayload": "ساق البامبو",
+        "am": {
+          "t": "image",
+          "u": "https://shahid.mbc.net/mediaObject/2020/disney/safwan/omar/lel-hob-jinon/Revamp/sag_babmo/sebag_al_albambo_thumb_clean/original/sebag_al_albambo_thumb_clean.jpg"
+        }
       },
       {
         "uid": "charades_arabic_drive_q23_600",
@@ -1460,7 +1492,11 @@
         "q": "🎭 امسح رمز QR بجوال الممثل فقط، ومثّل البطاقة لفريقك بدون كلام!",
         "a": "أرض الخوف",
         "isCharades": true,
-        "qrPayload": "أرض الخوف"
+        "qrPayload": "أرض الخوف",
+        "am": {
+          "t": "image",
+          "u": "https://img.parlmany.com/ArticleImgs/2023/5/29/22314-EnHcMknVkAIbHHI.jpg"
+        }
       },
       {
         "uid": "charades_arabic_drive_q24_600",
@@ -1468,7 +1504,11 @@
         "q": "🎭 امسح رمز QR بجوال الممثل فقط، ومثّل البطاقة لفريقك بدون كلام!",
         "a": "نهاية رجل شجاع",
         "isCharades": true,
-        "qrPayload": "نهاية رجل شجاع"
+        "qrPayload": "نهاية رجل شجاع",
+        "am": {
+          "t": "image",
+          "u": "https://m.media-amazon.com/images/M/MV5BMGQwNWE3YzctZmE2ZC00YWYtZDBmZDdjXkEyXkFqcGc%40._V1_FMjpg_UX1000_.jpg"
+        }
       }
     ]
   },
@@ -1492,7 +1532,11 @@
         "q": "🎭 امسح رمز QR بجوال الممثل فقط، ومثّل البطاقة لفريقك بدون كلام!",
         "a": "Home Alone",
         "isCharades": true,
-        "qrPayload": "Home Alone"
+        "qrPayload": "Home Alone",
+        "am": {
+          "t": "image",
+          "u": "https://imgix.bustle.com/uploads/image/2023/12/21/181f5fd4-74aa-47ce-8d78-8ec3310766f8-macualey-culkin.jpeg?crop=faces&fit=crop&fm=jpg&h=900&w=1200"
+        }
       },
       {
         "uid": "charades_english_drive_q21_400",
@@ -1500,7 +1544,11 @@
         "q": "🎭 امسح رمز QR بجوال الممثل فقط، ومثّل البطاقة لفريقك بدون كلام!",
         "a": "The Silence of the Lambs",
         "isCharades": true,
-        "qrPayload": "The Silence of the Lambs"
+        "qrPayload": "The Silence of the Lambs",
+        "am": {
+          "t": "image",
+          "u": "https://i.blogs.es/cd1715/silencio-corderos/840_560.jpeg"
+        }
       },
       {
         "uid": "charades_english_drive_q22_400",
@@ -1508,7 +1556,11 @@
         "q": "🎭 امسح رمز QR بجوال الممثل فقط، ومثّل البطاقة لفريقك بدون كلام!",
         "a": "Catch Me If You Can",
         "isCharades": true,
-        "qrPayload": "Catch Me If You Can"
+        "qrPayload": "Catch Me If You Can",
+        "am": {
+          "t": "image",
+          "u": "https://cdn.mos.cms.futurecdn.net/n36pmnMEYU9h6s3XeECfEn.jpg"
+        }
       },
       {
         "uid": "charades_english_drive_q23_600",
@@ -1516,7 +1568,11 @@
         "q": "🎭 امسح رمز QR بجوال الممثل فقط، ومثّل البطاقة لفريقك بدون كلام!",
         "a": "Eternal Sunshine of the Spotless Mind",
         "isCharades": true,
-        "qrPayload": "Eternal Sunshine of the Spotless Mind"
+        "qrPayload": "Eternal Sunshine of the Spotless Mind",
+        "am": {
+          "t": "image",
+          "u": "https://staticg.sportskeeda.com/editor/2025/09/017b9-17571464845328-1920.jpg?w=1460"
+        }
       },
       {
         "uid": "charades_english_drive_q24_600",
@@ -1524,7 +1580,11 @@
         "q": "🎭 امسح رمز QR بجوال الممثل فقط، ومثّل البطاقة لفريقك بدون كلام!",
         "a": "No Country for Old Men",
         "isCharades": true,
-        "qrPayload": "No Country for Old Men"
+        "qrPayload": "No Country for Old Men",
+        "am": {
+          "t": "image",
+          "u": "https://images.squarespace-cdn.com/content/v1/5a1c2452268b96d901cd3471/1536512311884-WP675L68JQ5YRHESMX09/0348_3131.jpg?format=1500w"
+        }
       }
     ]
   },
@@ -1548,7 +1608,11 @@
         "q": "🎭 امسح رمز QR بجوال الممثل فقط، ومثّل البطاقة لفريقك بدون كلام!",
         "a": "حلاق قص شعر زبون بالغلط ويحاول يرقعها",
         "isCharades": true,
-        "qrPayload": "حلاق قص شعر زبون بالغلط ويحاول يرقعها"
+        "qrPayload": "حلاق قص شعر زبون بالغلط ويحاول يرقعها",
+        "am": {
+          "t": "image",
+          "u": "https://akm-img-a-in.tosshub.com/indiatoday/images/story/202409/illustration-by-siddhant-jumde-072956784-1x1.jpg?VersionId=I4.LEkShmNvuWAQFUsB1fOT6gMiHPffp"
+        }
       },
       {
         "uid": "charades_imaginary_drive_q21_400",
@@ -1556,7 +1620,11 @@
         "q": "🎭 امسح رمز QR بجوال الممثل فقط، ومثّل البطاقة لفريقك بدون كلام!",
         "a": "اللي ما يعرف الصقر يشويه",
         "isCharades": true,
-        "qrPayload": "اللي ما يعرف الصقر يشويه"
+        "qrPayload": "اللي ما يعرف الصقر يشويه",
+        "am": {
+          "t": "image",
+          "u": "https://dashboard.hawdaj.net/uploads/swalefs/706DEA39-AA36-40AA-8929-5DF84F832AA0.webp"
+        }
       },
       {
         "uid": "charades_imaginary_drive_q22_400",
@@ -1564,7 +1632,11 @@
         "q": "🎭 امسح رمز QR بجوال الممثل فقط، ومثّل البطاقة لفريقك بدون كلام!",
         "a": "غوّاص يبحث عن لؤلؤة وطلع له قرش",
         "isCharades": true,
-        "qrPayload": "غوّاص يبحث عن لؤلؤة وطلع له قرش"
+        "qrPayload": "غوّاص يبحث عن لؤلؤة وطلع له قرش",
+        "am": {
+          "t": "image",
+          "u": "https://static.wixstatic.com/media/d56f09_a182b5f87fa64bf68908afc41b51baca~mv2.png/v1/fill/w_1344%2Ch_768%2Cal_c/d56f09_a182b5f87fa64bf68908afc41b51baca~mv2.png"
+        }
       },
       {
         "uid": "charades_imaginary_drive_q23_600",
@@ -1572,7 +1644,11 @@
         "q": "🎭 امسح رمز QR بجوال الممثل فقط، ومثّل البطاقة لفريقك بدون كلام!",
         "a": "رجع بخُفَّي حُنين",
         "isCharades": true,
-        "qrPayload": "رجع بخُفَّي حُنين"
+        "qrPayload": "رجع بخُفَّي حُنين",
+        "am": {
+          "t": "image",
+          "u": "https://storage.liranews.info/articles/November2021/104877495_167806348073401_324814384354787584_n.jpg"
+        }
       },
       {
         "uid": "charades_imaginary_drive_q24_600",
@@ -1580,7 +1656,11 @@
         "q": "🎭 امسح رمز QR بجوال الممثل فقط، ومثّل البطاقة لفريقك بدون كلام!",
         "a": "الاحتباس الحراري وذوبان الأنهار الجليدية",
         "isCharades": true,
-        "qrPayload": "الاحتباس الحراري وذوبان الأنهار الجليدية"
+        "qrPayload": "الاحتباس الحراري وذوبان الأنهار الجليدية",
+        "am": {
+          "t": "image",
+          "u": "https://marketplace.canva.com/oKCt4/MAGd1loKCt4/1/tl/canva-melting-glacier-climate-change-illustration-MAGd1loKCt4.png"
+        }
       }
     ]
   },
