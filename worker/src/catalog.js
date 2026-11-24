@@ -8,6 +8,7 @@ import EIGHT_EXPANSION from './eight_expansion.json';
 import EIGHT_QUESTION_REVIEW from './eight_question_review.json';
 import EIGHT_POSTER_CATEGORIES from './eight_poster_categories.json';
 import EIGHT_CATEGORIES_60_203 from './eight_categories_60_203.json';
+import EIGHT_CATEGORY_GUIDE from './eight_category_guide.json';
 import { HttpError, nowIso } from './util.js';
 import { gatewayConfigured } from './payments.js';
 import { eightRawQuestions } from './games.js';
@@ -16,7 +17,7 @@ export const DOC_KEYS = ['games', 'packages', 'categories', 'game_content', 'sug
 
 const EIGHT_QUESTIONS_PREFIX = 'eight_questions:';
 const expandedDefaults = new Map();
-export const EIGHT_CATEGORY_MERGES = { custom_1795179696757: 'quran_kareem' };
+export const EIGHT_CATEGORY_MERGES = { custom_1795179696757: 'quran_kareem', ...EIGHT_CATEGORY_GUIDE.merges };
 const mergedTargets = new Set(Object.values(EIGHT_CATEGORY_MERGES));
 const shippedEightCategories = [...EIGHT_POSTER_CATEGORIES, ...EIGHT_CATEGORIES_60_203];
 const shippedEightMetadata = new Map(shippedEightCategories.map(({ questions, ...category }) => [category.slug, category]));
@@ -26,7 +27,8 @@ export const EIGHT_POSTERS = {
   ...Object.fromEntries([...shippedEightMetadata].filter(([, category]) => category.poster).map(([slug, category]) => [slug, category.poster])),
   ...Object.fromEntries(Object.entries(EIGHT_EXPANSION)
     .filter(([, bundle]) => bundle.poster)
-    .map(([slug, bundle]) => [slug, bundle.poster]))
+    .map(([slug, bundle]) => [slug, bundle.poster])),
+  ...EIGHT_CATEGORY_GUIDE.posters
 };
 
 export async function getDoc(env, key) {
@@ -66,13 +68,18 @@ export async function getDoc(env, key) {
         } else if (shipped && EIGHT_STADIUM_CATEGORIES.has(c.slug)) {
           c.item_count = Math.max(c.item_count || 0, shipped.item_count);
         }
+        if (!c.poster && Object.hasOwn(EIGHT_CATEGORY_GUIDE.posters, c.slug)) c.poster = EIGHT_CATEGORY_GUIDE.posters[c.slug];
       }
     }
     return stored;
   }
   if (key === 'categories') {
     const slugs = new Set(SEED.categories.map((category) => category.slug));
-    return structuredClone([...SEED.categories, ...[...shippedEightMetadata.values()].filter((category) => !slugs.has(category.slug))]);
+    const categories = structuredClone([...SEED.categories, ...[...shippedEightMetadata.values()].filter((category) => !slugs.has(category.slug))]);
+    for (const c of categories) {
+      if (!c.poster && Object.hasOwn(EIGHT_CATEGORY_GUIDE.posters, c.slug)) c.poster = EIGHT_CATEGORY_GUIDE.posters[c.slug];
+    }
+    return categories;
   }
   return structuredClone(SEED[key]);
 }
@@ -139,10 +146,6 @@ async function getEightQuestions(env) {
     if (!databaseSlugs.has(slug)) expandedDefaults.set(slug, structuredClone(expanded));
     stored[slug] = expanded;
   }
-  for (const [source, target] of Object.entries(EIGHT_CATEGORY_MERGES)) {
-    if (savedAfterMerge.has(target) || !stored[source]?.length) continue;
-    stored[target] = mergeEightQuestionLists(stored[target] || eightRawQuestions(target), stored[source]);
-  }
   const stadiumRoutes = EIGHT_EXPANSION.rebus_football.stadiumRoutes;
   if (Array.isArray(stored.rebus_football)) {
     const savedCups = [];
@@ -192,6 +195,10 @@ async function getEightQuestions(env) {
       }
       return corrected;
     });
+  }
+  for (const [source, target] of Object.entries(EIGHT_CATEGORY_MERGES)) {
+    if (savedAfterMerge.has(target) || !stored[source]?.length) continue;
+    stored[target] = mergeEightQuestionLists(stored[target] || eightRawQuestions(target), stored[source]);
   }
   return stored;
 }
@@ -330,5 +337,12 @@ export async function getCatalog(env) {
     getDoc(env, 'categories'),
   ]);
   const settings = publicSettings(await getSettings(env));
-  return { games, packages, categories: categories.filter((c) => !c.deleted && !Object.hasOwn(EIGHT_CATEGORY_MERGES, c.slug)), catPosters: EIGHT_POSTERS, settings, gatewayConnected: gatewayConfigured(env), media: mediaLimits(env) };
+  const mergedWithQuestions = new Set(categories.filter((c) => c.item_count > 0 && Object.hasOwn(EIGHT_CATEGORY_MERGES, c.slug))
+    .map((c) => EIGHT_CATEGORY_MERGES[c.slug]));
+  const mergedQuestions = mergedWithQuestions.size ? await getEightQuestions(env) : null;
+  const visibleCategories = categories.filter((c) => !c.deleted && !Object.hasOwn(EIGHT_CATEGORY_MERGES, c.slug))
+    .map((c) => mergedWithQuestions.has(c.slug) && Array.isArray(mergedQuestions[c.slug])
+      ? { ...c, item_count: mergedQuestions[c.slug].length }
+      : c);
+  return { games, packages, categories: visibleCategories, catPosters: EIGHT_POSTERS, settings, gatewayConnected: gatewayConfigured(env), media: mediaLimits(env) };
 }
