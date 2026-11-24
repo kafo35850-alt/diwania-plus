@@ -19251,7 +19251,11 @@
         "points": 200,
         "q": "ما الدولتان المستقلتان الوحيدتان في العالم اللتان يتخذ علمهما الوطني شكل المربع المتساوي الأضلاع تماماً (بنسبة 1:1)؟",
         "a": "سويسرا والفاتيكان",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "/eight-media/square-national-flags.svg"
+        }
       },
       {
         "uid": "world_flags_drive_q21_400",
