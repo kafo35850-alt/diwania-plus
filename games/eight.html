@@ -7896,7 +7896,17 @@ if (!u) return '';
 var yt = dwYouTubeId(u);
 if (m.t === 'youtube' || yt) {
 if (!yt) return '';
-return '<div style="position:relative;width:100%;aspect-ratio:16/9;max-height:46vh"><iframe src="https://www.youtube-nocookie.com/embed/' + yt + '?rel=0&playsinline=1" title="video" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border:0;border-radius:12px"></iframe></div>';
+const sourceParams = new URL(u).searchParams;
+const embedParams = new URLSearchParams({ rel: '0', playsinline: '1' });
+const start = Number(sourceParams.get('start'));
+const end = Number(sourceParams.get('end'));
+const validStart = Number.isSafeInteger(start) && start >= 0;
+if (validStart && start > 0) embedParams.set('start', String(start));
+if (Number.isSafeInteger(end) && end > (validStart ? start : 0)) {
+embedParams.set('end', String(end));
+embedParams.set('controls', '0');
+}
+return '<div style="position:relative;width:100%;aspect-ratio:16/9;max-height:46vh"><iframe src="https://www.youtube-nocookie.com/embed/' + yt + '?' + dwEsc(embedParams.toString()) + '" title="مقطع الفيديو" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border:0;border-radius:12px"></iframe></div>';
 }
 if (m.t === 'video') return '<video src="' + dwEsc(u) + '" controls playsinline preload="metadata" style="display:block;width:100%;max-height:46vh;border-radius:12px;background:#000"></video>';
 if (m.t === 'audio') return '<div style="width:100%;padding:14px;border-radius:14px;background:linear-gradient(135deg,#1e1b4b,#0f766e);text-align:center"><div style="font-size:40px;line-height:1.2">🎧</div><audio src="' + dwEsc(u) + '" controls preload="metadata" style="width:100%;margin-top:8px"></audio></div>';
