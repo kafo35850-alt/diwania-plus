@@ -2240,35 +2240,55 @@
         "points": 200,
         "q": "ماذا تعني الأحرف الإنجليزية (CPU) في عالم الحاسوب؟",
         "a": "وحدة المعالجة المركزية (Central Processing Unit)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://cdn.mos.cms.futurecdn.net/047d8d28893dd9fdb3145074e4b77b74-1200-80.jpg"
+        }
       },
       {
         "uid": "computer_tech_drive_q21_400",
         "points": 400,
         "q": "من هو العالم البريطاني الذي اخترع شبكة الويب العالمية (World Wide Web) عام 1989 أثناء عمله في منظمة سيرن (CERN)؟",
         "a": "تيم بيرنرز لي (Tim Berners-Lee)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://dobetter.esade.edu/sites/default/files/inline-images/tim-berners.jpg"
+        }
       },
       {
         "uid": "computer_tech_drive_q22_400",
         "points": 400,
         "q": "ما اسم القانون التقني الذي تنبأ بتضاعف عدد الترانزستورات في الدوائر المتكاملة كل عامين تقريباً؟",
         "a": "قانون مور (Moore's Law)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://substackcdn.com/image/fetch/%24s_%21Xzb4%21%2Cf_auto%2Cq_auto%3Agood%2Cfl_progressive%3Asteep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2Fe47c25dd-e5e5-40c8-b5e1-2efaffab7bc9_3133x2318.png"
+        }
       },
       {
         "uid": "computer_tech_drive_q23_600",
         "points": 600,
         "q": "ما اسم أول معالج دقيق تجاري أحادي الشريحة في التاريخ أطلقته شركة إنتل عام 1971، وكم بت كانت معماريته؟",
         "a": "إنتل 4004 (Intel 4004) بمعمارية 4 بت",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.intel.com/content/dam/www/public/us/en/images/photography-business/4004-microprocessor.jpg"
+        }
       },
       {
         "uid": "computer_tech_drive_q24_600",
         "points": 600,
         "q": "ما اسم البروتوكول الذي اقترحه ديفيد ميلز عام 1985 ولا يزال يُعد المعيار الأساسي لمزامنة الساعات عبر شبكات الحاسوب؟",
         "a": "بروتوكول وقت الشبكة (NTP - Network Time Protocol)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.expressvpn.com/wp-ws-cache/uploads-expressvpn/2026/05/network-time-protocol-1.png"
+        }
       }
     ]
   },
@@ -2289,35 +2309,55 @@
         "points": 200,
         "q": "ما اللقب الشهير الذي تُعرف به الجزائر تكريماً لتضحيات شعبها خلال ثورة التحرير؟",
         "a": "بلد المليون ونصف المليون شهيد",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://eldjanoubelkabir.dz/media/2026/02/%D8%B9%D9%84%D9%85-%D8%A7%D9%84%D8%AC%D8%B2%D8%A7%D8%A6%D8%B1.jpeg"
+        }
       },
       {
         "uid": "country_algeria_drive_q21_400",
         "points": 400,
         "q": "ما اسم أعلى قمة جبلية في الجزائر، وتقع ضمن سلسلة جبال الهقار بولاية تمنراست؟",
         "a": "جبل تاهات أتاكور",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://mysummit.de/wp-content/uploads/2008-12_tahat.jpg"
+        }
       },
       {
         "uid": "country_algeria_drive_q22_400",
         "points": 400,
         "q": "ما اسم المدينة الجزائرية الملقّبة بـ«مدينة الجسور المعلّقة» والتي كانت تُعرف قديماً باسم سيرتا؟",
         "a": "قسنطينة",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://omrania.com/wp-content/uploads/shutterstock_596063633-1200x628.jpg"
+        }
       },
       {
         "uid": "country_algeria_drive_q23_600",
         "points": 600,
         "q": "ما اسم المدينة الأثرية الرومانية في ولاية باتنة التي أسّسها الإمبراطور تراجان عام 100م واشتهرت بتخطيطها الشبكي المتعامد الدقيق؟",
         "a": "تيمقاد (ثاموغادي)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://upload.wikimedia.org/wikipedia/commons/4/4a/Timgad_Arch_of_Trajan.jpg"
+        }
       },
       {
         "uid": "country_algeria_drive_q24_600",
         "points": 600,
         "q": "ما اسم الدولة التاريخية التي أسّسها عبد الرحمن بن رستم في القرن الثامن الميلادي في الجزائر واتخذت من مدينة تيهرت عاصمةً لها؟",
         "a": "الدولة الرستمية",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://upload.wikimedia.org/wikipedia/commons/3/33/%D8%A7%D9%84%D8%AF%D9%88%D9%84%D8%A9_%D8%A7%D9%84%D8%B1%D8%B3%D8%AA%D9%85%D9%8A%D8%A9_-.png"
+        }
       }
     ]
   },
@@ -2338,35 +2378,55 @@
         "points": 200,
         "q": "ما اسم الجسر البري الشهير الذي يربط مملكة البحرين بالمملكة العربية السعودية؟",
         "a": "جسر الملك فهد",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.bahrainedb.com/app/uploads/2020/11/KF-causeway-e1604471615616.png"
+        }
       },
       {
         "uid": "country_bahrain_drive_q21_400",
         "points": 400,
         "q": "ما اسم الحضارة القديمة التي ازدهرت في البحرين في الألفية الثالثة قبل الميلاد وذُكرت في النصوص السومرية باسم «أرض الخلود»؟",
         "a": "حضارة دلمون",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://static.srpcdigital.com/styles/1037xauto/public/2019/07/06/daily-070719-4.jpg.webp"
+        }
       },
       {
         "uid": "country_bahrain_drive_q22_400",
         "points": 400,
         "q": "ما اسم الشجرة المعمرة الشهيرة التي تنمو وحيدة في صحراء البحرين منذ نحو 400 عام دون مصدر مياه ظاهر؟",
         "a": "شجرة الحياة",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Tree_of_Life_Bahrain.jpg/1024px-Tree_of_Life_Bahrain.jpg"
+        }
       },
       {
         "uid": "country_bahrain_drive_q23_600",
         "points": 600,
         "q": "في أي عام اكتُشف أول بئر نفط في البحرين، وكان أيضاً أول اكتشاف للنفط في الجانب العربي من الخليج؟",
         "a": "عام 1932 (بئر رقم 1 في جبل الدخان)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://a4.pbase.com/u37/bmcmorrow/upload/32346330.bahrain299.JPG"
+        }
       },
       {
         "uid": "country_bahrain_drive_q24_600",
         "points": 600,
         "q": "ما اسم أعلى نقطة طبيعية في مملكة البحرين (بارتفاع نحو 134 متراً فوق سطح البحر)؟",
         "a": "جبل الدخان",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.saaih.com/files/styles/gallery/public/gallery/2018/03/%D8%AC%D8%A8%D9%84%20%D8%A7%D9%84%D8%AF%D8%AE%D8%A7%D9%86.jpg"
+        }
       }
     ]
   },
@@ -2387,35 +2447,55 @@
         "points": 200,
         "q": "في أي عام افتُتحت قناة السويس رسمياً للملاحة العالمية؟",
         "a": "عام 1869 (17 نوفمبر 1869)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.meisterdrucke.us/kunstwerke/1260px/Edouard_Riou_-_Inauguration_of_the_Suez_Canal_The_canal_was_created_to_connect_the_Red_Sea_to_t_-_%28MeisterDrucke-951726%29.jpg"
+        }
       },
       {
         "uid": "country_egypt_drive_q21_400",
         "points": 400,
         "q": "من هو القائد الفاطمي الذي أسّس مدينة القاهرة عام 969م (358 هـ)؟",
         "a": "جوهر الصقلي",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://pbs.twimg.com/profile_images/1773367292643909633/lSZAYdtg.jpg"
+        }
       },
       {
         "uid": "country_egypt_drive_q22_400",
         "points": 400,
         "q": "من هو الملك الفرعوني الذي أمر ببناء الهرم الأكبر في الجيزة؟",
         "a": "الملك خوفو",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://i0.wp.com/www.world-archaeology.com/wp-content/uploads/2022/03/pg-105.jpg?resize=700%2C465&ssl=1"
+        }
       },
       {
         "uid": "country_egypt_drive_q23_600",
         "points": 600,
         "q": "من هو المهندس والوزير المصري القديم الذي صمّم الهرم المدرّج للملك زوسر في سقارة، ويُعد أول مهندس معماري يُعرف اسمه في التاريخ؟",
         "a": "إمحوتب",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://upload.wikimedia.org/wikipedia/commons/1/14/Statue_of_Imhotep%2C_Egypt%2C_600-500_BCE_Wellcome_L0058411.jpg"
+        }
       },
       {
         "uid": "country_egypt_drive_q24_600",
         "points": 600,
         "q": "ما اسم العالم المصري الذي فاز بجائزة نوبل في الكيمياء عام 1999 لريادته في علم «كيمياء الفيمتو»؟",
         "a": "أحمد زويل",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://cdn.the-scientist.com/assets/articleNo/33057/iImg/7251/3dd4eb46-d6f5-4eb2-9a78-3cb59b3be9a8-zewail.jpg"
+        }
       }
     ]
   },
