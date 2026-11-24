@@ -6,6 +6,7 @@ import SEED from './seed.json';
 import CAT_POSTERS from './cat_posters.json';
 import EIGHT_EXPANSION from './eight_expansion.json';
 import EIGHT_QUESTION_REVIEW from './eight_question_review.json';
+import EIGHT_QUESTION_QUALITY from './eight_question_quality.json';
 import EIGHT_POSTER_CATEGORIES from './eight_poster_categories.json';
 import EIGHT_CATEGORIES_60_203 from './eight_categories_60_203.json';
 import EIGHT_CATEGORY_GUIDE from './eight_category_guide.json';
@@ -181,7 +182,17 @@ async function getEightQuestions(env) {
         : q;
     });
   }
-  for (const [slug, review] of Object.entries(EIGHT_QUESTION_REVIEW)) {
+  applyEightQuestionRevisions(stored, EIGHT_QUESTION_REVIEW);
+  applyEightQuestionRevisions(stored, EIGHT_QUESTION_QUALITY);
+  for (const [source, target] of Object.entries(EIGHT_CATEGORY_MERGES)) {
+    if (savedAfterMerge.has(target) || !stored[source]?.length) continue;
+    stored[target] = mergeEightQuestionLists(stored[target] || eightRawQuestions(target), stored[source]);
+  }
+  return stored;
+}
+
+function applyEightQuestionRevisions(stored, revisions) {
+  for (const [slug, review] of Object.entries(revisions)) {
     const questions = Object.hasOwn(stored, slug) ? stored[slug] : eightRawQuestions(slug);
     if (!Array.isArray(questions) || !questions.length) continue;
     stored[slug] = questions.map((card) => {
@@ -196,11 +207,6 @@ async function getEightQuestions(env) {
       return corrected;
     });
   }
-  for (const [source, target] of Object.entries(EIGHT_CATEGORY_MERGES)) {
-    if (savedAfterMerge.has(target) || !stored[source]?.length) continue;
-    stored[target] = mergeEightQuestionLists(stored[target] || eightRawQuestions(target), stored[source]);
-  }
-  return stored;
 }
 
 function questionWords(text) {
