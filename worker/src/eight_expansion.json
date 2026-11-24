@@ -14762,35 +14762,55 @@
         "points": 200,
         "q": "في أي مدينة سعودية تدور الأحداث الرئيسية لمسلسل «العاصوف» بدءاً من حقبة السبعينات؟",
         "a": "مدينة الرياض",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://vid.alarabiya.net/images/2018/05/21/80e1cae2-227e-4c9b-bb2f-675208c616b0/80e1cae2-227e-4c9b-bb2f-675208c616b0_16x9_1200x676.png"
+        }
       },
       {
         "uid": "series_alasoof_drive_q21_400",
         "points": 400,
         "q": "ما اسم الشقيق الأكبر لخالد الطيان في المسلسل الذي جسّد دوره الفنان عبدالإله السناني؟",
         "a": "محسن الطيان",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://cdnx.premiumread.com/?f=webp&q=100&url=https%3A%2F%2Fwww.okaz.com.sa%2Fuploads%2Fimages%2F2019%2F06%2F06%2F1265318.jpg&w=830"
+        }
       },
       {
         "uid": "series_alasoof_drive_q22_400",
         "points": 400,
         "q": "من هو المخرج السوري الذي تولّى إخراج أجزاء مسلسل «العاصوف»؟",
         "a": "المثنى صبح",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://media.alanba.com.kw/articlefiles/2024/11/1283894-1.jpg?crop=%280%2C8%2C450%2C284%29&cropxunits=450&cropyunits=307&w=770"
+        }
       },
       {
         "uid": "series_alasoof_drive_q23_600",
         "points": 600,
         "q": "من هو الكاتب السعودي الراحل الذي استُند مسلسل «العاصوف» إلى رباعيته الروائية «بيوت من تراب»؟",
         "a": "الدكتور عبدالرحمن الوابلي",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://al-sharq.com/get/maximage/20170923_1506189886-186077.jpg?t=1506189886"
+        }
       },
       {
         "uid": "series_alasoof_drive_q24_600",
         "points": 600,
         "q": "ما الحدث التاريخي المفصلي عام 1979 الذي رصده الجزء الثاني من «العاصوف»، وما الحدث التاريخي عام 1990–1991 الذي تناوله الجزء الثالث؟",
         "a": "الجزء الثاني: حادثة اقتحام الحرم المكي عام 1979م — الجزء الثالث: حرب الخليج الثانية (تحرير الكويت 1990–1991م)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://static.sayidaty.net/styles/1200_scale/public/2019/05/23/5313686-79859697.jpeg.webp?VersionId=2Crk_MH5UeM5rw_78AaYqVEtWqHdlI23"
+        }
       }
     ]
   },
