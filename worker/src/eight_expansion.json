@@ -4715,14 +4715,22 @@
         "points": 200,
         "q": "ما اسم المشروع المستقبلي العالمي الضخم التابع لرؤية السعودية 2030 الواقع في شمال غرب منطقة تبوك؟",
         "a": "نيوم (NEOM)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "/eight-media/28a1cb1f0f1534e7cc0e.webp"
+        }
       },
       {
         "uid": "custom_1795332815456_drive_q9_200",
         "points": 200,
         "q": "ما اسم الغزوة النبوية الكبرى التي وقعت في السنة التاسعة للهجرة وارتبطت باسم منطقة تبوك؟",
         "a": "غزوة تبوك (غزوة العسرة)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/Tabuk%20campaign%20(630).png?width=1280"
+        }
       },
       {
         "uid": "custom_1795332815456_drive_q10_200",
@@ -4739,21 +4747,33 @@
         "points": 200,
         "q": "ما اللقب الشهير لمنطقة تبوك نظراً لخصوبة أراضيها وإنتاجها الضخم من الزهور؟",
         "a": "تبوك الورد",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/Roses-%20Flowers.jpg?width=582"
+        }
       },
       {
         "uid": "custom_1795332815456_drive_q12_200",
         "points": 200,
         "q": "ما اسم المحافظة الساحلية في منطقة تبوك التي تُعد بوابة «مشروع البحر الأحمر» السياحي العالمي؟",
         "a": "أملج (والوجه)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "/eight-media/514a5bc150e52b19f81c.webp"
+        }
       },
       {
         "uid": "custom_1795332815456_drive_q13_400",
         "points": 400,
         "q": "ما اسم المحافظة الأثرية العريقة في منطقة تبوك التي تضم «بئر هداج» وتُعد من أقدم الواحات في الجزيرة العربية؟",
         "a": "محافظة تيماء",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/Old%20town%20of%20Tayma%202020.jpg?width=1280"
+        }
       },
       {
         "uid": "custom_1795332815456_drive_q14_400",
@@ -4770,28 +4790,44 @@
         "points": 400,
         "q": "ما اسم الوجهة الجبلية الثلجية المستقبلية قيد الإنشاء في جبال نيوم بمنطقة تبوك؟",
         "a": "تروجينا (Trojena)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/Trojena%20Ski%20Resort%2C%20Saudi%20Arabia.png?width=960"
+        }
       },
       {
         "uid": "custom_1795332815456_drive_q16_400",
         "points": 400,
         "q": "ما اسم المسجد التاريخي في مدينة تبوك الذي يُروى أن النبي ﷺ صلى في موضعه خلال غزوة تبوك؟",
         "a": "مسجد التوبة",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/Al%20Tawbah%20Mosque%20Tabuk.JPG?width=1280"
+        }
       },
       {
         "uid": "custom_1795332815456_drive_q17_400",
         "points": 400,
         "q": "ما اسم المحافظة الساحلية في تبوك التي تضم ميناءً بحرياً تاريخياً وقلعة المويلح القريبة منها؟",
         "a": "محافظة ضباء",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/%D9%82%D9%84%D8%B9%D8%A9%20%D8%A7%D9%84%D9%85%D9%88%D9%8A%D9%84%D8%AD.jpg?width=1024"
+        }
       },
       {
         "uid": "custom_1795332815456_drive_q18_400",
         "points": 400,
         "q": "ما اسم الموقع الأثري المنحوت في الصخر بمحافظة البدع في تبوك والذي يرتبط بأرض مدين؟",
         "a": "مغائر شعيب",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "/eight-media/e1a7c84e61069117c124.webp"
+        }
       },
       {
         "uid": "custom_1795332815456_drive_q19_600",
