@@ -15518,6 +15518,10 @@
         "qm": {
           "t": "image",
           "u": "/eight-media/48c5e7db1cf945e9e919.webp"
+        },
+        "am": {
+          "t": "image",
+          "u": "https://saudipedia.com/en/saudipediaen/uploads/images/2025/01/01/163968.jpg"
         }
       },
       {
@@ -15525,35 +15529,55 @@
         "points": 200,
         "q": "ما اسم المسابقة التلفزيونية الشهيرة في أبوظبي التي تُعد الأضخم في العالم العربي في مجال الشعر النبطي؟",
         "a": "شاعر المليون",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://millionspoet.ae/storage/post/large/wFxNLJnoagkkyHIELVj86Uj6kCqS8ytSXXIl8Q17.jpg"
+        }
       },
       {
         "uid": "nabati_poetry_drive_q21_400",
         "points": 400,
         "q": "من هو الشاعر السعودي الراحل الملقّب بـ «مهندس الكلمة» وكتب قصائد وطنية وعاطفية شهيرة منها «فوق هام السحب»؟",
         "a": "الأمير بدر بن عبد المحسن",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://static.hiamag.com/styles/1000x1000/public/2024-09/%D8%A7%D9%84%D8%A3%D9%85%D9%8A%D8%B1%20%D8%A7%D9%84%D8%B4%D8%A7%D8%B9%D8%B1%20%D8%A8%D8%AF%D8%B1%20%D8%A8%D9%86%20%D8%B9%D8%A8%D8%AF%D8%A7%D9%84%D9%85%D8%AD%D8%B3%D9%86%20-%20%D8%A7%D9%84%D8%B5%D9%88%D8%B1%D8%A9%20%D8%A7%D9%84%D8%B1%D8%A6%D9%8A%D8%B3%D9%8A%D8%A9.jpg?h=19170f84"
+        }
       },
       {
         "uid": "nabati_poetry_drive_q22_400",
         "points": 400,
         "q": "ما اسم الفن الشعري النبطي المرتجل الذي يدور بين شاعرين وجهاً لوجه على إيقاع الصفوف والطبول، ويُعرف أيضاً باسم «القلطة»؟",
         "a": "شعر المحاورة (الردّية)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.independentarabia.com/sites/default/files/styles/800x600/public/article/mainimage/2024/08/02/1059321-2015057738.jpeg"
+        }
       },
       {
         "uid": "nabati_poetry_drive_q23_600",
         "points": 600,
         "q": "ما اسم البحر الشعري النبطي الذي تفعيلته «مستفعلن مستفعلن فاعلاتن» ويُعد من أشهر بحور الشعر النبطي وأكثرها تداولاً على الربابة؟",
         "a": "بحر المسحوب",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.albayan.ae/assets/archives/images/2020/02/23/3785358.jpg"
+        }
       },
       {
         "uid": "nabati_poetry_drive_q24_600",
         "points": 600,
         "q": "من هو الشاعر النبطي الشهير قائل القصيدة التراثية الذائعة التي مطلعها: «يا كليب شب النار يا كليب شبّه»؟",
         "a": "دغيم الظلماوي",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://s2.dmcdn.net/v/WSgGI1e0J0NG0Ux92/x720"
+        }
       }
     ]
   },
