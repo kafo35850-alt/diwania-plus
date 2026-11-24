@@ -726,6 +726,10 @@
         "am": {
           "t": "image",
           "u": "/eight-media/ade7e3f19cb98034fba7.webp"
+        },
+        "qm": {
+          "t": "image",
+          "u": "https://elcomercio.pe/resizer/v2/UT7JJVTTCJHJPENB66FBTKLGCU.jpg?auth=f75ed0f18014643aeade7bf903aca906ea51101f821ebce284c61fe86a9b4918&quality=90&smart=true&width=1200"
         }
       },
       {
@@ -737,6 +741,10 @@
         "am": {
           "t": "image",
           "u": "https://i.blogs.es/4f0fd9/dragon-ball-z_-kakarot_20230112140508/1366_2000.jpeg"
+        },
+        "qm": {
+          "t": "image",
+          "u": "https://images.hdqwalls.com/wallpapers/goku-dominant-4d.jpg"
         }
       },
       {
@@ -748,6 +756,10 @@
         "am": {
           "t": "image",
           "u": "https://imgix.ranker.com/user_node_img/50091/1001800894/original/goku-turns-super-saiyan-for-the-first-time-photo-u1?auto=format&dpr=2&fit=crop&fm=pjpg&q=60&w=500"
+        },
+        "qm": {
+          "t": "image",
+          "u": "https://pbs.twimg.com/media/FChvfz7VUAML5xQ.png"
         }
       },
       {
@@ -759,6 +771,10 @@
         "am": {
           "t": "image",
           "u": "https://m.media-amazon.com/images/M/MV5BNmJkNDI1YjQtNGQ0OC00OTI1LWI3OWMtMmUwYTY1M2VlMmMwXkEyXkFqcGc%40._V1_.jpg"
+        },
+        "qm": {
+          "t": "image",
+          "u": "https://assets.st-note.com/production/uploads/images/72317394/rectangle_large_type_2_719468377afef5ea9a38ce4654733a4e.jpeg?width=1280"
         }
       },
       {
@@ -770,6 +786,10 @@
         "am": {
           "t": "image",
           "u": "https://static.wikia.nocookie.net/dragonball/images/8/88/Porunga_is_summoned_by_Dende.png/revision/latest/scale-to-width-down/1200?cb=20250214203821"
+        },
+        "qm": {
+          "t": "image",
+          "u": "https://m.media-amazon.com/images/M/MV5BNzIxMmZmNWUtM2VkOS00MTUxLWFlNmItNzZhOTg2YzZmMTI5XkEyXkFqcGc%40._V1_.jpg"
         }
       },
       {
@@ -781,6 +801,10 @@
         "am": {
           "t": "image",
           "u": "https://fr.web.img6.acsta.net/newsv7/18/03/26/10/50/46918650.jpg"
+        },
+        "qm": {
+          "t": "image",
+          "u": "https://i.pinimg.com/originals/f7/d3/7b/f7d37b82c0b12c5dd821d385922010b2.jpg"
         }
       }
     ]
