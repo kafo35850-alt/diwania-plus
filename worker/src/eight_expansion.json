@@ -1687,7 +1687,7 @@
         "qrPayload": "سالم الدوسري",
         "am": {
           "t": "image",
-          "u": "https://media.licdn.com/dms/image/v2/D4E22AQGmbBuoS0RSMw/feedshare-shrink_800/0/1706712096718?e=2147483647&t=LtRN3Wj2apmPhbT-cGh_Rx6kA5hbVLvLcRP3gHg7WEw&v=beta"
+          "u": "https://assets.the-afc.com/AFC_Annual_Awards_Doha_2022/2022_nominees/Salem-Al-Dawsari_22-November-2022.jpg"
         }
       },
       {
@@ -1699,7 +1699,7 @@
         "qrPayload": "إيرلينغ هالاند",
         "am": {
           "t": "image",
-          "u": "https://resources.premierleague.com/premierleague/photo/2025/01/04/34aa4c8d-64d5-4c9d-ae56-7c32240a7694/2025-01-04T171458Z_1424338096_UP1EK141CPJB3_RTRMADP_3_SOCCER-ENGLAND-MCI-WHU-REPORT.JPG"
+          "u": "https://media02.tr.beinsports.com/img/players/P10299.png"
         }
       },
       {
@@ -1804,7 +1804,7 @@
         "useCategoryPoster": true,
         "am": {
           "t": "image",
-          "u": "https://media.gettyimages.com/id/1452991805/photo/oganesson-element-periodic-table.jpg?s=2048x2048&w=gi&k=20&c=xwOTgB8M4jJGXRXhYtZpNlszqW17hwgDlM3m0QdLMzI="
+          "u": "https://scx2.b-cdn.net/gfx/news/2017/oganessonthe.jpg"
         }
       }
     ]
@@ -1964,35 +1964,55 @@
         "points": 200,
         "q": "ما اللقب الشهير الذي يُعرف به نادي الاتحاد السعودي بفضل أقدميته وتاريخه العريق؟",
         "a": "العميد (والنمور)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://i0.wp.com/saudi.wiki/wp-content/uploads/2023/08/1-15.jpg?resize=800%2C800&ssl=1"
+        }
       },
       {
         "uid": "club_alittihad_drive_q21_400",
         "points": 400,
         "q": "في أي عامين متتاليين تُوّج نادي الاتحاد بلقب دوري أبطال آسيا ليصبح أول نادٍ يحقق اللقب مرتين متتاليتين بالنظام الحديث للبطولة؟",
         "a": "عامي 2004 و2005",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://assets.the-afc.com/migration/n/f/nflfcwfpf7ty2lhir89i.jpg"
+        }
       },
       {
         "uid": "club_alittihad_drive_q22_400",
         "points": 400,
         "q": "أمام أي نادٍ كوري جنوبي حقق نادي الاتحاد ريمونتادا تاريخية بفوزه 5–0 في مباراة الإياب ليتوج بدوري أبطال آسيا 2004؟",
         "a": "سيونغنام إلهوا تشونما (Seongnam Ilhwa Chunma)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://arriyadiyah.com/media/thumb/1d/1e/800_79deabdf4c.jpg"
+        }
       },
       {
         "uid": "club_alittihad_drive_q23_600",
         "points": 600,
         "q": "من هو أول رئيس رسمي في تاريخ نادي الاتحاد السعودي بعد تأسيسه عام 1927م؟",
         "a": "علي هاشم سلطان (علي سلطان)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.ittihadclub.sa/_next/image?q=75&url=https%3A%2F%2Fmedia-cdn.cortextech.io%2Fded0d001-e4bc-427c-9bec-b20a448d9c62.jpg&w=1920"
+        }
       },
       {
         "uid": "club_alittihad_drive_q24_600",
         "points": 600,
         "q": "أمام أي نادٍ حقق نادي الاتحاد الفوز بنتيجة 1–0 في ربع نهائي كأس العالم للأندية 2005 باليابان، ومن سجل هدف المباراة الوحيد؟",
         "a": "أمام الأهلي المصري — وسجل الهدف محمد نور",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://resources.saudi-pro-league.pulselive.com/photo-resources/2025/06/16/cae469cc-15d2-44ba-be69-b2d7974d3cf3/GettyImages-56414187.jpg?height=584&width=938"
+        }
       }
     ]
   },
@@ -2013,35 +2033,55 @@
         "points": 200,
         "q": "من هو الهداف التاريخي لنادي النصر السعودي والملقّب بـ «السهم الملتهب» و«بيليه الصحراء»؟",
         "a": "ماجد عبدالله",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.middleeasteye.net/sites/default/files/majed-abdallah-al-nassr-trophy-afp.jpg"
+        }
       },
       {
         "uid": "club_alnassr_drive_q21_400",
         "points": 400,
         "q": "في أي عام شارك نادي النصر كأول ممثل لقارة آسيا في النسخة الأولى من كأس العالم للأندية بالبرازيل، ليحصل على لقب «العالمي» وجائزة الفيفا للعب النظيف؟",
         "a": "عام 2000م",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://assets.goal.com/images/v3/bltb65698f512fc56d0/goal---image-w-crest--49c70273-0f01-4e10-9ff6-e71185c7ba5b.jpeg?upscale=true&width=1400"
+        }
       },
       {
         "uid": "club_alnassr_drive_q22_400",
         "points": 400,
         "q": "من هو النجم البلغاري الفائز بالكرة الذهبية الذي سجل هدف تتويج النصر بلقب كأس الكؤوس الآسيوية 1998 أمام سوون سامسونغ الكوري الجنوبي؟",
         "a": "خريستو ستويتشكوف (Hristo Stoichkov)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://cdn1-m.zahratalkhaleej.ae/store/archive/image/2023/1/2/d309d252-3469-432b-9585-316e0b696276.jpeg?width=655"
+        }
       },
       {
         "uid": "club_alnassr_drive_q23_600",
         "points": 600,
         "q": "من هما الأخوان اللذان أسسا نادي النصر السعودي عام 1955م في الرياض؟",
         "a": "زيد الجبعاء وحسين الجبعاء",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://pbs.twimg.com/media/GkUL1qNXUAASpDs.jpg"
+        }
       },
       {
         "uid": "club_alnassr_drive_q24_600",
         "points": 600,
         "q": "ما اللقب القاري الآخر الذي يُعرف به نادي النصر إلى جانب «العالمي»، وما السبب التاريخي وراء هذه التسمية؟",
         "a": "«القاري» — لأنه أول نادٍ آسيوي يخوض مباريات رسمية في 4 قارات مختلفة (آسيا، إفريقيا، أمريكا الجنوبية، وأوروبا)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://cdn.al-ain.com/lg/images/2022/4/13/163-155554-asian-cup-winners-tournaments-cancelled-3.jpeg"
+        }
       }
     ]
   },
@@ -2062,35 +2102,55 @@
         "points": 200,
         "q": "ما اسم أكاديمية الشباب الشهيرة التابعة لنادي برشلونة؟",
         "a": "لا ماسيا (La Masia)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.fcbarcelona.com/photo-resources/2019/11/01/59125a83-2e9e-418e-a688-f695159b16f6/LA-MASIA.jpg?height=750&width=1200"
+        }
       },
       {
         "uid": "club_barcelona_drive_q21_400",
         "points": 400,
         "q": "في أي عام حقق نادي برشلونة «السداسية التاريخية» تحت قيادة المدرب بيب غوارديولا؟",
         "a": "عام 2009",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.infobae.com/resizer/v2/https%3A%2F%2Fs3.amazonaws.com%2Farc-wordpress-client-uploads%2Finfobae-wp%2Fwp-content%2Fuploads%2F2018%2F12%2F18203328%2FBarcelona-sextete.jpg?auth=2edbd2cea15deeb59ac9ff5647f9544d62f7bb429de33d6fbb987e78ad80b3d7&height=630&quality=85&smart=true&width=1200"
+        }
       },
       {
         "uid": "club_barcelona_drive_q22_400",
         "points": 400,
         "q": "من هو اللاعب الذي سجل هدف الفوز لبرشلونة في نهائي دوري أبطال أوروبا 1992 أمام سامبدوريا ليحقق النادي أول ألقابه في البطولة؟",
         "a": "رونالد كومان (من ركلة حرة في الدقيقة 112)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://cadenaser00.epimg.net/ser/imagenes/2011/05/24/deportes/1306193290_740215_0000000000_noticia_normal.jpg"
+        }
       },
       {
         "uid": "club_barcelona_drive_q23_600",
         "points": 600,
         "q": "ما اسم الصحيفة الرياضية التي نشر فيها خوان غامبر إعلانه الشهير في أكتوبر 1899 لدعوة الراغبين في تأسيس نادي برشلونة؟",
         "a": "صحيفة لوس ديبورتيس (Los Deportes)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.fcbarcelona.com/fcbarcelona/photo/2024/10/21/1ee79e04-f299-4250-aa6b-ecc4015c9606/Kans_Kamper.jpg"
+        }
       },
       {
         "uid": "club_barcelona_drive_q24_600",
         "points": 600,
         "q": "من هو المدرب الذي قاد نادي برشلونة للتتويج بأول لقب في تاريخ الدوري الإسباني (الليغا) في نسخته الافتتاحية موسم 1928–1929؟",
         "a": "روما فورنس (Romà Forns)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://estaticos-cdn.prensaiberica.es/clip/66909647-0260-4947-beb7-439a3068cb7c_original-libre-aspect-ratio_default_0.jpg"
+        }
       }
     ]
   },
@@ -2111,35 +2171,55 @@
         "points": 200,
         "q": "من هو الهداف التاريخي لنادي ريال مدريد في جميع المسابقات الرسمية؟",
         "a": "كريستيانو رونالدو (450 هدفاً)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://pbs.twimg.com/media/FNKE2t7X0AM7GQG?format=jpg&name=large"
+        }
       },
       {
         "uid": "club_real_madrid_drive_q21_400",
         "points": 400,
         "q": "من هو المدرب الذي قاد ريال مدريد للفوز بلقب دوري أبطال أوروبا العاشر «العاشرة» عام 2014؟",
         "a": "كارلو أنشيلوتي",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://publish.realmadrid.com/content/dam/portals/realmadrid-com/es-es/news/generic/2023/05/24/not-efemeride-decima-copa-de-europa-2023/galleries/32-10-copa-de-europa/1330829241709.jpg"
+        }
       },
       {
         "uid": "club_real_madrid_drive_q22_400",
         "points": 400,
         "q": "في أي عام تأسس نادي ريال مدريد، ومن هو الملك الذي منحه لقب «ريال» (الملكي) عام 1920؟",
         "a": "تأسس عام 1902، ومنحه اللقب الملك ألفونسو الثالث عشر",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://publish.realmadrid.com/content/dam/portals/realmadrid-com/es-es/news/generic/2023/06/29/not-efemeride-titulo-de-real-2023/assets/1330782253029.jpg"
+        }
       },
       {
         "uid": "club_real_madrid_drive_q23_600",
         "points": 600,
         "q": "من هو أول لاعب غير إسباني ارتدى شارة القيادة الأولى الرسمية لنادي ريال مدريد في القرن الحادي والعشرين؟",
         "a": "مارسيلو (موسم 2021–2022، وأول قائد أول غير إسباني منذ الغواتيمالي فيديريكو ريفويلتو عام 1904)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://i.yenicaggazetesi.com/storage/old/d/news/2022/05/300520221016065733360.jpg"
+        }
       },
       {
         "uid": "club_real_madrid_drive_q24_600",
         "points": 600,
         "q": "من هو أول رئيس رسمي لنادي ريال مدريد عند تأسيسه عام 1902، والذي أُطلقت بطولة كأس الملك في العام ذاته باقتراح من شقيقه؟",
         "a": "خوان بادروس (وشقيقه كارلوس بادروس)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://rm.luisskier.com/images/realmadrid/historia/fundadores.jpg"
+        }
       }
     ]
   },
