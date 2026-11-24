@@ -1256,11 +1256,13 @@
         "a": "استاد الملك فهد الدولي (الرياض، السعودية)",
         "qm": {
           "t": "image",
-          "u": "/eight-media/c4063c58601f42f95d10.webp"
+          "u": "https://data2.nssmag.com/images/galleries/34042/King-Fahd-3.jpeg",
+          "fallback": "/eight-media/c4063c58601f42f95d10.webp"
         },
         "am": {
           "t": "image",
-          "u": "https://data2.nssmag.com/images/galleries/34042/King-Fahd-3.jpeg"
+          "u": "https://data2.nssmag.com/images/galleries/34042/King-Fahd-3.jpeg",
+          "fallback": "/eight-media/c4063c58601f42f95d10.webp"
         }
       },
       {
@@ -1270,11 +1272,13 @@
         "a": "استاد لوسيل (قطر)",
         "qm": {
           "t": "image",
-          "u": "/eight-media/1013097238619f6cc8d3.webp"
+          "u": "https://stadiumdb.com/pictures/stadiums/qat/lusail_stadium/lusail_stadium21.jpg",
+          "fallback": "/eight-media/1013097238619f6cc8d3.webp"
         },
         "am": {
           "t": "image",
-          "u": "https://stadiumdb.com/pictures/stadiums/qat/lusail_stadium/lusail_stadium21.jpg"
+          "u": "https://stadiumdb.com/pictures/stadiums/qat/lusail_stadium/lusail_stadium21.jpg",
+          "fallback": "/eight-media/1013097238619f6cc8d3.webp"
         }
       },
       {
@@ -1284,53 +1288,61 @@
         "a": "ملعب مدينة الملك عبدالله الرياضية / ملعب الإنماء (الجوهرة المشعة — جدة)",
         "qm": {
           "t": "image",
-          "u": "/eight-media/edef8dbcc324af80b675.webp"
+          "u": "https://thenational-the-national-prod.cdn.arcpublishing.com/resizer/v2/SQQHDCOZUVCMJDK56YS4DO5SUM.jpg?auth=5b83a5f0c53a648c262a14df210966f8865da9b057fff3cda4ebe3abaf758513&height=533&smart=true&width=800",
+          "fallback": "/eight-media/edef8dbcc324af80b675.webp"
         },
         "am": {
           "t": "image",
-          "u": "https://thenational-the-national-prod.cdn.arcpublishing.com/resizer/v2/SQQHDCOZUVCMJDK56YS4DO5SUM.jpg?auth=5b83a5f0c53a648c262a14df210966f8865da9b057fff3cda4ebe3abaf758513&height=533&smart=true&width=800"
+          "u": "https://thenational-the-national-prod.cdn.arcpublishing.com/resizer/v2/SQQHDCOZUVCMJDK56YS4DO5SUM.jpg?auth=5b83a5f0c53a648c262a14df210966f8865da9b057fff3cda4ebe3abaf758513&height=533&smart=true&width=800",
+          "fallback": "/eight-media/edef8dbcc324af80b675.webp"
         }
       },
       {
         "uid": "arab_stadiums_photo_drive_q22_400",
         "points": 400,
-        "q": "ما اسم هذا الملعب المغطى الحديث في الرياض الذي يُعدّ معقل نادي الهلال السعودي ويتميز بسقفه المغلق وإضاءته البنفسجية والزرقاء؟",
+        "q": "ما اسم الملعب المغطّى في الرياض الذي يلعب فيه الهلال؟",
         "a": "المملكة أرينا (الرياض، السعودية)",
         "qm": {
           "t": "image",
-          "u": "/eight-media/0ed138ef1a4defcfc833.webp"
+          "u": "https://stadiumdb.com/pictures/stadiums/ksa/kingdom_arena/kingdom_arena16.jpg",
+          "fallback": "/eight-media/0ed138ef1a4defcfc833.webp"
         },
         "am": {
           "t": "image",
-          "u": "https://stadiumdb.com/pictures/stadiums/ksa/kingdom_arena/kingdom_arena16.jpg"
+          "u": "https://stadiumdb.com/pictures/stadiums/ksa/kingdom_arena/kingdom_arena16.jpg",
+          "fallback": "/eight-media/0ed138ef1a4defcfc833.webp"
         }
       },
       {
         "uid": "arab_stadiums_photo_drive_q23_600",
         "points": 600,
-        "q": "ما اسم هذا الاستاد العربي العريق الذي افتُتح عام 1960 ويتميز بمضماره الأحمر العريض وأبراج الإنارة الأربعة الشاهقة؟",
+        "q": "ما اسم الاستاد في العاصمة المصرية الذي افتُتح عام 1960؟",
         "a": "استاد القاهرة الدولي (القاهرة، مصر)",
         "qm": {
           "t": "image",
-          "u": "/eight-media/e466bddd70ec58b2eaec.webp"
+          "u": "/eight-media/c3800ac5471df3ec6ab0.webp",
+          "fallback": "/eight-media/e466bddd70ec58b2eaec.webp"
         },
         "am": {
           "t": "image",
-          "u": "https://upload.wikimedia.org/wikipedia/commons/3/32/Cairo_International_Stadium.jpg"
+          "u": "/eight-media/c3800ac5471df3ec6ab0.webp",
+          "fallback": "/eight-media/e466bddd70ec58b2eaec.webp"
         }
       },
       {
         "uid": "arab_stadiums_photo_drive_q24_600",
         "points": 600,
-        "q": "ما اسم هذا الملعب الخليجي الذي يتميز بسقفه الأبيض المتموج المستوحى من شراع السفينة التقليدية (البوم) ويُعد أكبر ملعب في بلده؟",
+        "q": "ما اسم الملعب الكويتي الذي يظهر في الصورة بسقفه الأبيض البيضاوي؟",
         "a": "استاد جابر الأحمد الدولي (الكويت)",
         "qm": {
           "t": "image",
-          "u": "/eight-media/228db6a6011916dd4ddb.webp"
+          "u": "https://www.arabtimesonline.com/arabtimes/uploads/images/2024/12/07/41795.jpg",
+          "fallback": "/eight-media/228db6a6011916dd4ddb.webp"
         },
         "am": {
           "t": "image",
-          "u": "https://www.arabtimesonline.com/arabtimes/uploads/images/2024/12/07/41795.jpg"
+          "u": "https://www.arabtimesonline.com/arabtimes/uploads/images/2024/12/07/41795.jpg",
+          "fallback": "/eight-media/228db6a6011916dd4ddb.webp"
         }
       }
     ]
@@ -16902,25 +16914,29 @@
         "a": "ملعب سانتياغو برنابيو — ريال مدريد",
         "qm": {
           "t": "image",
-          "u": "/eight-media/05ba2ea37995a09f2349.webp"
+          "u": "https://publish.realmadrid.com/content/dam/portals/realmadrid-com/es-es/tour/products/individual-classic-hora-flexible/multimedia/Hero-classic.jpg",
+          "fallback": "/eight-media/05ba2ea37995a09f2349.webp"
         },
         "am": {
           "t": "image",
-          "u": "https://publish.realmadrid.com/content/dam/portals/realmadrid-com/es-es/tour/products/individual-classic-hora-flexible/multimedia/Hero-classic.jpg"
+          "u": "https://publish.realmadrid.com/content/dam/portals/realmadrid-com/es-es/tour/products/individual-classic-hora-flexible/multimedia/Hero-classic.jpg",
+          "fallback": "/eight-media/05ba2ea37995a09f2349.webp"
         }
       },
       {
         "uid": "rebus_football_drive_q20_200",
         "points": 200,
-        "q": "ما اسم هذا الملعب الشهير بواجهته المضيئة القابلة لتغيير الألوان، وفي أي مدينة ألمانية يقع؟",
+        "q": "ما اسم هذا الملعب الألماني ذو الواجهة المكوّنة من ألواح تشبه الوسائد، وفي أي مدينة يقع؟",
         "a": "ملعب أليانز أرينا — ميونخ (ملعب بايرن ميونخ)",
         "qm": {
           "t": "image",
-          "u": "/eight-media/5c71361ae06b0327a518.webp"
+          "u": "/eight-media/d14a29dadffc01a0aae7.webp",
+          "fallback": "/eight-media/5c71361ae06b0327a518.webp"
         },
         "am": {
           "t": "image",
-          "u": "https://upload.wikimedia.org/wikipedia/commons/0/05/Allianz_Arena_in_red_%28Pixabay_1181668%29.jpg"
+          "u": "/eight-media/d14a29dadffc01a0aae7.webp",
+          "fallback": "/eight-media/5c71361ae06b0327a518.webp"
         }
       },
       {
@@ -16930,11 +16946,13 @@
         "a": "الجدار الأصفر (Die Gelbe Wand) — ملعب سيغنال إيدونا بارك (ويستفالين شتاديون، بوروسيا دورتموند)",
         "qm": {
           "t": "image",
-          "u": "/eight-media/3c679f380272fc6e7d64.webp"
+          "u": "https://cloudfront-us-east-1.images.arcpublishing.com/coxohio/N74GQW5JT5ABRFUKW45N3C4CYU.png",
+          "fallback": "/eight-media/3c679f380272fc6e7d64.webp"
         },
         "am": {
           "t": "image",
-          "u": "https://cloudfront-us-east-1.images.arcpublishing.com/coxohio/N74GQW5JT5ABRFUKW45N3C4CYU.png"
+          "u": "https://cloudfront-us-east-1.images.arcpublishing.com/coxohio/N74GQW5JT5ABRFUKW45N3C4CYU.png",
+          "fallback": "/eight-media/3c679f380272fc6e7d64.webp"
         }
       },
       {
@@ -16944,11 +16962,13 @@
         "a": "ملعب ماراكانا — الاسم الرسمي: ملعب جورناليستا ماريو فيليو (Estádio Jornalista Mário Filho)",
         "qm": {
           "t": "image",
-          "u": "/eight-media/33004096f5735c1b3cfe.webp"
+          "u": "https://es.travel2latam.com/uploads/0000067901-resized-1280x720.png",
+          "fallback": "/eight-media/33004096f5735c1b3cfe.webp"
         },
         "am": {
           "t": "image",
-          "u": "https://images.squarespace-cdn.com/content/v1/56c13cc00442627a08632989/6f0159f7-6d0f-44aa-8b1e-b6d15b773cfd/Esta%CC%81dioDoMaracana%CC%83.jpg"
+          "u": "https://es.travel2latam.com/uploads/0000067901-resized-1280x720.png",
+          "fallback": "/eight-media/33004096f5735c1b3cfe.webp"
         }
       },
       {
@@ -16958,25 +16978,29 @@
         "a": "ملعب سان سيرو (جوزيبي مياتزا) — افتُتح عام 1926 بمباراة ديربي بين إنتر وميلان (فاز إنتر 6–3)",
         "qm": {
           "t": "image",
-          "u": "/eight-media/375c13c3f7370cd2951e.webp"
+          "u": "https://www.ansa.it/webimages/news_base/2022/10/27/883ea17aaf0ebc578895ab68af152a28.jpg",
+          "fallback": "/eight-media/375c13c3f7370cd2951e.webp"
         },
         "am": {
           "t": "image",
-          "u": "https://www.ansa.it/webimages/news_base/2022/10/27/883ea17aaf0ebc578895ab68af152a28.jpg"
+          "u": "https://www.ansa.it/webimages/news_base/2022/10/27/883ea17aaf0ebc578895ab68af152a28.jpg",
+          "fallback": "/eight-media/375c13c3f7370cd2951e.webp"
         }
       },
       {
         "uid": "rebus_football_drive_q24_600",
         "points": 600,
-        "q": "ما الاسم الرسمي الكامل لهذا الملعب الأرجنتيني الشهير بلقب «لا بومبونيرا»، وما اسم المهندس السلوفيني-الأرجنتيني الذي صمّم مدرّجاته الثلاثية الحادّة؟",
+        "q": "ما الاسم الرسمي للملعب الأرجنتيني المعروف باسم «لا بومبونيرا»، ومن المهندس السلوفيني الذي شارك في تصميمه؟",
         "a": "ملعب ألبرتو خوسيه أرماندو (Estadio Alberto J. Armando) — المهندس فيكتور سولتشيتش (Viktor Sulčič)",
         "qm": {
           "t": "image",
-          "u": "/eight-media/3b800dd6451f08226a46.webp"
+          "u": "https://revistalibero.com/cdn/shop/articles/super-bombonera-p_opt-1170x600.jpg?v=1599046063",
+          "fallback": "/eight-media/3b800dd6451f08226a46.webp"
         },
         "am": {
           "t": "image",
-          "u": "https://www.hotelbristol.com.ar/assets/cache/uploads/0-fotos-web-2023/buenos-aires/573x450/estadio-boca-juniors-futbol-argentina-bristol-hotel-1685519616.jpg"
+          "u": "https://revistalibero.com/cdn/shop/articles/super-bombonera-p_opt-1170x600.jpg?v=1599046063",
+          "fallback": "/eight-media/3b800dd6451f08226a46.webp"
         }
       }
     ]
@@ -16990,11 +17014,13 @@
         "a": "خزنة البتراء — الأردن",
         "qm": {
           "t": "image",
-          "u": "/eight-media/e71421fbb8a345951c6a.webp"
+          "u": "/eight-media/4f29d04a8cd8bf746506.webp",
+          "fallback": "/eight-media/e71421fbb8a345951c6a.webp"
         },
         "am": {
           "t": "image",
-          "u": "https://upload.wikimedia.org/wikipedia/commons/4/40/Al_Khazneh_The_Treasury_at_Petra.jpg"
+          "u": "/eight-media/4f29d04a8cd8bf746506.webp",
+          "fallback": "/eight-media/e71421fbb8a345951c6a.webp"
         }
       },
       {
@@ -17004,39 +17030,45 @@
         "a": "تاج محل — مدينة أغرا (الهند)",
         "qm": {
           "t": "image",
-          "u": "/eight-media/e77a9598389495e781e2.webp"
+          "u": "/eight-media/6dbf8471e6629326cc09.webp",
+          "fallback": "/eight-media/e77a9598389495e781e2.webp"
         },
         "am": {
           "t": "image",
-          "u": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Taj_Mahal%2C_Agra%2C_India.jpg/1280px-Taj_Mahal%2C_Agra%2C_India.jpg"
+          "u": "/eight-media/6dbf8471e6629326cc09.webp",
+          "fallback": "/eight-media/e77a9598389495e781e2.webp"
         }
       },
       {
         "uid": "rebus_words_drive_q21_400",
         "points": 400,
-        "q": "ما اسم هذه القلعة الجبلية التاريخية التي بنتها حضارة الإنكا، وفي أي دولة تقع؟",
+        "q": "ما اسم مدينة الإنكا الأثرية الظاهرة في الصورة، وفي أي دولة تقع؟",
         "a": "ماتشو بيتشو — البيرو",
         "qm": {
           "t": "image",
-          "u": "/eight-media/10c436c7993d05f1930d.webp"
+          "u": "/eight-media/81f20512782d3c15e621.webp",
+          "fallback": "/eight-media/10c436c7993d05f1930d.webp"
         },
         "am": {
           "t": "image",
-          "u": "https://static.travelstride.com/store/main_image/6173435/attachment/70c3bda40aae29c8217eb3bac4c9fdcf.jpg"
+          "u": "/eight-media/81f20512782d3c15e621.webp",
+          "fallback": "/eight-media/10c436c7993d05f1930d.webp"
         }
       },
       {
         "uid": "rebus_words_drive_q22_400",
         "points": 400,
-        "q": "ما الاسم اللاتيني الأصلي للمدرّج الروماني الظاهر في الصورة (المعروف اليوم بالكولوسيوم)؟",
+        "q": "ما اسم هذا المدرّج الروماني المنسوب إلى الأسرة الفلافية والمعروف اليوم باسم الكولوسيوم؟",
         "a": "المدرّج الفلافي (Amphitheatrum Flavium)",
         "qm": {
           "t": "image",
-          "u": "/eight-media/8f86a287f159a149f57f.webp"
+          "u": "/eight-media/b838cbad2d28bccc15ea.webp",
+          "fallback": "/eight-media/8f86a287f159a149f57f.webp"
         },
         "am": {
           "t": "image",
-          "u": "https://www.unesco.org/sites/default/files/styles/best_image/public/structured_data/rome.jpg.webp?itok=4tiPH4gP"
+          "u": "/eight-media/b838cbad2d28bccc15ea.webp",
+          "fallback": "/eight-media/8f86a287f159a149f57f.webp"
         }
       },
       {
@@ -17046,25 +17078,29 @@
         "a": "أنغكور وات (كمبوديا) — الملك سوريافارمان الثاني (Suryavarman II)",
         "qm": {
           "t": "image",
-          "u": "/eight-media/ba933dbe943a6c145d1a.webp"
+          "u": "/eight-media/5a29ea3c16924ec643ee.webp",
+          "fallback": "/eight-media/ba933dbe943a6c145d1a.webp"
         },
         "am": {
           "t": "image",
-          "u": "https://content.eturia.ro/images/product/88e6e0a5-d21b-41e5-86e0-e970bdc459b0/5e4f8588da42921130108fba9ff9b324/original_1.jpg"
+          "u": "/eight-media/5a29ea3c16924ec643ee.webp",
+          "fallback": "/eight-media/ba933dbe943a6c145d1a.webp"
         }
       },
       {
         "uid": "rebus_words_drive_q24_600",
         "points": 600,
-        "q": "ما اسم هذه الجزيرة الصخرية والقلعة الديرية الظاهرة في الصورة، وفي أي إقليم فرنسي تقع تحديداً؟",
-        "a": "جبل سان ميشيل (Mont-Saint-Michel) — إقليم نورماندي (دائرة المانش / Manche)",
+        "q": "ما اسم الجزيرة الصخرية التي يظهر فوقها هذا الدير، وفي أي منطقة فرنسية تقع؟",
+        "a": "مون سان ميشيل (Mont-Saint-Michel) — منطقة نورماندي، في إقليم المانش",
         "qm": {
           "t": "image",
-          "u": "/eight-media/0cfae7e5a025504eb0b2.webp"
+          "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/91/Mont_St_Michel_Abbey.jpg/1280px-Mont_St_Michel_Abbey.jpg",
+          "fallback": "/eight-media/0cfae7e5a025504eb0b2.webp"
         },
         "am": {
           "t": "image",
-          "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/91/Mont_St_Michel_Abbey.jpg/1280px-Mont_St_Michel_Abbey.jpg"
+          "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/91/Mont_St_Michel_Abbey.jpg/1280px-Mont_St_Michel_Abbey.jpg",
+          "fallback": "/eight-media/0cfae7e5a025504eb0b2.webp"
         }
       }
     ]
@@ -20600,25 +20636,29 @@
         "a": "ملعب سانتياغو برنابيو (مدريد، إسبانيا)",
         "qm": {
           "t": "image",
-          "u": "/eight-media/81c82902907ec213f0fc.webp"
+          "u": "https://publish.realmadrid.com/content/dam/portals/realmadrid-com/es-es/tour/products/individual-classic-hora-flexible/multimedia/Hero-classic.jpg",
+          "fallback": "/eight-media/81c82902907ec213f0fc.webp"
         },
         "am": {
           "t": "image",
-          "u": "https://s3.elespanol.com/2024/04/26/elbernabeu/madridismo/850675643_241862049_1706x960.jpg?fmt=jpeg"
+          "u": "https://publish.realmadrid.com/content/dam/portals/realmadrid-com/es-es/tour/products/individual-classic-hora-flexible/multimedia/Hero-classic.jpg",
+          "fallback": "/eight-media/81c82902907ec213f0fc.webp"
         }
       },
       {
         "uid": "world_stadiums_photo_drive_q20_200",
         "points": 200,
-        "q": "ما اسم هذا الملعب الألماني الأيقوني الذي تتوهج واجهته الماسية المضيئة باللون الأحمر في مدينة ميونخ؟",
+        "q": "ما اسم ملعب بايرن ميونخ الذي تميّزه واجهة مكوّنة من ألواح تشبه الوسائد؟",
         "a": "ملعب أليانز أرينا (ميونخ، ألمانيا)",
         "qm": {
           "t": "image",
-          "u": "/eight-media/2478550b622c866bc0cf.webp"
+          "u": "/eight-media/d14a29dadffc01a0aae7.webp",
+          "fallback": "/eight-media/2478550b622c866bc0cf.webp"
         },
         "am": {
           "t": "image",
-          "u": "https://img.fcbayern.com/image/upload/f_auto/q_auto/t_cms-16x9-seo/v1601437318/cms/public/images/allianz-arena/arena-aussenbilder/rot_aussenansicht2.jpg"
+          "u": "/eight-media/d14a29dadffc01a0aae7.webp",
+          "fallback": "/eight-media/2478550b622c866bc0cf.webp"
         }
       },
       {
@@ -20628,25 +20668,29 @@
         "a": "ملعب ويمبلي (لندن، إنجلترا)",
         "qm": {
           "t": "image",
-          "u": "/eight-media/03d0351b89adc78701b5.webp"
+          "u": "https://content.fosterandpartners.com/api/media/getCroppedImage?crop=false&height=2000&imagePath=%2Fmedia%2Faq2nrk3b%2F1015_fp156220.jpg&width=2000",
+          "fallback": "/eight-media/03d0351b89adc78701b5.webp"
         },
         "am": {
           "t": "image",
-          "u": "https://content.fosterandpartners.com/api/media/getCroppedImage?crop=false&height=2000&imagePath=%2Fmedia%2Faq2nrk3b%2F1015_fp156220.jpg&width=2000"
+          "u": "https://content.fosterandpartners.com/api/media/getCroppedImage?crop=false&height=2000&imagePath=%2Fmedia%2Faq2nrk3b%2F1015_fp156220.jpg&width=2000",
+          "fallback": "/eight-media/03d0351b89adc78701b5.webp"
         }
       },
       {
         "uid": "world_stadiums_photo_drive_q22_400",
         "points": 400,
-        "q": "ما اسم هذا الملعب البرازيلي التاريخي في ريو دي جانيرو الذي استضاف نهائي كأس العالم عامي 1950 و2014؟",
+        "q": "ما اسم الملعب البرازيلي الذي احتضن مباراة الحسم في كأس العالم 1950 ونهائي 2014؟",
         "a": "ملعب ماراكانا (ريو دي جانيرو، البرازيل)",
         "qm": {
           "t": "image",
-          "u": "/eight-media/7a83ccab316d26f9e865.webp"
+          "u": "https://es.travel2latam.com/uploads/0000067901-resized-1280x720.png",
+          "fallback": "/eight-media/7a83ccab316d26f9e865.webp"
         },
         "am": {
           "t": "image",
-          "u": "https://es.travel2latam.com/uploads/0000067901-resized-1280x720.png"
+          "u": "https://es.travel2latam.com/uploads/0000067901-resized-1280x720.png",
+          "fallback": "/eight-media/7a83ccab316d26f9e865.webp"
         }
       },
       {
@@ -20656,11 +20700,13 @@
         "a": "ملعب لا بومبونيرا (ألبرتو خوسيه أرماندو — بوينس آيرس، الأرجنتين)",
         "qm": {
           "t": "image",
-          "u": "/eight-media/63cf306b89ddd216eeaa.webp"
+          "u": "https://revistalibero.com/cdn/shop/articles/super-bombonera-p_opt-1170x600.jpg?v=1599046063",
+          "fallback": "/eight-media/63cf306b89ddd216eeaa.webp"
         },
         "am": {
           "t": "image",
-          "u": "https://revistalibero.com/cdn/shop/articles/super-bombonera-p_opt-1170x600.jpg?v=1599046063"
+          "u": "https://revistalibero.com/cdn/shop/articles/super-bombonera-p_opt-1170x600.jpg?v=1599046063",
+          "fallback": "/eight-media/63cf306b89ddd216eeaa.webp"
         }
       },
       {
@@ -20670,11 +20716,13 @@
         "a": "ملعب براغا البلدي (Estádio Municipal de Braga — البرتغال)",
         "qm": {
           "t": "image",
-          "u": "/eight-media/9f1d82b48e473ac9ea89.webp"
+          "u": "https://cloudfront-eu-central-1.images.arcpublishing.com/diarioas/ZJGPQFPB4ZHQBNFMV2YEAANIZI.JPG",
+          "fallback": "/eight-media/9f1d82b48e473ac9ea89.webp"
         },
         "am": {
           "t": "image",
-          "u": "https://cloudfront-eu-central-1.images.arcpublishing.com/diarioas/ZJGPQFPB4ZHQBNFMV2YEAANIZI.JPG"
+          "u": "https://cloudfront-eu-central-1.images.arcpublishing.com/diarioas/ZJGPQFPB4ZHQBNFMV2YEAANIZI.JPG",
+          "fallback": "/eight-media/9f1d82b48e473ac9ea89.webp"
         }
       }
     ]
