@@ -4946,14 +4946,22 @@
         "points": 200,
         "q": "ما اسم العاصمة الإدارية لمنطقة الجوف؟",
         "a": "سكاكا",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/ISS-64%20Sakakah%20oasis%20city%2C%20Saudi%20Arabia.jpg?width=1280"
+        }
       },
       {
         "uid": "custom_1795333037952_drive_q9_200",
         "points": 200,
         "q": "في أي جهة جغرافية من المملكة العربية السعودية تقع منطقة الجوف؟",
         "a": "الشمال (شمال غرب المملكة)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/Al%20Jawf%20in%20Saudi%20Arabia%20map.png?width=1280"
+        }
       },
       {
         "uid": "custom_1795333037952_drive_q10_200",
@@ -4970,21 +4978,33 @@
         "points": 200,
         "q": "ما اسم المحافظة في منطقة الجوف التي تضم منفذ الحديثة البري الحدودي مع الأردن؟",
         "a": "محافظة القريات",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/Al%20Jawf%20Region%20-%20Al%20Qurayyat.svg?width=1280"
+        }
       },
       {
         "uid": "custom_1795333037952_drive_q12_200",
         "points": 200,
         "q": "ما اسم المسجد التاريخي العريق في دومة الجندل الذي تُعد مئذنته الحجرية من أقدم المآذن في الإسلام؟",
         "a": "مسجد عمر بن الخطاب رضي الله عنه",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "/eight-media/bc508731f008ea276715.webp"
+        }
       },
       {
         "uid": "custom_1795333037952_drive_q13_400",
         "points": 400,
         "q": "ما اسم أشهر نوع من التمور الذي تتميز بزراعته منطقة الجوف؟",
         "a": "حلوة الجوف",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://portalcdn.spa.gov.sa/backend/original/202503/Cnarb6KIDKGZcSl0JzJFOhtzuJg2VmyE02UQ7dSK.jpg"
+        }
       },
       {
         "uid": "custom_1795333037952_drive_q14_400",
@@ -5001,28 +5021,44 @@
         "points": 400,
         "q": "ما اسم أول محطة لطاقة الرياح على مستوى المرافق في المملكة وتقع في منطقة الجوف؟",
         "a": "مشروع دومة الجندل لطاقة الرياح",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.aleqt.com/_next/image?q=75&url=https%3A%2F%2Farchive-files.aleqt.com%2Frbitem%2F2018%2F07%2F23%2F874446-425963648.jpg&w=1920"
+        }
       },
       {
         "uid": "custom_1795333037952_drive_q16_400",
         "points": 400,
         "q": "ما اسم القلعة الطينية التاريخية التي تطل على مدينة سكاكا من قمة جبل وسط المدينة؟",
         "a": "قلعة زعبل",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/%D8%B2%D8%B9%D8%A8%D9%84.jpg?width=1280"
+        }
       },
       {
         "uid": "custom_1795333037952_drive_q17_400",
         "points": 400,
         "q": "ما اسم البئر الأثرية المنحوتة في الصخر أسفل قلعة زعبل في سكاكا والتي يعود تاريخها لآلاف السنين؟",
         "a": "بئر سيسرا",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/%D8%A8%D8%A6%D8%B1%20%D8%B3%D9%8A%D8%B3%D8%B1%D8%A7%20%D8%A8%D8%A7%D9%84%D8%AC%D9%88%D9%81.jpg?width=600"
+        }
       },
       {
         "uid": "custom_1795333037952_drive_q18_400",
         "points": 400,
         "q": "ما اسم المهرجان السنوي الدولي الذي تستضيفه منطقة الجوف احتفاءً بمحصولها الأشهر؟",
         "a": "مهرجان زيتون الجوف الدولي",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://portalcdn.spa.gov.sa/backend/original/202501/Ug3i8pIKqLKkeQcW7HAoIfnoA4dZTgiPJ4oSCXdu.jpg"
+        }
       },
       {
         "uid": "custom_1795333037952_drive_q19_600",
