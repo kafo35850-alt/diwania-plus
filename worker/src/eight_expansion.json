@@ -6101,14 +6101,22 @@
         "points": 200,
         "q": "ما أصح كتاب بعد كتاب الله تعالى باتفاق جمهور علماء الأمة؟",
         "a": "صحيح البخاري",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "/eight-media/3e06e01d22e1be2ea16e.webp"
+        }
       },
       {
         "uid": "custom_1795334158059_drive_q9_200",
         "points": 200,
         "q": "أكمل الحديث النبوي الشريف: «إنما الأعمال بالنيات، وإنما لكل امرئ...»؟",
         "a": "ما نوى",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/%D8%A7%D9%84%D9%86%D9%8A%D8%A91.png?width=1280"
+        }
       },
       {
         "uid": "custom_1795334158059_drive_q10_200",
@@ -6125,21 +6133,33 @@
         "points": 200,
         "q": "من هي أم المؤمنين التي تُعد أكثر النساء روايةً للحديث الشريف؟",
         "a": "عائشة بنت أبي بكر رضي الله عنها (2,210 أحاديث)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/Aisha_bint_Abi_Bakr.svg?width=1280"
+        }
       },
       {
         "uid": "custom_1795334158059_drive_q12_200",
         "points": 200,
         "q": "أكمل الحديث النبوي الشريف: «تبسمك في وجه أخيك...»؟",
         "a": "لك صدقة",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "/eight-media/e4371c720e8740478cfa.webp"
+        }
       },
       {
         "uid": "custom_1795334158059_drive_q13_400",
         "points": 400,
         "q": "ما المصطلح الذي يُطلق على الحديث الذي يرويه النبي ﷺ عن ربه عز وجل بلفظ النبي ومعناه من الله؟",
         "a": "الحديث القدسي",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "/eight-media/e4371c720e8740478cfa.webp"
+        }
       },
       {
         "uid": "custom_1795334158059_drive_q14_400",
@@ -6156,28 +6176,44 @@
         "points": 400,
         "q": "ما اسم الكتاب الشهير الذي جمع فيه الإمام النووي 42 حديثاً من جوامع الكلم؟",
         "a": "الأربعون النووية",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/Nawawi_40_manuscript.PNG?width=1280"
+        }
       },
       {
         "uid": "custom_1795334158059_drive_q16_400",
         "points": 400,
         "q": "ما المصطلح الحديثي الذي يُطلق على الحديث الذي اتفق الإمامان البخاري ومسلم على إخراجه في صحيحيهما؟",
         "a": "متفق عليه",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "/eight-media/3e06e01d22e1be2ea16e.webp"
+        }
       },
       {
         "uid": "custom_1795334158059_drive_q17_400",
         "points": 400,
         "q": "من هو الصحابي الذي روى حديث «إنما الأعمال بالنيات» أول حديث في صحيح البخاري؟",
         "a": "عمر بن الخطاب رضي الله عنه",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "/eight-media/907479e06033aeb88f38.webp"
+        }
       },
       {
         "uid": "custom_1795334158059_drive_q18_400",
         "points": 400,
         "q": "من هو الإمام صاحب كتاب «الموطأ» الذي يُعد من أقدم كتب الحديث والفقه المدوّنة؟",
         "a": "الإمام مالك بن أنس رحمه الله",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/%D9%85%D8%A7%D9%84%D9%83_%D8%A8%D9%86_%D8%A3%D9%86%D8%B3.png?width=1280"
+        }
       },
       {
         "uid": "custom_1795334158059_drive_q19_600",
