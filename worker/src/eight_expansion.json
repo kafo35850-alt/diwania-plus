@@ -18334,6 +18334,10 @@
         "qm": {
           "t": "image",
           "u": "/eight-media/670fa17aa2c184e50462.webp"
+        },
+        "am": {
+          "t": "image",
+          "u": "https://images.prismic.io/fft-billetterie/98d9b26c-8c9f-44bd-b7ed-722a5a57b0be_20220605_RG_JS_0177_web.jpg?auto=compress%2Cformat"
         }
       },
       {
@@ -18341,35 +18345,55 @@
         "points": 200,
         "q": "ما الكلمة الإنجليزية المستخدمة في التنس للدلالة على نتيجة «صفر» أثناء احتساب نقاط الشوط؟",
         "a": "لاف (Love)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://images.squarespace-cdn.com/content/v1/5a97763275f9eeee0b6f77f0/e1a92614-5a1e-4845-8cd6-02b1795f9a97/What%2BDoes%2BLove%2BMean%2BIn%2BTennis.jpg"
+        }
       },
       {
         "uid": "tennis_grand_slam_drive_q21_400",
         "points": 400,
         "q": "من هو اللاعب الإسباني الملقّب بـ «ملك الملاعب الترابية» والذي حقق رقماً قياسياً تاريخياً بفوزه ببطولة رولان غاروس 14 مرة؟",
         "a": "رافاييل نادال (Rafael Nadal)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.directvsports.com/__export/1684514703503/sites/dsports/img/2023/05/19/20230519_014503058_1pslb8lxu4qxx19fmbcnuoq6vp.jpg_1635092770.jpg"
+        }
       },
       {
         "uid": "tennis_grand_slam_drive_q22_400",
         "points": 400,
         "q": "ما اسم بطولة الجراند سلام الأقدم في العالم التي تُقام على الملاعب العشبية وتُلزم اللاعبين بارتداء الزي الأبيض؟",
         "a": "بطولة ويمبلدون (Wimbledon)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://media.assettype.com/freepressjournal/2025-07-10/ndn89not/wimbledon-CC.jfif?width=1200"
+        }
       },
       {
         "uid": "tennis_grand_slam_drive_q23_600",
         "points": 600,
         "q": "من هي اللاعبة الوحيدة في تاريخ التنس التي حققت «الجراند سلام الذهبي» (الفوز ببطولات الجراند سلام الأربع والذهبية الأولمبية) في عام ميلادي واحد (1988)؟",
         "a": "شتيفي غراف (Steffi Graf)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://pbs.twimg.com/media/EjK93QhXYAYYyde.jpg"
+        }
       },
       {
         "uid": "tennis_grand_slam_drive_q24_600",
         "points": 600,
         "q": "في بطولة ويمبلدون 2010، جرت أطول مباراة في تاريخ التنس واستمرت 11 ساعة و5 دقائق على مدى ثلاثة أيام؛ من هما اللاعبان اللذان خاضاها وانتهت المجموعة الخامسة بنتيجة 70-68؟",
         "a": "جون إيسنر (John Isner) ونيكولا ماهو (Nicolas Mahut)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://img.asmedia.epimg.net/resizer/v2/6OKQLKFWSBIJ3OGXQAA3IGMN7Y.jpg?auth=587119a7e22ebe381b3ecb7f7ef7dd0525b99a2eff07931cbef5875cdfd509c6&height=1104&smart=true&width=1472"
+        }
       }
     ]
   },
