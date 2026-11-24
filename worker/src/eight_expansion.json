@@ -1005,6 +1005,10 @@
         "am": {
           "t": "image",
           "u": "/eight-media/e69f82f8f3e016bf4fe3.webp"
+        },
+        "qm": {
+          "t": "image",
+          "u": "https://iz-g.com/images/2601_illust_rural_village.jpg"
         }
       },
       {
@@ -1016,6 +1020,10 @@
         "am": {
           "t": "image",
           "u": "https://cmsapi-frontend.naruto-official.com/site/api/naruto/Image/get?path=%2Fnaruto%2Fimport%2Fimages%2Fnaruto02%2F501%EF%BD%9E600%2F562%2FC329.jpg"
+        },
+        "qm": {
+          "t": "image",
+          "u": "https://images6.alphacoders.com/122/1226555.png"
         }
       },
       {
@@ -1027,6 +1035,10 @@
         "am": {
           "t": "image",
           "u": "https://static.promediateknologi.id/crop/0x0%3A0x0/0x0/webp/photo/p2/108/2024/01/30/Minato_Namikaze_1677422619649_1684195457143-3390926146.jpg"
+        },
+        "qm": {
+          "t": "image",
+          "u": "https://vignette2.wikia.nocookie.net/springtimeofyouth/images/6/62/New_rasengan_shot.png/revision/latest?cb=20120706101048"
         }
       },
       {
@@ -1038,6 +1050,10 @@
         "am": {
           "t": "image",
           "u": "https://www.einerd.com/wp-content/uploads/2020/11/Kisame-Hoshigaki-2.png"
+        },
+        "qm": {
+          "t": "image",
+          "u": "https://imgix.ranker.com/list_img_v2/8399/2728399/original/best-kisame-hoshigaki-quotes?dpr=1&fit=crop&fm=pjpg&h=630&q=80&w=1200"
         }
       },
       {
@@ -1049,6 +1065,10 @@
         "am": {
           "t": "image",
           "u": "https://image.idntimes.com/post/20230308/tobirama-senju-naruto-65c087d2e81f7421307f04afd99bd69b.jpg"
+        },
+        "qm": {
+          "t": "image",
+          "u": "https://vignette3.wikia.nocookie.net/naruto/images/2/28/T%C3%A9cnica_de_Anexamento_%282%29.png/revision/latest?cb=20161005205113&path-prefix=pt-br"
         }
       },
       {
@@ -1060,6 +1080,10 @@
         "am": {
           "t": "image",
           "u": "https://i0.wp.com/dailyanimeart.com/wp-content/uploads/2015/07/guys-eight-inner-gate-of-death.jpg?fit=1200%2C675&ssl=1"
+        },
+        "qm": {
+          "t": "image",
+          "u": "https://media.hitekno.com/thumbs/2022/08/14/59400-might-guy/730x480-img-59400-might-guy.jpg"
         }
       }
     ]
