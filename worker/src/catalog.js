@@ -45,6 +45,12 @@ export async function getDoc(env, key) {
         if (fresh && (c.item_count || 0) < fresh.length) c.item_count = fresh.length;
         const shipped = SEED.categories.find((s) => s.slug === c.slug);
         if (shipped && shipped.poster && String(c.poster || '').startsWith('/cat-posters/') && c.poster !== shipped.poster) c.poster = shipped.poster;
+        if (shipped && c.slug === 'rebus_football') {
+          const { name, description, icon, poster, item_count } = shipped;
+          Object.assign(c, { name, description, icon, poster, item_count });
+        } else if (shipped && EIGHT_STADIUM_CATEGORIES.has(c.slug)) {
+          c.item_count = Math.max(c.item_count || 0, shipped.item_count);
+        }
       }
     }
     return stored;
@@ -114,6 +120,36 @@ async function getEightQuestions(env) {
   for (const [source, target] of Object.entries(EIGHT_CATEGORY_MERGES)) {
     if (savedAfterMerge.has(target) || !stored[source]?.length) continue;
     stored[target] = mergeEightQuestionLists(stored[target] || eightRawQuestions(target), stored[source]);
+  }
+  const stadiumRoutes = EIGHT_EXPANSION.rebus_football.stadiumRoutes;
+  if (Array.isArray(stored.rebus_football)) {
+    const savedCups = [];
+    for (const q of stored.rebus_football) {
+      if (!Object.hasOwn(stadiumRoutes, q?.uid)) {
+        savedCups.push(q);
+        continue;
+      }
+      const target = stadiumRoutes[q.uid];
+      if (!target) continue;
+      const destination = stored[target] ||= [];
+      const shipped = EIGHT_EXPANSION[target].questions.find(card => card.uid === q.uid);
+      const moved = q.q === 'ما اسم هذا الملعب الشهير؟' ? { ...q, q: shipped.q, a: shipped.a } : q;
+      const index = destination.findIndex(card => card?.uid === q.uid);
+      if (index < 0) destination.push(moved);
+      else if (!databaseSlugs.has(target)) destination[index] = moved;
+    }
+    const shippedCups = eightRawQuestions('rebus_football');
+    const ids = new Set(savedCups.map(q => q?.uid));
+    stored.rebus_football = savedCups.concat(shippedCups.filter(q => !ids.has(q.uid)));
+  }
+  if (databaseSlugs.has('custom_photo_closeup') && Array.isArray(stored.custom_photo_closeup)) {
+    const closeups = new Map(SEED.catQuestionsOverrides.custom_photo_closeup.map(q => [q.uid, q]));
+    stored.custom_photo_closeup = stored.custom_photo_closeup.map(q => {
+      const fresh = closeups.get(q?.uid);
+      return fresh && q.am?.u === fresh.am?.u
+        ? { ...q, qm: fresh.qm, photoFocus: fresh.photoFocus }
+        : q;
+    });
   }
   return stored;
 }

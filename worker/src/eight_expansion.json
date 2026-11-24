@@ -163,19 +163,15 @@
       {
         "uid": "amazing_stats_drive_q21_400",
         "points": 400,
-        "q": "كم يستغرق ضوء الشمس تقريباً للوصول إلى كوكب الأرض؟",
-        "a": "نحو 8 دقائق و20 ثانية",
-        "useCategoryPoster": true,
-        "am": {
-          "t": "image",
-          "u": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/solar/internal_resources/4616/EarthOrbit_1AU-1.jpeg?crop=faces%2Cfocalpoint&fit=clip&h=1080&w=1920"
-        }
+        "q": "كم ثانية تقريبًا يستغرق الضوء ليقطع متوسط المسافة من الأرض إلى القمر؟",
+        "a": "نحو 1.28 ثانية",
+        "useCategoryPoster": true
       },
       {
         "uid": "amazing_stats_drive_q22_400",
         "points": 400,
-        "q": "كم عدد القلوب وكم عدد الأدمغة (العقد العصبية) التي يمتلكها الأخطبوط؟",
-        "a": "3 قلوب و9 أدمغة (دماغ مركزي و8 أدمغة صغيرة في الأذرع)",
+        "q": "كم عدد قلوب الأخطبوط وكم عقدة عصبية رئيسة توجد في أذرعه؟",
+        "a": "ثلاثة قلوب وثماني عقد عصبية رئيسة، واحدة في كل ذراع.",
         "useCategoryPoster": true,
         "am": {
           "t": "image",
@@ -185,8 +181,8 @@
       {
         "uid": "amazing_stats_drive_q23_600",
         "points": 600,
-        "q": "كم يبلغ العدد التقريبي للاحتمالات الممكنة لترتيب أوراق اللعب القياسية (52 ورقة، أي مضروب 52!)؟",
-        "a": "نحو 8 × 10 مرفوعة للقوة 67 (عدد مكون من 68 رقماً)",
+        "q": "كم عدد طرق ترتيب مجموعة من 52 ورقة لعب مختلفة تقريبًا؟",
+        "a": "نحو 8.07 × 10⁶⁷ ترتيبًا",
         "useCategoryPoster": true,
         "am": {
           "t": "image",
@@ -1193,24 +1189,16 @@
       {
         "uid": "arab_countries_general_drive_q20_200",
         "points": 200,
-        "q": "في أي مدينة يقع المقر الدائم لجامعة الدول العربية؟",
-        "a": "القاهرة (مصر)",
-        "useCategoryPoster": true,
-        "am": {
-          "t": "image",
-          "u": "https://static.majalla.com/2023-05/152184.jpg"
-        }
+        "q": "في أي مدينة استقر مقر جامعة الدول العربية من عام 1979 حتى عاد إلى القاهرة عام 1990؟",
+        "a": "تونس",
+        "useCategoryPoster": true
       },
       {
         "uid": "arab_countries_general_drive_q21_400",
         "points": 400,
-        "q": "ما الدولة العربية الوحيدة التي تقع بالكامل في نصف الكرة الأرضية الجنوبي؟",
-        "a": "جزر القمر",
-        "useCategoryPoster": true,
-        "am": {
-          "t": "image",
-          "u": "https://italiavola.files.wordpress.com/2022/10/thumbnail_moheli-islets_reduced.jpg"
-        }
+        "q": "ما عاصمة جزر القمر، الدولة العربية الواقعة بالكامل جنوب خط الاستواء؟",
+        "a": "موروني",
+        "useCategoryPoster": true
       },
       {
         "uid": "arab_countries_general_drive_q22_400",
@@ -1226,8 +1214,8 @@
       {
         "uid": "arab_countries_general_drive_q23_600",
         "points": 600,
-        "q": "كم كان عدد الدول المؤسسة التي وقّعت على ميثاق تأسيس جامعة الدول العربية في 22 مارس 1945؟",
-        "a": "7 دول (مصر، السعودية، العراق، سوريا، لبنان، الأردن، اليمن)",
+        "q": "كم كان عدد الدول المؤسسة لجامعة الدول العربية؟",
+        "a": "سبع دول (مصر، السعودية، العراق، سوريا، لبنان، الأردن، اليمن)",
         "useCategoryPoster": true,
         "am": {
           "t": "image",
@@ -1344,6 +1332,57 @@
           "u": "https://www.arabtimesonline.com/arabtimes/uploads/images/2024/12/07/41795.jpg",
           "fallback": "/eight-media/228db6a6011916dd4ddb.webp"
         }
+      },
+      {
+        "points": 400,
+        "q": "باسم أي ملك سعودي سُمّي هذا الاستاد في الرياض؟",
+        "a": "الملك فهد بن عبد العزيز",
+        "info": "في الرياض، وعُرف بسقفه الشبيه بالخيمة، واستضاف كأس القارات في التسعينيات.",
+        "options": [
+          "ملعب الملك فهد الدولي",
+          "ملعب الجوهرة المشعة",
+          "ملعب الأول بارك",
+          "ملعب مرسول بارك"
+        ],
+        "hint": "في الرياض ويُعرف بسقفه الشبيه بالخيمة",
+        "photo": {
+          "src": "https://data2.nssmag.com/images/galleries/34042/King-Fahd-3.jpeg"
+        },
+        "uid": "rebus_football_q10_400"
+      },
+      {
+        "points": 400,
+        "q": "ما المباراة الأخيرة التي استضافها هذا الاستاد في مونديال قطر 2022؟",
+        "a": "النهائي بين الأرجنتين وفرنسا",
+        "info": "استضاف نهائي كأس العالم 2022 في قطر.",
+        "options": [
+          "ملعب لوسيل",
+          "ملعب البيت",
+          "ملعب خليفة الدولي",
+          "ملعب أحمد بن علي"
+        ],
+        "hint": "استضاف نهائي مونديال قطر",
+        "photo": {
+          "src": "https://stadiumdb.com/pictures/stadiums/qat/lusail_stadium/lusail_stadium21.jpg"
+        },
+        "uid": "rebus_football_q11_400"
+      },
+      {
+        "points": 600,
+        "q": "في أي مدينة سعودية يقع الملعب المعروف بالجوهرة المشعة؟",
+        "a": "جدة",
+        "info": "ملعب في جدة ضمن مدينة الملك عبدالله الرياضية، ويُلقب بالجوهرة.",
+        "options": [
+          "الجوهرة المشعة",
+          "ملعب الملك فهد الدولي",
+          "ملعب الأول بارك",
+          "ملعب مرسول بارك"
+        ],
+        "hint": "ملعب في جدة يُلقب بالجوهرة",
+        "photo": {
+          "src": "https://thenational-the-national-prod.cdn.arcpublishing.com/resizer/v2/SQQHDCOZUVCMJDK56YS4DO5SUM.jpg?auth=5b83a5f0c53a648c262a14df210966f8865da9b057fff3cda4ebe3abaf758513&height=533&smart=true&width=800"
+        },
+        "uid": "rebus_football_q16_600"
       }
     ]
   },
@@ -14647,7 +14686,7 @@
       {
         "uid": "famous_explorers_drive_q19_200",
         "points": 200,
-        "q": "من هو أشهر رحالة مسلم في التاريخ، وُلد في طنجة بالمغرب وطاف العالم لنحو 29 عاماً؟",
+        "q": "من الرحالة الذي وُلد في طنجة وطاف لسنوات طويلة في أفريقيا وآسيا وأوروبا؟",
         "a": "ابن بطوطة",
         "am": {
           "t": "image",
@@ -14657,24 +14696,16 @@
       {
         "uid": "famous_explorers_drive_q20_200",
         "points": 200,
-        "q": "من هو الرحالة الإيطالي البندقي الذي سافر إلى الصين وعاش في بلاط قوبلاي خان لسنوات طويلة؟",
-        "a": "ماركو بولو",
-        "useCategoryPoster": true,
-        "am": {
-          "t": "image",
-          "u": "https://faktypro.com.ua/uploads/img-2/12-cikavih-faktiv-pro-marko-polo.jpg"
-        }
+        "q": "من كاتب الرومانس الإيطالي الذي دوّن رواية ماركو بولو عن أسفاره حين كانا في سجن جنوة؟",
+        "a": "روستيكيلو دا بيزا",
+        "useCategoryPoster": true
       },
       {
         "uid": "famous_explorers_drive_q21_400",
         "points": 400,
-        "q": "من هو المستكشف البرتغالي الذي قاد أول رحلة بحرية وصلت مباشرة من أوروبا إلى الهند عبر رأس الرجاء الصالح عام 1498م؟",
-        "a": "فاسكو دا غاما",
-        "useCategoryPoster": true,
-        "am": {
-          "t": "image",
-          "u": "https://static.lsm.lv/media/2022/07/large/1/ig3i.jpg"
-        }
+        "q": "إلى أي ميناء هندي وصل فاسكو دا غاما سنة 1498 بعد الدوران حول جنوب أفريقيا؟",
+        "a": "كاليكوت (كوزيكود)",
+        "useCategoryPoster": true
       },
       {
         "uid": "famous_explorers_drive_q22_400",
@@ -14690,24 +14721,16 @@
       {
         "uid": "famous_explorers_drive_q23_600",
         "points": 600,
-        "q": "من هو الرحالة والدبلوماسي العباسي الذي أرسله الخليفة المقتدر بالله عام 921م إلى بلاد الصقالبة ودوّن وصفاً فريداً لطقوس الروس (الفايكنغ) على نهر الفولغا؟",
-        "a": "أحمد بن فضلان",
-        "useCategoryPoster": true,
-        "am": {
-          "t": "image",
-          "u": "https://1.bp.blogspot.com/-oFxc4JyJt4U/XRqQEaIC3pI/AAAAAAAACK8/21etl4POGpQk00NORstFy0A6bZd05KOJgCLcBGAs/s1600/%25D8%25A7%25D8%25A8%25D9%2586%2B%25D9%2581%25D8%25B6%25D9%2584%25D8%25A7%25D9%2586.PNG"
-        }
+        "q": "في رسالة ابن فضلان، ما اسم الشعب الذي وصف مراسم تشييع أحد رجاله على نهر الفولغا؟",
+        "a": "الروس (الروس الفارانغيون)",
+        "useCategoryPoster": true
       },
       {
         "uid": "famous_explorers_drive_q24_600",
         "points": 600,
-        "q": "من هو القبطان الإسباني الذي أتمّ قيادة سفينة «فيكتوريا» لإكمال أول دوران كامل حول الكرة الأرضية عام 1522م بعد مقتل فرديناند ماجلان في الفلبين؟",
-        "a": "خوان سيباستيان إلكانو",
-        "useCategoryPoster": true,
-        "am": {
-          "t": "image",
-          "u": "https://content-historia.nationalgeographic.com.es/medio/2022/07/19/el-navegante-de-guetaria_376dddc0_1200x630.jpg"
-        }
+        "q": "ما اسم السفينة التي عاد بها إلكانو إلى إسبانيا عام 1522 وأتمّ عليها أول دورة بحرية حول الأرض؟",
+        "a": "فيكتوريا",
+        "useCategoryPoster": true
       }
     ]
   },
@@ -14981,8 +15004,8 @@
       {
         "uid": "general_sciences_drive_q19_200",
         "points": 200,
-        "q": "ما الظاهرة الفيزيائية التي تحدث عند مرور الضوء الأبيض عبر منشور زجاجي فيتحلل إلى ألوان الطيف السبعة؟",
-        "a": "تشتّت (أو انكسار وتحلّل) الضوء",
+        "q": "لماذا تنحرف ألوان الضوء الأبيض بزوايا مختلفة داخل المنشور الزجاجي؟",
+        "a": "لأن معامل انكسار الزجاج يختلف باختلاف الطول الموجي للضوء",
         "qm": {
           "t": "image",
           "u": "/eight-media/f3a69a5b692abdfd7e08.webp"
@@ -14995,7 +15018,7 @@
       {
         "uid": "general_sciences_drive_q20_200",
         "points": 200,
-        "q": "ما اسم العملية الحيوية التي تحوّل بها النباتات ضوء الشمس والماء وثاني أكسيد الكربون إلى غذاء وأكسجين؟",
+        "q": "ما العملية التي تستخدم فيها النباتات طاقة الضوء لصنع السكريات من الماء وثاني أكسيد الكربون؟",
         "a": "البناء الضوئي (التمثيل الضوئي)",
         "useCategoryPoster": true,
         "am": {
@@ -15006,24 +15029,16 @@
       {
         "uid": "general_sciences_drive_q21_400",
         "points": 400,
-        "q": "ما هي وحدة قياس القوة في النظام الدولي للوحدات (SI)؟",
-        "a": "النيوتن (Newton)",
-        "useCategoryPoster": true,
-        "am": {
-          "t": "image",
-          "u": "https://api.gamatrain.com/Files/post/5b8f2badfd864c76b82f0859bc3dc056.webp"
-        }
+        "q": "بماذا يعادل نيوتن واحد بوحدات الكيلوغرام والمتر والثانية؟",
+        "a": "كيلوغرام·متر لكل ثانية مربعة (kg·m/s²)",
+        "useCategoryPoster": true
       },
       {
         "uid": "general_sciences_drive_q22_400",
         "points": 400,
         "q": "ما اسم الطبقة الصخرية الصلبة الخارجية للأرض التي تشمل القشرة والجزء العلوي من الوشاح وتتحرك على هيئة صفائح تكتونية؟",
         "a": "الغلاف الصخري (الليثوسفير / Lithosphere)",
-        "useCategoryPoster": true,
-        "am": {
-          "t": "image",
-          "u": "https://geophile.net/Lessons/PlateTectonics/images/plategraveyard.fw.png"
-        }
+        "useCategoryPoster": true
       },
       {
         "uid": "general_sciences_drive_q23_600",
@@ -15054,7 +15069,7 @@
       {
         "uid": "great_inventions_drive_q19_200",
         "points": 200,
-        "q": "من هو المخترع الذي يُنسب إليه اختراع الهاتف (التليفون) وحصل على أول براءة اختراع له عام 1876؟",
+        "q": "أي مخترع شارك عام 1880 في ابتكار الفوتوفون، الذي ينقل الصوت باستخدام الضوء؟",
         "a": "ألكسندر غراهام بيل",
         "am": {
           "t": "image",
@@ -15064,8 +15079,8 @@
       {
         "uid": "great_inventions_drive_q20_200",
         "points": 200,
-        "q": "من هو المخترع الألماني الذي ابتكر المطبعة ذات الحروف المعدنية المتحركة في القرن الخامس عشر؟",
-        "a": "يوهانس غوتنبرغ",
+        "q": "ما أشهر كتاب طُبع مطبعيًا بحروف غوتنبرغ المعدنية المتحركة في القرن الخامس عشر؟",
+        "a": "إنجيل غوتنبرغ (الكتاب المقدس ذو الـ42 سطرًا)",
         "useCategoryPoster": true
       },
       {
@@ -15078,14 +15093,14 @@
       {
         "uid": "great_inventions_drive_q22_400",
         "points": 400,
-        "q": "من هو المهندس والمخترع الأمريكي الذي صمّم أول فأرة حاسوب (Mouse) خشبية عام 1964؟",
+        "q": "من قاد فريق معهد ستانفورد للأبحاث الذي ابتكر فأرة الحاسوب، وصنع زميله بيل إنغليش نموذجها الخشبي الأول؟",
         "a": "دوغلاس إنجلبارت",
         "useCategoryPoster": true
       },
       {
         "uid": "great_inventions_drive_q23_600",
         "points": 600,
-        "q": "من هي المخترعة النمساوية-الأمريكية التي شاركت عام 1942 في براءة اختراع تقنية «القفز الترددي» التي مهّدت لاحقاً للبلوتوث والواي فاي؟",
+        "q": "من الممثلة والمخترعة التي نالت مع جورج أنثيل براءة اختراع لنظام اتصالات يعتمد القفز الترددي عام 1942؟",
         "a": "هيدي لامار (بالتعاون مع جورج أنثيل)",
         "useCategoryPoster": true
       },
@@ -16694,8 +16709,8 @@
       {
         "uid": "plants_nature_drive_q21_400",
         "points": 400,
-        "q": "ما هو أسرع النباتات نمواً على وجه الأرض، حيث يمكن لبعض أنواعه أن ينمو قرابة متر واحد في اليوم؟",
-        "a": "الخيزران (البامبو)",
+        "q": "لأي فصيلة نباتية ينتمي الخيزران؟",
+        "a": "الفصيلة النجيلية (الفصيلة العشبية)",
         "useCategoryPoster": true,
         "am": {
           "t": "image",
@@ -16727,13 +16742,9 @@
       {
         "uid": "plants_nature_drive_q24_600",
         "points": 600,
-        "q": "ما اسم مستعمرة أشجار الحور الرجراج في ولاية يوتا الأمريكية التي تُعد أثقل كائن حي واحد (بجذر مشترك واحد) على وجه الأرض؟",
-        "a": "باندو (Pando)",
-        "useCategoryPoster": true,
-        "am": {
-          "t": "image",
-          "u": "https://upload.wikimedia.org/wikipedia/commons/7/71/Pando_Land_Mass_Outline.jpg"
-        }
+        "q": "ما اسم مستعمرة الحور الرجراج في ولاية يوتا التي تنمو سيقانها المتطابقة وراثيًا من شبكة جذور مترابطة؟",
+        "a": "باندو",
+        "useCategoryPoster": true
       }
     ]
   },
@@ -16905,104 +16916,33 @@
     ]
   },
   "rebus_football": {
-    "questions": [
-      {
-        "uid": "rebus_football_drive_q19_200",
-        "points": 200,
-        "q": "ما اسم هذا الملعب الشهير بواجهته المعدنية الحديثة، ولأي نادٍ إسباني ينتمي؟",
-        "a": "ملعب سانتياغو برنابيو — ريال مدريد",
-        "qm": {
-          "t": "image",
-          "u": "https://publish.realmadrid.com/content/dam/portals/realmadrid-com/es-es/tour/products/individual-classic-hora-flexible/multimedia/Hero-classic.jpg",
-          "fallback": "/eight-media/05ba2ea37995a09f2349.webp"
-        },
-        "am": {
-          "t": "image",
-          "u": "https://publish.realmadrid.com/content/dam/portals/realmadrid-com/es-es/tour/products/individual-classic-hora-flexible/multimedia/Hero-classic.jpg",
-          "fallback": "/eight-media/05ba2ea37995a09f2349.webp"
-        }
-      },
-      {
-        "uid": "rebus_football_drive_q20_200",
-        "points": 200,
-        "q": "ما اسم هذا الملعب الألماني ذو الواجهة المكوّنة من ألواح تشبه الوسائد، وفي أي مدينة يقع؟",
-        "a": "ملعب أليانز أرينا — ميونخ (ملعب بايرن ميونخ)",
-        "qm": {
-          "t": "image",
-          "u": "/eight-media/d14a29dadffc01a0aae7.webp",
-          "fallback": "/eight-media/5c71361ae06b0327a518.webp"
-        },
-        "am": {
-          "t": "image",
-          "u": "/eight-media/d14a29dadffc01a0aae7.webp",
-          "fallback": "/eight-media/5c71361ae06b0327a518.webp"
-        }
-      },
-      {
-        "uid": "rebus_football_drive_q21_400",
-        "points": 400,
-        "q": "بماذا يُلقّب هذا المدرّج الجنوبي الضخم الظاهر في الصورة، وما الاسم الرسمي للملعب الذي يحتضنه؟",
-        "a": "الجدار الأصفر (Die Gelbe Wand) — ملعب سيغنال إيدونا بارك (ويستفالين شتاديون، بوروسيا دورتموند)",
-        "qm": {
-          "t": "image",
-          "u": "https://cloudfront-us-east-1.images.arcpublishing.com/coxohio/N74GQW5JT5ABRFUKW45N3C4CYU.png",
-          "fallback": "/eight-media/3c679f380272fc6e7d64.webp"
-        },
-        "am": {
-          "t": "image",
-          "u": "https://cloudfront-us-east-1.images.arcpublishing.com/coxohio/N74GQW5JT5ABRFUKW45N3C4CYU.png",
-          "fallback": "/eight-media/3c679f380272fc6e7d64.webp"
-        }
-      },
-      {
-        "uid": "rebus_football_drive_q22_400",
-        "points": 400,
-        "q": "ما اسم هذا الملعب التاريخي في ريو دي جانيرو، وما الاسم الرسمي الكامل الذي يحمله تكريماً لصحفي رياضي برازيلي؟",
-        "a": "ملعب ماراكانا — الاسم الرسمي: ملعب جورناليستا ماريو فيليو (Estádio Jornalista Mário Filho)",
-        "qm": {
-          "t": "image",
-          "u": "https://es.travel2latam.com/uploads/0000067901-resized-1280x720.png",
-          "fallback": "/eight-media/33004096f5735c1b3cfe.webp"
-        },
-        "am": {
-          "t": "image",
-          "u": "https://es.travel2latam.com/uploads/0000067901-resized-1280x720.png",
-          "fallback": "/eight-media/33004096f5735c1b3cfe.webp"
-        }
-      },
-      {
-        "uid": "rebus_football_drive_q23_600",
-        "points": 600,
-        "q": "ما اسم هذا الملعب الإيطالي الشهير بأبراجه الخرسانية اللولبية، وفي أي عام افتُتح لأول مرة وبمباراة بين من ومن؟",
-        "a": "ملعب سان سيرو (جوزيبي مياتزا) — افتُتح عام 1926 بمباراة ديربي بين إنتر وميلان (فاز إنتر 6–3)",
-        "qm": {
-          "t": "image",
-          "u": "https://www.ansa.it/webimages/news_base/2022/10/27/883ea17aaf0ebc578895ab68af152a28.jpg",
-          "fallback": "/eight-media/375c13c3f7370cd2951e.webp"
-        },
-        "am": {
-          "t": "image",
-          "u": "https://www.ansa.it/webimages/news_base/2022/10/27/883ea17aaf0ebc578895ab68af152a28.jpg",
-          "fallback": "/eight-media/375c13c3f7370cd2951e.webp"
-        }
-      },
-      {
-        "uid": "rebus_football_drive_q24_600",
-        "points": 600,
-        "q": "ما الاسم الرسمي للملعب الأرجنتيني المعروف باسم «لا بومبونيرا»، ومن المهندس السلوفيني الذي شارك في تصميمه؟",
-        "a": "ملعب ألبرتو خوسيه أرماندو (Estadio Alberto J. Armando) — المهندس فيكتور سولتشيتش (Viktor Sulčič)",
-        "qm": {
-          "t": "image",
-          "u": "https://revistalibero.com/cdn/shop/articles/super-bombonera-p_opt-1170x600.jpg?v=1599046063",
-          "fallback": "/eight-media/3b800dd6451f08226a46.webp"
-        },
-        "am": {
-          "t": "image",
-          "u": "https://revistalibero.com/cdn/shop/articles/super-bombonera-p_opt-1170x600.jpg?v=1599046063",
-          "fallback": "/eight-media/3b800dd6451f08226a46.webp"
-        }
-      }
-    ]
+    "questions": [],
+    "stadiumRoutes": {
+      "rebus_football_q2_200": "world_stadiums_photo",
+      "rebus_football_q3_200": "world_stadiums_photo",
+      "rebus_football_q4_200": "world_stadiums_photo",
+      "rebus_football_q5_200": "world_stadiums_photo",
+      "rebus_football_q6_200": "world_stadiums_photo",
+      "rebus_football_q7_400": "world_stadiums_photo",
+      "rebus_football_q8_400": "world_stadiums_photo",
+      "rebus_football_q9_400": "world_stadiums_photo",
+      "rebus_football_q10_400": "arab_stadiums_photo",
+      "rebus_football_q11_400": "arab_stadiums_photo",
+      "rebus_football_q12_400": "world_stadiums_photo",
+      "rebus_football_q13_600": "world_stadiums_photo",
+      "rebus_football_q14_600": "world_stadiums_photo",
+      "rebus_football_q15_600": "world_stadiums_photo",
+      "rebus_football_q16_600": "arab_stadiums_photo",
+      "rebus_football_q17_600": "world_stadiums_photo",
+      "rebus_football_q18_600": "world_stadiums_photo",
+      "rebus_football_drive_q19_200": "world_stadiums_photo",
+      "rebus_football_drive_q20_200": "world_stadiums_photo",
+      "rebus_football_drive_q21_400": "world_stadiums_photo",
+      "rebus_football_drive_q22_400": "world_stadiums_photo",
+      "rebus_football_drive_q23_600": "world_stadiums_photo",
+      "rebus_football_drive_q24_600": "world_stadiums_photo"
+    },
+    "poster": "/eight-media/a88d0ea42be1d720fb33.webp"
   },
   "rebus_words": {
     "questions": [
@@ -17488,29 +17428,21 @@
       {
         "uid": "saudi_popular_food_drive_q19_200",
         "points": 200,
-        "q": "ما هو الطبق الشعبي الأشهر في المملكة العربية السعودية والمكوّن أساساً من الأرز واللحم أو الدجاج مع البهارات؟",
-        "a": "الكبسة",
-        "am": {
-          "t": "image",
-          "u": "/eight-media/f30081e4cb9a69b5aa8a.webp"
-        }
+        "q": "ما اسم الليمون المجفّف الذي يُستخدم لإضفاء نكهة حامضة على الكبسة؟",
+        "a": "اللومي (الليمون الأسود)"
       },
       {
         "uid": "saudi_popular_food_drive_q20_200",
         "points": 200,
-        "q": "ما هو المكوّن الأساسي الذي يُصنع منه طبق «الجريش» السعودي الشهير؟",
-        "a": "القمح المجروش (اللقيمي) مع اللبن أو الحليب والمرق",
-        "useCategoryPoster": true,
-        "am": {
-          "t": "image",
-          "u": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/%D8%A7%D9%84%D8%AC%D8%B1%D9%8A%D8%B4.jpg/1280px-%D8%A7%D9%84%D8%AC%D8%B1%D9%8A%D8%B4.jpg"
-        }
+        "q": "ما الحبوب التي تُجرش لتصبح المكوّن الأساسي للجريش السعودي؟",
+        "a": "القمح",
+        "useCategoryPoster": true
       },
       {
         "uid": "saudi_popular_food_drive_q21_400",
         "points": 400,
-        "q": "ما هو الطبق الشعبي الذي أعلنته هيئة فنون الطهي عام 2023 «الطبق الوطني» للمملكة، وما هي الحلوى الوطنية المعلنة معه؟",
-        "a": "الطبق الوطني: الجريش، والحلوى الوطنية: المقشوش",
+        "q": "ما الطبق الوطني والحلوى الوطنية اللذان أعلنتهما هيئة فنون الطهي السعودية عام 2023؟",
+        "a": "الجريش والمقشوش",
         "useCategoryPoster": true,
         "am": {
           "t": "image",
@@ -17520,8 +17452,8 @@
       {
         "uid": "saudi_popular_food_drive_q22_400",
         "points": 400,
-        "q": "بأي منطقة سعودية يشتهر طبقا «المعصوب» و«السليق» بشكل رئيسي؟",
-        "a": "منطقة الحجاز (المنطقة الغربية: مكة وجدة والطائف والمدينة)",
+        "q": "بأي إقليم في غرب السعودية يشتهر المعصوب والسليق؟",
+        "a": "الحجاز",
         "useCategoryPoster": true,
         "am": {
           "t": "image",
@@ -17531,19 +17463,15 @@
       {
         "uid": "saudi_popular_food_drive_q23_600",
         "points": 600,
-        "q": "في طبق «الحنيذ» التقليدي بجنوب المملكة، ما اسم النبات العطري الذي يُستخدم لتغطية اللحم داخل التنور (الميفا) لإكسابه نكهته المميزة؟",
-        "a": "نبات المرخ (ويُستخدم أحياناً نبات السلع)",
-        "useCategoryPoster": true,
-        "am": {
-          "t": "image",
-          "u": "https://www.mshtly.com/uploads/products/%D9%86%D8%A8%D8%AA%D8%A9%20%D8%A7%D9%84%D9%85%D8%B1%D8%AE.jpeg"
-        }
+        "q": "ما النبات الذي تُستخدم عيدانه في بعض طرق تحضير الحنيذ في جنوب السعودية، وقد يُستعمل السلع بدلًا منه؟",
+        "a": "المرخ",
+        "useCategoryPoster": true
       },
       {
         "uid": "saudi_popular_food_drive_q24_600",
         "points": 600,
-        "q": "ما الفرق الجوهري بين طبقي «القرصان» و«المرقوق» في المطبخ النجدي؟",
-        "a": "القرصان يُحضّر من رقائق خبز جافة رقيقة جداً تُسقى بالمرق والخضار واللحم على طبقات، بينما المرقوق يُطهى فيه العجين الطازج المفرود مباشرة داخل قدر المرق المغلي",
+        "q": "ما الفرق في تحضير العجين بين القرصان والمرقوق في المطبخ النجدي؟",
+        "a": "في القرصان يُسقى خبز رقيق مخبوز بالمرق، وفي المرقوق تُطهى رقائق العجين الطازجة في المرق مباشرة.",
         "useCategoryPoster": true,
         "am": {
           "t": "image",
@@ -19782,40 +19710,28 @@
       {
         "uid": "space_planets_drive_q19_200",
         "points": 200,
-        "q": "ما اسم الكوكب الغازي العملاق في المجموعة الشمسية الذي يتميز بحلقاته الجليدية الواسعة والواضحة؟",
-        "a": "زحل",
-        "am": {
-          "t": "image",
-          "u": "/eight-media/71d3a3d6e1b32064c89f.webp"
-        }
+        "q": "ما اسم الفجوة الكبرى الظاهرة بين الحلقتين A وB من حلقات زحل؟",
+        "a": "فجوة كاسيني"
       },
       {
         "uid": "space_planets_drive_q20_200",
         "points": 200,
-        "q": "ما اسم المجرة الحلزونية التي تقع فيها مجموعتنا الشمسية؟",
-        "a": "مجرة درب التبانة",
-        "useCategoryPoster": true,
-        "am": {
-          "t": "image",
-          "u": "https://svs.gsfc.nasa.gov/vis/a030000/a030500/a030559/robert_hurt_2MASS_stars.jpg"
-        }
+        "q": "ما اسم المجرة الحلزونية الكبيرة الأقرب إلى درب التبانة؟",
+        "a": "أندروميدا",
+        "useCategoryPoster": true
       },
       {
         "uid": "space_planets_drive_q21_400",
         "points": 400,
-        "q": "ما اسم أكبر قمر تابع لكوكب زحل، والذي يُعد القمر الوحيد في المجموعة الشمسية الذي يمتلك غلافاً جوياً كثيفاً؟",
-        "a": "تيتان (Titan)",
-        "useCategoryPoster": true,
-        "am": {
-          "t": "image",
-          "u": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/solar/internal_resources/1988/Full_disk_view_of_Saturns_hazy_moon_Titan.jpeg?crop=faces%2Cfocalpoint&fit=clip&h=1024&w=1024"
-        }
+        "q": "ما المركبة التي هبطت على تيتان في يناير 2005؟",
+        "a": "هويغنز",
+        "useCategoryPoster": true
       },
       {
         "uid": "space_planets_drive_q22_400",
         "points": 400,
-        "q": "ما اسم النجم الأقرب إلى الأرض بعد الشمس مباشرة؟",
-        "a": "قنطورس الأقرب (بروكسيما سنتوري / Proxima Centauri)",
+        "q": "إلى أي نظام نجمي ينتمي بروكسيما سنتوري؟",
+        "a": "نظام ألفا سنتوري",
         "useCategoryPoster": true,
         "am": {
           "t": "image",
@@ -19836,12 +19752,12 @@
       {
         "uid": "space_planets_drive_q24_600",
         "points": 600,
-        "q": "ما الاسم الرسمي المشتق من لغة هاواي الذي أُطلق على الثقب الأسود الفائق في مجرة M87 والذي التُقطت له أول صورة مباشرة عام 2019؟",
-        "a": "بويهي (Pōwehi)",
+        "q": "ما تسمية الثقب الأسود في قلب مجرة مسييه 87 الذي نُشرت أول صورة له عام 2019؟",
+        "a": "M87*",
         "useCategoryPoster": true,
         "am": {
           "t": "image",
-          "u": "https://hips.hearstapps.com/hmg-prod/images/screen-shot-2019-04-10-at-2-40-53-pm-1554921680.png?crop=0.614xw%3A1.00xh%3B0.194xw%2C0&resize=1200%3A%2A"
+          "u": "/eight-media/84120190410e87a00001.webp"
         }
       }
     ]
@@ -20239,7 +20155,7 @@
       {
         "uid": "wild_animals_drive_q20_200",
         "points": 200,
-        "q": "ما أكبر حيوان عاش على كوكب الأرض على الإطلاق؟",
+        "q": "ما الثديي البحري الذي قد يصل وزنه إلى نحو 150 طنًا أو أكثر، وتظهر على جلده بقع رمادية مزرقة؟",
         "a": "الحوت الأزرق",
         "useCategoryPoster": true,
         "am": {
@@ -20250,13 +20166,9 @@
       {
         "uid": "wild_animals_drive_q21_400",
         "points": 400,
-        "q": "كم عدد القلوب التي يمتلكها الأخطبوط في جسمه؟",
-        "a": "ثلاثة قلوب",
-        "useCategoryPoster": true,
-        "am": {
-          "t": "image",
-          "u": "https://oceanservice.noaa.gov/news/feb26/benthic-octopus-clam-960.jpg"
-        }
+        "q": "إلى أي عضوين يضخ القلبان الخيشوميان في الأخطبوط الدم؟",
+        "a": "إلى الخياشيم",
+        "useCategoryPoster": true
       },
       {
         "uid": "wild_animals_drive_q22_400",
@@ -20437,8 +20349,8 @@
       {
         "uid": "world_dishes_drive_q19_200",
         "points": 200,
-        "q": "ما اسم الطبق الإسباني التقليدي الظاهر في منتصف المائدة، والذي يُحضّر أساساً من الأرز بالزعفران والمأكولات البحرية في مقلاة معدنية واسعة؟",
-        "a": "الباييا (Paella)",
+        "q": "ما اسم طبق الأرز الإسباني الذي يُطهى في مقلاة عريضة ضحلة، ومن أصنافه نسخة بالمأكولات البحرية؟",
+        "a": "الباييلا",
         "qm": {
           "t": "image",
           "u": "/eight-media/4ed338f9a435dfa2ab77.webp"
@@ -20462,13 +20374,9 @@
       {
         "uid": "world_dishes_drive_q21_400",
         "points": 400,
-        "q": "ما اسم الطبق الوطني الكوري الشهير المكوّن من ملفوف النابا المخمّر مع الفلفل الأحمر والثوم والزنجبيل؟",
-        "a": "الكيمتشي (Kimchi)",
-        "useCategoryPoster": true,
-        "am": {
-          "t": "image",
-          "u": "https://cheobasannokimuchi.com/cdn/shop/files/hakusai_karakuchi.jpg?v=1690505490"
-        }
+        "q": "ما اسم نوع الملفوف الذي يُستخدم في أشهر أصناف الكيمتشي الكوري؟",
+        "a": "ملفوف النابا (الملفوف الصيني)",
+        "useCategoryPoster": true
       },
       {
         "uid": "world_dishes_drive_q22_400",
@@ -20484,13 +20392,9 @@
       {
         "uid": "world_dishes_drive_q23_600",
         "points": 600,
-        "q": "ما اسم التابل الإثيوبي المركّب شديد الحرارة المكوّن من أكثر من عشر بهارات أبرزها الفلفل المجفف والحلبة والهيل، والذي يُعد الأساس في طبق «دورو وات» الوطني؟",
-        "a": "البيربيري (Berbere)",
-        "useCategoryPoster": true,
-        "am": {
-          "t": "image",
-          "u": "https://wfg32p.s3.amazonaws.com/media/dishes/berbere_5436-reg.jpg"
-        }
+        "q": "ما اسم خلطة التوابل الإثيوبية التي يدخل فيها الفلفل الحار والحلبة وتُستخدم في طبق دورو وات؟",
+        "a": "بيربيري",
+        "useCategoryPoster": true
       },
       {
         "uid": "world_dishes_drive_q24_600",
@@ -20736,6 +20640,345 @@
           "u": "https://cloudfront-eu-central-1.images.arcpublishing.com/diarioas/ZJGPQFPB4ZHQBNFMV2YEAANIZI.JPG",
           "fallback": "/eight-media/9f1d82b48e473ac9ea89.webp"
         }
+      },
+      {
+        "points": 200,
+        "q": "ما اسم الملعب التاريخي لنادي برشلونة الظاهر في الصورة؟",
+        "a": "كامب نو",
+        "info": "ملعب نادي برشلونة ويُعد من أكبر ملاعب أوروبا.",
+        "options": [
+          "كامب نو",
+          "سانتياغو برنابيو",
+          "أنفيلد",
+          "سان سيرو"
+        ],
+        "hint": "في إقليم كتالونيا",
+        "photo": {
+          "src": "/media/med_seed_p_b340e3fa71d4"
+        },
+        "uid": "rebus_football_q3_200"
+      },
+      {
+        "points": 200,
+        "q": "ما اسم ملعب مانشستر يونايتد الظاهر في الصورة والمعروف بمسرح الأحلام؟",
+        "a": "أولد ترافورد",
+        "info": "ملعب نادي مانشستر يونايتد ويُلقب بمسرح الأحلام.",
+        "options": [
+          "أولد ترافورد",
+          "ويمبلي",
+          "أنفيلد",
+          "ستامفورد بريدج"
+        ],
+        "hint": "يُلقب بمسرح الأحلام",
+        "photo": {
+          "src": "/eight-media/0f069f5049824c35d2e4.webp",
+          "file": "2023 07 31 arne mueseler 00060-Verbessert-RR (53106651455).jpg"
+        },
+        "uid": "rebus_football_q4_200"
+      },
+      {
+        "points": 400,
+        "q": "ما اسم ملعب نادي ليفربول الظاهر في الصورة؟",
+        "a": "أنفيلد",
+        "info": "ملعب نادي ليفربول الإنجليزي ويشتهر بمدرج «ذا كوب».",
+        "options": [
+          "أنفيلد",
+          "أولد ترافورد",
+          "ستامفورد بريدج",
+          "ملعب الإمارات"
+        ],
+        "hint": "اشتهر بمدرج «ذا كوب»",
+        "photo": {
+          "src": "/eight-media/446755f838a83f3d2fb8.webp",
+          "file": "Anfield Stadium, Liverpool (4).JPG"
+        },
+        "uid": "rebus_football_q8_400"
+      },
+      {
+        "points": 400,
+        "q": "ما الاسم الشائع للملعب الذي يتشاركه ميلان وإنتر؟",
+        "a": "سان سيرو",
+        "info": "ملعب يتشاركه ميلان وإنتر في مدينة ميلانو الإيطالية.",
+        "options": [
+          "سان سيرو",
+          "أليانز أرينا",
+          "ماراكانا",
+          "أزتيكا"
+        ],
+        "hint": "في مدينة ميلانو",
+        "photo": {
+          "src": "https://www.ansa.it/webimages/news_base/2022/10/27/883ea17aaf0ebc578895ab68af152a28.jpg"
+        },
+        "uid": "rebus_football_q9_400"
+      },
+      {
+        "points": 400,
+        "q": "ما اسم هذا الملعب اللندني الذي انتقل إليه أرسنال من هايبري؟",
+        "a": "ملعب الإمارات",
+        "info": "ملعب نادي آرسنال في شمال لندن.",
+        "options": [
+          "ملعب الإمارات",
+          "ستامفورد بريدج",
+          "أنفيلد",
+          "ويمبلي"
+        ],
+        "hint": "ملعب نادي المدفعجية",
+        "photo": {
+          "src": "/eight-media/505e95c3bca6db10e748.webp",
+          "file": "London Emirates Stadium arsenal.jpg"
+        },
+        "uid": "rebus_football_q12_400"
+      },
+      {
+        "points": 600,
+        "q": "ما اسم ملعب بوروسيا دورتموند الظاهر في هذه الصورة؟",
+        "a": "سيغنال إيدونا بارك",
+        "info": "ملعب بوروسيا دورتموند ويشتهر بالمدرج الجنوبي الأصفر.",
+        "options": [
+          "سيغنال إيدونا بارك",
+          "أليانز أرينا",
+          "أنفيلد",
+          "سان سيرو"
+        ],
+        "hint": "ملعب النادي الأصفر والأسود في ألمانيا",
+        "photo": {
+          "src": "https://cloudfront-us-east-1.images.arcpublishing.com/coxohio/N74GQW5JT5ABRFUKW45N3C4CYU.png"
+        },
+        "uid": "rebus_football_q13_600"
+      },
+      {
+        "points": 600,
+        "q": "ما اسم الملعب المكسيكي الذي شهد نهائيي كأس العالم في 1970 و1986؟",
+        "a": "أزتيكا",
+        "info": "ملعب في مكسيكو سيتي استضاف نهائي كأس العالم مرتين: 1970 و1986.",
+        "options": [
+          "أزتيكا",
+          "ماراكانا",
+          "كامب نو",
+          "ويمبلي"
+        ],
+        "hint": "في المكسيك",
+        "photo": {
+          "src": "/eight-media/266c66b946e950b506ff.webp",
+          "file": "Estadio Azteca.jpg"
+        },
+        "uid": "rebus_football_q14_600"
+      },
+      {
+        "points": 600,
+        "q": "ما اسم ملعب مانشستر سيتي الظاهر في الصورة؟",
+        "a": "ملعب الاتحاد",
+        "info": "ملعب نادي مانشستر سيتي الإنجليزي.",
+        "options": [
+          "ملعب الاتحاد",
+          "أولد ترافورد",
+          "ملعب الإمارات",
+          "أنفيلد"
+        ],
+        "hint": "ملعب نادٍ سماوي في مانشستر",
+        "photo": {
+          "src": "/eight-media/fae5330eff96f7dddbcf.webp",
+          "file": "City of Manchester Stadium 2023 cropped.jpg"
+        },
+        "uid": "rebus_football_q15_600"
+      },
+      {
+        "points": 600,
+        "q": "ما اسم الملعب الذي يلعب فيه تشيلسي منذ تأسيس النادي؟",
+        "a": "ستامفورد بريدج",
+        "info": "ملعب نادي تشيلسي في غرب لندن.",
+        "options": [
+          "ستامفورد بريدج",
+          "أنفيلد",
+          "ملعب الإمارات",
+          "أولد ترافورد"
+        ],
+        "hint": "ملعب نادٍ أزرق في لندن",
+        "photo": {
+          "src": "/eight-media/64b533794d3a1f0d2391.webp",
+          "file": "Stamford Bridge stadium.jpg"
+        },
+        "uid": "rebus_football_q17_600"
+      },
+      {
+        "points": 600,
+        "q": "ما اسم ملعب باريس سان جيرمان الذي يُترجم اسمه إلى «حديقة الأمراء»؟",
+        "a": "بارك دي برانس",
+        "info": "ملعب نادي باريس سان جيرمان في العاصمة الفرنسية.",
+        "options": [
+          "بارك دي برانس",
+          "ستاد دو فرانس",
+          "سان سيرو",
+          "كامب نو"
+        ],
+        "hint": "في العاصمة الفرنسية",
+        "photo": {},
+        "uid": "rebus_football_q18_600"
+      },
+      {
+        "uid": "rebus_football_drive_q19_200",
+        "points": 200,
+        "q": "ما اسم المنطقة الإدارية الذي يقع فيه ملعب سانتياغو برنابيو في مدريد؟",
+        "a": "تشامارتين",
+        "qm": {
+          "t": "image",
+          "u": "https://publish.realmadrid.com/content/dam/portals/realmadrid-com/es-es/tour/products/individual-classic-hora-flexible/multimedia/Hero-classic.jpg",
+          "fallback": "/eight-media/05ba2ea37995a09f2349.webp"
+        },
+        "am": {
+          "t": "image",
+          "u": "https://publish.realmadrid.com/content/dam/portals/realmadrid-com/es-es/tour/products/individual-classic-hora-flexible/multimedia/Hero-classic.jpg",
+          "fallback": "/eight-media/05ba2ea37995a09f2349.webp"
+        }
+      },
+      {
+        "uid": "rebus_football_drive_q20_200",
+        "points": 200,
+        "q": "ما الملمح الخارجي الذي يميز واجهة أليانز أرينا عند إقامة المباريات ليلًا؟",
+        "a": "إضاءة الواجهة بألوان مختلفة",
+        "qm": {
+          "t": "image",
+          "u": "/eight-media/d14a29dadffc01a0aae7.webp",
+          "fallback": "/eight-media/5c71361ae06b0327a518.webp"
+        },
+        "am": {
+          "t": "image",
+          "u": "/eight-media/d14a29dadffc01a0aae7.webp",
+          "fallback": "/eight-media/5c71361ae06b0327a518.webp"
+        }
+      },
+      {
+        "uid": "rebus_football_drive_q21_400",
+        "points": 400,
+        "q": "بماذا يُلقّب هذا المدرّج الجنوبي الضخم الظاهر في الصورة، وما الاسم الرسمي للملعب الذي يحتضنه؟",
+        "a": "الجدار الأصفر (Die Gelbe Wand) — ملعب سيغنال إيدونا بارك (ويستفالين شتاديون، بوروسيا دورتموند)",
+        "qm": {
+          "t": "image",
+          "u": "https://cloudfront-us-east-1.images.arcpublishing.com/coxohio/N74GQW5JT5ABRFUKW45N3C4CYU.png",
+          "fallback": "/eight-media/3c679f380272fc6e7d64.webp"
+        },
+        "am": {
+          "t": "image",
+          "u": "https://cloudfront-us-east-1.images.arcpublishing.com/coxohio/N74GQW5JT5ABRFUKW45N3C4CYU.png",
+          "fallback": "/eight-media/3c679f380272fc6e7d64.webp"
+        }
+      },
+      {
+        "uid": "rebus_football_drive_q22_400",
+        "points": 400,
+        "q": "ما اسم هذا الملعب التاريخي في ريو دي جانيرو، وما الاسم الرسمي الكامل الذي يحمله تكريماً لصحفي رياضي برازيلي؟",
+        "a": "ملعب ماراكانا — الاسم الرسمي: ملعب جورناليستا ماريو فيليو (Estádio Jornalista Mário Filho)",
+        "qm": {
+          "t": "image",
+          "u": "https://es.travel2latam.com/uploads/0000067901-resized-1280x720.png",
+          "fallback": "/eight-media/33004096f5735c1b3cfe.webp"
+        },
+        "am": {
+          "t": "image",
+          "u": "https://es.travel2latam.com/uploads/0000067901-resized-1280x720.png",
+          "fallback": "/eight-media/33004096f5735c1b3cfe.webp"
+        }
+      },
+      {
+        "uid": "rebus_football_drive_q23_600",
+        "points": 600,
+        "q": "ما اسم هذا الملعب الإيطالي الشهير بأبراجه الخرسانية اللولبية، وفي أي عام افتُتح لأول مرة وبمباراة بين من ومن؟",
+        "a": "ملعب سان سيرو (جوزيبي مياتزا) — افتُتح عام 1926 بمباراة ديربي بين إنتر وميلان (فاز إنتر 6–3)",
+        "qm": {
+          "t": "image",
+          "u": "https://www.ansa.it/webimages/news_base/2022/10/27/883ea17aaf0ebc578895ab68af152a28.jpg",
+          "fallback": "/eight-media/375c13c3f7370cd2951e.webp"
+        },
+        "am": {
+          "t": "image",
+          "u": "https://www.ansa.it/webimages/news_base/2022/10/27/883ea17aaf0ebc578895ab68af152a28.jpg",
+          "fallback": "/eight-media/375c13c3f7370cd2951e.webp"
+        }
+      },
+      {
+        "uid": "rebus_football_drive_q24_600",
+        "points": 600,
+        "q": "ما الاسم الرسمي للملعب الأرجنتيني المعروف باسم «لا بومبونيرا»، ومن المهندس السلوفيني الذي شارك في تصميمه؟",
+        "a": "ملعب ألبرتو خوسيه أرماندو (Estadio Alberto J. Armando) — المهندس فيكتور سولتشيتش (Viktor Sulčič)",
+        "qm": {
+          "t": "image",
+          "u": "https://revistalibero.com/cdn/shop/articles/super-bombonera-p_opt-1170x600.jpg?v=1599046063",
+          "fallback": "/eight-media/3b800dd6451f08226a46.webp"
+        },
+        "am": {
+          "t": "image",
+          "u": "https://revistalibero.com/cdn/shop/articles/super-bombonera-p_opt-1170x600.jpg?v=1599046063",
+          "fallback": "/eight-media/3b800dd6451f08226a46.webp"
+        }
+      },
+      {
+        "points": 200,
+        "q": "ما النادي الذي يتخذ من الملعب الظاهر في الصورة مقرًا له؟",
+        "a": "ريال مدريد",
+        "info": "ملعب نادي ريال مدريد في العاصمة الإسبانية.",
+        "options": [
+          "سانتياغو برنابيو",
+          "كامب نو",
+          "أولد ترافورد",
+          "ملعب الاتحاد"
+        ],
+        "hint": "ملعب نادٍ ملكي في العاصمة الإسبانية",
+        "photo": {
+          "src": "https://publish.realmadrid.com/content/dam/portals/realmadrid-com/es-es/tour/products/individual-classic-hora-flexible/multimedia/Hero-classic.jpg"
+        },
+        "uid": "rebus_football_q2_200"
+      },
+      {
+        "points": 200,
+        "q": "ما المنتخب الذي يستضيف مبارياته في الملعب اللندني الظاهر في الصورة؟",
+        "a": "منتخب إنجلترا",
+        "info": "الملعب الوطني لإنجلترا في لندن، ويعلوه قوس فولاذي ضخم.",
+        "options": [
+          "ويمبلي",
+          "أولد ترافورد",
+          "ملعب الإمارات",
+          "ستامفورد بريدج"
+        ],
+        "hint": "تعلوه قوس ضخمة مميزة",
+        "photo": {
+          "src": "https://content.fosterandpartners.com/api/media/getCroppedImage?crop=false&height=2000&imagePath=%2Fmedia%2Faq2nrk3b%2F1015_fp156220.jpg&width=2000"
+        },
+        "uid": "rebus_football_q5_200"
+      },
+      {
+        "points": 200,
+        "q": "في أي مدينة برازيلية يقع الملعب الظاهر في الصورة، الذي استضاف نهائي مونديال 2014؟",
+        "a": "ريو دي جانيرو",
+        "info": "ملعب أسطوري في ريو دي جانيرو احتضن نهائي كأس العالم 2014.",
+        "options": [
+          "ماراكانا",
+          "أزتيكا",
+          "كامب نو",
+          "سان سيرو"
+        ],
+        "hint": "في البرازيل",
+        "photo": {
+          "src": "https://es.travel2latam.com/uploads/0000067901-resized-1280x720.png"
+        },
+        "uid": "rebus_football_q6_200"
+      },
+      {
+        "points": 400,
+        "q": "ما اسم النادي البافاري الذي يلعب مبارياته في الملعب الظاهر في الصورة؟",
+        "a": "بايرن ميونخ",
+        "info": "ملعب نادي بايرن ميونخ وتُضاء واجهته بألوان مختلفة.",
+        "options": [
+          "أليانز أرينا",
+          "سيغنال إيدونا بارك",
+          "سان سيرو",
+          "ملعب الإمارات"
+        ],
+        "hint": "تُضاء واجهته بألوان مختلفة",
+        "photo": {
+          "src": "/eight-media/d14a29dadffc01a0aae7.webp",
+          "file": "Allianz Arena, aerial view.jpg"
+        },
+        "uid": "rebus_football_q7_400"
       }
     ]
   },
