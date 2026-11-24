@@ -16112,35 +16112,55 @@
         "points": 200,
         "q": "ما هو المسطح المائي الأكثر ملوحةً بين البحار الكبرى في العالم ويقع بين الأردن وفلسطين؟",
         "a": "البحر الميت",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://static.findtourgo.com/IMAGE/Daed-Sea4.jpg"
+        }
       },
       {
         "uid": "rivers_seas_drive_q21_400",
         "points": 400,
         "q": "ما هو النهر الذي يمر بأكبر عدد من الدول في العالم، وكم عدد الدول التي يمر بها أو يشكل حدوداً لها؟",
         "a": "نهر الدانوب (10 دول أوروبية)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://upload.wikimedia.org/wikipedia/commons/0/04/Aerial_photograph_of_Margaret_Bridge_and_Budapest_Chain-Bridge_01.jpg"
+        }
       },
       {
         "uid": "rivers_seas_drive_q22_400",
         "points": 400,
         "q": "ما هو البحر الوحيد في العالم الذي ليس له أي سواحل برية تحده؟",
         "a": "بحر سارغاسو (في المحيط الأطلسي)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://cff2.earth.com/uploads/2025/05/16134547/sargasso-sea_only-sea-does-not-touch-land_1m-1400x850.jpg"
+        }
       },
       {
         "uid": "rivers_seas_drive_q23_600",
         "points": 600,
         "q": "ما هو أعمق نهر في العالم، وكم يبلغ أقصى عمق مُقاس فيه تقريباً؟",
         "a": "نهر الكونغو (يصل عمقه إلى نحو 220 متراً)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.worldatlas.com/r/w2560-q80/upload/6a/16/69/shutterstock-1242430540.jpg"
+        }
       },
       {
         "uid": "rivers_seas_drive_q24_600",
         "points": 600,
         "q": "ما اسم النهر الواقع في ولاية مونتانا الأمريكية والذي سُجّل كأقصر نهر في العالم بطول 61 متراً فقط؟",
         "a": "نهر رو (Roe River)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://image-worker.mindtrip.ai/image-resize/format%3Dwebp%2Cw%3D720/https%3A/images.mindtrip.ai/attractions/7197/a1f0/cd21/277e/3055/64c2/aef3/385c"
+        }
       }
     ]
   },
