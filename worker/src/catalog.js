@@ -158,8 +158,9 @@ async function getEightQuestions(env) {
     });
   }
   for (const [slug, review] of Object.entries(EIGHT_QUESTION_REVIEW)) {
-    if (!Array.isArray(stored[slug])) continue;
-    stored[slug] = stored[slug].map((card) => {
+    const questions = Object.hasOwn(stored, slug) ? stored[slug] : eightRawQuestions(slug);
+    if (!Array.isArray(questions) || !questions.length) continue;
+    stored[slug] = questions.map((card) => {
       const revision = card && Object.hasOwn(review, card.uid) && review[card.uid];
       if (!revision || card.q !== revision.before.q || card.a !== revision.before.a) return card;
       const corrected = { ...card };
