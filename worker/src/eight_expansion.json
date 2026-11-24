@@ -2792,35 +2792,55 @@
         "points": 200,
         "q": "ما اسم الجامعة التاريخية التي أسّستها فاطمة الفهرية في مدينة فاس عام 859م وتُعد أقدم جامعة مستمرة في العالم؟",
         "a": "جامعة القرويين",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.worldhistory.org/img/c/p/1200x627/19456.png.webp"
+        }
       },
       {
         "uid": "country_morocco_drive_q21_400",
         "points": 400,
         "q": "ما اسم أعلى قمة جبلية في المغرب وشمال أفريقيا بأكملها، وتقع ضمن سلسلة جبال الأطلس الكبير؟",
         "a": "جبل توبقال",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.climbingtoubkal.com/wp-content/uploads/2020/12/toubkal_summit-1.jpg"
+        }
       },
       {
         "uid": "country_morocco_drive_q22_400",
         "points": 400,
         "q": "ما اسم القصر الطيني المحصّن المدرج في قائمة التراث العالمي لليونسكو والواقع في إقليم ورزازات على طريق القوافل القديمة؟",
         "a": "قصر آيت بن حدو",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://upload.wikimedia.org/wikipedia/commons/2/2b/Ait_Ben_Haddou.jpg"
+        }
       },
       {
         "uid": "country_morocco_drive_q23_600",
         "points": 600,
         "q": "ما اسم المدينة الأثرية القريبة من مكناس التي كانت عاصمة مملكة موريطنية الطنجية وتشتهر بلوحاتها الفسيفسائية الرومانية المحفوظة؟",
         "a": "وليلي (فولوبيليس)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://upload.wikimedia.org/wikipedia/commons/1/19/Volubilis_Morocco_Roman_ruins.jpg"
+        }
       },
       {
         "uid": "country_morocco_drive_q24_600",
         "points": 600,
         "q": "ما اسم المؤرخ المغربي الذي ألّف الموسوعة التاريخية الشهيرة «الاستقصا لأخبار دول المغرب الأقصى» في القرن التاسع عشر؟",
         "a": "أحمد بن خالد الناصري",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://pbs.twimg.com/media/GwayeghWQAAW0I8.jpg"
+        }
       }
     ]
   },
@@ -2841,35 +2861,55 @@
         "points": 200,
         "q": "ما اسم العملة الرسمية لسلطنة عُمان؟",
         "a": "الريال العُماني",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.robertsworldmoney.com/cdn/shop/files/Oman_B240a_1_Rial_fr.jpg?v=1720589078"
+        }
       },
       {
         "uid": "country_oman_drive_q21_400",
         "points": 400,
         "q": "ما اسم أعلى قمة جبلية في سلطنة عُمان (بارتفاع نحو 3009 أمتار فوق سطح البحر)؟",
         "a": "جبل شمس",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.oman-sur-mesure.com/uploads/sites/33/2019/07/jabal-shams-oman-730x520-c-56x22.jpeg"
+        }
       },
       {
         "uid": "country_oman_drive_q22_400",
         "points": 400,
         "q": "ما اسم المحافظة العُمانية التي تشتهر بموسم «الخريف» الموسمي وأجوائها الضبابية الخضراء؟",
         "a": "محافظة ظفار (وعاصمتها صلالة)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/32/6a/8d/e0/caption.jpg?h=900&s=1&w=900"
+        }
       },
       {
         "uid": "country_oman_drive_q23_600",
         "points": 600,
         "q": "ما اسم نظام قنوات الري التقليدي العُماني القديم الذي أُدرجت خمسة من أبرز نماذجه على قائمة التراث العالمي لليونسكو عام 2006؟",
         "a": "الأفلاج العُمانية (نظام الأفلاج)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.atheer.om/resizer/v2/CJLVWXYAD5HQLAMGG253F22FJU.jpg?auth=f9e69cf3937b4cae1f6fa2792cdf928572f13001c6fae673ebf46a38ca4350fa&smart=true&width=800"
+        }
       },
       {
         "uid": "country_oman_drive_q24_600",
         "points": 600,
         "q": "من هو الإمام العُماني من أسرة اليعاربة الذي قاد تحرير مسقط من البرتغاليين عام 1650م وأمر ببناء البرج الدائري الشهير في قلعة نزوى؟",
         "a": "الإمام سلطان بن سيف اليعربي (سلطان بن سيف الأول)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://e1.elaphjournal.com/resources/images/Politics/2015/1/4.jpg"
+        }
       }
     ]
   },
@@ -2890,35 +2930,55 @@
         "points": 200,
         "q": "ما اسم المدينة الفلسطينية التاريخية التي تضم كنيسة المهد؟",
         "a": "بيت لحم",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Church_of_the_Nativity_%28Bethlehem%2C_2008%29.jpg/1200px-Church_of_the_Nativity_%28Bethlehem%2C_2008%29.jpg"
+        }
       },
       {
         "uid": "country_palestine_drive_q21_400",
         "points": 400,
         "q": "ما اسم المدينة الفلسطينية القديمة في غور الأردن التي تُعد من أقدم المدن المأهولة في التاريخ وأخفض مدينة في العالم تحت مستوى سطح البحر؟",
         "a": "أريحا",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://static.slobodnadalmacija.hr/images/slike/2023/07/01/25195907.jpg"
+        }
       },
       {
         "uid": "country_palestine_drive_q22_400",
         "points": 400,
         "q": "من هو الخليفة الأموي الذي أمر ببناء قبة الصخرة المشرفة في القدس عام 72 هـ (691م)؟",
         "a": "عبد الملك بن مروان",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.aljazeera.net/wp-content/uploads/2023/05/3-copy-1685343086.png?quality=80&resize=770%2C513"
+        }
       },
       {
         "uid": "country_palestine_drive_q23_600",
         "points": 600,
         "q": "ما اسم القصر الأموي الأثري الشهير في مدينة أريحا الذي اشتهر بلوحة فسيفساء «شجرة الحياة» الفريدة؟",
         "a": "قصر هشام (خربة المفجر)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://i0.wp.com/the-past.com/wp-content/uploads/2022/04/post-1_image0-46.jpg?fit=40752469&ssl=1"
+        }
       },
       {
         "uid": "country_palestine_drive_q24_600",
         "points": 600,
         "q": "ما اسم القمة الجبلية الأعلى في فلسطين (في الجليل الأعلى بارتفاع نحو 1208 أمتار فوق سطح البحر)؟",
         "a": "جبل الجرمق",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://arabi21.com/UP/%D8%A7%D9%84%D8%AB%D9%84%D9%88%D8%AC%20%D8%AA%D8%BA%D8%B7%D9%8A%20%D8%AC%D8%A8%D9%84%20%D8%A7%D9%84%D8%AC%D8%B1%D9%85%D9%82.jpg"
+        }
       }
     ]
   },
@@ -2939,35 +2999,55 @@
         "points": 200,
         "q": "في أي عام استضافت دولة قطر بطولة كأس العالم لكرة القدم؟",
         "a": "عام 2022",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://image.stern.de/32887494/t/m9/v4/w1440/r1.7778/-/lusail-stadion-katar-2022.jpg"
+        }
       },
       {
         "uid": "country_qatar_drive_q21_400",
         "points": 400,
         "q": "ما اسم الحقل البحري العملاق للغاز الطبيعي في قطر الذي يُعد أكبر حقل غاز غير مصاحب في العالم؟",
         "a": "حقل الشمال",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://attaqa.net/wp-content/uploads/2024/12/37f8cd10b5e8a14c414dee5379442662.png"
+        }
       },
       {
         "uid": "country_qatar_drive_q22_400",
         "points": 400,
         "q": "ما اسم المدينة الساحلية التاريخية في شمال غرب قطر المدرجة على قائمة التراث العالمي لليونسكو عام 2013؟",
         "a": "الزبارة (موقع الزبارة الأثري)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://fsn1.your-objectstorage.com/worldheritagesite/media/images/w1402a.width-1200.jpg"
+        }
       },
       {
         "uid": "country_qatar_drive_q23_600",
         "points": 600,
         "q": "ما اسم أعلى نقطة طبيعية في دولة قطر (بارتفاع نحو 103 أمتار فوق سطح البحر)؟",
         "a": "قُرين أبو البول",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://phonebookoftheworld.com/qatar/peak/qurayn-abu-al-bawl.jpg"
+        }
       },
       {
         "uid": "country_qatar_drive_q24_600",
         "points": 600,
         "q": "من هو المهندس المعماري العالمي الحاصل على جائزة بريتزكر الذي صمّم مبنى متحف الفن الإسلامي في الدوحة؟",
         "a": "آي إم باي (I. M. Pei)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://d12eu00glpdtk2.cloudfront.net/public/images/news/qatar-museums-i-m-peis-dual-exhibitions-architect-museum-islamic-art/qatar-museums-i-m-peis-dual-exhibitions-architect-museum-islamic-art.jpg"
+        }
       }
     ]
   },
