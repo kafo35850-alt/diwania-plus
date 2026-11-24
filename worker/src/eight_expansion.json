@@ -5870,14 +5870,22 @@
         "points": 200,
         "q": "ما اسم القرية التراثية الأشهر في منطقة الباحة المبنية فوق جبل من الرخام الأبيض؟",
         "a": "قرية ذي عين",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "/eight-media/aed7db25d9cffaf9fb90.webp"
+        }
       },
       {
         "uid": "custom_1795333828780_drive_q9_200",
         "points": 200,
         "q": "في أي جهة جغرافية من المملكة العربية السعودية تقع منطقة الباحة؟",
         "a": "الجنوب الغربي (ضمن سلسلة جبال السروات)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/Al%20Bahah%20in%20Saudi%20Arabia.svg?width=1280"
+        }
       },
       {
         "uid": "custom_1795333828780_drive_q10_200",
@@ -5894,21 +5902,33 @@
         "points": 200,
         "q": "ما اسم المحافظة الشهيرة في سراة الباحة المعروفة بـ «سوق السبت» التاريخي؟",
         "a": "بلجرشي",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.aleqt.com/sites/default/files/a/921297_386184.jpg"
+        }
       },
       {
         "uid": "custom_1795333828780_drive_q12_200",
         "points": 200,
         "q": "ما نوع الأشجار الجبلية المعمرة التي تغطي غابات الباحة وتُعد رمزاً لطبيعتها؟",
         "a": "أشجار العرعر",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://portalcdn.spa.gov.sa/backend/original/202604/F9829882.jpeg"
+        }
       },
       {
         "uid": "custom_1795333828780_drive_q13_400",
         "points": 400,
         "q": "ما اسم المحافظة التهامية في منطقة الباحة التي تقع فيها قرية ذي عين التراثية؟",
         "a": "محافظة المخواة",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://portalcdn.spa.gov.sa/backend/original/202401/OLwdXulvsql26nXUhuim7a8e3dfBku4FcFN4Qfgq.jpg"
+        }
       },
       {
         "uid": "custom_1795333828780_drive_q14_400",
@@ -5925,28 +5945,44 @@
         "points": 400,
         "q": "ما اسم الخبزة الدائرية السميكة التراثية التي تشتهر بها منطقة الباحة وتُخبز على الحجر الساخن وتُقدّم مع السمن والعسل؟",
         "a": "الخبزة المقناة",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://portalcdn.spa.gov.sa/backend/original/202407/d2v4dOhI9XeTItblTxVznAkHbC97uBRvtzW39fo7.jpg"
+        }
       },
       {
         "uid": "custom_1795333828780_drive_q16_400",
         "points": 400,
         "q": "ما اسم الأكلة الشعبية الشهيرة في الباحة المكونة من قطع عجين البر المسلوقة في مرق اللحم؟",
         "a": "الدغابيس",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://makkahnewspaper.com/uploads/images/2016/07/31/586136.jpg"
+        }
       },
       {
         "uid": "custom_1795333828780_drive_q17_400",
         "points": 400,
         "q": "ما اسم المحافظة في منطقة الباحة التي تضم «قرية الأطاولة التراثية»؟",
         "a": "محافظة القرى",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/Al%20Bahah%20Region%20-%20Al%20Qara.svg?width=1280"
+        }
       },
       {
         "uid": "custom_1795333828780_drive_q18_400",
         "points": 400,
         "q": "ما اسم الفن الشعبي الحماسي الأشهر في منطقة الباحة الذي يُؤدى بالسيوف والزير والشعر الارتجالي؟",
         "a": "العرضة الجنوبية",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://portalcdn.spa.gov.sa/backend/original/202309/xVaYre2dPNC9MgqMa7f24NblqQkkNr4wFDxJ7R1N.jpg"
+        }
       },
       {
         "uid": "custom_1795333828780_drive_q19_600",
