@@ -203,35 +203,55 @@
         "points": 200,
         "q": "ما هي أكبر دولة في قارة أمريكا الجنوبية من حيث المساحة وعدد السكان؟",
         "a": "البرازيل",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Brazil_in_South_America.png/1280px-Brazil_in_South_America.png"
+        }
       },
       {
         "uid": "americas_continent_drive_q21_400",
         "points": 400,
         "q": "ما اسم القناة المائية التي تربط بين المحيط الأطلسي والمحيط الهادئ وتفصل جغرافياً بين أمريكا الشمالية والجنوبية؟",
         "a": "قناة بنما",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Miraflores_Locks_Panama_Canal.jpg/1280px-Miraflores_Locks_Panama_Canal.jpg"
+        }
       },
       {
         "uid": "americas_continent_drive_q22_400",
         "points": 400,
         "q": "ما اسم أعلى شلال مائي متواصل غير منقطع في العالم ويقع في فنزويلا؟",
         "a": "شلالات آنجل (سالتو آنجل)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Angel_Falls_Venezuela.jpg/1280px-Angel_Falls_Venezuela.jpg"
+        }
       },
       {
         "uid": "americas_continent_drive_q23_600",
         "points": 600,
         "q": "ما اسم أعلى قمة جبلية في الأمريكتين ونصف الكرة الغربي بالكامل، وتقع في الأرجنتين ضمن جبال الأنديز بارتفاع 6,961 متراً؟",
         "a": "جبل أكونكاغوا (Aconcagua)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Aconcagua.jpg/1280px-Aconcagua.jpg"
+        }
       },
       {
         "uid": "americas_continent_drive_q24_600",
         "points": 600,
         "q": "ما هما الدولتان الحبيستان الوحيدتان في قارة أمريكا الجنوبية؟",
         "a": "بوليفيا وباراغواي",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Bolivia-Paraguay_Locator.svg/1280px-Bolivia-Paraguay_Locator.svg"
+        }
       }
     ]
   },
