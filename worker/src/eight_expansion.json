@@ -16113,28 +16113,44 @@
         "points": 400,
         "q": "ما اسم باني السفن العبقري وصديق راغنار المقرّب الذي صمّم السفن القادرة على الإبحار غرباً نحو إنجلترا؟",
         "a": "فلوكي (Floki)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.looper.com/img/gallery/lines-in-vikings-that-mean-more-than-you-realized/like-loki-the-god-1612188800.jpg"
+        }
       },
       {
         "uid": "series_vikings_drive_q22_400",
         "points": 400,
         "q": "ما اسم الملك الإنجليزي الذي أعدم راغنار لوثبروك برميه في حفرة الأفاعي؟",
         "a": "الملك آيلا ملك نورثمبريا (King Aelle of Northumbria)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://m.media-amazon.com/images/M/MV5BYTQ3NTg5MDItMDFmNC00MjlhLTg3YWQtYzlhZWQ3NDVmZGU0XkEyXkFqcGc%40._V1_FMjpg_UX1000_.jpg"
+        }
       },
       {
         "uid": "series_vikings_drive_q23_600",
         "points": 600,
         "q": "ما اسم الراهب الإنجليزي الذي أسره راغنار خلال الغارة التاريخية على دير «ليندسفارن» عام 793م وأصبح أقرب مستشاريه ومترجمه؟",
         "a": "أثيلستان (Athelstan)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://images.everyeye.it/img-singole/articolo-68547.jpg"
+        }
       },
       {
         "uid": "series_vikings_drive_q24_600",
         "points": 600,
         "q": "من هو المؤلف البريطاني الذي كتب جميع حلقات مسلسل «فايكنغز» الـ 89 بنفسه دون فريق كتّاب، وما اسم الجزيرة التي اكتشفها فلوكي في الموسم الخامس؟",
         "a": "مايكل هيرست (Michael Hirst) — وجزيرة آيسلندا (Iceland)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.looper.com/img/gallery/michael-hirst-creator-of-vikings-exclusive-interview-exclusive/intro-1611752898.jpg"
+        }
       }
     ]
   },
