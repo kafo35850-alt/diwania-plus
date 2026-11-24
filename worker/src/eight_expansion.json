@@ -8032,35 +8032,55 @@
         "points": 600,
         "q": "ما الاسم الأصلي الأول الذي تأسس به نادي أرسنال عام 1886 على يد عمال مصنع الأسلحة الملكي في وولويتش؟",
         "a": "دايل سكوير (Dial Square)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.arsenal.com/sites/default/files/images/royal_arsenal_1888.jpg"
+        }
       },
       {
         "uid": "custom_1795337298619_drive_q21_600",
         "points": 600,
         "q": "من هو المدرب الأسطوري الذي ابتكر خطة «WM» وقاد أرسنال في الثلاثينيات وأسس هوية القميص الأحمر ذي الأكمام البيضاء؟",
         "a": "هيربرت تشابمان (Herbert Chapman)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.arsenal.com/sites/default/files/styles/large_16x9/public/images/chapman_herbert.jpg?itok=NXcpQYqv"
+        }
       },
       {
         "uid": "custom_1795337298619_drive_q22_600",
         "points": 600,
         "q": "من هو اللاعب صاحب الرقم القياسي لأكثر عدد من المشاركات الرسمية في تاريخ أرسنال برصيد 722 مباراة؟",
         "a": "ديفيد أوليري (David O'Leary)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://static.wixstatic.com/media/a6402e_c5db0c97b6014a37ac9a56d1ac1e256c~mv2.jpg/v1/fill/w_980%2Ch_551%2Cal_c%2Cq_85%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/a6402e_c5db0c97b6014a37ac9a56d1ac1e256c~mv2.jpg"
+        }
       },
       {
         "uid": "custom_1795337298619_drive_q23_600",
         "points": 600,
         "q": "ضد أي نادٍ إيطالي فاز أرسنال بلقب كأس الكؤوس الأوروبية عام 1994 في كوبنهاغن بهدف ألان سميث؟",
         "a": "بارما (1-0)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://cdn.mos.cms.futurecdn.net/7fQLMVndVqJqeBzca2BWN5-1200-80.jpg"
+        }
       },
       {
         "uid": "custom_1795337298619_drive_q24_600",
         "points": 600,
         "q": "من هو المهاجم الإنجليزي الذي ظل الهداف التاريخي لأرسنال لمدة 58 عاماً برصيد 178 هدفاً قبل أن يحطم إيان رايت رقمه؟",
         "a": "كليف باستين (Cliff Bastin)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.arsenal.com/sites/default/files/styles/large_16x9/public/gun__1216118274_bastin_cliff.jpg?auto=webp&itok=dzgvzPSm"
+        }
       }
     ]
   },
@@ -8207,35 +8227,55 @@
         "points": 600,
         "q": "من هو رجل الأعمال الذي أسس نادي تشيلسي عام 1905 في حانة «ذا رايزينغ صن» المقابلة لستامفورد بريدج؟",
         "a": "غاس ميرز (Gus Mears)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://img.chelseafc.com/image/upload/f_auto%2Cw_1400%2Cdpr_2.0%2Cq_90/editorial/news/2020/03/stamford-bridge-old-1905.jpg"
+        }
       },
       {
         "uid": "custom_1795337528173_drive_q21_600",
         "points": 600,
         "q": "من هو اللاعب صاحب الرقم القياسي لأكثر عدد من المشاركات الرسمية في تاريخ تشيلسي برصيد 795 مباراة؟",
         "a": "رون هاريس (Ron Harris)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://res.cloudinary.com/chelsea-production/image/upload/c_fit%2Ch_630%2Cw_1200/v1/marketing/email-campaigns/2019/5/Ron-Harris-460x445"
+        }
       },
       {
         "uid": "custom_1795337528173_drive_q22_600",
         "points": 600,
         "q": "ضد أي نادٍ حقق تشيلسي أول لقب أوروبي في تاريخه (كأس الكؤوس الأوروبية عام 1971) بعد مباراة إعادة في أثينا؟",
         "a": "ريال مدريد (تعادلا 1-1 ثم فاز تشيلسي 2-1 في الإعادة)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://img.chelseafc.com/image/upload/f_auto%2Cw_1400%2Cdpr_2.0%2Cq_90/cfc/news/latestnews/15/7/weller-osgood-1971-real-madrid-athens-PA-18979354.jpg"
+        }
       },
       {
         "uid": "custom_1795337528173_drive_q23_600",
         "points": 600,
         "q": "من هو المهاجم الإنجليزي الذي ظل الهداف التاريخي لتشيلسي برصيد 202 هدف لنحو 43 عاماً قبل أن يحطم لامبارد رقمه عام 2013؟",
         "a": "بوبي تامبلينغ (Bobby Tambling)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://img.chelseafc.com/image/upload/f_auto%2Cw_1440%2Cc_fill%2Cg_faces%2Cdpr_2.0%2Cq_90/editorial/news/2018/9/tambling-931468774.jpg"
+        }
       },
       {
         "uid": "custom_1795337528173_drive_q24_600",
         "points": 600,
         "q": "في أي عام فاز تشيلسي بلقبه الأول في كأس الاتحاد الإنجليزي بعد مباراة إعادة شهيرة أمام ليدز يونايتد في أولد ترافورد؟",
         "a": "عام 1970 (فاز 2-1 بعد التعادل 2-2 في ويمبلي)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://prints.chelseafc.com/sq/99/chelseas-ron-harris-lifts-fa-cup-replay-win-vs-8381994.jpg.webp"
+        }
       }
     ]
   },
@@ -8382,35 +8422,55 @@
         "points": 600,
         "q": "من هو رجل الأعمال ومالك ملعب أنفيلد الذي أسس نادي ليفربول عام 1892 بعد خلافه المالي مع نادي إيفرتون؟",
         "a": "جون هولدينغ (John Houlding)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.thisisanfield.com/wp-content/uploads/PA-505398-540x450.jpg"
+        }
       },
       {
         "uid": "custom_1795337700525_drive_q21_600",
         "points": 600,
         "q": "من هو اللاعب صاحب الرقم القياسي لأكثر عدد من المشاركات الرسمية في تاريخ ليفربول برصيد 857 مباراة؟",
         "a": "إيان كالاغان (Ian Callaghan)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://s.yimg.com/ny/api/res/1.2/D7CJ1qbg_XdOZIltVTbnKg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD04Mjk7Y2Y9d2VicA--/https%3A/media.zenfs.com/en/fourfourtwo_376/2d98ab5926f7b274d447320c9ad2b4d3"
+        }
       },
       {
         "uid": "custom_1795337700525_drive_q22_600",
         "points": 600,
         "q": "في أي عام تُوّج ليفربول بأول لقب دوري إنجليزي في تاريخه تحت قيادة المدرب توم واتسون؟",
         "a": "عام 1901 (موسم 1900–1901)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://backend.liverpoolfc.com/sites/default/files/styles/xl/public/2025-12/Tom-Watson-feature-011225_5f39c50e3a3dd5a14608ccaff7c10ff1.webp?itok=voA1rtbH"
+        }
       },
       {
         "uid": "custom_1795337700525_drive_q23_600",
         "points": 600,
         "q": "من هو حارس ليفربول الذي ابتكر حركة «أرجل السباغيتي» الشهيرة أولاً في ركلات الترجيح بنهائي كأس أوروبا 1984 أمام روما؟",
         "a": "بروس غروبيلار (Bruce Grobbelaar)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://library.sportingnews.com/2021-08/bruce-grobelaar-1984-roma-liverpool_1bq6fs3p3j64x1tznsv7uvppcz.jpg"
+        }
       },
       {
         "uid": "custom_1795337700525_drive_q24_600",
         "points": 600,
         "q": "ما اسم النادي الإسباني الذي تغلب عليه ليفربول بنتيجة 5-4 بالهدف الذهبي في نهائي كأس الاتحاد الأوروبي 2001 في دورتموند؟",
         "a": "ديبورتيفو ألافيس (Deportivo Alavés)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://editorial.uefa.com/resources/025e-0fbc2318d868-48eeffe50ffa-1000/delfi_geli_and_his_alaves_team-mates_can_only_watch_as_the_ninth_goal_of_the_game_is_scored.jpeg"
+        }
       }
     ]
   },
@@ -8557,35 +8617,55 @@
         "points": 600,
         "q": "ما الاسم الأصلي الذي تأسس به نادي مانشستر سيتي عام 1880 قبل أن يتحول إلى «أردويك» ثم «مانشستر سيتي» عام 1894؟",
         "a": "سانت ماركس (ويست غورتون) — St. Mark's (West Gorton)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://nbcsports.brightspotcdn.com/dims4/default/56fc3ee/2147483647/strip/true/crop/902x504%2B0%2B0/resize/900x503%21/quality/90/?url=https%3A%2F%2Fnbc-sports-production-nbc-sports.s3.us-east-1.amazonaws.com%2Fbrightspot%2Fd1%2F66%2Fb757c4fb47c1f34e66b52e7fb8de%2Ffounders-plaque.png"
+        }
       },
       {
         "uid": "custom_1795337916572_drive_q21_600",
         "points": 600,
         "q": "من هو حارس مرمى مانشستر سيتي الألماني الذي أكمل آخر 17 دقيقة من نهائي كأس الاتحاد الإنجليزي 1956 وهو مصاب بكسر في الرقبة؟",
         "a": "بيرت تراوتمان (Bert Trautmann)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://cdn.mos.cms.futurecdn.net/YJB7RDvMnDo4DaNo9fqV5W.jpg"
+        }
       },
       {
         "uid": "custom_1795337916572_drive_q22_600",
         "points": 600,
         "q": "ما اسم ثنائي المدربين التاريخي الذي قاد مانشستر سيتي للقب الدوري وكأس الكؤوس في أواخر الستينيات؟",
         "a": "جو ميرسر ومالكولم أليسون (Joe Mercer & Malcolm Allison)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.mediastorehouse.com/sq/767/manchester-city-team-celebrate-winning-1968-21749186.jpg.webp"
+        }
       },
       {
         "uid": "custom_1795337916572_drive_q23_600",
         "points": 600,
         "q": "من هو اللاعب صاحب الرقم القياسي لأكثر عدد من المشاركات الرسمية في تاريخ مانشستر سيتي (680 مباراة بين 1957 و1975)؟",
         "a": "ألان أوكس (Alan Oakes)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://shop.memorylane.co.uk/sq/767/alan-oakes-manchester-city-football-player-21583192.jpg.webp"
+        }
       },
       {
         "uid": "custom_1795337916572_drive_q24_600",
         "points": 600,
         "q": "في أي موسم حقق مانشستر سيتي أول لقب دوري إنجليزي في تاريخه ثم هبط في الموسم التالي مباشرة رغم كونه الأقوى هجومياً؟",
         "a": "موسم 1936–1937 (وهبط في 1937–1938)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://prints.colorsport.co.uk/p/210/manchester-city-1937-division-champions-team-5772184.jpg.webp"
+        }
       }
     ]
   },
