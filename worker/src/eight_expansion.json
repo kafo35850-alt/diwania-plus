@@ -15324,21 +15324,33 @@
         "points": 400,
         "q": "ما اسم الأخت التوأم لـ «فيبي بوفيه» التي كانت علاقتها بها متوترة طوال المسلسل؟",
         "a": "أورسولا بوفيه (Ursula Buffay)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://eu-images.contentstack.com/v3/assets/blt949ea8e16e463049/blta6e6a671f998cbb9/67bf03fabff11ab7b739b216/friends-lisa-kudrow-phoebe-ursula.png"
+        }
       },
       {
         "uid": "series_friends_drive_q23_600",
         "points": 600,
         "q": "ما الاسم الأوسط الكامل لـ «تشاندلر بينغ» الذي ظلّ يخجل منه طوال المسلسل، وما اسم المجلة التي كانت تصل إلى شقته بالبريد باسم «Miss Chanandler Bong»؟",
         "a": "الاسم الأوسط: مورييل (Muriel) — والمجلة هي TV Guide",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://cdn.tvgag.com/content/quotes/3547_500.jpg"
+        }
       },
       {
         "uid": "series_friends_drive_q24_600",
         "points": 600,
         "q": "ما اسم الممثل الراحل الذي جسّد شخصية «غانثر» (مدير مقهى سنترال بيرك)، وما الكلمة الهولندية التي نعت بها روس غيلر في إحدى الحلقات وتعني «حمار»؟",
         "a": "جيمس مايكل تايلر (James Michael Tyler) — والكلمة هي «Ezel»",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://hips.hearstapps.com/digitalspyuk.cdnds.net/14/37/ustv-james-michael-tyler-2.jpg"
+        }
       }
     ]
   },
