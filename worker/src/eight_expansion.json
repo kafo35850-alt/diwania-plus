@@ -15975,7 +15975,11 @@
         "points": 400,
         "q": "في أي عام ميلادي عُرض الموسم الأول من مسلسل «طاش ما طاش» لأول مرة على شاشة التلفزيون السعودي؟",
         "a": "عام 1993م (رمضان 1413هـ)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://images.plex.tv/photo?size=large-1280&url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2Fr4wQfo8vZxOdX1rgItMCvQ2rGzS.jpg"
+        }
       },
       {
         "uid": "series_tash_ma_tash_drive_q22_400",
