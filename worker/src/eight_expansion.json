@@ -5177,14 +5177,22 @@
         "points": 200,
         "q": "في أي جهة جغرافية من المملكة العربية السعودية تقع منطقة جازان؟",
         "a": "الجنوب الغربي (على ساحل البحر الأحمر)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Jazan_Region_-_Provinces_labels_v2.svg/1280px-Jazan_Region_-_Provinces_labels_v2.svg.png"
+        }
       },
       {
         "uid": "custom_1795333251481_drive_q9_200",
         "points": 200,
         "q": "ما اسم الفاكهة الاستوائية الأشهر التي تُقيم لها جازان مهرجاناً سنوياً كبيراً وتشتهر بجودتها؟",
         "a": "المانجو",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "/eight-media/7dc742622f62b2c05592.webp"
+        }
       },
       {
         "uid": "custom_1795333251481_drive_q10_200",
@@ -5201,21 +5209,33 @@
         "points": 200,
         "q": "ما اسم الزهرة البيضاء العطرية الشهيرة في جازان التي تُصنع منها العقود وتُعد رمزاً للأفراح والضيافة؟",
         "a": "الفل الجازاني",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://portalcdn.spa.gov.sa/backend/original/202410/SKQ8ZRYfWK3SniCjniYWeSIwMHekGxLdfKaCqGcl.jpg"
+        }
       },
       {
         "uid": "custom_1795333251481_drive_q12_200",
         "points": 200,
         "q": "ما اسم نوع القهوة الجبلية الفاخرة التي تشتهر بها مرتفعات جازان وسُجّلت في التراث الثقافي لليونسكو؟",
         "a": "البن الخولاني السعودي",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://portalcdn.spa.gov.sa/backend/original/202201/f95cbddb8ee57e99e598d6b8392ba78a.jpeg"
+        }
       },
       {
         "uid": "custom_1795333251481_drive_q13_400",
         "points": 400,
         "q": "ما اسم الأكلة الشعبية الجازانية الشهيرة المصنوعة من فتيت الخبز والموز المهروس والسمن والعسل؟",
         "a": "المرسة",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://portalcdn.spa.gov.sa/backend/original/202406/izMJRRAVj56uv9cecw1KC67AinHNISM9Cr27WwJY.jpg"
+        }
       },
       {
         "uid": "custom_1795333251481_drive_q14_400",
@@ -5232,28 +5252,44 @@
         "points": 400,
         "q": "ما اسم الوادي الشهير في محافظة الريث بمنطقة جازان الذي يشتهر بشلالاته وجدرانه الصخرية الشاهقة؟",
         "a": "وادي لجب",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://portalcdn.spa.gov.sa/backend/original/202410/h7w7Ao0fGcwQS1TAW1Uf6Plemhsv6y5G5KJ4uPhu.jpg"
+        }
       },
       {
         "uid": "custom_1795333251481_drive_q16_400",
         "points": 400,
         "q": "ما اسم المهرجان السنوي البحري التراثي الشهير في جزر فرسان لصيد الأسماك الموسمية؟",
         "a": "مهرجان الحريد",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://portalcdn.spa.gov.sa/backend/original/202405/R1t8eO4dREouBHX2ppynRXAv64L1mgS5jfp2vFmT.jpg"
+        }
       },
       {
         "uid": "custom_1795333251481_drive_q17_400",
         "points": 400,
         "q": "ما اسم الفنين الشعبيين التراثيين الأشهر في منطقة جازان اللذين يُؤديان بالسيوف والإيقاعات الحماسية؟",
         "a": "السيف والعزاوي",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://portalcdn.spa.gov.sa/backend/original/202412/GTd4HB5hT8NyuCVPH1uf84nhX2YBdaUBJ7xPshfU.jpg"
+        }
       },
       {
         "uid": "custom_1795333251481_drive_q18_400",
         "points": 400,
         "q": "ما اسم الميناء البحري التجاري الرئيسي في منطقة جازان الذي يُعد ثالث موانئ المملكة على البحر الأحمر؟",
         "a": "ميناء جازان",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://portalcdn.spa.gov.sa/backend/original/202505/m0l2ma5Q5b5L8V6nu9ehTZmqMQmwnLbCWtRMWSbu.jpg"
+        }
       },
       {
         "uid": "custom_1795333251481_drive_q19_600",
