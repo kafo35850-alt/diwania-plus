@@ -15097,7 +15097,15 @@
         "points": 200,
         "q": "ما أشهر كتاب طُبع مطبعيًا بحروف غوتنبرغ المعدنية المتحركة في القرن الخامس عشر؟",
         "a": "إنجيل غوتنبرغ (الكتاب المقدس ذو الـ42 سطرًا)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "qm": {
+          "t": "image",
+          "u": "/eight-media/d1c9dfd38f3ffdb30223.webp"
+        },
+        "am": {
+          "t": "image",
+          "u": "/eight-media/369b35cefe29b0ef183f.webp"
+        }
       },
       {
         "uid": "great_inventions_drive_q21_400",
@@ -15111,7 +15119,15 @@
         "points": 400,
         "q": "من قاد فريق معهد ستانفورد للأبحاث الذي ابتكر فأرة الحاسوب، وصنع زميله بيل إنغليش نموذجها الخشبي الأول؟",
         "a": "دوغلاس إنجلبارت",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "qm": {
+          "t": "image",
+          "u": "/eight-media/999631f1f02ef7130392.webp"
+        },
+        "am": {
+          "t": "video",
+          "u": "/eight-media/b3b36024fb9fcdf9a757.mp4"
+        }
       },
       {
         "uid": "great_inventions_drive_q23_600",
@@ -19749,7 +19765,15 @@
         "points": 400,
         "q": "ما المركبة التي هبطت على تيتان في يناير 2005؟",
         "a": "هويغنز",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "qm": {
+          "t": "video",
+          "u": "/eight-media/38dd1156fa8614684e55.mp4"
+        },
+        "am": {
+          "t": "image",
+          "u": "/eight-media/3a2607120d93261cf8d7.webp"
+        }
       },
       {
         "uid": "space_planets_drive_q22_400",
