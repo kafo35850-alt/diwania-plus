@@ -13587,35 +13587,55 @@
         "points": 200,
         "q": "ما اسم البركان في أرض موردور الذي يجب إلقاء الخاتم الأوحد فيه لتدميره نهائياً؟",
         "a": "جبل الهلاك (Mount Doom)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://blog.kakaocdn.net/dna/JZk55/btsKUG2Pyb5/AAAAAAAAAAAAAAAAAAAAABDlVH5KxYS084DhZkEbE_npHSvWFFoBipz04P15ZFFS/img.gif?allow_ip=&allow_referer=&credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&signature=G4e31A9QThGnk87QDyMpyEUNYcc%3D"
+        }
       },
       {
         "uid": "movies_lotr_drive_q21_400",
         "points": 400,
         "q": "ما الاسم الأصلي لشخصية «غولوم» قبل أن يستحوذ عليه الخاتم الأوحد ويفسده؟",
         "a": "سميغول (Sméagol)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://images.wallpapersden.com/image/download/gollum-the-lord-of-the-rings_a21qa22UmZqaraWkpJRnamtlrWZsZWU.jpg"
+        }
       },
       {
         "uid": "movies_lotr_drive_q22_400",
         "points": 400,
         "q": "من هو المخرج النيوزيلندي الذي أخرج ثلاثية أفلام «سيد الخواتم»؟",
         "a": "بيتر جاكسون (Peter Jackson)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://m.media-amazon.com/images/M/MV5BMTQzMDU2MzUzMF5BMl5BanBnXkFtZTcwMDQ2MTk2Mw%40%40._V1_.jpg"
+        }
       },
       {
         "uid": "movies_lotr_drive_q23_600",
         "points": 600,
         "q": "ما اسم السيف الأسطوري الذي أُعيد تشكيله من شظايا سيف «نارسيل» وسُلّم إلى أراغورن في الجزء الثالث؟",
         "a": "أندوريل (Andúril — لهب الغرب)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://s2.afisha.ru/mediastorage/9f/a4/1de218c19abd4a2e85959037a49f.jpg"
+        }
       },
       {
         "uid": "movies_lotr_drive_q24_600",
         "points": 600,
         "q": "كم عدد جوائز الأوسكار التي حصدها الجزء الثالث «عودة الملك» (2003) ليحقق رقماً قياسياً تاريخياً بفوزه بجميع الترشيحات التي رُشّح لها؟",
         "a": "11 جائزة أوسكار (من أصل 11 ترشيحاً بنسبة فوز 100%)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://media.vanityfair.com/photos/530e7a82a2618a8b1d0000bb/master/w_2560%2Cc_limit/1393457795361_lotr-bestpicture3029107.jpg"
+        }
       }
     ]
   },
@@ -13636,35 +13656,55 @@
         "points": 200,
         "q": "كم عدد أحجار اللانهاية (Infinity Stones) التي سعى ثانوس لجمعها في قفازه؟",
         "a": "6 أحجار",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://imgix.bustle.com/inverse/5d/8e/bc/f5/6f3c/4188/b53b/59e2447e6592/avengers-endgame-infinity-war-snap-iron-man-thanos.jpeg?crop=faces&fit=crop&fm=jpg&h=675&w=1200"
+        }
       },
       {
         "uid": "movies_marvel_drive_q21_400",
         "points": 400,
         "q": "ما اسم مطرقة «ثور» الأسطورية، وما اسم الفأس التي صُنعت له لاحقاً في فيلم «Infinity War»؟",
         "a": "المطرقة: ميولنير (Mjolnir) — والفأس: ستورمبريكر (Stormbreaker)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://images.hdqwalls.com/download/thor-avengers-infinity-war-1c-2560x1440.jpg"
+        }
       },
       {
         "uid": "movies_marvel_drive_q22_400",
         "points": 400,
         "q": "ما اسم الكوكب الذي كان يحتضن «حجر الروح» (Soul Stone) وتطلّب تضحية غامورا ثم ناتاشا رومانوف؟",
         "a": "فورمير (Vormir)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://imgix.bustle.com/uploads/image/2021/5/24/0c059966-3e15-4c14-a9b6-183d39ec28ac-avengers-infinity-war-red-skull-future-infinity-stones-1126801-1280x0.jpeg"
+        }
       },
       {
         "uid": "movies_marvel_drive_q23_600",
         "points": 600,
         "q": "ما اسم المسبك النجمي (النجم النيوتروني) الذي صنع فيه القزم «إيتري» قفاز اللانهاية لثانوس وفأس ستورمبريكر لثور؟",
         "a": "نيدافيلير (Nidavellir)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://hips.hearstapps.com/hmg-prod/images/eitri-peter-dinklage-infinity-war-1587994321.jpg"
+        }
       },
       {
         "uid": "movies_marvel_drive_q24_600",
         "points": 600,
         "q": "ما رقم الكون الرئيسي الذي تقع فيه أحداث عالم مارفل السينمائي الأساسي كما سُمّي رسمياً في «Doctor Strange in the Multiverse of Madness»؟",
         "a": "الأرض-616 (Earth-616)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://d2d7ho1ae66ldi.cloudfront.net/ArquivoNoticias/a4fb25c9-63fd-11ec-aa6e-9587410378a2/chrome_2021-12-22_13-17-15.png"
+        }
       }
     ]
   },
@@ -13685,35 +13725,55 @@
         "points": 200,
         "q": "أيّ كبسولة اختارها نيو ليرى الحقيقة ويستيقظ في العالم الواقعي: الحمراء أم الزرقاء؟",
         "a": "الحمراء (The Red Pill)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://gcdn.emol.cl/cine/files/2020/08/matrix-significado-pildora-roja.jpg"
+        }
       },
       {
         "uid": "movies_matrix_drive_q21_400",
         "points": 400,
         "q": "ما اسم السفينة الحوامة التي يقودها «مورفيوس» وطاقمه في العالم الحقيقي؟",
         "a": "نبوخذ نصر (Nebuchadnezzar)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.slashfilm.com/img/gallery/the-coolest-spaceships-in-sci-fi-movie-history/the-nebuchadnezzar-1776496678.jpg"
+        }
       },
       {
         "uid": "movies_matrix_drive_q22_400",
         "points": 400,
         "q": "ما اسم العميل الرقمي الذي يمثل العدو الرئيسي لنيو وجسّد دوره هوغو ويفينغ؟",
         "a": "العميل سميث (Agent Smith)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://uploads.maisgoias.com.br/2021/12/6f1ef072-agente-smith.jpg"
+        }
       },
       {
         "uid": "movies_matrix_drive_q23_600",
         "points": 600,
         "q": "ما اسم آخر مدينة بشرية تحت الأرض في العالم الحقيقي التي تقاوم الآلات في ثلاثية «الماتريكس»؟",
         "a": "زايون (Zion)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.looper.com/img/gallery/the-most-confusing-moments-in-the-matrix-trilogy-explained/why-does-zion-exist-at-all-in-the-matrix-trilogy-1566843159.jpg"
+        }
       },
       {
         "uid": "movies_matrix_drive_q24_600",
         "points": 600,
         "q": "في فيلم «الماتريكس» (1999)، ما عنوان الكتاب الفلسفي الشهير لجان بودريار الذي أخفى فيه توماس أندرسون أقراصه الرقمية، وما اسم تقنية التصوير البطيء بزاوية 360 درجة التي اشتهر بها الفيلم؟",
         "a": "كتاب «المحاكاة والاصطناع» (Simulacra and Simulation) — وتقنية «زمن الرصاصة» (Bullet Time)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://107cine.cdn.cinehello.com/20220120/uploads/weixin/20Jan2022112231781.jpg"
+        }
       }
     ]
   },
@@ -13734,35 +13794,55 @@
         "points": 200,
         "q": "ما اسم الثقب الأسود العملاق الذي تدور حوله أحداث فيلم «Interstellar»؟",
         "a": "غارغانتوا (Gargantua)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://aip.brightspotcdn.com/dims4/default/3a4811c/2147483647/strip/true/crop/619x348%2B56%2B0/resize/1440x810%21/quality/90/?url=https%3A%2F%2Fk1-prod-aip.s3.us-east-2.amazonaws.com%2Fbrightspot%2Fb3%2F8b%2F1f1c1f0f989f1dac7e11d9293b16%2Finterstellar-top-0.jpg"
+        }
       },
       {
         "uid": "movies_nolan_drive_q21_400",
         "points": 400,
         "q": "ما اسم الكوكب المائي في فيلم «Interstellar» الذي تعادل فيه الساعة الواحدة سبع سنوات على كوكب الأرض؟",
         "a": "كوكب ميلر (Miller's Planet)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://cdn.mos.cms.futurecdn.net/97MowJALBchugBomPdAVgJ-1200-80.jpg"
+        }
       },
       {
         "uid": "movies_nolan_drive_q22_400",
         "points": 400,
         "q": "من هو الموسيقار الألماني الذي ألّف الموسيقى التصويرية لكلٍّ من «Inception» و«Interstellar» وثلاثية «The Dark Knight»؟",
         "a": "هانز زيمر (Hans Zimmer)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.musyno.com/img/composer/cover/2021-02-01_salinia_portrait_hans-zimmer.jpg"
+        }
       },
       {
         "uid": "movies_nolan_drive_q23_600",
         "points": 600,
         "q": "من هو عالم الفيزياء النظرية الحائز على جائزة نوبل الذي عمل مستشاراً علمياً ومنتجاً تنفيذياً لفيلم «Interstellar» ووضع معادلات محاكاة الثقب الأسود غارغانتوا؟",
         "a": "كيب ثورن (Kip Thorne)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://3.bp.blogspot.com/-1OuqOk2-jHk/Wt5wobxXZkI/AAAAAAAABEM/ta0n_PDRSeoNwflea9y09Z7_y-QMoBvEgCLcBGAs/s1600/kip-thorne.2.jpg"
+        }
       },
       {
         "uid": "movies_nolan_drive_q24_600",
         "points": 600,
         "q": "ما عنوان أول فيلم روائي طويل أخرجه كريستوفر نولان عام 1998 بالأبيض والأسود وبميزانية لا تتجاوز 6,000 دولار؟",
         "a": "Following (التتبّع / المطاردة)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://cdn.craft.cloud/26ed9c78-feb7-4ee6-8ddf-262fd7bafb2d/assets/tco/images/2017_06_following-1998.jpg?fit=crop&height=630&quality=82&s=Ejk3T5STISKz2Zte1gejt-kpzsFR0p7rPwGkOYvf6rk&width=1200"
+        }
       }
     ]
   },
