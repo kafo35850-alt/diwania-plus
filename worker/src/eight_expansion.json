@@ -15201,7 +15201,11 @@
         "points": 400,
         "q": "ما عنوان الأغنية الكوميدية الأشهر التي كانت تغنيها «فيبي بوفيه» على الغيتار في المقهى؟",
         "a": "Smelly Cat",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://pbs.twimg.com/media/CuqL1LtWAAEM7NP.jpg"
+        }
       },
       {
         "uid": "series_friends_drive_q22_400",
