@@ -2679,12 +2679,9 @@
       {
         "uid": "country_bahrain_drive_q19_200",
         "points": 200,
-        "q": "ما عاصمة مملكة البحرين؟",
-        "a": "المنامة",
-        "am": {
-          "t": "image",
-          "u": "/media/med_seed_p_686a33352ca6"
-        }
+        "q": "ما اسم الجزيرة الأكبر مساحةً في مملكة البحرين، والتي تقع عليها العاصمة المنامة؟",
+        "a": "جزيرة البحرين",
+        "useCategoryPoster": true
       },
       {
         "uid": "country_bahrain_drive_q20_200",
