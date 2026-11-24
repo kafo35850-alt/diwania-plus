@@ -4484,14 +4484,22 @@
         "points": 200,
         "q": "من هو الشاعر والفارس العربي الجاهلي الشهير الذي ارتبط اسمه بحائل وأصبح مضرب المثل في الكرم؟",
         "a": "حاتم الطائي",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "/eight-media/d3820838ec9be2526a2b.webp"
+        }
       },
       {
         "uid": "custom_1795332651982_drive_q9_200",
         "points": 200,
         "q": "ما اسم السباق الصحراوي الدولي الشهير الذي تستضيفه صحراء النفود الكبير في حائل سنوياً؟",
         "a": "رالي حائل الدولي",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/Hail_Rally_(2023).jpg?width=1280"
+        }
       },
       {
         "uid": "custom_1795332651982_drive_q10_200",
@@ -4508,21 +4516,33 @@
         "points": 200,
         "q": "ما اللقب السياحي الشهير لمدينة حائل؟",
         "a": "عروس الشمال",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/%D8%AD%D8%A7%D8%A6%D9%84_-_panoramio.jpg?width=1280"
+        }
       },
       {
         "uid": "custom_1795332651982_drive_q12_200",
         "points": 200,
         "q": "ما اسم الصحراء الرملية الحمراء الكبرى التي تمتد شمال منطقة حائل؟",
         "a": "صحراء النفود الكبير",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/Al-Nafud_Desert,_Saudi_Arabia_(MODIS_2026-01-17).jpg?width=1280"
+        }
       },
       {
         "uid": "custom_1795332651982_drive_q13_400",
         "points": 400,
         "q": "ما اسم القصر الطيني التاريخي ذو الطابقين في وسط حائل الذي بُني عام 1360هـ في عهد الملك عبدالعزيز؟",
         "a": "قصر القشلة",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "/eight-media/24cd2e55cfe5c74175d2.webp"
+        }
       },
       {
         "uid": "custom_1795332651982_drive_q14_400",
@@ -4539,28 +4559,44 @@
         "points": 400,
         "q": "ما اسم الحلوى التراثية الحائلية المصنوعة من أقراص دقيق البر والسمن والعسل والتي اعتُمدت الطبق الوطني للحلويات السعودية؟",
         "a": "المقشوش",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/%D8%B7%D8%A8%D9%82_%D8%A7%D9%84%D9%85%D9%82%D8%B4%D9%88%D8%B4_%D8%A7%D9%84%D8%B3%D8%B9%D9%88%D8%AF%D9%8A.jpg?width=1280"
+        }
       },
       {
         "uid": "custom_1795332651982_drive_q16_400",
         "points": 400,
         "q": "ما اسم القصر التاريخي الشهير في حائل الذي كان مقر إمارة آل رشيد لعدة عقود؟",
         "a": "قصر برزان",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/Barzan_Palace.jpg?width=1280"
+        }
       },
       {
         "uid": "custom_1795332651982_drive_q17_400",
         "points": 400,
         "q": "ما اسم الفن الشعبي التراثي الأشهر في حائل الذي يُؤدى بالدفوف والصفوف والقصائد العذبة؟",
         "a": "السامري الحائلي",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/%D8%A7%D8%A8%D9%86_%D8%B3%D9%86%D9%8A%D9%86%D8%A9_%D8%A7%D9%84%D8%B3%D8%A7%D9%85%D8%B1%D9%8A.png?width=1280"
+        }
       },
       {
         "uid": "custom_1795332651982_drive_q18_400",
         "points": 400,
         "q": "ما اسم الجبل الشهير في مدينة جبة بمنطقة حائل الذي يضم أقدم النقوش الصخرية الثمودية والنيوليتية؟",
         "a": "جبل أم سنمان",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/Petroglyph_of_the_king,_Jubbah_rock_art_site,_Saudi_Arabia.jpg?width=1280"
+        }
       },
       {
         "uid": "custom_1795332651982_drive_q19_600",
