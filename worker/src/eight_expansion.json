@@ -2516,35 +2516,55 @@
         "points": 200,
         "q": "ما اسم المجرى المائي الذي يتكوّن من التقاء نهري دجلة والفرات في جنوب العراق قبل أن يصبّ في الخليج العربي؟",
         "a": "شط العرب",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://cloudfront-eu-central-1.images.arcpublishing.com/thenational/SAIICCRDHNA77LB5VST2MYHBJU.jpg"
+        }
       },
       {
         "uid": "country_iraq_drive_q21_400",
         "points": 400,
         "q": "ما اسم المدرسة العباسية التاريخية التي أنشأها الخليفة المستنصر بالله في بغداد عام 1233م على ضفاف نهر دجلة؟",
         "a": "المدرسة المستنصرية",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/%D8%A7%D9%84%D9%85%D8%AF%D8%B1%D8%B3%D8%A9_%D8%A7%D9%84%D9%85%D8%B3%D8%AA%D9%86%D8%B5%D8%B1%D9%8A%D8%A9_%D9%81%D9%8A_%D8%A8%D8%BA%D8%AF%D8%A7%D8%AF_%281%29.jpg/640px-%D8%A7%D9%84%D9%85%D8%AF%D8%B1%D8%B3%D8%A9_%D8%A7%D9%84%D9%85%D8%B3%D8%AA%D9%86%D8%B5%D8%B1%D9%8A%D8%A9_%D9%81%D9%8A_%D8%A8%D8%BA%D8%AF%D8%A7%D8%AF_%281%29.jpg"
+        }
       },
       {
         "uid": "country_iraq_drive_q22_400",
         "points": 400,
         "q": "ما اسم القمة الجبلية الواقعة في محافظة أربيل التي تُعد أعلى قمة في العراق بارتفاع 3,611 متراً؟",
         "a": "قمة شيخا دار",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://upload.wikimedia.org/wikipedia/commons/e/e5/Cheekha_Dar_seen_from_Halgurd.jpg"
+        }
       },
       {
         "uid": "country_iraq_drive_q23_600",
         "points": 600,
         "q": "ما اسم الملك السومري الذي أسّس سلالة أور الثالثة وبنى زقورة أور وأصدر أقدم شريعة قانونية مكتوبة وصلت إلينا قبل شريعة حمورابي بنحو ثلاثة قرون؟",
         "a": "أور نمو",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://content-historia.nationalgeographic.com.es/medio/2023/09/14/justicia_74c174b7_230914160720_800x553.jpg"
+        }
       },
       {
         "uid": "country_iraq_drive_q24_600",
         "points": 600,
         "q": "ما اسم المدينة الأثرية في محافظة نينوى التي كانت عاصمة مملكة عربية قديمة وصمدت أمام حصار الإمبراطورين الرومانيين تراجان وسبتيموس سيفيروس؟",
         "a": "مدينة الحضر",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://madainproject.com/content/media/collect/hatra_667291.jpg"
+        }
       }
     ]
   },
@@ -2565,35 +2585,55 @@
         "points": 200,
         "q": "ما عاصمة المملكة الأردنية الهاشمية؟",
         "a": "عمّان",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://y3ni.com/web-media/0/src/c5fe33451686d44778a5a6129413c2ab2e66bb2a.jpg"
+        }
       },
       {
         "uid": "country_jordan_drive_q21_400",
         "points": 400,
         "q": "ما اسم الوادي الصحراوي الشهير في جنوب الأردن المعروف بـ «وادي القمر» والمدرج على قائمة التراث العالمي لليونسكو؟",
         "a": "وادي رم",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://dcontent.inviacdn.net/shared/img/web-830/2022/10/7/m0/1528529.jpg"
+        }
       },
       {
         "uid": "country_jordan_drive_q22_400",
         "points": 400,
         "q": "ما اسم الحضارة العربية القديمة التي اتخذت من البتراء عاصمةً لمملكتها؟",
         "a": "الأنباط (مملكة الأنباط)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.ontheluce.com/wp-content/uploads/2023/10/one-day-in-petra-treasury-1440x900.jpg.webp"
+        }
       },
       {
         "uid": "country_jordan_drive_q23_600",
         "points": 600,
         "q": "ما اسم أعلى قمة جبلية في المملكة الأردنية الهاشمية (بارتفاع نحو 1854 متراً فوق سطح البحر)؟",
         "a": "جبل أم الدامي",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.pelago.com/img/products/JO-Jordan/wadi-rum-mountain-hike-umm-ad-dami-highest-point-of-jordan-jeep-tour-lunch/d881cb50-0470-4aac-8ff6-706950817a5f_wadi-rum-mountain-hike-umm-ad-dami-highest-point-of-jordan-jeep-tour-lunch-xlarge.jpg"
+        }
       },
       {
         "uid": "country_jordan_drive_q24_600",
         "points": 600,
         "q": "ما اسم القصر الأموي الصحراوي في البادية الأردنية الذي اشتهر بلوحاته الجدارية الفريدة وقبته الفلكية وأُدرج على قائمة التراث العالمي لليونسكو عام 1985؟",
         "a": "قُصير عَمرة",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://images.lonelyplanetitalia.it/uploads/shutterstock-260834981?p=slider&q=80&s=dc0a8809d28c88717b50947494b455e3"
+        }
       }
     ]
   },
@@ -2614,35 +2654,55 @@
         "points": 200,
         "q": "ما اسم العملة الرسمية لدولة الكويت؟",
         "a": "الدينار الكويتي",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.banknoteworld.org/var/images/product/800.800/newimage_56wjp0.jpg"
+        }
       },
       {
         "uid": "country_kuwait_drive_q21_400",
         "points": 400,
         "q": "ما أكبر جزيرة في دولة الكويت من حيث المساحة؟",
         "a": "جزيرة بوبيان",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.saaih.com/files/styles/gallery/public/gallery/%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA/%D8%A8%D9%88%D8%A8%D9%8A%D8%A7%D9%86%202.jpeg"
+        }
       },
       {
         "uid": "country_kuwait_drive_q22_400",
         "points": 400,
         "q": "في أي عام أُلغيت اتفاقية الحماية البريطانية وأُعلن استقلال دولة الكويت؟",
         "a": "عام 1961 (19 يونيو 1961)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.kuna.net.kw/NewsPictures/2016/2/24/54b48a27-4976-4886-b60b-0032fe62cac3.jpg"
+        }
       },
       {
         "uid": "country_kuwait_drive_q23_600",
         "points": 600,
         "q": "ما اسم الجزيرة الكويتية التي استوطنتها الحضارة الدلمونية ثم الإغريقية وأطلق عليها الإغريق اسم «إيكاروس»؟",
         "a": "جزيرة فيلكا",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://3.bp.blogspot.com/-JVzoDB_Eyp0/WHGCQQdpi8I/AAAAAAAALeA/bUwhRvZrvQILRR2DbaMlFvi-9ZRY6rR8ACLcB/s1600/64NbYO-2fduCXxvbBOw8yYWA-3d-3d_BigProductImage.jpg"
+        }
       },
       {
         "uid": "country_kuwait_drive_q24_600",
         "points": 600,
         "q": "في أي عام وُقّعت المعاهدة الأنجلو-كويتية (معاهدة الحماية) بين الشيخ مبارك الصباح وبريطانيا؟",
         "a": "عام 1899 (23 يناير 1899)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://cdn.shopify.com/s/files/1/2785/2654/products/p47480_6d6b9b09-17e1-4b8b-bba3-fd4b9218a665_1024x1024.jpg?v=1528111164"
+        }
       }
     ]
   },
@@ -2663,35 +2723,55 @@
         "points": 200,
         "q": "ما اسم الشجرة التي تتوسط العلم اللبناني وتُعد رمزاً وطنياً للبلاد؟",
         "a": "شجرة الأرز",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.ancienscombattants.net/1394-tm_large_default/drapeaux-liban.jpg"
+        }
       },
       {
         "uid": "country_lebanon_drive_q21_400",
         "points": 400,
         "q": "ما اسم المغارة الكلسية الشهيرة في لبنان التي تضم مغارتين عليا وسفلى ويمر فيها نهر جوفي في وادي نهر الكلب؟",
         "a": "مغارة جعيتا",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://cdn1.matadornetwork.com/blogs/1/2019/07/The-Jeita-Grotto-limestone-caves-in-Lebanon.jpg"
+        }
       },
       {
         "uid": "country_lebanon_drive_q22_400",
         "points": 400,
         "q": "ما اسم أعلى قمة جبلية في لبنان وبلاد الشام بأكملها، ويبلغ ارتفاعها 3,088 متراً؟",
         "a": "القرنة السوداء",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://lebanoninapicture.com/pages/beautiful-layers-of-snow-around-3000m-on-the-way-to-the/beautiful-layers-of-snow-around-3000m-on-the-wa-5-9-2017-3-17-33-pm-m.jpg"
+        }
       },
       {
         "uid": "country_lebanon_drive_q23_600",
         "points": 600,
         "q": "ما اسم الملك الفينيقي لمدينة جبيل (بيبلوس) الذي نُقش على تابوته الحجري أقدم نقش طويل بالأبجدية الفينيقية المكتملة في القرن العاشر قبل الميلاد؟",
         "a": "الملك أحيرام",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://upload.wikimedia.org/wikipedia/commons/1/1a/Ahiram_Sarcophagus_1.JPG"
+        }
       },
       {
         "uid": "country_lebanon_drive_q24_600",
         "points": 600,
         "q": "ما اسم الدبلوماسي والمفكر اللبناني الذي شارك في صياغة الإعلان العالمي لحقوق الإنسان عام 1948 وترأس الجمعية العامة للأمم المتحدة عام 1958؟",
         "a": "شارل مالك",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://charlesmalikinstitute.org/wp-content/uploads/COPYRIGHT-TO-BE-CHECKED-MAYBE-EASY-1968-9-Dec-20th-anniversary-of-UDHR.jpg"
+        }
       }
     ]
   },
