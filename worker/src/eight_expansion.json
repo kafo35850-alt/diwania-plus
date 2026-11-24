@@ -15031,14 +15031,30 @@
         "points": 400,
         "q": "بماذا يعادل نيوتن واحد بوحدات الكيلوغرام والمتر والثانية؟",
         "a": "كيلوغرام·متر لكل ثانية مربعة (kg·m/s²)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "qm": {
+          "t": "video",
+          "u": "/eight-media/3fa57c3b53b1c06dfd8e.mp4"
+        },
+        "am": {
+          "t": "image",
+          "u": "/eight-media/b1ebf2d12a66a6c9a690.webp"
+        }
       },
       {
         "uid": "general_sciences_drive_q22_400",
         "points": 400,
         "q": "ما اسم الطبقة الصخرية الصلبة الخارجية للأرض التي تشمل القشرة والجزء العلوي من الوشاح وتتحرك على هيئة صفائح تكتونية؟",
         "a": "الغلاف الصخري (الليثوسفير / Lithosphere)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "qm": {
+          "t": "image",
+          "u": "/eight-media/8f25274aab4c564842a2.webp"
+        },
+        "am": {
+          "t": "video",
+          "u": "/eight-media/cfbd06f2ebc7ead9c444.mp4"
+        }
       },
       {
         "uid": "general_sciences_drive_q23_600",
@@ -19711,7 +19727,15 @@
         "uid": "space_planets_drive_q19_200",
         "points": 200,
         "q": "ما اسم الفجوة الكبرى الظاهرة بين الحلقتين A وB من حلقات زحل؟",
-        "a": "فجوة كاسيني"
+        "a": "فجوة كاسيني",
+        "qm": {
+          "t": "image",
+          "u": "/eight-media/ca9e60cf92a1e2badc20.webp"
+        },
+        "am": {
+          "t": "image",
+          "u": "/eight-media/4383161d6af016f0743f.webp"
+        }
       },
       {
         "uid": "space_planets_drive_q20_200",
