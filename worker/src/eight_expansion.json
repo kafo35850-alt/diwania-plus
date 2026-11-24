@@ -8812,35 +8812,55 @@
         "points": 600,
         "q": "من هو المؤسس الإنجليزي الذي أسس نادي ميلان عام 1899 وكان أول مدرب وقائد له؟",
         "a": "هيربرت كيلبن (Herbert Kilpin)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://wips.plug.it/cips/initalia.virgilio.it/cms/2016/10/herbert_team.jpg?a=c&h=450&w=800"
+        }
       },
       {
         "uid": "custom_1795338102584_drive_q21_600",
         "points": 600,
         "q": "من هو أول لاعب في تاريخ ميلان يفوز بجائزة الكرة الذهبية (البالون دور)، وفي أي عام؟",
         "a": "جاني ريفيرا عام 1969",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://wips.plug.it/cips/sport.virgilio.it/cms/2018/12/rivera.jpg"
+        }
       },
       {
         "uid": "custom_1795338102584_drive_q22_600",
         "points": 600,
         "q": "ما اسم النادي الذي سجل في شباكه بييرينو براتي «هاتريك» تاريخياً في نهائي كأس أوروبا 1969؟",
         "a": "أياكس أمستردام (فاز ميلان 4-1 في سانتياغو برنابيو)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://images.ad.nl/NjQxM2NlYzhhMThlZDJhYzU0ZTYvZGlvLzEwNTkxNzYzOS9maXQtd2lkdGgvODAw/johan-cruyff-probeert-de-milanese-verdediging-te-doorbreken"
+        }
       },
       {
         "uid": "custom_1795338102584_drive_q23_600",
         "points": 600,
         "q": "من هو المهاجم البرازيلي-الإيطالي الذي سجل هدفي ميلان في نهائي كأس أوروبا 1963 ليمنح إيطاليا أول لقب أوروبي؟",
         "a": "خوسيه ألتافيني (José Altafini)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://editorial.uefa.com/resources/025c-0f47c2e375cb-b3f81ac593c8-1000/champions_milan.jpeg"
+        }
       },
       {
         "uid": "custom_1795338102584_drive_q24_600",
         "points": 600,
         "q": "في أي عام هبط ميلان لأول مرة في تاريخه إلى الدرجة الثانية الإيطالية بسبب قضية «توتونيرو» للمراهنات؟",
         "a": "عام 1980 (بعد موسم 1979–1980)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://wips.plug.it/cips/sport.virgilio.it/cms/2018/12/totonero.jpg"
+        }
       }
     ]
   },
@@ -8987,35 +9007,55 @@
         "points": 600,
         "q": "ما اسم النادي الهاوي الأول في جزيرة ماديرا الذي بدأ فيه رونالدو لعب كرة القدم بعمر 7 سنوات (حيث كان والده مسؤولاً عن الملابس)؟",
         "a": "أندورينها (CF Andorinha)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://static.wintips.com/images/wintips-page/11-26-2024/cristiano-ronaldo-900-goals-1.jpg"
+        }
       },
       {
         "uid": "custom_1795338758725_drive_q21_600",
         "points": 600,
         "q": "ضد أي نادٍ إنجليزي سجل كريستيانو رونالدو أول هدف رسمي في مسيرته مع مانشستر يونايتد من ركلة حرة في نوفمبر 2003؟",
         "a": "بورتسموث",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://assets.manutd.com/AssetPicker/images/0/0/12/46/798364/DSC_1214-11572450567675_medium.jpg"
+        }
       },
       {
         "uid": "custom_1795338758725_drive_q22_600",
         "points": 600,
         "q": "ضد أي منتخب سجل رونالدو أول هدف دولي في مسيرته مع منتخب البرتغال (في المباراة الافتتاحية ليورو 2004)؟",
         "a": "اليونان",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.lequipe.fr/_medias/img-photo-jpg/entre-en-debut-de-deuxieme-periode-a-la-place-de-simao-cristiano-ronaldo-reduit-l-ecart-contre-la-grece-1-2-90e-3-d-une-tete-decroisee-sur-un-corner-frappe-par-figo-d-fevre-l-equipe/1500000001621149/0%3A155%2C1119%3A1274-828-828-75/5e8dd"
+        }
       },
       {
         "uid": "custom_1795338758725_drive_q23_600",
         "points": 600,
         "q": "ضد أي فريق سجل رونالدو 5 أهداف (ميجا هاتريك) لأول مرة في مسيرته مع ريال مدريد في أبريل 2015 (فوز 9-1)؟",
         "a": "غرناطة (وكررها ضد إسبانيول في سبتمبر 2015)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://cdn-s-www.ledauphine.com/images/EB2A62BF-B196-4DDA-9828-8EC17F5F021F/NW_raw/face-a-grenade-cristiano-ronaldo-a-inscrit-un-quintuple-photo-afp-gerard-julien-1428236433.jpg"
+        }
       },
       {
         "uid": "custom_1795338758725_drive_q24_600",
         "points": 600,
         "q": "ما هو الرقم الذي ارتداه كريستيانو رونالدو مع سبورتينغ لشبونة قبل انتقاله إلى مانشستر يونايتد؟",
         "a": "28",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://cdn.footballkitarchive.com/2025/03/23/2DoBsGSZKphyiqo.jpg"
+        }
       }
     ]
   },
@@ -9162,35 +9202,55 @@
         "points": 600,
         "q": "ضد أي منتخب أوروبي طُرد ليونيل ميسي بعد 47 ثانية فقط في أول مباراة دولية رسمية له مع منتخب الأرجنتين الأول عام 2005؟",
         "a": "المجر (هنغاريا)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://cdn.eldestapeweb.com/eldestape/082022/1660748638652/messi-expulsado-debut-seleccion-argentina-2005-mayor-scaloni-png..jpg?ch=675&cw=1200"
+        }
       },
       {
         "uid": "custom_1795338949528_drive_q21_600",
         "points": 600,
         "q": "ما اسم المدير الرياضي لبرشلونة الذي وقّع العقد التاريخي الأول مع ميسي على «منديل ورقي» في ديسمبر 2000؟",
         "a": "كارليس ريكساش",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://cloudfront-us-east-2.images.arcpublishing.com/reuters/UNTQTFOWJZIJJFTNCGEHWQGBME.jpg"
+        }
       },
       {
         "uid": "custom_1795338949528_drive_q22_600",
         "points": 600,
         "q": "كم عدد المباريات المتتالية في الدوري الإسباني التي سجل فيها ميسي رقماً قياسياً عالمياً خلال موسم 2012-2013 (سجل ضد كل فرق الليغا الـ 19 تباعاً)؟",
         "a": "21 مباراة متتالية (33 هدفاً)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://img.allfootballapp.com/www/M00/56/67/720x-/-/-/rB8CLF1yCoeAUu0SAAEmU7KJ-ME543.jpg.webp"
+        }
       },
       {
         "uid": "custom_1795338949528_drive_q23_600",
         "points": 600,
         "q": "ضد أي منتخب سجّل ميسي أول «خماسية» (5 أهداف) له في مباراة دولية واحدة مع الأرجنتين في يونيو 2022؟",
         "a": "إستونيا",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://times-abema.ismcdn.jp/mwimgs/5/8/1200w/img_585d7a329c70f1ace29c181f0881eebe118828.jpg"
+        }
       },
       {
         "uid": "custom_1795338949528_drive_q24_600",
         "points": 600,
         "q": "في أي أولمبياد فاز ليونيل ميسي بالميدالية الذهبية الأولمبية مع منتخب الأرجنتين (وضد من فازوا في النهائي 1-0)؟",
         "a": "أولمبياد بكين 2008 (ضد نيجيريا)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://sportal365images.com/process/smp-images-production/ringier.africa/23072024/982e47ca-2f3d-43ef-90d5-971a63446982.jpg?operations=fit%28770%3A%29"
+        }
       }
     ]
   },
@@ -9337,35 +9397,55 @@
         "points": 600,
         "q": "ما أكبر فوز تاريخي في الكلاسيكو على الإطلاق، الذي حققه ريال مدريد على برشلونة في إياب نصف نهائي كأس إسبانيا عام 1943؟",
         "a": "11-1 لصالح ريال مدريد",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://assets.kooora.com/images/v3/kooora_541711_1/15.jpg?auto=webp&format=pjpg&quality=60&width=1400"
+        }
       },
       {
         "uid": "custom_1795339103284_drive_q21_600",
         "points": 600,
         "q": "من هو اللاعب الذي سجل أسرع هدف في تاريخ مباريات الكلاسيكو بعد 21 ثانية فقط لصالح ريال مدريد في ديسمبر 2011؟",
         "a": "كريم بنزيمة",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://media-cdn-v2.laodong.vn/storage/newsportal/2021/4/9/897455/Benzema.jpg?crop=auto&h=496&scale=both&w=800"
+        }
       },
       {
         "uid": "custom_1795339103284_drive_q22_600",
         "points": 600,
         "q": "من هو اللاعب الذي سجل «هاتريك» لريال مدريد في فوزه 5-0 على برشلونة عام 1995 (رداً على خماسية روماريو 1994)؟",
         "a": "إيفان زامورانو",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://img.championat.com/i/92/99/15829592991856328726.jpg"
+        }
       },
       {
         "uid": "custom_1795339103284_drive_q23_600",
         "points": 600,
         "q": "من هو اللاعب الوحيد في التاريخ الذي سجل 4 أهداف (سوبر هاتريك) في مباراة كلاسيكو واحدة في الدوري الإسباني (لصالح ريال مدريد في فوزه 8-2 عام 1935)؟",
         "a": "إيلديفونسو سانيودو (وسجل 4 أهداف أيضاً مارتين فينتولرا لبرشلونة في نفس العام 1935)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://pbs.twimg.com/media/Gh_cf2sXYAE-6bV.jpg"
+        }
       },
       {
         "uid": "custom_1795339103284_drive_q24_600",
         "points": 600,
         "q": "في أي عام التقى ريال مدريد وبرشلونة لأول مرة في تاريخ بطولة كأس أوروبا (دوري الأبطال) وانتهى بتأهل برشلونة كأول فريق يقصي ريال مدريد من البطولة؟",
         "a": "1960 (نوفمبر 1960 في الدور الأول لنسخة 1960-1961)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://revistalibero.com/cdn/shop/articles/jjj.jpg?v=1492879198"
+        }
       }
     ]
   },
