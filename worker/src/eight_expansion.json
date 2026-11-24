@@ -4253,14 +4253,22 @@
         "points": 200,
         "q": "ما اللقب الصيفي الشهير لمدينة الطائف نظراً لاعتدال مناخها وارتفاعها؟",
         "a": "عروس المصايف",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "/eight-media/c6ad1ecf415dfd5d5631.webp"
+        }
       },
       {
         "uid": "custom_1795332408268_drive_q9_200",
         "points": 200,
         "q": "ما اسم السوق الأدبي والشعري العربي التاريخي الشهير الواقع شمال شرق الطائف؟",
         "a": "سوق عكاظ",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/%D8%B3%D9%88%D9%82_%D8%B9%D9%83%D8%A7%D8%B8.JPG?width=1280"
+        }
       },
       {
         "uid": "custom_1795332408268_drive_q10_200",
@@ -4277,21 +4285,33 @@
         "points": 200,
         "q": "ما اسم المنتزه الجبلي المرتفع الشهير في الطائف المعروف بضبابه ومزارع الفواكه والعسل؟",
         "a": "الشفا",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/Shafa_-_Taif,_Saudi_Arabia_(3947403348).jpg?width=1280"
+        }
       },
       {
         "uid": "custom_1795332408268_drive_q12_200",
         "points": 200,
         "q": "ما اسم الفاكهة الصيفية الشهيرة التي تشتهر بها مزارع الطائف وتُعرف بالتين الشوكي؟",
         "a": "البرشومي",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/Prickly_Pear_Cactus.jpg?width=1280"
+        }
       },
       {
         "uid": "custom_1795332408268_drive_q13_400",
         "points": 400,
         "q": "ما اسم المسجد التاريخي الشهير وسط مدينة الطائف الذي يضم مكتبة عريقة ويُنسب لحبر الأمة؟",
         "a": "مسجد عبدالله بن عباس رضي الله عنهما",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/%D9%85%D8%B3%D8%AC%D8%AF_%D8%B9%D8%A8%D8%AF%D8%A7%D9%84%D9%84%D9%87_%D8%A8%D9%86_%D8%B9%D8%A8%D8%A7%D8%B3.jpg?width=1280"
+        }
       },
       {
         "uid": "custom_1795332408268_drive_q14_400",
@@ -4308,28 +4328,44 @@
         "points": 400,
         "q": "ما اسم السباق السنوي العالمي الضخم للإبل الذي تستضيفه مدينة الطائف في ميدانها الشهير؟",
         "a": "مهرجان ولي العهد للهجن",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/%D8%B3%D8%A8%D8%A7%D9%82_%D8%A7%D9%84%D9%87%D8%AC%D9%86.jpg?width=1280"
+        }
       },
       {
         "uid": "custom_1795332408268_drive_q16_400",
         "points": 400,
         "q": "ما اسم المحمية الطبيعية الشهيرة الواقعة شرق الطائف التي تُعد موطناً للمها العربي والغزلان؟",
         "a": "محمية محازة الصيد",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/Lappet-faced_Vulture_in_Saudi_Arabia.jpeg?width=1280"
+        }
       },
       {
         "uid": "custom_1795332408268_drive_q17_400",
         "points": 400,
         "q": "ما اسم الوادي التاريخي الأشهر الذي يشق مدينة الطائف من جنوبها إلى شمالها؟",
         "a": "وادي وج",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/%D8%A7%D9%84%D8%B7%D8%A7%D8%A6%D9%81_%D9%85%D9%86_%D8%AC%D8%A8%D9%84_%D8%A7%D9%84%D9%87%D8%AF%D9%891.jpg?width=1280"
+        }
       },
       {
         "uid": "custom_1795332408268_drive_q18_400",
         "points": 400,
         "q": "ما اسم الميقات المكاني للحج والعمرة الواقع في الطائف للقادمين من نجد والشرق؟",
         "a": "ميقات قرن المنازل (السيل الكبير، وميقات وادي محرم على طريق الهدا)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/Miqat_Qarn_al-Manazil_(As_Sayl_al_Kabir)_(2025).jpg?width=1280"
+        }
       },
       {
         "uid": "custom_1795332408268_drive_q19_600",
