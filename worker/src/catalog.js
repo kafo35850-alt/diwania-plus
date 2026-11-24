@@ -5,6 +5,7 @@ import { getSettings, publicSettings } from './settings.js';
 import SEED from './seed.json';
 import CAT_POSTERS from './cat_posters.json';
 import EIGHT_EXPANSION from './eight_expansion.json';
+import EIGHT_QUESTION_REVIEW from './eight_question_review.json';
 import { HttpError, nowIso } from './util.js';
 import { gatewayConfigured } from './payments.js';
 import { eightRawQuestions } from './games.js';
@@ -156,6 +157,20 @@ async function getEightQuestions(env) {
         : q;
     });
   }
+  for (const [slug, review] of Object.entries(EIGHT_QUESTION_REVIEW)) {
+    if (!Array.isArray(stored[slug])) continue;
+    stored[slug] = stored[slug].map((card) => {
+      const revision = card && Object.hasOwn(review, card.uid) && review[card.uid];
+      if (!revision || card.q !== revision.before.q || card.a !== revision.before.a) return card;
+      const corrected = { ...card };
+      for (const [field, value] of Object.entries(revision.after)) {
+        if (JSON.stringify(card[field] ?? null) !== JSON.stringify(revision.before[field])) continue;
+        if (value === null) delete corrected[field];
+        else corrected[field] = structuredClone(value);
+      }
+      return corrected;
+    });
+  }
   return stored;
 }
 
@@ -228,7 +243,7 @@ function includeEightExpansion(slug, questions, { media = [], questions: additio
       };
       continue;
     }
-    if (useCategoryPoster && EIGHT_POSTERS[slug]) q.qm = { t: 'image', u: EIGHT_POSTERS[slug] };
+    if (useCategoryPoster && !q.qm && EIGHT_POSTERS[slug]) q.qm = { t: 'image', u: EIGHT_POSTERS[slug] };
     indices.set(key, withMedia.length);
     indicesById.set(q.uid, withMedia.length);
     withMedia.push(q);
