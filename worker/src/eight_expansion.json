@@ -16019,28 +16019,44 @@
         "points": 400,
         "q": "في أي عام ميلادي عُرض الموسم الأول من مسلسل «شباب البومب» لأول مرة؟",
         "a": "عام 2012م",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.bostah.com/uploads/260dc26c4359dcf8f921a4af0c493d5dfd06e283e1b0948830f4d45318fb8ea9.jpeg"
+        }
       },
       {
         "uid": "series_shabab_albomb_drive_q22_400",
         "points": 400,
         "q": "من هو الفنان الذي يؤدي شخصية «كفتة» في مسلسل «شباب البومب»؟",
         "a": "سليمان المقيطيب",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.onbuub.com/sites/default/files/2018-05/%D8%B3%D9%84%D9%85%D8%A7%D9%86-%D8%A7%D9%84%D9%85%D9%82%D9%8A%D8%B7%D9%8A%D8%A8.jpg"
+        }
       },
       {
         "uid": "series_shabab_albomb_drive_q23_600",
         "points": 600,
         "q": "على أي قناة تلفزيونية عُرضت المواسم الثلاثة الأولى من «شباب البومب» (2012–2014) قبل انتقاله إلى قناة «روتانا خليجية» بدءاً من الموسم الرابع؟",
         "a": "القناة السعودية الأولى (التلفزيون السعودي)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://image.tmdb.org/t/p/original/z1erA5a4tlJzasQdZxoRGzXFiKZ.jpg"
+        }
       },
       {
         "uid": "series_shabab_albomb_drive_q24_600",
         "points": 600,
         "q": "من هو الفنان الذي أدّى شخصية «تركي» في المواسم الأولى من «شباب البومب» وشارك في فكرته وتأليفه، ومن هو المخرج الذي أخرج الفيلم السينمائي الأول «شباب البومب» عام 2024؟",
         "a": "عبدالعزيز الفريحي — والمخرج الأمريكي يول كاسي (Yule Caise)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://al-sharq.com/get/maximage/20240510_1715369038-752.jpg"
+        }
       }
     ]
   },
