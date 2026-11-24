@@ -15842,28 +15842,44 @@
         "points": 400,
         "q": "ما اسم المسلسل الكوميدي السعودي الشهير الذي جمع حسن عسيري وفايز المالكي وراشد الشمراني على مدى عدة مواسم؟",
         "a": "بيني وبينك",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://static.sayidaty.net/styles/1200_scale/public/2017/12/06/3121946-1188708170.jpg.webp?VersionId=J9NuxxRyWjVyQs8gykyep78z9cmtrMB_"
+        }
       },
       {
         "uid": "series_saudi_general_drive_q22_400",
         "points": 400,
         "q": "ما اسم المسلسل السعودي الاجتماعي الناجح من بطولة إلهام علي وخالد صقر الذي تناول قصة عائلة تعيش في فيلا واحدة مع المربية؟",
         "a": "سندس",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.alriyadh.com/media/article/2022/05/09/img/9826846082.jpg"
+        }
       },
       {
         "uid": "series_saudi_general_drive_q23_600",
         "points": 600,
         "q": "من هو المخرج البريطاني الذي أخرج مسلسل «رشاش» (2021)، ومن هو الفنان السعودي الذي جسّد دور الضابط «فهد» في المسلسل؟",
         "a": "المخرج كولن تيغ (Colin Teague) — والفنان نايف الضفيري",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://static.hiamag.com/styles/312x462/public/featured/2021/08/01/10790156-1726429254.jpg"
+        }
       },
       {
         "uid": "series_saudi_general_drive_q24_600",
         "points": 600,
         "q": "ما اسم المسلسل السعودي الكلاسيكي الساخر الصادر عام 1985 الذي أخرجه عدنان إبراهيم وجمع محمد العلي ومحمد الطويان وناصر القصبي وعبدالله السدحان؟",
         "a": "عودة عصويد",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://is1-ssl.mzstatic.com/image/thumb/GhXxetkJ1R1g-Te_maRcXw/1200x675.jpg"
+        }
       }
     ]
   },
