@@ -16044,28 +16044,44 @@
         "points": 400,
         "q": "ما اسم حفل الجوائز السنوي الكوميدي الذي ينظمه مايكل سكوت لموظفيه؟",
         "a": "جوائز الدانديز (The Dundies)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://imageservice.disco.peacocktv.com/uuid/3b462039-0df2-3931-a1c0-470f563a60af/LAND_16_9?language=eng&proposition=NBCUOTT&version=71813387-d44f-31b8-80b6-716c17d71610"
+        }
       },
       {
         "uid": "series_the_office_drive_q22_400",
         "points": 400,
         "q": "ما المحصول الزراعي الشهير الذي يزرعه «دوايت شروت» في مزرعة عائلته (مزرعة شروت)؟",
         "a": "الشمندر / البنجر (Beets)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://s.yimg.com/ny/api/res/1.2/xlnuExNFKcmRSc551uF2ZA--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTQyNw--/https%3A/media.zenfs.com/es/lanacion.com.ar/2cebd710c18baccd7e492fcf55c694b8"
+        }
       },
       {
         "uid": "series_the_office_drive_q23_600",
         "points": 600,
         "q": "ما عنوان فيلم الأكشن الهزلي الذي كتبه وأخرجه ومثّل فيه مايكل سكوت على مدار 11 عاماً بشخصية العميل السري «مايكل سكارن»؟",
         "a": "Threat Level Midnight",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://m.media-amazon.com/images/M/MV5BODYwNjI5OTU2NV5BMl5BanBnXkFtZTcwMzA5Nzk0NA%40%40._V1_.jpg"
+        }
       },
       {
         "uid": "series_the_office_drive_q24_600",
         "points": 600,
         "q": "ما اسم الشركة التي استحوذت على «دندر ميفلين» في الموسم السادس بقيادة «جو بينيت»، وما المنتج الرئيسي الذي كانت تبيعه إلى جانب الورق؟",
         "a": "شركة سايبر (Sabre) — وكانت تبيع الطابعات (Printers)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://imgix.ranker.com/user_node_img/50102/1002023558/original/sabre-photo-u1?auto=format&dpr=2&fit=crop&fm=pjpg&q=60&w=355"
+        }
       }
     ]
   },
