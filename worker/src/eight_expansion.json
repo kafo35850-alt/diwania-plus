@@ -19517,7 +19517,11 @@
         "points": 600,
         "q": "ما اسم المضيق البحري الذي يربط بين البحر الأسود وبحر آزوف ويفصل بين شبه جزيرة القرم وشبه جزيرة تامان؟",
         "a": "مضيق كيرتش",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://upload.wikimedia.org/wikipedia/commons/6/6a/Kerch_Strait_Landsat.jpg"
+        }
       }
     ]
   },
