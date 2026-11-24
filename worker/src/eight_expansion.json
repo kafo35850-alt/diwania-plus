@@ -261,35 +261,55 @@
         "points": 200,
         "q": "ما اسم الفيلق العسكري الذي يخرج لاستكشاف العالم خارج الأسوار ومقاتلة العمالقة؟",
         "a": "فيلق الاستطلاع (Survey Corps)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://m.media-amazon.com/images/M/MV5BZmFhNGVlY2ItYmYxNC00NzVmLWI4NTMtMjgxY2JjY2MzZjRkXkEyXkFqcGc%40._V1_.jpg"
+        }
       },
       {
         "uid": "anime_aot_drive_q21_400",
         "points": 400,
         "q": "ما اسم المقاطعة الحدودية الواقعة في جنوب سور ماريا والتي نشأ فيها إيرين وميكاسا وأرمين؟",
         "a": "مقاطعة شيغانشينا (Shiganshina District)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://m.media-amazon.com/images/M/MV5BMGE5OGFiMzctZTZiZi00MWYzLTlmOGEtMTAzZjNlZWMzMGU4XkEyXkFqcGc%40._V1_.jpg"
+        }
       },
       {
         "uid": "anime_aot_drive_q22_400",
         "points": 400,
         "q": "ما هو الحد الأقصى لعدد السنوات التي يعيشها أي شخص بعد وراثة قوة أحد العمالقة التسعة (لعنة يومير)؟",
         "a": "13 سنة",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://letsweaboo.com/upload/upload/news/568569952231.jpg"
+        }
       },
       {
         "uid": "anime_aot_drive_q23_600",
         "points": 600,
         "q": "من هو الشخص الذي كان يحمل قوة «العملاق المهاجم» قبل غريشا ييغر وسلّمها له على جدار الميناء في جزيرة باراديس؟",
         "a": "إيرين كروغر (الملقّب بـ «البومة» — The Owl)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://elcomercio.pe/resizer/v2/L2CHDEFCAVFGJEZ522PWD23K3M.jpg?auth=2e8262a1bd8a18237aa38219bd9d097e0e2d29ecf80185f835467f8c6198fa1d&height=528&quality=75&smart=true&width=980"
+        }
       },
       {
         "uid": "anime_aot_drive_q24_600",
         "points": 600,
         "q": "ما هو الاسم الحقيقي للملك الإلدي الذي نقل شعبه إلى جزيرة باراديس وبنى الأسوار الثلاثة وأنشأ «عهد نبذ الحرب»؟",
         "a": "كارل فريتز (الملك رقم 145 لإلديا)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://i0.wp.com/inasianspaces.com/wp-content/uploads/2022/10/attack-on-titan-season-4-ep-21-the-first-fritz-king.png?resize=768%2C432&ssl=1"
+        }
       }
     ]
   },
@@ -310,35 +330,55 @@
         "points": 200,
         "q": "من هو المخترع الصديق لسينشي الذي يصنع له أدواته السرية مثل ربطة العنق المغيّرة للصوت وساعة التخدير؟",
         "a": "البروفيسور هيروشي أغاسا (Hiroshi Agasa)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://ogre.natalie.mu/media/news/comic/2016/1115/CON2H_0313.jpg?imdensity=1&imwidth=750"
+        }
       },
       {
         "uid": "anime_conan_drive_q21_400",
         "points": 400,
         "q": "ما هو الاسم الرمزي للعقار الذي صنعته المنظمة السوداء وتسبب في تقلص سينشي كودو؟",
         "a": "APTX 4869 (أبوتوكسين 4869)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.detectiveconanworld.com/wiki/images/6/64/Op60-17.jpg"
+        }
       },
       {
         "uid": "anime_conan_drive_q22_400",
         "points": 400,
         "q": "ما هو الاسم الحقيقي لآي هايبرا، وما اسمها الرمزي السابق داخل المنظمة السوداء؟",
         "a": "شيهو ميانو (Shiho Miyano)، واسمها الرمزي «شيري» (Sherry)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://cdn.alfabetajuega.com/alfabetajuega/2023/10/sherry-cuyo-autentico-nombre-es-shiho-es-un-personaje-bastante-tragico-dentro-de-esta-organizacion.jpg"
+        }
       },
       {
         "uid": "anime_conan_drive_q23_600",
         "points": 600,
         "q": "ما هو الاسم الحقيقي لزعيم المنظمة السوداء الغامض الذي كُشف عنه لاحقاً في القصة؟",
         "a": "رينيا كاراسوما (Renya Karasuma)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://p3-sdbk2-media.byteimg.com/tos-cn-i-xv4ileqgde/1751f90a3d2c4ce99c6280411454ab82~tplv-xv4ileqgde-resize-w%3A750.image"
+        }
       },
       {
         "uid": "anime_conan_drive_q24_600",
         "points": 600,
         "q": "من هما الكاتبان اللذان استوحى منهما سينشي كودو اسمه المستعار «كونان إيدوغاوا»؟",
         "a": "السير آرثر كونان دويل (مبتكر شارلوك هولمز) والكاتب الياباني رانبو إيدوغاوا (Edogawa Ranpo)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://prcdn.freetls.fastly.net/release_image/9284/514/9284-514-f5e738563a8fea4c766879ea94d17a2d-1054x884.png?auto=webp&fit=bounds&format=jpeg&height=1350&quality=85%2C75&width=1950"
+        }
       }
     ]
   },
@@ -359,35 +399,55 @@
         "points": 200,
         "q": "ما هو اللقب الذي أطلقه الناس ووسائل الإعلام على لايت ياغامي عندما بدأ بقتل المجرمين؟",
         "a": "كيرا (Kira)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://images.everyeye.it/img-screenshot/death-note-manga-v1-200077.jpg"
+        }
       },
       {
         "uid": "anime_death_note_drive_q21_400",
         "points": 400,
         "q": "كم ثانية تستغرق المذكرة لقتل الضحية بنوبة قلبية إذا لم يُكتب سبب الوفاة بعد تدوين الاسم؟",
         "a": "40 ثانية",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://static.wikia.nocookie.net/deathnote/images/7/7b/Rules_first_page.png/revision/latest?cb=20180301201541"
+        }
       },
       {
         "uid": "anime_death_note_drive_q22_400",
         "points": 400,
         "q": "ما هو الثمن الذي يدفعه الإنسان مقابل الحصول على «عيون الشينيغامي» لمعرفة أسماء الناس وأعمارهم؟",
         "a": "نصف ما تبقى من عمره",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://static.insales-cdn.com/images/products/1/4244/210333844/1.jpg"
+        }
       },
       {
         "uid": "anime_death_note_drive_q23_600",
         "points": 600,
         "q": "ما هو الاسم الكامل والحقيقي للمحقق العبقري «إل» (L)؟",
         "a": "إل لوليت (L Lawliet)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://image.zeta-ai.io/profile-image/08430a38-7cb1-4e8b-9f9b-704323ddc7c3/390206e3-09e0-4aba-8286-1e8481472d63/8cbc07bc-c8ef-4b85-9d0f-05dd8f2363e5.jpeg"
+        }
       },
       {
         "uid": "anime_death_note_drive_q24_600",
         "points": 600,
         "q": "ما اسم دار الأيتام البريطانية التي تربى فيها كل من «إل» و«نير» و«ميلو» تحت إشراف واتاري؟",
         "a": "منزل وامي (Wammy's House)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://1.bp.blogspot.com/-vE11UUaOuCg/XDEhz7s7HpI/AAAAAAAAAIU/kHDRn4DpKg4_BSRhk_mxzDDF7pRcgiN_QCEwYBhgL/s1600/73f69867db09f925d32a2b28571ee1bc--mello-anime-manga.jpg"
+        }
       }
     ]
   },
@@ -408,35 +468,55 @@
         "points": 200,
         "q": "ما اسم الشيطان الأول ومؤسس جميع الشياطين الذي يسعى فيلق قتلة الشياطين للقضاء عليه؟",
         "a": "موزان كيبوتسوجي (Muzan Kibutsuji)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://up.gc-img.net/post_img/2024/02/xBU7Kzsko7wFPMX_rexfU_603.jpeg"
+        }
       },
       {
         "uid": "anime_demon_slayer_drive_q21_400",
         "points": 400,
         "q": "ما اسم الزهور البنفسجية السامة للشياطين التي يزرعها فيلق قتلة الشياطين حول جبل الاختبار النهائي لإبعادهم؟",
         "a": "زهور الوستارية (Wisteria)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://mcdn.wallpapersafari.com/medium/27/67/Wy1C2A.jpg"
+        }
       },
       {
         "uid": "anime_demon_slayer_drive_q22_400",
         "points": 400,
         "q": "ما اسم السيوف الخاصة المصنوعة من خامات تمتص أشعة الشمس والتي يستخدمها قتلة الشياطين لقطع رؤوس الشياطين؟",
         "a": "سيوف النيتشيرين (Nichirin Swords)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://i.pinimg.com/736x/71/94/52/7194526f97680ed7a02cfb36aed7a5ee.jpg"
+        }
       },
       {
         "uid": "anime_demon_slayer_drive_q23_600",
         "points": 600,
         "q": "من هو السياف الأسطوري الذي ابتكر «تنفس الشمس» (Sun Breathing) — أصل جميع أساليب التنفس — وكاد يقتل موزان كيبوتسوجي في عصر سينغوكو؟",
         "a": "يوريتشي تسوغيكوني (Yoriichi Tsugikuni)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://alfabetajuega.com/hero/2023/08/yoriichi-tsugikuni.jpg?width=1200"
+        }
       },
       {
         "uid": "anime_demon_slayer_drive_q24_600",
         "points": 600,
         "q": "ما هو اسم النبتة الأسطورية النادرة التي قضى موزان كيبوتسوجي قروناً في البحث عنها ليتغلب على ضوء الشمس؟",
         "a": "زنبقة العنكبوت الزرقاء (Blue Spider Lily)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://cdn.shopify.com/s/files/1/0680/4094/9989/files/kimetsu_no_yaiba_spider_lily.jpg?v=1758274993"
+        }
       }
     ]
   },
