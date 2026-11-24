@@ -18755,35 +18755,55 @@
         "points": 200,
         "q": "من هو المقاتل الروسي الداغستاني الذي اعتزل في UFC بسجل خالٍ من الهزائم (29 انتصاراً دون خسارة)؟",
         "a": "حبيب نورمحمدوف",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://ufc.com/images/styles/inline/s3/image/1/229/GettyImages-1046917752.jpg?VersionId=tj5mpBrebW0juS.526ojw4E9xJDm4Dt9%26itok=hQhMgn6M"
+        }
       },
       {
         "uid": "ufc_mma_drive_q21_400",
         "points": 400,
         "q": "من هو أول مقاتل في تاريخ UFC يحمل لقبين في فئتين وزنيتين مختلفتين في الوقت نفسه؟",
         "a": "كونور ماكغريغور (وزن الريشة والوزن الخفيف عام 2016)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://legacymedia.sportsplatform.io/img/images/photos/003/643/009/hi-res-590a1b7600bb215a2d20f06280f243a7_crop_north.jpg?w=2560"
+        }
       },
       {
         "uid": "ufc_mma_drive_q22_400",
         "points": 400,
         "q": "من هو صاحب أسرع ضربة قاضية في تاريخ UFC (خلال 5 ثوانٍ فقط) وضد من كانت؟",
         "a": "خورخي ماسفيدال ضد بن أسكرين (في UFC 239 عام 2019)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://cloudfront-us-east-1.images.arcpublishing.com/artear/NOM7FJ6DCNWF3XMA4F7AJ6PP4I.jpg"
+        }
       },
       {
         "uid": "ufc_mma_drive_q23_600",
         "points": 600,
         "q": "في أي مدينة وولاية أمريكية أُقيمت النسخة الأولى من بطولة UFC 1 في نوفمبر 1993؟",
         "a": "دنفر، ولاية كولورادو",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.retroseasons.com/retroimages/stadium-McNichols-Sports-Arena-Denver-Nuggets.jpg"
+        }
       },
       {
         "uid": "ufc_mma_drive_q24_600",
         "points": 600,
         "q": "من هو المقاتل الذي فاز بأول نزال على الإطلاق في تاريخ منظمة UFC (النزال الافتتاحي لبطولة UFC 1 عام 1993)؟",
         "a": "جيرارد غوردو (بفوزه على تيلا تولي خلال 26 ثانية)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.washingtonpost.com/wp-apps/imrs.php?h=600&src=http%3A%2F%2Fwww.washingtonpost.com%2Fblogs%2Fearly-lead%2Ffiles%2F2016%2F11%2FGettyImages-285776.jpg&w=800"
+        }
       }
     ]
   },
