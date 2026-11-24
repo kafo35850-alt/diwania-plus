@@ -15861,7 +15861,11 @@
         "points": 400,
         "q": "ما اسم الحلوى الكورية التقليدية المصنوعة من السكر المذاب التي طُلب من اللاعبين استخراج الأشكال منها في اللعبة الثانية؟",
         "a": "حلوى الدالغونا (Dalgona)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://i.insider.com/615b3bcd542a580019a8ad5c?format=jpeg&width=1200"
+        }
       },
       {
         "uid": "series_squid_game_drive_q22_400",
