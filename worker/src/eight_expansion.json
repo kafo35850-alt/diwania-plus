@@ -134,35 +134,55 @@
         "points": 200,
         "q": "كم ثانية يحتوي اليوم الواحد (24 ساعة)؟",
         "a": "86,400 ثانية",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/27/24_Hour_Clock.JPG/1280px-24_Hour_Clock.JPG"
+        }
       },
       {
         "uid": "amazing_stats_drive_q21_400",
         "points": 400,
         "q": "كم يستغرق ضوء الشمس تقريباً للوصول إلى كوكب الأرض؟",
         "a": "نحو 8 دقائق و20 ثانية",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/solar/internal_resources/4616/EarthOrbit_1AU-1.jpeg?crop=faces%2Cfocalpoint&fit=clip&h=1080&w=1920"
+        }
       },
       {
         "uid": "amazing_stats_drive_q22_400",
         "points": 400,
         "q": "كم عدد القلوب وكم عدد الأدمغة (العقد العصبية) التي يمتلكها الأخطبوط؟",
         "a": "3 قلوب و9 أدمغة (دماغ مركزي و8 أدمغة صغيرة في الأذرع)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d3/Common_Octopus.jpg/1280px-Common_Octopus.jpg"
+        }
       },
       {
         "uid": "amazing_stats_drive_q23_600",
         "points": 600,
         "q": "كم يبلغ العدد التقريبي للاحتمالات الممكنة لترتيب أوراق اللعب القياسية (52 ورقة، أي مضروب 52!)؟",
         "a": "نحو 8 × 10 مرفوعة للقوة 67 (عدد مكون من 68 رقماً)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3e/Just_Playing_Cards.png/1280px-Just_Playing_Cards.png"
+        }
       },
       {
         "uid": "amazing_stats_drive_q24_600",
         "points": 600,
         "q": "في مفارقة عيد الميلاد الإحصائية، ما هو أقل عدد من الأشخاص في غرفة واحدة لتتجاوز احتمالية اشتراك شخصين في يوم الميلاد نفسه نسبة 50%؟",
         "a": "23 شخصاً",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/85/Birthday_celebration_%2855473628598%29.jpg/1280px-Birthday_celebration_%2855473628598%29.jpg"
+        }
       }
     ]
   },
