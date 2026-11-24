@@ -130,10 +130,9 @@ async function getEightQuestions(env) {
         continue;
       }
       const target = stadiumRoutes[q.uid];
-      if (!target) continue;
       const destination = stored[target] ||= [];
       const shipped = EIGHT_EXPANSION[target].questions.find(card => card.uid === q.uid);
-      const moved = q.q === 'ما اسم هذا الملعب الشهير؟' ? { ...q, q: shipped.q, a: shipped.a } : q;
+      const moved = shipped && q.q === 'ما اسم هذا الملعب الشهير؟' ? { ...q, q: shipped.q, a: shipped.a } : q;
       const index = destination.findIndex(card => card?.uid === q.uid);
       if (index < 0) destination.push(moved);
       else if (!databaseSlugs.has(target)) destination[index] = moved;
@@ -141,6 +140,12 @@ async function getEightQuestions(env) {
     const shippedCups = eightRawQuestions('rebus_football');
     const ids = new Set(savedCups.map(q => q?.uid));
     stored.rebus_football = savedCups.concat(shippedCups.filter(q => !ids.has(q.uid)));
+  }
+  // Stadium cards moved in this release also belong in previously saved destination lists.
+  for (const slug of EIGHT_STADIUM_CATEGORIES) {
+    if (!savedAfterExpansion.has(slug) || !Array.isArray(stored[slug])) continue;
+    const moved = EIGHT_EXPANSION[slug].questions.filter(q => stadiumRoutes[q.uid] === slug);
+    stored[slug] = includeEightExpansion(slug, stored[slug], { questions: moved });
   }
   if (databaseSlugs.has('custom_photo_closeup') && Array.isArray(stored.custom_photo_closeup)) {
     const closeups = new Map(SEED.catQuestionsOverrides.custom_photo_closeup.map(q => [q.uid, q]));
