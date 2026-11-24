@@ -6,6 +6,7 @@ import SEED from './seed.json';
 import CAT_POSTERS from './cat_posters.json';
 import EIGHT_EXPANSION from './eight_expansion.json';
 import EIGHT_QUESTION_REVIEW from './eight_question_review.json';
+import EIGHT_POSTER_CATEGORIES from './eight_poster_categories.json';
 import { HttpError, nowIso } from './util.js';
 import { gatewayConfigured } from './payments.js';
 import { eightRawQuestions } from './games.js';
@@ -16,9 +17,11 @@ const EIGHT_QUESTIONS_PREFIX = 'eight_questions:';
 const expandedDefaults = new Map();
 export const EIGHT_CATEGORY_MERGES = { custom_1795179696757: 'quran_kareem' };
 const mergedTargets = new Set(Object.values(EIGHT_CATEGORY_MERGES));
+const posterCategories = new Map(EIGHT_POSTER_CATEGORIES.map(({ questions, ...category }) => [category.slug, category]));
 export const EIGHT_STADIUM_CATEGORIES = new Set(['world_stadiums_photo', 'arab_stadiums_photo']);
 export const EIGHT_POSTERS = {
   ...CAT_POSTERS,
+  ...Object.fromEntries([...posterCategories].map(([slug, category]) => [slug, category.poster])),
   ...Object.fromEntries(Object.entries(EIGHT_EXPANSION)
     .filter(([, bundle]) => bundle.poster)
     .map(([slug, bundle]) => [slug, bundle.poster]))
@@ -39,12 +42,21 @@ export async function getDoc(env, key) {
       const slugs = new Set(stored.map((c) => c.slug));
       const fresh = SEED.categories.filter((c) => !slugs.has(c.slug)).map((c) => structuredClone(c));
       if (fresh.length) stored.unshift(...fresh);
+      const known = new Set(stored.map((category) => category.slug));
+      stored.push(...[...posterCategories.values()].filter((category) => !known.has(category.slug)).map((category) => structuredClone(category)));
     }
     if (key === 'categories' && Array.isArray(stored)) {
       for (const c of stored) {
         const fresh = SEED.catQuestionsOverrides && SEED.catQuestionsOverrides[c.slug];
         if (fresh && (c.item_count || 0) < fresh.length) c.item_count = fresh.length;
         const shipped = SEED.categories.find((s) => s.slug === c.slug);
+        const posterCategory = posterCategories.get(c.slug);
+        if (posterCategory) {
+          if (!c.poster) c.poster = posterCategory.poster;
+          if (!c.item_count) c.item_count = posterCategory.item_count;
+          if (posterCategory.isCharades) c.isCharades = true;
+          if (posterCategory.isLetterHoneycomb) c.isLetterHoneycomb = true;
+        }
         if (shipped && shipped.poster && String(c.poster || '').startsWith('/cat-posters/') && c.poster !== shipped.poster) c.poster = shipped.poster;
         if (shipped && c.slug === 'rebus_football') {
           const { name, description, icon, poster, item_count } = shipped;
@@ -55,6 +67,10 @@ export async function getDoc(env, key) {
       }
     }
     return stored;
+  }
+  if (key === 'categories') {
+    const slugs = new Set(SEED.categories.map((category) => category.slug));
+    return structuredClone([...SEED.categories, ...[...posterCategories.values()].filter((category) => !slugs.has(category.slug))]);
   }
   return structuredClone(SEED[key]);
 }
@@ -80,6 +96,9 @@ async function getEightQuestions(env) {
     }
   }
   const databaseSlugs = new Set(Object.keys(stored));
+  for (const { slug, questions } of EIGHT_POSTER_CATEGORIES) {
+    if (!(slug in stored) && questions.length) stored[slug] = structuredClone(questions);
+  }
   for (const [slug, list] of Object.entries(SEED.catQuestionsOverrides || {})) {
     if (!(slug in stored) || (!savedAfterExpansion.has(slug) && isUntouchedOlderSeed(slug, stored[slug], list))) {
       stored[slug] = structuredClone(list);

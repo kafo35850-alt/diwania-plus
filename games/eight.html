@@ -3282,7 +3282,7 @@ function cardHtml(o) {
 return '<div style="text-align:center;font-family:Cairo,Tajawal,system-ui,sans-serif">' +
 pictureHtml(o.uid, o.word) +
 '<div style="margin:14px auto 0;max-width:340px;background:#fff;color:#241c3d;border-radius:18px;padding:12px 14px;border:3px solid #f6b93b">' +
-'<div style="font-size:12px;font-weight:800;color:#8a6d1d">' + (isImagine(o.uid) ? 'اللي في الصورة (اشرحه لفريقك)' : 'الكلمة المطلوب تمثيلها') + '</div>' +
+'<div style="font-size:12px;font-weight:800;color:#8a6d1d">' + (o.draw ? 'الشيء المطلوب رسمه' : isImagine(o.uid) ? 'اللي في الصورة (اشرحه لفريقك)' : 'الكلمة المطلوب تمثيلها') + '</div>' +
 '<div class="m8a-word" style="font-size:26px;font-weight:900;line-height:1.35;margin-top:2px">' + esc(o.word) + '</div>' +
 
 '</div>' +
@@ -8703,7 +8703,7 @@ secretDisplay.classList.add('hidden');
 const cleanSecret = (qObj.a || '').replace(/الكلمة السرية.*?:/g, '').trim();
 window.__m8CurCharades = { qObj: qObj, col: col };
 secretDisplay.innerHTML = window.M8Actor
-? window.M8Actor.cardHtml({ uid: qObj.uid, word: cleanSecret, info: qObj.info, catName: col.name, points: qObj.points })
+? window.M8Actor.cardHtml({ uid: qObj.uid, word: cleanSecret, info: qObj.info, catName: col.name, points: qObj.points, draw: qObj.drawPrompt })
 : `<div class="p-3 font-black text-amber-200">${cleanSecret}</div>`;
 m8RefreshActorQr();
 m8CharadesLabels(Boolean(col.isImagine), false);
@@ -8715,10 +8715,13 @@ renderCluesBox(qObj);
 const M8_CHAR_TITLE_NORMAL = '🎭 جولة «ولا كلمة» — الممثل يمسح الكود بكاميرا جواله وتظهر له الكلمة المطلوب تمثيلها (ومع رابط اللعبة تفتح صفحة «لعبة ديوانية الثمانية» بالصورة)!';
 const M8_CHAR_TITLE_IMAGINE = '🖼️ جولة «الصورة الخيالية» — المشرح يمسح الكود بكاميرا جواله وتظهر له الصورة (أو يضغط الزر تحت ويشوفها على هذه الشاشة لوحده). يمثّلها أو يشرحها لفريقه بدون ما ينطق الجواب، والفريق يخمّن قبل ما يخلص الوقت!';
 function m8CharadesLabels(imagine, shown) {
+const draw = Boolean(window.__m8CurCharades?.qObj.drawPrompt);
 const t = document.getElementById('qModalCharadesTitle');
-if (t) t.textContent = imagine ? M8_CHAR_TITLE_IMAGINE : M8_CHAR_TITLE_NORMAL;
+if (t) t.textContent = draw ? '🎨 امسح الكود لعرض بطاقة الرسّام. ارسم لفريقك من غير كلام أو كتابة.' : imagine ? M8_CHAR_TITLE_IMAGINE : M8_CHAR_TITLE_NORMAL;
 const b = document.getElementById('toggleActorSecretWordBtn');
-if (b) b.textContent = imagine
+if (b) b.textContent = draw
+? (shown ? '🔒 إخفاء البطاقة وبدء الرسم' : '🔒 إظهار بطاقة الرسّام على هذه الشاشة')
+: imagine
 ? (shown ? '🔒 إخفاء الصورة وابدأ الشرح الآن!' : '🖼️ إظهار الصورة للمشرح على هذه الشاشة')
 : (shown ? '🔒 إخفاء البطاقة وبدء التمثيل الآن!' : '🔒 إظهار بطاقة الممثل على هذه الشاشة');
 }
@@ -8728,18 +8731,21 @@ const img = document.getElementById('actorQrCodeImg'), note = document.getElemen
 if (!cur || !A || !img || !note) return;
 const inp = document.getElementById('actorBaseInput');
 if (inp && document.activeElement !== inp) inp.value = A.savedBase();
-const url = A.actorUrl(cur.qObj.uid);
+const url = cur.qObj.isCharades && cur.qObj.uid.startsWith('custom_') ? '' : A.actorUrl(cur.qObj.uid);
 if (url) {
 img.src = A.qrDataUrl(cur.qObj.uid);
 note.innerHTML = '📱 وجّه كاميرا الجوال على الكود: تفتح صفحة <b>لعبة ديوانية الثمانية</b> فيها صورة الشيء المطلوب تمثيله. لا تُري الشاشة لبقية الفريق!';
 } else {
 const word = (cur.qObj.a || '').replace(/الكلمة السرية.*?:/g, '').trim();
 const imag = Boolean(cur.col && cur.col.isImagine);
-const txt = 'لعبة ديوانية الثمانية\n' + (imag ? '🖼️ اشرح لفريقك: ' : '🎭 مثّل: ') + word;
+const draw = Boolean(cur.qObj.drawPrompt);
+const txt = 'لعبة ديوانية الثمانية\n' + (draw ? '🎨 ارسم: ' : imag ? '🖼️ اشرح لفريقك: ' : '🎭 مثّل: ') + word;
 try { img.src = window.M8QR ? window.M8QR.toDataUrl(txt, { ecc: 'M', border: 2 }) : ''; } catch (e) { img.src = ''; }
-note.innerHTML = imag
+note.innerHTML = draw
+? '📱 امسح الكود لقراءة <b>الشيء المطلوب رسمه</b>. خلّ البطاقة بينك وبين جوالك!'
+: imag
 ? '📱 وجّه كاميرا الجوال على الكود وتظهر لك <b>الجملة اللي في الصورة</b> مباشرة (بدون إنترنت). ولو تبي الصورة نفسها اضغط الزر تحت. لا تُري الشاشة لبقية الفريق!'
-: '📱 وجّه كاميرا الجوال على الكود وتظهر لك <b>الكلمة المطلوب تمثيلها</b> مباشرة (بدون إنترنت). ولفتح صفحة كاملة بصورة الشيء انشر اللعبة على رابط وتشتغل تلقائياً. لا تُري الشاشة لبقية الفريق!';
+: '📱 امسح الكود لقراءة <b>الكلمة المطلوب تمثيلها</b>. خلّ البطاقة بينك وبين جوالك!';
 }
 }
 // «من هو اللاعب»: first clue is free, every extra clue takes 100 off (never below 100).

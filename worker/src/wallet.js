@@ -217,6 +217,8 @@ export async function servePlay(env, request, session, slug) {
       id: c.slug, name: c.name, icon: c.icon || '🎯', group: c.sub_group || 'فئات الديوانية', tag: c.sub_group || 'فئات الديوانية',
       desc: c.description || '', questionCount: overrides[c.slug].length, qCount: overrides[c.slug].length,
       ...(c.poster ? { customPosterDataUrl: c.poster } : {}),
+      ...(c.isCharades ? { isCharades: true } : {}),
+      ...(c.isLetterHoneycomb ? { isLetterHoneycomb: true, letterLang: 'ar' } : {}),
       ...(EIGHT_STADIUM_CATEGORIES.has(c.slug) ? { isRebus: true, isVisual: true } : {})
     })),
     hiddenCats: slug !== 'eight' ? [] : categories.filter((c) => !c.is_visible).map((c) => c.slug),
