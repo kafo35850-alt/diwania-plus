@@ -226,18 +226,17 @@
         "useCategoryPoster": true,
         "am": {
           "t": "image",
-          "u": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Brazil_in_South_America.png/1280px-Brazil_in_South_America.png"
+          "u": "/media/med_seed_p_ae249a1af8c5"
         }
       },
       {
         "uid": "americas_continent_drive_q21_400",
         "points": 400,
-        "q": "ما اسم القناة المائية التي تربط بين المحيط الأطلسي والمحيط الهادئ وتفصل جغرافياً بين أمريكا الشمالية والجنوبية؟",
+        "q": "ما اسم القناة الملاحية التي تعبر برزخًا في أمريكا الوسطى وتصل بين المحيطين الأطلسي والهادئ؟",
         "a": "قناة بنما",
-        "useCategoryPoster": true,
-        "am": {
+        "qm": {
           "t": "image",
-          "u": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Miraflores_Locks_Panama_Canal.jpg/1280px-Miraflores_Locks_Panama_Canal.jpg"
+          "u": "/eight-media/59073210ec5e14055c6e.webp"
         }
       },
       {
@@ -248,7 +247,7 @@
         "useCategoryPoster": true,
         "am": {
           "t": "image",
-          "u": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Angel_Falls_Venezuela.jpg/1280px-Angel_Falls_Venezuela.jpg"
+          "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e9/SaltoAngel1.jpg/330px-SaltoAngel1.jpg"
         }
       },
       {
@@ -267,11 +266,7 @@
         "points": 600,
         "q": "ما هما الدولتان الحبيستان الوحيدتان في قارة أمريكا الجنوبية؟",
         "a": "بوليفيا وباراغواي",
-        "useCategoryPoster": true,
-        "am": {
-          "t": "image",
-          "u": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Bolivia-Paraguay_Locator.svg/1280px-Bolivia-Paraguay_Locator.svg.png"
-        }
+        "useCategoryPoster": true
       }
     ]
   },
@@ -292,10 +287,13 @@
         "points": 200,
         "q": "في أي دولة يقع المدرّج الروماني الشهير «الكولوسيوم»؟",
         "a": "إيطاليا (في مدينة روما)",
-        "useCategoryPoster": true,
         "am": {
           "t": "image",
-          "u": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Colosseum_of_Rome.jpg/1280px-Colosseum_of_Rome.jpg"
+          "u": "/media/med_seed_p_ba21a1770ab5"
+        },
+        "qm": {
+          "t": "image",
+          "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/de/Colosseo_2020.jpg/330px-Colosseo_2020.jpg"
         }
       },
       {
@@ -306,7 +304,7 @@
         "useCategoryPoster": true,
         "am": {
           "t": "image",
-          "u": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Angkor_Wat.jpg/1280px-Angkor_Wat.jpg"
+          "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/41/Angkor_Wat.jpg/250px-Angkor_Wat.jpg"
         }
       },
       {
@@ -314,16 +312,15 @@
         "points": 400,
         "q": "في أي دولة عربية تقع مدينة «تدمر» الأثرية المعروفة تاريخياً باسم «عروس الصحراء»؟",
         "a": "سوريا",
-        "useCategoryPoster": true,
-        "am": {
+        "qm": {
           "t": "image",
-          "u": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Palmyra,_Syria,_Ruins.jpg/1280px-Palmyra,_Syria,_Ruins.jpg"
+          "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c1/Palmyra_03.jpg/330px-Palmyra_03.jpg"
         }
       },
       {
         "uid": "ancient_monuments_drive_q23_600",
         "points": 600,
-        "q": "ما اسم الموقع الأثري النيوليتي في جنوب شرق تركيا الذي يعود إلى نحو 9600 قبل الميلاد ويُعد أقدم مجمع حجري طقسي مكتشف في التاريخ؟",
+        "q": "ما اسم الموقع النيوليتي في جنوب شرق تركيا الذي يشتهر بأعمدته الحجرية على شكل حرف T ويعود أقدمها إلى نحو 9600 قبل الميلاد؟",
         "a": "غوبكلي تبه (Göbekli Tepe)",
         "useCategoryPoster": true,
         "am": {
@@ -334,12 +331,12 @@
       {
         "uid": "ancient_monuments_drive_q24_600",
         "points": 600,
-        "q": "من هو الملك النبطي الذي يُرجّح علماء الآثار أن «الخزنة» في البتراء نُحتت لتكون ضريحاً له في القرن الأول الميلادي؟",
-        "a": "الحارث الرابع (أريتاس الرابع)",
+        "q": "ما اسم الواجهة النبطية في البتراء التي يمرّ إليها الزائر عند نهاية ممرّ السيق؟",
+        "a": "الخزنة (خزنة الفرعون)",
         "useCategoryPoster": true,
         "am": {
           "t": "image",
-          "u": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Al_Khazneh,_Petra.jpg/1280px-Al_Khazneh,_Petra.jpg"
+          "u": "/eight-media/3b2b24d253701e374c73.webp"
         }
       }
     ]
@@ -1554,7 +1551,7 @@
         "a": "الشبكات العصبية الاصطناعية (Artificial Neural Networks)",
         "am": {
           "t": "image",
-          "u": "/eight-media/a59baf232fd60dcd0968.webp"
+          "u": "/eight-media/6fc13bed64a7cc27e4d3.webp"
         }
       },
       {
@@ -1582,7 +1579,7 @@
       {
         "uid": "artificial_intelligence_drive_q22_400",
         "points": 400,
-        "q": "ما اسم البرنامج الذي طورته شركة DeepMind وهزم بطل العالم في لعبة الغو (Go) لي سيدول عام 2016؟",
+        "q": "ما اسم البرنامج الذي طوّرته ديب مايند وفاز على لي سيدول، صاحب 18 لقبًا عالميًا في لعبة غو، بنتيجة 4–1 عام 2016؟",
         "a": "ألفا غو (AlphaGo)",
         "useCategoryPoster": true,
         "am": {
@@ -1593,13 +1590,9 @@
       {
         "uid": "artificial_intelligence_drive_q23_600",
         "points": 600,
-        "q": "ما اسم المؤتمر الصيفي الذي عُقد عام 1956 وشهد صياغة مصطلح «الذكاء الاصطناعي» رسمياً للمرة الأولى على يد جون مكارثي؟",
+        "q": "ما اسم المشروع البحثي الصيفي الذي عُقد عام 1956 في الكلية التي ورد اسمها في مقترح «الذكاء الاصطناعي» المنشور عام 1955؟",
         "a": "مؤتمر دارتموث (Dartmouth Summer Research Project on Artificial Intelligence)",
-        "useCategoryPoster": true,
-        "am": {
-          "t": "image",
-          "u": "https://www.cantorsparadise.org/content/images/size/w1200/2023/12/0-3jGv1es40NHPcTE3.jpg"
-        }
+        "useCategoryPoster": true
       },
       {
         "uid": "artificial_intelligence_drive_q24_600",
@@ -2065,7 +2058,7 @@
         "a": "Au",
         "am": {
           "t": "image",
-          "u": "/eight-media/ccfb6e1e216ff15c84d2.webp"
+          "u": "/eight-media/3a32fc5122c3941477df.webp"
         }
       },
       {
@@ -2082,7 +2075,7 @@
       {
         "uid": "chemistry_table_drive_q21_400",
         "points": 400,
-        "q": "ما هو العنصر الكيميائي الذي يرمز له بالرمز (Hg) ويُعد الفلز الوحيد السائل في درجة حرارة الغرفة القياسية؟",
+        "q": "ما اسم الفلز الذي يرمز له بالرمز Hg ويكون سائلًا عند 25 درجة مئوية؟",
         "a": "الزئبق",
         "useCategoryPoster": true,
         "am": {
@@ -2098,13 +2091,13 @@
         "useCategoryPoster": true,
         "am": {
           "t": "image",
-          "u": "https://blog.kakaocdn.net/dna/b6bJ6u/btqL8VLTMlf/AAAAAAAAAAAAAAAAAAAAAPuZPxCKJsfqXjZ5KD0ihVkAsVdiQ9ZmnG9YWSHXXGbW/img.jpg?allow_ip=&allow_referer=&credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1777561199&signature=tXMIqjrJk0%2BSAviGnKZNwJB22T8%3D"
+          "u": "/eight-media/228093ac1494bf90ad78.webp"
         }
       },
       {
         "uid": "chemistry_table_drive_q23_600",
         "points": 600,
-        "q": "ما هو العنصر الكيميائي صاحب أعلى درجة انصهار بين جميع الفلزات النقية (3,422 درجة مئوية) وما رمزه المشتق من اسم معدن «الوولفراميت»؟",
+        "q": "ما الفلز النقي صاحب أعلى درجة انصهار، نحو 3422 درجة مئوية، ويرمز له بالرمز W المأخوذ من اسمه «وولفرام»؟",
         "a": "التنغستن (Tungsten) ورمزه W",
         "useCategoryPoster": true,
         "am": {
@@ -2115,7 +2108,7 @@
       {
         "uid": "chemistry_table_drive_q24_600",
         "points": 600,
-        "q": "ما هو أثقل عنصر في الجدول الدوري الحالي وعدده الذري 118 وينتمي إلى المجموعة 18؟",
+        "q": "ما اسم العنصر ذو العدد الذري 118 في المجموعة 18 من الجدول الدوري؟",
         "a": "الأوغانيسون (Oganesson) ورمزه Og",
         "useCategoryPoster": true,
         "am": {
@@ -2570,7 +2563,7 @@
         "useCategoryPoster": true,
         "am": {
           "t": "image",
-          "u": "https://dobetter.esade.edu/sites/default/files/inline-images/tim-berners.jpg"
+          "u": "/media/med_seed_p_576963e4bef7"
         }
       },
       {
@@ -2598,12 +2591,12 @@
       {
         "uid": "computer_tech_drive_q24_600",
         "points": 600,
-        "q": "ما اسم البروتوكول الذي اقترحه ديفيد ميلز عام 1985 ولا يزال يُعد المعيار الأساسي لمزامنة الساعات عبر شبكات الحاسوب؟",
+        "q": "ما اسم بروتوكول مزامنة الساعات عبر الشبكات الذي وصفه ديفيد ميلز في الوثيقة RFC 958 عام 1985؟",
         "a": "بروتوكول وقت الشبكة (NTP - Network Time Protocol)",
         "useCategoryPoster": true,
         "am": {
           "t": "image",
-          "u": "https://www.expressvpn.com/wp-ws-cache/uploads-expressvpn/2026/05/network-time-protocol-1.png"
+          "u": "/eight-media/282b91d67c6ac30cbdeb.webp"
         }
       }
     ]
@@ -2755,7 +2748,11 @@
         "a": "نهر النيل",
         "am": {
           "t": "image",
-          "u": "/eight-media/49df1434501fd56387ec.webp"
+          "u": "/media/med_seed_p_2b7dbe38f56e"
+        },
+        "qm": {
+          "t": "image",
+          "u": "/eight-media/bd5c4b415fa859506c09.webp"
         }
       },
       {
@@ -2763,10 +2760,13 @@
         "points": 200,
         "q": "في أي عام افتُتحت قناة السويس رسمياً للملاحة العالمية؟",
         "a": "عام 1869 (17 نوفمبر 1869)",
-        "useCategoryPoster": true,
         "am": {
           "t": "image",
           "u": "https://www.meisterdrucke.us/kunstwerke/1260px/Edouard_Riou_-_Inauguration_of_the_Suez_Canal_The_canal_was_created_to_connect_the_Red_Sea_to_t_-_%28MeisterDrucke-951726%29.jpg"
+        },
+        "qm": {
+          "t": "image",
+          "u": "/eight-media/bd5c4b415fa859506c09.webp"
         }
       },
       {
@@ -2774,10 +2774,13 @@
         "points": 400,
         "q": "من هو القائد الفاطمي الذي أسّس مدينة القاهرة عام 969م (358 هـ)؟",
         "a": "جوهر الصقلي",
-        "useCategoryPoster": true,
         "am": {
           "t": "image",
           "u": "https://darkageshistory.com/wp-content/uploads/2025/04/Jawhar-al-Siqilli-leading-the-Fatimid-army-to-Egypt.png"
+        },
+        "qm": {
+          "t": "image",
+          "u": "/eight-media/bd5c4b415fa859506c09.webp"
         }
       },
       {
@@ -2785,21 +2788,23 @@
         "points": 400,
         "q": "من هو الملك الفرعوني الذي أمر ببناء الهرم الأكبر في الجيزة؟",
         "a": "الملك خوفو",
-        "useCategoryPoster": true,
         "am": {
           "t": "image",
           "u": "https://i0.wp.com/www.world-archaeology.com/wp-content/uploads/2022/03/pg-105.jpg?resize=700%2C465&ssl=1"
+        },
+        "qm": {
+          "t": "image",
+          "u": "/eight-media/bd5c4b415fa859506c09.webp"
         }
       },
       {
         "uid": "country_egypt_drive_q23_600",
         "points": 600,
-        "q": "من هو المهندس والوزير المصري القديم الذي صمّم الهرم المدرّج للملك زوسر في سقارة، ويُعد أول مهندس معماري يُعرف اسمه في التاريخ؟",
+        "q": "من المهندس المصري القديم الذي يُنسب إليه تصميم الهرم المدرّج للملك زوسر في سقارة؟",
         "a": "إمحوتب",
-        "useCategoryPoster": true,
-        "am": {
+        "qm": {
           "t": "image",
-          "u": "https://upload.wikimedia.org/wikipedia/commons/1/14/Statue_of_Imhotep%2C_Egypt%2C_600-500_BCE_Wellcome_L0058411.jpg"
+          "u": "/eight-media/fe100253505dbdde7cd6.webp"
         }
       },
       {
@@ -2807,10 +2812,13 @@
         "points": 600,
         "q": "ما اسم العالم المصري الذي فاز بجائزة نوبل في الكيمياء عام 1999 لريادته في علم «كيمياء الفيمتو»؟",
         "a": "أحمد زويل",
-        "useCategoryPoster": true,
         "am": {
           "t": "image",
           "u": "https://cdn.the-scientist.com/assets/articleNo/33057/iImg/7251/3dd4eb46-d6f5-4eb2-9a78-3cb59b3be9a8-zewail.jpg"
+        },
+        "qm": {
+          "t": "image",
+          "u": "/eight-media/bd5c4b415fa859506c09.webp"
         }
       }
     ]
@@ -2894,6 +2902,10 @@
         "am": {
           "t": "image",
           "u": "/eight-media/8b850be54ddae7ff1af2.webp"
+        },
+        "qm": {
+          "t": "image",
+          "u": "/media/med_seed_p_c8e7a11ab2b4"
         }
       },
       {
@@ -2901,10 +2913,13 @@
         "points": 200,
         "q": "ما عاصمة المملكة الأردنية الهاشمية؟",
         "a": "عمّان",
-        "useCategoryPoster": true,
         "am": {
           "t": "image",
           "u": "https://y3ni.com/web-media/0/src/c5fe33451686d44778a5a6129413c2ab2e66bb2a.jpg"
+        },
+        "qm": {
+          "t": "image",
+          "u": "/media/med_seed_p_c8e7a11ab2b4"
         }
       },
       {
@@ -2923,10 +2938,13 @@
         "points": 400,
         "q": "ما اسم الحضارة العربية القديمة التي اتخذت من البتراء عاصمةً لمملكتها؟",
         "a": "الأنباط (مملكة الأنباط)",
-        "useCategoryPoster": true,
         "am": {
           "t": "image",
           "u": "https://www.ontheluce.com/wp-content/uploads/2023/10/one-day-in-petra-treasury-1440x900.jpg.webp"
+        },
+        "qm": {
+          "t": "image",
+          "u": "/media/med_seed_p_c8e7a11ab2b4"
         }
       },
       {
@@ -3169,7 +3187,7 @@
         "a": "مسقط",
         "am": {
           "t": "image",
-          "u": "/eight-media/bcd88666e2b21a3ade6b.webp"
+          "u": "/media/med_seed_p_994dea8cb6b4"
         }
       },
       {
@@ -3221,11 +3239,7 @@
         "points": 600,
         "q": "من هو الإمام العُماني من أسرة اليعاربة الذي قاد تحرير مسقط من البرتغاليين عام 1650م وأمر ببناء البرج الدائري الشهير في قلعة نزوى؟",
         "a": "الإمام سلطان بن سيف اليعربي (سلطان بن سيف الأول)",
-        "useCategoryPoster": true,
-        "am": {
-          "t": "image",
-          "u": "https://e1.elaphjournal.com/resources/images/Politics/2015/1/4.jpg"
-        }
+        "useCategoryPoster": true
       }
     ]
   },
@@ -3308,6 +3322,10 @@
         "am": {
           "t": "image",
           "u": "/eight-media/45840930d0044ab3f711.webp"
+        },
+        "qm": {
+          "t": "image",
+          "u": "/media/med_seed_p_45260139f14f"
         }
       },
       {
@@ -3324,7 +3342,7 @@
       {
         "uid": "country_qatar_drive_q21_400",
         "points": 400,
-        "q": "ما اسم الحقل البحري العملاق للغاز الطبيعي في قطر الذي يُعد أكبر حقل غاز غير مصاحب في العالم؟",
+        "q": "ما اسم حقل الغاز البحري القطري الذي يقع قبالة الساحل الشمالي الشرقي لشبه جزيرة قطر ويتصل بحقل بارس الجنوبي الإيراني؟",
         "a": "حقل الشمال",
         "useCategoryPoster": true,
         "am": {
@@ -3340,7 +3358,7 @@
         "useCategoryPoster": true,
         "am": {
           "t": "image",
-          "u": "https://fsn1.your-objectstorage.com/worldheritagesite/media/images/w1402a.width-1200.jpg"
+          "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bb/Zubarah_ruins_site.jpg/250px-Zubarah_ruins_site.jpg"
         }
       },
       {
@@ -3580,27 +3598,26 @@
         "uid": "country_uae_drive_q19_200",
         "points": 200,
         "q": "كم عدد الإمارات التي يتألف منها اتحاد دولة الإمارات العربية المتحدة؟",
-        "a": "7 إمارات",
-        "am": {
-          "t": "image",
-          "u": "/eight-media/79d47a1e6708d06a1f04.webp"
-        }
+        "a": "7 إمارات"
       },
       {
         "uid": "country_uae_drive_q20_200",
         "points": 200,
         "q": "ما عاصمة دولة الإمارات العربية المتحدة؟",
         "a": "أبوظبي",
-        "useCategoryPoster": true,
         "am": {
           "t": "image",
-          "u": "https://megapass.com/cdn-cgi/image/width%3D900%2Cquality%3D100%2Cformat%3Dwebp%2Cfit%3Dcover%2Ccrop%3Dcenter%2Cgravity%3Dcenter/https%3A/cdn.megapass.com/public/storage/images/blog/images/abu-dhabi-skyline-1780553531.webp"
+          "u": "/media/med_seed_p_085785d4620a"
+        },
+        "qm": {
+          "t": "image",
+          "u": "/media/med_seed_p_fe4213b0816f"
         }
       },
       {
         "uid": "country_uae_drive_q21_400",
         "points": 400,
-        "q": "ما اسم القمة الجبلية الأعلى في دولة الإمارات العربية المتحدة؟",
+        "q": "ما الجبل الذي تقع فيه أعلى نقطة داخل الإمارات، في رأس الخيمة؟",
         "a": "جبل جيس (في إمارة رأس الخيمة)",
         "useCategoryPoster": true,
         "am": {
@@ -3613,11 +3630,7 @@
         "points": 400,
         "q": "أي إمارة من الإمارات السبع انضمت إلى الاتحاد في 10 فبراير 1972 بعد إعلان قيامه في 2 ديسمبر 1971؟",
         "a": "إمارة رأس الخيمة",
-        "useCategoryPoster": true,
-        "am": {
-          "t": "image",
-          "u": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Ras_al-Khaimah_in_United_Arab_Emirates.svg/3840px-Ras_al-Khaimah_in_United_Arab_Emirates.svg.png"
-        }
+        "useCategoryPoster": true
       },
       {
         "uid": "country_uae_drive_q23_600",
@@ -3633,7 +3646,7 @@
       {
         "uid": "country_uae_drive_q24_600",
         "points": 600,
-        "q": "ما اسم الثقافة الأثرية من العصر البرونزي (نحو 2600–2000 ق.م) التي سُمّيت باسم جزيرة صغيرة قبالة ساحل أبوظبي اشتهرت بمقابرها الدائرية المبنية من الحجر المصقول؟",
+        "q": "ما اسم ثقافة العصر البرونزي التي سُمّيت باسم جزيرة أثرية قرب أبوظبي تضم مستوطنة ومقابر دائرية تعود تقريبًا إلى 2500–2000 ق.م؟",
         "a": "ثقافة (حضارة) أم النار",
         "useCategoryPoster": true,
         "am": {
