@@ -3791,14 +3791,22 @@
         "points": 200,
         "q": "من هو الهداف التاريخي لبطولة دوري أبطال أوروبا برصيد 140 هدفاً؟",
         "a": "كريستيانو رونالدو",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/Cristiano_Ronaldo_(35480124482).jpg?width=1280"
+        }
       },
       {
         "uid": "custom_1795331767366_drive_q9_200",
         "points": 200,
         "q": "في أي موسم تغيّر اسم البطولة رسمياً من «كأس الأندية الأوروبية البطلة» إلى «دوري أبطال أوروبا»؟",
         "a": "موسم 1992–1993",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/UEFA_Champions_League_trophy,_Old_Trafford,_1992.jpg?width=1280"
+        }
       },
       {
         "uid": "custom_1795331767366_drive_q10_200",
@@ -3815,21 +3823,33 @@
         "points": 200,
         "q": "من هو المدرب الأكثر تتويجاً بلقب دوري أبطال أوروبا في التاريخ برصيد 5 ألقاب؟",
         "a": "كارلو أنشيلوتي",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/Carloancelotti.jpg?width=1280"
+        }
       },
       {
         "uid": "custom_1795331767366_drive_q12_200",
         "points": 200,
         "q": "ما النادي الفرنسي الذي تُوّج بلقب أول نسخة بالنظام الحديث (دوري أبطال أوروبا) عام 1993؟",
         "a": "أولمبيك مارسيليا",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/Olympique_de_Marseille_-_L%27%C3%A9quipe_de_la_finale_de_la_Ligue_des_Champions_1993.svg?width=960"
+        }
       },
       {
         "uid": "custom_1795331767366_drive_q13_400",
         "points": 400,
         "q": "من هو اللاعب الوحيد الذي تُوّج بلقب دوري أبطال أوروبا مع 3 أندية مختلفة (أياكس وريال مدريد وميلان)؟",
         "a": "كلارنس سيدورف (Clarence Seedorf)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/Clarence_Seedorf.jpg?width=1280"
+        }
       },
       {
         "uid": "custom_1795331767366_drive_q14_400",
@@ -3846,28 +3866,44 @@
         "points": 400,
         "q": "من هو اللاعب الذي سجل أسرع هدف في تاريخ دوري أبطال أوروبا بعد 10.12 ثانية بقميص بايرن ميونخ أمام ريال مدريد عام 2007؟",
         "a": "روي ماكاي (Roy Makaay)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/RoyMakaay.jpg?width=1280"
+        }
       },
       {
         "uid": "custom_1795331767366_drive_q16_400",
         "points": 400,
         "q": "ما النادي الإنجليزي الذي تُوّج بكأس أوروبا مرتين متتاليتين عامي 1979 و1980 تحت قيادة برايان كلوف؟",
         "a": "نوتنغهام فورست",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/Nottingham_Forest_FC_%28Amsterdam%2C_1980%29_-_Trevor_Francis.jpg?width=1280"
+        }
       },
       {
         "uid": "custom_1795331767366_drive_q17_400",
         "points": 400,
         "q": "كم هدفاً سجل كريستيانو رونالدو في موسم 2013–2014 ليحقق الرقم القياسي لأكثر أهداف في موسم واحد بدوري أبطال أوروبا؟",
         "a": "17 هدفاً",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/Celebraci%C3%B3n_de_La_D%C3%A9cima_Copa_de_Europa_Real_Madrid.jpg?width=1280"
+        }
       },
       {
         "uid": "custom_1795331767366_drive_q18_400",
         "points": 400,
         "q": "ما أول نادٍ بريطاني يتوّج بلقب كأس الأندية الأوروبية البطلة عام 1967 في لشبونة؟",
         "a": "سيلتك الإسكتلندي (فاز على إنتر ميلان 2-1)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/Celtic_FC_fans_Lisbon_67.jpg?width=1280"
+        }
       },
       {
         "uid": "custom_1795331767366_drive_q19_600",
