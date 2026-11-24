@@ -18731,6 +18731,10 @@
         "qm": {
           "t": "image",
           "u": "/eight-media/4ed338f9a435dfa2ab77.webp"
+        },
+        "am": {
+          "t": "image",
+          "u": "https://www.medineterranean.com/cdn/shop/files/03471_b_199c2e9c-ea7f-4493-8427-3d17f792708d_large.jpg?v=1752681852"
         }
       },
       {
@@ -18738,35 +18742,55 @@
         "points": 200,
         "q": "ما الدولة التي يُعد طبق «التاكو» (Tacos) المصنوع من خبز التورتيلا أحد أشهر أطباقها الوطنية؟",
         "a": "المكسيك",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.cocinadelirante.com/688x459/filters%3Aformat%28webp%29%3Aquality%2875%29/sites/default/files/styles/gallerie/public/ideas-de-tacos-para-fiestas-patrias.jpg"
+        }
       },
       {
         "uid": "world_dishes_drive_q21_400",
         "points": 400,
         "q": "ما اسم الطبق الوطني الكوري الشهير المكوّن من ملفوف النابا المخمّر مع الفلفل الأحمر والثوم والزنجبيل؟",
         "a": "الكيمتشي (Kimchi)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://cheobasannokimuchi.com/cdn/shop/files/hakusai_karakuchi.jpg?v=1690505490"
+        }
       },
       {
         "uid": "world_dishes_drive_q22_400",
         "points": 400,
         "q": "ما اسم الطبق الإيطالي التقليدي القادم من شمال إيطاليا والذي يُطهى فيه أرز «الأربوريو» ببطء مع المرق الساخن حتى يصبح بقوام كريمي؟",
         "a": "الريزوتو (Risotto)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://images.squarespace-cdn.com/content/v1/56c998b2f2b77e5c1531a5b6/1598402469381-62DMOK1GQUQ7FDH11WOV/IMG_5401.JPG"
+        }
       },
       {
         "uid": "world_dishes_drive_q23_600",
         "points": 600,
         "q": "ما اسم التابل الإثيوبي المركّب شديد الحرارة المكوّن من أكثر من عشر بهارات أبرزها الفلفل المجفف والحلبة والهيل، والذي يُعد الأساس في طبق «دورو وات» الوطني؟",
         "a": "البيربيري (Berbere)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://wfg32p.s3.amazonaws.com/media/dishes/berbere_5436-reg.jpg"
+        }
       },
       {
         "uid": "world_dishes_drive_q24_600",
         "points": 600,
         "q": "ما اسم الطبق التقليدي في جزيرة سردينيا الإيطالية المكوّن من معكرونة يدوية الصنع على شكل خيوط دقيقة تُعد من أندر أنواع المعكرونة في العالم؟",
         "a": "سو فيلينديو (Su Filindeu)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://wips.plug.it/cips/buonissimo.org/cms/2026/01/su-filindeu-cesta.jpg"
+        }
       }
     ]
   },
