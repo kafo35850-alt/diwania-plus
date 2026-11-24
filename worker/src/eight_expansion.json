@@ -14842,28 +14842,44 @@
         "points": 400,
         "q": "ما اسم زوجة «الكبير أوي» في المواسم الأولى التي جسّدت دورها الفنانة دنيا سمير غانم؟",
         "a": "هدية",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.nawa3em.com/images/criteria/6266_%D9%85%D8%B3%D9%84%D8%B3%D9%84%20%D8%A7%D9%84%D9%83%D8%A8%D9%8A%D8%B1%20%D8%A7%D9%88%D9%8A.jpg"
+        }
       },
       {
         "uid": "series_alkabeer_awy_drive_q22_400",
         "points": 400,
         "q": "ما اسم الطبيب الشهير في المزاريطة الذي يؤدي دوره الفنان بيومي فؤاد؟",
         "a": "الدكتور ربيع",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://media.elwatannews.com/media/img/mediaarc/large/16569486201681001018.jpg"
+        }
       },
       {
         "uid": "series_alkabeer_awy_drive_q23_600",
         "points": 600,
         "q": "في الجزء السادس من «الكبير أوي»، ما اسم المهرجان السينمائي الساخر الذي أقامه الكبير في قريته، وما أسماء ابنيه التوأمين؟",
         "a": "مهرجان المزاريطة السينمائي الدولي — وابناه التوأمان هما «العترة» و«جوني»",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://media.gemini.media/img/original/2022/4/27/2022_4_27_20_4_32_266.jpg"
+        }
       },
       {
         "uid": "series_alkabeer_awy_drive_q24_600",
         "points": 600,
         "q": "ما اسم الشقيق الرابع «السوداني» للكبير وجوني وحزلقوم الذي ظهر في الجزء الخامس (2015) وأدّى دوره أحمد مكي أيضاً، ومن هو المخرج الذي أخرج الموسم الأول من «الكبير أوي» عام 2010؟",
         "a": "الشقيق الرابع هو «نعيم» — وأخرج الموسم الأول المخرج إسلام خيري",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://watanimg.elwatannews.com/image_archive/original_lower_quality/2822494211708182362.jpg"
+        }
       }
     ]
   },
