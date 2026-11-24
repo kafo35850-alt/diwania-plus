@@ -354,6 +354,10 @@
         "am": {
           "t": "image",
           "u": "/eight-media/cd7534277128977b8876.webp"
+        },
+        "qm": {
+          "t": "image",
+          "u": "https://images.squarespace-cdn.com/content/v1/54fc8146e4b02a22841f4df7/1610461501569-ZJG5SOTZRT4MHCGQOBS1/nnn.jpg"
         }
       },
       {
@@ -365,6 +369,10 @@
         "am": {
           "t": "image",
           "u": "https://m.media-amazon.com/images/M/MV5BZmFhNGVlY2ItYmYxNC00NzVmLWI4NTMtMjgxY2JjY2MzZjRkXkEyXkFqcGc%40._V1_.jpg"
+        },
+        "qm": {
+          "t": "image",
+          "u": "https://cdn-origin.cool-style.com.tw/cool/2023/12/giant-cover.png"
         }
       },
       {
@@ -374,6 +382,10 @@
         "a": "مقاطعة شيغانشينا (Shiganshina District)",
         "useCategoryPoster": true,
         "am": {
+          "t": "image",
+          "u": "https://m.media-amazon.com/images/M/MV5BMGE5OGFiMzctZTZiZi00MWYzLTlmOGEtMTAzZjNlZWMzMGU4XkEyXkFqcGc%40._V1_.jpg"
+        },
+        "qm": {
           "t": "image",
           "u": "https://m.media-amazon.com/images/M/MV5BMGE5OGFiMzctZTZiZi00MWYzLTlmOGEtMTAzZjNlZWMzMGU4XkEyXkFqcGc%40._V1_.jpg"
         }
@@ -387,6 +399,10 @@
         "am": {
           "t": "image",
           "u": "https://letsweaboo.com/upload/upload/news/568569952231.jpg"
+        },
+        "qm": {
+          "t": "image",
+          "u": "https://m.media-amazon.com/images/M/MV5BMDdiNDMxZWMtYmM2ZC00NmY0LTgzYTctYTY0Nzc2YTVhNjNlXkEyXkFqcGc%40._V1_.jpg"
         }
       },
       {
@@ -398,6 +414,10 @@
         "am": {
           "t": "image",
           "u": "https://elcomercio.pe/resizer/v2/L2CHDEFCAVFGJEZ522PWD23K3M.jpg?auth=2e8262a1bd8a18237aa38219bd9d097e0e2d29ecf80185f835467f8c6198fa1d&height=528&quality=75&smart=true&width=980"
+        },
+        "qm": {
+          "t": "image",
+          "u": "https://cdn-ak.f.st-hatena.com/images/fotolife/b/bdek3712/20220322/20220322132342.jpg"
         }
       },
       {
@@ -409,6 +429,10 @@
         "am": {
           "t": "image",
           "u": "https://i0.wp.com/inasianspaces.com/wp-content/uploads/2022/10/attack-on-titan-season-4-ep-21-the-first-fritz-king.png?resize=768%2C432&ssl=1"
+        },
+        "qm": {
+          "t": "image",
+          "u": "https://pbs.twimg.com/media/FI0WG3XX0AATet_.jpg"
         }
       }
     ]
