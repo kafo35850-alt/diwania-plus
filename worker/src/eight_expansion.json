@@ -15796,28 +15796,44 @@
         "points": 400,
         "q": "ما اسم الحانة الشهيرة في حي «سمول هيث» التي تُعدّ المقر الرئيسي لاجتماعات عائلة شيلبي؟",
         "a": "ذا غاريسون (The Garrison Pub)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://art.ceskatelevize.cz/cms/art/article-2019-14/articles/rizny-industrial-aneb-mytizace-birminghamu-v-serialu-peaky-blinders/gallery-4RQkY/garrison-04.jpg"
+        }
       },
       {
         "uid": "series_peaky_blinders_drive_q22_400",
         "points": 400,
         "q": "ما اسم زعيم العصابة اللندنية الذي أدّى دوره النجم توم هاردي وتراوحت علاقته مع توماس شيلبي بين التحالف والعداوة؟",
         "a": "آلفي سولومونز (Alfie Solomons)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://hips.hearstapps.com/hmg-prod/images/peaky-blinders-tom-hardy-1-2-1565013406.jpg"
+        }
       },
       {
         "uid": "series_peaky_blinders_drive_q23_600",
         "points": 600,
         "q": "في أي معركة تاريخية شهيرة من الحرب العالمية الأولى خدم توماس شيلبي كـ «حفّار أنفاق» (Tunneller) وظلّت صدمتها تطارده طوال المسلسل؟",
         "a": "معركة السوم (Battle of the Somme)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://cdn.ida2at.com/media/2023/01/%D8%AA%D9%88%D9%85%D8%A7%D8%B3-%D8%B4%D9%8A%D9%84%D8%A8%D9%8A-%D9%85%D9%86-Peaky-Blinders.jpg"
+        }
       },
       {
         "uid": "series_peaky_blinders_drive_q24_600",
         "points": 600,
         "q": "ما اسم زعيم المافيا الإيطالية-الأمريكية الذي جاء من نيويورك للثأر من عائلة شيلبي في الموسم الرابع، ومن الممثل الحائز على الأوسكار الذي جسّد دوره؟",
         "a": "لوكا تشانغريتا (Luca Changretta) — وجسّده أدريان برودي (Adrien Brody)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://startefacts.com/upload/upload/news/573538408765.jpg"
+        }
       }
     ]
   },
