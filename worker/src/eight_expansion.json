@@ -13743,35 +13743,55 @@
         "points": 200,
         "q": "من هو الرحالة الإيطالي البندقي الذي سافر إلى الصين وعاش في بلاط قوبلاي خان لسنوات طويلة؟",
         "a": "ماركو بولو",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://faktypro.com.ua/uploads/img-2/12-cikavih-faktiv-pro-marko-polo.jpg"
+        }
       },
       {
         "uid": "famous_explorers_drive_q21_400",
         "points": 400,
         "q": "من هو المستكشف البرتغالي الذي قاد أول رحلة بحرية وصلت مباشرة من أوروبا إلى الهند عبر رأس الرجاء الصالح عام 1498م؟",
         "a": "فاسكو دا غاما",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://static.lsm.lv/media/2022/07/large/1/ig3i.jpg"
+        }
       },
       {
         "uid": "famous_explorers_drive_q22_400",
         "points": 400,
         "q": "ما الاسم الكامل لكتاب رحلة ابن بطوطة الشهير الذي أملاه على ابن جزي الكلبي؟",
         "a": "تحفة النظار في غرائب الأمصار وعجائب الأسفار",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://sothebys-md.brightspotcdn.com/dims4/default/5d473ee/2147483647/strip/true/crop/2000x1147%2B0%2B0/resize/4096x2349%21/quality/90/?url=http%3A%2F%2Fsothebys-brightspot.s3.amazonaws.com%2Fmedia-desk%2Fwebnative%2Fimages%2Fa0%2Fea%2F8324f56444c896df538b86fb48f3%2Fl25223-dd5gl-t1-grouped-03.jpg"
+        }
       },
       {
         "uid": "famous_explorers_drive_q23_600",
         "points": 600,
         "q": "من هو الرحالة والدبلوماسي العباسي الذي أرسله الخليفة المقتدر بالله عام 921م إلى بلاد الصقالبة ودوّن وصفاً فريداً لطقوس الروس (الفايكنغ) على نهر الفولغا؟",
         "a": "أحمد بن فضلان",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://1.bp.blogspot.com/-oFxc4JyJt4U/XRqQEaIC3pI/AAAAAAAACK8/21etl4POGpQk00NORstFy0A6bZd05KOJgCLcBGAs/s1600/%25D8%25A7%25D8%25A8%25D9%2586%2B%25D9%2581%25D8%25B6%25D9%2584%25D8%25A7%25D9%2586.PNG"
+        }
       },
       {
         "uid": "famous_explorers_drive_q24_600",
         "points": 600,
         "q": "من هو القبطان الإسباني الذي أتمّ قيادة سفينة «فيكتوريا» لإكمال أول دوران كامل حول الكرة الأرضية عام 1522م بعد مقتل فرديناند ماجلان في الفلبين؟",
         "a": "خوان سيباستيان إلكانو",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://content-historia.nationalgeographic.com.es/medio/2022/07/19/el-navegante-de-guetaria_376dddc0_1200x630.jpg"
+        }
       }
     ]
   },
@@ -13792,35 +13812,55 @@
         "points": 200,
         "q": "في أي دولة أُقيمت النسخة الأولى من بطولة كأس العالم عام 1930م؟",
         "a": "الأوروغواي",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://media.elobservador.com.uy/p/9648e6aeb230413c26577c6a712f9e89/adjuntos/362/imagenes/100/462/0100462617/1000x0/smart/1572291934332webp.webp"
+        }
       },
       {
         "uid": "fifa_world_cup_drive_q21_400",
         "points": 400,
         "q": "من هو الهداف التاريخي لبطولة كأس العالم لكرة القدم برصيد 16 هدفاً؟",
         "a": "ميروسلاف كلوزه (Miroslav Klose)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://i.postimg.cc/1tfSN5jL/afp-en-b235434445506ad58d077df1d139f94f8a1a52df.jpg"
+        }
       },
       {
         "uid": "fifa_world_cup_drive_q22_400",
         "points": 400,
         "q": "من هو المهاجم الفرنسي الذي يحمل الرقم القياسي لأكثر عدد من الأهداف في نسخة واحدة من كأس العالم برصيد 13 هدفاً في مونديال 1958؟",
         "a": "جاست فونتين (Just Fontaine)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://images.metroimg.com/2026/04/just-fontaine-franca-futebol.jpg"
+        }
       },
       {
         "uid": "fifa_world_cup_drive_q23_600",
         "points": 600,
         "q": "من هو اللاعب الفرنسي الذي سجل أول هدف في تاريخ بطولات كأس العالم عام 1930 في مرمى المكسيك؟",
         "a": "لوسيان لوران (Lucien Laurent)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://seyler.ekstat.com/img/max/800/C/CtoN0g8y44xaEg66-639116742607058724.jpg"
+        }
       },
       {
         "uid": "fifa_world_cup_drive_q24_600",
         "points": 600,
         "q": "من هو المدرب الإيطالي الوحيد في التاريخ الذي تُوّج بلقب كأس العالم مرتين كمدرب (عامي 1934 و1938)؟",
         "a": "فيتوريو بوتسو (Vittorio Pozzo)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.jurnas.com/images/posts/1/2025/2025-06-11/e0b0e789a648a26e0ba83e64a1f077e0_1.jpg"
+        }
       }
     ]
   },
@@ -13841,35 +13881,55 @@
         "points": 200,
         "q": "ما اسم الفريق الإيطالي العريق ذي اللون الأحمر الشهير الذي يُعد الأكثر تتويجاً ببطولة الصانعين في تاريخ الفورمولا 1؟",
         "a": "فيراري (Scuderia Ferrari)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://ferrari.scene7.com/is/image/ferrari/65fab4f33be2600056a639b3-scuderia-ferrari-australian-gp-2024-preview-land"
+        }
       },
       {
         "uid": "formula_1_drive_q21_400",
         "points": 400,
         "q": "ما اسم نظام تقليل السحب الهوائي الموجود في الجناح الخلفي لسيارات الفورمولا 1 والذي يُستخدم للمساعدة في التجاوز على المقاطع المستقيمة؟",
         "a": "نظام DRS (Drag Reduction System)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://s2-autoesporte.glbimg.com/Tf8kaHlFuqIPyrx_LW1EP-xIymE%3D/0x0%3A700x411/984x0/smart/filters%3Astrip_icc%28%29/i.s3.glbimg.com/v1/AUTH_cf9d035bf26b4646b105bd958f32089d/internal_photos/bs/2024/q/C/ezcUZQSViBWHQ0M0LMLQ/f1-red-bull-2023-drs-aberto.jpg"
+        }
       },
       {
         "uid": "formula_1_drive_q22_400",
         "points": 400,
         "q": "كم عدد الألقاب العالمية القياسي الذي يتقاسمه كل من مايكل شوماخر ولويس هاميلتون في بطولة سائقي الفورمولا 1؟",
         "a": "7 ألقاب عالمية",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://cloudfront-us-east-1.images.arcpublishing.com/copesa/T262BU6GTBC4XAF6VJILIV3D44.jpg"
+        }
       },
       {
         "uid": "formula_1_drive_q23_600",
         "points": 600,
         "q": "من هو أول بطل عالم في تاريخ بطولة الفورمولا 1 الرسمية عام 1950، ومع أي فريق حقق اللقب؟",
         "a": "جوزيبي فارينا (Giuseppe Farina) مع فريق ألفا روميو (Alfa Romeo)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://s2-ge.glbimg.com/5lBGbI2OXjP6YRUXn70oSMBdDGY%3D/1200x/smart/filters%3Acover%28%29%3Astrip_icc%28%29/i.s3.glbimg.com/v1/AUTH_bc8228b6673f488aa253bbcb03c80ec5/internal_photos/bs/2019/c/m/CioIETSua8M3AkhBiCWA/giuseppefarina-1950.jpg"
+        }
       },
       {
         "uid": "formula_1_drive_q24_600",
         "points": 600,
         "q": "ما الفريق الاستثنائي الذي شارك لموسم واحد فقط في الفورمولا 1 عام 2009 وحقق فيه بطولتي السائقين والصانعين معاً قبل أن تشتريه مرسيدس؟",
         "a": "براون جي بي (Brawn GP)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Jenson_Button_2009_Germany_2.jpg/960px-Jenson_Button_2009_Germany_2.jpg"
+        }
       }
     ]
   },
