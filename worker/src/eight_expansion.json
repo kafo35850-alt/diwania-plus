@@ -15605,28 +15605,44 @@
         "points": 400,
         "q": "ما اسم الأغنية الإيطالية التاريخية التي أصبحت النشيد الشهير للعصابة في المسلسل؟",
         "a": "بيلا تشاو (Bella Ciao)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://imagens.f5news.com.br/arquivos/2021/01/casa-papel-bella-ciao_827391611325370.jpg"
+        }
       },
       {
         "uid": "series_la_casa_drive_q22_400",
         "points": 400,
         "q": "ما اسم المؤسسة التي استهدفتها العصابة في السرقة الأولى، والمؤسسة التي استهدفتها في السرقة الثانية؟",
         "a": "الأولى: دار سك العملة الملكية الإسبانية — والثانية: بنك إسبانيا",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://static.eldiario.es/clip/58f0a1a7-e751-499a-8640-15b94a75e0d0_16-9-aspect-ratio_default_0.jpg"
+        }
       },
       {
         "uid": "series_la_casa_drive_q23_600",
         "points": 600,
         "q": "ما الاسم الحقيقي الكامل لشخصية «برلين»، وما اسم المرض الوراثي النادر الذي كان يعاني منه في المسلسل؟",
         "a": "أندريس دي فونويوسا (Andrés de Fonollosa) — ومرض اعتلال هلمر العضلي (Helmer's Myopathy)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://media.assettype.com/thequint%2F2021-06%2F39a35ece-4bd1-462d-9847-04d02500c98f%2FMoney_Heist_Pedro_Alonso_Berlin.jpeg"
+        }
       },
       {
         "uid": "series_la_casa_drive_q24_600",
         "points": 600,
         "q": "ما الاسم الحقيقي الكامل للبروفيسور، وما الاسم المستعار الذي قدّم به نفسه للمحققة راكيل موريو عند لقائهما الأول؟",
         "a": "اسمه الحقيقي: سيرجيو ماركينا (Sergio Marquina) — واسمه المستعار: سلفادور مارتن (Salva)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://vignette.wikia.nocookie.net/lacasadepapel/images/0/00/Profesor_2.jpg/revision/latest/scale-to-width-down/2000?cb=20180424112758&path-prefix=es"
+        }
       }
     ]
   },
