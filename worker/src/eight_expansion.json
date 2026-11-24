@@ -14830,35 +14830,55 @@
         "points": 200,
         "q": "ما هي أكبر صحراء رملية متصلة في العالم وتقع في شبه الجزيرة العربية؟",
         "a": "صحراء الربع الخالي",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://saudipedia.com/var/site/storage/images/6/6/2/4/6764266-1-ara-SA/875f3df450c1-67635.jpg"
+        }
       },
       {
         "uid": "mountains_deserts_drive_q21_400",
         "points": 400,
         "q": "ما هو أعلى جبل في قارة أفريقيا وفي أي دولة يقع؟",
         "a": "جبل كليمنجارو (في تنزانيا، بارتفاع 5,895 متراً)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://blogimages.rmiguides.com/Archived/Kilimanjaro_Archived/Hahn_Dave_KILI072518_summit.jpg"
+        }
       },
       {
         "uid": "mountains_deserts_drive_q22_400",
         "points": 400,
         "q": "ما هي أكثر الصحاري غير القطبية جفافاً على وجه الأرض؟",
         "a": "صحراء أتاكاما (في تشيلي بأمريكا الجنوبية)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://i0.statig.com.br/bancodeimagens/imgalta/3w/nw/mu/3wnwmuthqlc0oos22m4nhov60.jpg"
+        }
       },
       {
         "uid": "mountains_deserts_drive_q23_600",
         "points": 600,
         "q": "ما اسم الجبل الذي تُعد قمته أبعد نقطة على سطح الأرض عن مركز الكوكب بسبب تفلطح الأرض عند خط الاستواء؟",
         "a": "جبل تشيمبورازو (في الإكوادور)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://process.filestackapi.com/output%3D/resize%3Dfit%3Aclip%2Cwidth%3A1440%2Cheight%3A1000/quality%3Dv%3A79/compress/cache%3Dexpiry%3A604800/OcP9FnSHRte5Zs7t3jqy"
+        }
       },
       {
         "uid": "mountains_deserts_drive_q24_600",
         "points": 600,
         "q": "ما هي القمة الجبلية التي تُعرف بلقب «الجبل المتوحش» (Savage Mountain) وتُعد ثاني أعلى قمة في العالم بعد إيفرست؟",
         "a": "جبل K2 (بارتفاع 8,611 متراً)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/K2_2006b.jpg/1200px-K2_2006b.jpg"
+        }
       }
     ]
   },
