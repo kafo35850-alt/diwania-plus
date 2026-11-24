@@ -3282,7 +3282,7 @@ function cardHtml(o) {
 return '<div style="text-align:center;font-family:Cairo,Tajawal,system-ui,sans-serif">' +
 pictureHtml(o.uid, o.word) +
 '<div style="margin:14px auto 0;max-width:340px;background:#fff;color:#241c3d;border-radius:18px;padding:12px 14px;border:3px solid #f6b93b">' +
-'<div style="font-size:12px;font-weight:800;color:#8a6d1d">' + (o.draw ? 'الشيء المطلوب رسمه' : isImagine(o.uid) ? 'اللي في الصورة (اشرحه لفريقك)' : 'الكلمة المطلوب تمثيلها') + '</div>' +
+'<div style="font-size:12px;font-weight:800;color:#8a6d1d">' + (o.guess ? 'الاسم السري' : o.draw ? 'الشيء المطلوب رسمه' : isImagine(o.uid) ? 'اللي في الصورة (اشرحه لفريقك)' : 'الكلمة المطلوب تمثيلها') + '</div>' +
 '<div class="m8a-word" style="font-size:26px;font-weight:900;line-height:1.35;margin-top:2px">' + esc(o.word) + '</div>' +
 
 '</div>' +
@@ -7887,7 +7887,7 @@ else if (h === 'youtube.com' || h === 'youtube-nocookie.com') id = x.searchParam
 return /^[A-Za-z0-9_-]{6,20}$/.test(id) ? id : '';
 } catch (e) { return ''; }
 }
-function dwOkUrl(u) { u = String(u || ''); return /^\/eight-media\/[a-f0-9]{20}\.(?:webp|mp4)$/.test(u) || /^\/media\/med_[A-Za-z0-9_-]+$/.test(u) || /^https:\/\//.test(u) ? u : ''; }
+function dwOkUrl(u) { u = String(u || ''); return /^\/eight-media\/[a-f0-9]{20}\.(?:webp|mp4|mp3)$/.test(u) || /^\/media\/med_[A-Za-z0-9_-]+$/.test(u) || /^https:\/\//.test(u) ? u : ''; }
 function dwQMedia(q) {
 if (!q) return null;
 if (q.qm && dwOkUrl(q.qm.u)) return q.qm;
@@ -8703,7 +8703,7 @@ secretDisplay.classList.add('hidden');
 const cleanSecret = (qObj.a || '').replace(/الكلمة السرية.*?:/g, '').trim();
 window.__m8CurCharades = { qObj: qObj, col: col };
 secretDisplay.innerHTML = window.M8Actor
-? window.M8Actor.cardHtml({ uid: qObj.uid, word: cleanSecret, info: qObj.info, catName: col.name, points: qObj.points, draw: qObj.drawPrompt })
+? window.M8Actor.cardHtml({ uid: qObj.uid, word: cleanSecret, info: qObj.info, catName: col.name, points: qObj.points, draw: qObj.drawPrompt, guess: qObj.guessPrompt })
 : `<div class="p-3 font-black text-amber-200">${cleanSecret}</div>`;
 m8RefreshActorQr();
 m8CharadesLabels(Boolean(col.isImagine), false);
@@ -8715,11 +8715,16 @@ renderCluesBox(qObj);
 const M8_CHAR_TITLE_NORMAL = '🎭 جولة «ولا كلمة» — الممثل يمسح الكود بكاميرا جواله وتظهر له الكلمة المطلوب تمثيلها (ومع رابط اللعبة تفتح صفحة «لعبة ديوانية الثمانية» بالصورة)!';
 const M8_CHAR_TITLE_IMAGINE = '🖼️ جولة «الصورة الخيالية» — المشرح يمسح الكود بكاميرا جواله وتظهر له الصورة (أو يضغط الزر تحت ويشوفها على هذه الشاشة لوحده). يمثّلها أو يشرحها لفريقه بدون ما ينطق الجواب، والفريق يخمّن قبل ما يخلص الوقت!';
 function m8CharadesLabels(imagine, shown) {
-const draw = Boolean(window.__m8CurCharades?.qObj.drawPrompt);
+const card = window.__m8CurCharades?.qObj;
 const t = document.getElementById('qModalCharadesTitle');
-if (t) t.textContent = draw ? '🎨 امسح الكود لعرض بطاقة الرسّام. ارسم لفريقك من غير كلام أو كتابة.' : imagine ? M8_CHAR_TITLE_IMAGINE : M8_CHAR_TITLE_NORMAL;
 const b = document.getElementById('toggleActorSecretWordBtn');
-if (b) b.textContent = draw
+if (card?.guessPrompt) {
+if (t) t.textContent = 'امسح الكود عشان تعرف الاسم سرًّا. الفريق الثاني يخمّن بالأسئلة، وجاوبهم بنعم أو لا.';
+if (b) b.textContent = shown ? 'إخفاء الاسم وبدء التخمين' : 'إظهار الاسم السري على هذه الشاشة';
+return;
+}
+if (t) t.textContent = card?.drawPrompt ? '🎨 امسح الكود لعرض بطاقة الرسّام. ارسم لفريقك من غير كلام أو كتابة.' : imagine ? M8_CHAR_TITLE_IMAGINE : M8_CHAR_TITLE_NORMAL;
+if (b) b.textContent = card?.drawPrompt
 ? (shown ? '🔒 إخفاء البطاقة وبدء الرسم' : '🔒 إظهار بطاقة الرسّام على هذه الشاشة')
 : imagine
 ? (shown ? '🔒 إخفاء الصورة وابدأ الشرح الآن!' : '🖼️ إظهار الصورة للمشرح على هذه الشاشة')
@@ -8739,9 +8744,11 @@ note.innerHTML = '📱 وجّه كاميرا الجوال على الكود: ت�
 const word = (cur.qObj.a || '').replace(/الكلمة السرية.*?:/g, '').trim();
 const imag = Boolean(cur.col && cur.col.isImagine);
 const draw = Boolean(cur.qObj.drawPrompt);
-const txt = 'لعبة ديوانية الثمانية\n' + (draw ? '🎨 ارسم: ' : imag ? '🖼️ اشرح لفريقك: ' : '🎭 مثّل: ') + word;
+const txt = 'لعبة ديوانية الثمانية\n' + (cur.qObj.guessPrompt ? 'الاسم السري: ' : draw ? '🎨 ارسم: ' : imag ? '🖼️ اشرح لفريقك: ' : '🎭 مثّل: ') + word;
 try { img.src = window.M8QR ? window.M8QR.toDataUrl(txt, { ecc: 'M', border: 2 }) : ''; } catch (e) { img.src = ''; }
-note.innerHTML = draw
+note.innerHTML = cur.qObj.guessPrompt
+? '📱 امسح الكود لقراءة الاسم السري. لا توريه للفريق اللي يخمّن.'
+: draw
 ? '📱 امسح الكود لقراءة <b>الشيء المطلوب رسمه</b>. خلّ البطاقة بينك وبين جوالك!'
 : imag
 ? '📱 وجّه كاميرا الجوال على الكود وتظهر لك <b>الجملة اللي في الصورة</b> مباشرة (بدون إنترنت). ولو تبي الصورة نفسها اضغط الزر تحت. لا تُري الشاشة لبقية الفريق!'
@@ -9151,7 +9158,9 @@ resetBuzzer();
 function closeQuestionModal() {
 m8StopAnswerCountdown();
 stopQuestionTimer();
-document.getElementById('questionModal').classList.add('hidden');
+const modal = document.getElementById('questionModal');
+modal.querySelectorAll('audio, video').forEach((media) => media.pause());
+modal.classList.add('hidden');
 state.match.activeCell = null;
 m8BuzzRoundEnd();
 }

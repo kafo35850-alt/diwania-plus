@@ -183,6 +183,7 @@ export function cleanMedia(raw) {
   if (!u) return null;
   if (/^\/eight-media\/[a-f0-9]{20}\.webp$/.test(u)) return { t: 'image', u };
   if (/^\/eight-media\/[a-f0-9]{20}\.mp4$/.test(u)) return { t: 'video', u };
+  if (/^\/eight-media\/[a-f0-9]{20}\.mp3$/.test(u)) return { t: 'audio', u };
   if (MEDIA_RE.test(u)) return ['image', 'audio', 'video'].includes(t) ? { t, u } : { t: 'image', u };
   const link = httpsUrl(u, 600);
   if (!link) return null;
