@@ -15711,35 +15711,55 @@
         "points": 200,
         "q": "ما اسم الصبغة الخضراء الموجودة في أوراق النباتات والمسؤولة عن امتصاص الضوء؟",
         "a": "الكلوروفيل (اليخضور)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.crosstimbersgazette.com/crosstimbersgazette/wp-content/uploads/2020/05/Photosynthesis-leaf.jpg"
+        }
       },
       {
         "uid": "plants_nature_drive_q21_400",
         "points": 400,
         "q": "ما هو أسرع النباتات نمواً على وجه الأرض، حيث يمكن لبعض أنواعه أن ينمو قرابة متر واحد في اليوم؟",
         "a": "الخيزران (البامبو)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://gumlet.assettype.com/down-to-earth/import/library/large/2018-07-04/0.97391100_1530680882_1.jpg?ar=40%3A21&auto=format%2Ccompress&enlarge=true&mode=crop&ogImage=true&overlay=false&overlay_position=bottom&overlay_width=100&w=1200"
+        }
       },
       {
         "uid": "plants_nature_drive_q22_400",
         "points": 400,
         "q": "ما اسم أكبر زهرة منفردة في العالم، والتي تنمو في غابات جنوب شرق آسيا وتشتهر برائحتها النفاذة؟",
         "a": "زهرة رافليسيا أرنولدي (Rafflesia arnoldii)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Rafflesia_arnoldi_2013-12-31_21-48.JPG/1920px-Rafflesia_arnoldi_2013-12-31_21-48.JPG?_=20131231214901"
+        }
       },
       {
         "uid": "plants_nature_drive_q23_600",
         "points": 600,
         "q": "ما اسم أطول شجرة حية معروفة في العالم من فصيلة السيكويا الساحلية في كاليفورنيا؟",
         "a": "شجرة هايبريون (Hyperion، بارتفاع نحو 115.9 متراً)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.guinnessworldrecords.com/world-records/images/tallest-tree-living-header.jpg"
+        }
       },
       {
         "uid": "plants_nature_drive_q24_600",
         "points": 600,
         "q": "ما اسم مستعمرة أشجار الحور الرجراج في ولاية يوتا الأمريكية التي تُعد أثقل كائن حي واحد (بجذر مشترك واحد) على وجه الأرض؟",
         "a": "باندو (Pando)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://upload.wikimedia.org/wikipedia/commons/7/71/Pando_Land_Mass_Outline.jpg"
+        }
       }
     ]
   },
