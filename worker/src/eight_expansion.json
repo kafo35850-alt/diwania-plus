@@ -3560,14 +3560,22 @@
         "points": 200,
         "q": "ما اسم العاصمة الإدارية لمنطقة القصيم؟",
         "a": "بريدة",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a5/Buraidah_Water_Tower.jpeg/960px-Buraidah_Water_Tower.jpeg"
+        }
       },
       {
         "uid": "custom_1795331549596_drive_q9_200",
         "points": 200,
         "q": "ما اسم ثاني أكبر مدينة في منطقة القصيم وتُلقب بـ «باريس نجد»؟",
         "a": "عنيزة",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5e/Unaizah_View.jpg/1280px-Unaizah_View.jpg"
+        }
       },
       {
         "uid": "custom_1795331549596_drive_q10_200",
@@ -3584,21 +3592,33 @@
         "points": 200,
         "q": "ما اسم الوادي العظيم الذي يعبر منطقة القصيم ويُعد أطول أودية شبه الجزيرة العربية؟",
         "a": "وادي الرمة",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d1/Rumah_Valley_13_November_2008.jpg/500px-Rumah_Valley_13_November_2008.jpg"
+        }
       },
       {
         "uid": "custom_1795331549596_drive_q12_200",
         "points": 200,
         "q": "ما اسم الجامعة الحكومية الكبرى التي يقع مقرها الرئيسي في منطقة القصيم؟",
         "a": "جامعة القصيم",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/14/%D8%AC%D8%A7%D9%85%D8%B9%D8%A9_%D8%A7%D9%84%D9%82%D8%B5%D9%8A%D9%85.jpg/1280px-%D8%AC%D8%A7%D9%85%D8%B9%D8%A9_%D8%A7%D9%84%D9%82%D8%B5%D9%8A%D9%85.jpg"
+        }
       },
       {
         "uid": "custom_1795331549596_drive_q13_400",
         "points": 400,
         "q": "ما اسم المهرجان التراثي السنوي الشهير في بريدة المخصص لأشهر حلوى شعبية قصيمية؟",
         "a": "مهرجان الكليجا",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e8/Kleeja_in_Qassim_Section_at_Jenadriyah_27.JPG/1280px-Kleeja_in_Qassim_Section_at_Jenadriyah_27.JPG"
+        }
       },
       {
         "uid": "custom_1795331549596_drive_q14_400",
@@ -3615,28 +3635,44 @@
         "points": 400,
         "q": "ما اسم ثالث أكبر محافظة في منطقة القصيم وتشتهر ببرج الشنانة التاريخي؟",
         "a": "محافظة الرس",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://upload.wikimedia.org/wikipedia/commons/3/3c/Al-Shinanah_Tower.png"
+        }
       },
       {
         "uid": "custom_1795331549596_drive_q16_400",
         "points": 400,
         "q": "ما اسم المحافظة القصيمية الشهيرة التي تُعد موطن الشاعر والفارس العربي الجاهلي عنترة بن شداد؟",
         "a": "محافظة عيون الجواء",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://upload.wikimedia.org/wikipedia/commons/5/51/%D8%B5%D8%AE%D8%B1%D8%A9_%D8%B9%D9%86%D8%AA%D8%B1%D8%A9.jpg"
+        }
       },
       {
         "uid": "custom_1795331549596_drive_q17_400",
         "points": 400,
         "q": "ما اسم الأكلة الشعبية القصيمية الشهيرة المكونة من رقائق عجين البر المطبوخة في مرق اللحم والخضار؟",
         "a": "المطازيز (القبابيط)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/31/%D9%85%D8%B7%D8%A7%D8%B2%D9%8A%D8%B2.jpg/1280px-%D9%85%D8%B7%D8%A7%D8%B2%D9%8A%D8%B2.jpg"
+        }
       },
       {
         "uid": "custom_1795331549596_drive_q18_400",
         "points": 400,
         "q": "ما اسم المحافظة القصيمية التي تضم «متنزه الغضا» الشهير وتستضيف مهرجان الغضا الشتوي؟",
         "a": "محافظة عنيزة",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c5/%D8%A7%D9%84%D8%B3%D8%B9%D9%88%D8%AF%D9%8A%D8%A9-_%D8%B9%D9%86%D9%8A%D8%B2%D8%A9.jpg/960px-%D8%A7%D9%84%D8%B3%D8%B9%D9%88%D8%AF%D9%8A%D8%A9-_%D8%B9%D9%86%D9%8A%D8%B2%D8%A9.jpg"
+        }
       },
       {
         "uid": "custom_1795331549596_drive_q19_600",
