@@ -4022,14 +4022,22 @@
         "points": 200,
         "q": "كم عدد الأوراق المستخدمة في لعبة البلوت بعد استبعاد الأوراق من 2 إلى 6؟",
         "a": "32 ورقة",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "/eight-media/50bd13aeb5c305fb5790.webp"
+        }
       },
       {
         "uid": "custom_1795331958055_drive_q9_200",
         "points": 200,
         "q": "عند كم نقطة تنتهي «الصكة» (المباراة) الرسمية في لعبة البلوت؟",
         "a": "152 نقطة",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "/eight-media/3ecb3535cf8b1affdcd6.webp"
+        }
       },
       {
         "uid": "custom_1795331958055_drive_q10_200",
@@ -4046,21 +4054,33 @@
         "points": 200,
         "q": "ما أقوى ورقة في لعبة «الصن» بالبلوت؟",
         "a": "الإكة (الآس — Ace)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "/eight-media/1026f74f9d48e88966f4.webp"
+        }
       },
       {
         "uid": "custom_1795331958055_drive_q12_200",
         "points": 200,
         "q": "ما أقوى ورقة في نوع «الحكم» بالبلوت؟",
         "a": "الولد (Jack) من نوع الحكم",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/Jack_playing_cards.jpg?width=1280"
+        }
       },
       {
         "uid": "custom_1795331958055_drive_q13_400",
         "points": 400,
         "q": "كم مجموع النقاط الخام (الأبناط) الإجمالي في جولة «الصن» الواحدة شاملة الأرض (العشرة الأخيرة)؟",
         "a": "130 بنطاً (تُحسب 26 نقطة في التسجيل)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "/eight-media/3ecb3535cf8b1affdcd6.webp"
+        }
       },
       {
         "uid": "custom_1795331958055_drive_q14_400",
@@ -4077,28 +4097,44 @@
         "points": 400,
         "q": "كم نقطة يُحتسب بها مشروع «مية» (100) في تسجيل جولة «الصن»؟",
         "a": "20 نقطة في الصن (و10 نقاط في الحكم)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "/eight-media/fac7602fbf2bdbb75202.webp"
+        }
       },
       {
         "uid": "custom_1795331958055_drive_q16_400",
         "points": 400,
         "q": "ما الاسم الذي يُطلق على فوز أحد الفريقين بجميع الأكلات الثماني في الجولة الواحدة؟",
         "a": "كبوت",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/Public_domain_complete_playing_card_deck.svg?width=1280"
+        }
       },
       {
         "uid": "custom_1795331958055_drive_q17_400",
         "points": 400,
         "q": "كم نقطة يُحتسب بها مشروع «أربعمية» (أربع إكك) في تسجيل جولة الصن؟",
         "a": "40 نقطة (ولا يُحسب إلا في الصن)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/Ace_playing_cards.jpg?width=1280"
+        }
       },
       {
         "uid": "custom_1795331958055_drive_q18_400",
         "points": 400,
         "q": "ما الورقتان اللتان إذا اجتمعتا بيد لاعب واحد من نوع الحكم يُطلق عليهما مشروع «بلوت»؟",
         "a": "الشايب والبنت (King & Queen) من نوع الحكم",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "/eight-media/4cb248e0c026caeb7bec.webp"
+        }
       },
       {
         "uid": "custom_1795331958055_drive_q19_600",
