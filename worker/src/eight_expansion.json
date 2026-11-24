@@ -606,35 +606,55 @@
         "points": 200,
         "q": "في أنمي «ون بيس» (One Piece)، ما اسم فاكهة الشيطان التي أكلها مونكي دي لوفي في طفولته ومنحته جسداً مطاطياً؟",
         "a": "فاكهة غومو غومو نو مي (فاكهة المطاط / Gomu Gomu no Mi)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://images.wikia.com/onepiece/images/2/2a/Gomu_Gomu_no_Mi_in_Chest.png"
+        }
       },
       {
         "uid": "anime_general_drive_q21_400",
         "points": 400,
         "q": "ما اسم الاستوديو الياباني الذي أنتج المواسم الثلاثة الأولى من أنمي «هجوم العمالقة» (Attack on Titan) قبل انتقاله إلى استوديو MAPPA؟",
         "a": "استوديو ويت (Wit Studio)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://pbs.twimg.com/media/HGOs5SOaYAAtZfa.jpg"
+        }
       },
       {
         "uid": "anime_general_drive_q22_400",
         "points": 400,
         "q": "في أنمي «مذكرة الموت» (Death Note)، ما الاسم الحقيقي الكامل للمحقق العبقري المعروف بالحرف «L»؟",
         "a": "إل لاوليت (L Lawliet)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://nedeo.com/images/death-note/l-lawliet/l-lawliet-7.webp"
+        }
       },
       {
         "uid": "anime_general_drive_q23_600",
         "points": 600,
         "q": "ما عنوان أول فيلم أنمي ياباني روائي طويل بالألوان الكاملة عُرض في دور السينما عام 1958 من إنتاج استوديو «توي أنيميشن»؟",
         "a": "حكاية الثعبان الأبيض (Hakujaden / The White Snake Enchantress)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://macc.bunka.go.jp/wp-content/uploads/2023/08/think60-1.jpg"
+        }
       },
       {
         "uid": "anime_general_drive_q24_600",
         "points": 600,
         "q": "من هو المخرج الياباني الراحل الذي اشتهر بأفلام الأنمي النفسية والسريالية مثل «Perfect Blue» و«Millennium Actress» و«Paprika»؟",
         "a": "ساتوشي كون (Satoshi Kon)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://media.eiga.com/images/person/31377/153b4eccd4ec5899/640.jpg"
+        }
       }
     ]
   },
@@ -862,35 +882,55 @@
         "points": 200,
         "q": "في أي مدينة يقع المقر الدائم لجامعة الدول العربية؟",
         "a": "القاهرة (مصر)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://static.majalla.com/2023-05/152184.jpg"
+        }
       },
       {
         "uid": "arab_countries_general_drive_q21_400",
         "points": 400,
         "q": "ما الدولة العربية الوحيدة التي تقع بالكامل في نصف الكرة الأرضية الجنوبي؟",
         "a": "جزر القمر",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://italiavola.files.wordpress.com/2022/10/thumbnail_moheli-islets_reduced.jpg"
+        }
       },
       {
         "uid": "arab_countries_general_drive_q22_400",
         "points": 400,
         "q": "ما المضيق البحري الاستراتيجي الذي يفصل بين سلطنة عُمان وإيران ويربط الخليج العربي ببحر عُمان؟",
         "a": "مضيق هرمز",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://media.astroawani.com/awani/media/uploads/image/2026-06/TB_Strait%20of%20Hormuz_ADOBE%20STOCK.jpg?VersionId=4X5lqmAFL1jyh1n8Jk1NFbXz6BnUhXGE"
+        }
       },
       {
         "uid": "arab_countries_general_drive_q23_600",
         "points": 600,
         "q": "كم كان عدد الدول المؤسسة التي وقّعت على ميثاق تأسيس جامعة الدول العربية في 22 مارس 1945؟",
         "a": "7 دول (مصر، السعودية، العراق، سوريا، لبنان، الأردن، اليمن)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://res.cloudinary.com/aenetworks/image/upload/c_fill%2Car_2%2Cw_3840%2Ch_1920%2Cg_auto/dpr_auto/f_auto/q_auto%3Aeco/v1/613512378_jsrdgx?_a=BAVAZGB00"
+        }
       },
       {
         "uid": "arab_countries_general_drive_q24_600",
         "points": 600,
         "q": "ما أعلى قمة جبلية في العالم العربي، وفي أي دولة تقع؟",
         "a": "جبل توبقال (4,167 متراً) في المغرب",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.muchbetteradventures.com/magazine/content/images/2018/05/11112322/original-161.jpg"
+        }
       }
     ]
   },
@@ -904,6 +944,10 @@
         "qm": {
           "t": "image",
           "u": "/eight-media/c4063c58601f42f95d10.webp"
+        },
+        "am": {
+          "t": "image",
+          "u": "https://data2.nssmag.com/images/galleries/34042/King-Fahd-3.jpeg"
         }
       },
       {
@@ -914,6 +958,10 @@
         "qm": {
           "t": "image",
           "u": "/eight-media/1013097238619f6cc8d3.webp"
+        },
+        "am": {
+          "t": "image",
+          "u": "https://stadiumdb.com/pictures/stadiums/qat/lusail_stadium/lusail_stadium21.jpg"
         }
       },
       {
@@ -924,6 +972,10 @@
         "qm": {
           "t": "image",
           "u": "/eight-media/edef8dbcc324af80b675.webp"
+        },
+        "am": {
+          "t": "image",
+          "u": "https://thenational-the-national-prod.cdn.arcpublishing.com/resizer/v2/SQQHDCOZUVCMJDK56YS4DO5SUM.jpg?auth=5b83a5f0c53a648c262a14df210966f8865da9b057fff3cda4ebe3abaf758513&height=533&smart=true&width=800"
         }
       },
       {
@@ -934,6 +986,10 @@
         "qm": {
           "t": "image",
           "u": "/eight-media/0ed138ef1a4defcfc833.webp"
+        },
+        "am": {
+          "t": "image",
+          "u": "https://stadiumdb.com/pictures/stadiums/ksa/kingdom_arena/kingdom_arena16.jpg"
         }
       },
       {
@@ -944,6 +1000,10 @@
         "qm": {
           "t": "image",
           "u": "/eight-media/e466bddd70ec58b2eaec.webp"
+        },
+        "am": {
+          "t": "image",
+          "u": "https://upload.wikimedia.org/wikipedia/commons/3/32/Cairo_International_Stadium.jpg"
         }
       },
       {
@@ -954,6 +1014,10 @@
         "qm": {
           "t": "image",
           "u": "/eight-media/228db6a6011916dd4ddb.webp"
+        },
+        "am": {
+          "t": "image",
+          "u": "https://www.arabtimesonline.com/arabtimes/uploads/images/2024/12/07/41795.jpg"
         }
       }
     ]
@@ -975,35 +1039,55 @@
         "points": 200,
         "q": "من هو صانع المحتوى الأمريكي الذي يتصدر قائمة أكثر قنوات يوتيوب الفردية اشتراكاً في العالم بفضل تحدياته الضخمة وجوائزه المالية؟",
         "a": "مستر بيست (MrBeast / جيمي دونالدسون)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://i.guim.co.uk/img/media/44c2f35694e039d7b644f0b530684a8a6edc2887/40_0_1200_720/master/1200.jpg?auto=format&fit=max&quality=85&s=5aa50c089d388366f92b42fcc283a3a0&width=700"
+        }
       },
       {
         "uid": "arab_youtubers_drive_q21_400",
         "points": 400,
         "q": "ما اسم أول مقطع فيديو نُشر على منصة يوتيوب على الإطلاق عام 2005، ومن هو مؤسس المنصة الذي ظهر فيه؟",
         "a": "«Me at the zoo» (أنا في حديقة الحيوان)، وظهر فيه جاود كريم (Jawed Karim)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://media.ambito.com/p/06fd9c653d3e30c6a664939cba52d9a7/adjuntos/239/imagenes/042/367/0042367399/primer-video-youtubejpg.jpg"
+        }
       },
       {
         "uid": "arab_youtubers_drive_q22_400",
         "points": 400,
         "q": "ما اسم البرنامج العلمي العربي الشهير على يوتيوب الذي يقدمه أحمد الغندور لتبسيط العلوم والتاريخ بأسلوب ساخر؟",
         "a": "الدحيح",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://cdn1-m.zahratalkhaleej.ae/store/archive/image/2023/12/1/c772050b-7b87-47e6-ab14-d7776f9d477e.jpg"
+        }
       },
       {
         "uid": "arab_youtubers_drive_q23_600",
         "points": 600,
         "q": "ما اسم الدرع النادر الذي تمنحه يوتيوب عند تجاوز عتبة 100 مليون مشترك، وما أول قناة فردية في التاريخ حصلت عليه؟",
         "a": "درع الألماس الأحمر (Red Diamond)، وأول قناة فردية حصلت عليه هي قناة بيوديباي (PewDiePie)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.tomsguide.fr/content/uploads/sites/2/2019/11/red-diamond-youtube.jpg"
+        }
       },
       {
         "uid": "arab_youtubers_drive_q24_600",
         "points": 600,
         "q": "ما الاسم الأصلي الذي انطلقت به منصة البث المباشر «تويتش» (Twitch) عام 2007 قبل إعادة تسميتها وتخصيصها للألعاب عام 2011؟",
         "a": "جاستن تي في (Justin.tv)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://images.mein-mmo.de/medien/2023/04/JustinTV-edited.jpg"
+        }
       }
     ]
   },
