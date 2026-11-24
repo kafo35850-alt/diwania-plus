@@ -3068,35 +3068,55 @@
         "points": 200,
         "q": "كم عدد المناطق الإدارية في المملكة العربية السعودية؟",
         "a": "13 منطقة إدارية",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://upload.wikimedia.org/wikipedia/commons/5/5a/%D8%AE%D8%A7%D8%B1%D8%B7%D8%A9_%D8%A7%D9%84%D8%AA%D9%82%D8%B3%D9%8A%D9%85_%D8%A7%D9%84%D8%A5%D8%AF%D8%A7%D8%B1%D9%8A_%D9%84%D9%84%D9%85%D9%85%D9%84%D9%83%D8%A9_%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A%D8%A9_%D8%A7%D9%84%D8%B3%D8%B9%D9%88%D8%AF%D9%8A%D8%A9.png"
+        }
       },
       {
         "uid": "country_saudi_drive_q21_400",
         "points": 400,
         "q": "ما هي أكبر منطقة إدارية في المملكة العربية السعودية من حيث المساحة، وما هي أصغرها مساحة؟",
         "a": "الأكبر: المنطقة الشرقية، والأصغر: منطقة الباحة",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://upload.wikimedia.org/wikipedia/commons/7/70/Saudi_Eastern_Province_Governorates_map.jpg"
+        }
       },
       {
         "uid": "country_saudi_drive_q22_400",
         "points": 400,
         "q": "ما اسم أول موقع سعودي أُدرج على قائمة التراث العالمي لليونسكو، وفي أي عام تم ذلك؟",
         "a": "الحِجر (مدائن صالح) في العُلا، عام 2008",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://dartantora.co/wp-content/uploads/2024/09/Hegra-1024x576.jpg"
+        }
       },
       {
         "uid": "country_saudi_drive_q23_600",
         "points": 600,
         "q": "في أي عام انضمت المملكة العربية السعودية رسمياً إلى منظمة التجارة العالمية (WTO) لتصبح العضو رقم 149 فيها؟",
         "a": "عام 2005 (11 ديسمبر 2005)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.wto.org/images/img_acc/signing/saudi_arabia.jpg"
+        }
       },
       {
         "uid": "country_saudi_drive_q24_600",
         "points": 600,
         "q": "في أي حرة بركانية تقع «فوهة الوعبة» (مقلع طمية) الشهيرة، وكم يبلغ عمقها التقريبي؟",
         "a": "حرة كِشب (شمال شرق الطائف)، ويبلغ عمقها نحو 250 متراً وقطرها نحو 2 كيلومتر",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://assets.zyrosite.com/cdn-cgi/image/format%3Dauto%2Cw%3D1024%2Ch%3D685%2Cfit%3Dcrop/A0xWkxDwkNsv4xz3/al_wahba_crater_saudi_arabia_2-mP47jvZogbh6zzVw.jpg"
+        }
       }
     ]
   },
@@ -3117,35 +3137,55 @@
         "points": 200,
         "q": "ما اسم النهر الذي يمر عبر العاصمة السورية دمشق ويُعد من أشهر أنهار بلاد الشام؟",
         "a": "نهر بردى",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://a.openbible.info/geo/images/512/m39ac0b.ia3a355.jpg"
+        }
       },
       {
         "uid": "country_syria_drive_q21_400",
         "points": 400,
         "q": "ما اسم المدينة الأثرية السورية الواقعة قرب اللاذقية التي اكتُشفت فيها أقدم أبجدية مسمارية في التاريخ؟",
         "a": "أوغاريت (رأس شمرا)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://collections.louvre.fr/media/cache/medium/0000000021/0000144705/0001345123_OG.JPG"
+        }
       },
       {
         "uid": "country_syria_drive_q22_400",
         "points": 400,
         "q": "ما اسم أعلى قمة جبلية في سوريا، وتقع ضمن سلسلة جبال لبنان الشرقية؟",
         "a": "جبل الشيخ (جبل حرمون)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.profilenews.com/deftageh/2025/06/Mount_Hermon_2.jpg"
+        }
       },
       {
         "uid": "country_syria_drive_q23_600",
         "points": 600,
         "q": "ما اسم المملكة العمورية القديمة على ضفاف نهر الفرات في شرق سوريا التي اكتُشفت في قصر ملكها زمري ليم أكثر من 20 ألف رقيم طيني؟",
         "a": "مملكة ماري (تل الحريري)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://static.time.com/v3/assets/bltea6093859af6183b/blt7c582d893cd92b89/6988d63ee76ad2a4bc62e61c/zimri-lim.jpeg?auto=webp&branch=production&crop=16%3A9&quality=75&width=2400"
+        }
       },
       {
         "uid": "country_syria_drive_q24_600",
         "points": 600,
         "q": "ما اسم العالم والموسوعي الدمشقي الذي أسّس مجمع اللغة العربية بدمشق عام 1919 وتولّى رئاسته الأولى؟",
         "a": "محمد كرد علي",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://cdn.ida2at.com/media/2016/05/7762-1.jpg"
+        }
       }
     ]
   },
@@ -3166,35 +3206,55 @@
         "points": 200,
         "q": "ما اسم الحضارة والإمبراطورية القديمة التي تأسّست على الساحل التونسي وقاد جيوشها القائد الشهير حنبعل؟",
         "a": "قرطاج",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://shtreber.rs/uploads_gallery/originals/neda-lekcije-istorija/kartagina.jpg"
+        }
       },
       {
         "uid": "country_tunisia_drive_q21_400",
         "points": 400,
         "q": "ما اسم المسرح الروماني الدائري الضخم في تونس الذي يُعد ثالث أكبر مدرج روماني في العالم بعد الكولوسيوم وكابوا؟",
         "a": "قصر الجم (مسرح الجم الروماني)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://lp-cms-production.imgix.net/2025-05/shutterstock2436307545.jpg?auto=format%2Ccompress&fit=crop&h=810&q=72&w=1440"
+        }
       },
       {
         "uid": "country_tunisia_drive_q22_400",
         "points": 400,
         "q": "ما اسم البحيرة الملحية الجافة الضخمة في جنوب تونس التي تُعد أكبر شط ملحي في شمال أفريقيا؟",
         "a": "شط الجريد",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f7/Chott_el_jerid.jpg/960px-Chott_el_jerid.jpg"
+        }
       },
       {
         "uid": "country_tunisia_drive_q23_600",
         "points": 600,
         "q": "ما اسم أعلى قمة جبلية في تونس، وتقع في ولاية القصرين قرب الحدود الجزائرية بارتفاع 1,544 متراً؟",
         "a": "جبل الشعانبي",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://peakbaggerblobs.blob.core.windows.net/pbphoto/p493L.jpg"
+        }
       },
       {
         "uid": "country_tunisia_drive_q24_600",
         "points": 600,
         "q": "ما اسم المدينة البونية الأثرية في شبه جزيرة الوطن القبلي بتونس التي تُعد الموقع البوني الوحيد المحفوظ بتخطيطه الأصلي دون إعادة بناء روماني فوقه؟",
         "a": "كركوان",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://media.radiotunisienne.tn/uploads/content/images/1744317129968-39ce358da8b7.jpg"
+        }
       }
     ]
   },
@@ -3215,35 +3275,55 @@
         "points": 200,
         "q": "ما عاصمة دولة الإمارات العربية المتحدة؟",
         "a": "أبوظبي",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://megapass.com/cdn-cgi/image/width%3D900%2Cquality%3D100%2Cformat%3Dwebp%2Cfit%3Dcover%2Ccrop%3Dcenter%2Cgravity%3Dcenter/https%3A/cdn.megapass.com/public/storage/images/blog/images/abu-dhabi-skyline-1780553531.webp"
+        }
       },
       {
         "uid": "country_uae_drive_q21_400",
         "points": 400,
         "q": "ما اسم القمة الجبلية الأعلى في دولة الإمارات العربية المتحدة؟",
         "a": "جبل جيس (في إمارة رأس الخيمة)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://upload.wikimedia.org/wikipedia/commons/8/8e/View_from_Jebel_Jais_-_panoramio.jpg"
+        }
       },
       {
         "uid": "country_uae_drive_q22_400",
         "points": 400,
         "q": "أي إمارة من الإمارات السبع انضمت إلى الاتحاد في 10 فبراير 1972 بعد إعلان قيامه في 2 ديسمبر 1971؟",
         "a": "إمارة رأس الخيمة",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Ras_al-Khaimah_in_United_Arab_Emirates.svg/3840px-Ras_al-Khaimah_in_United_Arab_Emirates.svg.png"
+        }
       },
       {
         "uid": "country_uae_drive_q23_600",
         "points": 600,
         "q": "ما اسم المسجد الأثري في إمارة الفجيرة الذي يُعد أقدم مسجد قائم في دولة الإمارات ويعود بناؤه إلى القرن الخامس عشر الميلادي تقريباً؟",
         "a": "مسجد البدية",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.corinthiantravel.co.uk/app/uploads/2024/04/Fujairah-Al-Bidyah-Mosque-UAE-DT83643597-1.jpg"
+        }
       },
       {
         "uid": "country_uae_drive_q24_600",
         "points": 600,
         "q": "ما اسم الثقافة الأثرية من العصر البرونزي (نحو 2600–2000 ق.م) التي سُمّيت باسم جزيرة صغيرة قبالة ساحل أبوظبي اشتهرت بمقابرها الدائرية المبنية من الحجر المصقول؟",
         "a": "ثقافة (حضارة) أم النار",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://mybayutcdn.bayut.com/mybayut/wp-content/uploads/Tomb-at-Hili-Archaelogical-Park-1024x640.jpg"
+        }
       }
     ]
   },
