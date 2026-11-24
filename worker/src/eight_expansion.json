@@ -15642,35 +15642,55 @@
         "points": 200,
         "q": "كم عدد الحلقات المتشابكة في الشعار الأولمبي الرسمي؟",
         "a": "5 حلقات",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://olympic.kz/images/1528962001.png"
+        }
       },
       {
         "uid": "olympic_sports_drive_q21_400",
         "points": 400,
         "q": "من هو السباح الأمريكي الذي يحمل الرقم القياسي لأكبر عدد من الميداليات الذهبية الأولمبية في التاريخ برصيد 23 ذهبية؟",
         "a": "مايكل فيلبس (Michael Phelps)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.si.com/.image/c_fill%2Ccs_srgb%2Cfl_progressive%2Ch_400%2Cq_auto%3Agood%2Cw_620/MTY4MTI1Nzk0OTk0NTYyMzIx/michael-phelps-olympics-sports-illustrated-cover-storyjpg.jpg"
+        }
       },
       {
         "uid": "olympic_sports_drive_q22_400",
         "points": 400,
         "q": "ما المدينة التي أصبحت في عام 2022 أول مدينة في التاريخ تستضيف كلاً من الألعاب الأولمبية الصيفية والشتوية؟",
         "a": "بكين (الصين)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.beijing.gov.cn/gate/big5/www.beijing.gov.cn/tsbj/sxym/202202/W020220214508866878822.jpg"
+        }
       },
       {
         "uid": "olympic_sports_drive_q23_600",
         "points": 600,
         "q": "من هو العدّاء الإثيوبي الذي فاز بماراثون أولمبياد روما 1960 حافي القدمين، ليصبح أول أفريقي يحصد ميدالية ذهبية أولمبية؟",
         "a": "أبيبي بيكيلا (Abebe Bikila)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.raicultura.it/dl/img/2021/04/01/1617290845472_GettyImages-516802952.jpg"
+        }
       },
       {
         "uid": "olympic_sports_drive_q24_600",
         "points": 600,
         "q": "في أي دورة أولمبية صيفية ظهر سباق التتابع بالشعلة الأولمبية (Olympic Torch Relay) من أولمبيا إلى المدينة المستضيفة لأول مرة في التاريخ؟",
         "a": "أولمبياد برلين 1936",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.colorado.edu/asmagazine/sites/default/files/styles/large_image_style/public/2025-02/1936%20Olympics%20torch%20relay.jpg?itok=mmdS3eSe"
+        }
       }
     ]
   },
