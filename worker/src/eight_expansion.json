@@ -15982,21 +15982,33 @@
         "points": 400,
         "q": "من هو المخرج السعودي الراحل الذي تولّى إخراج الغالبية العظمى من مواسم «طاش ما طاش» ابتداءً من الموسم الثاني؟",
         "a": "عبدالخالق الغانم",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://static.sayidaty.net/styles/1375_scale/public/2021/05/02/7545746-1834360516.jpg"
+        }
       },
       {
         "uid": "series_tash_ma_tash_drive_q23_600",
         "points": 600,
         "q": "من هو المخرج الذي أخرج الموسم الأول فقط من «طاش ما طاش» عام 1993 قبل أن ينتقل إخراج السلسلة إلى عبدالخالق الغانم؟",
         "a": "المخرج عامر الحمود",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.alweeam.com.sa/wp-content/uploads/2023/03/%D8%A7%D9%84%D9%85%D8%AE%D8%B1%D8%AC-%D8%B9%D8%A7%D9%85%D8%B1-%D8%A7%D9%84%D8%AD%D9%85%D9%88%D8%AF.jpg"
+        }
       },
       {
         "uid": "series_tash_ma_tash_drive_q24_600",
         "points": 600,
         "q": "كم عدد المواسم الأصلية لمسلسل «طاش ما طاش» قبل توقفه عام 2011، ومن هو المخرج الذي تولّى إخراج موسم «طاش العودة» عام 2023؟",
         "a": "18 موسماً أصلياً — وأخرج «طاش العودة» (الموسم 19) المخرج البحريني محمد القفاص",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://d1wnoevxju5lec.cloudfront.net/storage/attachments/5807/5_541863.jpg"
+        }
       }
     ]
   },
