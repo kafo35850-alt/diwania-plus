@@ -1684,7 +1684,11 @@
         "q": "🎭 امسح رمز QR بجوال الممثل فقط، ومثّل البطاقة لفريقك بدون كلام!",
         "a": "سالم الدوسري",
         "isCharades": true,
-        "qrPayload": "سالم الدوسري"
+        "qrPayload": "سالم الدوسري",
+        "am": {
+          "t": "image",
+          "u": "https://media.licdn.com/dms/image/v2/D4E22AQGmbBuoS0RSMw/feedshare-shrink_800/0/1706712096718?e=2147483647&t=LtRN3Wj2apmPhbT-cGh_Rx6kA5hbVLvLcRP3gHg7WEw&v=beta"
+        }
       },
       {
         "uid": "charades_sports_drive_q21_400",
@@ -1692,7 +1696,11 @@
         "q": "🎭 امسح رمز QR بجوال الممثل فقط، ومثّل البطاقة لفريقك بدون كلام!",
         "a": "إيرلينغ هالاند",
         "isCharades": true,
-        "qrPayload": "إيرلينغ هالاند"
+        "qrPayload": "إيرلينغ هالاند",
+        "am": {
+          "t": "image",
+          "u": "https://resources.premierleague.com/premierleague/photo/2025/01/04/34aa4c8d-64d5-4c9d-ae56-7c32240a7694/2025-01-04T171458Z_1424338096_UP1EK141CPJB3_RTRMADP_3_SOCCER-ENGLAND-MCI-WHU-REPORT.JPG"
+        }
       },
       {
         "uid": "charades_sports_drive_q22_400",
@@ -1700,7 +1708,11 @@
         "q": "🎭 امسح رمز QR بجوال الممثل فقط، ومثّل البطاقة لفريقك بدون كلام!",
         "a": "لويس سواريز",
         "isCharades": true,
-        "qrPayload": "لويس سواريز"
+        "qrPayload": "لويس سواريز",
+        "am": {
+          "t": "image",
+          "u": "https://upload.wikimedia.org/wikipedia/commons/6/62/Luis_Su%C3%A1rez_Uruguay.jpg"
+        }
       },
       {
         "uid": "charades_sports_drive_q23_600",
@@ -1708,7 +1720,11 @@
         "q": "🎭 امسح رمز QR بجوال الممثل فقط، ومثّل البطاقة لفريقك بدون كلام!",
         "a": "رينيه هيغيتا (René Higuita)",
         "isCharades": true,
-        "qrPayload": "رينيه هيغيتا (René Higuita)"
+        "qrPayload": "رينيه هيغيتا (René Higuita)",
+        "am": {
+          "t": "image",
+          "u": "https://www.elgrafico.com.ar/media/cache/pub_news_details_large/media/i/55/14/5514803eb5dcd.jpg"
+        }
       },
       {
         "uid": "charades_sports_drive_q24_600",
@@ -1716,7 +1732,11 @@
         "q": "🎭 امسح رمز QR بجوال الممثل فقط، ومثّل البطاقة لفريقك بدون كلام!",
         "a": "روجر ميلا (Roger Milla)",
         "isCharades": true,
-        "qrPayload": "روجر ميلا (Roger Milla)"
+        "qrPayload": "روجر ميلا (Roger Milla)",
+        "am": {
+          "t": "image",
+          "u": "https://assets.orf.at/mims/2020/21/06/crops/w%3D1280%2Cq%3D90/565445_bigpicture_192606_fus_chronik_40_jahre_roger_milla_body3_afp.jpg?s=6eae9dd515963740fbdd2bf903c78c9f378d0791"
+        }
       }
     ]
   },
@@ -1737,35 +1757,55 @@
         "points": 200,
         "q": "ما هو أول عنصر في الجدول الدوري وعدده الذري 1؟",
         "a": "الهيدروجين (H)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://i.pinimg.com/originals/a7/8f/bc/a78fbcf9e7df7a68c70163f7641a911d.png"
+        }
       },
       {
         "uid": "chemistry_table_drive_q21_400",
         "points": 400,
         "q": "ما هو العنصر الكيميائي الذي يرمز له بالرمز (Hg) ويُعد الفلز الوحيد السائل في درجة حرارة الغرفة القياسية؟",
         "a": "الزئبق",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.theodoregray.com/Periodictable/Samples/080.14/s15s.JPG"
+        }
       },
       {
         "uid": "chemistry_table_drive_q22_400",
         "points": 400,
         "q": "ما هو العنصر الأكثر وفرة في الغلاف الجوي للأرض (يشكّل نحو 78% منه) وما رمزه الكيميائي؟",
         "a": "النيتروجين (N)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://blog.kakaocdn.net/dna/b6bJ6u/btqL8VLTMlf/AAAAAAAAAAAAAAAAAAAAAPuZPxCKJsfqXjZ5KD0ihVkAsVdiQ9ZmnG9YWSHXXGbW/img.jpg?allow_ip=&allow_referer=&credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1777561199&signature=tXMIqjrJk0%2BSAviGnKZNwJB22T8%3D"
+        }
       },
       {
         "uid": "chemistry_table_drive_q23_600",
         "points": 600,
         "q": "ما هو العنصر الكيميائي صاحب أعلى درجة انصهار بين جميع الفلزات النقية (3,422 درجة مئوية) وما رمزه المشتق من اسم معدن «الوولفراميت»؟",
         "a": "التنغستن (Tungsten) ورمزه W",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://cdn.shopify.com/s/files/1/0653/4381/5834/files/IMG_202504188302_1099x824_1ba3e312-b458-4e82-a633-916d87f84086.jpg?v=1744961226"
+        }
       },
       {
         "uid": "chemistry_table_drive_q24_600",
         "points": 600,
         "q": "ما هو أثقل عنصر في الجدول الدوري الحالي وعدده الذري 118 وينتمي إلى المجموعة 18؟",
         "a": "الأوغانيسون (Oganesson) ورمزه Og",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://media.gettyimages.com/id/1452991805/photo/oganesson-element-periodic-table.jpg?s=2048x2048&w=gi&k=20&c=xwOTgB8M4jJGXRXhYtZpNlszqW17hwgDlM3m0QdLMzI="
+        }
       }
     ]
   },
@@ -1786,35 +1826,55 @@
         "points": 200,
         "q": "ما اللقبان الأشهر اللذان يُعرف بهما النادي الأهلي السعودي؟",
         "a": "الراقي وقلعة الكؤوس",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://assets.footylogos.com/previews/al-ahli/al-ahli-logo-footylogos-1200.webp"
+        }
       },
       {
         "uid": "club_alahli_drive_q21_400",
         "points": 400,
         "q": "في أي موسم كروي تُوّج النادي الأهلي بلقب دوري المحترفين السعودي بقيادة المدرب السويسري كريستيان غروس؟",
         "a": "موسم 2015–2016",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://cdn.so3ody.com/images/1200x667/2022/%D8%A7%D9%84%D8%A3%D9%87%D9%84%D9%8A-%D8%A8%D8%B7%D9%84-%D8%A7%D9%84%D8%AF%D9%88%D8%B1%D9%8A-%D8%A7%D9%84%D8%B3%D8%B9%D9%88%D8%AF%D9%8A-20161668792816.jpg"
+        }
       },
       {
         "uid": "club_alahli_drive_q22_400",
         "points": 400,
         "q": "كم بلغ الرقم القياسي لأطول سلسلة مباريات متتالية دون خسارة حققها النادي الأهلي في تاريخ دوري المحترفين السعودي بين عامي 2014 و2016؟",
         "a": "51 مباراة متتالية دون خسارة",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://pbs.twimg.com/media/GGuq22dWIAACG3e.jpg"
+        }
       },
       {
         "uid": "club_alahli_drive_q23_600",
         "points": 600,
         "q": "من هو المدرب البرازيلي الأسطوري (مدرب منتخب البرازيل في مونديال 1982 و1986) الذي درّب النادي الأهلي السعودي في الثمانينيات وقاده لتحقيق لقب الدوري وكأس الملك؟",
         "a": "تيلي سانتانا (Telê Santana)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://cdn.al-ain.com/lg/images/2021/4/21/138-212405-telle-santana-ahli-saudi-brazil_700x400.jpg"
+        }
       },
       {
         "uid": "club_alahli_drive_q24_600",
         "points": 600,
         "q": "من هو الهداف السوري التاريخي للنادي الأهلي السعودي الذي تُوّج بلقب هداف دوري المحترفين السعودي 3 مواسم متتالية بقميص النادي؟",
         "a": "عمر السومة",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.winwin.com/sites/default/files/2020-12/%D8%B9%D9%85%D8%B1%20%D8%A7%D9%84%D8%B3%D9%88%D9%85%D8%A9.jpg"
+        }
       }
     ]
   },
@@ -1835,35 +1895,55 @@
         "points": 200,
         "q": "ما الاسم الأول الذي تأسس به نادي الهلال السعودي قبل أن يصدر أمر الملك سعود بتغييره إلى «الهلال» عام 1958م؟",
         "a": "النادي الأولمبي",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://contentfulproxy.stadion.io/eyc25wndlima/5RRnKSIXMrbOyBdGWCba4k/e6880c86b8613fcae1a05271608770ab/IMG_2941.jpg?f=face&fit=fill&fm=webp&h=690&w=1134"
+        }
       },
       {
         "uid": "club_alhilal_drive_q21_400",
         "points": 400,
         "q": "من هو الهداف التاريخي لنادي الهلال السعودي في جميع المسابقات الرسمية؟",
         "a": "سامي الجابر",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://saudipedia.com/en/saudipediaen/uploads/images/2024/11/28/128598.jpg"
+        }
       },
       {
         "uid": "club_alhilal_drive_q22_400",
         "points": 400,
         "q": "أمام أي نادٍ إيراني حقق نادي الهلال أول ألقابه في بطولة الأندية الآسيوية أبطال الدوري (دوري أبطال آسيا) عام 1991م؟",
         "a": "نادي استقلال طهران الإيراني (بركلات الترجيح)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://crankshaw-sports-stats.com/club_comp/pics/1991esteghlal.jpg"
+        }
       },
       {
         "uid": "club_alhilal_drive_q23_600",
         "points": 600,
         "q": "من هو المهاجم البرازيلي الذي سجل «هاتريك» تاريخياً قاد به الهلال للفوز 3–2 على جوبيلو إيواتا الياباني في نهائي بطولة الأندية الآسيوية أبطال الدوري عام 2000م؟",
         "a": "سيرجيو ريكاردو (Sergio Ricardo)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://assets.the-afc.com/migration/f/s/fs3wwaqq6dl4jvlao9h1.jpg"
+        }
       },
       {
         "uid": "club_alhilal_drive_q24_600",
         "points": 600,
         "q": "كم بلغ عدد الانتصارات المتتالية التي حققها نادي الهلال في موسم 2023–2024 ليدخل موسوعة غينيس كأطول سلسلة انتصارات متتالية في تاريخ كرة القدم للرجال؟",
         "a": "34 انتصاراً متتالياً",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.guinnessworldrecords.com/news/2024/5/images/gwr-certificate-being-presented-to-al-hilal-chairman-769804.jpg"
+        }
       }
     ]
   },
