@@ -16178,28 +16178,44 @@
         "points": 400,
         "q": "ما اسم لعبة الأدوار اللوحية التي كان الأصدقاء يلعبونها واشتقّوا منها أسماء الوحوش مثل ديموغورغون وفيكنا؟",
         "a": "Dungeons & Dragons (سجون وتنانين)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://dnm.nflximg.net/api/v6/BvVbc2Wxr2w6QuoANoSpJKEIWjQ/AAAAQag_4222cdO9xvUisDXcj7xZerjOlIPM1TkW3TVe7by4ruq2s-04CZ7SM_JNGlA7AD9mVOfCbzp-Wda_y_GMacCJvTkWHbK1qyX27EhYLBAniFDLprv9214y_F-tJTh6-bHA88IBrfQh9fusZlhGuDcytRI.jpg?r=62f"
+        }
       },
       {
         "uid": "series_stranger_things_drive_q22_400",
         "points": 400,
         "q": "ما اسم الوجبة الخفيفة المفضلة لدى «إيليفن» (Eleven) التي كانت تسرقها من المتجر في الموسم الأول؟",
         "a": "فطائر الوافل إيغو (Eggo Waffles)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://imgix.bustle.com/uploads/image/2017/10/18/e5a53437-56da-4a54-9c45-0d0a2758b7b4-st_105-106_unit_2870_r_crop.jpeg"
+        }
       },
       {
         "uid": "series_stranger_things_drive_q23_600",
         "points": 600,
         "q": "ما الاسم الحقيقي الكامل لـ «فيكنا» (الرقم 001) قبل تحوّله، وما اسم العالم الذي أدار مختبر هوكينز وكان الأطفال ينادونه «بابا»؟",
         "a": "هنري كريل (Henry Creel) — والدكتور مارتن برينر (Dr. Martin Brenner)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://t.ctcdn.com.br/k5qk3mrajwQkonyI3GB49N9QmF0%3D/1024x0/smart/filters%3Aformat%28webp%29/i604259.jpeg"
+        }
       },
       {
         "uid": "series_stranger_things_drive_q24_600",
         "points": 600,
         "q": "في الموسم الرابع، ما عنوان الأغنية الكلاسيكية الصادرة عام 1985 للمغنية «كيت بوش» التي أنقذت «ماكس مايفيلد» من قبضة فيكنا؟",
         "a": "Running Up That Hill (A Deal with God)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://i.headtopics.com/images/2025/11/26/huffpostuk/stranger-things-bosses-tease-plan-b-song-for-iconi-stranger-things-bosses-tease-plan-b-song-for-iconi-47227A0CA0123D0A691C5D1D5BAE81A1.webp?w=640"
+        }
       }
     ]
   },
