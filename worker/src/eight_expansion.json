@@ -15393,21 +15393,33 @@
         "points": 400,
         "q": "ما الاسم الحقيقي لجون سنو الذي كُشف عنه بعد إثبات نسبه الحقيقي؟",
         "a": "إيغون تارغاريان (Aegon Targaryen)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://krasavica.info/uploads/posts/2023-01/1673370185_krasavica-info-p-lianna-stark-aktrisa-vkontakte-68.jpg"
+        }
       },
       {
         "uid": "series_game_of_thrones_drive_q23_600",
         "points": 600,
         "q": "ما اسم السم النادر الذي استُخدم لقتل الملك جوفري باراثيون خلال «الزفاف البنفسجي»؟",
         "a": "الخانق (The Strangler)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://cdn-www.konbini.com/files/2019/08/ht_game_of_thrones_joffrey_jef_140414_31x13_992.jpg"
+        }
       },
       {
         "uid": "series_game_of_thrones_drive_q24_600",
         "points": 600,
         "q": "ما اسم المؤسسة المالية الأقوى في مدينة برافوس التي أقرضت التاج الحديدي، وما شعارها الشهير؟",
         "a": "البنك الحديدي في برافوس (The Iron Bank of Braavos) — وشعاره: «البنك الحديدي سينال حقه دائماً» (The Iron Bank will have its due)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://u.kanobu.ru/editor/images/11/9a6aa4da-b8fd-4457-85be-8ec30d970802.png"
+        }
       }
     ]
   },
