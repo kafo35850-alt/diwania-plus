@@ -16056,28 +16056,44 @@
         "points": 400,
         "q": "ما اسم العدو اللدود الأبرز لشيرلوك هولمز الذي جسّد دوره الممثل أندرو سكوت؟",
         "a": "جيم موريارتي (Jim Moriarty)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://m.media-amazon.com/images/M/MV5BMDkyMDRjZGQtNTZhNy00OThiLTlhOTAtZmQyYjI5Njg1MmVjXkEyXkFqcGc%40._V1_.jpg"
+        }
       },
       {
         "uid": "series_sherlock_drive_q22_400",
         "points": 400,
         "q": "ما اسم الشقيق الأكبر لشيرلوك هولمز الذي يشغل منصباً استخباراتياً رفيعاً في الحكومة البريطانية؟",
         "a": "مايكروفت هولمز (Mycroft Holmes)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://cdn.mos.cms.futurecdn.net/v2/t%3A0%2Cl%3A420%2Ccw%3A1080%2Cch%3A1080%2Cq%3A80%2Cw%3A1080/Q4z4hAviWRonz87PbnwNE9.jpeg"
+        }
       },
       {
         "uid": "series_sherlock_drive_q23_600",
         "points": 600,
         "q": "ما اسم الشقيقة السرية العبقرية لشيرلوك ومايكروفت التي ظهرت في الموسم الرابع، وما اسم السجن الجزيري فائق الحراسة الذي كانت محتجزة فيه؟",
         "a": "يوروس هولمز (Eurus Holmes) — وسجن شيرينفورد (Sherrinford)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://img.buzzfeed.com/buzzfeed-static/static/2022-09/27/14/asset/ca371291d142/sub-buzz-534-1664288564-26.jpg"
+        }
       },
       {
         "uid": "series_sherlock_drive_q24_600",
         "points": 600,
         "q": "في الحلقة الافتتاحية «A Study in Pink»، ما الكلمة التي نقشتها الضحية الأخيرة «جينيفر ويلسون» على الأرض وظنّ المحققون أنها تعني «انتقام» بالألمانية (Rache) قبل أن يكتشف شيرلوك أنها كانت كلمة مرور لهاتفها؟",
         "a": "Rachel (اسم ابنتها المتوفاة، وكانت الضحية تكتب Rachel قبل أن تفارق الحياة عند حرف e)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://i.pinimg.com/736x/c3/97/1e/c3971ef2df1dfc9ad5c81785473c38ee.jpg"
+        }
       }
     ]
   },
