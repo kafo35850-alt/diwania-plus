@@ -272,35 +272,55 @@
         "points": 200,
         "q": "في أي دولة يقع المدرّج الروماني الشهير «الكولوسيوم»؟",
         "a": "إيطاليا (في مدينة روما)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Colosseum_of_Rome.jpg/1280px-Colosseum_of_Rome.jpg"
+        }
       },
       {
         "uid": "ancient_monuments_drive_q21_400",
         "points": 400,
         "q": "ما اسم المعبد الأثري الضخم في كمبوديا الذي يُعد أكبر صرح ديني في العالم من حيث المساحة؟",
         "a": "أنغكور وات (Angkor Wat)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Angkor_Wat.jpg/1280px-Angkor_Wat.jpg"
+        }
       },
       {
         "uid": "ancient_monuments_drive_q22_400",
         "points": 400,
         "q": "في أي دولة عربية تقع مدينة «تدمر» الأثرية المعروفة تاريخياً باسم «عروس الصحراء»؟",
         "a": "سوريا",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Palmyra,_Syria,_Ruins.jpg/1280px-Palmyra,_Syria,_Ruins.jpg"
+        }
       },
       {
         "uid": "ancient_monuments_drive_q23_600",
         "points": 600,
         "q": "ما اسم الموقع الأثري النيوليتي في جنوب شرق تركيا الذي يعود إلى نحو 9600 قبل الميلاد ويُعد أقدم مجمع حجري طقسي مكتشف في التاريخ؟",
         "a": "غوبكلي تبه (Göbekli Tepe)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Gobeklitepe.jpg/1280px-Gobeklitepe.jpg"
+        }
       },
       {
         "uid": "ancient_monuments_drive_q24_600",
         "points": 600,
         "q": "من هو الملك النبطي الذي يُرجّح علماء الآثار أن «الخزنة» في البتراء نُحتت لتكون ضريحاً له في القرن الأول الميلادي؟",
         "a": "الحارث الرابع (أريتاس الرابع)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Al_Khazneh,_Petra.jpg/1280px-Al_Khazneh,_Petra.jpg"
+        }
       }
     ]
   },
