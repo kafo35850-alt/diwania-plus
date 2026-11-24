@@ -15658,28 +15658,44 @@
         "points": 400,
         "q": "ما اسم الابن الوحيد لعبدالغفور البرعي الذي رفض العمل في تجارة الخردة مع والده وجسّد دوره محمد رياض؟",
         "a": "عبدالوهاب البرعي",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://media.elwatannews.com/media/img/mediaarc/large/14691390501592188085.jpg"
+        }
       },
       {
         "uid": "series_lan_aeesh_drive_q22_400",
         "points": 400,
         "q": "ما اسم التاجر الكبير في الوكالة الذي بدأ عبدالغفور البرعي حياته صبياً لديه قبل أن يستقل بتجارته؟",
         "a": "الحاج إبراهيم سردينة (أدّى دوره عبدالرحمن أبو زهرة)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.annahar.com/Assets/ContentPhotos/Photos/ABDLRHMNABWZHRBSHKHSYLMALMSRDYNSWSHYLMYDY_134140.webp?height=805&mode=crop&scale=both&width=1416"
+        }
       },
       {
         "uid": "series_lan_aeesh_drive_q23_600",
         "points": 600,
         "q": "من هو الروائي المصري الكبير صاحب رواية «لن أعيش في جلباب أبي» الأصلية، ومن هو كاتب السيناريو والحوار الذي حوّلها إلى مسلسل عام 1996؟",
         "a": "الروائي إحسان عبدالقدوس — وكاتب السيناريو والحوار مصطفى محرم",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://magazine.rosaelyoussef.com/UserFiles/News/2025/11/02/65213.jpg"
+        }
       },
       {
         "uid": "series_lan_aeesh_drive_q24_600",
         "points": 600,
         "q": "ما أسماء بنات عبدالغفور البرعي الأربع في المسلسل، ومن هو المخرج الذي أخرج العمل؟",
         "a": "سنية، بهيرة، نفيسة، نظيرة — والمخرج أحمد توفيق",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://arcdn.scoopempire.com/wp-content/uploads/sites/4/2025/10/image-310-1024x576.png"
+        }
       }
     ]
   },
