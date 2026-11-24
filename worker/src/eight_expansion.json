@@ -5408,14 +5408,22 @@
         "points": 200,
         "q": "مع أي دولة عربية تجاور مدينة عرعر حدودها البرية الشمالية مباشرة؟",
         "a": "العراق",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "/eight-media/42cd95b2a42a069a70ef.webp"
+        }
       },
       {
         "uid": "custom_1795333422935_drive_q9_200",
         "points": 200,
         "q": "ما اسم الجامعة الحكومية التي يقع مقرها الرئيسي في مدينة عرعر؟",
         "a": "جامعة الحدود الشمالية",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.okaz.com.sa/uploads/images/2024/06/28/2401130.jpg"
+        }
       },
       {
         "uid": "custom_1795333422935_drive_q10_200",
@@ -5432,21 +5440,33 @@
         "points": 200,
         "q": "ما اسم المنفذ البري الحدودي الرئيسي القريب من عرعر الذي يربط السعودية بالعراق؟",
         "a": "منفذ جديدة عرعر",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://portalcdn.spa.gov.sa/backend/original/202206/6aed6f2044dd646719c5104db9b0060e.jpeg"
+        }
       },
       {
         "uid": "custom_1795333422935_drive_q12_200",
         "points": 200,
         "q": "ما المحافظتان الرئيسيتان الأخريان في منطقة الحدود الشمالية إلى جانب عرعر والعويقيلة؟",
         "a": "رفحاء وطريف",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/Northern%20Borders%20Region%20-%20Provinces.svg?width=1280"
+        }
       },
       {
         "uid": "custom_1795333422935_drive_q13_400",
         "points": 400,
         "q": "ما اسم الفن الشعبي التراثي الشهير في عرعر وشمال المملكة الذي يجمع بين التصفيق الإيقاعي والأداء الجماعي؟",
         "a": "الدحة",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://portalcdn.spa.gov.sa/backend/original/202512/Cxd0wPwAG4TkXpBYFus9ZDWZ6s2yhmjpUx6aEMFC.jpg"
+        }
       },
       {
         "uid": "custom_1795333422935_drive_q14_400",
@@ -5463,28 +5483,44 @@
         "points": 400,
         "q": "ما اسم المحمية الملكية الطبيعية التي تشمل مساحات واسعة من شرق منطقة الحدود الشمالية؟",
         "a": "محمية الإمام تركي بن عبدالله الملكية",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://portalcdn.spa.gov.sa/backend/original/202307/L01TWfJxMnV45CICICq38fK90bqULcCqkSvPLPZ7.jpg"
+        }
       },
       {
         "uid": "custom_1795333422935_drive_q16_400",
         "points": 400,
         "q": "ما اسم الأكلة الشعبية التراثية الشهيرة في عرعر وشمال المملكة المصنوعة من خبز الصاج ومرق اللحم واللبن المطبوخ (الجميد)؟",
         "a": "المنسف الشمالي (المليحية)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://portalcdn.spa.gov.sa/backend/original/202504/6DtCVeWaQQj27dR9r1ZrmcPOLhgUmsVzBqZb7bSU.jpg"
+        }
       },
       {
         "uid": "custom_1795333422935_drive_q17_400",
         "points": 400,
         "q": "ما الاسم المحلي لأجود وأشهر أنواع «الفقع» (الكمأة) ذات اللون الأبيض الكريمي التي تُجمع في ربيع عرعر؟",
         "a": "الزبيدي",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://alsaudialyaum.com/images/2024/02/%D8%B3%D9%88%D9%82-%D8%A7%D9%84%D9%81%D9%82%D8%B9-%D9%81%D9%8A-%D8%B7%D8%B1%D9%8A%D9%81-1706993477-3.jpg"
+        }
       },
       {
         "uid": "custom_1795333422935_drive_q18_400",
         "points": 400,
         "q": "ما اسم المهرجان التراثي السنوي الشهير الذي يُقام في منطقة الحدود الشمالية احتفاءً بهواية المقناص؟",
         "a": "مهرجان الصقور بمنطقة الحدود الشمالية",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://portalcdn.spa.gov.sa/backend/original/202602/3lLdHPz9YnEANJjHyjrTrqMH2TqqGArCINMwjnx1.jpg"
+        }
       },
       {
         "uid": "custom_1795333422935_drive_q19_600",
