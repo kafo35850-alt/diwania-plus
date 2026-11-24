@@ -18855,35 +18855,55 @@
         "points": 200,
         "q": "ما أكبر حيوان عاش على كوكب الأرض على الإطلاق؟",
         "a": "الحوت الأزرق",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://image.trecome.info/uploads/article/image/43502ff8-f83e-405f-a3f5-e85fa98c76bb"
+        }
       },
       {
         "uid": "wild_animals_drive_q21_400",
         "points": 400,
         "q": "كم عدد القلوب التي يمتلكها الأخطبوط في جسمه؟",
         "a": "ثلاثة قلوب",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://oceanservice.noaa.gov/news/feb26/benthic-octopus-clam-960.jpg"
+        }
       },
       {
         "uid": "wild_animals_drive_q22_400",
         "points": 400,
         "q": "ما اسم الثديي الأسترالي الفريد الذي يضع البيض بدلاً من الولادة وله منقار يشبه منقار البط؟",
         "a": "خلد الماء (البلاتيبوس)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://inaturalist-open-data.s3.amazonaws.com/photos/349575913/large.jpg"
+        }
       },
       {
         "uid": "wild_animals_drive_q23_600",
         "points": 600,
         "q": "ما الاسم العلمي للكائن البحري المعروف بـ«قنديل البحر الخالد» القادر بيولوجياً على العودة من طور البلوغ إلى طور السليلة (Polyp)؟",
         "a": "توريتوبسيس دورني (Turritopsis dohrnii)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://t1.blockdit.com/photos/2019/06/5d0cd3ae4d7a7c206f39bd9f_800x0xcover_ANnzEkFI.jpg"
+        }
       },
       {
         "uid": "wild_animals_drive_q24_600",
         "points": 600,
         "q": "ما اسم البروتين الحامل للأكسجين ذي الأساس النحاسي الذي يمنح دم سرطان حدوة الحصان (Horseshoe Crab) لونه الأزرق المميز؟",
         "a": "الهيموسيانين (Hemocyanin)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://d1ef7ke0x2i9g8.cloudfront.net/hong-kong/_1200x630_fit_center-center_82_none/Species-Spotlight_-The-Prehistoric-Horseshoe-Crab-Header.png?mtime=1724223029"
+        }
       }
     ]
   },
