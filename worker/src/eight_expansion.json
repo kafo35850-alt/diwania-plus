@@ -7019,14 +7019,22 @@
         "points": 200,
         "q": "في أي عام انطلقت النسخة الأولى من «موسم الرياض»؟",
         "a": "عام 2019 (أكتوبر 2019)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "/eight-media/920c155c6e90ddffa980.webp"
+        }
       },
       {
         "uid": "custom_1795335456800_drive_q9_200",
         "points": 200,
         "q": "ما الجهة الحكومية السعودية المسؤولة عن تنظيم وإطلاق موسم الرياض؟",
         "a": "الهيئة العامة للترفيه (GEA)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/Saudi_General_Entertainment_Authority_Logo.png?width=1280"
+        }
       },
       {
         "uid": "custom_1795335456800_drive_q10_200",
@@ -7043,21 +7051,33 @@
         "points": 200,
         "q": "ما اسم حفل الجوائز السنوي الضخم الذي يُقام ضمن فعاليات موسم الرياض لتكريم نجوم الفن والرياضة والسينما؟",
         "a": "حفل جوائز صناع الترفيه (Joy Awards)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/Ahmed_Ezz_at_Joy_Awards.jpg?width=1280"
+        }
       },
       {
         "uid": "custom_1795335456800_drive_q12_200",
         "points": 200,
         "q": "ما اسم الصالة المغطاة العملاقة التي استضافت نزالات الملاكمة العالمية ومباريات الهلال ضمن موسم الرياض؟",
         "a": "المملكة أرينا (Kingdom Arena)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "/eight-media/8fa70ca4e70b09c697ee.webp"
+        }
       },
       {
         "uid": "custom_1795335456800_drive_q13_400",
         "points": 400,
         "q": "ما الشعار الرسمي الشهير الذي أُطلق في النسخة الأولى من موسم الرياض عام 2019؟",
         "a": "تخيّل (Imagine)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/Riyadh_Season_Logo.svg?width=1280"
+        }
       },
       {
         "uid": "custom_1795335456800_drive_q14_400",
@@ -7074,28 +7094,44 @@
         "points": 400,
         "q": "ما اسم المنطقة الفاخرة في موسم الرياض التي تضم فندقاً فاخراً ومطاعم عالمية وصالات سينما راقية في حي الهدا؟",
         "a": "فيا رياض (VIA Riyadh)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/VIA_Riyadh_entrance.jpg?width=1280"
+        }
       },
       {
         "uid": "custom_1795335456800_drive_q16_400",
         "points": 400,
         "q": "ما اسم حديقة الحيوانات العريقة التي طُوّرت وأُدرجت ضمن المناطق المجانية في موسم الرياض؟",
         "a": "الرياض زو (Riyadh Zoo)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/Cheetah_at_the_Riyadh_zoo.jpg?width=1280"
+        }
       },
       {
         "uid": "custom_1795335456800_drive_q17_400",
         "points": 400,
         "q": "ما اسم الحديقة التي تستضيف الأسابيع الثقافية للشعوب والمطاعم الشعبية مجاناً في موسم الرياض؟",
         "a": "حديقة السويدي (Suwaidi Park)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/%D8%AC%D8%A7%D9%86%D8%A8_%D9%85%D9%86_%D9%85%D8%AA%D9%86%D8%B2%D9%87_%D8%A7%D9%84%D8%B3%D9%88%D9%8A%D8%AF%D9%8A_%D8%A8%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6.jpg?width=1280"
+        }
       },
       {
         "uid": "custom_1795335456800_drive_q18_400",
         "points": 400,
         "q": "من هما الملاكمان العالميان اللذان تواجها في نزال «حلبة النار» (Ring of Fire) لتوحيد ألقاب الوزن الثقيل في الرياض عام 2024؟",
         "a": "تايسون فيوري وأوليكساندر أوسيك",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/Robin_Safar_during_his_bout_against_Sergey_Kovalev_on_the_undercard_of_Tyson_Fury_vs_Oleksandr_Usyk_in_Saudi_Arabia%2C_May_18%2C_2024.jpg?width=1280"
+        }
       },
       {
         "uid": "custom_1795335456800_drive_q19_600",
