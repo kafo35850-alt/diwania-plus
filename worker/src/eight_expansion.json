@@ -16486,35 +16486,55 @@
         "points": 200,
         "q": "ما هو المكوّن الأساسي الذي يُصنع منه طبق «الجريش» السعودي الشهير؟",
         "a": "القمح المجروش (اللقيمي) مع اللبن أو الحليب والمرق",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/%D8%A7%D9%84%D8%AC%D8%B1%D9%8A%D8%B4.jpg/1280px-%D8%A7%D9%84%D8%AC%D8%B1%D9%8A%D8%B4.jpg"
+        }
       },
       {
         "uid": "saudi_popular_food_drive_q21_400",
         "points": 400,
         "q": "ما هو الطبق الشعبي الذي أعلنته هيئة فنون الطهي عام 2023 «الطبق الوطني» للمملكة، وما هي الحلوى الوطنية المعلنة معه؟",
         "a": "الطبق الوطني: الجريش، والحلوى الوطنية: المقشوش",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://cloudfront-eu-central-1.images.arcpublishing.com/thenational/3H3FN6UHC4R5M5YZ37YD6IBDF4.jpg"
+        }
       },
       {
         "uid": "saudi_popular_food_drive_q22_400",
         "points": 400,
         "q": "بأي منطقة سعودية يشتهر طبقا «المعصوب» و«السليق» بشكل رئيسي؟",
         "a": "منطقة الحجاز (المنطقة الغربية: مكة وجدة والطائف والمدينة)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://images.deliveryhero.io/image/menu-import-gateway-prd/regions/ME/chains/HS-KEBAD/de52de3e0798123f4a61e56dcb74efe0.jpeg?quality=75&webp=true&width=1440"
+        }
       },
       {
         "uid": "saudi_popular_food_drive_q23_600",
         "points": 600,
         "q": "في طبق «الحنيذ» التقليدي بجنوب المملكة، ما اسم النبات العطري الذي يُستخدم لتغطية اللحم داخل التنور (الميفا) لإكسابه نكهته المميزة؟",
         "a": "نبات المرخ (ويُستخدم أحياناً نبات السلع)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.mshtly.com/uploads/products/%D9%86%D8%A8%D8%AA%D8%A9%20%D8%A7%D9%84%D9%85%D8%B1%D8%AE.jpeg"
+        }
       },
       {
         "uid": "saudi_popular_food_drive_q24_600",
         "points": 600,
         "q": "ما الفرق الجوهري بين طبقي «القرصان» و«المرقوق» في المطبخ النجدي؟",
         "a": "القرصان يُحضّر من رقائق خبز جافة رقيقة جداً تُسقى بالمرق والخضار واللحم على طبقات، بينما المرقوق يُطهى فيه العجين الطازج المفرود مباشرة داخل قدر المرق المغلي",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://kitchen.sayidaty.net/uploads/small/b5/b5f5a90369b0cee9f6efa6d4d19b164a_w750_h500.jpg"
+        }
       }
     ]
   },
