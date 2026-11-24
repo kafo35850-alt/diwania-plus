@@ -19570,12 +19570,15 @@
       {
         "uid": "series_vikings_drive_q21_400",
         "points": 400,
-        "q": "ما اسم باني السفن العبقري وصديق راغنار المقرّب الذي صمّم السفن القادرة على الإبحار غرباً نحو إنجلترا؟",
+        "q": "في «فايكنغز»، من صديق راغنار الذي صمّم سفنًا تقدر تعبر البحر وتدخل الأنهار الضحلة، مثل السفينة في الرسم المتحرك؟",
         "a": "فلوكي (Floki)",
-        "useCategoryPoster": true,
         "am": {
           "t": "image",
           "u": "https://www.looper.com/img/gallery/lines-in-vikings-that-mean-more-than-you-realized/like-loki-the-god-1612188800.jpg"
+        },
+        "qm": {
+          "t": "video",
+          "u": "/eight-media/63459100b76dece3bd93.mp4"
         }
       },
       {
