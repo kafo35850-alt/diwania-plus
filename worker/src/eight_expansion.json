@@ -15191,28 +15191,44 @@
         "points": 400,
         "q": "من هو الكاتب المصري الكبير مؤلف روائع الدراما «ليالي الحلمية» و«الشهد والدموع» و«أرابيسك»؟",
         "a": "أسامة أنور عكاشة",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.aflami.tv/upload/604website%D8%A3%D8%B3%D8%A7%D9%85%D8%A9_%D8%A3%D9%86%D9%88%D8%B1_%D8%B9%D9%83%D8%A7%D8%B4%D8%A9.jpg"
+        }
       },
       {
         "uid": "series_egypt_general_drive_q22_400",
         "points": 400,
         "q": "ما اسم المسلسل المصري الشهير الذي جسّد فيه نور الشريف شخصية «الحاج متولي»؟",
         "a": "عائلة الحاج متولي",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.annahar.com/Assets/ContentPhotos/Photos/290366Image1.jpg?height=805&mode=crop&scale=both&width=1416"
+        }
       },
       {
         "uid": "series_egypt_general_drive_q23_600",
         "points": 600,
         "q": "من هو الموسيقار المصري الذي لحّن تتر مسلسل «ليالي الحلمية»، ومن هو الشاعر الذي كتب كلماته الشهيرة «ومنين بيجي الشجن»؟",
         "a": "الموسيقار ميشيل المصري — والشاعر سيد حجاب (وغناء محمد الحلو)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://i1.sndcdn.com/artworks-000098573238-lj20fw-t500x500.jpg"
+        }
       },
       {
         "uid": "series_egypt_general_drive_q24_600",
         "points": 600,
         "q": "من هو الكاتب الذي ألّف سيناريو وحوار مسلسل «رأفت الهجان» المأخوذ عن ملفات المخابرات المصرية، ومن هو المخرج الذي أخرج أجزاءه الثلاثة؟",
         "a": "الكاتب صالح مرسي — والمخرج يحيى العلمي",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://cdn.al-ain.com/lg/images/2023/7/05/135-122500-yahya-alami-profile-2.jpeg"
+        }
       }
     ]
   },
