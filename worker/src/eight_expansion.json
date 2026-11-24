@@ -14476,15 +14476,19 @@
         "a": "جبل فوجي",
         "am": {
           "t": "image",
-          "u": "/eight-media/064cad7942bc55e746e5.webp"
+          "u": "/media/med_seed_p_5ed27891ce21"
         }
       },
       {
         "uid": "east_asia_lands_drive_q20_200",
         "points": 200,
-        "q": "ما هي عاصمة كوريا الجنوبية؟",
-        "a": "سيول",
-        "useCategoryPoster": true
+        "q": "ما المدينة التي يمر وسطها نهر هان وهي عاصمة كوريا الجنوبية؟",
+        "a": "سيول (سول)",
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "/media/med_seed_p_adbb73915521"
+        }
       },
       {
         "uid": "east_asia_lands_drive_q21_400",
@@ -14498,21 +14502,29 @@
         "points": 400,
         "q": "ما اسم الصحراء الشاسعة التي تمتد بين جنوب منغوليا وشمال الصين؟",
         "a": "صحراء غوبي (Gobi)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "/media/med_seed_p_adb8b62726de"
+        }
       },
       {
         "uid": "east_asia_lands_drive_q23_600",
         "points": 600,
-        "q": "ما اسم أعمق نقطة بحرية على كوكب الأرض وتقع في غرب المحيط الهادئ شرق الفلبين وجنوب اليابان، وما اسم الخندق الذي يضمها؟",
+        "q": "ما اسم أعمق نقطة معروفة في محيطات الأرض، وما اسم الخندق الذي تقع فيه غرب المحيط الهادئ؟",
         "a": "تشالنجر ديب (Challenger Deep) في خندق ماريانا",
         "useCategoryPoster": true
       },
       {
         "uid": "east_asia_lands_drive_q24_600",
         "points": 600,
-        "q": "ما اسم العاصمة التاريخية لليابان التي سبقت طوكيو وظلت مقراً للإمبراطور لأكثر من ألف عام (من 794م حتى 1868م)؟",
-        "a": "كيوتو (هييان كيو)",
-        "useCategoryPoster": true
+        "q": "ما المدينة اليابانية التي اختارها الإمبراطور كانمو مقرًا للحكم عام 794م؟",
+        "a": "كيوتو (هييان-كيو آنذاك)",
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "/media/med_seed_p_0bdda449257b"
+        }
       }
     ]
   },
@@ -14574,34 +14586,46 @@
         "a": "جبال الألب",
         "am": {
           "t": "image",
-          "u": "/eight-media/009e7e8d033d0d2d2a05.webp"
+          "u": "/media/med_seed_p_406c1c7bb03b"
         }
       },
       {
         "uid": "europe_continent_drive_q20_200",
         "points": 200,
-        "q": "ما هي أصغر دولة في قارة أوروبا والعالم من حيث المساحة؟",
+        "q": "ما أصغر دولة مستقلة في العالم، ويقع فيها ميدان القديس بطرس؟",
         "a": "دولة الفاتيكان",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "/media/med_seed_p_7131796742ae"
+        }
       },
       {
         "uid": "europe_continent_drive_q21_400",
         "points": 400,
         "q": "ما هو أطول نهر في قارة أوروبا بالكامل ويجري داخل الأراضي الروسية ليصب في بحر قزوين؟",
         "a": "نهر الفولغا",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "/media/med_seed_p_92a24e69ec50"
+        }
       },
       {
         "uid": "europe_continent_drive_q22_400",
         "points": 400,
-        "q": "ما هو النهر الأوروبي الذي يمر بأكبر عدد من الدول في العالم (10 دول) ويمر بأربع عواصم أوروبية؟",
+        "q": "ما النهر الذي يمر بأربع عواصم أوروبية هي فيينا وبراتيسلافا وبودابست وبلغراد؟",
         "a": "نهر الدانوب",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://upload.wikimedia.org/wikipedia/commons/0/04/Aerial_photograph_of_Margaret_Bridge_and_Budapest_Chain-Bridge_01.jpg"
+        }
       },
       {
         "uid": "europe_continent_drive_q23_600",
         "points": 600,
-        "q": "ما اسم أعلى قمة جبلية في قارة أوروبا (جغرافياً ضمن سلسلة جبال القوقاز) ويبلغ ارتفاعها 5,642 متراً؟",
+        "q": "إذا اعتُمدت قمة القوقاز الكبرى ضمن أوروبا، فما أعلى قمة في القارة بارتفاع 5642 مترًا؟",
         "a": "جبل إلبروس (Mount Elbrus)",
         "useCategoryPoster": true
       },
@@ -14610,7 +14634,11 @@
         "points": 600,
         "q": "ما هي الدولة الأوروبية الوحيدة التي تُصنّف جغرافياً كدولة «حبيسة مزدوجة» (محاطة بالكامل بدولتين حبيستين هما سويسرا والنمسا)؟",
         "a": "ليختنشتاين (Liechtenstein)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "/media/med_seed_p_163d64678bb4"
+        }
       }
     ]
   },
@@ -15746,11 +15774,11 @@
       {
         "uid": "mountains_deserts_drive_q19_200",
         "points": 200,
-        "q": "ما هي أعلى قمة جبلية في العالم فوق مستوى سطح البحر؟",
+        "q": "ما القمة التي أعلنت نيبال والصين عام 2020 أن ارتفاعها 8848.86 مترًا فوق سطح البحر؟",
         "a": "قمة جبل إيفرست (8,848.86 متراً)",
         "am": {
           "t": "image",
-          "u": "/eight-media/d3f6222f0612fac39ff5.webp"
+          "u": "https://upload.wikimedia.org/wikipedia/commons/d/d1/Mount_Everest_as_seen_from_Drukair2_PLW_edit.jpg"
         }
       },
       {
@@ -15778,7 +15806,7 @@
       {
         "uid": "mountains_deserts_drive_q22_400",
         "points": 400,
-        "q": "ما هي أكثر الصحاري غير القطبية جفافاً على وجه الأرض؟",
+        "q": "ما الصحراء التشيلية التي تستخدم ناسا بعض مناطقها شديدة الجفاف لدراسة بيئات تشبه المريخ؟",
         "a": "صحراء أتاكاما (في تشيلي بأمريكا الجنوبية)",
         "useCategoryPoster": true,
         "am": {
@@ -15805,7 +15833,7 @@
         "useCategoryPoster": true,
         "am": {
           "t": "image",
-          "u": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/K2_2006b.jpg/1200px-K2_2006b.jpg"
+          "u": "https://upload.wikimedia.org/wikipedia/commons/1/12/K2_2006b.jpg"
         }
       }
     ]
@@ -17085,43 +17113,67 @@
         "a": "كابادوكيا (Cappadocia)",
         "am": {
           "t": "image",
+          "u": "/media/med_seed_p_2a8f4215389d"
+        },
+        "qm": {
+          "t": "image",
           "u": "/eight-media/5ec70bbfb00974bb4828.webp"
         }
       },
       {
         "uid": "republic_turkey_drive_q20_200",
         "points": 200,
-        "q": "ما هي العاصمة الرسمية لجمهورية تركيا؟",
+        "q": "في أي مدينة يقع ضريح أتاتورك «آنيت كابير»، وهي عاصمة الجمهورية التركية؟",
         "a": "أنقرة",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "/media/med_seed_p_7a50e6dff17e"
+        }
       },
       {
         "uid": "republic_turkey_drive_q21_400",
         "points": 400,
         "q": "ما اسم المضيق البحري الذي يفصل الشطر الأوروبي عن الشطر الآسيوي في مدينة إسطنبول؟",
         "a": "مضيق البوسفور",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "/media/med_seed_p_65ecbd8fccf3"
+        }
       },
       {
         "uid": "republic_turkey_drive_q22_400",
         "points": 400,
         "q": "في أي عام أُعلن قيام الجمهورية التركية رسمياً بقيادة مصطفى كمال أتاتورك؟",
         "a": "عام 1923م (29 أكتوبر 1923)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "/media/med_seed_p_e594a441008a"
+        }
       },
       {
         "uid": "republic_turkey_drive_q23_600",
         "points": 600,
         "q": "ما اسم أعلى قمة جبلية في تركيا ويبلغ ارتفاعها 5,137 متراً وتقع في أقصى شرق البلاد؟",
         "a": "جبل أرارات (أغري داغ)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "/media/med_seed_p_431e3c4b7ab0"
+        }
       },
       {
         "uid": "republic_turkey_drive_q24_600",
         "points": 600,
         "q": "ما اسم أكبر بحيرة في تركيا من حيث المساحة وتتميز بمياهها القلوية شديدة الملوحة في شرق الأناضول؟",
         "a": "بحيرة فان (Lake Van)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "/media/med_seed_p_835f50f7834f"
+        }
       }
     ]
   },
@@ -17130,17 +17182,17 @@
       {
         "uid": "rivers_seas_drive_q19_200",
         "points": 200,
-        "q": "ما هو أطول نهر في العالم؟",
-        "a": "نهر النيل (بطول نحو 6,650 كم)",
+        "q": "ما النهر الذي يجري شمالًا عبر السودان ومصر ويصبّ في البحر المتوسط؟",
+        "a": "نهر النيل",
         "am": {
           "t": "image",
-          "u": "/eight-media/cf1e6b015457c32f4274.webp"
+          "u": "/media/med_seed_p_2b7dbe38f56e"
         }
       },
       {
         "uid": "rivers_seas_drive_q20_200",
         "points": 200,
-        "q": "ما هو المسطح المائي الأكثر ملوحةً بين البحار الكبرى في العالم ويقع بين الأردن وفلسطين؟",
+        "q": "ما اسم البحيرة شديدة الملوحة في وادي الصدع التي تقع على شواطئها أخفض نقطة يابسة مكشوفة؟",
         "a": "البحر الميت",
         "useCategoryPoster": true,
         "am": {
@@ -17151,7 +17203,7 @@
       {
         "uid": "rivers_seas_drive_q21_400",
         "points": 400,
-        "q": "ما هو النهر الذي يمر بأكبر عدد من الدول في العالم، وكم عدد الدول التي يمر بها أو يشكل حدوداً لها؟",
+        "q": "ما النهر الذي يعبر دولًا أوروبية منها ألمانيا والنمسا والمجر، وكم دولة يمر بها أو يشكّل حدودًا لها؟",
         "a": "نهر الدانوب (10 دول أوروبية)",
         "useCategoryPoster": true,
         "am": {
@@ -17167,7 +17219,7 @@
         "useCategoryPoster": true,
         "am": {
           "t": "image",
-          "u": "https://cff2.earth.com/uploads/2025/05/16134547/sargasso-sea_only-sea-does-not-touch-land_1m-1400x850.jpg"
+          "u": "/media/med_seed_p_d921b9b399c7"
         }
       },
       {
@@ -17175,22 +17227,14 @@
         "points": 600,
         "q": "ما هو أعمق نهر في العالم، وكم يبلغ أقصى عمق مُقاس فيه تقريباً؟",
         "a": "نهر الكونغو (يصل عمقه إلى نحو 220 متراً)",
-        "useCategoryPoster": true,
-        "am": {
-          "t": "image",
-          "u": "https://www.worldatlas.com/r/w2560-q80/upload/6a/16/69/shutterstock-1242430540.jpg"
-        }
+        "useCategoryPoster": true
       },
       {
         "uid": "rivers_seas_drive_q24_600",
         "points": 600,
-        "q": "ما اسم النهر الواقع في ولاية مونتانا الأمريكية والذي سُجّل كأقصر نهر في العالم بطول 61 متراً فقط؟",
+        "q": "ما اسم النهر القصير الذي يجري بين ينابيع جاينت سبرينغز ونهر ميزوري في ولاية مونتانا؟",
         "a": "نهر رو (Roe River)",
-        "useCategoryPoster": true,
-        "am": {
-          "t": "image",
-          "u": "https://image-worker.mindtrip.ai/image-resize/format%3Dwebp%2Cw%3D720/https%3A/images.mindtrip.ai/attractions/7197/a1f0/cd21/277e/3055/64c2/aef3/385c"
-        }
+        "useCategoryPoster": true
       }
     ]
   },
@@ -20254,17 +20298,17 @@
       {
         "uid": "world_capitals_drive_q19_200",
         "points": 200,
-        "q": "ما عاصمة أستراليا؟",
+        "q": "أي مدينة أسترالية تقع فيها دار البرلمان على تلّ كابيتال هيل؟",
         "a": "كانبرا",
         "am": {
           "t": "image",
-          "u": "/eight-media/13f24476563e34e9e972.webp"
+          "u": "/media/med_seed_p_cc0f011e606a"
         }
       },
       {
         "uid": "world_capitals_drive_q20_200",
         "points": 200,
-        "q": "ما عاصمة كندا؟",
+        "q": "أي مدينة على الحدود بين أونتاريو وكيبيك اختيرت عاصمة لكندا؟",
         "a": "أوتاوا",
         "useCategoryPoster": true,
         "am": {
@@ -20275,18 +20319,19 @@
       {
         "uid": "world_capitals_drive_q21_400",
         "points": 400,
-        "q": "ما اسم العاصمة الإدارية لبوليفيا التي تُعد أعلى مقرّ حكومة في العالم بارتفاع يزيد على 3,600 متر فوق سطح البحر؟",
+        "q": "ما المدينة التي تُعدّ مقر الحكومة في بوليفيا، وتقع على ارتفاع يزيد على 3600 متر؟",
         "a": "لاباز",
         "useCategoryPoster": true,
         "am": {
           "t": "image",
           "u": "https://live.staticflickr.com/65535/54507152699_8951b25a34_c.jpg"
-        }
+        },
+        "info": "لاباز مقر الحكومة، وسوكري العاصمة الدستورية لبوليفيا."
       },
       {
         "uid": "world_capitals_drive_q22_400",
         "points": 400,
-        "q": "ما عاصمة دولة كازاخستان منذ عام 1997 بعد انتقالها من مدينة ألماتي؟",
+        "q": "ما اسم عاصمة كازاخستان التي استعادت اسمها عام 2022 بعد أن حملت اسم نور سلطان؟",
         "a": "أستانا",
         "useCategoryPoster": true,
         "am": {
@@ -20344,7 +20389,7 @@
       {
         "uid": "world_currencies_drive_q21_400",
         "points": 400,
-        "q": "ما العملة الرسمية لسويسرا؟",
+        "q": "ما اسم العملة الرسمية في سويسرا والتي يتكوّن رمزها الدولي من الأحرف CHF؟",
         "a": "الفرنك السويسري",
         "useCategoryPoster": true,
         "am": {
@@ -20355,7 +20400,7 @@
       {
         "uid": "world_currencies_drive_q22_400",
         "points": 400,
-        "q": "ما العملة الرسمية لجمهورية البرازيل؟",
+        "q": "ما اسم العملة التي اعتمدتها البرازيل عام 1994 ضمن خطة «ريال»؟",
         "a": "الريال البرازيلي (Real)",
         "useCategoryPoster": true,
         "am": {
@@ -20469,7 +20514,7 @@
         "a": "نيبال",
         "am": {
           "t": "image",
-          "u": "/eight-media/1377d88543f24c95caea.webp"
+          "u": "/eight-media/40e20d5373f928920ca3.webp"
         }
       },
       {
@@ -20480,7 +20525,7 @@
         "useCategoryPoster": true,
         "am": {
           "t": "image",
-          "u": "/eight-media/square-national-flags.svg"
+          "u": "/eight-media/6dcf63674511bad57be1.webp"
         }
       },
       {
@@ -20508,23 +20553,23 @@
       {
         "uid": "world_flags_drive_q23_600",
         "points": 600,
-        "q": "ما الدولة الوحيدة في العالم التي يختلف تصميم الوجه الأمامي لعلمها الوطني عن الوجه الخلفي (بحمل شعار مختلف في كل وجه)؟",
+        "q": "أي دولة من أمريكا الجنوبية تحمل في وسط علمها شعار الدولة على وجه وختم الخزانة على الوجه الآخر؟",
         "a": "باراغواي",
         "useCategoryPoster": true,
         "am": {
           "t": "image",
-          "u": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Flag_of_Paraguay_%281990%E2%80%932013%2C_3-2%29.svg/3840px-Flag_of_Paraguay_%281990%E2%80%932013%2C_3-2%29.svg.png"
+          "u": "/eight-media/4fb54bf3d63c0216ce8e.webp"
         }
       },
       {
         "uid": "world_flags_drive_q24_600",
         "points": 600,
-        "q": "ما الدولة الوحيدة في العالم التي لا يضم علمها الوطني أياً من الألوان الثلاثة الأكثر شيوعاً في أعلام الدول: الأحمر والأبيض والأزرق؟",
+        "q": "أي دولة كاريبية يظهر في علمها صليب ذهبي مائل، مع مثلثين أخضرين ومثلثين أسودين؟",
         "a": "جامايكا",
         "useCategoryPoster": true,
         "am": {
           "t": "image",
-          "u": "https://www.alcircle.com/api/media/1776476501.61918_Jamaican_flag_0_0.jpg"
+          "u": "/eight-media/2b5bc8d6a2587dad4ec7.webp"
         }
       }
     ]
@@ -20534,33 +20579,29 @@
       {
         "uid": "world_islands_drive_q19_200",
         "points": 200,
-        "q": "ما هي أكبر جزيرة في العالم من حيث المساحة (باستثناء القارات)؟",
-        "a": "جزيرة غرينلاند",
-        "am": {
-          "t": "image",
-          "u": "/eight-media/c78662632f6e8270903f.webp"
-        }
+        "q": "ما الجزيرة القطبية التي يغطي الجليد معظم مساحتها وتتبع مملكة الدنمارك؟",
+        "a": "غرينلاند"
       },
       {
         "uid": "world_islands_drive_q20_200",
         "points": 200,
-        "q": "ما هي الدولة العربية الوحيدة التي تتكون بالكامل من أرخبيل جزر في الخليج العربي؟",
+        "q": "ما الدولة الجزرية في الخليج العربي التي تتصل بالسعودية بجسر الملك فهد؟",
         "a": "مملكة البحرين",
         "useCategoryPoster": true,
         "am": {
           "t": "image",
-          "u": "https://www.drm.bh/assets/durrat/img/gallery/1%2817%29.jpg"
+          "u": "/media/med_seed_p_48953c9787fa"
         }
       },
       {
         "uid": "world_islands_drive_q21_400",
         "points": 400,
-        "q": "ما هي الجزيرة اليمنية الشهيرة في المحيط الهندي التي تشتهر بشجرة «دم الأخوين» النادرة؟",
+        "q": "ما الجزيرة اليمنية الكبرى في أرخبيل يقع شرقي القرن الأفريقي وتشتهر بشجرة دم الأخوين؟",
         "a": "جزيرة سقطرى",
         "useCategoryPoster": true,
         "am": {
           "t": "image",
-          "u": "https://www.yenimesaj.com.tr/resimler/haberler/45/dunyanin-kayip-ve-essiz-cenneti-socotra-adasi-H1577979-11.webp"
+          "u": "/media/med_seed_p_e2a36157aa5e"
         }
       },
       {
@@ -20571,13 +20612,13 @@
         "useCategoryPoster": true,
         "am": {
           "t": "image",
-          "u": "https://wwfasia.awsassets.panda.org/img/original/aerial-view-of-the-river-kinabatangan-and-riverine-tropical-rainforest--sabah--malays.jpg"
+          "u": "/media/med_seed_p_013fe0b64f9f"
         }
       },
       {
         "uid": "world_islands_drive_q23_600",
         "points": 600,
-        "q": "ما اسم الأرخبيل البركاني النائي في جنوب المحيط الأطلسي الذي يُعد أبعد تجمع سكني مأهول عن أقرب يابسة مأهولة في العالم؟",
+        "q": "ما الأرخبيل البركاني النائي الذي تقع فيه بلدة إدنبرة البحار السبعة في جنوب الأطلسي؟",
         "a": "تريستان دا كونا (Tristan da Cunha)",
         "useCategoryPoster": true,
         "am": {
@@ -20588,7 +20629,7 @@
       {
         "uid": "world_islands_drive_q24_600",
         "points": 600,
-        "q": "ما هي الجزيرة النهرية الصغيرة الواقعة في نهر بيداسوا بين فرنسا وإسبانيا والتي تتبادل الدولتان السيادة عليها كل 6 أشهر؟",
+        "q": "ما اسم الجزيرة في نهر بيداسوا التي يتناوب البلدان إدارة شؤونها كل ستة أشهر؟",
         "a": "جزيرة الفزان (Pheasant Island / Île des Faisans)",
         "useCategoryPoster": true,
         "am": {
@@ -20703,12 +20744,8 @@
       {
         "uid": "world_straits_drive_q19_200",
         "points": 200,
-        "q": "ما اسم المضيق البحري الاستراتيجي الذي يربط البحر الأحمر بخليج عدن والمحيط الهندي ويفصل بين اليمن وجيبوتي؟",
-        "a": "مضيق باب المندب",
-        "am": {
-          "t": "image",
-          "u": "/eight-media/9f8077a79858cdb274ee.webp"
-        }
+        "q": "ما المضيق عند المدخل الجنوبي للبحر الأحمر بين اليمن والقرن الأفريقي؟",
+        "a": "مضيق باب المندب"
       },
       {
         "uid": "world_straits_drive_q20_200",
@@ -20735,7 +20772,7 @@
       {
         "uid": "world_straits_drive_q22_400",
         "points": 400,
-        "q": "ما اسم المضيق البحري الذي يربط بين بحر أندامان وبحر الصين الجنوبي ويفصل بين شبه جزيرة الملايو وجزيرة سومطرة الإندونيسية؟",
+        "q": "ما المضيق الذي يمر بمحاذاة الساحل الشرقي لسومطرة حتى منطقة سنغافورة؟",
         "a": "مضيق ملقا",
         "useCategoryPoster": true,
         "am": {
