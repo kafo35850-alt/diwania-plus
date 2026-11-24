@@ -15865,28 +15865,44 @@
         "points": 400,
         "q": "ما اسم السجن البنمي الخطير الذي احتُجز فيه مايكل سكوفيلد في الموسم الثالث؟",
         "a": "سجن سونا (Sona)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://i.pinimg.com/736x/9d/bc/4f/9dbc4f4eb6cc078c0f4b8f4feee70a37--michael-scofield-prison-break.jpg"
+        }
       },
       {
         "uid": "series_prison_break_drive_q22_400",
         "points": 400,
         "q": "ما اسم الطبيبة التي كانت تعمل في عيادة سجن فوكس ريفر وساعدت مايكل في خطة الهروب؟",
         "a": "سارة تانكريدي (Sara Tancredi)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.looper.com/img/gallery/whatever-happened-to-sarah-wayne-callies-after-the-walking-dead/sarah-wayne-callies-finished-off-her-stint-on-prison-break-1676589304.jpg"
+        }
       },
       {
         "uid": "series_prison_break_drive_q23_600",
         "points": 600,
         "q": "ما اسم السجين المسنّ في «فوكس ريفر» الذي كُشف أنه الخاطف الغامض «دي بي كوبر» وأخبر مايكل بمكان الخمسة ملايين دولار المدفونة في ولاية يوتا؟",
         "a": "تشارلز ويستمورلاند (Charles Westmoreland)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://m.media-amazon.com/images/M/MV5BMjAwODc4NDI5OF5BMl5BanBnXkFtZTcwMTQwNTAyMg%40%40._V1_.jpg"
+        }
       },
       {
         "uid": "series_prison_break_drive_q24_600",
         "points": 600,
         "q": "ما اسم المنظمة السرية التي لفّقت التهمة للينكولن بروز، وما اسم جهاز التخزين الأسود الذي دارت حول بطاقاته الست أحداث الموسم الرابع؟",
         "a": "المنظمة تُعرف بـ «الشركة» (The Company) — والجهاز هو «سيلا» (Scylla)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://m.media-amazon.com/images/M/MV5BMTI4NjQ4MzAyMV5BMl5BanBnXkFtZTcwODMyOTUwMg%40%40._V1_.jpg"
+        }
       }
     ]
   },
