@@ -15829,35 +15829,55 @@
         "points": 200,
         "q": "ما النادي الذي تُوّج بلقب الدوري الإنجليزي الممتاز موسم 2003–2004 دون أي خسارة ليُلقب بفريق «اللا هزيمة» (The Invincibles)؟",
         "a": "نادي أرسنال (Arsenal)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://contentful-assets.yinzcam.com/images/0wcpt07qzvlh/29JqRCA3Bdo688hx98xWXR/8c30a12135c821955483aecc52505082/GettyImages-526856562.jpg?clxf=t_general_large"
+        }
       },
       {
         "uid": "premier_league_drive_q21_400",
         "points": 400,
         "q": "من هو الهداف التاريخي للدوري الإنجليزي الممتاز (منذ 1992) برصيد 260 هدفاً؟",
         "a": "آلان شيرر (Alan Shearer)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://cdn.mos.cms.futurecdn.net/dqVwmiqLdS9FgNdvwXCBRi-1953-80.jpg"
+        }
       },
       {
         "uid": "premier_league_drive_q22_400",
         "points": 400,
         "q": "ما النادي الذي حقق معجزة التتويج بلقب الدوري الإنجليزي الممتاز موسم 2015–2016 بقيادة المدرب الإيطالي كلاوديو رانييري؟",
         "a": "ليستر سيتي (Leicester City)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.si.com/.image/c_fill%2Ccs_srgb%2Cfl_progressive%2Ch_400%2Cq_auto%3Agood%2Cw_620/MTY4MTI1Nzk0OTk0NTYyMzIx/michael-phelps-olympics-sports-illustrated-cover-storyjpg.jpg"
+        }
       },
       {
         "uid": "premier_league_drive_q23_600",
         "points": 600,
         "q": "من هو اللاعب الذي سجل أول هدف في تاريخ الدوري الإنجليزي الممتاز في أغسطس 1992 بقميص شيفيلد يونايتد في شباك مانشستر يونايتد؟",
         "a": "براين دين (Brian Deane)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://static.independent.co.uk/s3fs-public/thumbnails/image/2017/08/08/18/brian-deane.jpg?crop=1200%3A800&height=800&width=1200"
+        }
       },
       {
         "uid": "premier_league_drive_q24_600",
         "points": 600,
         "q": "من هو اللاعب الأيرلندي الذي سجل أسرع هدف في تاريخ الدوري الإنجليزي الممتاز بعد 7.69 ثانية عام 2019 بقميص ساوثهامبتون ضد واتفورد؟",
         "a": "شين لونغ (Shane Long)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://resources.premierleague.pulselive.com/premierleague/photo/2025/12/14/ab9365fc-a244-4730-9922-2d740627f782/Southampton-forward-Shane-Long-runs-past-Watford-defender-Craig-Cathcart-to-score-the-fastest-ever-Premier-League-goal-after-just-7-seconds-in-April-2019.png"
+        }
       }
     ]
   },
