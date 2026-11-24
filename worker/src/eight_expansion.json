@@ -85,35 +85,55 @@
         "points": 200,
         "q": "من هو أول مؤذن في الإسلام؟",
         "a": "بلال بن رباح رضي الله عنه",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://upload.wikimedia.org/wikipedia/commons/1/1a/Bilal_al-Habashi_Masjid_an-Nabawi_Calligraphy.png"
+        }
       },
       {
         "uid": "alsahabah_alkiram_drive_q21_400",
         "points": 400,
         "q": "من هو الصحابي الذي اهتزّ عرش الرحمن لموته كما ورد في الحديث الصحيح؟",
         "a": "سعد بن معاذ رضي الله عنه",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Saad_ibn_Muadh_Masjid_an-Nabawi_Calligraphy.svg/1280px-Saad_ibn_Muadh_Masjid_an-Nabawi_Calligraphy.svg.png"
+        }
       },
       {
         "uid": "alsahabah_alkiram_drive_q22_400",
         "points": 400,
         "q": "من هو الصحابي الذي عُرف بـ «أمين هذه الأمة» وهو أحد العشرة المبشرين بالجنة؟",
         "a": "أبو عبيدة بن الجراح (عامر بن عبدالله) رضي الله عنه",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://upload.wikimedia.org/wikipedia/commons/8/8d/Abu_Ubayda_ibn_al-Jarrah_Masjid_an-Nabawi_Calligraphy.png"
+        }
       },
       {
         "uid": "alsahabah_alkiram_drive_q23_600",
         "points": 600,
         "q": "من هو الصحابي الذي عُرف بـ «ذي الشهادتين» لأن النبي ﷺ جعل شهادته بشهادة رجلين في قصة شراء الفرس؟",
         "a": "خزيمة بن ثابت الأنصاري رضي الله عنه",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://upload.wikimedia.org/wikipedia/commons/7/76/Khuzayma_ibn_Thabit.png"
+        }
       },
       {
         "uid": "alsahabah_alkiram_drive_q24_600",
         "points": 600,
         "q": "من هو الصحابي الذي لُقّب بـ «ذي النور» لأن النبي ﷺ دعا له فأضاء طرف سوطه في ليلة مظلمة حين عاد لدعوة قومه دوس؟",
         "a": "الطفيل بن عمرو الدوسي رضي الله عنه",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/Seal_of_Tufayl_ibn_Amr_al-Dawsi_-_companion_of_the_Prophet_Muhammad.png"
+        }
       }
     ]
   },
