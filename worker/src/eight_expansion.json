@@ -14030,6 +14030,10 @@
         "qm": {
           "t": "image",
           "u": "/eight-media/f3a69a5b692abdfd7e08.webp"
+        },
+        "am": {
+          "t": "image",
+          "u": "https://wips.plug.it/cips/virgilio.sapere.it/cms/2023/06/azione-del-prisma-triangolare.jpg"
         }
       },
       {
@@ -14037,35 +14041,55 @@
         "points": 200,
         "q": "ما اسم العملية الحيوية التي تحوّل بها النباتات ضوء الشمس والماء وثاني أكسيد الكربون إلى غذاء وأكسجين؟",
         "a": "البناء الضوئي (التمثيل الضوئي)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://i.pinimg.com/originals/b5/e7/60/b5e76065c0bb783d8dbd96358b933e10.jpg"
+        }
       },
       {
         "uid": "general_sciences_drive_q21_400",
         "points": 400,
         "q": "ما هي وحدة قياس القوة في النظام الدولي للوحدات (SI)؟",
         "a": "النيوتن (Newton)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://api.gamatrain.com/Files/post/5b8f2badfd864c76b82f0859bc3dc056.webp"
+        }
       },
       {
         "uid": "general_sciences_drive_q22_400",
         "points": 400,
         "q": "ما اسم الطبقة الصخرية الصلبة الخارجية للأرض التي تشمل القشرة والجزء العلوي من الوشاح وتتحرك على هيئة صفائح تكتونية؟",
         "a": "الغلاف الصخري (الليثوسفير / Lithosphere)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://geophile.net/Lessons/PlateTectonics/images/plategraveyard.fw.png"
+        }
       },
       {
         "uid": "general_sciences_drive_q23_600",
         "points": 600,
         "q": "في مقياس موس لصلابة المعادن (من 1 إلى 10)، ما اسم المعدن الذي يحتل المرتبة 9 قبل الألماس مباشرة؟",
         "a": "الكورندوم (Corundum)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://media.mineralauctions.com/411331/rlka37107b.jpg"
+        }
       },
       {
         "uid": "general_sciences_drive_q24_600",
         "points": 600,
         "q": "ما اسم الحد النظري الفيزيائي الذي يحدد أقصى كفاءة ممكنة لتحويل الطاقة الشمسية في خلية شمسية أحادية الوصلة (ويبلغ نحو 33.7%)؟",
         "a": "حد شوكلي–كويسر (Shockley–Queisser limit)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://frontend-cdn.solarreviews.com/shockley-queisser-limit-in-perovskite.jpg"
+        }
       }
     ]
   },
