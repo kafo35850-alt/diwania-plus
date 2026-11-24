@@ -6332,14 +6332,22 @@
         "points": 200,
         "q": "ما أول سورة يبدأ بها جزء عمّ؟",
         "a": "سورة النبأ",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "/eight-media/7021eb4d159abd245785.webp"
+        }
       },
       {
         "uid": "custom_1795334319478_drive_q9_200",
         "points": 200,
         "q": "ما أقصر سورة في القرآن الكريم وتقع في جزء عمّ؟",
         "a": "سورة الكوثر (3 آيات)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/%D8%B3%D9%88%D8%B1%D8%A9_%D8%A7%D9%84%D9%83%D9%88%D8%AB%D8%B1_%D8%A8%D8%A7%D9%84%D8%B1%D8%B3%D9%85_%D8%A7%D9%84%D8%B9%D8%AB%D9%85%D8%A7%D9%86%D9%8A.jpg?width=1280"
+        }
       },
       {
         "uid": "custom_1795334319478_drive_q10_200",
@@ -6356,21 +6364,33 @@
         "points": 200,
         "q": "ما السورة في جزء عمّ التي تعدل ثلث القرآن في الأجر والفضل؟",
         "a": "سورة الإخلاص",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "/eight-media/f17f1c4656fda7873249.webp"
+        }
       },
       {
         "uid": "custom_1795334319478_drive_q12_200",
         "points": 200,
         "q": "ما السورة في جزء عمّ التي سُمّيت باسم الليلة التي أُنزل فيها القرآن الكريم؟",
         "a": "سورة القدر",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/%D8%B3%D9%88%D8%B1%D8%A9_%D8%A7%D9%84%D9%82%D8%AF%D8%B1.jpg?width=1280"
+        }
       },
       {
         "uid": "custom_1795334319478_drive_q13_400",
         "points": 400,
         "q": "ما أطول سورة في جزء عمّ من حيث عدد الآيات؟",
         "a": "سورة النازعات (46 آية)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/Surah_An-Naziat.png?width=1280"
+        }
       },
       {
         "uid": "custom_1795334319478_drive_q14_400",
@@ -6387,28 +6407,44 @@
         "points": 400,
         "q": "ما السورة في جزء عمّ التي نزلت في شأن الصحابي الأعمى عبدالله بن أم مكتوم رضي الله عنه؟",
         "a": "سورة عبس",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/Surah_Abasa.png?width=1280"
+        }
       },
       {
         "uid": "custom_1795334319478_drive_q16_400",
         "points": 400,
         "q": "كم سورة في جزء عمّ تحتوي على «سجدة تلاوة»، وما هما؟",
         "a": "سورتان: سورة الانشقاق وسورة العلق",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/Surah_Al-Inshiqaq.png?width=1280"
+        }
       },
       {
         "uid": "custom_1795334319478_drive_q17_400",
         "points": 400,
         "q": "ما السورتان في جزء عمّ اللتان تبدآن بكلمة «ويلٌ»؟",
         "a": "سورة المطففين وسورة الهُمَزة",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/Surah_Al-Mutaffifin.png?width=1280"
+        }
       },
       {
         "uid": "custom_1795334319478_drive_q18_400",
         "points": 400,
         "q": "ما السورة المدنية في أواخر جزء عمّ التي بشّرت بفتح مكة ودخول الناس في دين الله أفواجاً؟",
         "a": "سورة النصر",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://commons.wikimedia.org/wiki/Special:FilePath/Surah_Al-Nasr.png?width=1280"
+        }
       },
       {
         "uid": "custom_1795334319478_drive_q19_600",
