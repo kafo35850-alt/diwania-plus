@@ -15260,28 +15260,44 @@
         "points": 400,
         "q": "ما اسم المسلسل الدرامي الأيقوني من إنتاج HBO الذي يتناول حياة زعيم المافيا «توني سوبرانو» في نيو جيرسي؟",
         "a": "آل سوبرانو (The Sopranos)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://static.nexilia.it/mangaforever/2021/11/Immagine-28-758x431-1.png"
+        }
       },
       {
         "uid": "series_foreign_general_drive_q22_400",
         "points": 400,
         "q": "ما اسم مسلسل الخيال العلمي المشتق من عالم «حرب النجوم» الذي اشتهر بشخصية «غروغو» (بيبي يودا)؟",
         "a": "ذا ماندالوريان (The Mandalorian)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://cnbl-cdn.bamgrid.com/assets/efbda61808381119f7e623f44b11caeea67229bece949de2bd0dda2d8d9aae5c/original"
+        }
       },
       {
         "uid": "series_foreign_general_drive_q23_600",
         "points": 600,
         "q": "ما اسم المسلسل البوليسي الواقعي من إنتاج HBO الذي دارت أحداثه في مدينة بالتيمور وابتكره الصحفي السابق ديفيد سيمون؟",
         "a": "ذا واير (The Wire)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://i.pinimg.com/736x/0d/c3/f4/0dc3f4f4311562b10f96cf8c97a865ab--wire-celebs.jpg"
+        }
       },
       {
         "uid": "series_foreign_general_drive_q24_600",
         "points": 600,
         "q": "في مسلسل «Succession» (الخلافة)، ما اسم الإمبراطورية الإعلامية التي يمتلكها لوغان روي، ومن هو المؤلف البريطاني الذي ابتكر المسلسل؟",
         "a": "وايستار رويكو (Waystar Royco) — والمؤلف جيسي أرمسترونغ (Jesse Armstrong)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://static.wikia.nocookie.net/succession/images/6/6f/Waystar_Royco_PNG.png/revision/latest/scale-to-width-down/1200?cb=20220603092342"
+        }
       }
     ]
   },
