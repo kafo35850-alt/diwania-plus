@@ -4918,35 +4918,55 @@
         "points": 600,
         "q": "ما اسم القرية التراثية الصيفية الشهيرة في جزر فرسان المبنية من الحجر المرجاني وجذوع النخيل؟",
         "a": "قرية القصار التراثية",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://portalcdn.spa.gov.sa/backend/original/202407/tzAojQvpPIFC9NQ3vxqt4vKeKucIk1bGFDMnjs7T.jpg"
+        }
       },
       {
         "uid": "custom_1795333251481_drive_q21_600",
         "points": 600,
         "q": "ما اسم المدينة الأثرية التاريخية الواقعة شمال صبيا في جازان والتي كانت ميناءً وحاضرة كبرى في العصور الإسلامية المبكرة؟",
         "a": "عثر (موقع عثر الأثري)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.alwatan.com.sa/uploads/images/2026/03/15/1240634.jpg"
+        }
       },
       {
         "uid": "custom_1795333251481_drive_q22_600",
         "points": 600,
         "q": "ما اسم البيت التراثي الشهير في جزر فرسان الذي بناه تاجر اللؤلؤ أحمد منور عام 1922م ويتميز بنقوشه الجصية الرائعة؟",
         "a": "بيت الرفاعي",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.aramcolife.com/-/media/aramco-life/publications/the-arabian-sun/articles/2020/week-48/farasan-island/02_al-rifai-house_03.jpg?cx=0.5&cy=0.5"
+        }
       },
       {
         "uid": "custom_1795333251481_drive_q23_600",
         "points": 600,
         "q": "ما اسم الإمارة التاريخية التي حكمت منطقة جازان (المخلاف السليماني) مطلع القرن العشرين قبل انضمامها للمملكة؟",
         "a": "الإمارة الإدريسية (الأدارسة)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Sa_mapa7-ar.png/450px-Sa_mapa7-ar.png"
+        }
       },
       {
         "uid": "custom_1795333251481_drive_q24_600",
         "points": 600,
         "q": "ما اسم القلعة الأثرية الحجرية الواقعة على تل مرتفع شمال جزيرة فرسان والتي تعود للعهد العثماني؟",
         "a": "القلعة العثمانية بفرسان",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://golden4tic.com/blog/wp-content/uploads/2024/04/2022-12-31.jpg"
+        }
       }
     ]
   },
@@ -5093,35 +5113,55 @@
         "points": 600,
         "q": "ما الاسم القديم الذي كانت تُعرف به المحطة والنواة الأولى لمدينة عرعر نسبةً إلى الوادي المجاور لها؟",
         "a": "بدنة (محطة بدنة / وادي بدنة)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://portalcdn.spa.gov.sa/backend/original/202104/7a34f02126e064c8055ec32a76808f7d.jpeg"
+        }
       },
       {
         "uid": "custom_1795333422935_drive_q21_600",
         "points": 600,
         "q": "ما اسم الموقع الأثري الشهير القريب من مدينة عرعر الذي يضم قصراً حجرياً وبقايا استيطان قديم على ضفاف وادي بدنة؟",
         "a": "قصر دوقرة (دوكرة) الأثري",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://blog.bayut.sa/uploads/2025/02/Body_01-2025-02-16T104754.904-1024x640.jpg"
+        }
       },
       {
         "uid": "custom_1795333422935_drive_q22_600",
         "points": 600,
         "q": "في أي عام ميلادي تأسست «محطة بدنة» التي شكّلت النواة الأولى لمدينة عرعر الحديثة؟",
         "a": "عام 1950م (1369هـ)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://pbs.twimg.com/media/DfGHDCFX0AAtR7k.jpg"
+        }
       },
       {
         "uid": "custom_1795333422935_drive_q23_600",
         "points": 600,
         "q": "ما اسم المدينة الصناعية التعدينية الكبرى الواقعة في منطقة الحدود الشمالية وتُعد عاصمة صناعة الفوسفات في المملكة؟",
         "a": "مدينة وعد الشمال للصناعات التعدينية",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://saudipedia.com/en/saudipediaen/uploads/images/2024/07/08/96115.jpg"
+        }
       },
       {
         "uid": "custom_1795333422935_drive_q24_600",
         "points": 600,
         "q": "ما اسم المحمية الطبيعية التاريخية الواقعة شمال غرب عرعر والتي تُعد أول محمية طبيعية أُنشئت في السعودية عام 1987؟",
         "a": "محمية حرة الحرة",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://portalcdn.spa.gov.sa/backend/original/202404/uhMaoSwa79zUKn5R5pSVw8vdgHqBcyVBihJcgaNy.jpg"
+        }
       }
     ]
   },
@@ -5268,35 +5308,55 @@
         "points": 600,
         "q": "ما اسم الخط العربي القديم الذي كُتبت به آلاف النقوش الأثرية في «آبار حمى» و«الأخدود» بنجران؟",
         "a": "الخط المسند (المسند الجنوبي)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Part_of_the_inscription_of_the_Himyarite_King_Dhu_Nuwas_at_Hima_Cultura%3B_Area%2C_near_Najran%2C_Saudi_Arabia%2C_early_6th_century.jpg/1280px-Part_of_the_inscription_of_the_Himyarite_King_Dhu_Nuwas_at_Hima_Cultura%3B_Area%2C_near_Najran%2C_Saudi_Arabia%2C_early_6th_century.jpg"
+        }
       },
       {
         "uid": "custom_1795333659132_drive_q21_600",
         "points": 600,
         "q": "من هو الملك الحميري الذي ارتبط اسمه تاريخياً بحادثة «أصحاب الأخدود» في نجران في القرن السادس الميلادي؟",
         "a": "ذو نواس (يوسف أسأر يثأر)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/c9679f62-2223-470d-9bac-a7513b06d86e/djcwm0n-66937e47-11bb-484a-a484-0777011876b1.png/v1/fill/w_762%2Ch_1049%2Cq_70%2Cstrp/dhu_nuwas_by_vinisalesi_djcwm0n-pre.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwib2JqIjpbeyJoZWlnaHQiOiI8PTEwNTMiLCJwYXRoIjoiL2YvYzk2NzlmNjItMjIyMy00NzBkLTliYWMtYTc1MTNiMDZkODZlL2RqY3dtMG4tNjY5MzdlNDctMTFiYi00ODRhLWE0ODQtMDc3NzAxMTg3NmIxLnBuZyIsIndpZHRoIjoiPD03NjUifV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.wb6fVSVu0F3flRs6F-ySaor0IdHGp_H3S00Y3NPBUb4"
+        }
       },
       {
         "uid": "custom_1795333659132_drive_q22_600",
         "points": 600,
         "q": "ما اسم الإناء الحجري المنحوت الذي تُقدّم فيه أكلة «الرقش» النجرانية للحفاظ على حرارتها؟",
         "a": "المدهن",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.spa.gov.sa/_next/image?q=75&url=https%3A%2F%2Fportalcdn.spa.gov.sa%2Fbackend%2Foriginal%2F202411%2F1vXuRST9a2uS87s2ZpoLf0bn6x7Re7xndFmITjpW.jpg&w=3840"
+        }
       },
       {
         "uid": "custom_1795333659132_drive_q23_600",
         "points": 600,
         "q": "ما اسم القلعة الحجرية الأثرية التي تطل على وادي نجران ومدينة الأخدود من قمة جبل مرتفع يحمل نفس الاسم؟",
         "a": "قلعة رعوم",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://i0.wp.com/waditrip.sa/wp-content/uploads/2023/10/%D9%81%D8%A7%D9%82%D9%81%D8%AA.jpg?fit=1024%2C628&quality=89&ssl=1"
+        }
       },
       {
         "uid": "custom_1795333659132_drive_q24_600",
         "points": 600,
         "q": "ما اسم المحمية الطبيعية شمال نجران التي سُجّلت عام 2023 كأول موقع تراث طبيعي عالمي لليونسكو في السعودية؟",
         "a": "محمية عروق بني معارض",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.arabnews.fr/sites/default/files/inline-images/sand_dune.jpg"
+        }
       }
     ]
   },
@@ -5443,35 +5503,55 @@
         "points": 600,
         "q": "ما اسم المحافظة في منطقة الباحة التي يقع فيها مطار الملك سعود بن عبدالعزيز الإقليمي؟",
         "a": "محافظة العقيق",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.kupibilet.ru/kland-storage/images/1200x630/50x50/anyports/sa/al-aqiq-airport/29580602-1a33-4478-b0ca-f6a331fa8299.webp"
+        }
       },
       {
         "uid": "custom_1795333828780_drive_q21_600",
         "points": 600,
         "q": "ما اسم الغابة الشهيرة في محافظة بني حسن/المندق بمنطقة الباحة المعروفة بشلالاتها وأشجار الزيتون البري؟",
         "a": "غابة خيرة",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://static.hiamag.com/inline-images/%D9%85%D9%86%D8%AA%D8%B2%D9%87%20%D8%BA%D8%A7%D8%A8%D8%A9%20%D8%AE%D9%8A%D8%B1%D8%A9%20%D8%A8%D9%85%D9%86%D8%B7%D9%82%D8%A9%20%D8%A7%D9%84%D8%A8%D8%A7%D8%AD%D8%A9%20-%20%D8%A7%D9%84%D9%85%D8%B5%D8%AF%D8%B1%20%D9%88%D8%A7%D8%B3.jpg"
+        }
       },
       {
         "uid": "custom_1795333828780_drive_q22_600",
         "points": 600,
         "q": "ما ترتيب منطقة الباحة بين مناطق المملكة الإدارية الـ 13 من حيث المساحة الجغرافية؟",
         "a": "الأصغر مساحةً (المركز الـ 13، بنحو 9,921 كم²)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.mdpi.com/cimb/cimb-47-00136/article_deploy/html/images/cimb-47-00136-g001.png"
+        }
       },
       {
         "uid": "custom_1795333828780_drive_q23_600",
         "points": 600,
         "q": "ما اسم العقبة الجبلية الشهيرة التي تربط مدينة الباحة في السراة بمحافظة المخواة في تهامة وتضم أكثر من 25 نفقاً؟",
         "a": "عقبة الباحة (عقبة الملك فهد)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://portalcdn.spa.gov.sa/backend/original/202401/1XSHjyS3wrI3So3XyZ2HkNNfaQYamdMFdEgncI6Z.jpg"
+        }
       },
       {
         "uid": "custom_1795333828780_drive_q24_600",
         "points": 600,
         "q": "ما اسم القرية الأثرية في محافظة قلوة بمنطقة الباحة التي تضم نقوشاً إسلامية بالخط الكوفي تعود للقرون الهجرية الأولى؟",
         "a": "قرية الخلف والخليف",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://portalcdn.spa.gov.sa/backend/original/202108/9ef953e9fe18e1e8a00102a00ebbea87.jpeg"
+        }
       }
     ]
   },
