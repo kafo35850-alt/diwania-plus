@@ -18484,35 +18484,55 @@
         "points": 200,
         "q": "ما اسم المجرة الحلزونية التي تقع فيها مجموعتنا الشمسية؟",
         "a": "مجرة درب التبانة",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://svs.gsfc.nasa.gov/vis/a030000/a030500/a030559/robert_hurt_2MASS_stars.jpg"
+        }
       },
       {
         "uid": "space_planets_drive_q21_400",
         "points": 400,
         "q": "ما اسم أكبر قمر تابع لكوكب زحل، والذي يُعد القمر الوحيد في المجموعة الشمسية الذي يمتلك غلافاً جوياً كثيفاً؟",
         "a": "تيتان (Titan)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/solar/internal_resources/1988/Full_disk_view_of_Saturns_hazy_moon_Titan.jpeg?crop=faces%2Cfocalpoint&fit=clip&h=1024&w=1024"
+        }
       },
       {
         "uid": "space_planets_drive_q22_400",
         "points": 400,
         "q": "ما اسم النجم الأقرب إلى الأرض بعد الشمس مباشرة؟",
         "a": "قنطورس الأقرب (بروكسيما سنتوري / Proxima Centauri)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://res.cloudinary.com/jerrick/image/upload/v1501175097/vybfl7wzvtfmizajuue1.png"
+        }
       },
       {
         "uid": "space_planets_drive_q23_600",
         "points": 600,
         "q": "ما اسم الحدّ الفيزيائي الفلكي الذي يُحدد الكتلة القصوى المستقرة لقزم أبيض (نحو 1.44 كتلة شمسية) قبل أن ينهار جاذبياً؟",
         "a": "حد تشاندراسيخار (Chandrasekhar Limit)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://image.slideserve.com/1175260/the-chandrasekhar-limit-l.jpg"
+        }
       },
       {
         "uid": "space_planets_drive_q24_600",
         "points": 600,
         "q": "ما الاسم الرسمي المشتق من لغة هاواي الذي أُطلق على الثقب الأسود الفائق في مجرة M87 والذي التُقطت له أول صورة مباشرة عام 2019؟",
         "a": "بويهي (Pōwehi)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://hips.hearstapps.com/hmg-prod/images/screen-shot-2019-04-10-at-2-40-53-pm-1554921680.png?crop=0.614xw%3A1.00xh%3B0.194xw%2C0&resize=1200%3A%2A"
+        }
       }
     ]
   },
@@ -19142,28 +19162,44 @@
         "points": 400,
         "q": "ما الدولة الأفريقية التي يظهر على علمها الوطني رسم لبندقية كلاشينكوف ومعول وكتاب مفتوح؟",
         "a": "موزمبيق",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://oau60.au.int/sites/default/files/2019-08/mozambique-flag-xl.jpg"
+        }
       },
       {
         "uid": "world_flags_drive_q22_400",
         "points": 400,
         "q": "ما الدولة الآسيوية التي يتوسط علمها الوطني رسم لمعبد «أنغكور وات» الشهير؟",
         "a": "كمبوديا",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.asiakingtravel.fr/cuploads/files/angkor-wat-4.jpg"
+        }
       },
       {
         "uid": "world_flags_drive_q23_600",
         "points": 600,
         "q": "ما الدولة الوحيدة في العالم التي يختلف تصميم الوجه الأمامي لعلمها الوطني عن الوجه الخلفي (بحمل شعار مختلف في كل وجه)؟",
         "a": "باراغواي",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Flag_of_Paraguay_%281990%E2%80%932013%2C_3-2%29.svg/3840px-Flag_of_Paraguay_%281990%E2%80%932013%2C_3-2%29.svg.png"
+        }
       },
       {
         "uid": "world_flags_drive_q24_600",
         "points": 600,
         "q": "ما الدولة الوحيدة في العالم التي لا يضم علمها الوطني أياً من الألوان الثلاثة الأكثر شيوعاً في أعلام الدول: الأحمر والأبيض والأزرق؟",
         "a": "جامايكا",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.alcircle.com/api/media/1776476501.61918_Jamaican_flag_0_0.jpg"
+        }
       }
     ]
   },
@@ -19341,28 +19377,44 @@
         "points": 200,
         "q": "ما اسم المضيق الذي يربط البحر الأبيض المتوسط بالمحيط الأطلسي ويفصل بين المغرب وإسبانيا؟",
         "a": "مضيق جبل طارق",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Gibraltar_World_Wind_view_annotated.jpg/1280px-Gibraltar_World_Wind_view_annotated.jpg"
+        }
       },
       {
         "uid": "world_straits_drive_q21_400",
         "points": 400,
         "q": "ما اسم المضيق البحري الذي يفصل بين قارة آسيا (روسيا) وقارة أمريكا الشمالية (ألاسكا) ويربط المحيط الهادئ بالمحيط المتجمد الشمالي؟",
         "a": "مضيق بيرنغ",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://assets.science.nasa.gov/content/dam/science/esd/eo/images/imagerecords/1000/1050/misr_beringstrait_lrg.jpg"
+        }
       },
       {
         "uid": "world_straits_drive_q22_400",
         "points": 400,
         "q": "ما اسم المضيق البحري الذي يربط بين بحر أندامان وبحر الصين الجنوبي ويفصل بين شبه جزيرة الملايو وجزيرة سومطرة الإندونيسية؟",
         "a": "مضيق ملقا",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Strait_of_Malacca_%28MODIS_2025-08-25%29.jpg/960px-Strait_of_Malacca_%28MODIS_2025-08-25%29.jpg"
+        }
       },
       {
         "uid": "world_straits_drive_q23_600",
         "points": 600,
         "q": "ما اسم المضيق البحري الذي يفصل بين الجزيرة الشمالية والجزيرة الجنوبية لنيوزيلندا؟",
         "a": "مضيق كوك",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.esa.int/var/esa/storage/images/esa_multimedia/images/2023/06/earth_from_space_cook_strait_new_zealand/24912660-1-eng-GB/Earth_from_Space_Cook_Strait_New_Zealand.jpg"
+        }
       },
       {
         "uid": "world_straits_drive_q24_600",
