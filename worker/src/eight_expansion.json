@@ -4138,35 +4138,55 @@
         "points": 600,
         "q": "ما اسم السد الحجري الأثري شرق الطائف الذي بُني في عهد معاوية بن أبي سفيان عام 58هـ ولا يزال قائماً؟",
         "a": "سد سيسد (سد معاوية)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://portalcdn.spa.gov.sa/backend/original/201710/4d08c7231c5e5b4321be35952a2007d5.jpeg"
+        }
       },
       {
         "uid": "custom_1795332408268_drive_q21_600",
         "points": 600,
         "q": "ما اسم أعلى قمة جبلية في الطائف وتقع في مركز الشفا بارتفاع يقارب 2,500 متر فوق سطح البحر؟",
         "a": "جبل دكا",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://cnn-arabic-images.cnn.io/cloudinary/image/upload/w_1920%2Cc_scale%2Cq_auto/cnnarabic/2021/12/06/images/199795.jpg"
+        }
       },
       {
         "uid": "custom_1795332408268_drive_q22_600",
         "points": 600,
         "q": "ما اسم المسجد التاريخي الصغير في حي المثناة بالطائف الذي ارتبط بقصة رحلة النبي ﷺ إلى الطائف؟",
         "a": "مسجد عدّاس",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://mindtrip.ai/cdn-cgi/image/format%3Dwebp%2Cw%3D1200/https%3A/images.mindtrip.ai/attractions/2566/141d/24b5/8c84/dd52/1255/1267/4b55"
+        }
       },
       {
         "uid": "custom_1795332408268_drive_q23_600",
         "points": 600,
         "q": "في أي عام ميلادي وُقّعت «معاهدة الطائف» التاريخية بين المملكة العربية السعودية واليمن؟",
         "a": "عام 1934م (1353هـ)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://iiif.qdl.qa/iiif/images/81055/vdc_100000000241.0x00001f/IOR_R_15_2_638_0079.jp2/full/!280,240/0/default.jpg"
+        }
       },
       {
         "uid": "custom_1795332408268_drive_q24_600",
         "points": 600,
         "q": "ما اسم القصر التراثي الحجازي الفخم في الطائف الذي بُني عام 1358هـ ويُعد من أبرز القصور التاريخية إلى جانب قصر شبرا؟",
         "a": "قصر الكعكي",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://scth.scene7.com/is/image/scth/al-kaaki-palace-in-taif-1%3Acrop-760x570?defaultImage=al-kaaki-palace-in-taif-1"
+        }
       }
     ]
   },
@@ -4313,35 +4333,55 @@
         "points": 600,
         "q": "ما اسم المدينة الأثرية الواقعة جنوب شرق حائل التي كانت عاصمة «درب زبيدة» وتضم قلعة خراش الأثرية؟",
         "a": "مدينة فيد التاريخية",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.alyaum.com/uploads/images/2026/04/11/2920780.jpg"
+        }
       },
       {
         "uid": "custom_1795332651982_drive_q21_600",
         "points": 600,
         "q": "ما اسم القرية التاريخية في جبال أجا بحائل التي يُروى أنها كانت موطن حاتم الطائي وتضم بقايا قصره؟",
         "a": "قرية توارن",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://rs.locationshub.com/up_images/3/3468723.jpg"
+        }
       },
       {
         "uid": "custom_1795332651982_drive_q22_600",
         "points": 600,
         "q": "في أي عام ميلادي أُقيمت النسخة الأولى من «رالي حائل الدولي» ليكون أول رالي صحراوي دولي في السعودية؟",
         "a": "عام 2006م",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://cdn.adh.reperio.news/image-f/f0d327d1-a6ea-419b-a67b-9df845275558/index.png?p=a%3D1%26co%3D1.05%26w%3D700%26h%3D750%26r%3Dcontain%26f%3Dwebp"
+        }
       },
       {
         "uid": "custom_1795332651982_drive_q23_600",
         "points": 600,
         "q": "ما اسم الفوهة البركانية الشهيرة شرق منطقة حائل (قرب طابة) التي تُعد من أبرز المعالم الجيولوجية في شمال المملكة؟",
         "a": "فوهة هتيمة",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://portalcdn.spa.gov.sa/backend/original/202607/F10372105.jpg"
+        }
       },
       {
         "uid": "custom_1795332651982_drive_q24_600",
         "points": 600,
         "q": "ما اسم السوق الشعبي التاريخي العريق في قلب مدينة حائل الذي اشتهر بتجارة الحرف اليدوية والمشغولات التراثية؟",
         "a": "سوق برزان",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.spa.gov.sa/_next/image?q=75&url=https%3A%2F%2Fportalcdn.spa.gov.sa%2Fbackend%2Foriginal%2F202503%2FkuQhTw9ppdib3SU8ljO4qm8ANrw2Wt44y0x0Lifx.jpg&w=3840"
+        }
       }
     ]
   },
@@ -4488,35 +4528,55 @@
         "points": 600,
         "q": "ما اسم آخر ملوك بابل الذي أقام في واحة «تيماء» بمنطقة تبوك لمدة عشر سنوات في القرن السادس قبل الميلاد؟",
         "a": "الملك نبونيد (Nabonidus)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://brill.com/docserver/fulltext/athr/1/1-2/30504880_001_01-02_s007_i0003.jpg"
+        }
       },
       {
         "uid": "custom_1795332815456_drive_q21_600",
         "points": 600,
         "q": "ما اسم الصخرة الأثرية الشهيرة في تيماء المشقوقة في منتصفها بخط مستقيم دقيق جداً؟",
         "a": "صخرة النصلة (Al-Naslaa Rock)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1d/Al_Naslaa_Rock_20211021_105005.jpg/960px-Al_Naslaa_Rock_20211021_105005.jpg"
+        }
       },
       {
         "uid": "custom_1795332815456_drive_q22_600",
         "points": 600,
         "q": "ما اسم الحصن التاريخي الشهير في تيماء الذي يُنسب للشاعر العربي الجاهلي السموأل بن عادياء؟",
         "a": "قصر الأبلق",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://saudipedia.com/en/saudipediaen/uploads/images/2025/01/09/thumbs/600x600/164168.jpg"
+        }
       },
       {
         "uid": "custom_1795332815456_drive_q23_600",
         "points": 600,
         "q": "ما اسم أكبر بئر أثرية تاريخية في شبه الجزيرة العربية وتقع في محافظة تيماء بمنطقة تبوك؟",
         "a": "بئر هداج",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://portalcdn.spa.gov.sa/backend/original/202104/b410b97ef9c2011773f30f33d7d790b4.jpeg"
+        }
       },
       {
         "uid": "custom_1795332815456_drive_q24_600",
         "points": 600,
         "q": "ما اسم الوادي الصخري الضيق الفريد القريب من شاطئ مقنا في تبوك الذي تشقّه جدران عمودية شاهقة نحو خليج العقبة؟",
         "a": "وادي طيب اسم",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://welcomesaudi-media.s3.me-south-1.amazonaws.com/0000/1/2021/07/23/47-wadi-al-ism-tabuk-province-900.jpg"
+        }
       }
     ]
   },
@@ -4663,35 +4723,55 @@
         "points": 600,
         "q": "ما الاسم القديم لـ «دومة الجندل» كما ورد في النصوص الآشورية القديمة كعاصمة لمملكة قيدار العربية؟",
         "a": "أدوماتو (Adummatu)",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://ancientarabia.huma-num.fr/images/nakala/TDAA_Duma_Charloux_Fig_5.JPG"
+        }
       },
       {
         "uid": "custom_1795333037952_drive_q21_600",
         "points": 600,
         "q": "ما المثل العربي الشهير الذي قيل في حصانة قلعة مارد بدومة الجندل حين عجزت الملكة الزباء عن اقتحامها؟",
         "a": "تمرّد مارد وعزّ الأبلق",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://gumlet.assettype.com/ajel/2022-08/3f77c349-82b8-41d6-b8b3-4a32765875e8/_______________________________10.jpg?auto=format%2Ccompress&fit=max"
+        }
       },
       {
         "uid": "custom_1795333037952_drive_q22_600",
         "points": 600,
         "q": "ما اسم القصر الأثري الشهير المبني من الحجر البازلتي في قرية كاف بمحافظة القريات في الجوف؟",
         "a": "قصر كاف",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://saudipedia.com/var/site/storage/images/5/3/2/6/5316235-1-ara-SA/2ab026329853-65768.jpg"
+        }
       },
       {
         "uid": "custom_1795333037952_drive_q23_600",
         "points": 600,
         "q": "ما اسم أول مشروع للطاقة الشمسية على مستوى المرافق في السعودية والذي أُنشئ في منطقة الجوف عام 2019؟",
         "a": "مشروع سكاكا للطاقة الشمسية الكهروضوئية",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.mepmiddleeast.com/cloud/2021/07/06/CNYClweB-sakakaplant-1200x674.jpg"
+        }
       },
       {
         "uid": "custom_1795333037952_drive_q24_600",
         "points": 600,
         "q": "ما اسم المحافظة الزراعية في منطقة الجوف التي تتبعها منطقة «بسيطا» الزراعية الشهيرة؟",
         "a": "محافظة طبرجل",
-        "useCategoryPoster": true
+        "useCategoryPoster": true,
+        "am": {
+          "t": "image",
+          "u": "https://www.arabnews.jp/en/wp-content/uploads/sites/2/2024/09/4519398-1125501099.jpg"
+        }
       }
     ]
   },
