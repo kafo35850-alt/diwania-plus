@@ -11,6 +11,7 @@ import { grantAppInstall, myPromo, checkPromo } from './promo.js';
 import { handleRooms } from './rooms/routes.js';
 import { handleSupport } from './support.js';
 import { recordEightQuestion, eightQuestionStats } from './eight-stats.js';
+import { creatorDashboard, requestPayout } from './creator.js';
 import { recordPing, analyticsOverview, analyticsUser } from './activity.js';
 import { STATIC } from './static.generated.js';
 export { GameHubDO, RelayRoomDO, BuzzerRoomDO } from './rooms/objects.js';
@@ -113,6 +114,14 @@ async function handleApi(env, request, url) {
   if (method === 'POST' && path === '/api/media') {
     const session = await requireSession(env, request);
     return json(await uploadMedia(env, request, session), 201);
+  }
+  if (method === 'GET' && path === '/api/creator') {
+    const session = await requireSession(env, request, { csrf: false });
+    return json(await creatorDashboard(env, session));
+  }
+  if (method === 'POST' && path === '/api/creator/payout') {
+    const session = await requireSession(env, request);
+    return json(await requestPayout(env, session, await readJson(request)));
   }
   if (method === 'POST' && path === '/api/suggestions/category') {
     const session = await requireSession(env, request);

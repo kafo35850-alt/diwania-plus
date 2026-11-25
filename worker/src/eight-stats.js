@@ -3,6 +3,7 @@ import { verifyPlayToken } from './rooms/routes.js';
 import { cleanText, HttpError, json, nowIso, readJson, underRateLimit } from './util.js';
 import { getDoc } from './catalog.js';
 import { eightRawQuestions } from './games.js';
+import { rewardCreator } from './creator.js';
 
 const idPattern = /^[A-Za-z0-9_-]{1,120}$/;
 const attemptPattern = /^[a-f0-9-]{36}$/;
@@ -37,6 +38,9 @@ export async function recordEightQuestion(env, request, url) {
        AND json_extract(excluded.json, '$.category') = json_extract(docs.json, '$.category')
        AND json_extract(excluded.json, '$.points') = json_extract(docs.json, '$.points')`
   ).bind(key, payload, nowIso()).run();
+  if (body.result === 'open') {
+    try { await rewardCreator(env, body.category, body.token, session.user.id); } catch (e) { console.error('creator reward', e); }
+  }
   return json({ ok: true });
 }
 

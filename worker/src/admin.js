@@ -8,6 +8,7 @@ import { cleanMedia, legacyMedia, mediaBytesUsed } from './media.js';
 import { promoConfig, APP_CODE } from './promo.js';
 import { voiceAdminData, saveVoicePiece } from './voice.js';
 import { getSettings } from './settings.js';
+import { creatorAdminData, markPayout } from './creator.js';
 
 const SLUG_RE = /^[a-z0-9_]{2,40}$/;
 export const NOT_CLONABLE = ['eight', 'dakhil', 'mafia', 'qaftah', 'chancellor', 'harf', 'qaddirha'];
@@ -41,6 +42,7 @@ export async function adminData(env) {
       used: ((await env.DB.prepare("SELECT COUNT(*) AS n FROM promo_redemptions WHERE code = ? AND status = 'used'").bind(APP_CODE).first()) || {}).n || 0
     },
     cat_suggestions: catSuggestions || [],
+    creators: await creatorAdminData(env),
     suggestions: gameSuggestions || [],
     ok: true,
     users: users.results || [],
@@ -308,15 +310,17 @@ export async function adminAction(env, session, action, payload) {
       sug.status = action === 'approve_cat_suggestion' ? 'approved' : 'rejected';
       sug.reviewed_by = admin.email;
       sug.reviewed_at = nowIso();
+      sug.review_note = cleanText(payload.note, 300);
       if (sug.status === 'approved') {
         const categories = await getDoc(env, 'categories');
         const slug = 'custom_' + Date.now();
         categories.unshift({
           id: 'cat_' + slug, slug, name: sug.name,
           macro_group: 'فئات الديوانية', sub_group: sug.group || 'من اقتراحات اللاعبين',
-          description: sug.description || ('فئة مقترحة من ' + sug.user_name),
+          description: (sug.description ? sug.description + ' · ' : '') + '✍️ من إعداد ' + sug.user_name,
           icon: sug.icon || '💡', posterTheme: 'country_saudi', sort_order: 1, is_visible: 1,
-          item_count: sug.questions.length, suggested_by: sug.user_name
+          item_count: sug.questions.length, suggested_by: sug.user_name,
+          creator_user_id: sug.user_id, creator_name: sug.user_name
         });
         const questions = sug.questions.map((it, i) => eightItem({ ...it, uid: slug + '_s' + (i + 1) }, i, slug));
         sug.category_slug = slug;
@@ -341,12 +345,20 @@ export async function adminAction(env, session, action, payload) {
         signup_bonus: Math.max(0, Math.min(50, toInt(p.signup_bonus, 0))),
         free_trials: p.free_trials ? 1 : 0,
         support_whatsapp: wa,
-        install_banner: p.install_banner ? 1 : 0
+        install_banner: p.install_banner ? 1 : 0,
+        creator_reward_halalas: Math.max(0, Math.min(1000, Math.round(Number(p.creator_reward_sar) * 100) || 0)),
+        creator_min_payout_halalas: Math.max(100, Math.min(100000, Math.round(Number(p.creator_min_payout_sar) * 100) || 5000))
       };
       if (next.announce_on && !next.announce_text) throw new HttpError(400, 'اكتب نص الإعلان أو أطفئه.');
       await putDoc(env, 'settings', next);
       await log(env, admin, 'save_settings', 'settings', 'store', JSON.stringify(next).slice(0, 180));
       return { ok: true, message: 'انحفظت إعدادات المتجر ✅' };
+    }
+
+    case 'mark_creator_payout': {
+      const r = await markPayout(env, payload);
+      await log(env, admin, action, 'creator_payout', String(payload.payoutId || ''), String(payload.status || ''));
+      return r;
     }
 
     case 'save_voice':
@@ -537,12 +549,16 @@ async function contentAction(env, admin, action, payload) {
 export async function submitCategorySuggestion(env, session, body) {
   const name = cleanText(body.name, 60);
   if (!name) throw new HttpError(400, 'اكتب اسم الفئة.');
-  const raw = Array.isArray(body.questions) ? body.questions.slice(0, 30) : [];
+  const raw = Array.isArray(body.questions) ? body.questions.slice(0, 60) : [];
   const questions = raw.map((it, i) => eightItem({
     uid: 'sug_' + i, points: [200, 400, 600].includes(toInt(it.points, 0)) ? toInt(it.points, 200) : 200,
     q: it.q, a: it.a, hint: it.hint, qm: it.qm, am: it.am
   }, i, 'sug')).filter((q) => q.q && q.a).map((q) => ({ ...q, q: q.q.slice(0, 300), a: q.a.slice(0, 120), hint: q.hint.slice(0, 300) }));
-  if (questions.length < 6) throw new HttpError(400, 'اكتب ٦ أسئلة على الأقل مع إجاباتها (اللوحة تحتاج ٦ أسئلة لكل فئة).');
+  const per = { 200: 0, 400: 0, 600: 0 };
+  for (const q of questions) per[q.points]++;
+  if (questions.length < 18 || per[200] < 6 || per[400] < 6 || per[600] < 6) {
+    throw new HttpError(400, 'الفئة تحتاج ١٨ سؤال على الأقل: ٦ سهلة (٢٠٠) و٦ متوسطة (٤٠٠) و٦ صعبة (٦٠٠). عندك الحين: ' + per[200] + ' سهل، ' + per[400] + ' متوسط، ' + per[600] + ' صعب.');
+  }
   const list = (await getDoc(env, 'cat_suggestions')) || [];
   const mine = list.filter((x) => x.user_id === session.user.id && x.status === 'pending').length;
   if (mine >= 5) throw new HttpError(429, 'عندك ٥ اقتراحات تنتظر المراجعة. انتظر لين نراجعها.');
