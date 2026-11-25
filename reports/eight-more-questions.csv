@@ -932,3 +932,177 @@ east_asia_lands,شرق آسيا,east_asia_lands_more_q21_600,600,ما اسم ا�
 east_asia_lands,شرق آسيا,east_asia_lands_more_q22_600,600,ما اسم المحارب الياباني القديم ذو السيف؟,الساموراي
 east_asia_lands,شرق آسيا,east_asia_lands_more_q23_600,600,ما اسم المسرح الياباني التقليدي الذي يستخدم ممثلين بمكياج كثيف؟,الكابوكي
 east_asia_lands,شرق آسيا,east_asia_lands_more_q24_600,600,ما اسم المؤسس الأسطوري للفلسفة الصينية صاحب «التعاليم» (Analects)؟,كونفوشيوس
+premier_league,الدوري الإنجليزي الممتاز,premier_league_more_q2_200,200,ما اسم ملعب نادي ليفربول؟,آنفيلد
+premier_league,الدوري الإنجليزي الممتاز,premier_league_more_q3_200,200,ما اسم ملعب مانشستر يونايتد الملقب بمسرح الأحلام؟,أولد ترافورد
+premier_league,الدوري الإنجليزي الممتاز,premier_league_more_q4_200,200,ما اسم ملعب تشيلسي؟,ستامفورد بريدج
+premier_league,الدوري الإنجليزي الممتاز,premier_league_more_q5_200,200,ما اسم المدرب الاسكتلندي الأسطوري لمانشستر يونايتد من 1986 حتى 2013؟,السير أليكس فيرغسون
+premier_league,الدوري الإنجليزي الممتاز,premier_league_more_q6_200,200,ما اسم المهاجم النرويجي هداف مانشستر سيتي؟,إيرلينغ هالاند
+premier_league,الدوري الإنجليزي الممتاز,premier_league_more_q7_200,200,ما لقب نادي أرسنال؟,المدفعجية (الغانرز)
+premier_league,الدوري الإنجليزي الممتاز,premier_league_more_q8_200,200,ما اسم المدرب الإسباني الذي قاد مانشستر سيتي لألقاب الدوري المتتالية منذ 2016؟,بيب غوارديولا
+premier_league,الدوري الإنجليزي الممتاز,premier_league_more_q9_400,400,ما اسم موسم أرسنال الذي أنهى فيه الدوري دون خسارة 2003-2004؟,موسم اللاهزيمة (The Invincibles)
+premier_league,الدوري الإنجليزي الممتاز,premier_league_more_q11_400,400,ما اسم المدرب الفرنسي الأسطوري لأرسنال من 1996 حتى 2018؟,أرسين فينغر
+premier_league,الدوري الإنجليزي الممتاز,premier_league_more_q12_400,400,ما اسم المدرب الإيطالي الذي قاد ليستر سيتي للقب 2016؟,كلاوديو رانييري
+premier_league,الدوري الإنجليزي الممتاز,premier_league_more_q13_400,400,ما اسم المدرب الألماني الذي قاد ليفربول للقب الدوري 2019-2020؟,يورغن كلوب
+premier_league,الدوري الإنجليزي الممتاز,premier_league_more_q14_400,400,ما اسم المدرب البرتغالي الذي فاز بالدوري مع تشيلسي عام 2005؟,جوزيه مورينيو
+premier_league,الدوري الإنجليزي الممتاز,premier_league_more_q15_400,400,ما اسم الديربي بين ليفربول وإيفرتون؟,ديربي الميرسيسايد
+premier_league,الدوري الإنجليزي الممتاز,premier_league_more_q16_400,400,ما اسم الكأس المحلية الأقدم في إنجلترا؟,كأس الاتحاد الإنجليزي (FA Cup)
+premier_league,الدوري الإنجليزي الممتاز,premier_league_more_q22_600,600,ما اسم المالك الروسي الذي اشترى تشيلسي عام 2003؟,رومان أبراموفيتش
+premier_league,الدوري الإنجليزي الممتاز,premier_league_more_q23_600,600,ما اسم ملعب توتنهام القديم قبل ملعبه الجديد عام 2019؟,وايت هارت لين
+premier_league,الدوري الإنجليزي الممتاز,premier_league_more_q24_600,600,ما اسم اللاعب صاحب أسرع هاتريك في تاريخ الدوري الإنجليزي (2:56 دقيقة) عام 2015؟,ساديو ماني
+club_real_madrid,نادي ريال مدريد,club_real_madrid_more_q1_200,200,ما لون القميص الأساسي لريال مدريد؟,الأبيض
+club_real_madrid,نادي ريال مدريد,club_real_madrid_more_q2_200,200,ما لقب ريال مدريد الأشهر؟,الملكي (الميرينغي)
+club_real_madrid,نادي ريال مدريد,club_real_madrid_more_q3_200,200,ما اسم الديربي بين ريال مدريد وأتلتيكو مدريد؟,ديربي مدريد
+club_real_madrid,نادي ريال مدريد,club_real_madrid_more_q4_200,200,ما اسم المباراة بين ريال مدريد وبرشلونة؟,الكلاسيكو
+club_real_madrid,نادي ريال مدريد,club_real_madrid_more_q5_200,200,ما اسم المدرب الفرنسي الذي قاد ريال مدريد لثلاثة ألقاب متتالية في دوري الأبطال؟,زين الدين زيدان
+club_real_madrid,نادي ريال مدريد,club_real_madrid_more_q6_200,200,ما اسم الحارس الكوستاريكي الذي فاز مع ريال مدريد بثلاثة ألقاب متتالية لدوري الأبطال؟,كيلور نافاس
+club_real_madrid,نادي ريال مدريد,club_real_madrid_more_q7_200,200,ما اسم القائد الإسباني المدافع الذي لعب لريال مدريد من 2005 حتى 2021؟,سيرخيو راموس
+club_real_madrid,نادي ريال مدريد,club_real_madrid_more_q8_200,200,ما اسم الكرواتي الفائز بالكرة الذهبية 2018 ولاعب وسط ريال مدريد؟,لوكا مودريتش
+club_real_madrid,نادي ريال مدريد,club_real_madrid_more_q9_400,400,ما اسم المشروع الذي جلب فيه بيريز نجوماً كباراً مثل زيدان وفيغو ورونالدو البرازيلي؟,الغالاكتيكوس
+club_real_madrid,نادي ريال مدريد,club_real_madrid_more_q10_400,400,في أي عام وقّع كريستيانو رونالدو لريال مدريد؟,2009م
+club_real_madrid,نادي ريال مدريد,club_real_madrid_more_q11_400,400,ما اسم المدينة التي أقيم فيها نهائي دوري الأبطال 2014 الذي فاز فيه الريال بالعاشرة؟,لشبونة
+club_real_madrid,نادي ريال مدريد,club_real_madrid_more_q14_400,400,ما اسم البرتغالي الذي انتقل من برشلونة لريال مدريد عام 2000 في صفقة مثيرة؟,لويس فيغو
+club_real_madrid,نادي ريال مدريد,club_real_madrid_more_q15_400,400,ما اسم ملعب تدريبات ريال مدريد؟,فالديبيباس
+club_real_madrid,نادي ريال مدريد,club_real_madrid_more_q17_600,600,ما اسم اللاعب المجري الأسطوري في ريال مدريد في الخمسينات والستينات؟,فيرينتس بوشكاش
+club_real_madrid,نادي ريال مدريد,club_real_madrid_more_q18_600,600,كم لقباً متتالياً لدوري أبطال أوروبا حقق ريال مدريد بين 1956 و1960؟,5 ألقاب
+club_real_madrid,نادي ريال مدريد,club_real_madrid_more_q19_600,600,ما اسم ريال مدريد عندما تأسس عام 1902؟,مدريد فوت بول كلوب
+club_real_madrid,نادي ريال مدريد,club_real_madrid_more_q20_600,600,من هو الملك الإسباني الذي منح النادي لقب «ريال» عام 1920؟,ألفونسو الثالث عشر
+club_real_madrid,نادي ريال مدريد,club_real_madrid_more_q21_600,600,ما اسم الفريق الذي فاز عليه ريال مدريد في نهائي دوري الأبطال 2022؟,ليفربول
+club_real_madrid,نادي ريال مدريد,club_real_madrid_more_q22_600,600,ما اسم اللاعب الويلزي الذي سجّل هدفاً مقصياً في نهائي 2018 ضد ليفربول؟,غاريث بيل
+club_real_madrid,نادي ريال مدريد,club_real_madrid_more_q23_600,600,ما اسم المدرب الألماني الذي قاد ريال مدريد للقب دوري الأبطال السابع عام 1998؟,يوب هاينكس
+club_real_madrid,نادي ريال مدريد,club_real_madrid_more_q24_600,600,من هو حارس المرمى الإسباني الذي لُقّب بالقديس ولعب لريال مدريد 16 موسماً؟,إيكر كاسياس
+club_alhilal,نادي الهلال السعودي,club_alhilal_more_q1_200,200,ما ألوان نادي الهلال؟,الأزرق والأبيض
+club_alhilal,نادي الهلال السعودي,club_alhilal_more_q3_200,200,ما اسم الحارس السعودي التاريخي للهلال والمنتخب صاحب الرقم القياسي في المباريات الدولية؟,محمد الدعيع
+club_alhilal,نادي الهلال السعودي,club_alhilal_more_q7_200,200,في أي بطولة دولية للأندية بلغ الهلال النهائي عام 2022؟,كأس العالم للأندية
+club_alhilal,نادي الهلال السعودي,club_alhilal_more_q8_200,200,ما اسم النجم الصربي الذي لعب في الهلال وكان أبرز هدافيه موسم 2023-2024؟,ألكسندر ميتروفيتش
+club_alhilal,نادي الهلال السعودي,club_alhilal_more_q12_400,400,ما اسم ملعب المملكة أرينا الذي يلعب عليه الهلال حالياً؟,المملكة أرينا
+club_alhilal,نادي الهلال السعودي,club_alhilal_more_q19_600,600,ما اسم الملعب الذي احتضن مباريات الهلال تاريخياً قبل «المملكة أرينا»؟,استاد الملك فهد الدولي
+movies_harry_potter,سلسلة أفلام هاري بوتر (Harry Potter),movies_harry_potter_more_q1_200,200,ما اسم صديقي هاري بوتر المقربين؟,رون ويزلي وهيرميون غرينجر
+movies_harry_potter,سلسلة أفلام هاري بوتر (Harry Potter),movies_harry_potter_more_q2_200,200,ما شكل الندبة على جبين هاري بوتر؟,صاعقة برق
+movies_harry_potter,سلسلة أفلام هاري بوتر (Harry Potter),movies_harry_potter_more_q3_200,200,ما اسم مدير مدرسة هوغوورتس في معظم الأجزاء؟,ألباس دمبلدور
+movies_harry_potter,سلسلة أفلام هاري بوتر (Harry Potter),movies_harry_potter_more_q4_200,200,ما اسم حارس المفاتيح العملاق صديق هاري؟,هاغريد
+movies_harry_potter,سلسلة أفلام هاري بوتر (Harry Potter),movies_harry_potter_more_q5_200,200,إلى أي منزل يُفرز هاري بوتر؟,غريفندور
+movies_harry_potter,سلسلة أفلام هاري بوتر (Harry Potter),movies_harry_potter_more_q6_200,200,ما اسم مؤلفة سلسلة هاري بوتر؟,جي كي رولينغ
+movies_harry_potter,سلسلة أفلام هاري بوتر (Harry Potter),movies_harry_potter_more_q7_200,200,ما اسم الكرة الذهبية الصغيرة المجنحة في لعبة الكويدتش؟,السنيتش الذهبية
+movies_harry_potter,سلسلة أفلام هاري بوتر (Harry Potter),movies_harry_potter_more_q8_200,200,ما اسم عدو هاري في المدرسة من منزل سليذرين؟,دراكو مالفوي
+movies_harry_potter,سلسلة أفلام هاري بوتر (Harry Potter),movies_harry_potter_more_q9_400,400,ما اسم القبعة التي توزّع الطلاب على المنازل؟,القبعة الفارزة
+movies_harry_potter,سلسلة أفلام هاري بوتر (Harry Potter),movies_harry_potter_more_q11_400,400,ما اسم الأستاذ الذي يدرّس الجرعات ويُكشف لاحقاً أنه كان يحمي هاري؟,سيفيروس سنايب
+movies_harry_potter,سلسلة أفلام هاري بوتر (Harry Potter),movies_harry_potter_more_q12_400,400,ما اسم الجن المنزلي الذي حرره هاري من عائلة مالفوي؟,دوبي
+movies_harry_potter,سلسلة أفلام هاري بوتر (Harry Potter),movies_harry_potter_more_q13_400,400,ما اسم عرّاب هاري بوتر؟,سيريوس بلاك
+movies_harry_potter,سلسلة أفلام هاري بوتر (Harry Potter),movies_harry_potter_more_q14_400,400,ما اسم الأشياء التي يخبئ فيها فولدمورت أجزاء من روحه؟,الهوركروكس
+movies_harry_potter,سلسلة أفلام هاري بوتر (Harry Potter),movies_harry_potter_more_q15_400,400,ما اسم الحارسات الشبيهات بالأشباح اللواتي يحرسن سجن أزكابان؟,الديمنتورز
+movies_harry_potter,سلسلة أفلام هاري بوتر (Harry Potter),movies_harry_potter_more_q16_400,400,ما اسم المرآة التي تُظهر أعمق رغبات من ينظر إليها؟,مرآة إيريسد
+movies_harry_potter,سلسلة أفلام هاري بوتر (Harry Potter),movies_harry_potter_more_q17_600,600,ما اسم التعويذة التي تُستخدم لصد الديمنتورز؟,إكسبكتو باترونوم
+movies_harry_potter,سلسلة أفلام هاري بوتر (Harry Potter),movies_harry_potter_more_q18_600,600,ما شكل الباترونوس الخاص بهاري بوتر؟,أيل (ظبي ذكر)
+movies_harry_potter,سلسلة أفلام هاري بوتر (Harry Potter),movies_harry_potter_more_q19_600,600,ما الاسم الأوسط لهاري بوتر؟,جيمس
+movies_harry_potter,سلسلة أفلام هاري بوتر (Harry Potter),movies_harry_potter_more_q20_600,600,ما اسم المقدسات الثلاث التي تُكوّن «مقدسات الموت»؟,العصا الكبرى وحجر البعث وعباءة الإخفاء
+movies_harry_potter,سلسلة أفلام هاري بوتر (Harry Potter),movies_harry_potter_more_q21_600,600,ما اسم الأستاذ ذي الوجهين الذي كان يحمل فولدمورت في رأسه في الجزء الأول؟,كويرينوس كويرل
+movies_harry_potter,سلسلة أفلام هاري بوتر (Harry Potter),movies_harry_potter_more_q22_600,600,ما اسم شقيق دمبلدور صاحب حانة «رأس الخنزير»؟,أبرفورث دمبلدور
+movies_harry_potter,سلسلة أفلام هاري بوتر (Harry Potter),movies_harry_potter_more_q23_600,600,ما اسم الأستاذ الذي تحوّل إلى ذئب وكان صديق والد هاري؟,ريموس لوبين
+movies_harry_potter,سلسلة أفلام هاري بوتر (Harry Potter),movies_harry_potter_more_q24_600,600,ما المادة التي تدرّسها الأستاذة سيبيل تريلاوني؟,التنجيم (العرافة)
+movies_lotr,سلسلة سيد الخواتم (Lord of the Rings),movies_lotr_more_q1_200,200,ما اسم المخلوقات القصيرة ذات الأقدام المشعرة التي ينتمي إليها فرودو؟,الهوبيت
+movies_lotr,سلسلة سيد الخواتم (Lord of the Rings),movies_lotr_more_q2_200,200,ما اسم الأرض الخيالية التي تدور فيها أحداث سيد الخواتم؟,الأرض الوسطى
+movies_lotr,سلسلة سيد الخواتم (Lord of the Rings),movies_lotr_more_q3_200,200,ما اسم القزم المحارب في رفقة الخاتم؟,غيملي
+movies_lotr,سلسلة سيد الخواتم (Lord of the Rings),movies_lotr_more_q4_200,200,ما اسم الجني الرامي في رفقة الخاتم؟,ليغولاس
+movies_lotr,سلسلة سيد الخواتم (Lord of the Rings),movies_lotr_more_q5_200,200,ما اسم قرية الهوبيت التي يعيش فيها فرودو؟,الشاير
+movies_lotr,سلسلة سيد الخواتم (Lord of the Rings),movies_lotr_more_q6_200,200,ما اسم مؤلف رواية سيد الخواتم؟,جون رونالد تولكين
+movies_lotr,سلسلة سيد الخواتم (Lord of the Rings),movies_lotr_more_q7_200,200,ما اسم عم فرودو الذي وجد الخاتم أولاً؟,بيلبو باغينز
+movies_lotr,سلسلة سيد الخواتم (Lord of the Rings),movies_lotr_more_q8_200,200,ما الجملة الشهيرة التي يقولها غاندالف على الجسر للبالروغ؟,لن تمر!
+movies_lotr,سلسلة سيد الخواتم (Lord of the Rings),movies_lotr_more_q9_400,400,ما اسم ساحر سورون الأبيض الخائن؟,سارومان
+movies_lotr,سلسلة سيد الخواتم (Lord of the Rings),movies_lotr_more_q10_400,400,ما اسم برج سارومان؟,أورثانك
+movies_lotr,سلسلة سيد الخواتم (Lord of the Rings),movies_lotr_more_q11_400,400,ما اسم المدينة البيضاء عاصمة غوندور؟,ميناس تيريث
+movies_lotr,سلسلة سيد الخواتم (Lord of the Rings),movies_lotr_more_q12_400,400,ما اسم الوحش الناري الذي واجهه غاندالف في مناجم موريا؟,البالروغ
+movies_lotr,سلسلة سيد الخواتم (Lord of the Rings),movies_lotr_more_q13_400,400,ما اسم ملك روهان في سيد الخواتم؟,ثيودن
+movies_lotr,سلسلة سيد الخواتم (Lord of the Rings),movies_lotr_more_q14_400,400,ما اسم ابنة إلروند التي أحبت أراغورن؟,آروين
+movies_lotr,سلسلة سيد الخواتم (Lord of the Rings),movies_lotr_more_q15_400,400,ما اسم العنكبوتة العملاقة التي هاجمت فرودو؟,شيلوب
+movies_lotr,سلسلة سيد الخواتم (Lord of the Rings),movies_lotr_more_q16_400,400,في أي دولة صُوّرت ثلاثية سيد الخواتم؟,نيوزيلندا
+movies_lotr,سلسلة سيد الخواتم (Lord of the Rings),movies_lotr_more_q17_600,600,ما اسم الفارسة الروهانية التي قتلت ملك الساحرات؟,إيوين
+movies_lotr,سلسلة سيد الخواتم (Lord of the Rings),movies_lotr_more_q18_600,600,ما اسم سيف بيلبو الذي أعطاه لفرودو ويتوهج بالأزرق عند اقتراب الأورك؟,ستينغ
+movies_lotr,سلسلة سيد الخواتم (Lord of the Rings),movies_lotr_more_q19_600,600,ما اسم قائد النازغول التسعة؟,ملك الساحرات من أنغمار
+movies_lotr,سلسلة سيد الخواتم (Lord of the Rings),movies_lotr_more_q20_600,600,ما اسم الحاكم الوصي على غوندور والد بورومير؟,دينيثور
+movies_lotr,سلسلة سيد الخواتم (Lord of the Rings),movies_lotr_more_q21_600,600,ما اسم شقيق بورومير؟,فارامير
+movies_lotr,سلسلة سيد الخواتم (Lord of the Rings),movies_lotr_more_q22_600,600,ما اسم البرج الذي يسكنه سورون في موردور؟,باراد-دور
+movies_lotr,سلسلة سيد الخواتم (Lord of the Rings),movies_lotr_more_q23_600,600,كم جزءاً في ثلاثية الهوبيت السينمائية؟,3 أجزاء
+movies_lotr,سلسلة سيد الخواتم (Lord of the Rings),movies_lotr_more_q24_600,600,ما اسم التنين في الهوبيت؟,سموغ
+movies_marvel,عالم مارفل السينمائي (Avengers),movies_marvel_more_q2_200,200,من هو الممثل الذي جسّد آيرون مان؟,روبرت داوني جونيور
+movies_marvel,عالم مارفل السينمائي (Avengers),movies_marvel_more_q3_200,200,ما اسم إله الرعد في مارفل؟,ثور
+movies_marvel,عالم مارفل السينمائي (Avengers),movies_marvel_more_q6_200,200,ما اسم شخصية كابتن أمريكا الحقيقي؟,ستيف روجرز
+movies_marvel,عالم مارفل السينمائي (Avengers),movies_marvel_more_q7_200,200,ما اسم الفيلم الذي جمع الأبطال لمواجهة ثانوس في الجزء الأخير عام 2019؟,أفنجرز: نهاية اللعبة (Endgame)
+movies_marvel,عالم مارفل السينمائي (Avengers),movies_marvel_more_q8_200,200,ما اسم الحيوان الشجري في حراس المجرة الذي لا يقول إلا «أنا غروت»؟,غروت
+movies_marvel,عالم مارفل السينمائي (Avengers),movies_marvel_more_q10_400,400,ما اسم الساحر الأعلى في مارفل الذي يجسده بينيديكت كامبرباتش؟,دكتور سترينج
+movies_marvel,عالم مارفل السينمائي (Avengers),movies_marvel_more_q11_400,400,ما اسم القفاز الذي جمع فيه ثانوس أحجار اللانهاية؟,قفاز اللانهاية
+movies_marvel,عالم مارفل السينمائي (Avengers),movies_marvel_more_q12_400,400,ما اسم الجاسوسة الروسية في فريق المنتقمين؟,الأرملة السوداء (ناتاشا رومانوف)
+movies_marvel,عالم مارفل السينمائي (Avengers),movies_marvel_more_q13_400,400,ما اسم الراكون الناطق في حراس المجرة؟,روكيت
+movies_marvel,عالم مارفل السينمائي (Avengers),movies_marvel_more_q14_400,400,ما اسم مركز قيادة شيلد الطائر؟,الهيليكاريير
+movies_marvel,عالم مارفل السينمائي (Avengers),movies_marvel_more_q15_400,400,ما اسم الرجل النملة الحقيقي؟,سكوت لانغ
+movies_marvel,عالم مارفل السينمائي (Avengers),movies_marvel_more_q16_400,400,ما اسم والد ثور في أسغارد؟,أودين
+movies_marvel,عالم مارفل السينمائي (Avengers),movies_marvel_more_q17_600,600,ما اسم الحجر الموجود في جبهة فيجن؟,حجر العقل
+movies_marvel,عالم مارفل السينمائي (Avengers),movies_marvel_more_q18_600,600,ما اسم حجر اللانهاية الذي يحمله دكتور سترينج في قلادته؟,حجر الزمن
+movies_marvel,عالم مارفل السينمائي (Avengers),movies_marvel_more_q19_600,600,ما اسم أخت ثور إلهة الموت في فيلم «راغناروك»؟,هيلا
+movies_marvel,عالم مارفل السينمائي (Avengers),movies_marvel_more_q20_600,600,ما اسم صديق كابتن أمريكا الذي تحوّل إلى «جندي الشتاء» بعد غسل دماغه؟,باكي بارنز (جندي الشتاء)
+movies_marvel,عالم مارفل السينمائي (Avengers),movies_marvel_more_q22_600,600,ما اسم الأخت الزرقاء لغامورا؟,نيبولا
+movies_marvel,عالم مارفل السينمائي (Avengers),movies_marvel_more_q24_600,600,ما اسم المخرج الذي أخرج «حراس المجرة» بأجزائه الثلاثة؟,جيمس غن
+series_friends_photo_trial,مسلسل فريندز (تجربة الصور),series_friends_photo_trial_more_q1_200,200,كم عدد الأصدقاء الرئيسيين في مسلسل «فريندز»؟,6
+series_friends_photo_trial,مسلسل فريندز (تجربة الصور),series_friends_photo_trial_more_q2_200,200,ما اسم الشخصية التي تعمل عالم حفريات في «فريندز»؟,روس غيلر
+series_friends_photo_trial,مسلسل فريندز (تجربة الصور),series_friends_photo_trial_more_q3_200,200,ما اسم الشخصية التي تعزف الغيتار وتغني أغاني غريبة في المقهى؟,فيبي بوفيه
+series_friends_photo_trial,مسلسل فريندز (تجربة الصور),series_friends_photo_trial_more_q4_200,200,ما مهنة جوي تريبياني؟,ممثل
+series_friends_photo_trial,مسلسل فريندز (تجربة الصور),series_friends_photo_trial_more_q5_200,200,ما اسم أخت روس غيلر؟,مونيكا غيلر
+series_friends_photo_trial,مسلسل فريندز (تجربة الصور),series_friends_photo_trial_more_q6_200,200,من هو صديق جوي المقرب وشريكه في السكن؟,تشاندلر بينغ
+series_friends_photo_trial,مسلسل فريندز (تجربة الصور),series_friends_photo_trial_more_q8_200,200,ما الجملة الشهيرة التي يقولها روس «كنا ...!» عن انفصاله المؤقت عن رايتشل؟,We were on a break!
+series_friends_photo_trial,مسلسل فريندز (تجربة الصور),series_friends_photo_trial_more_q9_400,400,ما اسم القرد الذي اقتناه روس؟,مارسيل
+series_friends_photo_trial,مسلسل فريندز (تجربة الصور),series_friends_photo_trial_more_q10_400,400,من هي زوجة روس الأولى التي اكتشف أنها تحب النساء؟,كارول
+series_friends_photo_trial,مسلسل فريندز (تجربة الصور),series_friends_photo_trial_more_q11_400,400,مع من تزوجت فيبي في النهاية؟,مايك هانيغان
+series_friends_photo_trial,مسلسل فريندز (تجربة الصور),series_friends_photo_trial_more_q12_400,400,ما الحيوانان الأليفان اللذان اقتناهما جوي وتشاندلر؟,دجاجة وبطة
+series_friends_photo_trial,مسلسل فريندز (تجربة الصور),series_friends_photo_trial_more_q13_400,400,ما اسم الشخصية التي تُعرف بضحكتها المزعجة وعبارة «Oh. My. God»؟,جانيس
+series_friends_photo_trial,مسلسل فريندز (تجربة الصور),series_friends_photo_trial_more_q14_400,400,ما اسم المسلسل التلفزيوني الطبي الذي مثّل فيه جوي دور الدكتور دريك رامورِي؟,Days of Our Lives
+series_friends_photo_trial,مسلسل فريندز (تجربة الصور),series_friends_photo_trial_more_q15_400,400,ما اسم الفنان الذي جسّد شخصية تشاندلر بينغ؟,ماثيو بيري
+series_friends_photo_trial,مسلسل فريندز (تجربة الصور),series_friends_photo_trial_more_q19_600,600,ما الاسم الأوسط لتشاندلر بينغ؟,موريل
+series_friends_photo_trial,مسلسل فريندز (تجربة الصور),series_friends_photo_trial_more_q20_600,600,كم عدد أطفال فيبي الذين حملتهم عن أخيها فرانك؟,ثلاثة توائم
+series_friends_photo_trial,مسلسل فريندز (تجربة الصور),series_friends_photo_trial_more_q21_600,600,ما اسم الكلب الخزفي الأبيض الكبير الذي يملكه جوي؟,بوب (الكلب الخزفي)
+series_friends_photo_trial,مسلسل فريندز (تجربة الصور),series_friends_photo_trial_more_q24_600,600,ما اسم المسلسل المنبثق عن «فريندز» بطولة جوي؟,Joey
+series_squid_game,مسلسل لعبة الحبار (Squid Game),series_squid_game_more_q2_200,200,على أي منصة عُرض مسلسل «لعبة الحبار»؟,نتفليكس
+series_squid_game,مسلسل لعبة الحبار (Squid Game),series_squid_game_more_q4_200,200,ما شكل الدمية العملاقة في اللعبة الأولى؟,فتاة صغيرة
+series_squid_game,مسلسل لعبة الحبار (Squid Game),series_squid_game_more_q5_200,200,ما اسم شخصية البطل الرئيسية «اللاعب 456»؟,سيونغ جي هون
+series_squid_game,مسلسل لعبة الحبار (Squid Game),series_squid_game_more_q6_200,200,ما اسم شخصية العجوز «اللاعب 001»؟,أو إيل نام
+series_squid_game,مسلسل لعبة الحبار (Squid Game),series_squid_game_more_q9_400,400,ما اسم صديق جي هون منذ الطفولة الذي كان «اللاعب 218»؟,تشو سانغ وو
+series_squid_game,مسلسل لعبة الحبار (Squid Game),series_squid_game_more_q10_400,400,ما اسم الفتاة الكورية الشمالية «اللاعبة 067»؟,كانغ سي بيوك
+series_squid_game,مسلسل لعبة الحبار (Squid Game),series_squid_game_more_q11_400,400,ما اسم اللاعب الباكستاني «199» الذي ساعد سانغ وو؟,علي عبدول
+series_squid_game,مسلسل لعبة الحبار (Squid Game),series_squid_game_more_q14_400,400,في أي عام عُرض الموسم الأول؟,2021م
+series_squid_game,مسلسل لعبة الحبار (Squid Game),series_squid_game_more_q17_600,600,ما اسم الجائزة الكبرى التي حصل عليها لي جونغ جاي عام 2022 كأول آسيوي؟,جائزة إيمي لأفضل ممثل في مسلسل درامي
+series_squid_game,مسلسل لعبة الحبار (Squid Game),series_squid_game_more_q22_600,600,ما اسم الأخ الشرطي الذي تسلل إلى الجزيرة بحثاً عن أخيه؟,هوانغ جون هو
+series_squid_game,مسلسل لعبة الحبار (Squid Game),series_squid_game_more_q24_600,600,في أي عام صدر الموسم الثاني من «لعبة الحبار»؟,2024م
+series_game_of_thrones,مسلسل صراع العروش (Game of Thrones),series_game_of_thrones_more_q2_200,200,ما اسم الجدار الجليدي الضخم في الشمال؟,الجدار
+series_game_of_thrones,مسلسل صراع العروش (Game of Thrones),series_game_of_thrones_more_q3_200,200,ما العبارة الشهيرة لعائلة ستارك؟,الشتاء قادم
+series_game_of_thrones,مسلسل صراع العروش (Game of Thrones),series_game_of_thrones_more_q4_200,200,ما اسم القزم الذكي من عائلة لانيستر؟,تيريون لانيستر
+series_game_of_thrones,مسلسل صراع العروش (Game of Thrones),series_game_of_thrones_more_q5_200,200,ما اسم الابن غير الشرعي لنيد ستارك الذي انضم لحرس الليل؟,جون سنو
+series_game_of_thrones,مسلسل صراع العروش (Game of Thrones),series_game_of_thrones_more_q6_200,200,ما لقب دينيريس المرتبط بالتنانين؟,أم التنانين
+series_game_of_thrones,مسلسل صراع العروش (Game of Thrones),series_game_of_thrones_more_q7_200,200,على أي قناة عُرض صراع العروش؟,HBO
+series_game_of_thrones,مسلسل صراع العروش (Game of Thrones),series_game_of_thrones_more_q8_200,200,ما اسم والد عائلة ستارك سيد وينترفيل؟,إدارد (نيد) ستارك
+series_game_of_thrones,مسلسل صراع العروش (Game of Thrones),series_game_of_thrones_more_q9_400,400,ما اسم الملك الشاب القاسي ابن سيرسي؟,جوفري باراثيون
+series_game_of_thrones,مسلسل صراع العروش (Game of Thrones),series_game_of_thrones_more_q10_400,400,ما اسم الحارس العملاق الأخرس لبران؟,هودور
+series_game_of_thrones,مسلسل صراع العروش (Game of Thrones),series_game_of_thrones_more_q11_400,400,ما معنى اسم «هودور» في نهاية قصته؟,Hold the door (أمسك الباب)
+series_game_of_thrones,مسلسل صراع العروش (Game of Thrones),series_game_of_thrones_more_q13_400,400,ما اسم أخت جيمي لانيستر التوأم؟,سيرسي لانيستر
+series_game_of_thrones,مسلسل صراع العروش (Game of Thrones),series_game_of_thrones_more_q14_400,400,ما اسم قائد الدوثراكي الذي تزوج دينيريس؟,كال دروغو
+series_game_of_thrones,مسلسل صراع العروش (Game of Thrones),series_game_of_thrones_more_q16_400,400,ما اسم المسلسل المنبثق عن صراع العروش عن آل تارغارين؟,بيت التنين (House of the Dragon)
+series_game_of_thrones,مسلسل صراع العروش (Game of Thrones),series_game_of_thrones_more_q17_600,600,ما اسم سلسلة الروايات التي اقتُبس منها المسلسل؟,أغنية الجليد والنار
+series_game_of_thrones,مسلسل صراع العروش (Game of Thrones),series_game_of_thrones_more_q18_600,600,ما اسم المرأة الحمراء كاهنة إله النور؟,ميليساندر
+series_game_of_thrones,مسلسل صراع العروش (Game of Thrones),series_game_of_thrones_more_q19_600,600,ما اسم قائد السائرين البيض؟,ملك الليل
+series_game_of_thrones,مسلسل صراع العروش (Game of Thrones),series_game_of_thrones_more_q20_600,600,ما اسم المعركة التي حررت فيها عائلة ستارك وينترفيل من رامزي بولتون؟,معركة الأوغاد
+series_game_of_thrones,مسلسل صراع العروش (Game of Thrones),series_game_of_thrones_more_q21_600,600,ما اسم التنين الذي قتله ملك الليل وأعاده للحياة؟,فيزيريون
+series_game_of_thrones,مسلسل صراع العروش (Game of Thrones),series_game_of_thrones_more_q22_600,600,ما اسم الملك المجنون والد دينيريس؟,إيريس الثاني تارغارين
+series_game_of_thrones,مسلسل صراع العروش (Game of Thrones),series_game_of_thrones_more_q23_600,600,ما اسم الفارس الذي قتل الملك المجنون؟,جيمي لانيستر
+series_game_of_thrones,مسلسل صراع العروش (Game of Thrones),series_game_of_thrones_more_q24_600,600,من أصبح ملك الممالك في نهاية مسلسل صراع العروش؟,بران ستارك
+series_stranger_things,مسلسل سترينجر ثينغز (Stranger Things),series_stranger_things_more_q2_200,200,ما اسم صديق مايك الذي يعاني من نقص الأسنان؟,داستن هندرسون
+series_stranger_things,مسلسل سترينجر ثينغز (Stranger Things),series_stranger_things_more_q3_200,200,ما اسم الأم التي تتواصل مع ابنها عبر أضواء عيد الميلاد؟,جويس بايرز
+series_stranger_things,مسلسل سترينجر ثينغز (Stranger Things),series_stranger_things_more_q4_200,200,على أي منصة يُعرض «سترينجر ثينغز»؟,نتفليكس
+series_stranger_things,مسلسل سترينجر ثينغز (Stranger Things),series_stranger_things_more_q5_200,200,ما اسم الشاب الذي يحمي الأطفال بمضرب بيسبول فيه مسامير؟,ستيف هارينغتون
+series_stranger_things,مسلسل سترينجر ثينغز (Stranger Things),series_stranger_things_more_q7_200,200,ما اسم الممثلة التي أدّت دور إليفن؟,ميلي بوبي براون
+series_stranger_things,مسلسل سترينجر ثينغز (Stranger Things),series_stranger_things_more_q8_200,200,في أي ولاية أمريكية تقع مدينة هوكينز الخيالية؟,إنديانا
+series_stranger_things,مسلسل سترينجر ثينغز (Stranger Things),series_stranger_things_more_q9_400,400,ما اسم أخت مايك الكبرى؟,نانسي ويلر
+series_stranger_things,مسلسل سترينجر ثينغز (Stranger Things),series_stranger_things_more_q10_400,400,ما اسم شقيق ويل الأكبر؟,جوناثان بايرز
+series_stranger_things,مسلسل سترينجر ثينغز (Stranger Things),series_stranger_things_more_q11_400,400,ما اسم صديق مايك الذي يستخدم المقلاع؟,لوكاس سنكلير
+series_stranger_things,مسلسل سترينجر ثينغز (Stranger Things),series_stranger_things_more_q13_400,400,ما اسم الفتاة التي تعمل في محل المثلجات مع ستيف؟,روبن
+series_stranger_things,مسلسل سترينجر ثينغز (Stranger Things),series_stranger_things_more_q17_600,600,ما رقم «فيكنا» الأصلي في مختبر هوكينز؟,001
+series_stranger_things,مسلسل سترينجر ثينغز (Stranger Things),series_stranger_things_more_q21_600,600,ما اسم أخت لوكاس الصغيرة؟,إريكا سنكلير
+series_stranger_things,مسلسل سترينجر ثينغز (Stranger Things),series_stranger_things_more_q22_600,600,ما اسم والدة مايك؟,كارين ويلر
+series_stranger_things,مسلسل سترينجر ثينغز (Stranger Things),series_stranger_things_more_q23_600,600,ما اسم الموسيقي ذو الشعر الطويل الذي عزف «ماستر أوف بابتس» في العالم المقلوب؟,إدي مانسون
+series_stranger_things,مسلسل سترينجر ثينغز (Stranger Things),series_stranger_things_more_q24_600,600,ما اسم صديقة نانسي التي اختفت في الموسم الأول؟,باربرا هولاند (بارب)
