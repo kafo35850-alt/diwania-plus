@@ -168,6 +168,13 @@ def main():
         for slug, cat, uid, pts, q, a, kind, qgap, agap in r:
             if agap.strip():
                 rows.append({'slug': slug, 'category': cat, 'uid': uid, 'question': q, 'answer': a})
+    more = os.path.join(ROOT, 'reports', 'eight-more-questions.csv')  # new questions (no answer picture yet)
+    if os.path.exists(more):
+        with open(more, encoding='utf-8-sig') as f:
+            r = csv.reader(f)
+            next(r)
+            for slug, cat, uid, pts, q, a in r:
+                rows.append({'slug': slug, 'category': cat, 'uid': uid, 'question': q, 'answer': a})
     out = json.load(open(OUT)) if os.path.exists(OUT) else {'items': {}}
     done = {uid for s in out['items'].values() for uid in s}
     sources = json.load(open(SOURCES))
