@@ -6865,6 +6865,11 @@ function m8Norm(v) {
     .replace(/ة/g, 'ه').replace(/ى/g, 'ي').replace(/[^\p{L}\p{N}]+/gu, ' ').trim();
 }
 function m8Stem(w) { return w.replace(/^(وال|بال|لل|فال|كال|ال)/, '').replace(/^[وب](?=ال)/, ''); }
+// The picture (or clip) shown with the question: two questions with the same one never share a board.
+function m8QuestionMediaKey(q) {
+const u = (q.qm && q.qm.u) || q.img || q.video || (q.photo && (q.photo.u || q.photo)) || '';
+return u && typeof u === 'string' ? 'm:' + u : '';
+}
 function m8AnswerKey(q) {
   const a = m8Norm(String(q.a || q.answer || '').split(/[—(\-–|]/)[0]);
   return a ? 'a:' + a.split(' ').map(m8Stem).join(' ') : '';
@@ -6883,6 +6888,8 @@ function m8TopicIndex(pool) {
     const keys = new Set();
     const ak = m8AnswerKey(q);
     if (ak) keys.add(ak);
+    const mk = m8QuestionMediaKey(q);
+    if (mk) keys.add(mk);
     words[i].forEach(w => { if (freq.get(w) <= rareMax) keys.add('w:' + w); });
     // A question that names another question's answer is about the same thing.
     const text = ' ' + m8Norm(q.q || q.question || '').split(' ').map(m8Stem).join(' ') + ' ';
@@ -6956,7 +6963,7 @@ const board = boardUsed || new Set();
 const used = new Set();
 const picked = [];
 const reserve = { 200: [], 400: [], 600: [] };
-const fits = (q) => !m8Clash(topic.get(q), used) && !board.has(m8AnswerKey(q)) && !board.has('q:' + m8Norm(q.q));
+const fits = (q) => !m8Clash(topic.get(q), used) && !board.has(m8AnswerKey(q)) && !board.has('q:' + m8Norm(q.q)) && !(m8QuestionMediaKey(q) && board.has(m8QuestionMediaKey(q)));
 const take = (q) => { picked.push(q); m8Claim(topic.get(q), used); };
 [200, 400, 600].forEach(tier => {
 const inTier = shuffleInPlace(pool.filter(q => q.points === tier));
@@ -6973,7 +6980,7 @@ rest.filter(fits).concat(rest.filter(q => !fits(q))).forEach(q => { if (picked.l
 }
 // Swaps (lifeline) also prefer a question on a new topic.
 [200, 400, 600].forEach(tier => { const r = reserve[tier]; reserve[tier] = r.filter(fits).concat(r.filter(q => !fits(q))); });
-picked.forEach(q => { const k = m8AnswerKey(q); if (k) board.add(k); board.add('q:' + m8Norm(q.q)); });
+picked.forEach(q => { const k = m8AnswerKey(q); if (k) board.add(k); board.add('q:' + m8Norm(q.q)); const mk = m8QuestionMediaKey(q); if (mk) board.add(mk); });
 picked.sort((a, b) => a.points - b.points);
 const result = picked.map(q => {
 const opt = prepareChoiceOptions(q);
