@@ -2,3 +2,4 @@ node_modules/
 .wrangler/
 .dev.vars
 worker/src/static.generated.js
+__pycache__/
