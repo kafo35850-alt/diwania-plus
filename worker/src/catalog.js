@@ -13,6 +13,7 @@ import EIGHT_CATEGORIES_60_203 from './eight_categories_60_203.json';
 import EIGHT_CATEGORY_GUIDE from './eight_category_guide.json';
 import EIGHT_MEDIA_REFRESH from './eight_media_refresh.json';
 import { addShippedQuestionMedia } from './eight-question-media.js';
+import { addAutoAnswerMedia } from './eight-answer-auto.js';
 import { HttpError, nowIso } from './util.js';
 import { gatewayConfigured } from './payments.js';
 import { eightRawQuestions } from './games.js';
@@ -213,6 +214,7 @@ async function getEightQuestions(env) {
     if (questions && !savedAfterMediaRefresh.has(slug)) stored[slug] = structuredClone(questions);
   }
   addShippedQuestionMedia(stored, eightRawQuestions);
+  addAutoAnswerMedia(stored, eightRawQuestions);
   return stored;
 }
 
