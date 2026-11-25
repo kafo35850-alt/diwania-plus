@@ -2896,26 +2896,28 @@ html.dw-game-open #dwApp { visibility: hidden; }
     var v = (Number(halalas) || 0) / 100;
     return arNum(v % 1 ? v.toFixed(2) : String(v)) + ' ر.س';
   }
-  function peReward() { var r = siteSettings().creator_reward_halalas; return r == null ? 25 : Number(r) || 0; }
+  function peReward() { return Number(siteSettings().creator_reward_halalas) || 0; }
+  function peShare() { return Number(siteSettings().creator_share_percent) || 0; }
+  function pctText(n) { return arNum(n) + '٪'; }
   // «العب واكسب»: the big poster on the home page and the categories page.
   function playEarnPosterHtml() {
-    var r = peReward();
+    var r = peShare();
     return '<section class="pe-poster" id="dwPlayEarn">' +
       '<div style="position:relative;z-index:1">' +
         '<span class="pe-kicker">✨ جديد في ديوانية بلس</span>' +
         '<h2>العب واكسب</h2>' +
-        '<p class="pe-sub"><b>فئتك تنلعب… وأنت تكسب.</b> اصنع فئة في «تحدي الثمانية» من أسئلتك أنت، ولو اعتمدناها تطلع في اللعبة باسمك' + (r ? '، وينحسب لك <b style="color:#fcd581">' + sarText(r) + '</b> عن كل لعبة تنلعب فيها فئتك' : '') + ' — حتى لو أنت اللي لعبتها.</p>' +
+        '<p class="pe-sub"><b>فئتك تنلعب… وأنت تكسب.</b> اصنع فئة في «تحدي الثمانية» من أسئلتك أنت، ولو اعتمدناها تطلع في اللعبة باسمك' + (r ? '، وتاخذ <b style="color:#fcd581">' + pctText(r) + ' من دخل فئتك</b> في كل لعبة مدفوعة تنلعب فيها — حتى لو أنت اللي لعبتها' : '') + '.</p>' +
         '<div class="pe-chips"><span>✍️ ١٨ سؤال وجواب</span><span>🔎 مراجعة من فريقنا</span><span>🏷️ باسمك داخل اللعبة</span><span>🏦 سحب لحسابك البنكي</span></div>' +
         '<div class="pe-btns"><button class="dw-btn dw-btn-gold" data-act="pe-start">🚀 ابدأ فئتك الحين</button>' +
           (STATE.user ? '<button class="dw-btn dw-btn-sec" data-act="pe-earnings">💼 فئاتي وأرباحي</button>' : '') + '</div>' +
       '</div>' +
       '<div class="pe-art" aria-hidden="true"><div class="pe-coin">💰</div>' +
-        (r ? '<div class="pe-rate">' + sarText(r) + '<small>عن كل لعبة</small></div>' : '') + '</div>' +
+        (r ? '<div class="pe-rate">' + pctText(r) + '<small>من دخل فئتك</small></div>' : '') + '</div>' +
     '</section>';
   }
   // Shown once per device, a moment after the home page opens (skipped for automated browsers unless ?pepop=1).
   function maybeShowPePopup() {
-    if (STATE.pePopDone || STATE.tab !== 'store' || !peReward() || !DiwaniyaServerKernel.loadDB().catalogReady) return;
+    if (STATE.pePopDone || STATE.tab !== 'store' || !peShare() || !DiwaniyaServerKernel.loadDB().catalogReady) return;
     var force = /[?&]pepop=1/.test(location.search);
     if (navigator.webdriver && !force) return;
     try { if (!force && localStorage.getItem('dw_pe_pop_v1')) { STATE.pePopDone = true; return; } } catch (e) { }
@@ -2951,6 +2953,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
     var canWithdraw = c.balance > 0 && c.balance >= c.min_payout_halalas && !c.payouts.some(function (p) { return p.status === 'pending'; });
     return '<section class="dw-card" id="dwCreatorPanel">' +
       '<h3 style="margin:0;font-size:22px">💼 فئاتي وأرباحي</h3>' +
+      '<p style="margin:0;font-size:13px;color:var(--text-muted)">لك ' + pctText(c.share_percent) + ' من دخل فئتك: اللوحة فيها ٨ فئات، فكل لعبة مدفوعة فيها فئتك تجيب لك ' + sarText(c.reward_halalas) + '. التجربة المجانية واللعب بأقيام هدية ما تنحسب.</p>' +
       '<div class="pe-money"><div><b>' + sarText(c.balance) + '</b><span>رصيدك القابل للسحب</span></div><div><b>' + arNum(c.plays) + '</b><span>مرة انلعبت فئاتك</span></div><div><b>' + sarText(c.earned) + '</b><span>كل أرباحك</span></div></div>' +
       '<div class="dw-table-wrap"><table class="dw-table"><thead><tr><th>الفئة</th><th>الحالة</th><th>عدد اللعب</th><th>الأرباح</th></tr></thead><tbody>' +
         c.categories.map(function (x) {
@@ -2975,7 +2978,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
     }
     var d = STATE.catSug || (STATE.catSug = newCatSugDraft());
     saveCatSugDraft();
-    var r = peReward();
+    var r = peShare();
     return '<section class="dw-card" id="dwCatSugBox">' +
       '<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">' +
         '<div><h3 style="margin:0;font-size:24px">💰 العب واكسب — اصنع فئتك</h3><p style="margin:4px 0 0;color:var(--text-muted);font-size:13.5px">شغلك ينحفظ في جهازك أول بأول، تقدر تكمّل بعدين.</p></div>' +
@@ -2986,7 +2989,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
         '<li><b>اكتب ١٨ سؤال على الأقل</b>٦ سهلة (٢٠٠) و٦ متوسطة (٤٠٠) و٦ صعبة (٦٠٠). اضغط «+ سؤال» لكل واحد.</li>' +
         '<li><b>الإجابة قصيرة وأكيدة</b>كلمة أو اسم، وتأكد إنها صحيحة ١٠٠٪. تقدر تحط صورة أو فيديو.</li>' +
         '<li><b>أرسلها للمراجعة</b>فريقنا يراجعها، وتشوف حالتها تحت في «فئاتي وأرباحي».</li>' +
-        '<li><b>تنقبل… وتبدأ تكسب</b>تطلع في اللعبة باسمك' + (r ? '، ولك ' + sarText(r) + ' عن كل لعبة تنلعب فيها — حتى لو أنت اللي لعبت' : '') + '.</li>' +
+        '<li><b>تنقبل… وتبدأ تكسب</b>تطلع في اللعبة باسمك' + (r ? '، ولك ' + pctText(r) + ' من دخل فئتك في كل لعبة مدفوعة تنلعب فيها — حتى لو أنت اللي لعبت' : '') + '.</li>' +
       '</ol>' +
       '<div><b style="font-size:14px">👀 مثال (فئة «عواصم العالم»):</b><div class="pe-example" style="margin-top:6px">' +
         '<div>🟢 سهل ٢٠٠<br>وش عاصمة مصر؟ ← <i>القاهرة</i></div>' +
@@ -3686,8 +3689,9 @@ html.dw-game-open #dwApp { visibility: hidden; }
             '<input class="dw-input" id="setWa" dir="ltr" inputmode="numeric" placeholder="9665xxxxxxxx" style="max-width:240px" value="' + esc(cfg.support_whatsapp || '') + '"></section>' +
           '<section class="set-box"><h5>📲 شريط «ثبّت التطبيق»</h5><p>الشريط اللي فوق الصفحة الرئيسية يدعو الناس يثبتون التطبيق ويأخذون كود الخصم.</p>' +
             '<label class="set-sw"><input type="checkbox" id="setInstall"' + on(cfg.install_banner) + '> إظهار الشريط</label></section>' +
-          '<section class="set-box"><h5>💰 العب واكسب</h5><p>المبلغ اللي ينحسب لصاحب الفئة المعتمدة عن كل لعبة تنلعب فيها فئته (مرة وحدة لكل جلسة لعب)، وأقل مبلغ يقدر يسحبه. صفر = نوقف الأرباح.</p>' +
-            '<div style="display:flex;gap:10px;flex-wrap:wrap"><label style="font-size:13px">ريال عن كل لعبة<input class="dw-input" id="setPeReward" type="number" min="0" max="10" step="0.05" style="max-width:140px" value="' + ((cfg.creator_reward_halalas != null ? cfg.creator_reward_halalas : 25) / 100) + '"></label>' +
+          '<section class="set-box"><h5>💰 العب واكسب</h5><p>صاحب الفئة ياخذ نسبة من <b>صافي</b> دخل اللعبة (بعد الضريبة ١٥٪ ورسوم الدفع ٣٪)، محسوب على أرخص سعر قيم عندك، ومقسوم على ٨ فئات اللوحة. فمستحيل تدفع أكثر من اللي دخل لك. التجربة المجانية والأقيام الهدية ما تنحسب. صفر = نوقف الأرباح.</p>' +
+            (function () { var rt = (DiwaniyaServerKernel.loadDB().creators || {}).rate; return rt ? '<p style="color:#fcd581">الحين: أرخص قيم = ' + sarText(rt.cheapestCredit) + ' ← صافيه ' + sarText(rt.netPerCredit) + ' ← نصيب الفئة الوحدة من اللعبة = <b>' + sarText(rt.perCat) + '</b>. لو كل الـ٨ فئات لنفس الشخص ياخذ ' + sarText(rt.perCat * 8) + ' وأنت يبقى لك ' + sarText(rt.netPerCredit - rt.perCat * 8) + ' صافي.</p>' : ''; })() +
+            '<div style="display:flex;gap:10px;flex-wrap:wrap"><label style="font-size:13px">النسبة لأصحاب الفئات ٪ (أقصى شي ٩٠)<input class="dw-input" id="setPeShare" type="number" min="0" max="90" step="5" style="max-width:140px" value="' + (cfg.creator_share_percent != null ? cfg.creator_share_percent : 50) + '"></label>' +
             '<label style="font-size:13px">أقل سحب (ريال)<input class="dw-input" id="setPeMin" type="number" min="1" max="1000" step="1" style="max-width:140px" value="' + ((cfg.creator_min_payout_halalas || 5000) / 100) + '"></label></div></section>' +
           '<div><button class="dw-btn dw-btn-gold" data-act="adm-save-settings">💾 حفظ الإعدادات</button></div>' +
         '</div>';
@@ -5113,7 +5117,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
       adminCall('save_settings', {
         announce_on: !!g('setAnnOn').checked, announce_text: g('setAnnText').value, announce_link: g('setAnnLink').value,
         signup_bonus: g('setBonus').value, free_trials: !!g('setTrials').checked, support_whatsapp: g('setWa').value, install_banner: !!g('setInstall').checked,
-        creator_reward_sar: g('setPeReward').value, creator_min_payout_sar: g('setPeMin').value
+        creator_share_percent: g('setPeShare').value, creator_min_payout_sar: g('setPeMin').value
       }, function (r) { render(); showToast(r.message); });
     } else if (act === 'adm-idea') {
       var idOp = actBtn.getAttribute('data-op');

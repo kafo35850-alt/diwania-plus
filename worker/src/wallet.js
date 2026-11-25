@@ -66,10 +66,10 @@ export async function walletSnapshot(env, userId) {
   };
 }
 
-async function issuePlayToken(env, userId, slug) {
+async function issuePlayToken(env, userId, slug, launchKey = '', paidCredits = 0) {
   const token = randomToken(32);
-  await env.DB.prepare('INSERT INTO play_tokens (token_hash, user_id, game_slug, expires_at) VALUES (?, ?, ?, ?)')
-    .bind(await sha256Hex(token), userId, slug, nowMs() + PLAY_TOKEN_TTL_MS).run();
+  await env.DB.prepare('INSERT INTO play_tokens (token_hash, user_id, game_slug, expires_at, launch_key, paid_credits) VALUES (?, ?, ?, ?, ?, ?)')
+    .bind(await sha256Hex(token), userId, slug, nowMs() + PLAY_TOKEN_TTL_MS, launchKey, Math.max(0, Number(paidCredits) || 0)).run();
   return '/play/' + encodeURIComponent(slug) + '?t=' + encodeURIComponent(token);
 }
 
@@ -89,10 +89,11 @@ export async function launchGame(env, session, slug, body) {
   if (!claim.meta.changes) {
     const prev = await env.DB.prepare('SELECT game_slug, result_json FROM launches WHERE user_id = ? AND idem_key = ?').bind(uid, idemKey).first();
     if (!prev || !prev.result_json || prev.game_slug !== slug) throw new HttpError(409, 'الطلب قيد المعالجة، انتظر لحظة.');
+    const prevResult = JSON.parse(prev.result_json);
     return {
-      ...JSON.parse(prev.result_json),
+      ...prevResult,
       deduplicated: true,
-      playUrl: await issuePlayToken(env, uid, slug),
+      playUrl: await issuePlayToken(env, uid, slug, idemKey, prevResult.costDeducted),
       wallet: await walletSnapshot(env, uid)
     };
   }
@@ -147,7 +148,7 @@ export async function launchGame(env, session, slug, body) {
     env.DB.prepare('UPDATE launches SET result_json = ? WHERE user_id = ? AND idem_key = ?').bind(JSON.stringify(result), uid, idemKey)
   ]);
 
-  return { ...result, playUrl: await issuePlayToken(env, uid, slug), wallet: await walletSnapshot(env, uid) };
+  return { ...result, playUrl: await issuePlayToken(env, uid, slug, idemKey, charged), wallet: await walletSnapshot(env, uid) };
 }
 
 // Games added from the admin panel reuse the engine file of an existing game.

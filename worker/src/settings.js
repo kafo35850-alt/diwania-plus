@@ -7,7 +7,7 @@ export const DEFAULT_SETTINGS = {
   free_trials: 1,           // one free play of every paid game per account
   support_whatsapp: '',     // digits with country code, e.g. 9665xxxxxxxx
   install_banner: 1,        // "install the app" bar on the home page
-  creator_reward_halalas: 25,      // «العب واكسب»: paid to a category's creator per game session that plays it
+  creator_share_percent: 50,       // «العب واكسب»: % of a paid game's net income (after VAT and gateway fee) shared by its 8 categories
   creator_min_payout_halalas: 5000 // smallest withdrawal
 };
 
@@ -24,7 +24,7 @@ export function publicSettings(s) {
     free_trials: !!s.free_trials,
     support_whatsapp: s.support_whatsapp || '',
     install_banner: !!s.install_banner,
-    creator_reward_halalas: Number(s.creator_reward_halalas) || 0,
+    creator_share_percent: Number(s.creator_share_percent) || 0,
     creator_min_payout_halalas: Number(s.creator_min_payout_halalas) || 0
   };
 }

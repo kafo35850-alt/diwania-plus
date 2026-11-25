@@ -8,7 +8,7 @@ import { cleanMedia, legacyMedia, mediaBytesUsed } from './media.js';
 import { promoConfig, APP_CODE } from './promo.js';
 import { voiceAdminData, saveVoicePiece } from './voice.js';
 import { getSettings } from './settings.js';
-import { creatorAdminData, markPayout } from './creator.js';
+import { creatorAdminData, markPayout, creatorRate } from './creator.js';
 
 const SLUG_RE = /^[a-z0-9_]{2,40}$/;
 export const NOT_CLONABLE = ['eight', 'dakhil', 'mafia', 'qaftah', 'chancellor', 'harf', 'qaddirha'];
@@ -346,11 +346,12 @@ export async function adminAction(env, session, action, payload) {
         free_trials: p.free_trials ? 1 : 0,
         support_whatsapp: wa,
         install_banner: p.install_banner ? 1 : 0,
-        creator_reward_halalas: Math.max(0, Math.min(1000, Math.round(Number(p.creator_reward_sar) * 100) || 0)),
+        creator_share_percent: Math.max(0, Math.min(90, Math.round(Number(p.creator_share_percent)) || 0)),
         creator_min_payout_halalas: Math.max(100, Math.min(100000, Math.round(Number(p.creator_min_payout_sar) * 100) || 5000))
       };
       if (next.announce_on && !next.announce_text) throw new HttpError(400, 'اكتب نص الإعلان أو أطفئه.');
       await putDoc(env, 'settings', next);
+      await creatorRate(env, true);
       await log(env, admin, 'save_settings', 'settings', 'store', JSON.stringify(next).slice(0, 180));
       return { ok: true, message: 'انحفظت إعدادات المتجر ✅' };
     }

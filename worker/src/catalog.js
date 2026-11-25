@@ -1,3 +1,4 @@
+import { creatorRate } from './creator.js';
 import { mediaLimits } from './media.js';
 import { getSettings, publicSettings } from './settings.js';
 // Admin-editable catalog documents. Anything the owner has not edited yet
@@ -369,6 +370,7 @@ export async function getCatalog(env) {
     getDoc(env, 'categories'),
   ]);
   const settings = publicSettings(await getSettings(env));
+  settings.creator_reward_halalas = (await creatorRate(env)).perCat;
   const mergedWithQuestions = new Set(categories.filter((c) => c.item_count > 0 && Object.hasOwn(EIGHT_CATEGORY_MERGES, c.slug))
     .map((c) => EIGHT_CATEGORY_MERGES[c.slug]));
   const mergedQuestions = mergedWithQuestions.size ? await getEightQuestions(env) : null;
