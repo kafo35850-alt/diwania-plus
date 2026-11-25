@@ -10,6 +10,7 @@ import EIGHT_QUESTION_QUALITY from './eight_question_quality.json';
 import EIGHT_POSTER_CATEGORIES from './eight_poster_categories.json';
 import EIGHT_CATEGORIES_60_203 from './eight_categories_60_203.json';
 import EIGHT_CATEGORY_GUIDE from './eight_category_guide.json';
+import EIGHT_MEDIA_REFRESH from './eight_media_refresh.json';
 import { HttpError, nowIso } from './util.js';
 import { gatewayConfigured } from './payments.js';
 import { eightRawQuestions } from './games.js';
@@ -20,8 +21,24 @@ const EIGHT_QUESTIONS_PREFIX = 'eight_questions:';
 const expandedDefaults = new Map();
 export const EIGHT_CATEGORY_MERGES = { custom_1795179696757: 'quran_kareem', ...EIGHT_CATEGORY_GUIDE.merges };
 const mergedTargets = new Set(Object.values(EIGHT_CATEGORY_MERGES));
+const MEDIA_REFRESH_VERSION = 1;
+const categoryRefresh = new Map(Object.entries(EIGHT_MEDIA_REFRESH).map(([slug, { category }]) => [slug, category]));
 const shippedEightCategories = [...EIGHT_POSTER_CATEGORIES, ...EIGHT_CATEGORIES_60_203];
 const shippedEightMetadata = new Map(shippedEightCategories.map(({ questions, ...category }) => [category.slug, category]));
+for (const [slug, category] of categoryRefresh) {
+  if (category?.id && !shippedEightMetadata.has(slug)) shippedEightMetadata.set(slug, { slug, ...category });
+}
+function refreshEightCategory(category) {
+  const updated = categoryRefresh.get(category.slug);
+  if (!updated) return category;
+  const { name, description, isCharades } = updated;
+  return {
+    ...category,
+    ...(name ? { name } : {}),
+    ...(description ? { description } : {}),
+    ...(isCharades ? { isCharades } : {})
+  };
+}
 export const EIGHT_STADIUM_CATEGORIES = new Set(['world_stadiums_photo', 'arab_stadiums_photo']);
 export const EIGHT_POSTERS = {
   ...CAT_POSTERS,
@@ -72,7 +89,7 @@ export async function getDoc(env, key) {
         if (!c.poster && Object.hasOwn(EIGHT_CATEGORY_GUIDE.posters, c.slug)) c.poster = EIGHT_CATEGORY_GUIDE.posters[c.slug];
       }
     }
-    return stored;
+    return key === 'categories' && Array.isArray(stored) ? stored.map(refreshEightCategory) : stored;
   }
   if (key === 'categories') {
     const slugs = new Set(SEED.categories.map((category) => category.slug));
@@ -80,7 +97,7 @@ export async function getDoc(env, key) {
     for (const c of categories) {
       if (!c.poster && Object.hasOwn(EIGHT_CATEGORY_GUIDE.posters, c.slug)) c.poster = EIGHT_CATEGORY_GUIDE.posters[c.slug];
     }
-    return categories;
+    return categories.map(refreshEightCategory);
   }
   return structuredClone(SEED[key]);
 }
@@ -94,6 +111,7 @@ async function getEightQuestions(env) {
   // New writes are scoped to one category. An empty saved list also masks a legacy list.
   const savedAfterExpansion = new Set();
   const savedAfterMerge = new Set();
+  const savedAfterMediaRefresh = new Set();
   for (const row of saved.results) {
     const slug = row.key.slice(EIGHT_QUESTIONS_PREFIX.length);
     const value = JSON.parse(row.json);
@@ -101,6 +119,7 @@ async function getEightQuestions(env) {
       stored[slug] = value.questions;
       if (value.includesDriveExpansion === true) savedAfterExpansion.add(slug);
       if (value.includesCategoryMerge === true) savedAfterMerge.add(slug);
+      if (value.mediaRefreshVersion === MEDIA_REFRESH_VERSION) savedAfterMediaRefresh.add(slug);
     } else {
       stored[slug] = value;
     }
@@ -187,6 +206,9 @@ async function getEightQuestions(env) {
   for (const [source, target] of Object.entries(EIGHT_CATEGORY_MERGES)) {
     if (savedAfterMerge.has(target) || !stored[source]?.length) continue;
     stored[target] = mergeEightQuestionLists(stored[target] || eightRawQuestions(target), stored[source]);
+  }
+  for (const [slug, { questions }] of Object.entries(EIGHT_MEDIA_REFRESH)) {
+    if (questions && !savedAfterMediaRefresh.has(slug)) stored[slug] = structuredClone(questions);
   }
   return stored;
 }
@@ -314,8 +336,9 @@ export async function putDoc(env, key, value) {
 export async function saveEightQuestions(env, slug, questions, catalogChanges = {}) {
   const includesDriveExpansion = Boolean(EIGHT_EXPANSION[slug]);
   const includesCategoryMerge = mergedTargets.has(slug);
-  const value = includesDriveExpansion || includesCategoryMerge
-    ? { questions, includesDriveExpansion, includesCategoryMerge }
+  const mediaRefreshVersion = EIGHT_MEDIA_REFRESH[slug]?.questions ? MEDIA_REFRESH_VERSION : undefined;
+  const value = includesDriveExpansion || includesCategoryMerge || mediaRefreshVersion
+    ? { questions, includesDriveExpansion, includesCategoryMerge, mediaRefreshVersion }
     : questions;
   const json = JSON.stringify(value);
   // Leave room for the row key and timestamp within D1's 2 MB record limit.
