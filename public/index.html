@@ -1026,6 +1026,11 @@ html.dw-game-open #dwApp { visibility: hidden; }
 .pe-money b { display: block; font-size: 24px; color: #fcd581; }
 .pe-money span { font-size: 12.5px; color: var(--text-muted); }
 @media (max-width: 520px) { .pe-money { grid-template-columns: 1fr; } }
+.ed-cat-hits { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 6px; }
+.ed-cat-hits:empty { display: none; }
+.ed-cat-hits button { padding: 7px 12px; border-radius: 12px; border: 1px solid rgba(245,185,66,.45); background: rgba(245,185,66,.1); color: #fde9b5; font: inherit; font-size: 14px; font-weight: 700; cursor: pointer; }
+.ed-cat-hits button:hover, .ed-cat-hits button:focus-visible { background: rgba(245,185,66,.25); }
+.ed-cat-hits .none { color: var(--text-muted); font-size: 13px; }
 .cta-band { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding: 26px 28px; border-radius: 24px; background: linear-gradient(120deg, rgba(245,185,66,.22), rgba(124,58,237,.18)); border: 1px solid rgba(245,185,66,.4); }
 .cta-band h3 { margin: 0; font-size: 24px; }
 .cta-band p { margin: 6px 0 0; color: #e2e8f0; font-size: 15px; }
@@ -2885,6 +2890,30 @@ html.dw-game-open #dwApp { visibility: hidden; }
   }
 
   var PE_DRAFT_KEY = 'dw_pe_draft_v1';
+  // Admin question editor: find a category by typing instead of scrolling through hundreds.
+  function normAr(v) {
+    return String(v || '').toLowerCase().replace(/[\u064B-\u0652\u0640]/g, '').replace(/[أإآ]/g, 'ا').replace(/ة/g, 'ه').replace(/ى/g, 'ي').trim();
+  }
+  function renderEdCatHits(q) {
+    var box = document.getElementById('edCatHits');
+    if (!box) return;
+    var nq = normAr(q);
+    if (!nq) { box.innerHTML = ''; return; }
+    var words = nq.split(/\s+/).map(function (w) {
+      var x = w.replace(/^(وال|بال|ال)/, '');
+      x = x.replace(/(ات|ين|ون|ه|ي)$/, '');
+      return x.length >= 2 ? x : w;
+    });
+    var hits = STATE.categories.filter(function (c) {
+      var hay = normAr(c.name + ' ' + (c.sub_group || '') + ' ' + (c.macro_group || '') + ' ' + c.slug);
+      return words.every(function (w) { return hay.indexOf(w) !== -1; });
+    });
+    hits.sort(function (a, b) { return (normAr(a.name).indexOf(nq) === 0 ? 0 : 1) - (normAr(b.name).indexOf(nq) === 0 ? 0 : 1); });
+    box.innerHTML = hits.length
+      ? hits.slice(0, 12).map(function (c) { return '<button type="button" data-act="ed-pick-cat" data-slug="' + esc(c.slug) + '">' + esc(c.icon) + ' ' + esc(c.name) + '</button>'; }).join('') +
+        (hits.length > 12 ? '<span class="none">+' + arNum(hits.length - 12) + ' ثانية… اكتب أكثر</span>' : '')
+      : '<span class="none">ما لقيت فئة بهالاسم.</span>';
+  }
   function newCatSugDraft() {
     try { var saved = JSON.parse(localStorage.getItem(PE_DRAFT_KEY) || 'null'); if (saved && Array.isArray(saved.qs)) return saved; } catch (e) { }
     return { name: '', icon: '💡', group: '', desc: '', qs: [] };
@@ -3649,7 +3678,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
               }).join('') +
             '</select></div>' +
             (isEight
-              ? '<div><label style="font-size:12px;color:var(--gold);font-weight:800">٢. الفئة (' + arNum(STATE.categories.length) + ' فئة)</label><select id="edCatSelect" class="dw-select">' +
+              ? '<div><label style="font-size:12px;color:var(--gold);font-weight:800">٢. الفئة (' + arNum(STATE.categories.length) + ' فئة)</label><input id="edCatFind" class="dw-input" type="search" autocomplete="off" placeholder="🔎 ابحث عن فئة… (مثال: ساعات، خليجي)" style="margin-bottom:6px"><div id="edCatHits" class="ed-cat-hits"></div><select id="edCatSelect" class="dw-select">' +
                   STATE.categories.map(function (c) {
                     return '<option value="' + esc(c.slug) + '"' + (STATE.editorCatSlug === c.slug ? ' selected' : '') + '>' + esc(c.icon) + ' ' + esc(c.name) + '</option>';
                   }).join('') +
@@ -4687,6 +4716,13 @@ html.dw-game-open #dwApp { visibility: hidden; }
     } else if (act === 'show-all-games') {
       STATE.showAllGames = true;
       render();
+    } else if (act === 'ed-pick-cat') {
+      STATE.editorCatSlug = actBtn.getAttribute('data-slug');
+      STATE.editingItemId = null;
+      render();
+      var sel = document.getElementById('edCatSelect');
+      if (sel) sel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      showToast('فتحت فئة «' + (sel && sel.options[sel.selectedIndex] ? sel.options[sel.selectedIndex].text : '') + '»');
     } else if (act === 'pe-pop-close') {
       var pop = document.getElementById('dwPePop'); if (pop) pop.remove();
     } else if (act === 'csug-open' || act === 'pe-start' || act === 'pe-earnings') {
@@ -5375,6 +5411,8 @@ html.dw-game-open #dwApp { visibility: hidden; }
     if (t.id === 'dwCatSearchInp') {
       STATE.catSearch = t.value;
       updateCategoryResults();
+    } else if (t.id === 'edCatFind') {
+      renderEdCatHits(t.value);
     } else if (t.id === 'edSearchInp') {
       STATE.editorSearch = t.value;
       render();
