@@ -1,6 +1,8 @@
 import { requireSession } from './auth.js';
 import { verifyPlayToken } from './rooms/routes.js';
 import { cleanText, HttpError, json, nowIso, readJson, underRateLimit } from './util.js';
+import { getDoc } from './catalog.js';
+import { eightRawQuestions } from './games.js';
 
 const idPattern = /^[A-Za-z0-9_-]{1,120}$/;
 const attemptPattern = /^[a-f0-9-]{36}$/;
@@ -42,18 +44,33 @@ export async function eightQuestionStats(env, request, url) {
   await requireSession(env, request, { csrf: false, owner: true });
   const category = url.searchParams.get('category') || '';
   if (category && !idPattern.test(category)) throw new HttpError(400, 'الفئة غير صالحة.');
+  // One row per question (results under an older point value still say how hard the question is).
   const { results } = await env.DB.prepare(
     `SELECT json_extract(json, '$.question') AS question,
             json_extract(json, '$.category') AS category,
-            json_extract(json, '$.points') AS points,
+            MAX(json_extract(json, '$.points')) AS points,
             MAX(json_extract(json, '$.prompt')) AS prompt,
             COUNT(*) AS shown,
             SUM(json_extract(json, '$.result') <> 'open') AS resolved,
             SUM(json_extract(json, '$.result') = 'correct') AS correct
      FROM docs WHERE key >= 'eight_stat:' AND key < 'eight_stat;'
        AND (? = '' OR json_extract(json, '$.category') = ?)
-     GROUP BY category, question, points
-     ORDER BY resolved DESC, shown DESC, category, question LIMIT 500`
+     GROUP BY category, question
+     ORDER BY resolved DESC, shown DESC, category, question LIMIT 800`
   ).bind(category, category).all();
+  // The question's points now (after any move from this page), and how many questions each level has.
+  const overrides = await getDoc(env, 'catQuestionsOverrides');
+  const lists = new Map();
+  const listFor = (slug) => {
+    if (!lists.has(slug)) lists.set(slug, Array.isArray(overrides[slug]) ? overrides[slug] : eightRawQuestions(slug) || []);
+    return lists.get(slug);
+  };
+  for (const row of results) {
+    const list = listFor(row.category);
+    const q = list.find((x) => x && x.uid === row.question);
+    row.current = q ? Number(q.points) || row.points : null;
+    row.levels = { 200: 0, 400: 0, 600: 0 };
+    for (const x of list) if (x && row.levels[x.points] != null) row.levels[x.points]++;
+  }
   return json({ ok: true, questions: results });
 }

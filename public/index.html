@@ -3234,27 +3234,57 @@ html.dw-game-open #dwApp { visibility: hidden; }
     });
   }
 
+  // «ميزان الصعوبة»: the players' own results decide where each question belongs.
+  var BAL_MIN = 8; // rounds with a result before a question gets a suggestion
+  function balSuggest(pct) { return pct >= 70 ? 200 : pct >= 35 ? 400 : 600; }
+  function balIgnored() { try { return JSON.parse(localStorage.getItem('dw_bal_ignored') || '{}'); } catch (e) { return {}; } }
   function renderEightStats() {
     var labels = new Map(STATE.categories.map(function (cat) { return [cat.slug, cat.name]; }));
     var data = eightStats.data;
-    var rows = data && data.questions || [];
-    return '<section class="dw-card"><h4 style="margin:0">صعوبة أسئلة الثمانية</h4>' +
-      '<p>نسبة الصح = الجولات الصحيحة ÷ الجولات اللي سجّل المضيف نتيجتها. عرض السؤال وحده يدخل في عدّاد العرض.</p>' +
-      '<div style="display:flex;gap:8px;flex-wrap:wrap"><label>الفئة <select id="dwEightStatsCategory" class="dw-select"' + (eightStats.loading ? ' disabled' : '') + '>' +
-      '<option value="">كل الفئات</option>' + STATE.categories.map(function (cat) {
-        return '<option value="' + esc(cat.slug) + '"' + (cat.slug === eightStats.category ? ' selected' : '') + '>' + esc(cat.name) + '</option>';
-      }).join('') + '</select></label><button type="button" class="dw-btn dw-btn-sec dw-btn-sm" data-act="eight-stats-refresh"' +
-      (eightStats.loading ? ' disabled' : '') + '>تحديث</button></div>' +
-      (eightStats.loading ? '<p role="status">جاري تحميل الإحصائيات…</p>' :
-      !data || !data.ok ? '<p role="status">' + esc(data && data.error || 'تعذر تحميل الإحصائيات.') + '</p>' :
-      !rows.length ? '<p>ما فيه محاولات مسجلة إلى الآن.</p>' :
-      '<p style="font-size:13px;color:var(--text-muted)">تعرض القائمة حتى ٥٠٠ سؤال حسب عدد النتائج المسجلة. استخدم فلتر الفئة للمراجعة.</p>' +
-      '<div class="dw-table-wrap"><table class="dw-table"><thead><tr><th>الفئة</th><th>السؤال</th><th>النقاط</th><th>العرض</th><th>نتيجة مسجلة</th><th>صح</th><th>نسبة الصح</th></tr></thead><tbody>' +
-      rows.map(function (row) {
-        return '<tr><td>' + esc(labels.get(row.category) || row.category) + '</td><td>' + esc(row.prompt || row.question) + '</td><td>' + arNum(row.points) +
-          '</td><td>' + arNum(row.shown) + '</td><td>' + arNum(row.resolved) + '</td><td>' + arNum(row.correct) + '</td><td>' +
-          (row.resolved ? arNum(Math.round(100 * row.correct / row.resolved)) + '٪' : '—') +
-          (row.resolved < 20 ? '<br><small>عينة محدودة</small>' : '') + '</td></tr>';
+    var ign = balIgnored();
+    var rows = (data && data.questions || []).map(function (r) {
+      var pct = r.resolved ? Math.round(100 * r.correct / r.resolved) : null;
+      var cur = r.current || r.points;
+      var sug = r.resolved >= BAL_MIN ? balSuggest(pct) : null;
+      return Object.assign({}, r, { pct: pct, cur: cur, sug: sug, move: sug && sug !== cur && r.current != null && !ign[r.category + '|' + r.question + '|' + sug] });
+    });
+    var moves = rows.filter(function (r) { return r.move; });
+    var ready = rows.filter(function (r) { return r.resolved >= BAL_MIN; }).length;
+    var showAll = eightStats.view === 'all';
+    var list = showAll ? rows : moves;
+    var levelName = function (p) { return p === 200 ? 'سهل' : p === 400 ? 'متوسط' : 'صعب'; };
+    var bar = function (pct) {
+      if (pct == null) return '—';
+      var col = pct >= 70 ? '#2DD4BF' : pct >= 35 ? '#F5B942' : '#F43F5E';
+      return '<div style="display:flex;align-items:center;gap:6px;min-width:110px"><div style="flex:1;height:8px;border-radius:9px;background:rgba(255,255,255,.1);overflow:hidden"><div style="width:' + pct + '%;height:100%;background:' + col + '"></div></div><b>' + arNum(pct) + '٪</b></div>';
+    };
+    return '<section class="dw-card"><h4 style="margin:0;font-size:19px">⚖️ ميزان الصعوبة — أسئلة الثمانية</h4>' +
+      '<p style="margin:6px 0 0;color:#c9d2e6;line-height:1.9;font-size:14px">كل ما المضيف يعطي نقاط أو يضغط «لم يُجب أحد»، نحسب نسبة اللي جاوبوه صح. ' +
+        'إذا أغلب الشلل تعرفه (٧٠٪ أو أكثر) مكانه <b>٢٠٠</b>، وإذا قليل يعرفونه (أقل من ٣٥٪) مكانه <b>٦٠٠</b>، والباقي <b>٤٠٠</b>. ' +
+        'ما نقترح شي إلا بعد ' + arNum(BAL_MIN) + ' جولات على الأقل للسؤال.</p>' +
+      '<div class="qsummary" style="margin:10px 0"><span class="qlv easy">' + arNum(rows.length) + ' سؤال انلعب</span><span class="qlv mid">' + arNum(ready) + ' عندها نتائج كافية</span><span class="qlv hard">' + arNum(moves.length) + ' اقتراح نقل</span></div>' +
+      '<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">' +
+        '<button class="dw-btn dw-btn-sm ' + (showAll ? 'dw-btn-sec' : 'dw-btn-gold') + '" data-act="bal-view" data-view="moves">💡 الاقتراحات (' + arNum(moves.length) + ')</button>' +
+        '<button class="dw-btn dw-btn-sm ' + (showAll ? 'dw-btn-gold' : 'dw-btn-sec') + '" data-act="bal-view" data-view="all">📋 كل الأسئلة</button>' +
+        '<label style="margin-inline-start:auto">الفئة <select id="dwEightStatsCategory" class="dw-select"' + (eightStats.loading ? ' disabled' : '') + '>' +
+        '<option value="">كل الفئات</option>' + STATE.categories.map(function (cat) {
+          return '<option value="' + esc(cat.slug) + '"' + (cat.slug === eightStats.category ? ' selected' : '') + '>' + esc(cat.name) + '</option>';
+        }).join('') + '</select></label><button type="button" class="dw-btn dw-btn-sec dw-btn-sm" data-act="eight-stats-refresh"' + (eightStats.loading ? ' disabled' : '') + '>🔄 تحديث</button></div>' +
+      (eightStats.loading ? '<p role="status">جاري تحميل النتائج…</p>' :
+      !data || !data.ok ? '<p role="status">' + esc(data && data.error || 'تعذر تحميل النتائج.') + '</p>' :
+      !list.length ? '<p style="padding:14px;text-align:center;color:#c9d2e6">' + (showAll ? 'ما فيه جولات مسجلة إلى الآن.' : '✅ ما فيه اقتراحات الحين. كل الأسئلة اللي عندها نتائج كافية في مكانها الصح.') + '</p>' :
+      '<div class="dw-table-wrap"><table class="dw-table"><thead><tr><th>الفئة</th><th>السؤال</th><th>الحالي</th><th>انلعب</th><th>جاوبوه صح</th><th>المقترح</th><th>إجراء</th></tr></thead><tbody>' +
+      list.map(function (r) {
+        var key = r.category + '|' + r.question + '|' + r.sug;
+        var after = r.levels ? r.levels[r.cur] - 1 : 99;
+        var act = r.move
+          ? '<button class="dw-btn dw-btn-gold dw-btn-sm" data-act="bal-move" data-cat="' + esc(r.category) + '" data-q="' + esc(r.question) + '" data-to="' + r.sug + '">✅ انقله لـ' + arNum(r.sug) + '</button> ' +
+            '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="bal-ignore" data-key="' + esc(key) + '">تجاهل</button>' +
+            (after < 4 ? '<div style="font-size:11.5px;color:#fda4af;margin-top:4px">⚠️ يبقى ' + arNum(Math.max(0, after)) + ' أسئلة فقط في ' + arNum(r.cur) + '</div>' : '')
+          : (r.resolved < BAL_MIN ? '<small style="color:var(--text-muted)">ينتظر ' + arNum(BAL_MIN - r.resolved) + ' جولات</small>' : '<span class="dw-chip teal">✔ مكانه صح</span>');
+        return '<tr><td>' + esc(labels.get(r.category) || r.category) + '</td><td style="white-space:normal;min-width:220px">' + esc(r.prompt || r.question) + '</td>' +
+          '<td>' + arNum(r.cur) + '<br><small>' + levelName(r.cur) + '</small></td><td>' + arNum(r.resolved) + '</td><td>' + bar(r.pct) + '</td>' +
+          '<td>' + (r.sug ? '<b>' + arNum(r.sug) + '</b><br><small>' + levelName(r.sug) + '</small>' : '—') + '</td><td style="white-space:nowrap">' + act + '</td></tr>';
       }).join('') + '</tbody></table></div>') + '</section>';
   }
 
@@ -3270,7 +3300,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
         '<div><span class="dw-badge">لوحة المالك</span><h3 style="margin:4px 0 0;font-size:22px;font-weight:900">لوحة تحكم المالك وإدارة الألعاب · ' + arNum(visibleEightCategories().length) + ' فئة ظاهرة</h3></div>' +
         '<div style="display:flex;gap:6px;flex-wrap:wrap">' +
           '<button class="dw-tab-btn ' + (st === 'overview' ? 'active' : '') + '" data-adm-tab="overview">📊 الإحصائيات</button>' +
-          '<button class="dw-tab-btn ' + (st === 'eight-stats' ? 'active' : '') + '" data-adm-tab="eight-stats">صعوبة أسئلة الثمانية</button>' +
+          '<button class="dw-tab-btn ' + (st === 'eight-stats' ? 'active' : '') + '" data-adm-tab="eight-stats">⚖️ ميزان الصعوبة</button>' +
           '<button class="dw-tab-btn ' + (st === 'analytics' ? 'active' : '') + '" data-adm-tab="analytics">📈 تحليل العملاء</button>' +
           '<button class="dw-tab-btn ' + (st === 'users' ? 'active' : '') + '" data-adm-tab="users">👥 المستخدمين والأرصدة</button>' +
           '<button class="dw-tab-btn ' + (st === 'packages' ? 'active' : '') + '" data-adm-tab="packages">💎 إدارة الباقات</button>' +
@@ -4472,6 +4502,20 @@ html.dw-game-open #dwApp { visibility: hidden; }
     if (!actBtn) return;
     var act = actBtn.getAttribute('data-act');
 
+    if (act === 'bal-view') { eightStats.view = actBtn.getAttribute('data-view'); render(); return; }
+    if (act === 'bal-ignore') {
+      var ig = balIgnored(); ig[actBtn.getAttribute('data-key')] = 1;
+      try { localStorage.setItem('dw_bal_ignored', JSON.stringify(ig)); } catch (e) {}
+      render(); return;
+    }
+    if (act === 'bal-move') {
+      actBtn.disabled = true;
+      adminCall('edit_content', { gameId: 'game_eight', catSlug: actBtn.getAttribute('data-cat'), itemId: actBtn.getAttribute('data-q'), points: Number(actBtn.getAttribute('data-to')), promptText: '', answerText: '' }, function (r) {
+        showToast(r && r.ok !== false ? '✅ انتقل السؤال لـ' + arNum(Number(actBtn.getAttribute('data-to'))) + ' نقطة' : ((r && (r.error || r.message)) || 'ما قدرنا ننقل السؤال.'));
+        loadEightStats();
+      });
+      return;
+    }
     if (act === 'eight-stats-refresh') {
       loadEightStats();
     } else if (act === 'support-refresh') {
