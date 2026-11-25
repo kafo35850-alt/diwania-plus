@@ -737,6 +737,9 @@ footer a { text-decoration: none; }
 .sec-kicker { display: inline-block; font-size: 13px; font-weight: 700; color: var(--gold); letter-spacing: .3px; margin-bottom: 4px; }
 
 /* pricing */
+.ai-banner.ai-slim{padding:6px 10px;gap:8px;min-height:0;align-items:center;flex-wrap:nowrap}
+.ai-banner.ai-slim .ai-banner-ic{font-size:18px}.ai-banner.ai-slim .ai-slim-txt{flex:1;font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ai-banner.ai-slim .dw-btn{padding:5px 12px;font-size:12.5px;flex:none}
 .offer-card{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin:0 auto 16px;max-width:980px;padding:18px 22px;border-radius:22px;background:linear-gradient(135deg,rgba(245,185,66,.18),rgba(45,212,191,.10));border:2px solid rgba(245,185,66,.7);box-shadow:0 14px 34px rgba(0,0,0,.35);text-align:right}
 .offer-card .oc-gift{font-size:54px;line-height:1}
 .offer-card .oc-body{flex:1;min-width:200px}.offer-card .oc-kicker{display:inline-block;font-size:13px;font-weight:800;color:#2b1c00;background:#F5B942;border-radius:999px;padding:3px 12px}
@@ -2466,7 +2469,18 @@ html.dw-game-open #dwApp { visibility: hidden; }
 
   function installBannerHtml() {
     if (!window.DwInstall || !window.DwInstall.bannerVisible() || siteSettings().install_banner === false) return '';
-    var sar = STATE.appPromo ? STATE.appPromo.amount_halalas / 100 : 2;
+    // Full banner on the first visit only; after that a slim one-line bar so the page starts with the games.
+    var seenBefore = false;
+    try {
+      seenBefore = localStorage.getItem('dw_ai_seen') === '1' && sessionStorage.getItem('dw_ai_first') !== '1';
+      if (!localStorage.getItem('dw_ai_seen')) { localStorage.setItem('dw_ai_seen', '1'); sessionStorage.setItem('dw_ai_first', '1'); }
+    } catch (e) {}
+    if (seenBefore) {
+      return '<div class="ai-banner ai-slim" role="region" aria-label="تثبيت التطبيق">' +
+        '<span class="ai-banner-ic">📲</span><span class="ai-slim-txt">ثبّت التطبيق وخذ كود خصم 🎁</span>' +
+        '<button class="dw-btn dw-btn-gold dw-btn-sm" data-ai="open">' + (window.DwInstall.canPrompt() ? 'ثبّت' : 'كيف؟') + '</button>' +
+        '<button class="ai-banner-x" data-ai="dismiss" aria-label="إخفاء">✕</button></div>';
+    }
     return '<div class="ai-banner" role="region" aria-label="تثبيت التطبيق">' +
       '<span class="ai-banner-ic">📲</span>' +
       '<div class="ai-banner-txt"><b>ثبّت تطبيق ديوانية بلس على جهازك في ١٠ ثوانٍ</b><span>واحصل على كود خصم فوراً 🎁</span></div>' +
