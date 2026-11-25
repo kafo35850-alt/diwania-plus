@@ -215,6 +215,10 @@ export default {
 
       if (url.pathname === '/payments/return' && request.method === 'GET') return await handleReturn(env, request);
 
+      // Imported question media normally come from the static file store; the few kept in the database instead
+      // (scripts/seed-assets-d1.mjs) are served from there.
+      const em = url.pathname.match(/^\/eight-media\/([a-f0-9]{20})\.(?:webp|mp3|mp4)$/);
+      if (em && (request.method === 'GET' || request.method === 'HEAD')) return await serveMedia(env, request, 'med_em_' + em[1]);
       const media = url.pathname.match(/^\/media\/(med_[A-Za-z0-9_-]{6,60})$/);
       if (media && (request.method === 'GET' || request.method === 'HEAD')) return await serveMedia(env, request, media[1]);
 
