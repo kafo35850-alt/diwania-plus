@@ -6719,7 +6719,7 @@ function renderAnswerVisualPortraitHtml(qObj) {
 if (qObj && qObj.rebus && Array.isArray(qObj.rebus.pics) && qObj.rebus.pics.length) return m8RebusPanelsHtml(qObj, true);
 if (qObj && qObj.fantasy) return renderFantasyCard(qObj, true);
 if (qObj && qObj.photo) return m8PhotoDocHtml(qObj);
-if (qObj && qObj.scenePhoto) return qObj.scenePhoto.real ? '' : renderScenePhotoCard(qObj);   // a real picture is already on screen above
+if (qObj?.scenePhoto?.src && !qObj.scenePhoto.real) return renderScenePhotoCard(qObj);
 return '';
 }
 const TEAM_KEYS = ['team1', 'team2', 'team3', 'team4'];
@@ -7896,22 +7896,27 @@ return /^[A-Za-z0-9_-]{6,20}$/.test(id) ? id : '';
 } catch (e) { return ''; }
 }
 function dwOkUrl(u) { u = String(u || ''); return /^\/eight-media\/[a-f0-9]{20}\.(?:webp|mp4|mp3)$/.test(u) || /^\/media\/med_[A-Za-z0-9_-]+$/.test(u) || /^https:\/\//.test(u) ? u : ''; }
-function dwQMedia(q) {
+function dwQuestionImageIsPoster(url, col) {
+if (!url || !col) return false;
+const posters = (window.__DW_CONTENT || {}).catPosters || {};
+return url === col.customPosterDataUrl || url === posters[col.id];
+}
+function dwQMedia(q, col) {
 if (!q) return null;
-if (q.qm && dwOkUrl(q.qm.u)) return q.qm;
-if (q.img && dwOkUrl(q.img)) return { t: 'image', u: q.img };
+if (q.qm && dwOkUrl(q.qm.u) && !(q.qm.t === 'image' && dwQuestionImageIsPoster(q.qm.u, col))) return q.qm;
+if (q.img && dwOkUrl(q.img) && !dwQuestionImageIsPoster(q.img, col)) return { t: 'image', u: q.img };
 if (q.video && dwOkUrl(q.video)) return { t: dwYouTubeId(q.video) ? 'youtube' : (/\.(mp3|m4a|aac|wav|ogg)(\?|#|$)/i.test(q.video) ? 'audio' : 'video'), u: q.video };
 return null;
 }
-function dwImportedQuestionImage(q) {
-const media = dwQMedia(q);
+function dwImportedQuestionImage(q, col) {
+const media = dwQMedia(q, col);
 return media && media.t === 'image' && media.u.startsWith('/eight-media/');
 }
 function dwAMedia(q, col) {
-if (q && q.am && dwOkUrl(q.am.u)) return q.am;
+if (q && q.am && dwOkUrl(q.am.u) && !(q.am.t === 'image' && dwQuestionImageIsPoster(q.am.u, col))) return q.am;
 // Series reveal images must be deliberately selected, never reuse the question photo.
 if (col && String(col.id || '').startsWith('series_')) return null;
-return dwImportedQuestionImage(q) ? null : dwQMedia(q);
+return dwImportedQuestionImage(q, col) ? null : dwQMedia(q, col);
 }
 function dwMediaHtml(m) {
 if (!m) return '';
@@ -8662,10 +8667,10 @@ cropControls.classList.add('hidden');
 state.modal.photoCropped = false;
 visualArt.style.filter = 'blur(0px)';
 if (!qObj.photo) window.__m8Pix = null;
-if (dwQMedia(qObj)) {
+const questionMedia = dwQMedia(qObj, col);
+if (questionMedia) {
 visualStage.className = 'max-w-xl mx-auto rounded-2xl overflow-hidden border border-amber-300 bg-slate-900 p-1.5 shadow-inner';
 visualArt.className = 'rounded-xl flex flex-col items-center justify-center gap-2 overflow-hidden';
-const questionMedia = dwQMedia(qObj);
 visualArt.innerHTML = dwMediaHtml(questionMedia);
 if (questionMedia.t === 'image' && col.id === 'custom_photo_closeup' && !state.modal.answerRevealed) {
 const scale = { 200: 1.55, 400: 1.7, 600: 1.85 }[Number(qObj.points)] || 1.7;
@@ -8698,9 +8703,8 @@ visualStage.className = ((qObj.scenePhoto && qObj.scenePhoto.real) ? 'max-w-md' 
 visualArt.className = 'rounded-lg flex items-center justify-center overflow-visible';
 visualArt.innerHTML = renderScenePhotoCard(qObj);
 } else {
-visualStage.className = 'max-w-xs mx-auto rounded-xl overflow-hidden border border-slate-200 bg-slate-50/70 p-1.5 shadow-sm';
-visualArt.className = 'h-24 sm:h-28 w-44 sm:w-52 mx-auto rounded-lg flex items-center justify-center overflow-hidden';
-visualArt.innerHTML = getCategoryPosterHtml(col, 'h-24 sm:h-28');
+visualStage.classList.add('hidden');
+visualArt.innerHTML = '';
 }
 const charadesBox = document.getElementById('qModalCharadesBox');
 const secretDisplay = document.getElementById('actorSecretWordDisplay');
@@ -9034,8 +9038,8 @@ const wasCropped = state.modal.photoCropped;
 if (wasCropped) m8SetPhotoCrop(false);
 document.getElementById('m8PhotoChallenge').classList.add('hidden');
 const revealCol = m.boardColumns[cell.colIdx];
-const dwAM = dwAMedia(qObj, revealCol) || (wasCropped && !String(revealCol.id || '').startsWith('series_') ? dwQMedia(qObj) : null);
-if (dwAM || dwImportedQuestionImage(qObj)) {
+const dwAM = dwAMedia(qObj, revealCol) || (wasCropped && !String(revealCol.id || '').startsWith('series_') ? dwQMedia(qObj, revealCol) : null);
+if (dwAM || dwImportedQuestionImage(qObj, revealCol)) {
 // Keep the imported question image on the question screen and stop any playing clip.
 const st = document.getElementById('qModalVisualStage'); if (st) { st.classList.add('hidden'); const va = document.getElementById('visualArtContainer'); if (va) va.innerHTML = ''; }
 }

@@ -197,10 +197,14 @@ function applyEightQuestionRevisions(stored, revisions) {
     if (!Array.isArray(questions) || !questions.length) continue;
     stored[slug] = questions.map((card) => {
       const revision = card && Object.hasOwn(review, card.uid) && review[card.uid];
-      if (!revision || card.q !== revision.before.q || card.a !== revision.before.a) return card;
+      if (!revision) return card;
+      const { before, after } = revision;
+      const originalText = card.q === before.q && card.a === before.a;
+      const revisedText = card.q === (after.q ?? before.q) && card.a === (after.a ?? before.a);
+      if (!originalText && !revisedText) return card;
       const corrected = { ...card };
-      for (const [field, value] of Object.entries(revision.after)) {
-        if (JSON.stringify(card[field] ?? null) !== JSON.stringify(revision.before[field])) continue;
+      for (const [field, value] of Object.entries(after)) {
+        if (JSON.stringify(card[field] ?? null) !== JSON.stringify(before[field])) continue;
         if (value === null) delete corrected[field];
         else corrected[field] = structuredClone(value);
       }
@@ -278,7 +282,6 @@ function includeEightExpansion(slug, questions, { media = [], questions: additio
       };
       continue;
     }
-    if (useCategoryPoster && !q.qm && EIGHT_POSTERS[slug]) q.qm = { t: 'image', u: EIGHT_POSTERS[slug] };
     indices.set(key, withMedia.length);
     indicesById.set(q.uid, withMedia.length);
     withMedia.push(q);
