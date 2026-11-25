@@ -1130,6 +1130,13 @@ body:not(.board-mode-active) main { max-width: min(94vw, 1720px) !important; }
 #questionModalCard { max-width: min(92vw, 1380px) !important; }
 #qModalQuestionText { font-size: clamp(22px, 2vw, 34px) !important; line-height: 1.55 !important; }
 #qModalAnswerText { font-size: clamp(22px, 1.9vw, 32px) !important; }
+/* Answer view: once the answer is out it is the first thing under the timer (no scrolling down to find it). */
+#questionModalCard.m8-ans #answerRevealContainer{order:-1;font-size:1.05em}
+#questionModalCard.m8-ans .m8-qtop{order:-2}
+#questionModalCard.m8-ans #qModalAnswerText{font-size:clamp(26px,3vw,40px)!important;line-height:1.35}
+#questionModalCard.m8-ans #qModalQuestionText,#questionModalCard.m8-ans #qModalCluesBox,#questionModalCard.m8-ans #qModalHintBox,
+#questionModalCard.m8-ans #qModalChoicesGrid,#questionModalCard.m8-ans #modalBuzzerSection,#questionModalCard.m8-ans #answeringTeamBanner{display:none!important}
+
 #qModalChoicesGrid button { font-size: clamp(15px, 1.25vw, 22px) !important; padding: 14px 18px !important; }
 }
 /* 3. iPad Portrait & Tablet Question Modal Compactness (< 1024px) */
@@ -2634,7 +2641,7 @@ body.board-mode-active .m8-banner { min-height: 0; }
 </div>
 <div class="p-4 sm:p-6 grid grid-cols-1 lg:grid-cols-12 gap-4 items-stretch">
 <div class="lg:col-span-9 rounded-3xl bg-white border-2 border-[#e07a5f] p-4 sm:p-6 flex flex-col justify-between relative shadow-sm space-y-4">
-<div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
+<div class="m8-qtop flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
 <span id="qModalPointsBadge" class="px-4 py-1 rounded-full text-xs sm:text-sm font-black bg-slate-800 text-white num-font shadow">
 200 نقطة
 </span>
@@ -8872,6 +8879,7 @@ state.modal.statAttempt = token && globalThis.crypto?.randomUUID && question.uid
 if (!previous) m8RecordAttempt(state.modal.statAttempt, 'open');
 }
 function openQuestionModal(colIdx, qIdx, previousAttempt) {
+m8AnswerMode(false);
 const m = state.match;
 const col = m.boardColumns[colIdx];
 const qObj = col.questions[qIdx];
@@ -8979,6 +8987,7 @@ const col = m.boardColumns[cell.colIdx];
 const qObj = col.questions[cell.qIdx];
 state.modal.viewingQuestion = true;
 document.getElementById('answerRevealContainer').classList.add('hidden');
+m8AnswerMode(false);
 renderQuestionVisual(m, col, qObj);
 const va = document.getElementById('visualArtContainer'); if (va) va.style.filter = 'blur(0px)';
 if (qObj.photo && typeof m8PixClear === 'function') m8PixClear();
@@ -8994,6 +9003,11 @@ const st = document.getElementById('qModalVisualStage'); if (st) st.classList.ad
 const va = document.getElementById('visualArtContainer'); if (va) va.innerHTML = '';
 }
 document.getElementById('answerRevealContainer').classList.remove('hidden');
+m8AnswerMode(true);
+}
+function m8AnswerMode(on) {
+const card = document.getElementById('questionModalCard'); if (card) card.classList.toggle('m8-ans', !!on);
+if (on) { const md = document.getElementById('questionModal'); if (md) md.scrollTop = 0; try { window.scrollTo(0, 0); } catch (e) {} }
 }
 function revealAnswerAndSurprise() {
 if (state.modal.viewingQuestion) { m8BackToAnswer(); return; }
@@ -9009,6 +9023,7 @@ const visualArt = document.getElementById('visualArtContainer');
 if (visualArt) visualArt.style.filter = 'blur(0px)';
 if (qObj.photo && typeof m8PixClear === 'function') m8PixClear();
 document.getElementById('answerRevealContainer').classList.remove('hidden');
+m8AnswerMode(true);
 const portraitBox = document.getElementById('answerPortraitContainer');
 if (portraitBox) {
 portraitBox.innerHTML = renderAnswerVisualPortraitHtml(qObj, m.boardColumns[cell.colIdx]);
@@ -9156,6 +9171,7 @@ resetBuzzer();
 }, 1000);
 }
 function closeQuestionModal() {
+m8AnswerMode(false);
 m8StopAnswerCountdown();
 stopQuestionTimer();
 const modal = document.getElementById('questionModal');
