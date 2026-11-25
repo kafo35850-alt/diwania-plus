@@ -6741,7 +6741,6 @@ const M8_LIFE = [
 { key: 'options', ico: '🎯', name: '٤ خيارات', desc: 'تطلع لكم ٤ خيارات للإجابة' },
 { key: 'hint', ico: '💡', name: 'تلميح + ٣٠ث', desc: 'تلميح للإجابة و٣٠ ثانية زيادة' },
 { key: 'pit', ico: '🪤', name: 'الحفرة', desc: 'لو جاوبتوا صح تنخصم نفس النقاط من الخصم' },
-{ key: 'swap', ico: '🔄', name: 'تبديل السؤال', desc: 'سؤال ثاني بنفس الفئة والنقاط' },
 { key: 'fifty', ico: '✂️', name: 'حذف إجابتين', desc: 'يبقى خيارين بس: الصح وواحد غلط' },
 { key: 'letter', ico: '🔤', name: 'أول حرف', desc: 'يطلع أول حرف من الإجابة وكم حرف فيها' },
 { key: 'time', ico: '⏱️', name: 'دقيقة زيادة', desc: '+٦٠ ثانية على الوقت' },
@@ -6749,7 +6748,7 @@ const M8_LIFE = [
 ];
 const M8_LIFE_NEW = ['fifty', 'letter', 'time', 'double'];
 const M8_LIFE_PICK = 4;
-const M8_LIFE_DEFAULT = ['options', 'hint', 'pit', 'swap'];
+const M8_LIFE_DEFAULT = ['options', 'hint', 'pit', 'time'];
 function m8TeamLifeChoice() {
 if (!state.settings.teamLifelines) {
 let saved = null;
