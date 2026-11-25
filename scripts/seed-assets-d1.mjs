@@ -18,12 +18,21 @@ const ignorePath = join(root, 'assets', '.assetsignore');
 const ignored = new Set(existsSync(ignorePath) ? readFileSync(ignorePath, 'utf8').split('\n').map((s) => s.trim()).filter(Boolean) : []);
 
 const files = readdirSync(dir).filter((f) => /^[a-f0-9]{20}\.(webp|mp3|mp4)$/.test(f));
+// Files already in the database are skipped, so a run that stopped half way picks up where it left off.
+const inDb = new Set();
+try {
+  const out = execFileSync('npx', ['wrangler', 'd1', 'execute', 'diwaniya-plus', '--remote', '--json', '--command',
+    "SELECT m.id FROM media m WHERE m.id LIKE 'med_em_%' AND m.chunks = (SELECT COUNT(*) FROM media_chunks c WHERE c.media_id = m.id)"],
+    { cwd: root, encoding: 'utf8', maxBuffer: 64 * 1024 * 1024, stdio: ['ignore', 'pipe', 'inherit'] });
+  for (const r of JSON.parse(out.slice(out.indexOf('[')))[0].results) inDb.add(r.id.slice('med_em_'.length));
+} catch (e) { console.log('could not list stored files, checking all:', e.message.slice(0, 120)); }
+console.log('already stored', inDb.size);
 const missing = [];
 for (let i = 0; i < files.length; i += 24) {
   const batch = files.slice(i, i + 24);
   // curl (not fetch): it goes through the workspace's HTTPS proxy.
   const codes = await Promise.all(batch.map((f) => new Promise((res) => execFile('curl', ['-s', '-o', '/dev/null', '-I', '-w', '%{http_code}', SITE + '/eight-media/' + f], (e, out) => res(Number(out) || 0)))));
-  batch.forEach((f, k) => { if (codes[k] === 404 || ignored.has('eight-media/' + f)) missing.push(f); });
+  batch.forEach((f, k) => { if (!inDb.has(f.slice(0, 20)) && (codes[k] === 404 || ignored.has('eight-media/' + f))) missing.push(f); });
 }
 console.log('files', files.length, 'missing on the live site', missing.length);
 const tmp = mkdtempSync(join(tmpdir(), 'seedassets-'));
