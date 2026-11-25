@@ -6736,11 +6736,95 @@ function pickPitVictim(winnerKey) {
 const others = activeTeamKeys().filter(k => k !== winnerKey);
 return others.sort((a, b) => getTeamScore(b) - getTeamScore(a))[0];
 }
+// ---- Help tools: 8 to choose from, each team picks its own 4 before the match.
+const M8_LIFE = [
+{ key: 'options', ico: '🎯', name: '٤ خيارات', desc: 'تطلع لكم ٤ خيارات للإجابة' },
+{ key: 'hint', ico: '💡', name: 'تلميح + ٣٠ث', desc: 'تلميح للإجابة و٣٠ ثانية زيادة' },
+{ key: 'pit', ico: '🪤', name: 'الحفرة', desc: 'لو جاوبتوا صح تنخصم نفس النقاط من الخصم' },
+{ key: 'swap', ico: '🔄', name: 'تبديل السؤال', desc: 'سؤال ثاني بنفس الفئة والنقاط' },
+{ key: 'fifty', ico: '✂️', name: 'حذف إجابتين', desc: 'يبقى خيارين بس: الصح وواحد غلط' },
+{ key: 'letter', ico: '🔤', name: 'أول حرف', desc: 'يطلع أول حرف من الإجابة وكم حرف فيها' },
+{ key: 'time', ico: '⏱️', name: 'دقيقة زيادة', desc: '+٦٠ ثانية على الوقت' },
+{ key: 'double', ico: '✖️٢', name: 'دبّلها', desc: 'لو جاوبتوا صح تاخذون ضعف النقاط' }
+];
+const M8_LIFE_NEW = ['fifty', 'letter', 'time', 'double'];
+const M8_LIFE_PICK = 4;
+const M8_LIFE_DEFAULT = ['options', 'hint', 'pit', 'swap'];
+function m8TeamLifeChoice() {
+if (!state.settings.teamLifelines) {
+let saved = null;
+try { saved = JSON.parse(localStorage.getItem('m8_team_lifelines_v1') || 'null'); } catch (e) { }
+const ok = (a) => Array.isArray(a) && a.every(k => M8_LIFE.some(x => x.key === k)) && a.length <= M8_LIFE_PICK;
+state.settings.teamLifelines = {};
+TEAM_KEYS.forEach(k => { state.settings.teamLifelines[k] = saved && ok(saved[k]) ? saved[k].slice() : M8_LIFE_DEFAULT.slice(); });
+}
+return state.settings.teamLifelines;
+}
 function freshLifelines() {
-const al = state.settings.allowedLifelines;
+const choice = m8TeamLifeChoice();
 const o = {};
-TEAM_KEYS.forEach(k => { o[k] = { options: al.options, pit: al.pit, hint: al.hint, swap: al.swap }; });
+TEAM_KEYS.forEach(k => { o[k] = {}; (choice[k] || []).forEach(key => { o[k][key] = true; }); });
 return o;
+}
+function m8BoardLifeExtras() {
+const m = state.match;
+TEAM_KEYS.forEach((tk, i) => {
+const n = i + 1, lf = (m.lifelines && m.lifelines[tk]) || {};
+['Options', 'Pit', 'Hint', 'Swap'].forEach(L => { const b = document.getElementById('t' + n + 'Life' + L); if (b) b.style.display = (L.toLowerCase() in lf) ? '' : 'none'; });
+const first = document.getElementById('t' + n + 'LifeOptions');
+if (!first) return;
+const wrap = first.parentElement;
+let extra = wrap.querySelector('.m8-life-extra');
+if (!extra) { extra = document.createElement('span'); extra.className = 'm8-life-extra'; extra.style.cssText = 'display:contents'; wrap.appendChild(extra); }
+extra.innerHTML = M8_LIFE_NEW.filter(k => k in lf).map(k => { const L = m8LifeInfo(k); return `<button type="button" class="m8-life ${lf[k] ? '' : 'opacity-25 line-through'}" data-life-extra="${k}" data-team="${tk}" title="${L.name}" aria-label="${L.name}" ${lf[k] ? '' : 'disabled'}><span style="font-size:20px;line-height:1">${L.ico}</span><span class="m8-life-text" aria-hidden="true">${L.name}</span></button>`; }).join('');
+});
+}
+document.addEventListener('click', (e) => {
+const b = e.target.closest && e.target.closest('[data-life-extra]');
+if (!b) return;
+showToast(`«${m8LifeInfo(b.getAttribute('data-life-extra')).name}» تنستخدم من داخل السؤال — افتحوا السؤال واضغطوها.`, 'info');
+});
+function m8LifeInfo(key) { return M8_LIFE.find(x => x.key === key) || { key, ico: '❔', name: key, desc: '' }; }
+function m8RenderLifePicker() {
+const oldBtn = document.getElementById('cfgLifeOptionsBtn');
+if (!oldBtn) return;
+const box = oldBtn.parentElement.parentElement;
+oldBtn.parentElement.style.display = 'none';
+const oldTitle = box.querySelector('h3');
+if (oldTitle) oldTitle.style.display = 'none';
+let host = document.getElementById('m8LifePicker');
+if (!host) {
+host = document.createElement('div');
+host.id = 'm8LifePicker';
+host.className = 'space-y-3';
+box.appendChild(host);
+host.addEventListener('click', (e) => {
+const b = e.target.closest('[data-life-pick]');
+if (!b) return;
+const team = b.getAttribute('data-team'), key = b.getAttribute('data-life-pick');
+const list = m8TeamLifeChoice()[team];
+const i = list.indexOf(key);
+if (i >= 0) list.splice(i, 1);
+else if (list.length >= M8_LIFE_PICK) { playSound('wrong'); showToast(`كل فريق يختار ${M8_LIFE_PICK} بس — شيل وحدة أول.`, 'warn'); return; }
+else list.push(key);
+playSound('click');
+try { localStorage.setItem('m8_team_lifelines_v1', JSON.stringify(m8TeamLifeChoice())); } catch (e2) { }
+m8RenderLifePicker();
+});
+}
+const cnt = parseInt((document.getElementById('teamCountSelect') || {}).value || '2', 10) || 2;
+const nameOf = (k, i) => { const el = document.getElementById(k + 'NameInput'); return (el && el.value.trim()) || ['الفريق الأول', 'الفريق الثاني', 'الفريق الثالث', 'الفريق الرابع'][i]; };
+const choice = m8TeamLifeChoice();
+host.innerHTML = `<h3 class="text-sm sm:text-base font-black text-slate-900">🛠️ كل فريق يختار وسائل مساعدته (${M8_LIFE_PICK} من ${M8_LIFE.length})</h3>
+<p class="text-[11px] sm:text-xs font-bold text-slate-500">اضغطوا على الوسيلة عشان تختارونها أو تشيلونها. كل وسيلة تنستخدم مرة وحدة في القيم.</p>` +
+TEAM_KEYS.slice(0, cnt).map((k, i) => `<div class="p-3 rounded-xl bg-white border border-slate-200 space-y-2" data-team-row="${k}">
+<div class="text-xs sm:text-sm font-black text-slate-900">${TEAM_EMOJI[k] || ''} ${m8EscapeHtml(nameOf(k, i))} <span class="text-slate-500 font-bold">(${choice[k].length}/${M8_LIFE_PICK})</span></div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-2">` + M8_LIFE.map(L => {
+const on = choice[k].includes(L.key);
+return `<button type="button" data-life-pick="${L.key}" data-team="${k}" aria-pressed="${on}" class="p-2 rounded-xl border-2 text-center transition ${on ? 'border-emerald-500 bg-emerald-50 shadow-sm' : 'border-slate-200 bg-slate-50 opacity-70'}">
+<div class="text-lg">${L.ico}</div><div class="text-[11px] sm:text-xs font-black text-slate-900">${L.name}</div><div class="text-[10px] font-bold text-slate-500 leading-tight">${L.desc}</div>
+<div class="text-[10px] font-black ${on ? 'text-emerald-600' : 'text-slate-400'}">${on ? 'مختارة ✓' : 'اضغط للاختيار'}</div></button>`;
+}).join('') + `</div></div>`).join('');
 }
 function m8EscapeHtml(t) {
 return String(t == null ? '' : t).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -8420,6 +8504,7 @@ renderSelectedTray();
 renderCatalogGrid();
 }
 function renderPreMatchSettingsUI() {
+try { m8RenderLifePicker(); } catch (e) { }
 const trBtn = document.getElementById('toggleTrapsSettingBtn');
 if (state.settings.trapsEnabled) {
 trBtn.className = 'px-4 py-2 rounded-xl font-black text-xs bg-emerald-600 text-white shadow shrink-0';
@@ -8455,6 +8540,7 @@ lifeKeys.forEach(item => {
 const on = state.settings.allowedLifelines[item.key];
 const btn = document.getElementById(item.btnId);
 const st = document.getElementById(item.stId);
+if (!btn || !st) return;
 if (on) {
 btn.className = 'p-3 rounded-xl border-2 border-emerald-500 bg-white text-center space-y-1 shadow-sm transition';
 st.className = 'text-[10px] font-bold text-emerald-600';
@@ -8688,6 +8774,7 @@ updateLifeBtn('t' + n + 'LifeOptions', lf.options); updateLifeBtn('t' + n + 'Lif
 updateLifeBtn('t' + n + 'LifeHint', lf.hint); updateLifeBtn('t' + n + 'LifeSwap', lf.swap);
 });
 ['team1', 'team2', 'team3', 'team4'].forEach((tk, i) => { const cd = document.getElementById('boardTeam' + (i + 1) + 'Card'); if (cd) cd.classList.toggle('m8-turn', m.currentTurn === tk); });
+try { m8BoardLifeExtras(); } catch (e) { }
 try { turnBanner.setAttribute('data-team', String(m.currentTurn || 'team1').replace('team', '')); } catch (e) { }
 let totalQ = 0, remQ = 0;
 m.boardColumns.forEach(col => {
@@ -8911,7 +8998,7 @@ return `
 <div class="m8-team-pill py-1.5 px-3 rounded-full font-black text-xs">${TEAM_EMOJI[k]} ${m8EscapeHtml(getTeamName(k))}</div>
 <div class="text-2xl font-black num-font m8-team-score" style="font-size:28px!important">${getTeamScore(k)}</div>
 <div class="m8-life-label" style="font-size:11px">وسائل المساعدة</div>
-<div class="m8-life-wrap" style="gap:6px;padding-top:2px">${ico(life.options, 'options')}${ico(life.hint, 'hint')}${ico(life.pit, 'pit')}${ico(life.swap, 'swap')}</div>
+<div class="m8-life-wrap" style="gap:6px;padding-top:2px">${M8_LIFE.filter(L => L.key in life).map(L => (window.M8_ICONS || {})[L.key] ? ico(life[L.key], L.key) : `<span class="m8-life m8-life-mini ${life[L.key] ? '' : 'm8-life-off'}" title="${L.name}"><span style="font-size:15px;line-height:1">${L.ico}</span></span>`).join('')}</div>
 </div>`;
 }).join('');
 }
@@ -9002,6 +9089,7 @@ state.modal.answeringTeam = m.currentTurn;
 state.modal.chooserTeam = m.currentTurn;
 state.modal.passTrail = [];
 state.modal.pitActiveForTeam = null;
+state.modal.doubleForTeam = null;
 state.modal.buzzerWinner = null;
 state.modal.buzzerPlayerName = null;
 state.modal.questionOpenedAt = performance.now();
@@ -9191,6 +9279,16 @@ styleBtn('modalUseOptionsBtn', activeLife.options, 'bg-orange-100 hover:bg-orang
 styleBtn('modalUseHintBtn', activeLife.hint, 'bg-amber-100 hover:bg-amber-200 text-amber-800');
 styleBtn('modalUsePitBtn', activeLife.pit, 'bg-rose-100 hover:bg-rose-200 text-rose-800');
 styleBtn('modalUseSwapBtn', activeLife.swap, 'bg-sky-100 hover:bg-sky-200 text-sky-800');
+[['modalUseOptionsBtn', 'options'], ['modalUseHintBtn', 'hint'], ['modalUsePitBtn', 'pit'], ['modalUseSwapBtn', 'swap']].forEach(([id, key]) => { const el = document.getElementById(id); if (el) el.style.display = (key in activeLife) ? '' : 'none'; });
+const swapBtn = document.getElementById('modalUseSwapBtn');
+if (swapBtn) {
+let extra = document.getElementById('m8ModalLifeExtra');
+if (!extra) { extra = document.createElement('span'); extra.id = 'm8ModalLifeExtra'; extra.style.cssText = 'display:contents'; swapBtn.parentElement.appendChild(extra); }
+const cq = (() => { try { const c = m.activeCell; return c ? m.boardColumns[c.colIdx].questions[c.qIdx] : null; } catch (e) { return null; } })();
+const noChoices = !cq || !Array.isArray(cq.options) || cq.options.length < 2 || !(cq.correctIndex >= 0);
+extra.innerHTML = M8_LIFE_NEW.filter(k => k in activeLife).map(k => { const L = m8LifeInfo(k); const on = !!activeLife[k] && !(k === 'fifty' && noChoices);
+return `<button type="button" data-use-life="${k}" ${on ? '' : 'disabled'} class="${on ? 'px-2.5 py-1 rounded-full text-[11px] font-black bg-violet-100 hover:bg-violet-200 text-violet-800 transition' : 'px-2.5 py-1 rounded-full text-[11px] font-bold bg-slate-100 text-slate-400 opacity-50 cursor-not-allowed line-through'}">${L.ico} ${L.name}</button>`; }).join('');
+}
 renderSideScores();
 }
 function passQuestionToOtherTeam() {
@@ -9406,6 +9504,63 @@ updateModalLifelineButtons();
 renderBoardView();
 showToast('💡 تم كشف التلميح الذكي وإضافة 30 ثانية للوقت!', 'success');
 }
+// New help tools (used from inside the question).
+function m8UseNewLifeline(key) {
+const cell = state.match.activeCell;
+if (!cell) return;
+const m = state.match;
+const tKey = state.modal.answeringTeam || m.currentTurn;
+const life = m.lifelines[tKey] || {};
+if (!life[key]) { showToast('هالوسيلة مو متاحة لهذا الفريق أو انستخدمت.', 'warn'); return; }
+const qObj = m.boardColumns[cell.colIdx].questions[cell.qIdx];
+const L = m8LifeInfo(key);
+if (key === 'fifty') {
+if (!Array.isArray(qObj.options) || qObj.options.length < 2 || qObj.correctIndex < 0) { showToast('ℹ️ هذا السؤال ما له خيارات — الوسيلة ما انخصمت.', 'info'); return; }
+const wrong = qObj.options.map((t, i) => i).filter(i => i !== qObj.correctIndex);
+const keep = [qObj.correctIndex, wrong[Math.floor(Math.random() * wrong.length)]].sort(() => Math.random() - 0.5);
+const grid = document.getElementById('qModalChoicesGrid');
+grid.innerHTML = '';
+let locked = false;
+keep.forEach((idx, n) => {
+const btn = document.createElement('button');
+btn.type = 'button';
+btn.className = 'm8-choice-bar w-full py-3 px-5 text-xs sm:text-sm font-black flex items-center justify-between';
+btn.innerHTML = `<span class="w-6 h-6 rounded-full bg-white/25 text-white font-black flex items-center justify-center text-xs num-font">${n + 1}</span> <span class="flex-1 text-center">${m8EscapeHtml(qObj.options[idx])}</span>`;
+btn.addEventListener('click', () => {
+if (locked) return; locked = true;
+btn.className = idx === qObj.correctIndex ? 'w-full py-3 px-5 rounded-full bg-emerald-600 text-white text-xs sm:text-sm font-black flex items-center justify-between shadow-lg' : 'w-full py-3 px-5 rounded-full bg-rose-700 text-white text-xs sm:text-sm font-bold flex items-center justify-between opacity-75';
+playSound(idx === qObj.correctIndex ? 'correct' : 'wrong');
+Array.from(grid.children).forEach(b => { b.disabled = true; });
+});
+grid.appendChild(btn);
+});
+grid.classList.remove('hidden');
+} else if (key === 'letter') {
+const ans = String(qObj.a || '').split(/[—(\-–|،,]/)[0].trim();
+const letters = ans.replace(/[\s\u064B-\u0652\u0640.'"«»]/g, '');
+if (!letters) { showToast('ℹ️ ما نقدر نطلع حرف لهالسؤال — الوسيلة ما انخصمت.', 'info'); return; }
+const words = ans.split(/\s+/).filter(Boolean).length;
+const box = document.getElementById('qModalHintBox'), txt = document.getElementById('qModalHintText');
+const line = `🔤 أول حرف: «${letters[0]}» — عدد الحروف: ${letters.length}${words > 1 ? ' (' + words + ' كلمات)' : ''}`;
+txt.textContent = box.classList.contains('hidden') ? line : (txt.textContent + '\n' + line);
+box.classList.remove('hidden');
+} else if (key === 'time') {
+state.modal.timerRemaining += 60;
+updateTimerUI();
+} else if (key === 'double') {
+state.modal.doubleForTeam = tKey;
+} else return;
+playSound(key === 'double' ? 'double_surprise' : 'click');
+life[key] = false;
+updateModalLifelineButtons();
+renderBoardView();
+const msg = { fifty: '✂️ انحذفت إجابتين — باقي خيارين!', letter: '🔤 طلع أول حرف من الإجابة!', time: '⏱️ انضافت دقيقة على الوقت!', double: `✖️٢ «${getTeamName(tKey)}» دبّلها! لو جاوب صح ياخذ ضعف النقاط.` }[key];
+showToast(msg || L.name, key === 'double' ? 'warn' : 'success');
+}
+document.addEventListener('click', (e) => {
+const b = e.target.closest && e.target.closest('[data-use-life]');
+if (b && !b.disabled) m8UseNewLifeline(b.getAttribute('data-use-life'));
+});
 function triggerPitLifeline(teamKey) {
 const cell = state.match.activeCell;
 if (!cell) return;
@@ -9487,9 +9642,13 @@ const kind = mm[2];
 const tName = getTeamName(tk);
 if (kind === 'win') {
 playSound('correct');
-addTeamScore(tk, effectivePts);
+const winPts = state.modal.doubleForTeam === tk ? effectivePts * 2 : effectivePts;
+addTeamScore(tk, winPts);
 qObj.answeredBy = tk;
-if (state.modal.pitActiveForTeam === tk) {
+if (winPts !== effectivePts) {
+logText = `✖️٢ ${tName} دبّلها وجاوب صح: +${winPts} نقطة في [${col.name}]`;
+if (state.modal.pitActiveForTeam === tk) { const victim = pickPitVictim(tk); addTeamScore(victim, -effectivePts); logText += ` 🪤 و -${effectivePts} من ${getTeamName(victim)}`; }
+} else if (state.modal.pitActiveForTeam === tk) {
 const victim = pickPitVictim(tk);
 addTeamScore(victim, -effectivePts);
 logText = `🪤 ${tName} أجاب صح مع «الحفرة» (+${effectivePts} لـ ${tName} و -${effectivePts} من ${getTeamName(victim)}) في [${col.name}]`;
@@ -10721,6 +10880,7 @@ const teamCountSel = document.getElementById('teamCountSelect');
 if (teamCountSel) {
 teamCountSel.addEventListener('change', (e) => {
 const cnt = parseInt(e.target.value, 10) || 2;
+try { m8RenderLifePicker(); } catch (e2) { }
 const b3 = document.getElementById('preMatchTeam3Box');
 const b4 = document.getElementById('preMatchTeam4Box');
 if (b3) b3.classList.toggle('hidden', cnt < 3);
