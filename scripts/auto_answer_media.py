@@ -28,7 +28,7 @@ MEDIA_DIR = os.path.join(ROOT, 'assets', 'eight-media')
 API = 'https://ar.wikipedia.org/w/api.php'
 UA = 'DiwaniyaQuizMediaBot/1.0 (quiz answer picture matcher; contact via site)'
 EXCLUDED_SLUGS = {'custom_1795086658817', 'custom_cars'}
-RELIGIOUS = re.compile(r'قرآن|القرآن|إسلام|اسلام|سيرة|السيرة|صحاب|أنبياء|الأنبياء|نبي|فقه|حديث|عقيدة|سور|تفسير|أذكار|عبادات')
+RELIGIOUS = re.compile(r'(^|\s)(ال)?(قرآن|إسلام|إسلامي|إسلاميات|اسلاميات|سيرة|صحابة|أنبياء|الأنبياء|نبوية|فقه|حديث|عقيدة|سور|سورة|تفسير|أذكار|عبادات|دين|دينية)(\s|$|:)')
 PERSON_WORDS = re.compile(r'ممثل|مغن|مطرب|لاعب|كاتب|شاعر|ملحن|رسام|مخرج|سياسي|شخصية|عالم|ملك|أمير|ملكة|أميرة|مدرب|رياض|فنان|إعلامي|مذيع|رئيس|قائد|مؤلف|مصمم|موسيقي|مفكر|فيلسوف|مخترع|ولد|ولدت|توفي|توفيت|حارس|مهاجم|مدافع|بطل|بطلة|يوتيوبر|ممثلة|مغنية|مؤثر|طبيب|مهندس|مستكشف|رحالة|خليفة|سلطان|شيخ')
 STOP = set('''الذي التي الذين اللي اسم هذا هذه هذين ماذا متى أين وين كيف كم أي وش هو هي هم في على من إلى الى عن مع كان كانت يكون تكون
 أول الأول الأولى أكثر أكبر أشهر أصغر أطول أقدم أحد إحدى التي الذي عام سنة عند حتى بين خلال حول بعد قبل تحت فوق يعرف تعرف يسمى تسمى
@@ -62,7 +62,10 @@ def fingerprint(q, a):
 
 def answer_name(a):
     """The name to look up, or (None, reason)."""
-    main = re.split(r'\s[—–-]\s|—|–|\(|،|/|\bأو\b', str(a or ''))[0].strip(' .«»"\'')
+    a = str(a or '')
+    quoted = re.search(r'«([^»]+)»', a)  # فيلم «البحث عن نيمو» → البحث عن نيمو
+    main = quoted.group(1) if quoted else re.split(r'\s[—–-]\s|—|–|\(|،|/|\bأو\b', a)[0]
+    main = main.strip(' .«»"\'')
     if not main:
         return None, 'إجابة فاضية'
     if re.search(r'[0-9٠-٩]', main):
@@ -97,7 +100,7 @@ def lookup(names):
     found = {}
     names = list(names)
     for i in range(0, len(names), 20):
-        part = names[i:i + 20]
+        part = names[i:i + 20]  # API limit for intros
         d = api({'action': 'query', 'redirects': '1', 'titles': '|'.join(part),
                  'prop': 'pageimages|pageprops|extracts', 'pilicense': 'free', 'piprop': 'thumbnail|name',
                  'pithumbsize': '800', 'exintro': '1', 'explaintext': '1', 'exchars': '700', 'exlimit': '20',
@@ -183,33 +186,46 @@ def main():
         todo.append(row)
     todo = todo[:limit]
     print('questions to check:', len(todo), flush=True)
-    pages = lookup(sorted({r['name'] for r in todo}))
     added = 0
-    for row in todo:
-        page = pages.get(row['name'])
-        why = matches(row, row['name'], page)
-        if why:
-            report.append([row['slug'], row['uid'], row['answer'], page and page.get('title') or '', why])
-            continue
-        try:
-            u = save_image(page['thumbnail']['source'])
-        except Exception as e:  # unreadable picture: skip it
-            report.append([row['slug'], row['uid'], row['answer'], page['title'], 'تعذر تحميل الصورة'])
-            continue
-        out['items'].setdefault(row['slug'], {})[row['uid']] = [fingerprint(row['question'], row['answer']), u]
-        sources[u] = 'https://commons.wikimedia.org/wiki/File:' + page['pageimage'].replace(' ', '_')
-        report.append([row['slug'], row['uid'], row['answer'], page['title'], 'انضافت ✅'])
-        added += 1
-        if added % 25 == 0:
-            print('pictures added:', added, flush=True)
-            json.dump(out, open(OUT, 'w'), ensure_ascii=False, separators=(',', ':'))
-            json.dump(sources, open(SOURCES, 'w'), ensure_ascii=False, indent=2)
-    json.dump(out, open(OUT, 'w'), ensure_ascii=False, separators=(',', ':'))
-    json.dump(sources, open(SOURCES, 'w'), ensure_ascii=False, indent=2)
-    with open(REPORT, 'w', encoding='utf-8-sig', newline='') as f:
-        w = csv.writer(f)
-        w.writerow(['معرف الفئة', 'معرف السؤال', 'الإجابة', 'مقالة ويكيبيديا', 'النتيجة'])
-        w.writerows(report)
+
+    def save():
+        json.dump(out, open(OUT, 'w'), ensure_ascii=False, separators=(',', ':'))
+        json.dump(sources, open(SOURCES, 'w'), ensure_ascii=False, indent=2)
+        with open(REPORT, 'w', encoding='utf-8-sig', newline='') as f:
+            w = csv.writer(f)
+            w.writerow(['معرف الفئة', 'معرف السؤال', 'الإجابة', 'مقالة ويكيبيديا', 'النتيجة'])
+            w.writerows(old_report + report)
+
+    old_report = []
+    if os.path.exists(REPORT):
+        with open(REPORT, encoding='utf-8-sig') as f:
+            old_report = [x for x in list(csv.reader(f))[1:] if x[1] in done or x[4] not in ('',)]
+        seen_report = {x[1] for x in old_report}
+        todo = [r for r in todo if r['uid'] not in seen_report]
+        report = [x for x in report if x[1] not in seen_report]
+    # Small groups, saved after each one: if Wikipedia stops answering, the next run carries on from here.
+    names = sorted({r['name'] for r in todo})
+    for i in range(0, len(names), 20):
+        group = set(names[i:i + 20])
+        pages = lookup(group)
+        for row in [r for r in todo if r['name'] in group]:
+            page = pages.get(row['name'])
+            why = matches(row, row['name'], page)
+            if why:
+                report.append([row['slug'], row['uid'], row['answer'], page and page.get('title') or '', why])
+                continue
+            try:
+                u = save_image(page['thumbnail']['source'])
+            except Exception:  # unreadable picture: skip it
+                report.append([row['slug'], row['uid'], row['answer'], page['title'], 'تعذر تحميل الصورة'])
+                continue
+            out['items'].setdefault(row['slug'], {})[row['uid']] = [fingerprint(row['question'], row['answer']), u]
+            sources[u] = 'https://commons.wikimedia.org/wiki/File:' + page['pageimage'].replace(' ', '_')
+            report.append([row['slug'], row['uid'], row['answer'], page['title'], 'انضافت ✅'])
+            added += 1
+        save()
+        print('checked', min(i + 20, len(names)), 'of', len(names), 'names — pictures added:', added, flush=True)
+    save()
     print('done: added', added, 'pictures; report in reports/eight-answer-auto.csv', flush=True)
 
 
