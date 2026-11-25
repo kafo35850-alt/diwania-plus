@@ -1043,8 +1043,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
     <div class="fb-actions">
       <button class="fb-btn" id="dwFrameDemoBtn" data-act="toggle-frame-demo" style="display:none" title="تجربة اللعبة مع لاعبين آليين">🤖<span class="lbl"> بوتات</span></button>
       <button class="fb-btn" data-act="open-room-hub" title="غرفة الجرس والإجابات بالجوالات">📱<span class="lbl"> غرفة الجرس</span></button>
-      <button class="fb-btn" id="dwFrameVoiceBtn" data-act="toggle-store-voice" title="صوت الراوي">🔊</button>
-      <button class="fb-btn" id="dwFrameSfxBtn" data-act="toggle-store-sfx" title="المؤثرات">🎵</button>
+      <button class="fb-btn" id="dwFrameVolBtn" data-act="open-game-volume" title="الصوت: المؤثرات والراوي">🔊<span class="lbl"> الصوت</span></button>
       <button class="fb-btn" id="dwFrameFsBtn" data-act="toggle-frame-fullscreen" title="ملء الشاشة" style="display:none">⛶</button>
     </div>
   </div>
@@ -4396,6 +4395,10 @@ html.dw-game-open #dwApp { visibility: hidden; }
         render();
         showToast(tpRes.message);
       });
+    } else if (act === 'open-game-volume') {
+      // The volume panel lives inside the game (volume.js), so it controls that game's own sounds.
+      var vifr = document.getElementById('dwGameIframe');
+      try { if (vifr && vifr.contentWindow) vifr.contentWindow.postMessage({ type: 'DW_VOLUME_OPEN' }, location.origin); } catch (e) {}
     } else if (act === 'toggle-store-voice') {
       STATE.storeVoiceOn = !STATE.storeVoiceOn;
       syncAudioButtonsUI();

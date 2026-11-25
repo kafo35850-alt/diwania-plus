@@ -38,6 +38,7 @@
   }
   function playUrl(url, done, fail) {
     var a = new Audio(url);
+    a.__dwVoice = 1; // the narrator volume (volume.js) applies to the owner's recordings
     current = a;
     var finished = false, end = function () { if (!finished) { finished = true; done(); } };
     a.onended = end; a.onerror = function () { if (!finished) { finished = true; fail(); } };
