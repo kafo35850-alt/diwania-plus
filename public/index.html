@@ -2170,6 +2170,8 @@ html.dw-game-open #dwApp { visibility: hidden; }
           .then(function (r) { return r.json().catch(function () { return { ok: false, error: 'تعذر رفع الصورة.' }; }); })
           .catch(function () { return { ok: false, error: 'تعذر الاتصال بالخادم.' }; });
       },
+      eightBoards: function () { return api('GET', '/api/play/eight-boards'); },
+      eightReplay: function (boardId) { return api('POST', '/api/play/eight-replay', { boardId: boardId }); },
       creatorPayout: function (payload) {
         return api('POST', '/api/creator/payout', payload);
       },
@@ -3050,7 +3052,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
       if (groups.indexOf(c.sub_group) === -1) groups.push(c.sub_group);
     });
 
-    return renderCatSuggestBox() + renderCreatorPanel() + '<div class="dw-card">' +
+    return renderPastBoards() + renderCatSuggestBox() + renderCreatorPanel() + '<div class="dw-card">' +
       '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">' +
         '<div><h3 style="margin:0;font-size:24px;font-weight:900">فئات ديوانية الثمانية (' + arNum(visibleCats.length) + ' فئة)</h3>' +
         '<p style="margin:4px 0 0;color:var(--text-muted);font-size:14px">كل فئة فيها أسئلة على ٣ مستويات (٢٠٠ و٤٠٠ و٦٠٠). اختاروا ٨ فئات داخل اللعبة وابدؤوا التحدي.</p></div>' +
@@ -3253,9 +3255,10 @@ html.dw-game-open #dwApp { visibility: hidden; }
     }
     var w = STATE.wallet;
     var eligibleTrials = gamesWithFreeTrials();
+    var pastHtml = renderPastBoards();
     var usedTrials = w.freeTrialsUsed || {};
     var freeLeft = eligibleTrials.filter(function (g) { return !usedTrials[g.slug]; }).length;
-    return '<div class="dw-grid-4">' +
+    return pastHtml + '<div class="dw-grid-4">' +
       '<div class="dw-card"><div style="color:var(--text-muted);font-size:13px">رصيدك</div><div style="font-size:34px;font-weight:900;color:var(--gold)">' + arNum(w.balance) + ' أقيام</div></div>' +
       '<div class="dw-card"><div style="color:var(--text-muted);font-size:13px">التجارب المجانية المتبقية</div><div style="font-size:34px;font-weight:900;color:var(--teal)">' + arNum(freeLeft) + ' من ' + arNum(eligibleTrials.length) + '</div></div>' +
       '<div class="dw-card"><div style="color:var(--text-muted);font-size:13px">إجمالي الأقيام المضافة</div><div style="font-size:34px;font-weight:900">' + arNum(w.totalPurchased) + ' أقيام</div></div>' +
@@ -4543,6 +4546,63 @@ html.dw-game-open #dwApp { visibility: hidden; }
 
   window.launchGameWithCreditCheck = launchGameWithCreditCheck;
 
+  // «قيماتك السابقة»: reopen a past Eight board for free (same categories and questions).
+  function loadPastBoards(force) {
+    if (!STATE.user || STATE.pastBoardsLoading || (STATE.pastBoards && STATE.pastBoardsFor === STATE.user.id && !force)) return;
+    STATE.pastBoardsLoading = true;
+    DiwaniyaServerKernel.eightBoards().then(function (r) {
+      STATE.pastBoardsLoading = false;
+      if (r.ok) { STATE.pastBoards = r.boards; STATE.pastBoardsFor = STATE.user && STATE.user.id; render(); }
+    });
+  }
+  function renderPastBoards() {
+    if (!STATE.user) return '';
+    if (!STATE.pastBoards || STATE.pastBoardsFor !== STATE.user.id) { loadPastBoards(); return ''; }
+    if (!STATE.pastBoards.length) return '';
+    var shown = STATE.showAllBoards ? STATE.pastBoards : STATE.pastBoards.slice(0, 3);
+    return '<section class="dw-card" id="dwPastBoards">' +
+      '<div><h3 style="margin:0;font-size:21px">🔁 قيماتك السابقة — العبها مرة ثانية ببلاش</h3>' +
+      '<p style="margin:4px 0 0;color:var(--text-muted);font-size:13.5px">أي قيم لعبته في «ديوانية الثمانية» تقدر ترجع تلعبه بنفس الفئات ونفس الأسئلة بدون ما ينخصم منك ولا قيم.</p></div>' +
+      shown.map(function (b) {
+        return '<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:12px;border-radius:14px;background:rgba(0,0,0,.22);border:1px solid var(--border-subtle)">' +
+          '<div style="flex:1;min-width:220px"><div style="font-size:12.5px;color:var(--text-muted)">' + esc(new Date(b.created_at).toLocaleString('ar-SA', { dateStyle: 'medium', timeStyle: 'short' })) + (b.replays ? ' · لعبته مرة ثانية ' + arNum(b.replays) + '×' : '') + '</div>' +
+          '<div style="font-size:14px;line-height:1.7">' + b.cats.map(function (c) { return esc(c.icon || '') + ' ' + esc(c.name); }).join(' · ') + '</div></div>' +
+          '<button class="dw-btn dw-btn-gold dw-btn-sm" data-act="replay-board" data-id="' + esc(b.id) + '">▶️ العبه ببلاش</button></div>';
+      }).join('') +
+      (STATE.pastBoards.length > 3 && !STATE.showAllBoards ? '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="show-all-boards">عرض الكل (' + arNum(STATE.pastBoards.length) + ')</button>' : '') +
+    '</section>';
+  }
+  function replayBoard(boardId) {
+    if (STATE.launchInFlight) return;
+    STATE.launchInFlight = true;
+    DiwaniyaServerKernel.eightReplay(boardId).then(function (res) {
+      STATE.launchInFlight = false;
+      if (!res.ok) { showToast(res.error || 'تعذر فتح القيم.'); if (res.status === 401) openAuth(); return; }
+      STATE.activeGameSlug = 'eight';
+      STATE.room.gameSlug = 'eight';
+      STATE.guideSlug = null;
+      STATE.pastBoards = null;
+      render();
+      showToast('🔁 قيمك السابق — ببلاش، استمتعوا!');
+      var frameWrap = document.getElementById('dwGameFrameWrap');
+      var frameTitle = document.getElementById('dwGameFrameTitle');
+      var iframe = document.getElementById('dwGameIframe');
+      if (!frameWrap || !iframe) return;
+      frameTitle.textContent = cleanTitle(res.gameTitle);
+      iframe.onload = function () { syncGameRoleToFrame(); syncAudioButtonsUI(); };
+      TRIAL_WATCH.arm(null, null);
+      iframe.removeAttribute('srcdoc');
+      iframe.src = res.playUrl;
+      frameWrap.dataset.gameSlug = 'eight';
+      frameWrap.classList.add('open');
+      document.documentElement.classList.add('dw-game-open');
+      var tEl = document.getElementById('dwToast'); if (tEl) tEl.classList.add('in-game');
+      var fsBtn = document.getElementById('dwFrameFsBtn');
+      if (fsBtn) fsBtn.style.display = (document.fullscreenEnabled || document.webkitFullscreenEnabled) ? '' : 'none';
+      syncFrameDemoButton();
+    });
+  }
+
   document.addEventListener('submit', async function (event) {
     var form = event.target;
     if (form.id === 'dwSupportForm') {
@@ -4716,6 +4776,10 @@ html.dw-game-open #dwApp { visibility: hidden; }
     } else if (act === 'show-all-games') {
       STATE.showAllGames = true;
       render();
+    } else if (act === 'replay-board') {
+      replayBoard(actBtn.getAttribute('data-id'));
+    } else if (act === 'show-all-boards') {
+      STATE.showAllBoards = true; render();
     } else if (act === 'ed-pick-cat') {
       STATE.editorCatSlug = actBtn.getAttribute('data-slug');
       STATE.editingItemId = null;
@@ -4844,6 +4908,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
         }
       }
     } else if (act === 'close-game-frame') {
+      STATE.pastBoards = null;
       TRIAL_WATCH.closedEarly();
       var fw = document.getElementById('dwGameFrameWrap');
       var ifr = document.getElementById('dwGameIframe');

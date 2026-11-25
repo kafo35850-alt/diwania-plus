@@ -5,6 +5,7 @@ import { HttpError, nowMs, nowIso, randomToken, randomId, sha256Hex } from './ut
 import { getDoc, EIGHT_POSTERS, EIGHT_STADIUM_CATEGORIES, EIGHT_CATEGORY_MERGES } from './catalog.js';
 import { GAMES } from './games.js';
 import PICS from './pictures.json'; // uid → [question picture, answer picture] for the built-in Eight questions
+import { playTokenRow, replayBoardFor } from './eight-replay.js';
 import { ROOM_GAMES, verifyPlayToken, gameRoomExists, relayHostConnected, prepareRoomGame, prepareEight } from './rooms/routes.js';
 
 const PLAY_TOKEN_TTL_MS = 12 * 60 * 60 * 1000;
@@ -41,7 +42,9 @@ export async function cancelLaunch(env, session, body) {
   await env.DB.batch([
     env.DB.prepare('INSERT INTO wallet_transactions (id, user_id, type, amount, balance_before, balance_after, description, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)')
       .bind(randomId('wtx'), uid, 'refund', cost, after - cost, after, '↩️ رجعت الأقيام (ما بدأت اللعب): ' + (res.gameTitle || row.game_slug), nowIso()),
-    env.DB.prepare('DELETE FROM play_tokens WHERE user_id = ? AND game_slug = ?').bind(uid, row.game_slug)
+    env.DB.prepare('DELETE FROM play_tokens WHERE user_id = ? AND game_slug = ?').bind(uid, row.game_slug),
+    // A refunded game was never played: it can't be replayed for free either.
+    env.DB.prepare('DELETE FROM eight_boards WHERE launch_hash = ?').bind(await sha256Hex(uid + ':' + idemKey))
   ]);
   return { ok: true, refunded: cost, wallet: await walletSnapshot(env, uid) };
 }
@@ -224,6 +227,7 @@ export async function servePlay(env, request, session, slug) {
     })),
     hiddenCats: slug !== 'eight' ? [] : categories.filter((c) => !c.is_visible).map((c) => c.slug),
     pics: slug === 'eight' && !guest ? PICS : {},
+    replayBoard: slug === 'eight' && !guest && token ? await replayBoardFor(env, session.user.id, await playTokenRow(env, token)) : null,
     catPosters: slug === 'eight' ? EIGHT_POSTERS : {},
     categoryMerges: slug === 'eight' ? EIGHT_CATEGORY_MERGES : {},
     qaftah: gameContent.filter((x) => x.game_id === 'game_qaftah' && x.is_active !== 0)

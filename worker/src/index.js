@@ -12,6 +12,7 @@ import { handleRooms } from './rooms/routes.js';
 import { handleSupport } from './support.js';
 import { recordEightQuestion, eightQuestionStats } from './eight-stats.js';
 import { creatorDashboard, requestPayout } from './creator.js';
+import { saveEightBoard, listEightBoards, replayEightBoard } from './eight-replay.js';
 import { recordPing, analyticsOverview, analyticsUser } from './activity.js';
 import { STATIC } from './static.generated.js';
 export { GameHubDO, RelayRoomDO, BuzzerRoomDO } from './rooms/objects.js';
@@ -146,6 +147,9 @@ async function handleApi(env, request, url) {
     return json(await cancelLaunch(env, session, await readJson(request)));
   }
   if (method === 'POST' && path === '/api/play/eight-question') return recordEightQuestion(env, request, url);
+  if (method === 'POST' && path === '/api/play/eight-board') return saveEightBoard(env, request, url);
+  if (method === 'GET' && path === '/api/play/eight-boards') return listEightBoards(env, request);
+  if (method === 'POST' && path === '/api/play/eight-replay') return replayEightBoard(env, request);
   if (method === 'GET' && path === '/api/admin/eight-stats') return eightQuestionStats(env, request, url);
   if (method === 'POST' && path === '/api/play/started') {
     const session = await requireSession(env, request);

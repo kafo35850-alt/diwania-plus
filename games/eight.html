@@ -6767,7 +6767,98 @@ const correctText = four[0];
 shuffleInPlace(four);
 return { options: four, correctIndex: four.indexOf(correctText) };
 }
-function buildFreshQuestionsForCategory(cat, seenMap) {
+// ---- Topic guard: two questions about the same thing (same answer, or the same rare name such as
+// «غامبول») never sit in one category column, and the same answer never shows twice on one board.
+const M8_STOP = new Set(('الذي التي الذين اللي اسم هذا هذه هذين لهذين هؤلاء الشهير الشهيرة المشهور المشهورة ' +
+  'يظهر تظهر الظاهر الظاهرة الصورة الصور المعلم المكان حرف عندما كانت يكون تكون كان أول الأول الأولى أكثر أكبر ' +
+  'أشهر أصغر أطول أقدم أحد إحدى التالي التالية عالم العالم الذهبية العربية السعودية سعودي السعودي عربي العربي ' +
+  'لاعب اللاعب اللاعبين فنان الفنان فنانة مسلسل المسلسل فيلم الفيلم لعبة اللعبة أغنية الأغنية بطل البطل شخصية الشخصية ' +
+  'مدينة المدينة دولة الدولة عاصمة العاصمة منطقة المنطقة النادي نادي المنتخب منتخب الفريق فريق سنة عام العام ' +
+  'يسمى تسمى يطلق يُطلق تعرف يعرف بالإنجليزي بالعربي لقب الملقب الملقبة باسم الاسم الجديد القديم القديمة ' +
+  'وماذا ماذا متى أين وين ليش كيف كم أي وش اللي فيها فيه عليه عليها منها منه بين خلال حول ضمن لدى عند حتى ' +
+  'الخاص الخاصة الكبير الكبيرة الصغير الصغيرة جميع كل بعض أيضا أيضاً تقريبا تقريباً').split(/\s+/).map(m8Norm));
+function m8Norm(v) {
+  return String(v || '').toLowerCase().replace(/[ً-ْـ]/g, '').replace(/[أإآ]/g, 'ا')
+    .replace(/ة/g, 'ه').replace(/ى/g, 'ي').replace(/[^\p{L}\p{N}]+/gu, ' ').trim();
+}
+function m8Stem(w) { return w.replace(/^(وال|بال|لل|فال|كال|ال)/, '').replace(/^[وب](?=ال)/, ''); }
+function m8AnswerKey(q) {
+  const a = m8Norm(String(q.a || q.answer || '').split(/[—(\-–|]/)[0]);
+  return a ? 'a:' + a.split(' ').map(m8Stem).join(' ') : '';
+}
+function m8Words(q) {
+  return new Set(m8Norm(q.q || q.question || '').split(' ').map(m8Stem).filter(w => w.length >= 4 && !M8_STOP.has(w)));
+}
+// Keys that tie a question to its topic, worked out against the rest of its category.
+function m8TopicIndex(pool) {
+  const words = pool.map(m8Words);
+  const freq = new Map();
+  words.forEach(ws => ws.forEach(w => freq.set(w, (freq.get(w) || 0) + 1)));
+  const rareMax = Math.max(2, Math.floor(pool.length * 0.15));
+  const answers = pool.map(q => m8AnswerKey(q).slice(2)).filter(Boolean);
+  return pool.map((q, i) => {
+    const keys = new Set();
+    const ak = m8AnswerKey(q);
+    if (ak) keys.add(ak);
+    words[i].forEach(w => { if (freq.get(w) <= rareMax) keys.add('w:' + w); });
+    // A question that names another question's answer is about the same thing.
+    const text = ' ' + m8Norm(q.q || q.question || '').split(' ').map(m8Stem).join(' ') + ' ';
+    answers.forEach(a => { if (a.length >= 3 && text.includes(' ' + a + ' ')) keys.add('a:' + a); });
+    words[i].forEach(w => keys.add('t:' + w)); // matched only against answers (below)
+    return keys;
+  });
+}
+function m8Clash(keys, used) {
+  for (const k of keys) {
+    if (k.startsWith('t:')) { if (used.has('a:' + k.slice(2))) return true; continue; }
+    if (used.has(k)) return true;
+  }
+  return false;
+}
+function m8Claim(keys, used) { keys.forEach(k => { if (!k.startsWith('t:')) used.add(k); }); }
+// ---- Replay a saved board for free (window.__DW_CONTENT.replayBoard): same categories, same questions.
+function m8Replay() { try { return (window.__DW_CONTENT || {}).replayBoard || null; } catch (e) { return null; } }
+function m8ReplayColumn(cat) {
+const board = m8Replay();
+const saved = board && board.cats.find(c => c.id === cat.id);
+if (!saved) return null;
+const rawQuestions = (Array.isArray(cat.questions) && cat.questions.length) ? cat.questions : (CATEGORY_QUESTIONS_CACHE[cat.id] || []);
+const pool = rawQuestions.map((q, idx) => m8WithPics({ ...q, uid: q.uid || `${cat.id}_q${idx + 1}`, points: Number(q.points || 200), info: q.info || q.a }));
+const byUid = new Map(pool.map(q => [q.uid, q]));
+const picked = saved.uids.map(u => byUid.get(u)).filter(Boolean);
+if (picked.length < saved.uids.length) return null; // the category changed since: pick fresh questions
+const reserve = { 200: [], 400: [], 600: [] };
+pool.forEach(q => { if (!picked.includes(q) && reserve[q.points]) reserve[q.points].push(q); });
+picked.sort((a, b) => a.points - b.points);
+const result = picked.map(q => { const opt = prepareChoiceOptions(q); return { ...q, options: opt.options, correctIndex: opt.correctIndex }; });
+result.reserve = reserve;
+return result;
+}
+function m8ReplayInit() {
+const board = m8Replay();
+if (!board) return;
+const ids = new Set(state.categories.map(c => c.id));
+state.selectedForMatch = board.cats.filter(c => ids.has(c.id)).map(c => ({ id: c.id, owner: c.owner || 'shared' }));
+renderSetupView();
+['viewSetup', 'viewPreMatchSettings'].forEach(vid => {
+const host = document.getElementById(vid);
+if (!host || host.querySelector('.m8-replay-bar')) return;
+const bar = document.createElement('div');
+bar.className = 'm8-replay-bar';
+bar.setAttribute('role', 'status');
+bar.style.cssText = 'position:sticky;top:0;z-index:60;margin:0 auto 10px;max-width:980px;padding:12px 16px;border-radius:16px;background:linear-gradient(120deg,rgba(245,185,66,.25),rgba(20,184,166,.18));border:1px solid rgba(245,185,66,.6);color:#fff;font-weight:800;text-align:center;line-height:1.6';
+bar.innerHTML = '🔁 هذا قيمك السابق — نفس الـ٨ فئات ونفس الأسئلة، <span style="color:#fcd581">ببلاش</span>. كمّلوا وابدؤوا القيم.';
+host.insertBefore(bar, host.firstChild);
+});
+}
+function m8SaveBoard(columns) {
+if (m8Replay()) return;
+const token = new URLSearchParams(location.search).get('t');
+if (!token) return;
+const cats = columns.map(c => ({ id: c.id, name: c.name, icon: c.icon, owner: c.owner, uids: c.questions.map(q => q.uid) }));
+fetch('/api/play/eight-board', { method: 'POST', headers: { 'Content-Type': 'application/json' }, credentials: 'same-origin', body: JSON.stringify({ token, cats }), keepalive: true }).catch(() => {});
+}
+function buildFreshQuestionsForCategory(cat, seenMap, boardUsed) {
 const rawQuestions = (Array.isArray(cat.questions) && cat.questions.length) ? cat.questions : (CATEGORY_QUESTIONS_CACHE[cat.id] || []);
 const pool = rawQuestions.map((q, idx) => m8WithPics({
 ...q,
@@ -6775,19 +6866,31 @@ uid: q.uid || `${cat.id}_q${idx + 1}`,
 points: Number(q.points || 200),
 info: q.info || q.a
 }));
+const topic = new Map();
+m8TopicIndex(pool).forEach((keys, i) => topic.set(pool[i], keys));
 const seen = seenMap || {};
+const board = boardUsed || new Set();
+const used = new Set();
 const picked = [];
-const leftovers = [];
 const reserve = { 200: [], 400: [], 600: [] };
+const fits = (q) => !m8Clash(topic.get(q), used) && !board.has(m8AnswerKey(q)) && !board.has('q:' + m8Norm(q.q));
+const take = (q) => { picked.push(q); m8Claim(topic.get(q), used); };
 [200, 400, 600].forEach(tier => {
 const inTier = shuffleInPlace(pool.filter(q => q.points === tier));
 const ordered = inTier.filter(q => !seen[q.uid]).concat(inTier.filter(q => seen[q.uid]));
-ordered.forEach((q, i) => { if (i < 2) picked.push(q); else reserve[tier].push(q); });
+const chosen = [];
+for (const q of ordered) { if (chosen.length < 2 && fits(q)) { chosen.push(q); take(q); } }
+for (const q of ordered) { if (chosen.length < 2 && !chosen.includes(q)) { chosen.push(q); take(q); } } // tiny categories
+ordered.forEach(q => { if (!chosen.includes(q)) reserve[tier].push(q); });
 });
 if (picked.length < 6) {
 const have = new Set(picked.map(q => q.uid));
-pool.filter(q => !have.has(q.uid)).forEach(q => { if (picked.length < 6) picked.push(q); else leftovers.push(q); });
+const rest = pool.filter(q => !have.has(q.uid));
+rest.filter(fits).concat(rest.filter(q => !fits(q))).forEach(q => { if (picked.length < 6 && !picked.includes(q)) take(q); });
 }
+// Swaps (lifeline) also prefer a question on a new topic.
+[200, 400, 600].forEach(tier => { const r = reserve[tier]; reserve[tier] = r.filter(fits).concat(r.filter(q => !fits(q))); });
+picked.forEach(q => { const k = m8AnswerKey(q); if (k) board.add(k); board.add('q:' + m8Norm(q.q)); });
 picked.sort((a, b) => a.points - b.points);
 const result = picked.map(q => {
 const opt = prepareChoiceOptions(q);
@@ -8376,6 +8479,7 @@ try { console.error(err); showToast('⚠️ تعذّر بدء القيم: ' + ((
 finally { m8StartBusy = false; if (btn) btn.disabled = false; }
 }
 async function m8StartMatchCore() {
+if (m8Replay()) { const ids = new Set(state.categories.map(c => c.id)); state.selectedForMatch = m8Replay().cats.filter(c => ids.has(c.id)).map(c => ({ id: c.id, owner: c.owner || 'shared' })); }
 if (state.selectedForMatch.length !== 8) {
 const left = 8 - state.selectedForMatch.length;
 showToast(left > 0 ? `لازم تكمل 8 فئات بالضبط قبل البدء — باقي ${left}.` : 'العدد المسموح 8 فئات بالضبط!', 'warn');
@@ -8448,12 +8552,13 @@ state.match.history = [];
 state.match.undoStack = [];
 const sharedIndices = [];
 const seenMap = state.account.seenQuestions || {};
+const boardUsed = new Set();
 const columns = state.selectedForMatch.map((sel, colIdx) => {
 const cat = state.categories.find(c => c.id === sel.id);
 if (sel.owner === 'shared') {
 sharedIndices.push(colIdx);
 }
-const freshSix = buildFreshQuestionsForCategory(cat, seenMap);
+const freshSix = m8ReplayColumn(cat) || buildFreshQuestionsForCategory(cat, seenMap, boardUsed);
 const qs = freshSix.map((qObj, qIdx) => ({
 ...qObj,
 qIdx,
@@ -8504,6 +8609,7 @@ try { showToast('ℹ️ ما فيه فئة مشتركة 🟣 في هذه الم�
 }
 }
 state.match.boardColumns = columns;
+m8SaveBoard(columns);
 renderBoardView();
 switchView('board');
 }
@@ -10435,6 +10541,7 @@ m8BuzzInitUI();
 m8QualityInit();
 state.selectedForMatch = [];
 renderSetupView();
+m8ReplayInit();
 renderPreMatchSettingsUI();
 document.getElementById('categoriesCatalogGrid').addEventListener('click', (e) => {
 const infoBtn = e.target.closest('[data-info-cat-id]');
