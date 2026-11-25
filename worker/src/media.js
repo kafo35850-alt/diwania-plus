@@ -4,6 +4,7 @@
 import { HttpError, clientIp, nowIso, randomId, underRateLimit } from './util.js';
 
 const CHUNK = 1536 * 1024;
+const SEED_CHUNK = 40000; // must match CHUNK in scripts/seed-assets-d1.mjs
 const MB = 1024 * 1024;
 // The free D1 database holds 500MB; keep room for everything else.
 const STORAGE_CAP = 420 * MB;
@@ -159,16 +160,18 @@ export async function serveMedia(env, request, id) {
     const all = row.data instanceof ArrayBuffer ? new Uint8Array(row.data) : new Uint8Array(row.data);
     body = all.subarray(start, end + 1);
   } else {
+    // Pieces are CHUNK bytes, except files put in by scripts/seed-assets-d1.mjs, which uses SEED_CHUNK.
+    const piece = Math.ceil(size / CHUNK) === row.chunks ? CHUNK : SEED_CHUNK;
     // Send at most two pieces per request; players ask for the rest with further range requests.
-    const first = Math.floor(start / CHUNK);
-    let last = Math.floor(end / CHUNK);
-    if (partial && last - first > 1) { last = first + 1; end = Math.min(end, (last + 1) * CHUNK - 1); }
+    const first = Math.floor(start / piece);
+    let last = Math.floor(end / piece);
+    if (partial && last - first > 1) { last = first + 1; end = Math.min(end, (last + 1) * piece - 1); }
     const rows = await env.DB.prepare('SELECT idx, data FROM media_chunks WHERE media_id = ? AND idx BETWEEN ? AND ? ORDER BY idx').bind(id, first, last).all();
     const pieces = (rows.results || []).map((r) => new Uint8Array(r.data));
     const joined = new Uint8Array(pieces.reduce((n, p) => n + p.length, 0));
     let off = 0;
     for (const p of pieces) { joined.set(p, off); off += p.length; }
-    body = joined.subarray(start - first * CHUNK, end - first * CHUNK + 1);
+    body = joined.subarray(start - first * piece, end - first * piece + 1);
   }
   const headers = { ...MEDIA_HEADERS, ...seedCache, 'content-type': row.mime, 'content-length': String(body.length) };
   if (partial) headers['content-range'] = 'bytes ' + start + '-' + end + '/' + size;
