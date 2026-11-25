@@ -1,11 +1,10 @@
 import { getSettings } from './settings.js';
-import { voiceForGame } from './voice.js';
+import { voiceForGame, voiceTokensForGame } from './voice.js';
 // Wallet, game launches (credit / free-trial deduction) and protected game delivery.
 import { HttpError, nowMs, nowIso, randomToken, randomId, sha256Hex } from './util.js';
-import { getDoc } from './catalog.js';
+import { getDoc, EIGHT_POSTERS, EIGHT_STADIUM_CATEGORIES, EIGHT_CATEGORY_MERGES } from './catalog.js';
 import { GAMES } from './games.js';
 import PICS from './pictures.json'; // uid → [question picture, answer picture] for the built-in Eight questions
-import CAT_POSTERS from './cat_posters.json'; // built-in category id → poster picture
 import { ROOM_GAMES, verifyPlayToken, gameRoomExists, relayHostConnected, prepareRoomGame, prepareEight } from './rooms/routes.js';
 
 const PLAY_TOKEN_TTL_MS = 12 * 60 * 60 * 1000;
@@ -206,18 +205,26 @@ export async function servePlay(env, request, session, slug) {
   if (resolved.retitle) html = html.replace(/ديوانية بلس — [^<]+/g, 'ديوانية بلس — ' + game.title.replace(/[<>&]/g, ''));
 
   // Owner-edited content the games read at start-up (guests of the Eight buzzer never get questions).
-  const [overrides, gameContent, categories] = await Promise.all([getDoc(env, 'catQuestionsOverrides'), getDoc(env, 'game_content'), getDoc(env, 'categories')]);
+  const [overrides, gameContent, categories] = await Promise.all([
+    slug === 'eight' && !guest ? getDoc(env, 'catQuestionsOverrides') : {},
+    getDoc(env, 'game_content'),
+    getDoc(env, 'categories')
+  ]);
   const content = {
-    catQuestionsOverrides: slug === 'eight' && guest ? {} : overrides,
+    catQuestionsOverrides: overrides,
     // Categories added from the admin panel (or approved suggestions), and built-ins the owner hid.
-    customCats: slug !== 'eight' ? [] : categories.filter((c) => String(c.slug).startsWith('custom_') && c.is_visible && Array.isArray(overrides[c.slug]) && overrides[c.slug].length >= 6).map((c) => ({
+    customCats: slug !== 'eight' ? [] : categories.filter((c) => (String(c.slug).startsWith('custom_') || EIGHT_STADIUM_CATEGORIES.has(c.slug)) && c.is_visible && !Object.hasOwn(EIGHT_CATEGORY_MERGES, c.slug) && Array.isArray(overrides[c.slug]) && overrides[c.slug].length >= 6).map((c) => ({
       id: c.slug, name: c.name, icon: c.icon || '🎯', group: c.sub_group || 'فئات الديوانية', tag: c.sub_group || 'فئات الديوانية',
       desc: c.description || '', questionCount: overrides[c.slug].length, qCount: overrides[c.slug].length,
-      ...(c.poster ? { customPosterDataUrl: c.poster } : {})
+      ...(c.poster ? { customPosterDataUrl: c.poster } : {}),
+      ...(c.isCharades ? { isCharades: true } : {}),
+      ...(c.isLetterHoneycomb ? { isLetterHoneycomb: true, letterLang: 'ar' } : {}),
+      ...(EIGHT_STADIUM_CATEGORIES.has(c.slug) ? { isRebus: true, isVisual: true } : {})
     })),
     hiddenCats: slug !== 'eight' ? [] : categories.filter((c) => !c.is_visible).map((c) => c.slug),
     pics: slug === 'eight' && !guest ? PICS : {},
-    catPosters: slug === 'eight' ? CAT_POSTERS : {},
+    catPosters: slug === 'eight' ? EIGHT_POSTERS : {},
+    categoryMerges: slug === 'eight' ? EIGHT_CATEGORY_MERGES : {},
     qaftah: gameContent.filter((x) => x.game_id === 'game_qaftah' && x.is_active !== 0)
   };
   if (ROOM_GAMES[slug] && !classic) html = prepareRoomGame(html, slug, url, { token, demo: !guest && url.searchParams.get('demo') === '1' });
@@ -226,8 +233,10 @@ export async function servePlay(env, request, session, slug) {
   if (ROOM_GAMES[slug] && !classic) {
     html = html.replace('</head>', '<style>/*dw-tv*/@media (min-width:1280px) and (min-height:700px){body{zoom:1.25}}@media (min-width:1700px) and (min-height:900px){body{zoom:1.55}}@media (min-width:2400px) and (min-height:1300px){body{zoom:2.1}}</style></head>');
   }
-  content.voice = await voiceForGame(env, slug);
-  html = html.replace(/<head([^>]*)>/i, (m) => m + '\n<script src="/volume.js"></script><script>window.__DW_CONTENT = ' + scriptJson(content) + ';</script>' + (content.voice.length ? '<script src="/voice-player.js"></script>' : ''));
+  const narrator = resolved.retitle ? game.engine_type : slug;
+  content.voice = await voiceForGame(env, narrator);
+  if (content.voice.length) content.voiceTokens = voiceTokensForGame(narrator);
+  html = html.replace(/<head([^>]*)>/i, (m) => m + '\n<script src="/volume.js"></script><script>window.__DW_CONTENT = ' + scriptJson(content) + ';</script><script src="/voice-player.js?v=2"></script>');
   html = html.replace('</head>', '<style>@media (max-width:700px){.dw-FloatingAudioBar{display:none!important}}html.dw-in-frame .dw-FloatingAudioBar{display:none!important}</style><script>try{if(window.top!==window)document.documentElement.classList.add(\'dw-in-frame\')}catch(e){}</script></head>');
 
   return new Response(html, {

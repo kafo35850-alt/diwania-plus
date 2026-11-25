@@ -661,6 +661,7 @@ window.GAME_CONFIG = {"slug":"friends_court","title":"محكمة الديوان�
         var ctx = this.ctx;
         if (ctx.state === 'suspended') ctx.resume();
         var now = ctx.currentTime;
+        if (window.__dwVoice && window.__dwVoice.effect(type, ctx, ctx.destination, ctx.currentTime)) return;
         var osc = ctx.createOscillator();
         var gain = ctx.createGain();
         osc.connect(gain); gain.connect(ctx.destination);
@@ -1555,6 +1556,7 @@ window.GAME_CONFIG = {"slug":"friends_court","title":"محكمة الديوان�
       renderAll();
     } else if (act === 'toggle-voice') {
       AUDIO.voiceOn = !AUDIO.voiceOn;
+      if (!AUDIO.voiceOn && window.__dwVoice) window.__dwVoice.stop();
       if (!AUDIO.voiceOn && window.speechSynthesis) { try { window.speechSynthesis.cancel(); } catch(err){} }
       renderAll();
     } else if (act === 'toggle-sfx') {

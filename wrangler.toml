@@ -1,8 +1,9 @@
 name = "diwaniya-plus"
-main = "worker/src/index.js"
+main = "worker.js"
 compatibility_date = "2025-09-01"
 
 workers_dev = true
+keep_vars = true
 
 # The site's own domain (the zone lives in the same Cloudflare account). workers.dev keeps working too.
 routes = [
@@ -10,8 +11,12 @@ routes = [
   { pattern = "www.diwaniyaplus.com", custom_domain = true }
 ]
 
-# Everything is bundled into the Worker: the public site (public/, via scripts/build-static.mjs)
-# and the private game files (games/), so a deploy is a single upload.
+# Keep large game images in Workers Static Assets so they do not count toward the script bundle size.
+[assets]
+directory = "./assets"
+html_handling = "none"
+
+# The public interface and the private game files are bundled into the Worker.
 [[rules]]
 type = "Text"
 globs = ["**/*.html"]
@@ -59,3 +64,6 @@ DEV_MODE = "false"
 #   RESEND_API_KEY          API key from resend.com
 #   MOYASAR_SECRET_KEY      secret API key from the Moyasar dashboard (sk_test_… or sk_live_…)
 #   MOYASAR_WEBHOOK_SECRET  the "secret token" you type when adding the webhook in the Moyasar dashboard
+
+[build]
+command = "npm run build"

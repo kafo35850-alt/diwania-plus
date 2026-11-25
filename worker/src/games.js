@@ -57,3 +57,18 @@ export const GAMES = {
   vault50,
   who_knows_friend,
 };
+
+// The built-in questions of a category exactly as the game stores them (photos and all).
+export function eightRawQuestions(catSlug) {
+  const html = eight;
+  const marker = 'id="m8_cat_' + catSlug + '"';
+  const pos = html.indexOf(marker);
+  if (pos === -1) return [];
+  const gt = html.indexOf('>', pos);
+  const lt = html.indexOf('</script>', gt);
+  if (gt === -1 || lt === -1) return [];
+  try {
+    const arr = JSON.parse(html.slice(gt + 1, lt).trim());
+    return Array.isArray(arr) ? arr.map((q, i) => ({ ...q, uid: q.uid || (catSlug + '_q' + (i + 1) + '_' + (q.points || 200)) })) : [];
+  } catch (e) { return []; }
+}

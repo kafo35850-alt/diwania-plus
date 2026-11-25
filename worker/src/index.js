@@ -9,6 +9,8 @@ import { adminData, adminAction, eightCategoryQuestions, submitCategorySuggestio
 import { uploadMedia, serveMedia } from './media.js';
 import { grantAppInstall, myPromo, checkPromo } from './promo.js';
 import { handleRooms } from './rooms/routes.js';
+import { handleSupport } from './support.js';
+import { recordEightQuestion, eightQuestionStats } from './eight-stats.js';
 import { recordPing, analyticsOverview, analyticsUser } from './activity.js';
 import { STATIC } from './static.generated.js';
 export { GameHubDO, RelayRoomDO, BuzzerRoomDO } from './rooms/objects.js';
@@ -117,6 +119,11 @@ async function handleApi(env, request, url) {
     return json(await submitCategorySuggestion(env, session, await readJson(request)));
   }
 
+  if (path === '/api/support' || path === '/api/admin/support') {
+    const support = await handleSupport(env, request, url);
+    if (support) return support;
+  }
+
   if (method === 'POST' && path === '/api/suggestions') {
     return json(await submitSuggestion(env, request, await readJson(request)));
   }
@@ -129,6 +136,8 @@ async function handleApi(env, request, url) {
     const session = await requireSession(env, request);
     return json(await cancelLaunch(env, session, await readJson(request)));
   }
+  if (method === 'POST' && path === '/api/play/eight-question') return recordEightQuestion(env, request, url);
+  if (method === 'GET' && path === '/api/admin/eight-stats') return eightQuestionStats(env, request, url);
   if (method === 'POST' && path === '/api/play/started') {
     const session = await requireSession(env, request);
     return json(await confirmTrialStart(env, session, await readJson(request)));

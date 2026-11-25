@@ -495,6 +495,7 @@ window.GAME_CONFIG = {"slug":"alibi_court","title":"تحقيق الديواني�
         if (!this.ctx) this.ctx = new AudioCtx();
         var ctx = this.ctx;
         if (ctx.state === 'suspended') ctx.resume();
+        if (window.__dwVoice && window.__dwVoice.effect(type, ctx, ctx.destination, ctx.currentTime)) return;
         var osc = ctx.createOscillator();
         var gain = ctx.createGain();
         osc.connect(gain); gain.connect(ctx.destination);

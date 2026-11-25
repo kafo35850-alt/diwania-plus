@@ -1,8 +1,8 @@
 // Admin-panel operations (owners and admins). Every route here is reached through requireSession(..., { owner: true }).
 // Managing admins is reserved for owners.
 import { HttpError, nowIso, randomId, cleanText, toInt } from './util.js';
-import { getDoc, putDoc, isShippedCategory } from './catalog.js';
-import { GAMES } from './games.js';
+import { getDoc, putDoc, isShippedCategory, saveEightQuestions } from './catalog.js';
+import { GAMES, eightRawQuestions } from './games.js';
 import { verifyOrder } from './payments.js';
 import { cleanMedia, legacyMedia, mediaBytesUsed } from './media.js';
 import { promoConfig, APP_CODE } from './promo.js';
@@ -51,34 +51,10 @@ export async function adminData(env) {
   };
 }
 
-// The built-in questions of a category exactly as the game stores them (photos and all).
-function eightRawQuestions(catSlug) {
-  const html = GAMES.eight || '';
-  const marker = 'id="m8_cat_' + catSlug + '"';
-  const pos = html.indexOf(marker);
-  if (pos === -1) return [];
-  const gt = html.indexOf('>', pos);
-  const lt = html.indexOf('</script>', gt);
-  if (gt === -1 || lt === -1) return [];
-  try {
-    const arr = JSON.parse(html.slice(gt + 1, lt).trim());
-    return Array.isArray(arr) ? arr.map((q, i) => ({ ...q, uid: q.uid || (catSlug + '_q' + (i + 1) + '_' + (q.points || 200)) })) : [];
-  } catch (e) { return []; }
-}
-
 // Built-in questions of one Eight category, read from the game file (owner editor only).
 export function eightCategoryQuestions(catSlug) {
-  const html = GAMES.eight || '';
-  const marker = 'id="m8_cat_' + catSlug + '"';
-  const pos = html.indexOf(marker);
-  if (pos === -1) return [];
-  const gt = html.indexOf('>', pos);
-  const lt = html.indexOf('</script>', gt);
-  if (gt === -1 || lt === -1) return [];
-  let arr;
-  try { arr = JSON.parse(html.slice(gt + 1, lt).trim()); } catch (e) { return []; }
-  return arr.map((q, idx) => ({
-    id: q.uid || (catSlug + '_q' + (idx + 1) + '_' + (q.points || 200)),
+  return eightRawQuestions(catSlug).map((q, idx) => ({
+    id: q.uid,
     game_id: 'game_eight',
     cat: catSlug,
     content_type: 'trivia_question',
@@ -234,6 +210,22 @@ export async function adminAction(env, session, action, payload) {
       return { ok: true, message: 'تم حفظ اللعبة.' };
     }
 
+    case 'update_game_details': {
+      const title = cleanText(payload.title, 80);
+      const description = cleanText(payload.description, 600);
+      const posterUrl = String(payload.posterUrl || '').trim();
+      const poster = cleanMedia({ t: 'image', u: posterUrl });
+      if (!title) throw new HttpError(400, 'أدخل اسم اللعبة.');
+      if (posterUrl && poster?.t !== 'image') throw new HttpError(400, 'ارفع صورة أو أدخل رابط صورة يبدأ بـ HTTPS.');
+      const games = await getDoc(env, 'games');
+      const game = games.find((g) => g.id === payload.gameId);
+      if (!game) throw new HttpError(404, 'اللعبة غير موجودة.');
+      Object.assign(game, { title, description, poster: poster?.u || '' });
+      await putDoc(env, 'games', games);
+      await log(env, admin, 'update_game_details', 'game', game.slug, title);
+      return { ok: true, message: 'تم حفظ تفاصيل اللعبة.' };
+    }
+
     case 'toggle_game': {
       const games = await getDoc(env, 'games');
       const game = games.find((g) => g.id === payload.gameId);
@@ -326,13 +318,12 @@ export async function adminAction(env, session, action, payload) {
           icon: sug.icon || '💡', posterTheme: 'country_saudi', sort_order: 1, is_visible: 1,
           item_count: sug.questions.length, suggested_by: sug.user_name
         });
-        const overrides = await getDoc(env, 'catQuestionsOverrides');
-        overrides[slug] = sug.questions.map((it, i) => eightItem({ ...it, uid: slug + '_s' + (i + 1) }, i, slug));
-        await putDoc(env, 'catQuestionsOverrides', overrides);
-        await putDoc(env, 'categories', categories);
+        const questions = sug.questions.map((it, i) => eightItem({ ...it, uid: slug + '_s' + (i + 1) }, i, slug));
         sug.category_slug = slug;
+        await saveEightQuestions(env, slug, questions, { categories, cat_suggestions: list });
+      } else {
+        await putDoc(env, 'cat_suggestions', list);
       }
-      await putDoc(env, 'cat_suggestions', list);
       await log(env, admin, action, 'cat_suggestion', sug.id, sug.name);
       return { ok: true, message: sug.status === 'approved' ? 'تم اعتماد فئة «' + sug.name + '» وصارت في ديوانية الثمانية.' : 'تم رفض الاقتراح.' };
     }
@@ -412,18 +403,14 @@ export async function adminAction(env, session, action, payload) {
       if (!cat) throw new HttpError(404, 'الفئة غير موجودة.');
       // Built-in categories live inside the game file: they can be hidden, not deleted.
       if (!String(cat.slug).startsWith('custom_')) throw new HttpError(400, 'هذي فئة أساسية من اللعبة: تقدر تخفيها بس، ما تنحذف.');
-      const overrides = await getDoc(env, 'catQuestionsOverrides');
       let list;
       if (isShippedCategory(cat.slug)) {
         // A ready-made category would come back on the next update: keep a "deleted" mark instead.
         cat.deleted = 1; cat.is_visible = 0; list = categories;
-        overrides[cat.slug] = [];
       } else {
         list = categories.filter((c) => c !== cat);
-        delete overrides[cat.slug];
       }
-      await putDoc(env, 'catQuestionsOverrides', overrides);
-      await putDoc(env, 'categories', list);
+      await saveEightQuestions(env, cat.slug, [], { categories: list });
       await log(env, admin, 'del_cat', 'category', cat.slug, cat.name);
       return { ok: true, message: 'تم حذف فئة «' + cat.name + '» وأسئلتها.' };
     }
@@ -474,32 +461,31 @@ async function contentAction(env, admin, action, payload) {
         qm: payload.qm, am: payload.am
       }, 0, catSlug));
     } else if (action === 'edit_content') {
-      list.forEach((q) => {
-        if (q.uid === payload.itemId) {
-          q.q = cleanText(payload.promptText || q.q, 1000);
-          q.a = cleanText(payload.answerText || q.a, 500);
-          q.hint = cleanText(payload.extraInfo != null ? payload.extraInfo : q.hint, 1000);
-          if (payload.points) q.points = toInt(payload.points, q.points);
-          if (payload.qm !== undefined) { q.qm = cleanMedia(payload.qm); delete q.img; delete q.video; }
-          if (payload.am !== undefined) q.am = cleanMedia(payload.am);
-        }
-      });
+      const q = list.find((item) => item.uid === payload.itemId);
+      if (!q) throw new HttpError(404, 'السؤال غير موجود. حدّث قائمة الأسئلة وحاول مرة ثانية.');
+      q.q = cleanText(payload.promptText || q.q, 1000);
+      q.a = cleanText(payload.answerText || q.a, 500);
+      q.hint = cleanText(payload.extraInfo != null ? payload.extraInfo : q.hint, 1000);
+      if (payload.points) q.points = toInt(payload.points, q.points);
+      if (payload.qm !== undefined) { q.qm = cleanMedia(payload.qm); delete q.img; delete q.video; }
+      if (payload.am !== undefined) q.am = cleanMedia(payload.am);
     } else if (action === 'del_content') {
       list = list.filter((q) => q.uid !== payload.itemId);
     } else if (action === 'import_content' && Array.isArray(payload.items)) {
       list = payload.items.slice(0, MAX_ITEMS).map((it, i) => eightItem(it, i, catSlug));
     }
-    overrides[catSlug] = list.slice(0, MAX_ITEMS);
-    await putDoc(env, 'catQuestionsOverrides', overrides);
-
+    const questions = list.slice(0, MAX_ITEMS);
     const categories = await getDoc(env, 'categories');
-    const cat = categories.find((c) => c.slug === catSlug);
-    if (cat) {
-      cat.item_count = overrides[catSlug].length;
-      await putDoc(env, 'categories', categories);
+    const cat = categories.find((c) => c.slug === catSlug && !c.deleted);
+    if (!cat) throw new HttpError(404, 'الفئة غير موجودة.');
+    const catalogChanges = {};
+    if (cat.item_count !== questions.length) {
+      cat.item_count = questions.length;
+      catalogChanges.categories = categories;
     }
-    await log(env, admin, action, 'eight_category', catSlug, overrides[catSlug].length + ' سؤال');
-    return { ok: true, message: 'تم حفظ أسئلة الفئة (' + overrides[catSlug].length + ' سؤالاً) وستظهر في تحدي الثمانية لكل اللاعبين.' };
+    await saveEightQuestions(env, catSlug, questions, catalogChanges);
+    await log(env, admin, action, 'eight_category', catSlug, questions.length + ' سؤال');
+    return { ok: true, message: 'تم حفظ أسئلة الفئة (' + questions.length + ' سؤالاً) وستظهر في تحدي الثمانية لكل اللاعبين.' };
   }
 
   let content = await getDoc(env, 'game_content');

@@ -4,10 +4,10 @@
   "type": "module",
   "scripts": {
     "build": "node scripts/build-static.mjs",
-    "dev": "npm run build && wrangler dev",
+    "dev": "wrangler dev",
     "db:migrate:local": "wrangler d1 migrations apply diwaniya-plus --local",
     "db:migrate:remote": "wrangler d1 migrations apply diwaniya-plus --remote",
-    "deploy": "npm run build && wrangler deploy"
+    "deploy": "wrangler deploy"
   },
   "devDependencies": {
     "wrangler": "4.40.0"
