@@ -14,6 +14,7 @@ import EIGHT_CATEGORY_GUIDE from './eight_category_guide.json';
 import EIGHT_MEDIA_REFRESH from './eight_media_refresh.json';
 import { addShippedQuestionMedia } from './eight-question-media.js';
 import { addAutoAnswerMedia } from './eight-answer-auto.js';
+import EIGHT_MORE from './eight_more_questions.json';
 import { HttpError, nowIso } from './util.js';
 import { gatewayConfigured } from './payments.js';
 import { eightRawQuestions } from './games.js';
@@ -212,6 +213,16 @@ async function getEightQuestions(env) {
   }
   for (const [slug, { questions }] of Object.entries(EIGHT_MEDIA_REFRESH)) {
     if (questions && !savedAfterMediaRefresh.has(slug)) stored[slug] = structuredClone(questions);
+  }
+  // New questions written later (worker/src/eight_more_questions.json): added to each category once, by uid,
+  // after the owner's own list, so they reach saved categories too and are never added twice.
+  for (const [slug, extra] of Object.entries(EIGHT_MORE)) {
+    const list = Array.isArray(stored[slug]) ? stored[slug] : eightRawQuestions(slug);
+    if (!list.length) continue;
+    const have = new Set(list.map((q) => q && q.uid));
+    const texts = new Set(list.map((q) => q && questionWords(q.q)));
+    const add = extra.filter((q) => !have.has(q.uid) && !texts.has(questionWords(q.q)));
+    if (add.length) stored[slug] = [...list, ...add];
   }
   addShippedQuestionMedia(stored, eightRawQuestions);
   addAutoAnswerMedia(stored, eightRawQuestions);
