@@ -117,6 +117,12 @@ export async function createCheckout(env, request, session, body) {
   if (!pkg) throw new HttpError(404, 'الباقة المختارة غير متاحة.');
   const price = Number(pkg.price_halalas);
   if (!Number.isInteger(price) || price < 100) throw new HttpError(400, 'سعر الباقة غير صالح.');
+  // The first-purchase offer: once per account (any earlier paid order counts) and never with a discount code.
+  if (pkg.first_purchase_only) {
+    if (body.promoCode) throw new HttpError(400, 'عرض أول شراء ما يجتمع مع كود خصم. شيل الكود وكمّل.');
+    const paidBefore = await env.DB.prepare("SELECT 1 FROM payments WHERE user_id = ? AND status = 'paid' LIMIT 1").bind(session.user.id).first();
+    if (paidBefore) throw new HttpError(409, 'عرض أول شراء لأول عملية شراء بس، وحسابك شرا قبل.');
+  }
   // Discount codes are checked and applied here; the browser only sends the code.
   const promo = body.promoCode ? await promoDiscount(env, session, body.promoCode, price) : null;
   const amount = price - (promo ? promo.discount : 0);

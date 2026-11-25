@@ -1,74 +1,501 @@
 [
-  { "id": "all_night", "games": ["mafia", "dakhil", "chancellor", "qaftah", "harf", "qaddirha"], "text": "حلّ الليل" },
-  { "id": "all_winner", "games": ["dakhil", "harf", "qaddirha"], "text": "انتهت اللعبة. الفايز: {}." },
-
-  { "id": "mafia_reveal", "games": ["mafia"], "text": "وُزّعت الأدوار. كل واحد يشوف بطاقته بسرية، وانتبهوا من العيون." },
-  { "id": "mafia_night", "games": ["mafia"], "text": "حلّ الليل… نامت المدينة. الكل يمسك جواله ويختار بصمت." },
-  { "id": "mafia_night_host", "games": ["mafia"], "text": "حلّ الليل… نامت المدينة. غمّضوا عيونكم." },
-  { "id": "mafia_dawn_wait", "games": ["mafia"], "text": "طلع الصباح… والليلة…" },
-  { "id": "mafia_res_wait", "games": ["mafia", "chancellor"], "text": "انتهى التصويت… والنتيجة…" },
-  { "id": "mafia_dawn_none", "games": ["mafia"], "text": "ليلة هادية… ما أحد انقتل." },
-  { "id": "mafia_dawn_dead", "games": ["mafia"], "text": "وللأسف، انقتل {}." },
-  { "id": "mafia_dawn_idle", "games": ["mafia"], "text": "و{} طلع من اللعبة، لأنه ما خلّص مهمته." },
-  { "id": "mafia_day", "games": ["mafia"], "text": "وقت النقاش. ناقشوا مين المشتبه فيه." },
-  { "id": "mafia_vote", "games": ["mafia"], "text": "حان وقت التصويت. مين تبون تطلعونه من القرية؟" },
-  { "id": "mafia_res_out", "games": ["mafia"], "text": "قرّرت القرية… {} يطلع من اللعبة." },
-  { "id": "mafia_res_tie", "games": ["mafia"], "text": "تعادلت الأصوات… ما أحد يطلع هالمرة." },
-  { "id": "mafia_res_none", "games": ["mafia"], "text": "ما أحد صوّت… ما أحد يطلع." },
-  { "id": "mafia_win_town", "games": ["mafia"], "text": "انتهت اللعبة. فاز أهل البلد! انكشفت المافيا كلها." },
-  { "id": "mafia_win_mafia", "games": ["mafia"], "text": "انتهت اللعبة. فازت المافيا… سيطرت على القرية." },
-  { "id": "mafia_win_jester", "games": ["mafia"], "text": "انتهت اللعبة. فاز المهرّج! خدعكم كلكم." },
-
-  { "id": "dakhil_round", "games": ["dakhil"], "text": "الجولة {}. المجموعة: {}. كل واحد يشوف دوره بسرية… وواحد منكم الدخيل." },
-  { "id": "dakhil_caught", "games": ["dakhil"], "text": "انكشف الدخيل… {}! عنده فرصة أخيرة يخمّن الكلمة." },
-  { "id": "dakhil_questions", "games": ["dakhil"], "text": "بدأت الأسئلة. الدور على {}." },
-  { "id": "dakhil_no_agree", "games": ["dakhil"], "text": "ما اتفقتوا على أحد. كملوا الأسئلة." },
-  { "id": "dakhil_spy_wins", "games": ["dakhil"], "text": "فاز الدخيل {}. والكلمة: {}." },
-  { "id": "dakhil_town_wins", "games": ["dakhil"], "text": "فاز المواطنون. الدخيل كان {}. والكلمة: {}." },
-  { "id": "dakhil_vote_called", "games": ["dakhil"], "text": "{} طلب التصويت. منو الدخيل؟ صوّتوا الحين." },
-  { "id": "dakhil_vote_time", "games": ["dakhil"], "text": "انتهى الوقت. منو الدخيل؟ صوّتوا الحين." },
-  { "id": "dakhil_asks", "games": ["dakhil"], "text": "{} يسأل {}." },
-
-  { "id": "ch_cards", "games": ["chancellor"], "text": "وُزّعت البطاقات. كل واحد يشوف بطاقته بسرية، ولا أحد يكشف جواله." },
-  { "id": "ch_pres_pick", "games": ["chancellor"], "text": "الرئيس {}. اختر مستشارك." },
-  { "id": "ch_nominated_danger", "games": ["chancellor"], "text": "{} رشّح {}. صوّتوا بجوالاتكم: نعم أو لا. وانتبهوا… لو طلع الزعيم السري، تنتهي اللعبة." },
-  { "id": "ch_nominated", "games": ["chancellor"], "text": "{} رشّح {}. صوّتوا بجوالاتكم: نعم أو لا." },
-  { "id": "ch_passed", "games": ["chancellor"], "text": "نجحت الحكومة. {} نعم، و{} لا." },
-  { "id": "ch_failed_chaos", "games": ["chancellor"], "text": "سقطت الحكومة. {} نعم، و{} لا. وانتبهوا: رفض واحد بعد، وتصير فوضى." },
-  { "id": "ch_failed", "games": ["chancellor"], "text": "سقطت الحكومة. {} نعم، و{} لا." },
-  { "id": "ch_gov_ok", "games": ["chancellor"], "text": "نجحت الحكومة. الرئيس يشوف ثلاث سياسات بسرية، ويستبعد وحدة." },
-  { "id": "ch_chancellor_picks", "games": ["chancellor"], "text": "المستشار يختار السياسة." },
-  { "id": "ch_veto", "games": ["chancellor"], "text": "المستشار طلب الفيتو! القرار عند الرئيس." },
-  { "id": "ch_veto_refused", "games": ["chancellor"], "text": "الرئيس رفض الفيتو. لازم المستشار يعتمد وحدة." },
-  { "id": "ch_chaos", "games": ["chancellor"], "text": "ثلاث حكومات سقطت… فوضى! تنعتمد السياسة اللي فوق الكومة." },
-  { "id": "ch_enacted", "games": ["chancellor"], "text": "وانعتمدت…" },
-  { "id": "ch_clean", "games": ["chancellor"], "text": "سياسة نزيهة." },
-  { "id": "ch_corrupt_power", "games": ["chancellor"], "text": "سياسة فاسدة. والرئيس حصل على قدرة: {}." },
-  { "id": "ch_corrupt", "games": ["chancellor"], "text": "سياسة فاسدة." },
-  { "id": "ch_power_kill", "games": ["chancellor"], "text": "قدرة الإعدام. الرئيس يختار مين يطلع من اللعبة." },
-  { "id": "ch_power_check", "games": ["chancellor"], "text": "قدرة فحص الولاء. الرئيس يشوف حزب لاعب بسرية." },
-  { "id": "ch_power_peek", "games": ["chancellor"], "text": "الرئيس يشوف أول ثلاث بطاقات بالكومة بسرية." },
-  { "id": "ch_power_special", "games": ["chancellor"], "text": "انتخابات خاصة. الرئيس يختار الرئيس الجاي." },
-  { "id": "ch_checked", "games": ["chancellor"], "text": "الرئيس فحص ولاء {}." },
-  { "id": "ch_executed", "games": ["chancellor"], "text": "تم إعدام {}. وما كان الزعيم السري." },
-  { "id": "ch_win_clean", "games": ["chancellor"], "text": "انتهت اللعبة. فاز النزهاء! {}." },
-  { "id": "ch_win_corrupt", "games": ["chancellor"], "text": "انتهت اللعبة. فاز الفاسدين… {}." },
-
-  { "id": "qf_round_x", "games": ["qaftah"], "text": "الجولة {}، والنقاط مضروبة في {}. ألّفوا كذباتكم السرية في الجوال!" },
-  { "id": "qf_round", "games": ["qaftah"], "text": "الجولة {}. ألّفوا كذباتكم السرية في الجوال!" },
-  { "id": "qf_all_wrote", "games": ["qaftah"], "text": "الكل كتب كذبته! الحين دوركم تصيدون الجواب الحقيقي من بين الفخاخ." },
-  { "id": "qf_caught", "games": ["qaftah"], "text": "قفطة! {} طلعت كذبة من تأليف {}، وطاح فيها {}!" },
-  { "id": "qf_truth_by", "games": ["qaftah"], "text": "الإجابة الصحيحة هي: {}. كشفها {}" },
-  { "id": "qf_truth_none", "games": ["qaftah"], "text": "الإجابة الصحيحة هي: {}. ولا أحد لقط الحقيقة!" },
-  { "id": "qf_fact_by", "games": ["qaftah"], "text": "والحقيقة المؤكدة هي: {}. كشفها {}" },
-  { "id": "qf_fact_none", "games": ["qaftah"], "text": "والحقيقة المؤكدة هي: {}. ولا أحد قدر يكشفها!" },
-  { "id": "qf_winner", "games": ["qaftah"], "text": "انتهت اللعبة! بطل قفطة هو {}!" },
-
-  { "id": "harf_round", "games": ["harf"], "text": "الجولة {}. الحرف: {}. ابدؤوا الكتابة!" },
-  { "id": "harf_time", "games": ["harf"], "text": "انتهى الوقت. راجعوا الإجابات وارفضوا الغلط." },
-  { "id": "harf_stop", "games": ["harf"], "text": "{} خلّص! باقي عشر ثواني." },
-
-  { "id": "qd_answer_closest", "games": ["qaddirha"], "text": "الجواب: {}. الأقرب: {}" },
-
-  { "id": "screen_code", "games": ["shifra"], "text": "الشفرة هي {}، عدد البطاقات {}" }
+ {
+  "id": "all_night",
+  "games": [
+   "mafia",
+   "dakhil",
+   "chancellor",
+   "qaftah",
+   "harf",
+   "qaddirha",
+   "draw_guess"
+  ],
+  "text": "حلّ الليل"
+ },
+ {
+  "id": "all_winner",
+  "games": [
+   "dakhil",
+   "harf",
+   "qaddirha"
+  ],
+  "text": "انتهت اللعبة. الفايز: {}."
+ },
+ {
+  "id": "mafia_reveal",
+  "games": [
+   "mafia"
+  ],
+  "text": "وُزّعت الأدوار. كل واحد يشوف بطاقته بسرية، وانتبهوا من العيون."
+ },
+ {
+  "id": "mafia_night",
+  "games": [
+   "mafia"
+  ],
+  "text": "حلّ الليل… نامت المدينة. الكل يمسك جواله ويختار بصمت."
+ },
+ {
+  "id": "mafia_night_host",
+  "games": [
+   "mafia"
+  ],
+  "text": "حلّ الليل… نامت المدينة. غمّضوا عيونكم."
+ },
+ {
+  "id": "mafia_dawn_wait",
+  "games": [
+   "mafia"
+  ],
+  "text": "طلع الصباح… والليلة…"
+ },
+ {
+  "id": "mafia_res_wait",
+  "games": [
+   "mafia",
+   "chancellor"
+  ],
+  "text": "انتهى التصويت… والنتيجة…"
+ },
+ {
+  "id": "mafia_dawn_none",
+  "games": [
+   "mafia"
+  ],
+  "text": "ليلة هادية… ما أحد انقتل."
+ },
+ {
+  "id": "mafia_dawn_dead",
+  "games": [
+   "mafia"
+  ],
+  "text": "وللأسف، انقتل {}."
+ },
+ {
+  "id": "mafia_dawn_idle",
+  "games": [
+   "mafia"
+  ],
+  "text": "و{} طلع من اللعبة، لأنه ما خلّص مهمته."
+ },
+ {
+  "id": "mafia_day",
+  "games": [
+   "mafia"
+  ],
+  "text": "وقت النقاش. ناقشوا مين المشتبه فيه."
+ },
+ {
+  "id": "mafia_vote",
+  "games": [
+   "mafia"
+  ],
+  "text": "حان وقت التصويت. مين تبون تطلعونه من القرية؟"
+ },
+ {
+  "id": "mafia_res_out",
+  "games": [
+   "mafia"
+  ],
+  "text": "قرّرت القرية… {} يطلع من اللعبة."
+ },
+ {
+  "id": "mafia_res_tie",
+  "games": [
+   "mafia"
+  ],
+  "text": "تعادلت الأصوات… ما أحد يطلع هالمرة."
+ },
+ {
+  "id": "mafia_res_none",
+  "games": [
+   "mafia"
+  ],
+  "text": "ما أحد صوّت… ما أحد يطلع."
+ },
+ {
+  "id": "mafia_win_town",
+  "games": [
+   "mafia"
+  ],
+  "text": "انتهت اللعبة. فاز أهل البلد! انكشفت المافيا كلها."
+ },
+ {
+  "id": "mafia_win_mafia",
+  "games": [
+   "mafia"
+  ],
+  "text": "انتهت اللعبة. فازت المافيا… سيطرت على القرية."
+ },
+ {
+  "id": "mafia_win_jester",
+  "games": [
+   "mafia"
+  ],
+  "text": "انتهت اللعبة. فاز المهرّج! خدعكم كلكم."
+ },
+ {
+  "id": "dakhil_round",
+  "games": [
+   "dakhil"
+  ],
+  "text": "الجولة {}. المجموعة: {}. كل واحد يشوف دوره بسرية… وواحد منكم الدخيل."
+ },
+ {
+  "id": "dakhil_caught",
+  "games": [
+   "dakhil"
+  ],
+  "text": "انكشف الدخيل… {}! عنده فرصة أخيرة يخمّن الكلمة."
+ },
+ {
+  "id": "dakhil_questions",
+  "games": [
+   "dakhil"
+  ],
+  "text": "بدأت الأسئلة. الدور على {}."
+ },
+ {
+  "id": "dakhil_no_agree",
+  "games": [
+   "dakhil"
+  ],
+  "text": "ما اتفقتوا على أحد. كملوا الأسئلة."
+ },
+ {
+  "id": "dakhil_spy_wins",
+  "games": [
+   "dakhil"
+  ],
+  "text": "فاز الدخيل {}. والكلمة: {}."
+ },
+ {
+  "id": "dakhil_town_wins",
+  "games": [
+   "dakhil"
+  ],
+  "text": "فاز المواطنون. الدخيل كان {}. والكلمة: {}."
+ },
+ {
+  "id": "dakhil_vote_called",
+  "games": [
+   "dakhil"
+  ],
+  "text": "{} طلب التصويت. منو الدخيل؟ صوّتوا الحين."
+ },
+ {
+  "id": "dakhil_vote_time",
+  "games": [
+   "dakhil"
+  ],
+  "text": "انتهى الوقت. منو الدخيل؟ صوّتوا الحين."
+ },
+ {
+  "id": "dakhil_asks",
+  "games": [
+   "dakhil"
+  ],
+  "text": "{} يسأل {}."
+ },
+ {
+  "id": "ch_cards",
+  "games": [
+   "chancellor"
+  ],
+  "text": "وُزّعت البطاقات. كل واحد يشوف بطاقته بسرية، ولا أحد يكشف جواله."
+ },
+ {
+  "id": "ch_pres_pick",
+  "games": [
+   "chancellor"
+  ],
+  "text": "الرئيس {}. اختر مستشارك."
+ },
+ {
+  "id": "ch_nominated_danger",
+  "games": [
+   "chancellor"
+  ],
+  "text": "{} رشّح {}. صوّتوا بجوالاتكم: نعم أو لا. وانتبهوا… لو طلع الزعيم السري، تنتهي اللعبة."
+ },
+ {
+  "id": "ch_nominated",
+  "games": [
+   "chancellor"
+  ],
+  "text": "{} رشّح {}. صوّتوا بجوالاتكم: نعم أو لا."
+ },
+ {
+  "id": "ch_passed",
+  "games": [
+   "chancellor"
+  ],
+  "text": "نجحت الحكومة. {} نعم، و{} لا."
+ },
+ {
+  "id": "ch_failed_chaos",
+  "games": [
+   "chancellor"
+  ],
+  "text": "سقطت الحكومة. {} نعم، و{} لا. وانتبهوا: رفض واحد بعد، وتصير فوضى."
+ },
+ {
+  "id": "ch_failed",
+  "games": [
+   "chancellor"
+  ],
+  "text": "سقطت الحكومة. {} نعم، و{} لا."
+ },
+ {
+  "id": "ch_gov_ok",
+  "games": [
+   "chancellor"
+  ],
+  "text": "نجحت الحكومة. الرئيس يشوف ثلاث سياسات بسرية، ويستبعد وحدة."
+ },
+ {
+  "id": "ch_chancellor_picks",
+  "games": [
+   "chancellor"
+  ],
+  "text": "المستشار يختار السياسة."
+ },
+ {
+  "id": "ch_veto",
+  "games": [
+   "chancellor"
+  ],
+  "text": "المستشار طلب الفيتو! القرار عند الرئيس."
+ },
+ {
+  "id": "ch_veto_refused",
+  "games": [
+   "chancellor"
+  ],
+  "text": "الرئيس رفض الفيتو. لازم المستشار يعتمد وحدة."
+ },
+ {
+  "id": "ch_chaos",
+  "games": [
+   "chancellor"
+  ],
+  "text": "ثلاث حكومات سقطت… فوضى! تنعتمد السياسة اللي فوق الكومة."
+ },
+ {
+  "id": "ch_enacted",
+  "games": [
+   "chancellor"
+  ],
+  "text": "وانعتمدت…"
+ },
+ {
+  "id": "ch_clean",
+  "games": [
+   "chancellor"
+  ],
+  "text": "سياسة نزيهة."
+ },
+ {
+  "id": "ch_corrupt_power",
+  "games": [
+   "chancellor"
+  ],
+  "text": "سياسة فاسدة. والرئيس حصل على قدرة: {}."
+ },
+ {
+  "id": "ch_corrupt",
+  "games": [
+   "chancellor"
+  ],
+  "text": "سياسة فاسدة."
+ },
+ {
+  "id": "ch_power_kill",
+  "games": [
+   "chancellor"
+  ],
+  "text": "قدرة الإعدام. الرئيس يختار مين يطلع من اللعبة."
+ },
+ {
+  "id": "ch_power_check",
+  "games": [
+   "chancellor"
+  ],
+  "text": "قدرة فحص الولاء. الرئيس يشوف حزب لاعب بسرية."
+ },
+ {
+  "id": "ch_power_peek",
+  "games": [
+   "chancellor"
+  ],
+  "text": "الرئيس يشوف أول ثلاث بطاقات بالكومة بسرية."
+ },
+ {
+  "id": "ch_power_special",
+  "games": [
+   "chancellor"
+  ],
+  "text": "انتخابات خاصة. الرئيس يختار الرئيس الجاي."
+ },
+ {
+  "id": "ch_checked",
+  "games": [
+   "chancellor"
+  ],
+  "text": "الرئيس فحص ولاء {}."
+ },
+ {
+  "id": "ch_executed",
+  "games": [
+   "chancellor"
+  ],
+  "text": "تم إعدام {}. وما كان الزعيم السري."
+ },
+ {
+  "id": "ch_win_clean",
+  "games": [
+   "chancellor"
+  ],
+  "text": "انتهت اللعبة. فاز النزهاء! {}."
+ },
+ {
+  "id": "ch_win_corrupt",
+  "games": [
+   "chancellor"
+  ],
+  "text": "انتهت اللعبة. فاز الفاسدين… {}."
+ },
+ {
+  "id": "qf_round_x",
+  "games": [
+   "qaftah"
+  ],
+  "text": "الجولة {}، والنقاط مضروبة في {}. ألّفوا كذباتكم السرية في الجوال!"
+ },
+ {
+  "id": "qf_round",
+  "games": [
+   "qaftah"
+  ],
+  "text": "الجولة {}. ألّفوا كذباتكم السرية في الجوال!"
+ },
+ {
+  "id": "qf_all_wrote",
+  "games": [
+   "qaftah"
+  ],
+  "text": "الكل كتب كذبته! الحين دوركم تصيدون الجواب الحقيقي من بين الفخاخ."
+ },
+ {
+  "id": "qf_caught",
+  "games": [
+   "qaftah"
+  ],
+  "text": "قفطة! {} طلعت كذبة من تأليف {}، وطاح فيها {}!"
+ },
+ {
+  "id": "qf_truth_by",
+  "games": [
+   "qaftah"
+  ],
+  "text": "الإجابة الصحيحة هي: {}. كشفها {}"
+ },
+ {
+  "id": "qf_truth_none",
+  "games": [
+   "qaftah"
+  ],
+  "text": "الإجابة الصحيحة هي: {}. ولا أحد لقط الحقيقة!"
+ },
+ {
+  "id": "qf_fact_by",
+  "games": [
+   "qaftah"
+  ],
+  "text": "والحقيقة المؤكدة هي: {}. كشفها {}"
+ },
+ {
+  "id": "qf_fact_none",
+  "games": [
+   "qaftah"
+  ],
+  "text": "والحقيقة المؤكدة هي: {}. ولا أحد قدر يكشفها!"
+ },
+ {
+  "id": "qf_winner",
+  "games": [
+   "qaftah"
+  ],
+  "text": "انتهت اللعبة! بطل قفطة هو {}!"
+ },
+ {
+  "id": "harf_round",
+  "games": [
+   "harf"
+  ],
+  "text": "الجولة {}. الحرف: {}. ابدؤوا الكتابة!"
+ },
+ {
+  "id": "harf_time",
+  "games": [
+   "harf"
+  ],
+  "text": "انتهى الوقت. راجعوا الإجابات وارفضوا الغلط."
+ },
+ {
+  "id": "harf_stop",
+  "games": [
+   "harf"
+  ],
+  "text": "{} خلّص! باقي عشر ثواني."
+ },
+ {
+  "id": "qd_answer_closest",
+  "games": [
+   "qaddirha"
+  ],
+  "text": "الجواب: {}. الأقرب: {}"
+ },
+ {
+  "id": "screen_code",
+  "games": [
+   "shifra"
+  ],
+  "text": "الشفرة هي {}، عدد البطاقات {}"
+ },
+ {
+  "id": "draw_round",
+  "games": [
+   "draw_guess"
+  ],
+  "text": "الجولة {}. الفئة: {}. شوفوا كلماتكم، وواحد منكم برا السالفة!"
+ },
+ {
+  "id": "draw_start",
+  "games": [
+   "draw_guess"
+  ],
+  "text": "يلا نبدأ الرسم. أول واحد: {}"
+ },
+ {
+  "id": "draw_vote",
+  "games": [
+   "draw_guess"
+  ],
+  "text": "خلص الرسم. صوّتوا: مين برا السالفة؟"
+ },
+ {
+  "id": "draw_caught",
+  "games": [
+   "draw_guess"
+  ],
+  "text": "صدتوه! {} برا السالفة. عنده فرصة أخيرة."
+ },
+ {
+  "id": "draw_word",
+  "games": [
+   "draw_guess"
+  ],
+  "text": "الكلمة كانت: {}"
+ }
 ]

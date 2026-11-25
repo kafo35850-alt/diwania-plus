@@ -727,6 +727,14 @@ footer a { text-decoration: none; }
 .sec-kicker { display: inline-block; font-size: 13px; font-weight: 700; color: var(--gold); letter-spacing: .3px; margin-bottom: 4px; }
 
 /* pricing */
+.offer-card{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin:0 auto 16px;max-width:980px;padding:18px 22px;border-radius:22px;background:linear-gradient(135deg,rgba(245,185,66,.18),rgba(45,212,191,.10));border:2px solid rgba(245,185,66,.7);box-shadow:0 14px 34px rgba(0,0,0,.35);text-align:right}
+.offer-card .oc-gift{font-size:54px;line-height:1}
+.offer-card .oc-body{flex:1;min-width:200px}.offer-card .oc-kicker{display:inline-block;font-size:13px;font-weight:800;color:#2b1c00;background:#F5B942;border-radius:999px;padding:3px 12px}
+.offer-card .oc-credits{font-size:38px;font-weight:900;color:#fff;margin:6px 0 2px}.offer-card .oc-credits small{font-size:18px;color:#F5B942}
+.offer-card p{margin:0;color:#c9d2e6;font-size:14px;line-height:1.7}
+.offer-card .oc-price{display:flex;flex-direction:column;align-items:center;gap:4px;min-width:150px}.offer-card .oc-price b{font-size:34px;color:#F5B942}.offer-card .oc-price b small{font-size:15px}
+.offer-card .oc-price s{color:#94a3b8;font-size:15px}.offer-card .oc-price span{color:#a7f3d0;font-size:13px}
+@media (max-width:640px){.offer-card{flex-direction:column;text-align:center}.offer-card .oc-body{min-width:0}}
 .price-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; align-items: stretch; margin-top: 6px; }
 @media (max-width: 1100px) { .price-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 560px) {
@@ -2890,8 +2898,32 @@ html.dw-game-open #dwApp { visibility: hidden; }
   }
 
   // Price per credit of the smallest package is the reference for "you save".
+  // The first-purchase offer: shown until the account has a paid order (the server checks it again).
+  function firstOfferPkg() {
+    var o = STATE.packages.find(function (p) { return p.is_active && p.first_purchase_only; });
+    if (!o) return null;
+    var paid = ((STATE.wallet && STATE.wallet.payments) || []).some(function (x) { return x && x.status === 'paid'; });
+    return paid ? null : o;
+  }
+  function renderOfferCard() {
+    var o = firstOfferPkg(); if (!o) return '';
+    var gateway = DiwaniyaServerKernel.loadDB().gatewayConnected;
+    var ref = STATE.packages.filter(function (p) { return p.is_active && !p.first_purchase_only; }).sort(function (a, b) { return a.credits - b.credits; })[0];
+    var full = ref ? Math.round(ref.price_halalas / ref.credits * o.credits) : 0;
+    var btn = !gateway ? '<button class="dw-btn dw-btn-sec" disabled>🔒 قريباً</button>'
+      : (!STATE.user ? '<button class="dw-btn dw-btn-gold" data-act="open-auth">خذ العرض</button>'
+        : '<button class="dw-btn dw-btn-gold" data-act="buy-pkg" data-id="' + esc(o.id) + '"' + (STATE.checkoutInFlight ? ' disabled' : '') + '>🎁 خذ العرض</button>');
+    return '<div class="offer-card">' +
+      '<div class="oc-gift">🎁</div>' +
+      '<div class="oc-body"><span class="oc-kicker">' + esc(o.badge || 'عرض خاص') + '</span>' +
+        '<div class="oc-credits">' + arNum(o.credits) + ' <small>قيم</small></div>' +
+        '<p>' + esc(o.description) + '</p></div>' +
+      '<div class="oc-price"><b>' + arNum(sarText(o.price_halalas)) + ' <small>ر.س</small></b>' + (full > o.price_halalas ? '<s>' + arNum(sarText(full)) + '</s>' : '') +
+        '<span>≈ ' + arNum(sarText(Math.round(o.price_halalas / o.credits))) + ' ر.س للقيم</span>' + btn + '</div>' +
+    '</div>';
+  }
   function renderPriceCards() {
-    var pkgs = STATE.packages.filter(function (p) { return p.is_active; }).sort(function (a, b) { return a.sort_order - b.sort_order; });
+    var pkgs = STATE.packages.filter(function (p) { return p.is_active && !p.first_purchase_only; }).sort(function (a, b) { return a.sort_order - b.sort_order; });
     if (!pkgs.length) return '';
     var ref = pkgs.slice().sort(function (a, b) { return a.credits - b.credits; })[0];
     var refPer = ref.price_halalas / ref.credits;
@@ -2956,7 +2988,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
         '<p style="margin:8px auto 0;max-width:620px;color:#c9d2e6;line-height:1.8">القيم الواحد يشغّل لعبة كاملة لكل الشلة. كل ما كبرت الباقة نزل سعر القيم.' + (trialsOn() ? ' وأول مرة في كل لعبة <b style="color:var(--teal)">مجانية</b>.' : '') + '</p>' +
       '</section>' +
       promoBoxHtml() +
-      '<div style="padding-top:14px">' + renderPriceCards() + '</div>' +
+      '<div style="padding-top:14px">' + renderOfferCard() + renderPriceCards() + '</div>' +
       payTrustRow() +
       '<div style="text-align:center;color:var(--text-muted);font-size:13px;line-height:1.9">الأقيام ما لها تاريخ انتهاء، وتنضاف لمحفظتك تلقائياً بعد تأكيد الدفع. بياناتك البنكية ما تمر على موقعنا.<br>بإتمام الشراء أنت توافق على ' + legalLinksHtml() + '.</div>' +
       renderFaq();
@@ -3200,6 +3232,8 @@ html.dw-game-open #dwApp { visibility: hidden; }
     }
 
     if (st === 'games') {
+      var voGames = [];
+      ((DiwaniyaServerKernel.loadDB().voice || {}).lines || []).forEach(function (l) { l.games.forEach(function (x) { if (voGames.indexOf(x) === -1) voGames.push(x); }); });
       return nav +
         '<div class="dw-card">' +
           '<h4 style="margin:0;font-size:19px">نظام إدارة الألعاب (Game Management System) — جميع الألعاب الـ ' + arNum(STATE.games.length) + '</h4>' +
@@ -3233,7 +3267,8 @@ html.dw-game-open #dwApp { visibility: hidden; }
                 '<td>' + (g.is_enabled ? '<span class="dw-chip teal">ظاهرة</span>' : '<span class="dw-chip">مخفية</span>') + (isFreeGame(g) ? ' <span class="dw-chip teal">🆓 مجانية</span>' : '') + (g.featured ? ' <span class="dw-chip gold">⭐ مميزة</span>' : '') + '</td>' +
                 '<td style="white-space:nowrap"><button class="dw-btn dw-btn-sec dw-btn-sm" data-act="adm-toggle-game" data-id="' + esc(g.id) + '">' + (g.is_enabled ? 'إخفاء' : 'إظهار') + '</button> ' +
                   '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="adm-toggle-free" data-id="' + esc(g.id) + '">' + (isFreeGame(g) ? '💎 خلّها مدفوعة' : '🆓 خلّها مجانية') + '</button> ' +
-                  '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="adm-toggle-featured" data-id="' + esc(g.id) + '">' + (g.featured ? '☆ شيلها من المميزة' : '⭐ خلّها مميزة') + '</button></td>' +
+                  '<button class="dw-btn dw-btn-sec dw-btn-sm" data-act="adm-toggle-featured" data-id="' + esc(g.id) + '">' + (g.featured ? '☆ شيلها من المميزة' : '⭐ خلّها مميزة') + '</button>' +
+                  (voGames.indexOf(g.engine_type) !== -1 || voGames.indexOf(g.slug) !== -1 ? ' <button class="dw-btn dw-btn-gold dw-btn-sm" data-adm-tab="voice" data-vo-game="' + esc(voGames.indexOf(g.slug) !== -1 ? g.slug : g.engine_type) + '">🎙️ صوت الراوي</button>' : '') + '</td>' +
               '</tr>';
             }).join('') +
           '</tbody></table></div>' +
@@ -3320,7 +3355,17 @@ html.dw-game-open #dwApp { visibility: hidden; }
       var vd = DiwaniyaServerKernel.loadDB().voice || { lines: [], rec: {} };
       var gameName = function (slug) { var g = STATE.games.find(function (x) { return x.slug === slug; }); return g ? cleanTitle(g.title) : slug; };
       var groups = [];
-      vd.lines.forEach(function (l) {
+      var voList = [];
+      vd.lines.forEach(function (l) { l.games.forEach(function (x) { if (voList.indexOf(x) === -1) voList.push(x); }); });
+      var voPick = STATE.voGame && voList.indexOf(STATE.voGame) !== -1 ? STATE.voGame : '';
+      var voChips = '<div class="dw-chip-row" style="display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 10px">' +
+        '<button class="dw-btn dw-btn-sm ' + (voPick ? 'dw-btn-sec' : 'dw-btn-gold') + '" data-adm-tab="voice" data-vo-game="">كل الألعاب</button>' +
+        voList.map(function (x) { return '<button class="dw-btn dw-btn-sm ' + (voPick === x ? 'dw-btn-gold' : 'dw-btn-sec') + '" data-adm-tab="voice" data-vo-game="' + esc(x) + '">🎮 ' + esc(gameName(x)) + '</button>'; }).join('') + '</div>';
+      if (voPick) {
+        // One game: every line its narrator says, in one open list (shared lines included).
+        groups.push({ key: voPick, title: '🎮 ' + gameName(voPick) + ' — كل الجمل اللي يقولها الراوي', lines: vd.lines.filter(function (l) { return l.games.indexOf(voPick) !== -1; }) });
+      }
+      if (!voPick) vd.lines.forEach(function (l) {
         var key = l.games.length > 1 ? 'shared' : l.games[0];
         var grp = groups.find(function (x) { return x.key === key; });
         if (!grp) { grp = { key: key, title: key === 'shared' ? '🔁 جمل مشتركة بين أكثر من لعبة' : '🎮 ' + gameName(key), lines: [] }; groups.push(grp); }
@@ -3359,7 +3404,8 @@ html.dw-game-open #dwApp { visibility: hidden; }
           '<h4 style="margin:0;font-size:19px">🎙️ أصوات الراوي — سجّلها بصوتك</h4>' +
           '<p style="margin:0;color:#c9d2e6;line-height:1.9;font-size:14px">اضغط «🔴 سجّل»، قل الجملة، وبعدها «⏹ وقّف واحفظ». الجمل اللي فيها <span class="vo-slot">🤖 الاسم</span> تتقسم: تسجّل اللي قبل الاسم واللي بعده، والجهاز يقول الاسم بس. أي جملة ما سجلتها تبقى بالصوت الحالي.</p>' +
           '<div class="qsummary"><span class="qlv easy">' + arNum(done) + ' من ' + arNum(vd.lines.length) + ' جملة بصوتك</span><span class="qsum-note">💡 سجّل في مكان هادي، والجوال على بعد شبر من فمك.</span></div>' +
-          groups.map(function (g) { return '<details class="vo-group"' + (g.key === 'mafia' || g.key === 'shared' ? ' open' : '') + '><summary>' + esc(g.title) + ' <small>(' + arNum(g.lines.length) + ')</small></summary>' + g.lines.map(lineHtml).join('') + '</details>'; }).join('') +
+          voChips +
+          groups.map(function (g) { return '<details class="vo-group"' + (voPick || g.key === 'mafia' || g.key === 'shared' ? ' open' : '') + '><summary>' + esc(g.title) + ' <small>(' + arNum(g.lines.length) + ')</small></summary>' + g.lines.map(lineHtml).join('') + '</details>'; }).join('') +
         '</div>';
     }
 
@@ -4134,6 +4180,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
     var admTabBtn = base.closest('[data-adm-tab]');
     if (admTabBtn) {
       STATE.adminSubTab = admTabBtn.getAttribute('data-adm-tab');
+      if (STATE.adminSubTab === 'voice') STATE.voGame = admTabBtn.getAttribute('data-vo-game') || '';
       render();
       return;
     }
