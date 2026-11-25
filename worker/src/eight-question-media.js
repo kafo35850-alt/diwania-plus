@@ -8,8 +8,8 @@ const reviews = Object.entries(COVERAGE.questions)
   .filter(([slug]) => !excluded.has(slug))
   .map(([slug, cards]) => [
     slug,
-    new Map(cards.map(([uid, digest, question, answer, fixedText]) =>
-      [uid, { digest, question, answer, fixedText }]))
+    new Map(cards.map(([uid, digest, question, answer, fixedText, previousMedia]) =>
+      [uid, { digest, question, answer, fixedText, previousMedia }]))
   ]);
 
 function fingerprint(question, answer) {
@@ -32,17 +32,23 @@ export function addShippedQuestionMedia(stored, rawQuestions) {
       if (!review || fingerprint(card.q, card.a) !== review.digest) return card;
 
       const seeded = Object.hasOwn(PICS, card.uid) ? PICS[card.uid] : [];
-      const qm = !card.qm && !card.img && !card.video && !seeded[0] && media[review.question];
-      const am = !card.am && !seeded[1] && media[review.answer];
-      if (!qm && !am && !review.fixedText) return card;
+      // Only replace a saved URL if it is the exact one retired by this correction.
+      const replaceQuestion = review.previousMedia?.qm && card.qm?.u === review.previousMedia.qm;
+      const replaceAnswer = review.previousMedia?.am && card.am?.u === review.previousMedia.am;
+      const qm = (!card.qm || replaceQuestion) && !card.img && !card.video && !seeded[0] && media[review.question];
+      const am = (!card.am || replaceAnswer) && !seeded[1] && media[review.answer];
+      if (!qm && !am && !replaceQuestion && !replaceAnswer && !review.fixedText) return card;
 
       changed = true;
-      return {
+      const updatedCard = {
         ...card,
         ...(review.fixedText ? { q: review.fixedText } : {}),
         ...(qm ? { qm: { ...qm } } : {}),
         ...(am ? { am: { ...am } } : {})
       };
+      if (replaceQuestion && !qm) delete updatedCard.qm;
+      if (replaceAnswer && !am) delete updatedCard.am;
+      return updatedCard;
     });
     if (changed) stored[slug] = updated;
   }
