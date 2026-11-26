@@ -257,7 +257,7 @@
   // Drawn game pictures (loaded into the database as /media/med_seed_game_<slug>); the drawing above stays as a fallback.
   ['eight','qaftah','chancellor','harf','qaddirha','dakhil','mafia','shifra','mystery_button','golden_vault','diwaniya_auction','fortune_wheel',
    'friends_court','last_one_standing','silent_library','who_knows_friend','draw_guess','stadium_esports','how_much_price','pressure_seat',
-   'mazad30','fake_artist','liars_table','vault50','radar_guess','alibi_court'].forEach(function (k) {
+   'mazad30','fake_artist','liars_table','vault50','radar_guess','alibi_court','hami_barid','fooq_rasak'].forEach(function (k) {
     var old = P[k] || '';
     // Only the picture (on the same navy as its own background); the old drawing peeked out at odd sizes while it loaded.
     P[k] = '<div style="position:relative;width:100%;height:100%;background:#151d4a">' +
