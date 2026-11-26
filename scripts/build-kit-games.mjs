@@ -10,7 +10,7 @@ export const KIT_GAMES = {
   harf: { title: 'حروف الديوانية' },
   qaddirha: { title: 'تقدير الديوانية' },
   draw_guess: { title: 'رسّام الديوانية' },
-  fooq_rasak: { title: 'شخصيات الديوانية' }
+  fooq_rasak: { title: 'ديوانية خمّن الشخصية' }
 };
 const SLOTS = [
   ['games/dakhil/words.js', 'data.js'],

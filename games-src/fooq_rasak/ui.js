@@ -29,7 +29,7 @@
   }
 
   const cfg = {
-    id: 'fooq_rasak', name: 'شخصيات الديوانية', nameHtml: '<b>شخصيات</b> الديوانية', tagline: 'كل واحد يختار شخصية سرية… واسأل لين تعرف شخصية خصمك!', icon: ICON, wsPath: '/fooq_rasak/ws', min: 2, max: 2,
+    id: 'fooq_rasak', name: 'ديوانية خمّن الشخصية', nameHtml: 'ديوانية <b>خمّن الشخصية</b>', tagline: 'كل واحد يختار شخصية سرية… واسأل لين تعرف شخصية خصمك!', icon: ICON, wsPath: '/fooq_rasak/ws', min: 2, max: 2,
     engine: MG.fooq_rasak, help: MG.fooq_rasakHelp,
     err: { not_your_turn: 'مو دورك', room_full: 'الغرفة لشخصين بس' },
     phaseName: { pick: 'اختيار الشخصية', play: 'اللعب', result: 'نهاية الجولة', ended: 'النهاية' },
@@ -101,7 +101,7 @@
   };
 
   cfg.board = {
-    title: '<b>شخصيات</b> الديوانية', timedPhases: [], stepKey: (v) => v.phase + ':' + v.round + ':' + (v.turn || '') + ':' + (v.step || ''),
+    title: 'ديوانية <b>خمّن الشخصية</b>', timedPhases: [], stepKey: (v) => v.phase + ':' + v.round + ':' + (v.turn || '') + ':' + (v.step || ''),
     css: '.mdb .who{font-size:5em;font-weight:900;color:#ffd978;line-height:1.1}.mdb .vs{display:flex;gap:4em;font-size:2.4em;justify-content:center}.mdb .vs div{text-align:center}.mdb .vs b{display:block;font-size:2em;color:#ffd978}.mdb .ans{font-size:6em;font-weight:900}.mdb .gwtv{width:9em;height:9em;border-radius:1em;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;font-size:1.6em;margin:0 auto}.mdb .gwtv img{width:100%;height:100%;object-fit:cover;object-position:top}',
     tone: (v) => (v.phase === 'result' || v.phase === 'ended' ? 'gold' : ''),
     render(v, B) {
