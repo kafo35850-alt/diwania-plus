@@ -12,6 +12,7 @@ import fortune_wheel from '../../games/fortune_wheel.html';
 import fooq_rasak from '../../games/fooq_rasak.html';
 import friends_court from '../../games/friends_court.html';
 import golden_vault from '../../games/golden_vault.html';
+import hami_barid from '../../games/hami_barid.html';
 import harf from '../../games/harf.html';
 import how_much_price from '../../games/how_much_price.html';
 import last_one_standing from '../../games/last_one_standing.html';
@@ -42,6 +43,7 @@ export const GAMES = {
   fooq_rasak,
   friends_court,
   golden_vault,
+  hami_barid,
   harf,
   how_much_price,
   last_one_standing,

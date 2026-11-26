@@ -5,6 +5,9 @@ compatibility_date = "2025-09-01"
 workers_dev = true
 keep_vars = true
 
+[ai]
+binding = "AI"
+
 # The site's own domain (the zone lives in the same Cloudflare account). workers.dev keeps working too.
 routes = [
   { pattern = "diwaniyaplus.com", custom_domain = true },
@@ -24,7 +27,11 @@ fallthrough = true
 
 [[rules]]
 type = "Data"
-globs = ["**/*.png"]
+globs = ["**/*.png", "**/ctx/*.bin"]
+
+[[rules]]
+type = "Text"
+globs = ["**/ctx/*.txt"]
 fallthrough = true
 
 [[d1_databases]]

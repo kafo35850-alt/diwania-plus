@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>ديوانية بلس — حامي بارد</title>
+<style>
+:root{--bg:#070B1A;--panel:#101733;--card:rgba(22,32,68,.86);--gold:#F5B942;--text:#F8FAFC;--muted:#94A3B8;--hot:#10B981;--warm:#F59E0B;--cold:#F43F5E;--line:rgba(255,255,255,.1)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;min-height:100vh;color:var(--text);font-family:-apple-system,"SF Arabic","Tajawal","Cairo",system-ui,sans-serif;background:radial-gradient(900px 450px at 85% 0%,rgba(244,63,94,.14),transparent 65%),radial-gradient(800px 450px at 10% 100%,rgba(16,185,129,.12),transparent 65%),linear-gradient(180deg,#0E1530 0%,#070B1A 100%)}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer;border:none;background:none;touch-action:manipulation}
+.wrap{max-width:560px;margin:0 auto;padding:12px 16px 90px}
+.top{display:flex;align-items:center;gap:10px;padding:6px 0 12px}
+.top a{color:var(--muted);text-decoration:none;font-size:22px;padding:4px 8px}
+.title{flex:1;text-align:center;font-weight:900;font-size:24px;letter-spacing:.5px}
+.title b{background:linear-gradient(90deg,#fb7185,#f59e0b 50%,#34d399);-webkit-background-clip:text;background-clip:text;color:transparent}
+.menu-btn{font-size:22px;padding:4px 8px;color:var(--muted)}
+.meta{display:flex;justify-content:space-between;color:var(--muted);font-size:13px;font-weight:700;margin-bottom:8px}
+.inp{width:100%;padding:14px 16px;border-radius:14px;border:2px solid rgba(148,163,184,.45);background:#0b1230;font-size:20px;font-weight:800;outline:none}
+.inp:focus{border-color:var(--gold)}
+.row{position:relative;display:flex;align-items:center;height:42px;border-radius:10px;overflow:hidden;background:#172040;margin-top:7px;font-weight:800}
+.row .bar{position:absolute;inset:0 0 0 auto;border-radius:10px}
+.row .w{position:relative;padding:0 12px;flex:1;font-size:17px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row .n{position:relative;padding:0 12px;font-size:16px;font-variant-numeric:tabular-nums}
+.row.last{outline:2.5px solid #fff}
+.row.hint .w::after{content:" 💡";font-size:13px}
+.msg{min-height:24px;text-align:center;font-weight:800;margin:10px 0 2px;color:var(--gold)}
+.sep{height:1px;background:var(--line);margin:14px 0 6px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;margin-top:12px}
+.btn{display:block;width:100%;padding:13px;border-radius:14px;font-weight:900;font-size:16px;background:rgba(255,255,255,.08);margin-top:8px}
+.btn.gold{background:linear-gradient(180deg,#FFE08A,#F5B942);color:#1a1205}
+.win{text-align:center}
+.win .big{font-size:30px;font-weight:900;margin:4px 0}
+.win .w{font-size:40px;font-weight:900;color:var(--hot)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:8px}
+.chip{padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.08);font-weight:800;font-size:14px}
+.sheet{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:flex-end;justify-content:center;z-index:50}
+.sheet.on{display:flex}
+.sheet .in{background:#101733;width:100%;max-width:560px;border-radius:22px 22px 0 0;padding:18px 16px 28px;max-height:86vh;overflow:auto}
+.sheet h3{margin:4px 0 10px;font-size:20px}
+.sheet p{color:#cbd5e1;line-height:1.9;margin:6px 0}
+.legend{display:flex;gap:8px;margin:8px 0}
+.legend span{flex:1;text-align:center;padding:6px;border-radius:10px;font-weight:800;font-size:13px}
+.load{text-align:center;padding:60px 10px;color:var(--muted);font-weight:800}
+.load .pb{height:8px;border-radius:9px;background:#1e293b;margin:14px auto 0;max-width:260px;overflow:hidden}
+.load .pb i{display:block;height:100%;width:0;background:var(--gold);transition:width .2s}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#111827;border:1px solid var(--line);padding:10px 16px;border-radius:12px;font-weight:800;z-index:60;display:none}
+</style>
+</head>
+<body>
+<div class="wrap" id="app"><div class="load">يجهّز القاموس…<div class="pb"><i id="pb"></i></div></div></div>
+<div class="sheet" id="sheet"><div class="in" id="sheetIn"></div></div>
+<div class="toast" id="toast"></div>
+<script>
+(function () {
+  'use strict';
+  const AR = (n) => String(n).replace(/\d/g, (d) => '٠١٢٣٤٥٦٧٨٩'[d]);
+  const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const $ = (id) => document.getElementById(id);
+  const store = { get(k) { try { return JSON.parse(localStorage.getItem(k)); } catch (e) { return null; } }, set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { } } };
+  // نفس توحيد الكلمات اللي استخدمناه وقت بناء القاموس
+  function norm(w) {
+    w = String(w || '').trim().replace(/[ً-ْـ]/g, '').replace(/[أإآ]/g, 'ا').replace(/ى/g, 'ي').replace(/ة/g, 'ه').replace(/ؤ/g, 'و').replace(/ئ/g, 'ي').replace(/\s+/g, ' ');
+    if (w.indexOf('ال') === 0 && w.length > 4) w = w.slice(2);
+    return w;
+  }
+  let WORDS = [], NMAP = new Map(), EMB = null, DIM = 0, TOP = null, NS = 0, K = 0, N = 0;
+  let S = null; // الحالة الحالية: { id, ranks(Int32Array), order(Int32Array), guesses:[{i,r,h}], hints, done, gaveUp }
+  function toast(t) { const el = $('toast'); el.textContent = t; el.style.display = 'block'; clearTimeout(toast.t); toast.t = setTimeout(() => { el.style.display = 'none'; }, 2600); }
+
+  async function load() {
+    const pb = $('pb');
+    const get = async (u, type) => { const r = await fetch(u, { cache: 'force-cache' }); if (!r.ok) throw new Error(u); return type === 'text' ? r.text() : r.arrayBuffer(); };
+    const [voc, emb, top] = await Promise.all([get('/ctx/vocab.txt', 'text').then((x) => { pb.style.width = '30%'; return x; }), get('/ctx/emb.bin').then((x) => { pb.style.width = '80%'; return x; }), get('/ctx/top.bin')]);
+    pb.style.width = '100%';
+    WORDS = voc.split('\n'); N = WORDS.length;
+    WORDS.forEach((w, i) => { const n = norm(w); if (!NMAP.has(n)) NMAP.set(n, i); });
+    const h = new Int32Array(emb, 0, 2); DIM = h[1]; EMB = new Int8Array(emb, 8);
+    const th = new Uint16Array(top, 0, 2); NS = th[0]; K = th[1]; TOP = new Uint16Array(top, 4);
+  }
+  // ترتيب كل كلمات القاموس حسب قربها من الكلمة السرية
+  function rankFor(id) {
+    const base = id * K, ranks = new Int32Array(N).fill(0), order = new Int32Array(N);
+    for (let r = 0; r < K; r++) { const i = TOP[base + r]; ranks[i] = r + 1; order[r] = i; }
+    const sec = TOP[base], sv = EMB.subarray(sec * DIM, sec * DIM + DIM);
+    const rest = [], sims = new Float32Array(N);
+    for (let i = 0; i < N; i++) {
+      if (ranks[i]) continue;
+      let s = 0; const o = i * DIM; for (let d = 0; d < DIM; d++) s += sv[d] * EMB[o + d];
+      sims[i] = s; rest.push(i);
+    }
+    rest.sort((a, b) => sims[b] - sims[a]);
+    for (let k = 0; k < rest.length; k++) { ranks[rest[k]] = K + k + 1; order[K + k] = rest[k]; }
+    return { ranks, order };
+  }
+  function lookup(raw) {
+    const n = norm(raw); if (!n) return -1;
+    const tries = [n];
+    const m = n.match(/^(وال|بال|فال|كال|لل|و|ف|ب|ل|ك)(.{2,})$/); if (m) { tries.push(m[2]); if (m[2].indexOf('ال') === 0) tries.push(m[2].slice(2)); }
+    if (n.endsWith('ه')) tries.push(n.slice(0, -1)); else tries.push(n + 'ه');
+    if (n.endsWith('ات')) tries.push(n.slice(0, -2) + 'ه', n.slice(0, -2));
+    if (/ين$|ون$/.test(n)) tries.push(n.slice(0, -2));
+    for (const t of tries) if (NMAP.has(t)) return NMAP.get(t);
+    return -1;
+  }
+  const color = (r) => (r <= 300 ? 'var(--hot)' : r <= 1500 ? 'var(--warm)' : 'var(--cold)');
+  const width = (r) => Math.max(3, Math.round(100 * (1 - Math.log(r) / Math.log(N + 1))));
+  const label = (r) => (r === 1 ? '🎯' : r <= 50 ? '🔥 حامي مرّة' : r <= 300 ? '♨️ حامي' : r <= 1500 ? '🌤️ دافي' : r <= 5000 ? '❄️ بارد' : '🧊 بارد مرّة');
+  const rowHtml = (g, last) => '<div class="row' + (last ? ' last' : '') + (g.h ? ' hint' : '') + '"><div class="bar" style="width:' + width(g.r) + '%;background:' + color(g.r) + '"></div><span class="w">' + esc(WORDS[g.i]) + '</span><span class="n">' + AR(g.r) + '</span></div>';
+
+  const today = () => Math.floor((Date.now() + 3 * 3600e3) / 86400e3); // بتوقيت السعودية
+  const dailyId = () => ((today() * 7919) % NS + NS) % NS;
+  function open(id) {
+    id = ((id % NS) + NS) % NS;
+    const saved = store.get('hb_' + id) || { guesses: [], hints: 0, done: false, gaveUp: false };
+    const rk = rankFor(id);
+    S = Object.assign({ id, ranks: rk.ranks, order: rk.order, last: null }, saved);
+    store.set('hb_cur', id);
+    try { history.replaceState(null, '', location.pathname + location.search.replace(/([?&])w=\d+&?/, '$1').replace(/[?&]$/, '') + location.hash); } catch (e) { }
+    render(); setTimeout(() => { const i = $('g'); if (i && !S.done) i.focus(); }, 50);
+  }
+  function save() { store.set('hb_' + S.id, { guesses: S.guesses, hints: S.hints, done: S.done, gaveUp: S.gaveUp }); }
+  function guess(raw) {
+    if (S.done) return;
+    const i = lookup(raw);
+    if (i < 0) { setMsg('ما أعرف «' + raw + '» 🤔 جرّب كلمة ثانية'); return; }
+    const prev = S.guesses.find((g) => g.i === i);
+    if (prev) { S.last = prev; setMsg('جرّبت «' + WORDS[i] + '» قبل!'); render(); return; }
+    const g = { i, r: S.ranks[i], h: 0 }; S.guesses.push(g); S.last = g;
+    if (g.r === 1) { S.done = true; }
+    save(); setMsg(g.r === 1 ? '' : label(g.r)); render();
+  }
+  function hint() {
+    if (S.done) return;
+    const best = S.guesses.length ? Math.min(...S.guesses.map((g) => g.r)) : 0;
+    let target = !best ? 300 : best > 2 ? Math.max(2, Math.floor(best / 2)) : 0;
+    if (!target) { const nxt = [2, 3, 4, 5, 6, 7, 8, 9, 10].find((r) => !S.guesses.some((g) => g.r === r)); target = nxt || 2; }
+    let r = target; while (r > 1 && S.guesses.some((g) => g.r === r)) r--;
+    if (r <= 1) { r = target; while (S.guesses.some((g) => g.r === r)) r++; }
+    const i = S.order[r - 1]; const g = { i, r, h: 1 }; S.guesses.push(g); S.hints++; S.last = g; save();
+    setMsg('💡 تلميح: «' + WORDS[i] + '» ترتيبها ' + AR(r)); render();
+  }
+  function giveUp() { S.done = true; S.gaveUp = true; save(); closeSheet(); render(); }
+  let msg = '';
+  function setMsg(t) { msg = t; }
+  function render() {
+    const app = $('app'); const guesses = S.guesses.filter((g) => !g.h).length;
+    let out = '<div class="top"><a href="/" aria-label="رجوع">‹</a><div class="title"><b>حامي بارد</b></div><button class="menu-btn" data-a="menu">☰</button></div>';
+    out += '<div class="meta"><span>الكلمة رقم ' + AR(S.id + 1) + (S.id === dailyId() ? ' · كلمة اليوم 📅' : '') + '</span><span>المحاولات: ' + AR(guesses) + (S.hints ? ' · تلميحات: ' + AR(S.hints) : '') + '</span></div>';
+    if (S.done) {
+      const sec = WORDS[S.order[0]];
+      out += '<div class="card win">' + (S.gaveUp ? '<div class="big">🏳️ الكلمة كانت</div>' : '<div class="big">🎉 كفو! عرفتها</div>') + '<div class="w">' + esc(sec) + '</div>' +
+        (S.gaveUp ? '' : '<div class="chips"><span class="chip">' + AR(guesses) + ' محاولة</span><span class="chip">' + AR(S.hints) + ' تلميح</span></div>') +
+        '<button class="btn gold" data-a="share">🔗 تحدّى ربعك بنفس الكلمة</button><button class="btn" data-a="closest">شوف أقرب ١٠٠ كلمة</button><button class="btn" data-a="random">🎲 كلمة جديدة</button></div>';
+    } else {
+      out += '<form id="f" autocomplete="off"><input id="g" class="inp" placeholder="اكتب كلمة…" enterkeyhint="go" autocapitalize="off" spellcheck="false"></form>';
+    }
+    out += '<div class="msg">' + esc(msg) + '</div>';
+    if (S.last && !S.done) out += rowHtml(S.last, true) + '<div class="sep"></div>';
+    out += S.guesses.slice().sort((a, b) => a.r - b.r).map((g) => rowHtml(g, S.last && g === S.last)).join('');
+    if (!S.guesses.length && !S.done) out += '<div class="card"><b>وش اللعبة؟</b><p style="color:#cbd5e1;line-height:1.9;margin:6px 0 0">فيه كلمة سرية، وكل ما كتبت كلمة يطلع لك رقمها: <b style="color:var(--hot)">١ = هي الكلمة نفسها</b>، والرقم الصغير يعني <b style="color:var(--hot)">حامي</b> (قريب بالمعنى)، والكبير <b style="color:var(--cold)">بارد</b> (بعيد). خمّن لين توصل لـ١!</p></div>';
+    app.innerHTML = out;
+    const f = $('f'); if (f) f.onsubmit = (e) => { e.preventDefault(); const v = $('g').value.trim(); if (v) { guess(v); const i = $('g'); if (i) { i.value = ''; i.focus(); } } };
+  }
+  function sheet(html) { $('sheetIn').innerHTML = html; $('sheet').classList.add('on'); }
+  function closeSheet() { $('sheet').classList.remove('on'); }
+  function menu() {
+    sheet('<h3>القائمة</h3>' + (S.done ? '' : '<button class="btn gold" data-a="hint">💡 تلميح (يعطيك كلمة أقرب)</button>') +
+      '<button class="btn" data-a="daily">📅 كلمة اليوم (نفسها لكل الناس)</button><button class="btn" data-a="random">🎲 كلمة عشوائية</button>' +
+      '<button class="btn" data-a="share">🔗 تحدّى ربعك بنفس الكلمة</button><button class="btn" data-a="pick">🔢 اختار رقم كلمة</button>' +
+      '<button class="btn" data-a="help">❓ كيف تلعب</button>' + (S.done ? '' : '<button class="btn" data-a="giveup" style="color:#fda4af">🏳️ أستسلم وأشوف الكلمة</button>') +
+      '<button class="btn" data-a="close">إغلاق</button>');
+  }
+  function help() {
+    sheet('<h3>كيف تلعب حامي بارد؟</h3><p>فيه <b>كلمة سرية</b> واحنا نخمنها. اكتب أي كلمة، واللعبة تقول لك ترتيبها: كل ما كان الرقم أصغر كانت كلمتك أقرب للسرية <b>بالمعنى والسياق</b> (مو بالحروف).</p>' +
+      '<div class="legend"><span style="background:var(--hot);color:#052e1c">١ — ٣٠٠ حامي</span><span style="background:var(--warm);color:#3b2300">٣٠١ — ١٥٠٠ دافي</span><span style="background:var(--cold)">بعدها بارد</span></div>' +
+      '<p>مثال: لو الكلمة «بحر»، فكلمة «سمك» أو «موج» بتجيك حامية، و«قلم» بتجيك باردة.</p><p>💡 التلميح يعطيك كلمة أقرب من أفضل كلمة عندك. و🔗 «تحدّى ربعك» يرسل لهم نفس الكلمة وتشوفون مين يعرفها بمحاولات أقل.</p><p>القاموس فيه أكثر من ٣٠ ألف كلمة بالفصحى والخليجي.</p><button class="btn gold" data-a="close">يلا نلعب</button>');
+  }
+  function closest() {
+    const list = []; for (let r = 1; r <= 100; r++) list.push({ i: S.order[r - 1], r, h: 0 });
+    sheet('<h3>أقرب ١٠٠ كلمة لـ«' + esc(WORDS[S.order[0]]) + '»</h3>' + list.map((g) => rowHtml(g, false)).join('') + '<button class="btn" data-a="close">إغلاق</button>');
+  }
+  async function share() {
+    const url = location.origin + '/';
+    const g = S.guesses.filter((x) => !x.h).length;
+    const text = S.done && !S.gaveUp ? 'عرفت كلمة «حامي بارد» رقم ' + AR(S.id + 1) + ' في ' + AR(g) + ' محاولة 🔥 تقدر تغلبني؟' : 'تحدّاك بكلمة «حامي بارد» رقم ' + AR(S.id + 1) + ' 🔥';
+    try { if (navigator.share) { await navigator.share({ text: text + '\n' + 'افتح لعبة حامي بارد في ديوانية بلس واختار الكلمة رقم ' + AR(S.id + 1), url }); return; } } catch (e) { return; }
+    try { await navigator.clipboard.writeText(text + '\nالكلمة رقم ' + (S.id + 1) + ' في لعبة حامي بارد — ديوانية بلس'); toast('انسخ النص! أرسله لربعك'); } catch (e) { toast('رقم الكلمة: ' + AR(S.id + 1)); }
+  }
+  function pick() {
+    sheet('<h3>اختار رقم كلمة</h3><p>اكتب رقم الكلمة اللي أرسلها لك خويك (من ١ إلى ' + AR(NS) + ').</p><input id="pk" class="inp" inputmode="numeric" placeholder="مثال: ١٢"><button class="btn gold" data-a="pickgo">افتح الكلمة</button><button class="btn" data-a="close">إغلاق</button>');
+    setTimeout(() => { const i = $('pk'); if (i) i.focus(); }, 50);
+  }
+  document.addEventListener('click', (e) => {
+    const el = e.target.closest('[data-a]'); if (!el) { if (e.target.id === 'sheet') closeSheet(); return; }
+    const a = el.getAttribute('data-a');
+    if (a === 'menu') menu(); else if (a === 'close') closeSheet();
+    else if (a === 'hint') { closeSheet(); hint(); }
+    else if (a === 'giveup') { if (el.getAttribute('data-c')) giveUp(); else { el.setAttribute('data-c', '1'); el.textContent = 'متأكد؟ اضغط مرة ثانية'; } }
+    else if (a === 'daily') { closeSheet(); msg = ''; open(dailyId()); }
+    else if (a === 'random') { closeSheet(); msg = ''; let id; do { id = Math.floor(Math.random() * NS); } while (NS > 1 && id === S.id); open(id); }
+    else if (a === 'share') share();
+    else if (a === 'closest') closest();
+    else if (a === 'help') help();
+    else if (a === 'pick') pick();
+    else if (a === 'pickgo') { const v = Number(String($('pk').value).replace(/[٠-٩]/g, (d) => '٠١٢٣٤٥٦٧٨٩'.indexOf(d))); if (!(v >= 1 && v <= NS)) { toast('رقم غير صحيح'); return; } closeSheet(); msg = ''; open(v - 1); }
+  });
+  load().then(() => {
+    const q = new URLSearchParams(location.search).get('w');
+    const cur = store.get('hb_cur');
+    if (q && Number(q) >= 1) open(Number(q) - 1);
+    else if (cur !== null && cur !== undefined && !(store.get('hb_' + cur) || {}).done) open(cur);
+    else open(dailyId());
+    if (!store.get('hb_seen')) { store.set('hb_seen', 1); help(); }
+  }).catch(() => { $('app').innerHTML = '<div class="load">ما قدرنا نحمّل القاموس 😕<br><br><button class="btn gold" onclick="location.reload()">حاول مرة ثانية</button></div>'; });
+})();
+</script>
+</body>
+</html>

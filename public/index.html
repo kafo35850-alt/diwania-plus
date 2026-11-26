@@ -1129,6 +1129,10 @@ html.dw-game-open #dwApp { visibility: hidden; }
       bg: 'radial-gradient(circle at 50% 35%, #1d3b6b 0%, #081226 75%)',
       svg: '<svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg"><rect x="18" y="18" width="124" height="124" rx="28" fill="#0B1528" stroke="#F5B942" stroke-width="4.5"/><text x="80" y="104" text-anchor="middle" font-size="78" font-weight="900" fill="#F5B942" font-family="Tahoma,Arial">ح</text><rect x="44" y="118" width="72" height="8" rx="4" fill="#2DD4BF"/></svg>'
     },
+    hami_barid: {
+      bg: 'radial-gradient(circle at 50% 35%, #7f1d1d 0%, #0b1a2e 75%)',
+      svg: '<svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg"><rect x="24" y="34" width="112" height="20" rx="8" fill="#10B981"/><rect x="24" y="62" width="84" height="20" rx="8" fill="#F59E0B"/><rect x="24" y="90" width="56" height="20" rx="8" fill="#F43F5E"/><text x="80" y="140" text-anchor="middle" font-size="26" font-weight="900" fill="#F5B942" font-family="Tahoma,Arial">🔥 ١ 🧊</text></svg>'
+    },
     fooq_rasak: {
       bg: 'radial-gradient(circle at 50% 35%, #991b1b 0%, #2a0707 75%)',
       svg: '<svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg"><rect x="22" y="96" width="116" height="16" rx="8" fill="#2563eb"/><rect x="52" y="24" width="56" height="74" rx="10" fill="#ef4444" stroke="#fff" stroke-width="4"/><text x="80" y="76" text-anchor="middle" font-size="44" font-weight="900" fill="#fff" font-family="Tahoma,Arial">؟</text><circle cx="80" cy="134" r="18" fill="#f2c9a0"/></svg>'
@@ -1359,6 +1363,21 @@ html.dw-game-open #dwApp { visibility: hidden; }
           { h: '١٠ نقاط', t: 'إجابة صحيحة ما كتبها أحد غيرك.' },
           { h: '٥ نقاط', t: 'إجابة صحيحة كتبها لاعب ثاني بعد.' },
           { h: 'صفر', t: 'الخانة الفاضية، أو اللي حكم عليها المضيف إنها غلط.' }
+        ] }
+      ]
+    },
+    hami_barid: {
+      title: 'شرح لعبة: حامي بارد',
+      subtitle: 'كلمة سرية… وكل كلمة تكتبها تقول لك قد إيش أنت قريب منها بالمعنى',
+      tabs: [
+        { id: 'idea', label: 'فكرة اللعبة', lead: 'فيه كلمة سرية. اكتب أي كلمة واللعبة تعطيك رقمها: ١ يعني هي الكلمة نفسها، والرقم الصغير حامي (قريب بالمعنى) والكبير بارد.', steps: [
+          { h: 'خمّن', t: 'مثلاً لو الكلمة «بحر»: «سمك» تجيك حامية 🔥 و«قلم» تجيك باردة 🧊.' },
+          { h: 'الألوان', t: 'أخضر = حامي (أقل من ٣٠٠)، برتقالي = دافي، أحمر = بارد.' },
+          { h: 'تلميح', t: 'إذا علقت، التلميح يعطيك كلمة أقرب من أفضل كلمة عندك.' }
+        ] },
+        { id: 'pts', label: 'تحدّى ربعك', lead: 'كلمة اليوم نفسها لكل الناس', steps: [
+          { h: 'كلمة اليوم', t: 'كل يوم كلمة جديدة، شوفوا مين يعرفها بمحاولات أقل.' },
+          { h: 'رقم الكلمة', t: 'كل كلمة لها رقم، أرسله لخويك ويفتح نفس الكلمة.' }
         ] }
       ]
     },
@@ -2438,9 +2457,9 @@ html.dw-game-open #dwApp { visibility: hidden; }
 
   // Store groupings (client-side presentation only).
   var GAME_TAGS = {
-    top: ['eight', 'dakhil', 'mafia', 'qaftah', 'shifra', 'harf', 'chancellor', 'draw_guess', 'fortune_wheel', 'qaddirha', 'fooq_rasak'],
+    top: ['eight', 'dakhil', 'mafia', 'qaftah', 'shifra', 'harf', 'chancellor', 'draw_guess', 'fortune_wheel', 'qaddirha', 'fooq_rasak', 'hami_barid'],
     phones: ['fooq_rasak', 'dakhil', 'mafia', 'qaftah', 'chancellor', 'harf', 'qaddirha'],
-    quiz: ['eight', 'stadium_esports', 'last_one_standing', 'radar_guess', 'golden_vault', 'how_much_price', 'mazad30', 'qaddirha', 'harf'],
+    quiz: ['hami_barid', 'eight', 'stadium_esports', 'last_one_standing', 'radar_guess', 'golden_vault', 'how_much_price', 'mazad30', 'qaddirha', 'harf'],
     party: ['silent_library', 'pressure_seat', 'draw_guess', 'fake_artist', 'fortune_wheel', 'mystery_button', 'diwaniya_auction', 'vault50', 'who_knows_friend'],
     bluff: ['shifra', 'friends_court', 'alibi_court', 'liars_table', 'dakhil', 'mafia', 'chancellor', 'qaftah']
   };
@@ -2454,6 +2473,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
     harf: ['new', '✨ جديد'],
     qaddirha: ['new', '✨ جديد'],
     fooq_rasak: ['new', '✨ جديد'],
+    hami_barid: ['new', '✨ جديد'],
     shifra: ['pick', '⭐ ننصح بها'],
     draw_guess: ['', '👨‍👩‍👧 للعائلة'],
     fortune_wheel: ['', '🎉 للتجمعات الكبيرة'],
