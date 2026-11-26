@@ -16,7 +16,8 @@
    ... إلى ...
    reports/gemini-check-19.txt  ←  reports/fact-check-19.csv
    reports/gemini-check-20.txt  ←  reports/fact-check-20.csv  (6 أسئلة عن أحداث 2026، ابدأ فيه أول لأنه صغير ومهم)
-(15 ملف، من 06 إلى 20). ارفع بعد كل 3 ملفات.
+   reports/gemini-check-21.txt  ←  reports/fact-check-21.csv  (أحداث 2025-2026 من جولة Gemini الثانية، وبعده 20)
+(16 ملف، من 06 إلى 21). ارفع بعد كل 3 ملفات.
 ملاحظة: الأسئلة اللي في content/eight_checked.json تحت gemini_new كتبها Gemini بمصادر، لا تفحصها.
 
 الخطوة 2 — صور الإجابات التلقائية:
