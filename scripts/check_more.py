@@ -10,7 +10,7 @@ def n(s):
 drop = '--drop' in sys.argv
 args = [a for a in sys.argv[2:] if a != '--drop']
 for slug in (args or list(more)):
-    old = [n(q['a']) for q in live.get(slug, {}).get('qs', [])]
+    old = [x for x in (n(q['a']) for q in live.get(slug, {}).get('qs', [])) if len(x) >= 2]
     seen = collections.Counter(old)
     keep = []
     for q in more.get(slug, []):
