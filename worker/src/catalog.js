@@ -231,13 +231,13 @@ async function getEightQuestions(env) {
     const list = Array.isArray(stored[slug]) ? stored[slug] : eightRawQuestions(slug);
     if (!list.length) continue;
     let changed = false;
-    const next = list.map((q) => {
+    const next = list.filter((q) => !(q && byUid[q.uid] && byUid[q.uid].drop)).map((q) => {
       const fix = q && byUid[q.uid];
       if (!fix) return q;
       changed = true;
       return { ...q, ...(fix.q ? { q: fix.q } : {}), ...(fix.a ? { a: fix.a, ...(q.info ? { info: fix.a } : {}) } : {}) };
     });
-    if (changed) stored[slug] = next;
+    if (changed || next.length !== list.length) stored[slug] = next;
   }
   return stored;
 }
