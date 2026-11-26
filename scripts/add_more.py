@@ -9,7 +9,8 @@ new = json.load(sys.stdin)
 for slug, rows in new.items():
     lst = data.setdefault(slug, [])
     have = {q['q'] for q in lst}
-    n = len(lst)
+    import re
+    n = max([int(re.search(r'_more_q(\d+)_', q['uid']).group(1)) for q in lst] or [0])
     for pts, q, a in rows:
         if q in have: continue
         n += 1
