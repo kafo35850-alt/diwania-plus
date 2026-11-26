@@ -219,7 +219,6 @@ async function getEightQuestions(env) {
   // after the owner's own list, so they reach saved categories too and are never added twice.
   for (const [slug, extra] of Object.entries(EIGHT_MORE)) {
     const list = Array.isArray(stored[slug]) ? stored[slug] : eightRawQuestions(slug);
-    if (!list.length) continue;
     const have = new Set(list.map((q) => q && q.uid));
     const texts = new Set(list.map((q) => q && questionWords(q.q)));
     const add = extra.filter((q) => !have.has(q.uid) && !texts.has(questionWords(q.q)));
@@ -407,5 +406,10 @@ export async function getCatalog(env) {
     .map((c) => mergedWithQuestions.has(c.slug) && Array.isArray(mergedQuestions[c.slug])
       ? { ...c, item_count: mergedQuestions[c.slug].length }
       : c);
-  return { games, packages, categories: visibleCategories, catPosters: EIGHT_POSTERS, settings, gatewayConnected: gatewayConfigured(env), media: mediaLimits(env) };
+  // Question counts include the questions added later in eight_more_questions.json.
+  const withExtra = visibleCategories.map((c) => {
+    const extra = EIGHT_MORE[c.slug];
+    return Array.isArray(extra) && extra.length ? { ...c, item_count: (Number(c.item_count) || 0) + extra.length } : c;
+  });
+  return { games, packages, categories: withExtra, catPosters: EIGHT_POSTERS, settings, gatewayConnected: gatewayConfigured(env), media: mediaLimits(env) };
 }

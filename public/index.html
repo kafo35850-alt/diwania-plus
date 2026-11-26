@@ -2389,7 +2389,10 @@ html.dw-game-open #dwApp { visibility: hidden; }
   }
 
   function visibleEightCategories() {
-    return STATE.categories.filter(function (c) { return c.is_visible && !c.deleted; });
+    // Categories the owner added but has not filled yet (under 6 questions) do not show in the store or the game.
+    return STATE.categories.filter(function (c) {
+      return c.is_visible && !c.deleted && !(String(c.slug).indexOf('custom_') === 0 && (Number(c.item_count) || 0) < 6);
+    });
   }
 
   function gamesWithFreeTrials() {
