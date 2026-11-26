@@ -2744,6 +2744,7 @@ body.board-mode-active .m8-banner { min-height: 0; }
 <span id="answerPointsSummary" class="text-xs font-black text-orange-600 num-font"></span>
 </div>
 <div id="qModalAnswerText" class="text-lg sm:text-2xl font-black text-emerald-900"></div>
+<div id="qModalAnswerTol" class="hidden text-xs sm:text-sm font-black text-amber-800 bg-amber-50 border border-amber-300 rounded-xl px-2.5 py-1.5"></div>
 <div id="answerPortraitContainer"></div>
 <div class="p-2.5 rounded-xl bg-white border border-emerald-200 text-xs text-slate-700 leading-relaxed">
 <strong class="text-emerald-700">📌 توثيق المعلومة:</strong>
@@ -6948,6 +6949,30 @@ if (!token) return;
 const cats = columns.map(c => ({ id: c.id, name: c.name, icon: c.icon, owner: c.owner, uids: c.questions.map(q => q.uid) }));
 fetch('/api/play/eight-board', { method: 'POST', headers: { 'Content-Type': 'application/json' }, credentials: 'same-origin', body: JSON.stringify({ token, cats }), keepalive: true }).catch(() => {});
 }
+function m8AnswerTolerance(q) {
+// Numeric "measurement" answers (heights, lengths, areas, speeds...) get an accepted range, tighter for harder questions.
+const a = String(q && q.a || ''), text = String(q && q.q || '');
+if (/عام|سنة|السنة|متى|رقم|ترتيب|الحلقة|الموسم|آية|آيات|سورة|القرآن|حديث/.test(text)) return '';
+const m = a.replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[,٬]/g, '').match(/\d+(?:\.\d+)?/);
+if (!m) return '';
+const v = parseFloat(m[0]);
+if (/أكثر من|أقل من/.test(a)) return '';
+const approx = /تقريب|نحو|حوالي/.test(a + ' ' + text);
+const measure = /ارتفاع|طول|مساحة|سرعة|مسافة|عمق|وزن|كتلة|سكان|درجة حرارة|كيلو|كم²|متر|ميل|قدم/.test(text + ' ' + a);
+if (!(approx || (measure && v >= 100))) return '';
+const pct = Number(q.points) >= 600 ? 0.002 : Number(q.points) >= 400 ? 0.005 : 0.01;
+let tol = v * pct;
+const mag = Math.pow(10, Math.floor(Math.log10(Math.max(tol, 1e-9))));
+tol = Math.max(Math.round(tol / mag) * mag, v >= 10 ? 1 : 0.1);
+const fmt = x => (Math.round(x * 100) / 100).toLocaleString('en-US');
+const unit = (a.replace(/[,٬]/g, '').split(m[0])[1] || '').replace(/تقريباً|تقريبا|\(.*$/g, '').trim().split(/\s+/).slice(0, 2).join(' ');
+return `🎯 يُحسب صح من ${fmt(Math.max(0, v - tol))} إلى ${fmt(v + tol)}${unit ? ' ' + unit : ''}`;
+}
+function m8SetAnswerText(qObj) {
+m8SetAnswerText(qObj);
+const tolEl = document.getElementById('qModalAnswerTol');
+if (tolEl) { const t = m8AnswerTolerance(qObj); tolEl.textContent = t; tolEl.classList.toggle('hidden', !t); }
+}
 function buildFreshQuestionsForCategory(cat, seenMap, boardUsed) {
 const rawQuestions = (Array.isArray(cat.questions) && cat.questions.length) ? cat.questions : (CATEGORY_QUESTIONS_CACHE[cat.id] || []);
 const pool = rawQuestions.map((q, idx) => m8WithPics({
@@ -9125,7 +9150,7 @@ document.getElementById('qModalQuestionText').textContent = m8QuestionPrompt(col
 document.getElementById('qModalHintBox').classList.add('hidden');
 document.getElementById('qModalChoicesGrid').classList.add('hidden');
 document.getElementById('answerRevealContainer').classList.add('hidden');
-document.getElementById('qModalAnswerText').textContent = qObj.a;
+m8SetAnswerText(qObj);
 document.getElementById('qModalVerifyText').textContent = qObj.info;
 document.getElementById('answerPointsSummary').textContent = `${qObj.points} نقطة`;
 renderSideScores();
@@ -9338,7 +9363,7 @@ const opt = prepareChoiceOptions(nq);
 Object.assign(qObj, nq, { options: opt.options, correctIndex: opt.correctIndex }, keep);
 m8OpenAttempt(col, qObj);
 document.getElementById('qModalQuestionText').textContent = m8QuestionPrompt(col, qObj);
-document.getElementById('qModalAnswerText').textContent = qObj.a;
+m8SetAnswerText(qObj);
 document.getElementById('qModalVerifyText').textContent = qObj.info;
 document.getElementById('qModalHintBox').classList.add('hidden');
 document.getElementById('qModalChoicesGrid').classList.add('hidden');
