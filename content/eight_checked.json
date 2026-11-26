@@ -1,5 +1,5 @@
 {
- "note": "أسئلة انفحصت. لا تعيد فحصها. gemini_old = الأسئلة القديمة اللي فحصها Gemini (ملفات reports/old-check). codex_new = الأسئلة الجديدة اللي فحصها Codex (gemini-check-01..05). أي سؤال يتعدل بعدين لازم ينشال من هنا.",
+ "note": "أسئلة انفحصت. لا تعيد فحصها. gemini_old = الأسئلة القديمة اللي فحصها Gemini (ملفات reports/old-check). codex_new = الأسئلة الجديدة اللي فحصها Codex (gemini-check-01..05). أي سؤال يتعدل بعدين لازم ينشال من هنا. gemini_new = أسئلة مشاهد كتبها Gemini بمصادر (ما تحتاج فحص Codex).",
  "gemini_old": [
   "abbasid_andalus_drive_q19_200",
   "abbasid_andalus_drive_q20_200",
@@ -6842,5 +6842,30 @@
  ],
  "pending": {
   "codex_new": "gemini-check-06.txt"
- }
+ },
+ "gemini_new": [
+  "series_tash_ma_tash_more_q10_400",
+  "series_tash_ma_tash_more_q11_400",
+  "series_tash_ma_tash_more_q12_400",
+  "series_tash_ma_tash_more_q13_400",
+  "series_tash_ma_tash_more_q14_400",
+  "series_tash_ma_tash_more_q15_400",
+  "series_tash_ma_tash_more_q16_400",
+  "series_tash_ma_tash_more_q17_600",
+  "series_tash_ma_tash_more_q18_600",
+  "series_tash_ma_tash_more_q19_600",
+  "series_tash_ma_tash_more_q1_200",
+  "series_tash_ma_tash_more_q20_600",
+  "series_tash_ma_tash_more_q21_600",
+  "series_tash_ma_tash_more_q22_600",
+  "series_tash_ma_tash_more_q23_600",
+  "series_tash_ma_tash_more_q2_200",
+  "series_tash_ma_tash_more_q3_200",
+  "series_tash_ma_tash_more_q4_200",
+  "series_tash_ma_tash_more_q5_200",
+  "series_tash_ma_tash_more_q6_200",
+  "series_tash_ma_tash_more_q7_200",
+  "series_tash_ma_tash_more_q8_200",
+  "series_tash_ma_tash_more_q9_400"
+ ]
 }
