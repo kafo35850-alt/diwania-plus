@@ -1,102 +1,133 @@
-/* فوق راسك — شاشات الجوال + شاشة التلفزيون */
+/* خمّن الشخصية — شاشات الجوال + شاشة التلفزيون */
 (function (root) {
   'use strict';
   const MG = root.MG, esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const AR = (n) => String(n).replace(/\d/g, (d) => '٠١٢٣٤٥٦٧٨٩'[d]);
-  const ICON = '<svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block"><rect width="160" height="160" rx="30" fill="#7f1d1d"/><rect x="22" y="96" width="116" height="16" rx="8" fill="#2563eb"/><rect x="52" y="24" width="56" height="74" rx="10" fill="#ef4444" stroke="#fff" stroke-width="4"/><text x="80" y="76" text-anchor="middle" font-size="44" font-weight="900" fill="#fff" font-family="Tahoma,Arial">؟</text><circle cx="80" cy="138" r="10" fill="#F5B942"/></svg>';
+  const ICON = '<svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block"><rect width="160" height="160" rx="30" fill="#1e3a8a"/>' +
+    [0, 1, 2].map((r) => [0, 1, 2].map((c) => '<rect x="' + (22 + c * 40) + '" y="' + (22 + r * 40) + '" width="34" height="34" rx="7" fill="' + ((r + c) % 3 === 1 ? '#475569' : '#f8fafc') + '"/>').join('')).join('') +
+    '<rect x="62" y="62" width="34" height="34" rx="7" fill="#F5B942"/><text x="79" y="88" text-anchor="middle" font-size="26" font-weight="900" fill="#1e3a8a" font-family="Tahoma,Arial">؟</text></svg>';
   const nm = (v, id) => { const p = v.players.find((x) => x.id === id); return p ? esc(p.name) : '؟'; };
-  const pic = (c, size) => {
-    if (!c) return '<div class="fr-q" style="font-size:' + Math.round(size * 0.55) + 'px">❓</div>';
-    if (c.m) return '<img src="/media/med_seed_' + esc(c.m) + '" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:top">';
-    return '<div class="fr-e" style="font-size:' + Math.round(size * 0.6) + 'px">' + esc(c.e) + '</div>';
-  };
-  const CSS = '<style>.fr-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:10px}.fr-c{background:rgba(255,255,255,.06);border:2px solid rgba(255,255,255,.12);border-radius:16px;padding:6px;display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center}.fr-c.cur{border-color:#F5B942;box-shadow:0 0 0 3px rgba(245,185,66,.3)}.fr-c.ok{border-color:#34d399}.fr-c .ph{width:100%;aspect-ratio:3/4;border-radius:11px;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center}.fr-c .ph.hid{background:linear-gradient(135deg,#ef4444,#991b1b)}.fr-c .cn{font-weight:900;font-size:13px;line-height:1.3}.fr-c .pn{font-size:12px;opacity:.75}.fr-q{color:#fff;font-weight:900}.fr-e{line-height:1}.fr-big{width:min(62vw,240px);margin:0 auto;aspect-ratio:3/4;border-radius:18px;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;border:4px solid #F5B942}</style>';
-  function cardGrid(v, opt) {
-    opt = opt || {};
-    return '<div class="fr-grid">' + v.cards.map((c) => {
-      const mine = v.me && c.id === v.me.id;
-      const label = c.card ? esc(c.card.n) : (mine ? 'فوق راسك!' : '؟');
-      return '<div class="fr-c ' + (c.id === v.cur ? 'cur' : '') + (c.solved ? ' ok' : '') + '"><div class="ph ' + (c.card ? '' : 'hid') + '">' + pic(c.card, 100) + '</div><div class="cn">' + label + '</div><div class="pn">' + nm(v, c.id) + (mine ? ' (أنت)' : '') + (c.solved ? ' ✅' : '') + '</div></div>';
+  const face = (c, big) => c.m ? '<img src="/media/med_seed_' + esc(c.m) + '" alt="" loading="lazy">' : '<span class="em" style="font-size:' + (big ? 120 : 34) + 'px">' + esc(c.e) + '</span>';
+  const CSS = '<style>.gw-b{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.gw-c{position:relative;background:#fff;border-radius:10px;overflow:hidden;border:2px solid transparent;padding:0;display:flex;flex-direction:column;align-items:stretch;color:#0f172a;transition:transform .15s,opacity .15s}.gw-c .ph{aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#f1f5f9}.gw-c img{width:100%;height:100%;object-fit:cover;object-position:top}.gw-c .em{line-height:1}.gw-c .t{font-size:10.5px;font-weight:800;padding:2px 2px 3px;line-height:1.2;min-height:2.4em;display:flex;align-items:center;justify-content:center;text-align:center}.gw-c.dn{opacity:.28;transform:scale(.92);filter:grayscale(1)}.gw-c.dn::after{content:"✕";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:40px;font-weight:900;color:#dc2626}.gw-c.sel{border-color:#F5B942;box-shadow:0 0 0 3px rgba(245,185,66,.5)}.gw-c.gm{border-color:#f472b6}.gw-me{display:flex;gap:10px;align-items:center}.gw-me .ph{width:64px;height:64px;border-radius:12px;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;flex:none}.gw-me .ph img{width:100%;height:100%;object-fit:cover;object-position:top}.gw-big{width:min(56vw,220px);aspect-ratio:1/1;margin:0 auto;border-radius:18px;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;border:4px solid #F5B942}.gw-big img{width:100%;height:100%;object-fit:cover;object-position:top}.gw-ans{font-size:44px;font-weight:900}.gw-h{display:flex;flex-direction:column;gap:4px;font-size:13px}.gw-h div{display:flex;gap:8px}.gw-h b.y{color:#34d399}.gw-h b.n{color:#f87171}</style>';
+  const IDEAS = ['إنسان؟', 'ذكر؟', 'يلبس نظارة؟', 'عربي؟', 'لاعب كورة؟', 'مغني؟', 'عنده أجنحة؟', 'يعيش بالبحر؟', 'لونه أخضر؟', 'يتاكل؟', 'أكبر من الكرسي؟', 'يشتغل بالكهرباء؟'];
+
+  function board(v, mode) {
+    return '<div class="gw-b">' + v.board.map((c, i) => {
+      const dn = v.me.down[i];
+      const cls = (dn ? ' dn' : '') + (mode === 'pick' && v.me.secret === i ? ' sel' : '') + (mode === 'guess' ? ' gm' : '');
+      return '<button class="gw-c' + cls + '" data-a="cell" data-i="' + i + '"><div class="ph">' + face(c) + '</div><div class="t">' + esc(c.n) + '</div></button>';
     }).join('') + '</div>';
   }
-  function lastLine(v) {
-    const l = v.last; if (!l) return '';
-    if (l.ok) return '<div class="ann g"><div class="big">🎉 ' + nm(v, l.id) + ' عرف إنه «' + esc(l.card ? l.card.n : '') + '» (+' + AR(l.pts) + ')</div></div>';
-    if (l.ok === false) return '<div class="card ctr">❌ ' + nm(v, l.id) + ' خمّن غلط</div>';
-    return '';
+  function mine(v) {
+    if (v.me.secret === null || v.me.secret === undefined) return '';
+    const c = v.board[v.me.secret];
+    return '<div class="card gw-me"><div class="ph">' + face(c) + '</div><div><div class="mut small">شخصيتك السرية 🤫</div><div class="big">' + esc(c.n) + '</div></div><span class="sp"></span><span class="pill">باقي عندك ' + AR(v.left[v.me.id]) + '</span></div>';
+  }
+  function hist(v) {
+    if (!v.history.length) return '';
+    return '<div class="card col"><div class="mut small">الأسئلة اللي فاتت</div><div class="gw-h">' + v.history.slice().reverse().map((h) => '<div><span>' + nm(v, h.by) + ':</span>' + (h.ans === 'wrong' ? '<span>خمّن «' + esc(v.board[h.guess].n) + '» ❌</span>' : '<span>' + (h.text ? esc(h.text) : '(سؤال بالصوت)') + '</span><span class="sp"></span><b class="' + (h.ans === 'yes' ? 'y' : 'n') + '">' + (h.ans === 'yes' ? 'نعم' : 'لا') + '</b>') + '</div>').join('') + '</div></div>';
   }
 
   const cfg = {
-    id: 'fooq_rasak', name: 'فوق راسك', nameHtml: '<b>فوق</b> راسك', tagline: 'الكل يشوف بطاقتك إلا أنت… اسأل وخمّن مين أنت!', icon: ICON, wsPath: '/fooq_rasak/ws', min: 2, max: 12,
+    id: 'fooq_rasak', name: 'خمّن الشخصية', nameHtml: '<b>خمّن</b> الشخصية', tagline: 'كل واحد يختار شخصية سرية… واسأل لين تعرف شخصية خصمك!', icon: ICON, wsPath: '/fooq_rasak/ws', min: 2, max: 2,
     engine: MG.fooq_rasak, help: MG.fooq_rasakHelp,
-    err: { not_your_turn: 'مو دورك', not_judge: 'ما تقدر تحكم على نفسك', no_judges: 'ما فيه أحد يحكم' },
-    phaseName: { turn: 'الأسئلة', judge: 'الحكم', ended: 'النهاية' },
-    stepKey: (v) => v.phase + ':' + v.round,
-    myTurn: (v) => v.phase === 'turn' && v.me && v.cur === v.me.id,
-    lobbyInfo: () => '<div class="card hint">كل واحد تطلع له بطاقة سرية (شخصية أو شي) يشوفها الكل بجوالاتهم إلا هو. بدوره يسأل أسئلة جوابها «نعم» أو «لا» لين يعرف مين هو!</div>',
+    err: { not_your_turn: 'مو دورك', room_full: 'الغرفة لشخصين بس' },
+    phaseName: { pick: 'اختيار الشخصية', play: 'اللعب', result: 'نهاية الجولة', ended: 'النهاية' },
+    stepKey: (v) => v.phase + ':' + v.round + ':' + (v.turn || '') + ':' + (v.step || ''),
+    myTurn: (v) => (v.phase === 'play' && v.me && ((v.turn === v.me.id && v.step === 'ask') || (v.turn !== v.me.id && v.step === 'answer'))),
+    lobbyInfo: () => '<div class="card hint">لعبة لشخصين: الاثنين قدامهم نفس لوحة الشخصيات. كل واحد يختار شخصية بالسر، وبالدور تسألون أسئلة جوابها «نعم» أو «لا» وتنزّلون البطاقات الغلط. أول من يعرف شخصية خصمه يفوز!</div>',
     lobbyHost: (v, K) => '<div class="card col"><div class="big">إعدادات اللعبة</div>' +
-      K.settingChips(v, 'set', v.setOrder.map((k) => [k, v.setNames[k]]), 'نوع البطاقات') +
-      K.settingChips(v, 'sec', [[30, '٣٠ ثانية'], [45, '٤٥ ثانية'], [60, 'دقيقة'], [90, 'دقيقة ونص']], 'وقت كل دور') +
-      K.settingChips(v, 'laps', [[3, '٣ لفّات'], [5, '٥ لفّات'], [8, '٨ لفّات']], 'كم دور لكل لاعب (أقصى حد)') + '</div>',
-    evText: (v, e) => e.k === 'verdict' ? (e.ok ? '✅ ' : '❌ ') + nm(v, e.id) + (e.ok ? ' عرف بطاقته' : ' خمّن غلط') : e.k === 'turn' ? 'دور ' + nm(v, e.id) : '',
+      K.settingChips(v, 'set', v.setOrder.map((k) => [k, v.setNames[k]]), 'نوع الشخصيات') +
+      K.settingChips(v, 'size', [[16, '١٦ بطاقة'], [24, '٢٤ بطاقة']], 'حجم اللوحة') +
+      K.settingChips(v, 'rounds', [[1, 'جولة وحدة'], [3, 'أفضل من ٣'], [5, 'أفضل من ٥']], 'عدد الجولات') + '</div>',
+    evText: (v, e) => e.k === 'win' ? '🏆 ' + nm(v, e.id) + ' عرف الشخصية' : e.k === 'wrong' ? '❌ ' + nm(v, e.id) + ' خمّن غلط' : '',
     click(a, el, K) {
-      if (a === 'claim') { K.act('claim'); return true; }
-      if (a === 'pass') { K.act('pass'); return true; }
-      if (a === 'vote') { K.act('vote', { v: el.getAttribute('data-v') }); return true; }
-      if (a === 'endgame') { K.act('end'); return true; }
+      const v = K.ST.view;
+      if (a === 'cell') {
+        const i = Number(el.getAttribute('data-i'));
+        if (v.phase === 'pick') { K.act('pick', { i }); return true; }
+        if (v.phase === 'play') {
+          if (K.ST.local.guess) { if (v.me.down[i]) { K.toast('هالبطاقة نازلة'); return true; } K.ST.local.guess = false; K.act('guess', { i }); return true; }
+          K.act('flip', { i }); return true;
+        }
+        return true;
+      }
+      if (a === 'idea') { const inp = document.getElementById('gwq' + v.round); if (inp) inp.value = el.getAttribute('data-t'); return true; }
+      if (a === 'ask') { const inp = document.getElementById('gwq' + v.round); K.act('ask', { text: inp ? inp.value.trim() : '' }); return true; }
+      if (a === 'askvoice') { K.act('ask', { text: '' }); return true; }
+      if (a === 'ans') { K.act('answer', { v: el.getAttribute('data-v') }); return true; }
+      if (a === 'endturn') { K.act('endturn'); return true; }
+      if (a === 'guessmode') { K.ST.local.guess = !K.ST.local.guess; K.render(); return true; }
+      if (a === 'next') { K.act('next'); return true; }
       return false;
     },
     screen(v, K) {
-      const me = v.me, ph = v.phase; let out = CSS + K.topbar(v, '<span class="pill">اللفّة ' + AR(Math.min(v.lap, v.laps)) + ' من ' + AR(v.laps) + '</span>');
-      if (ph === 'turn') {
-        const mine = v.cur === me.id;
-        out += lastLine(v) + K.timerHtml(v);
-        if (mine) out += '<div class="ann g"><div class="huge">دورك! 🎯</div><div class="mut" style="margin-top:6px;line-height:1.8">اسأل الباقين سؤال جوابه «نعم» أو «لا» بصوت عالي.<br>مثال: «أنا إنسان؟» «أنا لاعب كورة؟» «أنا أتاكل؟»</div></div>' +
-          '<div class="stick col" style="gap:8px"><button class="btn gold" data-a="claim">عرفتها! بقول الجواب</button><button class="btn sec" data-a="pass">خلّص دوري</button></div>';
-        else if (me.solved) out += '<div class="card ctr">✅ عرفت بطاقتك! الحين ساعد الباقين بالجواب على أسئلتهم.</div><div class="ann"><div class="big">دور ' + nm(v, v.cur) + '</div><div class="mut small">جاوبوه بـ«نعم» أو «لا» بس</div></div>';
-        else out += '<div class="ann"><div class="big">دور ' + nm(v, v.cur) + ' يسأل</div><div class="mut small" style="margin-top:4px">جاوبوه بصوت: «نعم» أو «لا» بس! وانتبهوا لا تكشفون البطاقة 🤫</div></div>';
-        out += cardGrid(v);
-        if (me.host && !mine) out += '<div class="row" style="gap:8px">' + K.hostSkip(v, 'تخطّي الدور (المضيف)') + '<button class="btn sec sm" data-a="endgame">إنهاء اللعبة</button></div>';
-      } else if (ph === 'judge') {
-        const c = v.cards.find((x) => x.id === v.cur), mine = v.cur === me.id;
-        out += K.timerHtml(v);
-        if (mine) out += '<div class="ann g"><div class="huge">قل جوابك! 🎤</div><div class="mut" style="margin-top:6px">قل بصوت عالي مين تتوقع نفسك… والباقين يحكمون.</div></div><div class="card ctr mut">حكم ' + AR(v.votes.yes + v.votes.no) + ' من ' + AR(v.votes.total) + '</div>';
-        else {
-          out += '<div class="ann"><div class="big">' + nm(v, v.cur) + ' يقول إنه عرفها!</div><div class="mut small">اسمعوا جوابه… صح ولا غلط؟</div></div>';
-          if (c && c.card) out += '<div class="fr-big">' + pic(c.card, 220) + '</div><div class="ctr big" style="margin:8px 0">' + esc(c.card.n) + '</div>';
-          out += '<div class="row" style="gap:10px"><button class="btn ' + (me.vote === 'ok' ? 'gold' : 'sec') + ' sp" data-a="vote" data-v="ok">✅ صح</button><button class="btn ' + (me.vote === 'no' ? 'gold' : 'sec') + ' sp" data-a="vote" data-v="no">❌ غلط</button></div>' +
-            '<div class="card ctr mut small">صح ' + AR(v.votes.yes) + ' · غلط ' + AR(v.votes.no) + ' · من ' + AR(v.votes.total) + '</div>';
-        }
-        out += me.host ? K.hostSkip(v, 'احسم الحكم الحين (المضيف)') : '';
-      } else if (ph === 'ended') out = CSS + K.endScreen(v, '<div class="card col"><div class="big">البطاقات</div>' + cardGrid(v) + '</div>');
+      const me = v.me, ph = v.phase, opp = me.opp; let out = CSS + K.topbar(v);
+      if (ph === 'pick') {
+        if (me.secret === null) out += '<div class="ann g"><div class="big">اختار شخصيتك السرية 🤫</div><div class="mut small" style="margin-top:4px">لا تخلّي خصمك يشوف جوالك!</div></div>';
+        else out += mine(v) + '<div class="card ctr mut">' + (v.picked[opp] ? '' : 'ننتظر ' + nm(v, opp) + ' يختار…') + ' تقدر تغيّر اختيارك.</div>';
+        out += board(v, 'pick');
+      } else if (ph === 'play') {
+        const myTurn = v.turn === me.id, gm = !!K.ST.local.guess;
+        out += mine(v);
+        if (myTurn && v.step === 'ask') {
+          out += '<div class="ann g"><div class="big">دورك! اسأل سؤال جوابه نعم أو لا</div></div>' +
+            '<div class="card col"><input id="gwq' + v.round + '" class="inp" maxlength="80" autocomplete="off" placeholder="اكتب سؤالك… مثال: شخصيتك تلبس نظارة؟">' +
+            '<div class="row wrap" style="gap:6px">' + IDEAS.map((t) => '<button class="chip" data-a="idea" data-t="' + esc(t) + '">' + esc(t) + '</button>').join('') + '</div>' +
+            '<div class="row" style="gap:8px"><button class="btn gold sp" data-a="ask">أرسل السؤال</button><button class="btn sec sp" data-a="askvoice">سألته بصوتي</button></div></div>' +
+            '<button class="btn ' + (gm ? 'gold' : 'sec') + '" data-a="guessmode">' + (gm ? 'إلغاء التخمين' : '🎯 أعرفها! أبي أخمّن') + '</button>';
+        } else if (myTurn && v.step === 'answer') out += '<div class="ann"><div class="big">ننتظر جواب ' + nm(v, opp) + '…</div>' + (v.q.text ? '<div class="mut" style="margin-top:6px">«' + esc(v.q.text) + '»</div>' : '') + '</div>';
+        else if (myTurn && v.step === 'flip') {
+          out += '<div class="ann g"><div class="mut">' + (v.q.text ? '«' + esc(v.q.text) + '»' : 'جواب سؤالك') + '</div><div class="gw-ans" style="color:' + (v.q.ans === 'yes' ? '#34d399' : '#f87171') + '">' + (v.q.ans === 'yes' ? 'نعم ✅' : 'لا ❌') + '</div><div class="mut small">نزّل البطاقات اللي ما تنطبق (اضغط عليها)</div></div>' +
+            '<div class="row" style="gap:8px"><button class="btn gold sp" data-a="endturn">خلّصت دوري</button><button class="btn ' + (gm ? 'gold' : 'sec') + ' sp" data-a="guessmode">' + (gm ? 'إلغاء التخمين' : '🎯 أخمّن') + '</button></div>';
+        } else if (!myTurn && v.step === 'answer') {
+          const c = v.board[me.secret];
+          out += '<div class="ann g"><div class="mut">' + nm(v, opp) + ' يسألك:</div><div class="big" style="margin:6px 0">' + (v.q.text ? '«' + esc(v.q.text) + '»' : 'اسمع سؤاله 👂') + '</div><div class="mut small">عن شخصيتك: <b style="color:#fff">' + esc(c.n) + '</b></div></div>' +
+            '<div class="gw-big">' + face(c, true) + '</div>' +
+            '<div class="row" style="gap:10px;margin-top:10px"><button class="btn gold sp" data-a="ans" data-v="yes">نعم ✅</button><button class="btn sec sp" data-a="ans" data-v="no">لا ❌</button></div>';
+        } else out += '<div class="ann"><div class="big">دور ' + nm(v, opp) + '</div><div class="mut small">' + (v.step === 'flip' ? 'جاوبت: ' + (v.q.ans === 'yes' ? 'نعم' : 'لا') + ' — ينزّل بطاقاته الحين' : 'يفكّر بسؤاله…') + '</div><div class="mut small" style="margin-top:4px">باقي عنده ' + AR(v.left[opp]) + ' بطاقة</div></div>';
+        if (v.lastGuess && !v.lastGuess.ok && v.lastGuess.by === opp && v.turn === me.id && v.step === 'ask') out = out.replace('<div class="ann g"><div class="big">دورك!', '<div class="card ctr">❌ ' + nm(v, opp) + ' خمّن «' + esc(v.board[v.lastGuess.i].n) + '» وطلع غلط!</div><div class="ann g"><div class="big">دورك!');
+        if (gm) out += '<div class="card ctr" style="border-color:#f472b6">🎯 اضغط على الشخصية اللي تتوقعها. لو غلطت ينتقل الدور!</div>';
+        out += board(v, gm ? 'guess' : 'play') + hist(v);
+        out += me.host ? K.hostSkip(v, 'انقل الدور (المضيف)') : '';
+      } else if (ph === 'result') {
+        const won = v.winner === me.id, s = v.secrets;
+        out += '<div class="ann g"><div class="huge">' + (won ? '🏆 فزت بالجولة!' : '😅 ' + nm(v, v.winner) + ' عرفها!') + '</div></div>' +
+          '<div class="row" style="gap:10px">' + v.players.map((p) => '<div class="card col sp ctr"><div class="mut small">شخصية ' + esc(p.name) + '</div><div class="gw-big" style="width:100%">' + face(v.board[s[p.id]], true) + '</div><b>' + esc(v.board[s[p.id]].n) + '</b></div>').join('') + '</div>' +
+          K.scores(v, 'الجولات') + (me.host ? '<div class="stick"><button class="btn gold" data-a="next">التالي</button></div>' : '<div class="card ctr mut">ننتظر المضيف…</div>');
+      } else if (ph === 'ended') out = CSS + K.endScreen(v);
       return out;
     }
   };
 
   cfg.board = {
-    title: '<b>فوق</b> راسك', timedPhases: ['turn', 'judge'], stepKey: (v) => v.phase + ':' + v.round,
-    css: '.mdb .who{font-size:6em;font-weight:900;color:#ffd978;line-height:1.1}.mdb .fr-tv{display:flex;flex-wrap:wrap;gap:1em;justify-content:center;max-width:60em}.mdb .fr-tv div{width:8em;text-align:center;font-size:1.4em}.mdb .fr-tv .ph{width:8em;height:10.6em;border-radius:.8em;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;font-size:1em}.mdb .fr-tv img{width:100%;height:100%;object-fit:cover;object-position:top}',
-    tone: (v) => (v.phase === 'judge' ? 'blue' : v.phase === 'ended' ? 'gold' : ''),
+    title: '<b>خمّن</b> الشخصية', timedPhases: [], stepKey: (v) => v.phase + ':' + v.round + ':' + (v.turn || '') + ':' + (v.step || ''),
+    css: '.mdb .who{font-size:5em;font-weight:900;color:#ffd978;line-height:1.1}.mdb .vs{display:flex;gap:4em;font-size:2.4em;justify-content:center}.mdb .vs div{text-align:center}.mdb .vs b{display:block;font-size:2em;color:#ffd978}.mdb .ans{font-size:6em;font-weight:900}.mdb .gwtv{width:9em;height:9em;border-radius:1em;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;font-size:1.6em;margin:0 auto}.mdb .gwtv img{width:100%;height:100%;object-fit:cover;object-position:top}',
+    tone: (v) => (v.phase === 'result' || v.phase === 'ended' ? 'gold' : ''),
     render(v, B) {
       const ph = v.phase, N = (id) => esc(B.N(v, id));
-      const tv = (list) => '<div class="fr-tv">' + list.map((c) => '<div><div class="ph">' + (c.card.m ? '<img src="/media/med_seed_' + esc(c.card.m) + '" alt="">' : '<span style="font-size:5em">' + esc(c.card.e) + '</span>') + '</div><b>' + esc(c.card.n) + '</b><br>' + N(c.id) + '</div>').join('') + '</div>';
-      if (ph === 'turn') {
-        const l = v.last;
-        const core = (l && l.ok ? '<div class="sub">🎉 ' + N(l.id) + ' عرف إنه «' + esc(l.card.n) + '»</div>' : '') + '<div class="sub">دور</div><div class="who">' + N(v.cur) + '</div><div class="sub">يسأل سؤال جوابه نعم أو لا</div>';
-        return '<div class="core">' + core + '</div>' + B.seats(v, { tag: (p) => (p.solved ? '<span class="tg ok">عرف ✅</span>' : '') });
+      const vs = () => '<div class="vs">' + v.players.map((p) => '<div>' + esc(p.name) + '<b>' + B.AR(v.left ? v.left[p.id] : 0) + '</b><span class="sub">بطاقة باقية</span></div>').join('') + '</div>';
+      if (ph === 'pick') return '<div class="core"><div class="who">اختاروا شخصياتكم 🤫</div><div class="sub">' + v.players.map((p) => esc(p.name) + (v.picked[p.id] ? ' ✅' : ' …')).join(' · ') + '</div></div>';
+      if (ph === 'play') {
+        let mid = '<div class="sub">دور</div><div class="who">' + N(v.turn) + '</div>';
+        if (v.step === 'answer') mid += '<div class="sub">' + (v.q.text ? '«' + esc(v.q.text) + '»' : 'يسأل…') + '</div>';
+        if (v.step === 'flip') mid += '<div class="sub">' + (v.q.text ? '«' + esc(v.q.text) + '»' : '') + '</div><div class="ans" style="color:' + (v.q.ans === 'yes' ? '#34d399' : '#f87171') + '">' + (v.q.ans === 'yes' ? 'نعم' : 'لا') + '</div>';
+        return '<div class="core">' + mid + vs() + '</div>';
       }
-      if (ph === 'judge') return '<div class="core"><div class="who">' + N(v.cur) + '</div><div class="sub">يقول إنه عرفها! صح ولا غلط؟</div><div class="sub">صح ' + B.AR(v.votes.yes) + ' · غلط ' + B.AR(v.votes.no) + '</div></div>';
-      if (ph === 'ended') {
-        const top = v.players.slice().sort((a, b) => b.score - a.score)[0];
-        return '<div class="core full"><div class="sub">الفايز</div><div class="big gold">' + esc(top.name) + '</div>' + tv(v.cards.filter((c) => c.card)) + B.ranking(v) + '</div>';
+      if (ph === 'result') {
+        const s = v.secrets;
+        return '<div class="core full"><div class="sub">فاز بالجولة</div><div class="who">' + N(v.winner) + '</div><div class="vs">' + v.players.map((p) => { const c = v.board[s[p.id]]; return '<div>' + esc(p.name) + '<div class="gwtv">' + (c.m ? '<img src="/media/med_seed_' + esc(c.m) + '" alt="">' : '<span style="font-size:5em">' + esc(c.e) + '</span>') + '</div><b style="font-size:1em">' + esc(c.n) + '</b></div>'; }).join('') + '</div></div>';
       }
+      if (ph === 'ended') { const top = v.players.slice().sort((a, b) => b.score - a.score)[0]; return '<div class="core full"><div class="sub">الفايز</div><div class="big gold">' + esc(top.name) + '</div>' + B.ranking(v) + '</div>'; }
       return '<div class="core"></div>';
     },
     cues(prev, v, B, fresh) {
       if (!fresh) return;
-      if (v.phase === 'turn') { if (v.last && v.last.ok) B.sfx('fanfare'); else B.sfx('gong'); B.later(500, () => B.say('دور ' + B.N(v, v.cur))); }
-      else if (v.phase === 'judge') { B.sfx('blip'); B.later(300, () => B.say(B.N(v, v.cur) + ' يقول إنه عرفها!')); }
-      else if (v.phase === 'ended') { B.sfx('fanfare'); const top = v.players.slice().sort((a, b) => b.score - a.score)[0]; B.later(800, () => B.say('انتهت اللعبة. الفايز: ' + top.name + '.')); }
+      if (v.phase === 'pick') { B.sfx('gong'); B.later(400, () => B.say('اختاروا شخصياتكم بالسر')); }
+      else if (v.phase === 'play' && v.step === 'ask') { B.sfx('blip'); B.later(300, () => B.say('دور ' + B.N(v, v.turn))); }
+      else if (v.phase === 'play' && v.step === 'flip') B.later(200, () => B.say(v.q.ans === 'yes' ? 'نعم' : 'لا'));
+      else if (v.phase === 'result') { B.sfx('fanfare'); B.later(600, () => B.say(B.N(v, v.winner) + ' عرف الشخصية!')); }
+      else if (v.phase === 'ended') { B.sfx('fanfare'); const top = v.players.slice().sort((a, b) => b.score - a.score)[0]; B.later(800, () => B.say('الفايز: ' + top.name)); }
     }
   };
   root.DIWANIYA_CFG = cfg;

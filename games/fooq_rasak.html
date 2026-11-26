@@ -872,124 +872,111 @@
 });
 </script>
 <script>/* games/fooq_rasak/engine.js */
-/* ديوانية بلس — فوق راسك: محرك اللعبة (منطق صرف، يشتغل في Node والمتصفح وCloudflare).
- * كل لاعب عنده بطاقة سرية (شخصية أو شي) يشوفها الكل إلا هو، مثل البطاقة اللي فوق الراس.
- * بالدور: صاحب الدور يسأل الباقين سؤال جوابه «نعم» أو «لا» بصوت عالي.
- * إذا حس إنه عرفها يضغط «عرفتها!» ويقول الجواب بصوت، والباقين يحكمون صح ولا غلط.
- * النقاط: أول من يعرف ياخذ ٥، الثاني ٤، الثالث ٣، وبعدهم ٢ ثم ١.
- * المراحل: lobby → turn → judge → turn … → ended */
+/* ديوانية بلس — خمّن الشخصية: محرك اللعبة (منطق صرف، يشتغل في Node والمتصفح وCloudflare).
+ * لاعبين اثنين قدامهم نفس لوحة الشخصيات. كل واحد يختار شخصية سرية.
+ * بالدور: تسأل سؤال جوابه «نعم» أو «لا»، خصمك يجاوب، وأنت تنزّل البطاقات اللي ما تنطبق.
+ * إذا عرفت شخصيته اضغط «أخمّن» واختارها: صح = تفوز بالجولة، غلط = تنزل البطاقة وينتقل الدور.
+ * المراحل: lobby → pick → play (ask → answer → flip) → result → … → ended */
 (function (root, factory) {
   if (typeof module === 'object' && module.exports) module.exports = factory(root.DiwaniyaLobby, root.MG.fooq_rasakData);
   else { root.MG = root.MG || {}; root.MG.fooq_rasak = factory(root.DiwaniyaLobby, root.MG.fooq_rasakData); }
 })(typeof self !== 'undefined' ? self : this, function (L, D) {
   'use strict';
-  const MIN = 2, MAX = 12, JUDGE_MS = 25000;
-  const ALLOWED = { set: D.ORDER, sec: [30, 45, 60, 90], laps: [3, 5, 8] };
-  const RANK_PTS = [5, 4, 3, 2, 1];
+  const MIN = 2, MAX = 2;
+  const ALLOWED = { set: D.ORDER, size: [16, 24], rounds: [1, 3, 5] };
   const ok = L.ok, fail = L.fail, byId = L.byId;
-  const live = (g) => g.players.filter((p) => p.connected);
 
   function createGame(code) {
-    const g = L.base(code, { min: MIN, max: MAX, settings: { set: 'mix', sec: 45, laps: 5 } });
-    Object.assign(g, { cards: {}, solved: {}, solvedCount: 0, order: [], cur: null, lap: 0, turns: {}, claim: null, votes: {}, last: null });
+    const g = L.base(code, { min: MIN, max: MAX, settings: { set: 'animals', size: 24, rounds: 3 } });
+    Object.assign(g, { board: [], secret: {}, down: {}, turn: null, step: null, q: null, history: [], winner: null, starter: 0, wins: {}, lastGuess: null });
     return g;
   }
   const join = (g, name) => L.join(g, name);
+  const other = (g, id) => (g.players.find((p) => p.id !== id) || {}).id || null;
 
-  function deal(g, rng) {
-    const cards = L.shuffle(D.pool(g.settings.set), rng);
-    const extra = L.shuffle(D.pool('mix'), rng).filter((c) => !cards.some((x) => x.n === c.n));
-    const all = cards.concat(extra);
-    g.cards = {}; g.players.forEach((p, i) => { g.cards[p.id] = all[i % all.length]; });
-  }
-  function begin(g, now, rng) {
-    g.players.forEach((p) => { p.score = 0; });
-    deal(g, rng);
-    g.solved = {}; g.solvedCount = 0; g.turns = {}; g.claim = null; g.votes = {}; g.last = null;
-    g.order = L.shuffle(g.players.map((p) => p.id), rng);
-    g.lap = 1; g.round = 0; g.cur = null;
-    nextTurn(g, now, true);
+  function newRound(g, now, rng) {
+    g.round++;
+    const pool = L.shuffle(D.pool(g.settings.set), rng);
+    g.board = pool.slice(0, Math.min(g.settings.size, pool.length));
+    g.secret = {}; g.down = {}; g.history = []; g.q = null; g.winner = null; g.lastGuess = null; g.step = null; g.turn = null;
+    g.players.forEach((p) => { g.down[p.id] = g.board.map(() => false); });
+    L.setPhase(g, 'pick', now, 0); L.ev(g, { k: 'pick' });
   }
   function start(g, hostId, now, rng) {
     if (g.hostId !== hostId) return fail('not_host'); if (g.phase !== 'lobby') return fail('already_started');
     if (L.need(g) > 0) return fail('need_players');
-    begin(g, now, rng); return ok();
+    g.round = 0; g.starter = Math.floor(rng() * 2); g.players.forEach((p) => { p.score = 0; });
+    newRound(g, now, rng); return ok();
   }
-  const waiting = (g) => g.order.filter((id) => !g.solved[id] && (byId(g, id) || {}).connected);
-  function finish(g, now) {
-    g.cur = null; g.claim = null; L.setPhase(g, 'ended', now, 0); L.ev(g, { k: 'end' });
-  }
-  // ينتقل الدور للي بعده (اللي ما عرف بطاقته ولا هو متصل)
-  function nextTurn(g, now, first) {
-    const left = waiting(g);
-    if (!left.length) return finish(g, now);
-    let i = first ? -1 : g.order.indexOf(g.cur);
-    for (let k = 0; k < g.order.length; k++) {
-      i = (i + 1) % g.order.length;
-      if (i === 0 && !first) g.lap++;
-      const id = g.order[i];
-      if (!g.solved[id] && (byId(g, id) || {}).connected) break;
+  function pick(g, id, i, now) {
+    if (g.phase !== 'pick') return fail('bad_phase'); i = Number(i);
+    if (!byId(g, id) || !(i >= 0 && i < g.board.length)) return fail('bad_target');
+    g.secret[id] = i;
+    if (g.players.every((p) => g.secret[p.id] !== undefined)) {
+      g.turn = g.players[(g.starter + g.round - 1) % g.players.length].id; g.step = 'ask';
+      L.setPhase(g, 'play', now, 0); L.ev(g, { k: 'play', id: g.turn });
     }
-    if (g.lap > g.settings.laps) return finish(g, now);
-    g.cur = g.order[i]; g.turns[g.cur] = (g.turns[g.cur] || 0) + 1; g.round++;
-    g.claim = null; g.votes = {};
-    L.setPhase(g, 'turn', now, g.settings.sec * 1000);
-    L.ev(g, { k: 'turn', id: g.cur });
-  }
-  function claim(g, id, now) {
-    if (g.phase !== 'turn') return fail('bad_phase'); if (id !== g.cur) return fail('not_your_turn');
-    if (!judges(g).length) return fail('no_judges');
-    g.claim = { by: id }; g.votes = {};
-    L.setPhase(g, 'judge', now, JUDGE_MS); L.ev(g, { k: 'claim', id });
     return ok();
   }
-  const judges = (g) => live(g).filter((p) => p.id !== g.cur);
-  function vote(g, id, v, now) {
-    if (g.phase !== 'judge') return fail('bad_phase'); if (id === g.cur) return fail('not_judge');
-    if (!byId(g, id)) return fail('no_player'); if (v !== 'ok' && v !== 'no') return fail('bad_vote');
-    g.votes[id] = v; settle(g, now, false); return ok();
+  function ask(g, id, text) {
+    if (g.phase !== 'play' || g.step !== 'ask') return fail('bad_phase'); if (id !== g.turn) return fail('not_your_turn');
+    g.q = { by: id, text: L.cleanText(text, 80), ans: null }; g.step = 'answer'; L.ev(g, { k: 'ask', id });
+    return ok();
   }
-  // الأغلبية تحكم. إذا تعادلوا أو ما صوّت أحد = غلط.
-  function settle(g, now, force) {
-    const js = judges(g), n = js.length;
-    const yes = js.filter((p) => g.votes[p.id] === 'ok').length, no = js.filter((p) => g.votes[p.id] === 'no').length;
-    let verdict = null;
-    if (yes * 2 > n) verdict = 'ok'; else if (no * 2 > n) verdict = 'no';
-    else if (force || yes + no >= n) verdict = yes > no ? 'ok' : 'no';
-    if (!verdict) return false;
-    const id = g.cur;
-    if (verdict === 'ok') {
-      g.solvedCount++; g.solved[id] = g.solvedCount;
-      const pts = RANK_PTS[g.solvedCount - 1] || 1; const p = byId(g, id); if (p) p.score += pts;
-      g.last = { id, ok: true, pts, card: g.cards[id] };
-    } else g.last = { id, ok: false, pts: 0 };
-    L.ev(g, { k: 'verdict', id, ok: verdict === 'ok' });
-    nextTurn(g, now, false); return true;
+  function answer(g, id, v) {
+    if (g.phase !== 'play' || g.step !== 'answer') return fail('bad_phase'); if (id === g.turn) return fail('not_your_turn');
+    if (v !== 'yes' && v !== 'no') return fail('bad_vote');
+    g.q.ans = v; g.history.push({ by: g.q.by, text: g.q.text, ans: v }); if (g.history.length > 40) g.history.shift();
+    g.step = 'flip'; L.ev(g, { k: 'answer', ans: v }); return ok();
   }
-  function pass(g, id, now) {
-    if (g.phase !== 'turn') return fail('bad_phase'); if (id !== g.cur && id !== g.hostId) return fail('not_your_turn');
-    g.last = { id: g.cur, ok: null, pts: 0 }; nextTurn(g, now, false); return ok();
+  function flip(g, id, i) {
+    if (g.phase !== 'play') return fail('bad_phase'); i = Number(i);
+    if (!g.down[id] || !(i >= 0 && i < g.board.length)) return fail('bad_target');
+    g.down[id][i] = !g.down[id][i]; return ok();
   }
-  function skip(g, id, now) {
+  function passTurn(g) { g.turn = other(g, g.turn); g.step = 'ask'; g.q = null; }
+  function endTurn(g, id) {
+    if (g.phase !== 'play' || g.step !== 'flip') return fail('bad_phase'); if (id !== g.turn) return fail('not_your_turn');
+    passTurn(g); L.ev(g, { k: 'turn', id: g.turn }); return ok();
+  }
+  function guess(g, id, i, now) {
+    if (g.phase !== 'play' || g.step === 'answer') return fail('bad_phase'); if (id !== g.turn) return fail('not_your_turn');
+    i = Number(i); if (!(i >= 0 && i < g.board.length)) return fail('bad_target');
+    const opp = other(g, id);
+    if (g.secret[opp] === i) {
+      g.winner = id; const p = byId(g, id); if (p) p.score += 1;
+      g.lastGuess = { by: id, i, ok: true };
+      L.setPhase(g, 'result', now, 0); L.ev(g, { k: 'win', id });
+    } else {
+      g.down[id][i] = true; g.lastGuess = { by: id, i, ok: false };
+      g.history.push({ by: id, guess: i, ans: 'wrong' });
+      passTurn(g); L.ev(g, { k: 'wrong', id });
+    }
+    return ok();
+  }
+  function next(g, id, now, rng) {
+    if (g.hostId !== id) return fail('not_host'); if (g.phase !== 'result') return fail('bad_phase');
+    const need = Math.floor(g.settings.rounds / 2) + 1;
+    if (g.round >= g.settings.rounds || g.players.some((p) => p.score >= need)) { L.setPhase(g, 'ended', now, 0); return ok(); }
+    newRound(g, now, rng); return ok();
+  }
+  function skip(g, id) {
     if (g.hostId !== id) return fail('not_host');
-    if (g.phase === 'turn') return pass(g, id, now);
-    if (g.phase === 'judge') { settle(g, now, true); return ok(); }
+    if (g.phase === 'play') { passTurn(g); L.ev(g, { k: 'turn', id: g.turn }); return ok(); }
     return fail('bad_phase');
   }
-  function tick(g, now) {
-    if (!g.deadline || now < g.deadline) return false;
-    if (g.phase === 'turn') { g.last = { id: g.cur, ok: null, pts: 0 }; nextTurn(g, now, false); return true; }
-    if (g.phase === 'judge') { settle(g, now, true); return true; }
-    return false;
-  }
+  const tick = () => false;
   function act(g, id, m, now, rng) {
     switch (m.a) {
-      case 'claim': return claim(g, id, now);
-      case 'vote': return vote(g, id, m.v, now);
-      case 'pass': return pass(g, id, now);
-      case 'skip': return skip(g, id, now);
-      case 'end': { if (g.hostId !== id) return fail('not_host'); if (g.phase !== 'turn' && g.phase !== 'judge') return fail('bad_phase'); finish(g, now); return ok(); }
-      case 'again': { if (g.hostId !== id) return fail('not_host'); if (g.phase !== 'ended') return fail('bad_phase'); begin(g, now, rng); return ok(); }
+      case 'pick': return pick(g, id, m.i, now);
+      case 'ask': return ask(g, id, m.text);
+      case 'answer': return answer(g, id, m.v);
+      case 'flip': return flip(g, id, m.i);
+      case 'endturn': return endTurn(g, id);
+      case 'guess': return guess(g, id, m.i, now);
+      case 'skip': return skip(g, id);
+      case 'next': return next(g, id, now, rng);
+      case 'again': { if (g.hostId !== id) return fail('not_host'); if (g.phase !== 'ended') return fail('bad_phase'); g.round = 0; g.players.forEach((p) => { p.score = 0; }); newRound(g, now, rng); return ok(); }
       case 'lobby': return L.toLobby(g, id);
       case 'settings': return L.setSettings(g, id, m.patch || {}, ALLOWED);
       default: return fail('bad_action');
@@ -998,149 +985,171 @@
 
   function viewFor(g, pid, now) {
     const v = L.baseView(g, now), inGame = g.phase !== 'lobby';
-    v.setNames = D.NAMES; v.setOrder = D.ORDER;
+    v.setNames = D.NAMES; v.setOrder = D.ORDER; v.rounds = g.settings.rounds;
     if (inGame) {
-      const ended = g.phase === 'ended';
-      v.cur = g.cur; v.lap = g.lap; v.laps = g.settings.laps; v.last = g.last;
-      v.claim = g.claim;
-      // بطاقتك ما تشوفها إلا إذا عرفتها أو خلصت اللعبة. التلفزيون ما يعرض إلا البطاقات المعروفة.
-      v.cards = g.players.map((p) => {
-        const show = ended || g.solved[p.id] || (pid && p.id !== pid && byId(g, pid));
-        const c = g.cards[p.id];
-        return { id: p.id, solved: g.solved[p.id] || 0, turns: g.turns[p.id] || 0, card: show && c ? { n: c.n, m: c.m || '', e: c.e || '' } : null };
-      });
-      if (g.last && g.last.card) v.last = Object.assign({}, g.last);
-      if (g.phase === 'judge') {
-        const js = judges(g);
-        v.votes = { yes: js.filter((p) => g.votes[p.id] === 'ok').length, no: js.filter((p) => g.votes[p.id] === 'no').length, total: js.length };
-      }
+      const open = g.phase === 'result' || g.phase === 'ended';
+      v.board = g.board.map((c) => ({ n: c.n, m: c.m || '', e: c.e || '' }));
+      v.turn = g.turn; v.step = g.step; v.q = g.q; v.history = g.history.slice(-8); v.winner = g.winner; v.lastGuess = g.lastGuess;
+      v.left = {}; g.players.forEach((p) => { v.left[p.id] = (g.down[p.id] || []).filter((x) => !x).length; });
+      v.picked = {}; g.players.forEach((p) => { v.picked[p.id] = g.secret[p.id] !== undefined; });
+      if (open) { v.secrets = {}; g.players.forEach((p) => { v.secrets[p.id] = g.secret[p.id]; }); }
     }
-    v.players.forEach((p) => { p.solved = g.solved[p.id] || 0; });
     const p = pid && byId(g, pid);
     if (p) {
-      v.me = { id: p.id, name: p.name, host: g.hostId === p.id, solved: g.solved[p.id] || 0 };
-      if (g.phase === 'judge') v.me.vote = g.votes[p.id] || null;
+      v.me = { id: p.id, name: p.name, host: g.hostId === p.id, opp: other(g, p.id) };
+      if (inGame) { v.me.secret = g.secret[p.id] === undefined ? null : g.secret[p.id]; v.me.down = (g.down[p.id] || []).slice(); }
     }
     return v;
   }
-  return Object.assign({ MIN, MAX, ALLOWED, RANK_PTS, createGame, join, start, tick, act, viewFor }, { leave: L.leave, kick: L.kick, setConnected: L.setConnected, need: L.need, byId: L.byId });
+  return Object.assign({ MIN, MAX, ALLOWED, createGame, join, start, tick, act, viewFor }, { leave: L.leave, kick: L.kick, setConnected: L.setConnected, need: L.need, byId: L.byId });
 });
 </script>
 <script>/* games/fooq_rasak/help.js */
 (function (root) {
   'use strict'; root.MG = root.MG || {};
   root.MG.fooq_rasakHelp = { SECTIONS: [
-    { id: 'idea', short: 'الفكرة', title: 'وش فوق راسك؟', lead: 'مثل لعبة البطاقة اللي تنحط فوق الراس: كل واحد عنده بطاقة سرية، الكل يشوفها بجوالاتهم إلا هو! لازم يسأل ويخمّن مين هو.', kind: 'list', points: ['من ٢ إلى ١٢ لاعب، كل واحد بجواله.', 'البطاقات: لاعبين كورة، مشاهير، حيوانات، أكل، أشياء، مهن… أو مختلط.', 'التلفزيون يعرض الدور والنتيجة، وما يكشف أي بطاقة.'] },
+    { id: 'idea', short: 'الفكرة', title: 'وش خمّن الشخصية؟', lead: 'لعبة لشخصين: الاثنين قدامهم نفس لوحة الشخصيات بجوالاتهم، وكل واحد يختار شخصية بالسر. أول واحد يعرف شخصية خصمه يفوز!', kind: 'list', points: ['لاعبين اثنين، كل واحد بجواله.', 'اللوحات: لاعبين كورة، مشاهير، حيوانات، أكل، أشياء، مهن… أو مختلط.', 'التلفزيون يعرض الدور والأسئلة وكم بطاقة باقية لكل واحد.'] },
     { id: 'play', short: 'كيف تلعب', title: 'سير اللعبة', kind: 'steps', steps: [
-      { h: 'دورك', t: 'اسأل الباقين سؤال جوابه «نعم» أو «لا» بس: «أنا إنسان؟» «أنا مشهور؟» «أنا أتاكل؟»' },
-      { h: 'الجواب', t: 'الباقين يجاوبونك بصوت عالي. تقدر تسأل كم سؤال لين يخلص وقت دورك.' },
-      { h: 'عرفتها!', t: 'إذا عرفت اضغط «عرفتها!» وقل الجواب بصوت. الباقين يحكمون بجوالاتهم: صح ولا غلط.' },
-      { h: 'الغلط', t: 'إذا غلطت أو خلص وقتك، الدور ينتقل للي بعدك.' }
+      { h: 'اختار', t: 'كل واحد يختار شخصية سرية من اللوحة.' },
+      { h: 'اسأل', t: 'بدورك اسأل سؤال جوابه «نعم» أو «لا»: شخصيتك إنسان؟ تلبس نظارة؟ لونها أخضر؟ تكتبه أو تقوله بصوتك.' },
+      { h: 'نزّل', t: 'خصمك يجاوب من جواله، وأنت تنزّل البطاقات اللي ما تنطبق بالضغط عليها، وبعدين «خلّصت دوري».' },
+      { h: 'خمّن', t: 'إذا عرفتها اضغط «أخمّن» واختار الشخصية. صح = تفوز بالجولة، غلط = ينتقل الدور لخصمك.' }
     ] },
-    { id: 'win', short: 'النقاط', title: 'كيف تنحسب النقاط', kind: 'list', points: ['أول واحد يعرف بطاقته ياخذ ٥ نقاط، الثاني ٤، الثالث ٣، وبعدها ٢ ثم ١.', 'اللعبة تخلص لما الكل يعرف، أو تخلص اللفّات اللي اختارها المضيف.', 'نصيحة: لا تكشفون البطاقة بتعابير وجيهكم 😄'] }
+    { id: 'win', short: 'الفوز', title: 'الجولات', kind: 'list', points: ['تقدرون تلعبون جولة وحدة أو أفضل من ٣ أو أفضل من ٥.', 'كل جولة لوحة جديدة وشخصيات جديدة.', 'نصيحة: الأسئلة اللي تقسم اللوحة نصين أقوى شي!'] }
   ] };
 })(typeof self !== 'undefined' ? self : this);
 </script>
 <script>/* games/fooq_rasak/ui.js */
-/* فوق راسك — شاشات الجوال + شاشة التلفزيون */
+/* خمّن الشخصية — شاشات الجوال + شاشة التلفزيون */
 (function (root) {
   'use strict';
   const MG = root.MG, esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const AR = (n) => String(n).replace(/\d/g, (d) => '٠١٢٣٤٥٦٧٨٩'[d]);
-  const ICON = '<svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block"><rect width="160" height="160" rx="30" fill="#7f1d1d"/><rect x="22" y="96" width="116" height="16" rx="8" fill="#2563eb"/><rect x="52" y="24" width="56" height="74" rx="10" fill="#ef4444" stroke="#fff" stroke-width="4"/><text x="80" y="76" text-anchor="middle" font-size="44" font-weight="900" fill="#fff" font-family="Tahoma,Arial">؟</text><circle cx="80" cy="138" r="10" fill="#F5B942"/></svg>';
+  const ICON = '<svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block"><rect width="160" height="160" rx="30" fill="#1e3a8a"/>' +
+    [0, 1, 2].map((r) => [0, 1, 2].map((c) => '<rect x="' + (22 + c * 40) + '" y="' + (22 + r * 40) + '" width="34" height="34" rx="7" fill="' + ((r + c) % 3 === 1 ? '#475569' : '#f8fafc') + '"/>').join('')).join('') +
+    '<rect x="62" y="62" width="34" height="34" rx="7" fill="#F5B942"/><text x="79" y="88" text-anchor="middle" font-size="26" font-weight="900" fill="#1e3a8a" font-family="Tahoma,Arial">؟</text></svg>';
   const nm = (v, id) => { const p = v.players.find((x) => x.id === id); return p ? esc(p.name) : '؟'; };
-  const pic = (c, size) => {
-    if (!c) return '<div class="fr-q" style="font-size:' + Math.round(size * 0.55) + 'px">❓</div>';
-    if (c.m) return '<img src="/media/med_seed_' + esc(c.m) + '" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:top">';
-    return '<div class="fr-e" style="font-size:' + Math.round(size * 0.6) + 'px">' + esc(c.e) + '</div>';
-  };
-  const CSS = '<style>.fr-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:10px}.fr-c{background:rgba(255,255,255,.06);border:2px solid rgba(255,255,255,.12);border-radius:16px;padding:6px;display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center}.fr-c.cur{border-color:#F5B942;box-shadow:0 0 0 3px rgba(245,185,66,.3)}.fr-c.ok{border-color:#34d399}.fr-c .ph{width:100%;aspect-ratio:3/4;border-radius:11px;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center}.fr-c .ph.hid{background:linear-gradient(135deg,#ef4444,#991b1b)}.fr-c .cn{font-weight:900;font-size:13px;line-height:1.3}.fr-c .pn{font-size:12px;opacity:.75}.fr-q{color:#fff;font-weight:900}.fr-e{line-height:1}.fr-big{width:min(62vw,240px);margin:0 auto;aspect-ratio:3/4;border-radius:18px;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;border:4px solid #F5B942}</style>';
-  function cardGrid(v, opt) {
-    opt = opt || {};
-    return '<div class="fr-grid">' + v.cards.map((c) => {
-      const mine = v.me && c.id === v.me.id;
-      const label = c.card ? esc(c.card.n) : (mine ? 'فوق راسك!' : '؟');
-      return '<div class="fr-c ' + (c.id === v.cur ? 'cur' : '') + (c.solved ? ' ok' : '') + '"><div class="ph ' + (c.card ? '' : 'hid') + '">' + pic(c.card, 100) + '</div><div class="cn">' + label + '</div><div class="pn">' + nm(v, c.id) + (mine ? ' (أنت)' : '') + (c.solved ? ' ✅' : '') + '</div></div>';
+  const face = (c, big) => c.m ? '<img src="/media/med_seed_' + esc(c.m) + '" alt="" loading="lazy">' : '<span class="em" style="font-size:' + (big ? 120 : 34) + 'px">' + esc(c.e) + '</span>';
+  const CSS = '<style>.gw-b{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.gw-c{position:relative;background:#fff;border-radius:10px;overflow:hidden;border:2px solid transparent;padding:0;display:flex;flex-direction:column;align-items:stretch;color:#0f172a;transition:transform .15s,opacity .15s}.gw-c .ph{aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#f1f5f9}.gw-c img{width:100%;height:100%;object-fit:cover;object-position:top}.gw-c .em{line-height:1}.gw-c .t{font-size:10.5px;font-weight:800;padding:2px 2px 3px;line-height:1.2;min-height:2.4em;display:flex;align-items:center;justify-content:center;text-align:center}.gw-c.dn{opacity:.28;transform:scale(.92);filter:grayscale(1)}.gw-c.dn::after{content:"✕";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:40px;font-weight:900;color:#dc2626}.gw-c.sel{border-color:#F5B942;box-shadow:0 0 0 3px rgba(245,185,66,.5)}.gw-c.gm{border-color:#f472b6}.gw-me{display:flex;gap:10px;align-items:center}.gw-me .ph{width:64px;height:64px;border-radius:12px;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;flex:none}.gw-me .ph img{width:100%;height:100%;object-fit:cover;object-position:top}.gw-big{width:min(56vw,220px);aspect-ratio:1/1;margin:0 auto;border-radius:18px;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;border:4px solid #F5B942}.gw-big img{width:100%;height:100%;object-fit:cover;object-position:top}.gw-ans{font-size:44px;font-weight:900}.gw-h{display:flex;flex-direction:column;gap:4px;font-size:13px}.gw-h div{display:flex;gap:8px}.gw-h b.y{color:#34d399}.gw-h b.n{color:#f87171}</style>';
+  const IDEAS = ['إنسان؟', 'ذكر؟', 'يلبس نظارة؟', 'عربي؟', 'لاعب كورة؟', 'مغني؟', 'عنده أجنحة؟', 'يعيش بالبحر؟', 'لونه أخضر؟', 'يتاكل؟', 'أكبر من الكرسي؟', 'يشتغل بالكهرباء؟'];
+
+  function board(v, mode) {
+    return '<div class="gw-b">' + v.board.map((c, i) => {
+      const dn = v.me.down[i];
+      const cls = (dn ? ' dn' : '') + (mode === 'pick' && v.me.secret === i ? ' sel' : '') + (mode === 'guess' ? ' gm' : '');
+      return '<button class="gw-c' + cls + '" data-a="cell" data-i="' + i + '"><div class="ph">' + face(c) + '</div><div class="t">' + esc(c.n) + '</div></button>';
     }).join('') + '</div>';
   }
-  function lastLine(v) {
-    const l = v.last; if (!l) return '';
-    if (l.ok) return '<div class="ann g"><div class="big">🎉 ' + nm(v, l.id) + ' عرف إنه «' + esc(l.card ? l.card.n : '') + '» (+' + AR(l.pts) + ')</div></div>';
-    if (l.ok === false) return '<div class="card ctr">❌ ' + nm(v, l.id) + ' خمّن غلط</div>';
-    return '';
+  function mine(v) {
+    if (v.me.secret === null || v.me.secret === undefined) return '';
+    const c = v.board[v.me.secret];
+    return '<div class="card gw-me"><div class="ph">' + face(c) + '</div><div><div class="mut small">شخصيتك السرية 🤫</div><div class="big">' + esc(c.n) + '</div></div><span class="sp"></span><span class="pill">باقي عندك ' + AR(v.left[v.me.id]) + '</span></div>';
+  }
+  function hist(v) {
+    if (!v.history.length) return '';
+    return '<div class="card col"><div class="mut small">الأسئلة اللي فاتت</div><div class="gw-h">' + v.history.slice().reverse().map((h) => '<div><span>' + nm(v, h.by) + ':</span>' + (h.ans === 'wrong' ? '<span>خمّن «' + esc(v.board[h.guess].n) + '» ❌</span>' : '<span>' + (h.text ? esc(h.text) : '(سؤال بالصوت)') + '</span><span class="sp"></span><b class="' + (h.ans === 'yes' ? 'y' : 'n') + '">' + (h.ans === 'yes' ? 'نعم' : 'لا') + '</b>') + '</div>').join('') + '</div></div>';
   }
 
   const cfg = {
-    id: 'fooq_rasak', name: 'فوق راسك', nameHtml: '<b>فوق</b> راسك', tagline: 'الكل يشوف بطاقتك إلا أنت… اسأل وخمّن مين أنت!', icon: ICON, wsPath: '/fooq_rasak/ws', min: 2, max: 12,
+    id: 'fooq_rasak', name: 'خمّن الشخصية', nameHtml: '<b>خمّن</b> الشخصية', tagline: 'كل واحد يختار شخصية سرية… واسأل لين تعرف شخصية خصمك!', icon: ICON, wsPath: '/fooq_rasak/ws', min: 2, max: 2,
     engine: MG.fooq_rasak, help: MG.fooq_rasakHelp,
-    err: { not_your_turn: 'مو دورك', not_judge: 'ما تقدر تحكم على نفسك', no_judges: 'ما فيه أحد يحكم' },
-    phaseName: { turn: 'الأسئلة', judge: 'الحكم', ended: 'النهاية' },
-    stepKey: (v) => v.phase + ':' + v.round,
-    myTurn: (v) => v.phase === 'turn' && v.me && v.cur === v.me.id,
-    lobbyInfo: () => '<div class="card hint">كل واحد تطلع له بطاقة سرية (شخصية أو شي) يشوفها الكل بجوالاتهم إلا هو. بدوره يسأل أسئلة جوابها «نعم» أو «لا» لين يعرف مين هو!</div>',
+    err: { not_your_turn: 'مو دورك', room_full: 'الغرفة لشخصين بس' },
+    phaseName: { pick: 'اختيار الشخصية', play: 'اللعب', result: 'نهاية الجولة', ended: 'النهاية' },
+    stepKey: (v) => v.phase + ':' + v.round + ':' + (v.turn || '') + ':' + (v.step || ''),
+    myTurn: (v) => (v.phase === 'play' && v.me && ((v.turn === v.me.id && v.step === 'ask') || (v.turn !== v.me.id && v.step === 'answer'))),
+    lobbyInfo: () => '<div class="card hint">لعبة لشخصين: الاثنين قدامهم نفس لوحة الشخصيات. كل واحد يختار شخصية بالسر، وبالدور تسألون أسئلة جوابها «نعم» أو «لا» وتنزّلون البطاقات الغلط. أول من يعرف شخصية خصمه يفوز!</div>',
     lobbyHost: (v, K) => '<div class="card col"><div class="big">إعدادات اللعبة</div>' +
-      K.settingChips(v, 'set', v.setOrder.map((k) => [k, v.setNames[k]]), 'نوع البطاقات') +
-      K.settingChips(v, 'sec', [[30, '٣٠ ثانية'], [45, '٤٥ ثانية'], [60, 'دقيقة'], [90, 'دقيقة ونص']], 'وقت كل دور') +
-      K.settingChips(v, 'laps', [[3, '٣ لفّات'], [5, '٥ لفّات'], [8, '٨ لفّات']], 'كم دور لكل لاعب (أقصى حد)') + '</div>',
-    evText: (v, e) => e.k === 'verdict' ? (e.ok ? '✅ ' : '❌ ') + nm(v, e.id) + (e.ok ? ' عرف بطاقته' : ' خمّن غلط') : e.k === 'turn' ? 'دور ' + nm(v, e.id) : '',
+      K.settingChips(v, 'set', v.setOrder.map((k) => [k, v.setNames[k]]), 'نوع الشخصيات') +
+      K.settingChips(v, 'size', [[16, '١٦ بطاقة'], [24, '٢٤ بطاقة']], 'حجم اللوحة') +
+      K.settingChips(v, 'rounds', [[1, 'جولة وحدة'], [3, 'أفضل من ٣'], [5, 'أفضل من ٥']], 'عدد الجولات') + '</div>',
+    evText: (v, e) => e.k === 'win' ? '🏆 ' + nm(v, e.id) + ' عرف الشخصية' : e.k === 'wrong' ? '❌ ' + nm(v, e.id) + ' خمّن غلط' : '',
     click(a, el, K) {
-      if (a === 'claim') { K.act('claim'); return true; }
-      if (a === 'pass') { K.act('pass'); return true; }
-      if (a === 'vote') { K.act('vote', { v: el.getAttribute('data-v') }); return true; }
-      if (a === 'endgame') { K.act('end'); return true; }
+      const v = K.ST.view;
+      if (a === 'cell') {
+        const i = Number(el.getAttribute('data-i'));
+        if (v.phase === 'pick') { K.act('pick', { i }); return true; }
+        if (v.phase === 'play') {
+          if (K.ST.local.guess) { if (v.me.down[i]) { K.toast('هالبطاقة نازلة'); return true; } K.ST.local.guess = false; K.act('guess', { i }); return true; }
+          K.act('flip', { i }); return true;
+        }
+        return true;
+      }
+      if (a === 'idea') { const inp = document.getElementById('gwq' + v.round); if (inp) inp.value = el.getAttribute('data-t'); return true; }
+      if (a === 'ask') { const inp = document.getElementById('gwq' + v.round); K.act('ask', { text: inp ? inp.value.trim() : '' }); return true; }
+      if (a === 'askvoice') { K.act('ask', { text: '' }); return true; }
+      if (a === 'ans') { K.act('answer', { v: el.getAttribute('data-v') }); return true; }
+      if (a === 'endturn') { K.act('endturn'); return true; }
+      if (a === 'guessmode') { K.ST.local.guess = !K.ST.local.guess; K.render(); return true; }
+      if (a === 'next') { K.act('next'); return true; }
       return false;
     },
     screen(v, K) {
-      const me = v.me, ph = v.phase; let out = CSS + K.topbar(v, '<span class="pill">اللفّة ' + AR(Math.min(v.lap, v.laps)) + ' من ' + AR(v.laps) + '</span>');
-      if (ph === 'turn') {
-        const mine = v.cur === me.id;
-        out += lastLine(v) + K.timerHtml(v);
-        if (mine) out += '<div class="ann g"><div class="huge">دورك! 🎯</div><div class="mut" style="margin-top:6px;line-height:1.8">اسأل الباقين سؤال جوابه «نعم» أو «لا» بصوت عالي.<br>مثال: «أنا إنسان؟» «أنا لاعب كورة؟» «أنا أتاكل؟»</div></div>' +
-          '<div class="stick col" style="gap:8px"><button class="btn gold" data-a="claim">عرفتها! بقول الجواب</button><button class="btn sec" data-a="pass">خلّص دوري</button></div>';
-        else if (me.solved) out += '<div class="card ctr">✅ عرفت بطاقتك! الحين ساعد الباقين بالجواب على أسئلتهم.</div><div class="ann"><div class="big">دور ' + nm(v, v.cur) + '</div><div class="mut small">جاوبوه بـ«نعم» أو «لا» بس</div></div>';
-        else out += '<div class="ann"><div class="big">دور ' + nm(v, v.cur) + ' يسأل</div><div class="mut small" style="margin-top:4px">جاوبوه بصوت: «نعم» أو «لا» بس! وانتبهوا لا تكشفون البطاقة 🤫</div></div>';
-        out += cardGrid(v);
-        if (me.host && !mine) out += '<div class="row" style="gap:8px">' + K.hostSkip(v, 'تخطّي الدور (المضيف)') + '<button class="btn sec sm" data-a="endgame">إنهاء اللعبة</button></div>';
-      } else if (ph === 'judge') {
-        const c = v.cards.find((x) => x.id === v.cur), mine = v.cur === me.id;
-        out += K.timerHtml(v);
-        if (mine) out += '<div class="ann g"><div class="huge">قل جوابك! 🎤</div><div class="mut" style="margin-top:6px">قل بصوت عالي مين تتوقع نفسك… والباقين يحكمون.</div></div><div class="card ctr mut">حكم ' + AR(v.votes.yes + v.votes.no) + ' من ' + AR(v.votes.total) + '</div>';
-        else {
-          out += '<div class="ann"><div class="big">' + nm(v, v.cur) + ' يقول إنه عرفها!</div><div class="mut small">اسمعوا جوابه… صح ولا غلط؟</div></div>';
-          if (c && c.card) out += '<div class="fr-big">' + pic(c.card, 220) + '</div><div class="ctr big" style="margin:8px 0">' + esc(c.card.n) + '</div>';
-          out += '<div class="row" style="gap:10px"><button class="btn ' + (me.vote === 'ok' ? 'gold' : 'sec') + ' sp" data-a="vote" data-v="ok">✅ صح</button><button class="btn ' + (me.vote === 'no' ? 'gold' : 'sec') + ' sp" data-a="vote" data-v="no">❌ غلط</button></div>' +
-            '<div class="card ctr mut small">صح ' + AR(v.votes.yes) + ' · غلط ' + AR(v.votes.no) + ' · من ' + AR(v.votes.total) + '</div>';
-        }
-        out += me.host ? K.hostSkip(v, 'احسم الحكم الحين (المضيف)') : '';
-      } else if (ph === 'ended') out = CSS + K.endScreen(v, '<div class="card col"><div class="big">البطاقات</div>' + cardGrid(v) + '</div>');
+      const me = v.me, ph = v.phase, opp = me.opp; let out = CSS + K.topbar(v);
+      if (ph === 'pick') {
+        if (me.secret === null) out += '<div class="ann g"><div class="big">اختار شخصيتك السرية 🤫</div><div class="mut small" style="margin-top:4px">لا تخلّي خصمك يشوف جوالك!</div></div>';
+        else out += mine(v) + '<div class="card ctr mut">' + (v.picked[opp] ? '' : 'ننتظر ' + nm(v, opp) + ' يختار…') + ' تقدر تغيّر اختيارك.</div>';
+        out += board(v, 'pick');
+      } else if (ph === 'play') {
+        const myTurn = v.turn === me.id, gm = !!K.ST.local.guess;
+        out += mine(v);
+        if (myTurn && v.step === 'ask') {
+          out += '<div class="ann g"><div class="big">دورك! اسأل سؤال جوابه نعم أو لا</div></div>' +
+            '<div class="card col"><input id="gwq' + v.round + '" class="inp" maxlength="80" autocomplete="off" placeholder="اكتب سؤالك… مثال: شخصيتك تلبس نظارة؟">' +
+            '<div class="row wrap" style="gap:6px">' + IDEAS.map((t) => '<button class="chip" data-a="idea" data-t="' + esc(t) + '">' + esc(t) + '</button>').join('') + '</div>' +
+            '<div class="row" style="gap:8px"><button class="btn gold sp" data-a="ask">أرسل السؤال</button><button class="btn sec sp" data-a="askvoice">سألته بصوتي</button></div></div>' +
+            '<button class="btn ' + (gm ? 'gold' : 'sec') + '" data-a="guessmode">' + (gm ? 'إلغاء التخمين' : '🎯 أعرفها! أبي أخمّن') + '</button>';
+        } else if (myTurn && v.step === 'answer') out += '<div class="ann"><div class="big">ننتظر جواب ' + nm(v, opp) + '…</div>' + (v.q.text ? '<div class="mut" style="margin-top:6px">«' + esc(v.q.text) + '»</div>' : '') + '</div>';
+        else if (myTurn && v.step === 'flip') {
+          out += '<div class="ann g"><div class="mut">' + (v.q.text ? '«' + esc(v.q.text) + '»' : 'جواب سؤالك') + '</div><div class="gw-ans" style="color:' + (v.q.ans === 'yes' ? '#34d399' : '#f87171') + '">' + (v.q.ans === 'yes' ? 'نعم ✅' : 'لا ❌') + '</div><div class="mut small">نزّل البطاقات اللي ما تنطبق (اضغط عليها)</div></div>' +
+            '<div class="row" style="gap:8px"><button class="btn gold sp" data-a="endturn">خلّصت دوري</button><button class="btn ' + (gm ? 'gold' : 'sec') + ' sp" data-a="guessmode">' + (gm ? 'إلغاء التخمين' : '🎯 أخمّن') + '</button></div>';
+        } else if (!myTurn && v.step === 'answer') {
+          const c = v.board[me.secret];
+          out += '<div class="ann g"><div class="mut">' + nm(v, opp) + ' يسألك:</div><div class="big" style="margin:6px 0">' + (v.q.text ? '«' + esc(v.q.text) + '»' : 'اسمع سؤاله 👂') + '</div><div class="mut small">عن شخصيتك: <b style="color:#fff">' + esc(c.n) + '</b></div></div>' +
+            '<div class="gw-big">' + face(c, true) + '</div>' +
+            '<div class="row" style="gap:10px;margin-top:10px"><button class="btn gold sp" data-a="ans" data-v="yes">نعم ✅</button><button class="btn sec sp" data-a="ans" data-v="no">لا ❌</button></div>';
+        } else out += '<div class="ann"><div class="big">دور ' + nm(v, opp) + '</div><div class="mut small">' + (v.step === 'flip' ? 'جاوبت: ' + (v.q.ans === 'yes' ? 'نعم' : 'لا') + ' — ينزّل بطاقاته الحين' : 'يفكّر بسؤاله…') + '</div><div class="mut small" style="margin-top:4px">باقي عنده ' + AR(v.left[opp]) + ' بطاقة</div></div>';
+        if (v.lastGuess && !v.lastGuess.ok && v.lastGuess.by === opp && v.turn === me.id && v.step === 'ask') out = out.replace('<div class="ann g"><div class="big">دورك!', '<div class="card ctr">❌ ' + nm(v, opp) + ' خمّن «' + esc(v.board[v.lastGuess.i].n) + '» وطلع غلط!</div><div class="ann g"><div class="big">دورك!');
+        if (gm) out += '<div class="card ctr" style="border-color:#f472b6">🎯 اضغط على الشخصية اللي تتوقعها. لو غلطت ينتقل الدور!</div>';
+        out += board(v, gm ? 'guess' : 'play') + hist(v);
+        out += me.host ? K.hostSkip(v, 'انقل الدور (المضيف)') : '';
+      } else if (ph === 'result') {
+        const won = v.winner === me.id, s = v.secrets;
+        out += '<div class="ann g"><div class="huge">' + (won ? '🏆 فزت بالجولة!' : '😅 ' + nm(v, v.winner) + ' عرفها!') + '</div></div>' +
+          '<div class="row" style="gap:10px">' + v.players.map((p) => '<div class="card col sp ctr"><div class="mut small">شخصية ' + esc(p.name) + '</div><div class="gw-big" style="width:100%">' + face(v.board[s[p.id]], true) + '</div><b>' + esc(v.board[s[p.id]].n) + '</b></div>').join('') + '</div>' +
+          K.scores(v, 'الجولات') + (me.host ? '<div class="stick"><button class="btn gold" data-a="next">التالي</button></div>' : '<div class="card ctr mut">ننتظر المضيف…</div>');
+      } else if (ph === 'ended') out = CSS + K.endScreen(v);
       return out;
     }
   };
 
   cfg.board = {
-    title: '<b>فوق</b> راسك', timedPhases: ['turn', 'judge'], stepKey: (v) => v.phase + ':' + v.round,
-    css: '.mdb .who{font-size:6em;font-weight:900;color:#ffd978;line-height:1.1}.mdb .fr-tv{display:flex;flex-wrap:wrap;gap:1em;justify-content:center;max-width:60em}.mdb .fr-tv div{width:8em;text-align:center;font-size:1.4em}.mdb .fr-tv .ph{width:8em;height:10.6em;border-radius:.8em;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;font-size:1em}.mdb .fr-tv img{width:100%;height:100%;object-fit:cover;object-position:top}',
-    tone: (v) => (v.phase === 'judge' ? 'blue' : v.phase === 'ended' ? 'gold' : ''),
+    title: '<b>خمّن</b> الشخصية', timedPhases: [], stepKey: (v) => v.phase + ':' + v.round + ':' + (v.turn || '') + ':' + (v.step || ''),
+    css: '.mdb .who{font-size:5em;font-weight:900;color:#ffd978;line-height:1.1}.mdb .vs{display:flex;gap:4em;font-size:2.4em;justify-content:center}.mdb .vs div{text-align:center}.mdb .vs b{display:block;font-size:2em;color:#ffd978}.mdb .ans{font-size:6em;font-weight:900}.mdb .gwtv{width:9em;height:9em;border-radius:1em;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;font-size:1.6em;margin:0 auto}.mdb .gwtv img{width:100%;height:100%;object-fit:cover;object-position:top}',
+    tone: (v) => (v.phase === 'result' || v.phase === 'ended' ? 'gold' : ''),
     render(v, B) {
       const ph = v.phase, N = (id) => esc(B.N(v, id));
-      const tv = (list) => '<div class="fr-tv">' + list.map((c) => '<div><div class="ph">' + (c.card.m ? '<img src="/media/med_seed_' + esc(c.card.m) + '" alt="">' : '<span style="font-size:5em">' + esc(c.card.e) + '</span>') + '</div><b>' + esc(c.card.n) + '</b><br>' + N(c.id) + '</div>').join('') + '</div>';
-      if (ph === 'turn') {
-        const l = v.last;
-        const core = (l && l.ok ? '<div class="sub">🎉 ' + N(l.id) + ' عرف إنه «' + esc(l.card.n) + '»</div>' : '') + '<div class="sub">دور</div><div class="who">' + N(v.cur) + '</div><div class="sub">يسأل سؤال جوابه نعم أو لا</div>';
-        return '<div class="core">' + core + '</div>' + B.seats(v, { tag: (p) => (p.solved ? '<span class="tg ok">عرف ✅</span>' : '') });
+      const vs = () => '<div class="vs">' + v.players.map((p) => '<div>' + esc(p.name) + '<b>' + B.AR(v.left ? v.left[p.id] : 0) + '</b><span class="sub">بطاقة باقية</span></div>').join('') + '</div>';
+      if (ph === 'pick') return '<div class="core"><div class="who">اختاروا شخصياتكم 🤫</div><div class="sub">' + v.players.map((p) => esc(p.name) + (v.picked[p.id] ? ' ✅' : ' …')).join(' · ') + '</div></div>';
+      if (ph === 'play') {
+        let mid = '<div class="sub">دور</div><div class="who">' + N(v.turn) + '</div>';
+        if (v.step === 'answer') mid += '<div class="sub">' + (v.q.text ? '«' + esc(v.q.text) + '»' : 'يسأل…') + '</div>';
+        if (v.step === 'flip') mid += '<div class="sub">' + (v.q.text ? '«' + esc(v.q.text) + '»' : '') + '</div><div class="ans" style="color:' + (v.q.ans === 'yes' ? '#34d399' : '#f87171') + '">' + (v.q.ans === 'yes' ? 'نعم' : 'لا') + '</div>';
+        return '<div class="core">' + mid + vs() + '</div>';
       }
-      if (ph === 'judge') return '<div class="core"><div class="who">' + N(v.cur) + '</div><div class="sub">يقول إنه عرفها! صح ولا غلط؟</div><div class="sub">صح ' + B.AR(v.votes.yes) + ' · غلط ' + B.AR(v.votes.no) + '</div></div>';
-      if (ph === 'ended') {
-        const top = v.players.slice().sort((a, b) => b.score - a.score)[0];
-        return '<div class="core full"><div class="sub">الفايز</div><div class="big gold">' + esc(top.name) + '</div>' + tv(v.cards.filter((c) => c.card)) + B.ranking(v) + '</div>';
+      if (ph === 'result') {
+        const s = v.secrets;
+        return '<div class="core full"><div class="sub">فاز بالجولة</div><div class="who">' + N(v.winner) + '</div><div class="vs">' + v.players.map((p) => { const c = v.board[s[p.id]]; return '<div>' + esc(p.name) + '<div class="gwtv">' + (c.m ? '<img src="/media/med_seed_' + esc(c.m) + '" alt="">' : '<span style="font-size:5em">' + esc(c.e) + '</span>') + '</div><b style="font-size:1em">' + esc(c.n) + '</b></div>'; }).join('') + '</div></div>';
       }
+      if (ph === 'ended') { const top = v.players.slice().sort((a, b) => b.score - a.score)[0]; return '<div class="core full"><div class="sub">الفايز</div><div class="big gold">' + esc(top.name) + '</div>' + B.ranking(v) + '</div>'; }
       return '<div class="core"></div>';
     },
     cues(prev, v, B, fresh) {
       if (!fresh) return;
-      if (v.phase === 'turn') { if (v.last && v.last.ok) B.sfx('fanfare'); else B.sfx('gong'); B.later(500, () => B.say('دور ' + B.N(v, v.cur))); }
-      else if (v.phase === 'judge') { B.sfx('blip'); B.later(300, () => B.say(B.N(v, v.cur) + ' يقول إنه عرفها!')); }
-      else if (v.phase === 'ended') { B.sfx('fanfare'); const top = v.players.slice().sort((a, b) => b.score - a.score)[0]; B.later(800, () => B.say('انتهت اللعبة. الفايز: ' + top.name + '.')); }
+      if (v.phase === 'pick') { B.sfx('gong'); B.later(400, () => B.say('اختاروا شخصياتكم بالسر')); }
+      else if (v.phase === 'play' && v.step === 'ask') { B.sfx('blip'); B.later(300, () => B.say('دور ' + B.N(v, v.turn))); }
+      else if (v.phase === 'play' && v.step === 'flip') B.later(200, () => B.say(v.q.ans === 'yes' ? 'نعم' : 'لا'));
+      else if (v.phase === 'result') { B.sfx('fanfare'); B.later(600, () => B.say(B.N(v, v.winner) + ' عرف الشخصية!')); }
+      else if (v.phase === 'ended') { B.sfx('fanfare'); const top = v.players.slice().sort((a, b) => b.score - a.score)[0]; B.later(800, () => B.say('الفايز: ' + top.name)); }
     }
   };
   root.DIWANIYA_CFG = cfg;
@@ -1715,14 +1724,26 @@ body.show-board .tabs{left:14px;transform:none;bottom:34px}
 
 </script>
 <script>/* games/fooq_rasak/bots.js */
-/* فوق راسك — بوتات النسخة التجريبية */
+/* خمّن الشخصية — بوت النسخة التجريبية */
 (function (g) {
   'use strict';
   var E = g.MG.fooq_rasak;
-  g.DiwaniyaLoop.install({ E: E, bots: 4, think: function (b, v, H) {
+  var Q = ['شخصيتك إنسان؟', 'لونها أسود؟', 'تعيش بالبحر؟', 'أكبر من الكرسي؟', 'مشهورة؟'];
+  g.DiwaniyaLoop.install({ E: E, bots: 1, think: function (b, v, H) {
     var me = v.me; if (!me) return; var ph = v.phase;
-    if (ph === 'turn' && v.cur === me.id) b.once('t' + v.round, 5000, 12000, function () { this.act({ a: H.rnd() < 0.55 ? 'claim' : 'pass' }); });
-    else if (ph === 'judge' && v.cur !== me.id && !me.vote) b.once('j' + v.round, 1500, 5000, function () { this.act({ a: 'vote', v: H.rnd() < 0.6 ? 'ok' : 'no' }); });
+    var up = function () { var a = []; me.down.forEach(function (d, i) { if (!d) a.push(i); }); return a; };
+    if (ph === 'pick' && me.secret === null) b.once('p' + v.round, 1500, 4000, function () { this.act({ a: 'pick', i: Math.floor(H.rnd() * v.board.length) }); });
+    else if (ph === 'play' && v.turn === me.id && v.step === 'ask') b.once('a' + v.history.length, 2500, 5000, function () {
+      var u = up(); if (u.length <= 3 && H.rnd() < 0.6) this.act({ a: 'guess', i: u[Math.floor(H.rnd() * u.length)] });
+      else this.act({ a: 'ask', text: Q[Math.floor(H.rnd() * Q.length)] });
+    });
+    else if (ph === 'play' && v.turn !== me.id && v.step === 'answer') b.once('r' + v.history.length, 1500, 3500, function () { this.act({ a: 'answer', v: H.rnd() < 0.5 ? 'yes' : 'no' }); });
+    else if (ph === 'play' && v.turn === me.id && v.step === 'flip') b.once('f' + v.history.length, 2000, 4000, function () {
+      var u = up(), k = Math.ceil(u.length / 3), self = this;
+      for (var j = 0; j < k && u.length > 1; j++) { var x = u.splice(Math.floor(H.rnd() * u.length), 1)[0]; if (x !== me.secret) self.act({ a: 'flip', i: x }); }
+      self.act({ a: 'endturn' });
+    });
+    else if (ph === 'result' && me.host) b.once('n' + v.round, 4000, 6000, function () { this.act({ a: 'next' }); });
   } });
 })(typeof window !== 'undefined' ? window : globalThis);
 </script>

@@ -237,12 +237,15 @@
     R(210, 76, 70, 92, 12, '#0f172a', ' stroke="#f472b6" stroke-width="2"') + T(245, 104, 10, '«كنا في', '#fbcfe8', 600) + T(245, 120, 10, 'الحوش»', '#fbcfe8', 600) + T(245, 150, 18, '📱') +
     T(160, 126, 30, '❗'));
 
-  // فوق راسك — بطاقة فوق الراس والكل يشوفها إلا صاحبها
-  P.fooq_rasak = svg('fooq_rasak', '#991b1b', '#2a0707',
-    [60, 160, 260].map(function (x, i) {
-      return R(x - 44, 112, 88, 14, 7, '#2563eb') + C(x, 150, 30, '#f2c9a0') + R(x - 24, 34, 48, 64, 9, '#ef4444', ' stroke="#fff" stroke-width="3"') +
-        T(x, 78, 30, ['🦁', '❓', '⚽'][i]);
-    }).join('') + T(160, 22, 15, 'مين فوق راسي؟', '#FFE08A'));
+  // خمّن الشخصية — لوحتين شخصيات وبطاقات نازلة
+  P.fooq_rasak = svg('fooq_rasak', '#1e3a8a', '#0b1230',
+    [[20, '#38bdf8'], [170, '#f472b6']].map(function (s) {
+      var x0 = s[0], out = R(x0, 30, 130, 120, 12, '#0f172a', ' stroke="' + s[1] + '" stroke-width="3"');
+      var em = ['🦁', '🐘', '🦒', '🐧', '🐢', '🦊', '🐼', '🦉'];
+      for (var k = 0; k < 8; k++) { var cx = x0 + 10 + (k % 4) * 30, cy = 40 + Math.floor(k / 4) * 52, dn = (k + (x0 > 100 ? 1 : 0)) % 3 === 0;
+        out += R(cx, cy, 26, 44, 5, dn ? '#475569' : '#f8fafc') + (dn ? T(cx + 13, cy + 30, 18, '✕', '#ef4444') : T(cx + 13, cy + 30, 18, em[k])); }
+      return out;
+    }).join('') + T(160, 22, 15, 'مين شخصيتي؟', '#FFE08A'));
 
   // Drawn game pictures (loaded into the database as /media/med_seed_game_<slug>); the drawing above stays as a fallback.
   ['eight','qaftah','chancellor','harf','qaddirha','dakhil','mafia','shifra','mystery_button','golden_vault','diwaniya_auction','fortune_wheel',
