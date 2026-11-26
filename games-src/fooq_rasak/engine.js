@@ -9,11 +9,11 @@
 })(typeof self !== 'undefined' ? self : this, function (L, D) {
   'use strict';
   const MIN = 2, MAX = 2;
-  const ALLOWED = { set: D.ORDER, size: [16, 24], rounds: [1, 3, 5] };
+  const ALLOWED = { set: D.ORDER, size: [20, 30], rounds: [1, 3, 5] };
   const ok = L.ok, fail = L.fail, byId = L.byId;
 
   function createGame(code) {
-    const g = L.base(code, { min: MIN, max: MAX, settings: { set: 'animals', size: 24, rounds: 3 } });
+    const g = L.base(code, { min: MIN, max: MAX, settings: { set: 'animals', size: 30, rounds: 3 } });
     Object.assign(g, { board: [], secret: {}, down: {}, turn: null, step: null, q: null, history: [], winner: null, starter: 0, wins: {}, lastGuess: null });
     return g;
   }
