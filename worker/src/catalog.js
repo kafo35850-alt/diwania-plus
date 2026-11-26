@@ -15,6 +15,7 @@ import EIGHT_MEDIA_REFRESH from './eight_media_refresh.json';
 import { addShippedQuestionMedia } from './eight-question-media.js';
 import { addAutoAnswerMedia } from './eight-answer-auto.js';
 import EIGHT_MORE from './eight_more_questions.json';
+import EIGHT_FIXES from './eight_question_fixes.json';
 import { HttpError, nowIso } from './util.js';
 import { gatewayConfigured } from './payments.js';
 import { eightRawQuestions } from './games.js';
@@ -226,6 +227,19 @@ async function getEightQuestions(env) {
   }
   addShippedQuestionMedia(stored, eightRawQuestions);
   addAutoAnswerMedia(stored, eightRawQuestions);
+  // Fact-check fixes for existing questions (worker/src/eight_question_fixes.json), by question id; pictures stay.
+  for (const [slug, byUid] of Object.entries(EIGHT_FIXES)) {
+    const list = Array.isArray(stored[slug]) ? stored[slug] : eightRawQuestions(slug);
+    if (!list.length) continue;
+    let changed = false;
+    const next = list.map((q) => {
+      const fix = q && byUid[q.uid];
+      if (!fix) return q;
+      changed = true;
+      return { ...q, ...(fix.q ? { q: fix.q } : {}), ...(fix.a ? { a: fix.a, ...(q.info ? { info: fix.a } : {}) } : {}) };
+    });
+    if (changed) stored[slug] = next;
+  }
   return stored;
 }
 
