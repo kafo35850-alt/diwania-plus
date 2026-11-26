@@ -1129,6 +1129,10 @@ html.dw-game-open #dwApp { visibility: hidden; }
       bg: 'radial-gradient(circle at 50% 35%, #1d3b6b 0%, #081226 75%)',
       svg: '<svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg"><rect x="18" y="18" width="124" height="124" rx="28" fill="#0B1528" stroke="#F5B942" stroke-width="4.5"/><text x="80" y="104" text-anchor="middle" font-size="78" font-weight="900" fill="#F5B942" font-family="Tahoma,Arial">ح</text><rect x="44" y="118" width="72" height="8" rx="4" fill="#2DD4BF"/></svg>'
     },
+    fooq_rasak: {
+      bg: 'radial-gradient(circle at 50% 35%, #991b1b 0%, #2a0707 75%)',
+      svg: '<svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg"><rect x="22" y="96" width="116" height="16" rx="8" fill="#2563eb"/><rect x="52" y="24" width="56" height="74" rx="10" fill="#ef4444" stroke="#fff" stroke-width="4"/><text x="80" y="76" text-anchor="middle" font-size="44" font-weight="900" fill="#fff" font-family="Tahoma,Arial">؟</text><circle cx="80" cy="134" r="18" fill="#f2c9a0"/></svg>'
+    },
     qaddirha: {
       bg: 'radial-gradient(circle at 50% 35%, #0f4c5c 0%, #071923 75%)',
       svg: '<svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg"><circle cx="80" cy="80" r="66" fill="#081C29" stroke="#F5B942" stroke-width="4.5"/><circle cx="80" cy="80" r="42" fill="none" stroke="#2DD4BF" stroke-width="5"/><circle cx="80" cy="80" r="18" fill="#F5B942"/><path d="M80 80 L122 38" stroke="#fff" stroke-width="6" stroke-linecap="round"/></svg>'
@@ -1355,6 +1359,21 @@ html.dw-game-open #dwApp { visibility: hidden; }
           { h: '١٠ نقاط', t: 'إجابة صحيحة ما كتبها أحد غيرك.' },
           { h: '٥ نقاط', t: 'إجابة صحيحة كتبها لاعب ثاني بعد.' },
           { h: 'صفر', t: 'الخانة الفاضية، أو اللي حكم عليها المضيف إنها غلط.' }
+        ] }
+      ]
+    },
+    fooq_rasak: {
+      title: 'شرح لعبة: فوق راسك',
+      subtitle: 'الكل يشوف بطاقتك إلا أنت… خمّن مين أنت! (من ٢ إلى ١٢ لاعباً)',
+      tabs: [
+        { id: 'idea', label: 'فكرة اللعبة', lead: 'مثل البطاقة اللي تنحط فوق الراس: كل لاعب تطلع له بطاقة سرية (لاعب، مشهور، حيوان، أكل…) يشوفها الكل بجوالاتهم إلا هو.', steps: [
+          { h: 'اسأل', t: 'بدورك اسأل أسئلة جوابها «نعم» أو «لا» بس: أنا إنسان؟ أنا لاعب كورة؟ أنا أتاكل؟' },
+          { h: 'عرفتها!', t: 'إذا عرفت اضغط «عرفتها!» وقل الجواب بصوت، والباقين يحكمون بجوالاتهم صح ولا غلط.' },
+          { h: 'الدور', t: 'إذا غلطت أو خلص وقتك، الدور ينتقل للي بعدك.' }
+        ] },
+        { id: 'pts', label: 'النقاط', lead: 'الأسرع يفوز', steps: [
+          { h: '٥ / ٤ / ٣ / ٢ / ١', t: 'أول من يعرف بطاقته ياخذ ٥ نقاط، والثاني ٤، وهكذا.' },
+          { h: 'النهاية', t: 'تخلص اللعبة لما الكل يعرف بطاقته أو تخلص اللفّات.' }
         ] }
       ]
     },
@@ -2359,7 +2378,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
     } catch (e) {}
   }
 
-  var ROOM_GAME_SLUGS = ['dakhil', 'mafia', 'qaftah', 'chancellor', 'harf', 'qaddirha'];
+  var ROOM_GAME_SLUGS = ['dakhil', 'mafia', 'qaftah', 'chancellor', 'harf', 'qaddirha', 'fooq_rasak'];
   function syncFrameDemoButton() {
     var btn = document.getElementById('dwFrameDemoBtn');
     var ifr = document.getElementById('dwGameIframe');
@@ -2419,8 +2438,8 @@ html.dw-game-open #dwApp { visibility: hidden; }
 
   // Store groupings (client-side presentation only).
   var GAME_TAGS = {
-    top: ['eight', 'dakhil', 'mafia', 'qaftah', 'shifra', 'harf', 'chancellor', 'draw_guess', 'fortune_wheel', 'qaddirha'],
-    phones: ['dakhil', 'mafia', 'qaftah', 'chancellor', 'harf', 'qaddirha'],
+    top: ['eight', 'dakhil', 'mafia', 'qaftah', 'shifra', 'harf', 'chancellor', 'draw_guess', 'fortune_wheel', 'qaddirha', 'fooq_rasak'],
+    phones: ['fooq_rasak', 'dakhil', 'mafia', 'qaftah', 'chancellor', 'harf', 'qaddirha'],
     quiz: ['eight', 'stadium_esports', 'last_one_standing', 'radar_guess', 'golden_vault', 'how_much_price', 'mazad30', 'qaddirha', 'harf'],
     party: ['silent_library', 'pressure_seat', 'draw_guess', 'fake_artist', 'fortune_wheel', 'mystery_button', 'diwaniya_auction', 'vault50', 'who_knows_friend'],
     bluff: ['shifra', 'friends_court', 'alibi_court', 'liars_table', 'dakhil', 'mafia', 'chancellor', 'qaftah']
@@ -2434,6 +2453,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
     qaftah: ['hot', '😂 ضحك مضمون'],
     harf: ['new', '✨ جديد'],
     qaddirha: ['new', '✨ جديد'],
+    fooq_rasak: ['new', '✨ جديد'],
     shifra: ['pick', '⭐ ننصح بها'],
     draw_guess: ['', '👨‍👩‍👧 للعائلة'],
     fortune_wheel: ['', '🎉 للتجمعات الكبيرة'],
@@ -2445,7 +2465,7 @@ html.dw-game-open #dwApp { visibility: hidden; }
   // Only these games read questions edited in the admin panel; the others carry their content inside the game.
   var EDITABLE_GAMES = ['game_eight', 'game_qaftah'];
   // Phone-room games and the Eight buzzer need their own room servers, so they cannot be copied as a new game.
-  var NOT_CLONABLE = ['eight', 'dakhil', 'mafia', 'qaftah', 'chancellor', 'harf', 'qaddirha'];
+  var NOT_CLONABLE = ['eight', 'dakhil', 'mafia', 'qaftah', 'chancellor', 'harf', 'qaddirha', 'fooq_rasak'];
   function siteSettings() { return DiwaniyaServerKernel.loadDB().settings || {}; }
   function trialsOn() { return siteSettings().free_trials !== false; }
   function whatsappLink() { var w = siteSettings().support_whatsapp; return w ? 'https://wa.me/' + w : ''; }

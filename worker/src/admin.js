@@ -11,7 +11,7 @@ import { getSettings } from './settings.js';
 import { creatorAdminData, markPayout, creatorRate } from './creator.js';
 
 const SLUG_RE = /^[a-z0-9_]{2,40}$/;
-export const NOT_CLONABLE = ['eight', 'dakhil', 'mafia', 'qaftah', 'chancellor', 'harf', 'qaddirha'];
+export const NOT_CLONABLE = ['eight', 'dakhil', 'mafia', 'qaftah', 'chancellor', 'harf', 'qaddirha', 'fooq_rasak'];
 // The question editor only offers games that actually read edited content.
 export const EDITABLE_GAMES = ['game_eight', 'game_qaftah'];
 

@@ -16,7 +16,8 @@ const GAMES = {
   chancellor: { scripts: ['hub.js', 'sh/engine.js'], engine: 'self.SHEngine' },
   harf: { scripts: ['hub.js', 'kit/lobby.js', 'games/harf/data.js', 'games/harf/engine.js'], engine: 'self.MG.harf' },
   qaddirha: { scripts: ['hub.js', 'kit/lobby.js', 'games/qaddirha/data.js', 'games/qaddirha/engine.js'], engine: 'self.MG.qaddirha' },
-  draw_guess: { scripts: ['hub.js', 'kit/lobby.js', 'games/draw_guess/data.js', 'games/draw_guess/engine.js'], engine: 'self.MG.draw_guess' }
+  draw_guess: { scripts: ['hub.js', 'kit/lobby.js', 'games/draw_guess/data.js', 'games/draw_guess/engine.js'], engine: 'self.MG.draw_guess' },
+  fooq_rasak: { scripts: ['hub.js', 'kit/lobby.js', 'games/fooq_rasak/data.js', 'games/fooq_rasak/engine.js'], engine: 'self.MG.fooq_rasak' }
 };
 
 function scriptBlock(html, name, file) {

@@ -9,6 +9,7 @@ import draw_classic from '../../games/draw_classic.html';
 import eight from '../../games/eight.html';
 import fake_artist from '../../games/fake_artist.html';
 import fortune_wheel from '../../games/fortune_wheel.html';
+import fooq_rasak from '../../games/fooq_rasak.html';
 import friends_court from '../../games/friends_court.html';
 import golden_vault from '../../games/golden_vault.html';
 import harf from '../../games/harf.html';
@@ -38,6 +39,7 @@ export const GAMES = {
   eight,
   fake_artist,
   fortune_wheel,
+  fooq_rasak,
   friends_court,
   golden_vault,
   harf,

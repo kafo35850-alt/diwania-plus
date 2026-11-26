@@ -3487,6 +3487,432 @@ function load_draw_guess() {
   return { Hub: self.MafiaHub, E: self.MG.draw_guess };
 }
 
+function load_fooq_rasak() {
+  const self = {};
+/* hub.js */
+/* ديوانية بلس مافيا — مركز الغرف (hub): بروتوكول الرسائل + الغرف + المؤقتات، بدون أي شبكة.
+ * يشتغل في Node (server.js) وفي المتصفح (النسخة التجريبية) وفي Cloudflare Durable Object لاحقاً.
+ * الناقل (WebSocket أو غيره) يعطي كل اتصال كائن conn فيه: send(obj) و close(code).
+ *
+ * رسائل العميل -> الخادم (JSON):
+ *   {t:'create', name, dev?}          إنشاء غرفة (المنشئ هو المضيف)
+ *   {t:'join', code, name}            دخول بالرمز
+ *   {t:'resume', code, token}         رجوع بعد انقطاع / قفل الجوال
+ *   {t:'board', code}                 شاشة عرض عامة (بدون دور)
+ *   {t:'act', a, ...}                 a = ready | night{target,kind?} | confirm{on?} | task | vote | voteReady | start | skip | settings | kick | reset | leave
+ *                                     (الليل: المافيا تقترح بـnight ثم تؤكد بـconfirm · بقية اللاعبين اللي ما عندهم قدرة ينفذون مهمة ويبلّغون بـtask)
+ *                                     وضع المقدّم: hostPick{kind,target} | hostNext | hostTimer{sec}
+ *   {t:'ping'}
+ * الخادم -> العميل: {t:'joined',code,id,token} | {t:'view',view} | {t:'err',err} | {t:'pong'} | {t:'kicked'} | {t:'left'}
+ */
+(function (root, factory) {
+  if (typeof module === 'object' && module.exports) module.exports = factory();
+  else root.MafiaHub = factory();
+})(typeof self !== 'undefined' ? self : this, function () {
+  'use strict';
+  const LOBBY_GRACE_MS = 90 * 1000, ROOM_IDLE_MS = 6 * 3600 * 1000, EMPTY_ROOM_MS = 30 * 60 * 1000;
+
+  /* opts: { E (المحرك), rng(), randInt(min,max), token(), now(), wallet, allowDev, maxRooms } */
+  function createHub(opts) {
+    const E = opts.E, rng = opts.rng, now = opts.now || Date.now, maxRooms = opts.maxRooms || 500;
+    const wallet = opts.wallet || { async charge() { return true; } };   // مكان ربط الرصيد: يُخصم قيم واحد من المضيف عند البدء
+    const rooms = new Map();
+
+    const newCode = () => { for (let i = 0; i < 50; i++) { const c = String(opts.randInt(1000, 10000)); if (!rooms.has(c)) return c; } return null; };
+
+    function sendViews(room) {
+      const t = now();
+      room.conns.forEach((c) => { if (!c.closed) c.send({ t: 'view', view: E.viewFor(room.g, c.pid, t) }); });
+    }
+    function bind(room, conn, pid) {
+      // اتصال قديم لنفس اللاعب؟ نقفله
+      room.conns.forEach((c) => { if (c !== conn && pid && c.pid === pid) { c.pid = null; room.conns.delete(c); c.close(4000); } });
+      conn.code = room.g.code; conn.pid = pid; conn.board = !pid; room.conns.add(conn);
+      if (pid) { E.setConnected(room.g, pid, true); delete room.discAt[pid]; }
+    }
+    function closed(conn) {
+      const room = conn.code && rooms.get(conn.code); if (!room) return;
+      room.conns.delete(conn);
+      if (conn.pid && E.byId(room.g, conn.pid)) {
+        const still = [...room.conns].some((c) => c.pid === conn.pid);
+        if (!still) { E.setConnected(room.g, conn.pid, false); room.discAt[conn.pid] = now(); sendViews(room); }
+      }
+    }
+
+    function message(conn, m) {
+      const t0 = now();
+      const err = (e) => conn.send({ t: 'err', err: e });
+      switch (m.t) {
+        case 'ping': return conn.send({ t: 'pong' });
+        case 'create': {
+          if (rooms.size >= maxRooms) return err('server_busy');
+          const code = newCode(); if (!code) return err('server_busy');
+          const g = E.createGame(code, { minPlayers: m.dev && opts.allowDev ? 3 : 5 });
+          const room = { g, conns: new Set(), tokens: {}, discAt: {}, created: t0, last: t0 };
+          const r = E.join(g, m.name, t0); if (!r.ok) return err(r.err);
+          rooms.set(code, room); const tk = opts.token(); room.tokens[tk] = r.id;
+          bind(room, conn, r.id); conn.send({ t: 'joined', code, id: r.id, token: tk }); return sendViews(room);
+        }
+        case 'join': {
+          const room = rooms.get(String(m.code || '')); if (!room) return err('no_room');
+          const r = E.join(room.g, m.name, t0); if (!r.ok) return err(r.err);
+          const tk = opts.token(); room.tokens[tk] = r.id; room.last = t0;
+          bind(room, conn, r.id); conn.send({ t: 'joined', code: room.g.code, id: r.id, token: tk }); return sendViews(room);
+        }
+        case 'resume': {
+          const room = rooms.get(String(m.code || '')); if (!room) return err('no_room');
+          const pid = room.tokens[String(m.token || '')]; if (!pid || !E.byId(room.g, pid)) return err('bad_token');
+          bind(room, conn, pid); conn.send({ t: 'joined', code: room.g.code, id: pid, token: m.token, resumed: true }); return sendViews(room);
+        }
+        case 'board': {
+          const room = rooms.get(String(m.code || '')); if (!room) return err('no_room');
+          bind(room, conn, null); return conn.send({ t: 'view', view: E.viewFor(room.g, null, t0) });
+        }
+        case 'act': {
+          const room = conn.code && rooms.get(conn.code); if (!room || !conn.pid) return err('not_joined');
+          const g = room.g, id = conn.pid; let r = { ok: true }; room.last = t0;
+          // محرك عام (مثل المستشار السري): كل أفعال اللعب تروح لـ E.act، ما عدا الطرد والبدء والخروج (لها شغل اتصالات هنا)
+          if (E.act && m.a !== 'kick' && m.a !== 'start' && m.a !== 'leave') { const r0 = E.act(g, id, m, t0, rng); if (!r0.ok) err(r0.err); return sendViews(room); }
+          switch (m.a) {
+            case 'ready': r = E.ready(g, id, t0); break;
+            case 'night': r = E.nightAct(g, id, m.target === undefined ? null : m.target, t0, m.kind, rng); break;
+            case 'confirm': r = E.nightConfirm(g, id, t0, rng, m.on !== false); break;
+            case 'task': r = E.nightTask(g, id, t0, rng); break;
+            case 'vote': r = E.vote(g, id, m.target, t0); break;
+            case 'voteReady': r = E.voteReady(g, id, t0); break;
+            case 'settings': r = E.setSettings(g, id, m.patch || {}); break;
+            case 'skip': r = E.skip(g, id, t0, rng); break;
+            case 'hostPick': r = E.hostPick(g, id, m.kind, m.target === undefined ? null : m.target); break;
+            case 'hostNext': r = E.hostNext(g, id, t0); break;
+            case 'hostTimer': r = E.hostTimer(g, id, m.sec, t0); break;
+            case 'kick': { const victim = [...room.conns].find((c) => c.pid === m.target); r = E.kick(g, id, m.target); if (r.ok && victim) { victim.pid = null; room.conns.delete(victim); victim.send({ t: 'kicked' }); victim.close(4001); } break; }
+            case 'reset': r = E.reset(g, id); break;
+            case 'start': {
+              if (g.hostId !== id) { r = { ok: false, err: 'not_host' }; break; }
+              if (g.phase !== 'lobby') { r = { ok: false, err: 'already_started' }; break; }
+              if (E.need(g) > 0) { r = { ok: false, err: 'need_players' }; break; }
+              // هنا يُخصم قيم واحد من رصيد المضيف (من الخادم، مو من الجوال).
+              Promise.resolve(wallet.charge(room)).then((okc) => {
+                if (!okc) { conn.send({ t: 'err', err: 'no_credit' }); return; }
+                const rr = E.start(g, id, now(), rng); if (!rr.ok) conn.send({ t: 'err', err: rr.err });
+                sendViews(room);
+              }).catch(() => conn.send({ t: 'err', err: 'wallet_error' }));
+              return;
+            }
+            case 'leave': { r = E.leave(g, id); const tkn = Object.keys(room.tokens).find((k) => room.tokens[k] === id); if (tkn) delete room.tokens[tkn]; conn.pid = null; conn.send({ t: 'left' }); break; }
+            default: r = { ok: false, err: 'bad_action' };
+          }
+          if (!r.ok) err(r.err);
+          return sendViews(room);
+        }
+      }
+    }
+
+    // مؤقتات اللعبة + تنظيف الغرف (يُستدعى كل ~500ms)
+    function tick() {
+      const t = now();
+      rooms.forEach((room, code) => {
+        const g = room.g; let changed = false;
+        try { changed = E.tick(g, t, rng); } catch (e) { if (typeof console !== 'undefined') console.error('tick error', code, e); }
+        if (g.phase === 'lobby') Object.keys(room.discAt).forEach((pid) => { if (t - room.discAt[pid] > LOBBY_GRACE_MS) { E.leave(g, pid); delete room.discAt[pid]; changed = true; } });
+        if (changed) sendViews(room);
+        if ((room.conns.size === 0 && t - room.last > EMPTY_ROOM_MS) || t - room.last > ROOM_IDLE_MS) rooms.delete(code);
+      });
+    }
+
+    return { rooms, message, closed, tick, sendViews };
+  }
+
+  return { createHub };
+});
+
+
+/* kit/lobby.js */
+/* ديوانية بلس — أساس مشترك لمحركات الألعاب الجماعية: اللاعبين واللوبي والمضيف والمراحل.
+ * يشتغل في Node والمتصفح وCloudflare. كل لعبة تبني محركها فوقه وتعطي نفس واجهة hub.js
+ * (createGame, join, leave, kick, setConnected, need, start, tick, viewFor, act, byId). */
+(function (root, factory) {
+  if (typeof module === 'object' && module.exports) module.exports = factory();
+  else root.DiwaniyaLobby = factory();
+})(typeof self !== 'undefined' ? self : this, function () {
+  'use strict';
+  const COLORS = ['#f26538', '#38bdf8', '#a78bfa', '#34d399', '#fbbf24', '#f472b6', '#60a5fa', '#fb7185', '#2dd4bf', '#c084fc', '#facc15', '#4ade80', '#f97316', '#22d3ee', '#e879f9', '#94a3b8'];
+  const ok = (x) => Object.assign({ ok: true }, x || {});
+  const fail = (err) => ({ ok: false, err });
+  const cleanName = (s) => String(s == null ? '' : s).replace(/[\u0000-\u001f\u007f<>]/g, '').replace(/\s+/g, ' ').trim().slice(0, 14);
+  const cleanText = (s, n) => String(s == null ? '' : s).replace(/[\u0000-\u001f\u007f<>]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, n || 80);
+  const byId = (g, id) => g.players.find((p) => p.id === id) || null;
+  const shuffle = (a, rng) => { a = a.slice(); rng = rng || Math.random; for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(rng() * (i + 1)); const t = a[i]; a[i] = a[j]; a[j] = t; } return a; };
+
+  // opts: { min, max, settings }
+  function base(code, opts) {
+    return { code: String(code), min: opts.min, max: opts.max, settings: Object.assign({}, opts.settings || {}), players: [], hostId: null, nextId: 1, phase: 'lobby', round: 0, deadline: null, timerTotal: null, phaseSince: 0, events: [] };
+  }
+  function join(g, name) {
+    if (g.phase !== 'lobby') return fail('game_started');
+    if (g.players.length >= g.max) return fail('room_full');
+    let nm = cleanName(name); if (!nm) return fail('name_required');
+    const b = nm; let k = 2;
+    while (g.players.some((p) => p.name === nm)) { nm = b.slice(0, 12) + ' ' + k; k++; }
+    const used = new Set(g.players.map((p) => p.color));
+    const color = COLORS.find((c) => !used.has(c)) || COLORS[g.players.length % COLORS.length];
+    const p = { id: 'p' + (g.nextId++), name: nm, color, connected: true, score: 0 };
+    g.players.push(p); if (!g.hostId) g.hostId = p.id;
+    return ok({ id: p.id });
+  }
+  function passHost(g) { const n = g.players.find((p) => p.connected && p.id !== g.hostId); if (n) g.hostId = n.id; }
+  function leave(g, id) {
+    const p = byId(g, id); if (!p) return fail('no_player');
+    if (g.phase === 'lobby') { g.players = g.players.filter((x) => x.id !== id); if (g.hostId === id) g.hostId = g.players.length ? g.players[0].id : null; }
+    else { p.connected = false; if (g.hostId === id) passHost(g); }
+    return ok();
+  }
+  function setConnected(g, id, v) { const p = byId(g, id); if (p) p.connected = !!v; }
+  function kick(g, hostId, targetId) {
+    if (g.hostId !== hostId) return fail('not_host'); if (g.phase !== 'lobby') return fail('game_started');
+    if (targetId === hostId) return fail('cannot_kick_self');
+    return leave(g, targetId);
+  }
+  const need = (g) => Math.max(0, g.min - g.players.length);
+  function setPhase(g, ph, now, ms) { g.phase = ph; g.phaseSince = now; g.deadline = ms ? now + ms : null; g.timerTotal = ms || null; }
+  const ev = (g, e) => { e.round = g.round; g.events.push(e); if (g.events.length > 60) g.events.splice(0, g.events.length - 60); };
+  // إعداد من قائمة مسموحة: allowed = { key: [values...] }
+  function setSettings(g, hostId, patch, allowed) {
+    if (g.hostId !== hostId) return fail('not_host'); if (g.phase !== 'lobby') return fail('game_started');
+    for (const k in (patch || {})) { if (!allowed[k]) return fail('bad_setting'); const v = patch[k]; if (allowed[k].indexOf(v) < 0) return fail('bad_setting'); g.settings[k] = v; }
+    return ok();
+  }
+  // رجوع للوبي (يبقى المتصلين فقط)
+  function toLobby(g, hostId) {
+    if (g.hostId !== hostId) return fail('not_host');
+    g.players = g.players.filter((p) => p.connected);
+    if (!g.players.some((p) => p.id === g.hostId)) g.hostId = g.players.length ? g.players[0].id : null;
+    g.players.forEach((p) => { p.score = 0; });
+    g.phase = 'lobby'; g.round = 0; g.deadline = null; g.timerTotal = null; g.events = [];
+    return ok();
+  }
+  const pubPlayer = (g, p) => ({ id: p.id, name: p.name, color: p.color, connected: p.connected, host: p.id === g.hostId, score: p.score || 0 });
+  const baseView = (g, now) => ({ now, code: g.code, phase: g.phase, round: g.round, settings: g.settings, deadline: g.deadline, timerTotal: g.timerTotal, minPlayers: g.min, maxPlayers: g.max, need: need(g), players: g.players.map((p) => pubPlayer(g, p)), events: g.events.slice(-25) });
+  const timeUp = (g, now) => !!(g.deadline && now >= g.deadline && g.phase !== 'lobby');
+
+  return { COLORS, ok, fail, cleanName, cleanText, byId, shuffle, base, join, leave, kick, setConnected, need, setPhase, ev, setSettings, toLobby, pubPlayer, baseView, timeUp };
+});
+
+
+/* games/fooq_rasak/data.js */
+/* فوق راسك — بطاقات الشخصيات والأشياء. m = صورة من /media/med_seed_<m>، e = إيموجي */
+(function (root, factory) {
+  if (typeof module === 'object' && module.exports) module.exports = factory();
+  else { root.MG = root.MG || {}; root.MG.fooq_rasakData = factory(); }
+})(typeof self !== 'undefined' ? self : this, function () {
+  'use strict';
+  const P = (list) => list.map(([n, m]) => ({ n, m }));
+  const E = (list) => list.map(([n, e]) => ({ n, e }));
+  const SETS = {
+    football: { name: 'لاعبين كورة', icon: '⚽', cards: P([
+      ['ليونيل ميسي', 'fw_1_a'], ['محمد صلاح', 'fw_3_a'], ['نيمار', 'fw_5_a'], ['كيليان مبابي', 'fw_6_a'], ['لوكا مودريتش', 'fw_9_a'],
+      ['إيرلينغ هالاند', 'fw_10_a'], ['ماركو ماتيراتزي', 'fw_11_a'], ['جورج ويا', 'fw_13_a'], ['ميروسلاف كلوزه', 'fw_15_a'], ['كريستيانو رونالدو', 'fw_16_a'],
+      ['ليف ياشين', 'fw_17_a'], ['سالم الدوسري', 'fa_3_a'], ['ياسر القحطاني', 'fa_6_a'], ['رياض محرز', 'fa_10_a'], ['ماجد عبدالله', 'fa_14_a'], ['ياسين بونو', 'fa_17_a']
+    ]) },
+    celebs: { name: 'مشاهير', icon: '🌟', cards: P([
+      ['محمد عبده', 'ca_1_a'], ['أم كلثوم', 'ca_2_a'], ['عبدالحليم حافظ', 'ca_3_a'], ['فيروز', 'ca_5_a'], ['عادل إمام', 'ca_6_a'], ['طلال مداح', 'ca_7_a'],
+      ['كاظم الساهر', 'ca_8_a'], ['عبدالحسين عبدالرضا', 'ca_9_a'], ['حسين الجسمي', 'ca_10_a'], ['ناصر القصبي', 'ca_11_a'], ['محمد عبدالوهاب', 'ca_12_a'],
+      ['إبراهيم ناجي', 'ca_16_a'], ['نزار قباني', 'ca_18_a'], ['روبرت داوني جونيور', 'cw_1_a'], ['مايكل جاكسون', 'cw_2_a'], ['بيل غيتس', 'cw_3_a'],
+      ['إيلون ماسك', 'cw_4_a'], ['جوني ديب', 'cw_5_a'], ['أديل', 'cw_6_a'], ['مارك زوكربيرغ', 'cw_7_a'], ['ليوناردو دي كابريو', 'cw_8_a'], ['توم كروز', 'cw_9_a'],
+      ['تايلور سويفت', 'cw_10_a'], ['مستر بين (روان أتكنسون)', 'cw_11_a'], ['جيف بيزوس', 'cw_12_a'], ['ستيف وزنياك', 'cw_14_a'], ['واكين فينيكس', 'cw_15_a'], ['محمد علي كلاي', 'cw_18_a']
+    ]) },
+    animals: { name: 'حيوانات', icon: '🦁', cards: E([
+      ['أسد', '🦁'], ['نمر', '🐯'], ['فيل', '🐘'], ['زرافة', '🦒'], ['جمل', '🐫'], ['حصان', '🐴'], ['قرد', '🐒'], ['دب', '🐻'], ['باندا', '🐼'], ['كنغر', '🦘'],
+      ['تمساح', '🐊'], ['ثعبان', '🐍'], ['سلحفاة', '🐢'], ['دلفين', '🐬'], ['حوت', '🐋'], ['قرش', '🦈'], ['أخطبوط', '🐙'], ['بطريق', '🐧'], ['بومة', '🦉'], ['صقر', '🦅'],
+      ['ببغاء', '🦜'], ['دجاجة', '🐔'], ['بقرة', '🐄'], ['خروف', '🐑'], ['قطة', '🐱'], ['كلب', '🐶'], ['أرنب', '🐰'], ['فأر', '🐭'], ['نحلة', '🐝'], ['فراشة', '🦋'],
+      ['عنكبوت', '🕷️'], ['حمار وحشي', '🦓'], ['خفاش', '🦇'], ['ثعلب', '🦊'], ['ديناصور', '🦖']
+    ]) },
+    food: { name: 'أكل وشرب', icon: '🍔', cards: E([
+      ['برجر', '🍔'], ['بيتزا', '🍕'], ['شاورما', '🌯'], ['بطاطس مقلية', '🍟'], ['هوت دوق', '🌭'], ['سوشي', '🍣'], ['معكرونة', '🍝'], ['رز', '🍚'], ['شوربة', '🍲'], ['بيض', '🍳'],
+      ['خبز', '🍞'], ['كرواسون', '🥐'], ['دونات', '🍩'], ['كيك', '🎂'], ['آيسكريم', '🍦'], ['شوكولاتة', '🍫'], ['فشار', '🍿'], ['تمر', '🌴'], ['قهوة', '☕'], ['شاي', '🫖'],
+      ['حليب', '🥛'], ['عصير برتقال', '🧃'], ['تفاحة', '🍎'], ['موز', '🍌'], ['بطيخ', '🍉'], ['عنب', '🍇'], ['فراولة', '🍓'], ['أناناس', '🍍'], ['جزر', '🥕'], ['ذرة', '🌽'],
+      ['جبن', '🧀'], ['عسل', '🍯'], ['فلافل', '🧆'], ['تاكو', '🌮'], ['مكسرات', '🥜']
+    ]) },
+    things: { name: 'أشياء', icon: '📱', cards: E([
+      ['جوال', '📱'], ['لابتوب', '💻'], ['تلفزيون', '📺'], ['ساعة', '⌚'], ['نظارة', '👓'], ['شمسية', '☂️'], ['مفتاح', '🔑'], ['مقص', '✂️'], ['قلم', '✏️'], ['كتاب', '📖'],
+      ['كاميرا', '📷'], ['سماعة', '🎧'], ['ميكروفون', '🎤'], ['جيتار', '🎸'], ['كرة قدم', '⚽'], ['دراجة', '🚲'], ['سيارة', '🚗'], ['طيارة', '✈️'], ['سفينة', '🚢'], ['صاروخ', '🚀'],
+      ['شمعة', '🕯️'], ['مصباح', '💡'], ['مطرقة', '🔨'], ['مغناطيس', '🧲'], ['هدية', '🎁'], ['بالون', '🎈'], ['تاج', '👑'], ['خاتم', '💍'], ['حقيبة', '🎒'], ['كرسي', '🪑'],
+      ['سرير', '🛏️'], ['باب', '🚪'], ['مرآة', '🪞'], ['فرشاة أسنان', '🪥'], ['مكنسة', '🧹']
+    ]) },
+    jobs: { name: 'مهن وشخصيات', icon: '👨‍🚀', cards: E([
+      ['طبيب', '👨‍⚕️'], ['معلم', '👨‍🏫'], ['طباخ', '👨‍🍳'], ['شرطي', '👮'], ['رجل إطفاء', '👨‍🚒'], ['رائد فضاء', '👨‍🚀'], ['طيار', '👨‍✈️'], ['مزارع', '👨‍🌾'], ['ميكانيكي', '👨‍🔧'], ['رسام', '👨‍🎨'],
+      ['مبرمج', '👨‍💻'], ['قاضي', '👨‍⚖️'], ['عالم', '👨‍🔬'], ['مغني', '👨‍🎤'], ['محقق', '🕵️'], ['نينجا', '🥷'], ['ساحر', '🧙'], ['مصاص دماء', '🧛'], ['زومبي', '🧟'], ['شبح', '👻'],
+      ['روبوت', '🤖'], ['قرصان', '🏴‍☠️'], ['ملك', '🤴'], ['بابا نويل', '🎅'], ['سوبرمان', '🦸'], ['مهرج', '🤡'], ['كائن فضائي', '👽'], ['جني', '🧞']
+    ]) }
+  };
+  const ORDER = ['mix', 'football', 'celebs', 'animals', 'food', 'things', 'jobs'];
+  const NAMES = { mix: '🎲 مختلط' };
+  ORDER.slice(1).forEach((k) => { NAMES[k] = SETS[k].icon + ' ' + SETS[k].name; });
+  function pool(set) {
+    if (set === 'mix') return ORDER.slice(1).reduce((a, k) => a.concat(SETS[k].cards), []);
+    return (SETS[set] || SETS.animals).cards.slice();
+  }
+  return { SETS, ORDER, NAMES, pool };
+});
+
+/* games/fooq_rasak/engine.js */
+/* ديوانية بلس — فوق راسك: محرك اللعبة (منطق صرف، يشتغل في Node والمتصفح وCloudflare).
+ * كل لاعب عنده بطاقة سرية (شخصية أو شي) يشوفها الكل إلا هو، مثل البطاقة اللي فوق الراس.
+ * بالدور: صاحب الدور يسأل الباقين سؤال جوابه «نعم» أو «لا» بصوت عالي.
+ * إذا حس إنه عرفها يضغط «عرفتها!» ويقول الجواب بصوت، والباقين يحكمون صح ولا غلط.
+ * النقاط: أول من يعرف ياخذ ٥، الثاني ٤، الثالث ٣، وبعدهم ٢ ثم ١.
+ * المراحل: lobby → turn → judge → turn … → ended */
+(function (root, factory) {
+  if (typeof module === 'object' && module.exports) module.exports = factory(root.DiwaniyaLobby, root.MG.fooq_rasakData);
+  else { root.MG = root.MG || {}; root.MG.fooq_rasak = factory(root.DiwaniyaLobby, root.MG.fooq_rasakData); }
+})(typeof self !== 'undefined' ? self : this, function (L, D) {
+  'use strict';
+  const MIN = 2, MAX = 12, JUDGE_MS = 25000;
+  const ALLOWED = { set: D.ORDER, sec: [30, 45, 60, 90], laps: [3, 5, 8] };
+  const RANK_PTS = [5, 4, 3, 2, 1];
+  const ok = L.ok, fail = L.fail, byId = L.byId;
+  const live = (g) => g.players.filter((p) => p.connected);
+
+  function createGame(code) {
+    const g = L.base(code, { min: MIN, max: MAX, settings: { set: 'mix', sec: 45, laps: 5 } });
+    Object.assign(g, { cards: {}, solved: {}, solvedCount: 0, order: [], cur: null, lap: 0, turns: {}, claim: null, votes: {}, last: null });
+    return g;
+  }
+  const join = (g, name) => L.join(g, name);
+
+  function deal(g, rng) {
+    const cards = L.shuffle(D.pool(g.settings.set), rng);
+    const extra = L.shuffle(D.pool('mix'), rng).filter((c) => !cards.some((x) => x.n === c.n));
+    const all = cards.concat(extra);
+    g.cards = {}; g.players.forEach((p, i) => { g.cards[p.id] = all[i % all.length]; });
+  }
+  function begin(g, now, rng) {
+    g.players.forEach((p) => { p.score = 0; });
+    deal(g, rng);
+    g.solved = {}; g.solvedCount = 0; g.turns = {}; g.claim = null; g.votes = {}; g.last = null;
+    g.order = L.shuffle(g.players.map((p) => p.id), rng);
+    g.lap = 1; g.round = 0; g.cur = null;
+    nextTurn(g, now, true);
+  }
+  function start(g, hostId, now, rng) {
+    if (g.hostId !== hostId) return fail('not_host'); if (g.phase !== 'lobby') return fail('already_started');
+    if (L.need(g) > 0) return fail('need_players');
+    begin(g, now, rng); return ok();
+  }
+  const waiting = (g) => g.order.filter((id) => !g.solved[id] && (byId(g, id) || {}).connected);
+  function finish(g, now) {
+    g.cur = null; g.claim = null; L.setPhase(g, 'ended', now, 0); L.ev(g, { k: 'end' });
+  }
+  // ينتقل الدور للي بعده (اللي ما عرف بطاقته ولا هو متصل)
+  function nextTurn(g, now, first) {
+    const left = waiting(g);
+    if (!left.length) return finish(g, now);
+    let i = first ? -1 : g.order.indexOf(g.cur);
+    for (let k = 0; k < g.order.length; k++) {
+      i = (i + 1) % g.order.length;
+      if (i === 0 && !first) g.lap++;
+      const id = g.order[i];
+      if (!g.solved[id] && (byId(g, id) || {}).connected) break;
+    }
+    if (g.lap > g.settings.laps) return finish(g, now);
+    g.cur = g.order[i]; g.turns[g.cur] = (g.turns[g.cur] || 0) + 1; g.round++;
+    g.claim = null; g.votes = {};
+    L.setPhase(g, 'turn', now, g.settings.sec * 1000);
+    L.ev(g, { k: 'turn', id: g.cur });
+  }
+  function claim(g, id, now) {
+    if (g.phase !== 'turn') return fail('bad_phase'); if (id !== g.cur) return fail('not_your_turn');
+    if (!judges(g).length) return fail('no_judges');
+    g.claim = { by: id }; g.votes = {};
+    L.setPhase(g, 'judge', now, JUDGE_MS); L.ev(g, { k: 'claim', id });
+    return ok();
+  }
+  const judges = (g) => live(g).filter((p) => p.id !== g.cur);
+  function vote(g, id, v, now) {
+    if (g.phase !== 'judge') return fail('bad_phase'); if (id === g.cur) return fail('not_judge');
+    if (!byId(g, id)) return fail('no_player'); if (v !== 'ok' && v !== 'no') return fail('bad_vote');
+    g.votes[id] = v; settle(g, now, false); return ok();
+  }
+  // الأغلبية تحكم. إذا تعادلوا أو ما صوّت أحد = غلط.
+  function settle(g, now, force) {
+    const js = judges(g), n = js.length;
+    const yes = js.filter((p) => g.votes[p.id] === 'ok').length, no = js.filter((p) => g.votes[p.id] === 'no').length;
+    let verdict = null;
+    if (yes * 2 > n) verdict = 'ok'; else if (no * 2 > n) verdict = 'no';
+    else if (force || yes + no >= n) verdict = yes > no ? 'ok' : 'no';
+    if (!verdict) return false;
+    const id = g.cur;
+    if (verdict === 'ok') {
+      g.solvedCount++; g.solved[id] = g.solvedCount;
+      const pts = RANK_PTS[g.solvedCount - 1] || 1; const p = byId(g, id); if (p) p.score += pts;
+      g.last = { id, ok: true, pts, card: g.cards[id] };
+    } else g.last = { id, ok: false, pts: 0 };
+    L.ev(g, { k: 'verdict', id, ok: verdict === 'ok' });
+    nextTurn(g, now, false); return true;
+  }
+  function pass(g, id, now) {
+    if (g.phase !== 'turn') return fail('bad_phase'); if (id !== g.cur && id !== g.hostId) return fail('not_your_turn');
+    g.last = { id: g.cur, ok: null, pts: 0 }; nextTurn(g, now, false); return ok();
+  }
+  function skip(g, id, now) {
+    if (g.hostId !== id) return fail('not_host');
+    if (g.phase === 'turn') return pass(g, id, now);
+    if (g.phase === 'judge') { settle(g, now, true); return ok(); }
+    return fail('bad_phase');
+  }
+  function tick(g, now) {
+    if (!g.deadline || now < g.deadline) return false;
+    if (g.phase === 'turn') { g.last = { id: g.cur, ok: null, pts: 0 }; nextTurn(g, now, false); return true; }
+    if (g.phase === 'judge') { settle(g, now, true); return true; }
+    return false;
+  }
+  function act(g, id, m, now, rng) {
+    switch (m.a) {
+      case 'claim': return claim(g, id, now);
+      case 'vote': return vote(g, id, m.v, now);
+      case 'pass': return pass(g, id, now);
+      case 'skip': return skip(g, id, now);
+      case 'end': { if (g.hostId !== id) return fail('not_host'); if (g.phase !== 'turn' && g.phase !== 'judge') return fail('bad_phase'); finish(g, now); return ok(); }
+      case 'again': { if (g.hostId !== id) return fail('not_host'); if (g.phase !== 'ended') return fail('bad_phase'); begin(g, now, rng); return ok(); }
+      case 'lobby': return L.toLobby(g, id);
+      case 'settings': return L.setSettings(g, id, m.patch || {}, ALLOWED);
+      default: return fail('bad_action');
+    }
+  }
+
+  function viewFor(g, pid, now) {
+    const v = L.baseView(g, now), inGame = g.phase !== 'lobby';
+    v.setNames = D.NAMES; v.setOrder = D.ORDER;
+    if (inGame) {
+      const ended = g.phase === 'ended';
+      v.cur = g.cur; v.lap = g.lap; v.laps = g.settings.laps; v.last = g.last;
+      v.claim = g.claim;
+      // بطاقتك ما تشوفها إلا إذا عرفتها أو خلصت اللعبة. التلفزيون ما يعرض إلا البطاقات المعروفة.
+      v.cards = g.players.map((p) => {
+        const show = ended || g.solved[p.id] || (pid && p.id !== pid && byId(g, pid));
+        const c = g.cards[p.id];
+        return { id: p.id, solved: g.solved[p.id] || 0, turns: g.turns[p.id] || 0, card: show && c ? { n: c.n, m: c.m || '', e: c.e || '' } : null };
+      });
+      if (g.last && g.last.card) v.last = Object.assign({}, g.last);
+      if (g.phase === 'judge') {
+        const js = judges(g);
+        v.votes = { yes: js.filter((p) => g.votes[p.id] === 'ok').length, no: js.filter((p) => g.votes[p.id] === 'no').length, total: js.length };
+      }
+    }
+    v.players.forEach((p) => { p.solved = g.solved[p.id] || 0; });
+    const p = pid && byId(g, pid);
+    if (p) {
+      v.me = { id: p.id, name: p.name, host: g.hostId === p.id, solved: g.solved[p.id] || 0 };
+      if (g.phase === 'judge') v.me.vote = g.votes[p.id] || null;
+    }
+    return v;
+  }
+  return Object.assign({ MIN, MAX, ALLOWED, RANK_PTS, createGame, join, start, tick, act, viewFor }, { leave: L.leave, kick: L.kick, setConnected: L.setConnected, need: L.need, byId: L.byId });
+});
+
+  return { Hub: self.MafiaHub, E: self.MG.fooq_rasak };
+}
+
 export const ROOM_ENGINES = {
   dakhil: load_dakhil,
   mafia: load_mafia,
@@ -3494,5 +3920,6 @@ export const ROOM_ENGINES = {
   chancellor: load_chancellor,
   harf: load_harf,
   qaddirha: load_qaddirha,
-  draw_guess: load_draw_guess
+  draw_guess: load_draw_guess,
+  fooq_rasak: load_fooq_rasak
 };
