@@ -261,7 +261,7 @@
     var old = P[k] || '';
     // Only the picture (on the same navy as its own background); the old drawing peeked out at odd sizes while it loaded.
     P[k] = '<div style="position:relative;width:100%;height:100%;background:#151d4a">' +
-      '<img src="/media/med_seed_game_' + k + '?v=4" alt="" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block"></div>';
+      '<img src="/media/med_seed_game_' + k + '?v=5" alt="" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block"></div>';
   });
   window.DW_POSTERS = P;
 })();
