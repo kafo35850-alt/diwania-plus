@@ -14,6 +14,8 @@ import EIGHT_CATEGORY_GUIDE from './eight_category_guide.json';
 import EIGHT_MEDIA_REFRESH from './eight_media_refresh.json';
 // Redrawn posters that replace an older picture, wherever it was stored.
 import POSTER_OVERRIDES from './poster_overrides.json';
+// Renamed categories: the new name/description win over a copy saved earlier in the database.
+import CATEGORY_TEXT_OVERRIDES from './category_text_overrides.json';
 import { addShippedQuestionMedia } from './eight-question-media.js';
 import { addAutoAnswerMedia } from './eight-answer-auto.js';
 import EIGHT_MORE from './eight_more_questions.json';
@@ -37,6 +39,7 @@ for (const [slug, category] of categoryRefresh) {
 }
 function refreshEightCategory(category) {
   if (Object.hasOwn(POSTER_OVERRIDES, category.slug)) category = { ...category, poster: POSTER_OVERRIDES[category.slug] };
+  if (Object.hasOwn(CATEGORY_TEXT_OVERRIDES, category.slug)) category = { ...category, ...CATEGORY_TEXT_OVERRIDES[category.slug] };
   const updated = categoryRefresh.get(category.slug);
   if (!updated) return category;
   const { name, description, isCharades } = updated;
