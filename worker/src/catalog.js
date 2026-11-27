@@ -12,6 +12,8 @@ import EIGHT_POSTER_CATEGORIES from './eight_poster_categories.json';
 import EIGHT_CATEGORIES_60_203 from './eight_categories_60_203.json';
 import EIGHT_CATEGORY_GUIDE from './eight_category_guide.json';
 import EIGHT_MEDIA_REFRESH from './eight_media_refresh.json';
+// Redrawn posters that replace an older picture, wherever it was stored.
+import POSTER_OVERRIDES from './poster_overrides.json';
 import { addShippedQuestionMedia } from './eight-question-media.js';
 import { addAutoAnswerMedia } from './eight-answer-auto.js';
 import EIGHT_MORE from './eight_more_questions.json';
@@ -34,6 +36,7 @@ for (const [slug, category] of categoryRefresh) {
   if (category?.id && !shippedEightMetadata.has(slug)) shippedEightMetadata.set(slug, { slug, ...category });
 }
 function refreshEightCategory(category) {
+  if (Object.hasOwn(POSTER_OVERRIDES, category.slug)) category = { ...category, poster: POSTER_OVERRIDES[category.slug] };
   const updated = categoryRefresh.get(category.slug);
   if (!updated) return category;
   const { name, description, isCharades } = updated;
@@ -51,7 +54,8 @@ export const EIGHT_POSTERS = {
   ...Object.fromEntries(Object.entries(EIGHT_EXPANSION)
     .filter(([, bundle]) => bundle.poster)
     .map(([slug, bundle]) => [slug, bundle.poster])),
-  ...EIGHT_CATEGORY_GUIDE.posters
+  ...EIGHT_CATEGORY_GUIDE.posters,
+  ...POSTER_OVERRIDES
 };
 
 export async function getDoc(env, key) {
