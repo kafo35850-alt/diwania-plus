@@ -170,7 +170,7 @@ button{cursor:pointer;border:none;background:none;touch-action:manipulation}
   function render() {
     const app = $('app'); const guesses = S.guesses.filter((g) => !g.h).length;
     let out = '<div class="top"><a href="/" aria-label="رجوع">‹</a><div class="title"><b>حامي بارد</b> الديوانية</div><button class="menu-btn" data-a="menu">☰</button></div>';
-    out += '<div class="meta"><span>الكلمة رقم ' + AR(S.id + 1) + (S.id === dailyId() ? ' · كلمة اليوم 📅' : '') + '</span><span>⏱️ <b id="tmr">' + clock(elapsed()) + '</b> · المحاولات: ' + AR(guesses) + (S.hints ? ' · تلميحات: ' + AR(S.hints) : '') + '</span></div>';
+    out += '<div class="meta"><span>الكلمة رقم ' + AR(S.id + 1) + (S.id === dailyId() ? ' · كلمة اليوم 📅' : '') + '</span><span>⏱️ <b id="tmr" dir="ltr">' + clock(elapsed()) + '</b> · المحاولات: ' + AR(guesses) + (S.hints ? ' · تلميحات: ' + AR(S.hints) : '') + '</span></div>';
     if (S.done) {
       const sec = WORDS[S.order[0]];
       out += '<div class="card win">' + (S.gaveUp ? '<div class="big">🏳️ الكلمة كانت</div>' : '<div class="big">🎉 كفو! عرفتها</div>') + '<div class="w">' + esc(sec) + '</div>' +
