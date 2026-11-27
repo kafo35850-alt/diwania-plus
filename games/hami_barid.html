@@ -62,7 +62,7 @@ button{cursor:pointer;border:none;background:none;touch-action:manipulation}
   // نفس توحيد الكلمات اللي استخدمناه وقت بناء القاموس
   function norm(w) {
     w = String(w || '').trim().replace(/[ً-ْـ]/g, '').replace(/[أإآ]/g, 'ا').replace(/ى/g, 'ي').replace(/ة/g, 'ه').replace(/ؤ/g, 'و').replace(/ئ/g, 'ي').replace(/\s+/g, ' ');
-    if (w.indexOf('ال') === 0 && w.length > 4) w = w.slice(2);
+    if (w.indexOf('ال') === 0 && w.length >= 4) w = w.slice(2);
     return w;
   }
   let WORDS = [], NMAP = new Map(), EMB = null, DIM = 0, TOP = null, NS = 0, K = 0, N = 0;
@@ -72,7 +72,7 @@ button{cursor:pointer;border:none;background:none;touch-action:manipulation}
   async function load() {
     const pb = $('pb');
     const get = async (u, type) => { const r = await fetch(u, { cache: 'force-cache' }); if (!r.ok) throw new Error(u); return type === 'text' ? r.text() : r.arrayBuffer(); };
-    const [voc, emb, top] = await Promise.all([get('/ctx/vocab.txt', 'text').then((x) => { pb.style.width = '30%'; return x; }), get('/ctx/emb.bin').then((x) => { pb.style.width = '80%'; return x; }), get('/ctx/top.bin')]);
+    const [voc, emb, top] = await Promise.all([get('/ctx/vocab.txt?v=2', 'text').then((x) => { pb.style.width = '30%'; return x; }), get('/ctx/emb.bin?v=2').then((x) => { pb.style.width = '80%'; return x; }), get('/ctx/top.bin?v=2')]);
     pb.style.width = '100%';
     WORDS = voc.split('\n'); N = WORDS.length;
     WORDS.forEach((w, i) => { const n = norm(w); if (!NMAP.has(n)) NMAP.set(n, i); });
@@ -98,6 +98,7 @@ button{cursor:pointer;border:none;background:none;touch-action:manipulation}
     const n = norm(raw); if (!n) return -1;
     const tries = [n];
     const m = n.match(/^(وال|بال|فال|كال|لل|و|ف|ب|ل|ك)(.{2,})$/); if (m) { tries.push(m[2]); if (m[2].indexOf('ال') === 0) tries.push(m[2].slice(2)); }
+    if (n.length >= 3 && n.indexOf('ال') === 0) tries.push(n.slice(2));
     if (n.endsWith('ه')) tries.push(n.slice(0, -1)); else tries.push(n + 'ه');
     if (n.endsWith('ات')) tries.push(n.slice(0, -2) + 'ه', n.slice(0, -2));
     if (/ين$|ون$/.test(n)) tries.push(n.slice(0, -2));
@@ -107,29 +108,51 @@ button{cursor:pointer;border:none;background:none;touch-action:manipulation}
   const color = (r) => (r <= 300 ? 'var(--hot)' : r <= 1500 ? 'var(--warm)' : 'var(--cold)');
   const width = (r) => Math.max(3, Math.round(100 * (1 - Math.log(r) / Math.log(N + 1))));
   const label = (r) => (r === 1 ? '🎯' : r <= 50 ? '🔥 حامي مرّة' : r <= 300 ? '♨️ حامي' : r <= 1500 ? '🌤️ دافي' : r <= 5000 ? '❄️ بارد' : '🧊 بارد مرّة');
-  const rowHtml = (g, last) => '<div class="row' + (last ? ' last' : '') + (g.h ? ' hint' : '') + '"><div class="bar" style="width:' + width(g.r) + '%;background:' + color(g.r) + '"></div><span class="w">' + esc(WORDS[g.i]) + '</span><span class="n">' + AR(g.r) + '</span></div>';
+  const rowHtml = (g, last) => '<div class="row' + (last ? ' last' : '') + (g.h ? ' hint' : '') + '"><div class="bar" style="width:' + width(g.r) + '%;background:' + color(g.r) + '"></div><span class="w">' + esc(g.w || WORDS[g.i]) + '</span><span class="n">' + AR(g.r) + '</span></div>';
 
   const today = () => Math.floor((Date.now() + 3 * 3600e3) / 86400e3); // بتوقيت السعودية
   const dailyId = () => ((today() * 7919) % NS + NS) % NS;
   function open(id) {
     id = ((id % NS) + NS) % NS;
-    const saved = store.get('hb_' + id) || { guesses: [], hints: 0, done: false, gaveUp: false };
+    const saved = store.get('hb2_' + id) || { guesses: [], hints: 0, done: false, gaveUp: false };
     const rk = rankFor(id);
     S = Object.assign({ id, ranks: rk.ranks, order: rk.order, last: null }, saved);
-    store.set('hb_cur', id);
+    store.set('hb2_cur', id);
     try { history.replaceState(null, '', location.pathname + location.search.replace(/([?&])w=\d+&?/, '$1').replace(/[?&]$/, '') + location.hash); } catch (e) { }
     render(); setTimeout(() => { const i = $('g'); if (i && !S.done) i.focus(); }, 50);
   }
-  function save() { store.set('hb_' + S.id, { guesses: S.guesses, hints: S.hints, done: S.done, gaveUp: S.gaveUp }); }
-  function guess(raw) {
-    if (S.done) return;
-    const i = lookup(raw);
-    if (i < 0) { setMsg('ما أعرف «' + raw + '» 🤔 جرّب كلمة ثانية'); return; }
-    const prev = S.guesses.find((g) => g.i === i);
-    if (prev) { S.last = prev; setMsg('جرّبت «' + WORDS[i] + '» قبل!'); render(); return; }
-    const g = { i, r: S.ranks[i], h: 0 }; S.guesses.push(g); S.last = g;
-    if (g.r === 1) { S.done = true; }
+  function save() { store.set('hb2_' + S.id, { guesses: S.guesses, hints: S.hints, done: S.done, gaveUp: S.gaveUp, startAt: S.startAt || 0, doneAt: S.doneAt || 0 }); }
+  const clock = (ms) => { const s = Math.max(0, Math.floor(ms / 1000)), h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60), x = s % 60; return AR((h ? h + ':' + String(m).padStart(2, '0') : m) + ':' + String(x).padStart(2, '0')); };
+  const elapsed = () => (S.startAt ? (S.doneAt || Date.now()) - S.startAt : 0);
+  setInterval(() => { const el = document.getElementById('tmr'); if (el && S && !S.done) el.textContent = clock(elapsed()); }, 1000);
+  let busy = false;
+  function add(g) {
+    S.guesses.push(g); S.last = g;
+    if (g.r === 1) { S.done = true; S.doneAt = Date.now(); }
     save(); setMsg(g.r === 1 ? '' : label(g.r)); render();
+  }
+  async function guess(raw) {
+    if (S.done || busy) return;
+    if (!S.startAt) { S.startAt = Date.now(); save(); }
+    const i = lookup(raw);
+    if (i >= 0) {
+      const prev = S.guesses.find((g) => g.i === i && !g.w);
+      if (prev) { S.last = prev; setMsg('جرّبت «' + WORDS[i] + '» قبل!'); render(); return; }
+      add({ i, r: S.ranks[i], h: 0 }); return;
+    }
+    // كلمة مو في القاموس: الذكاء الاصطناعي يحسب قربها
+    const k = norm(raw);
+    const prev = S.guesses.find((g) => g.w && norm(g.w) === k);
+    if (prev) { S.last = prev; setMsg('جرّبت «' + prev.w + '» قبل!'); render(); return; }
+    if (!/^[\u0621-\u064A\u064B-\u0652\u0640 ]{2,30}$/.test(raw)) { setMsg('اكتب كلمة عربية 🙏'); render(); return; }
+    busy = true; setMsg('🤔 أفكّر في «' + raw + '»…'); render();
+    try {
+      const r = await fetch('/ctx/guess', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ id: S.id, w: raw }) });
+      const d = await r.json();
+      busy = false;
+      if (!d.ok) { setMsg(d.error === 'slow_down' ? 'شوي شوي 😅 انتظر لحظة' : 'ما قدرت أفهم «' + raw + '» 🤔 جرّب كلمة ثانية'); render(); return; }
+      add({ i: -1, w: raw, r: d.rank, h: 0 });
+    } catch (e) { busy = false; setMsg('الاتصال ضعيف… جرّب مرة ثانية'); render(); }
   }
   function hint() {
     if (S.done) return;
@@ -147,11 +170,11 @@ button{cursor:pointer;border:none;background:none;touch-action:manipulation}
   function render() {
     const app = $('app'); const guesses = S.guesses.filter((g) => !g.h).length;
     let out = '<div class="top"><a href="/" aria-label="رجوع">‹</a><div class="title"><b>حامي بارد</b> الديوانية</div><button class="menu-btn" data-a="menu">☰</button></div>';
-    out += '<div class="meta"><span>الكلمة رقم ' + AR(S.id + 1) + (S.id === dailyId() ? ' · كلمة اليوم 📅' : '') + '</span><span>المحاولات: ' + AR(guesses) + (S.hints ? ' · تلميحات: ' + AR(S.hints) : '') + '</span></div>';
+    out += '<div class="meta"><span>الكلمة رقم ' + AR(S.id + 1) + (S.id === dailyId() ? ' · كلمة اليوم 📅' : '') + '</span><span>⏱️ <b id="tmr">' + clock(elapsed()) + '</b> · المحاولات: ' + AR(guesses) + (S.hints ? ' · تلميحات: ' + AR(S.hints) : '') + '</span></div>';
     if (S.done) {
       const sec = WORDS[S.order[0]];
       out += '<div class="card win">' + (S.gaveUp ? '<div class="big">🏳️ الكلمة كانت</div>' : '<div class="big">🎉 كفو! عرفتها</div>') + '<div class="w">' + esc(sec) + '</div>' +
-        (S.gaveUp ? '' : '<div class="chips"><span class="chip">' + AR(guesses) + ' محاولة</span><span class="chip">' + AR(S.hints) + ' تلميح</span></div>') +
+        (S.gaveUp ? '' : '<div class="chips"><span class="chip">⏱️ ' + clock(elapsed()) + '</span><span class="chip">' + AR(guesses) + ' محاولة</span><span class="chip">' + AR(S.hints) + ' تلميح</span></div>') +
         '<button class="btn gold" data-a="share">🔗 تحدّى ربعك بنفس الكلمة</button><button class="btn" data-a="closest">شوف أقرب ١٠٠ كلمة</button><button class="btn" data-a="random">🎲 كلمة جديدة</button></div>';
     } else {
       out += '<form id="f" autocomplete="off"><input id="g" class="inp" placeholder="اكتب كلمة…" enterkeyhint="go" autocapitalize="off" spellcheck="false"></form>';
@@ -175,7 +198,7 @@ button{cursor:pointer;border:none;background:none;touch-action:manipulation}
   function help() {
     sheet('<h3>كيف تلعب حامي بارد الديوانية؟</h3><p>فيه <b>كلمة سرية</b> واحنا نخمنها. اكتب أي كلمة، واللعبة تقول لك ترتيبها: كل ما كان الرقم أصغر كانت كلمتك أقرب للسرية <b>بالمعنى والسياق</b> (مو بالحروف).</p>' +
       '<div class="legend"><span style="background:var(--hot);color:#052e1c">١ — ٣٠٠ حامي</span><span style="background:var(--warm);color:#3b2300">٣٠١ — ١٥٠٠ دافي</span><span style="background:var(--cold)">بعدها بارد</span></div>' +
-      '<p>مثال: لو الكلمة «بحر»، فكلمة «سمك» أو «موج» بتجيك حامية، و«قلم» بتجيك باردة.</p><p>💡 التلميح يعطيك كلمة أقرب من أفضل كلمة عندك. و🔗 «تحدّى ربعك» يرسل لهم نفس الكلمة وتشوفون مين يعرفها بمحاولات أقل.</p><p>القاموس فيه أكثر من ٣٠ ألف كلمة بالفصحى والخليجي.</p><button class="btn gold" data-a="close">يلا نلعب</button>');
+      '<p>مثال: لو الكلمة «بحر»، فكلمة «سمك» أو «موج» بتجيك حامية، و«قلم» بتجيك باردة.</p><p>💡 التلميح يعطيك كلمة أقرب من أفضل كلمة عندك. و🔗 «تحدّى ربعك» يرسل لهم نفس الكلمة وتشوفون مين يعرفها بمحاولات أقل.</p><p>القاموس فيه أكثر من ٣٠ ألف كلمة بالفصحى والخليجي، وأي كلمة ما يعرفها يفهمها بالذكاء الاصطناعي. والمؤقت يبدأ من أول كلمة تكتبها ⏱️</p><button class="btn gold" data-a="close">يلا نلعب</button>');
   }
   function closest() {
     const list = []; for (let r = 1; r <= 100; r++) list.push({ i: S.order[r - 1], r, h: 0 });
@@ -184,7 +207,7 @@ button{cursor:pointer;border:none;background:none;touch-action:manipulation}
   async function share() {
     const url = location.origin + '/';
     const g = S.guesses.filter((x) => !x.h).length;
-    const text = S.done && !S.gaveUp ? 'عرفت كلمة «حامي بارد الديوانية» رقم ' + AR(S.id + 1) + ' في ' + AR(g) + ' محاولة 🔥 تقدر تغلبني؟' : 'تحدّاك بكلمة «حامي بارد الديوانية» رقم ' + AR(S.id + 1) + ' 🔥';
+    const text = S.done && !S.gaveUp ? 'عرفت كلمة «حامي بارد الديوانية» رقم ' + AR(S.id + 1) + ' في ' + AR(g) + ' محاولة و⏱️ ' + clock(elapsed()) + ' 🔥 تقدر تغلبني؟' : 'تحدّاك بكلمة «حامي بارد الديوانية» رقم ' + AR(S.id + 1) + ' 🔥';
     try { if (navigator.share) { await navigator.share({ text: text + '\n' + 'افتح لعبة حامي بارد الديوانية في ديوانية بلس واختار الكلمة رقم ' + AR(S.id + 1), url }); return; } } catch (e) { return; }
     try { await navigator.clipboard.writeText(text + '\nالكلمة رقم ' + (S.id + 1) + ' في لعبة حامي بارد الديوانية — ديوانية بلس'); toast('انسخ النص! أرسله لربعك'); } catch (e) { toast('رقم الكلمة: ' + AR(S.id + 1)); }
   }
@@ -208,9 +231,9 @@ button{cursor:pointer;border:none;background:none;touch-action:manipulation}
   });
   load().then(() => {
     const q = new URLSearchParams(location.search).get('w');
-    const cur = store.get('hb_cur');
+    const cur = store.get('hb2_cur');
     if (q && Number(q) >= 1) open(Number(q) - 1);
-    else if (cur !== null && cur !== undefined && !(store.get('hb_' + cur) || {}).done) open(cur);
+    else if (cur !== null && cur !== undefined && !(store.get('hb2_' + cur) || {}).done) open(cur);
     else open(dailyId());
     if (!store.get('hb_seen')) { store.set('hb_seen', 1); help(); }
   }).catch(() => { $('app').innerHTML = '<div class="load">ما قدرنا نحمّل القاموس 😕<br><br><button class="btn gold" onclick="location.reload()">حاول مرة ثانية</button></div>'; });

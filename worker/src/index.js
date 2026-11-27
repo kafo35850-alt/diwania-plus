@@ -225,7 +225,7 @@ export default {
         const roomRes = await handleRooms(env, request, url);
         if (roomRes) return roomRes;
       }
-      if (url.pathname.startsWith('/ctx/')) return serveCtx(url);
+      if (url.pathname.startsWith('/ctx/')) return serveCtx(url, request, env);
       if (url.pathname.startsWith('/api/')) return await handleApi(env, request, url);
 
       if (url.pathname === '/payments/return' && request.method === 'GET') return await handleReturn(env, request);

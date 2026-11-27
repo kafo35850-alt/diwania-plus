@@ -3838,12 +3838,13 @@ function load_fooq_rasak() {
       v.turn = g.turn; v.step = g.step; v.q = g.q; v.history = g.history.slice(-8); v.winner = g.winner; v.lastGuess = g.lastGuess;
       v.left = {}; g.players.forEach((p) => { v.left[p.id] = (g.down[p.id] || []).filter((x) => !x).length; });
       v.picked = {}; g.players.forEach((p) => { v.picked[p.id] = g.secret[p.id] !== undefined; });
+      v.downs = {}; g.players.forEach((p) => { v.downs[p.id] = (g.down[p.id] || []).slice(); });
       if (open) { v.secrets = {}; g.players.forEach((p) => { v.secrets[p.id] = g.secret[p.id]; }); }
     }
     const p = pid && byId(g, pid);
     if (p) {
       v.me = { id: p.id, name: p.name, host: g.hostId === p.id, opp: other(g, p.id) };
-      if (inGame) { v.me.secret = g.secret[p.id] === undefined ? null : g.secret[p.id]; v.me.down = (g.down[p.id] || []).slice(); }
+      if (inGame) { v.me.secret = g.secret[p.id] === undefined ? null : g.secret[p.id]; v.me.down = (g.down[p.id] || []).slice(); const o = other(g, p.id); v.oppDown = o ? (g.down[o] || []).slice() : []; }
     }
     return v;
   }
