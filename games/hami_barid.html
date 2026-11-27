@@ -55,6 +55,7 @@ button{cursor:pointer;border:none;background:none;touch-action:manipulation}
 <script>
 (function () {
   'use strict';
+  const DV = '3'; // نسخة القاموس: تتغير مع كل تحديث للبيانات
   const AR = (n) => String(n).replace(/\d/g, (d) => '٠١٢٣٤٥٦٧٨٩'[d]);
   const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const $ = (id) => document.getElementById(id);
@@ -72,7 +73,7 @@ button{cursor:pointer;border:none;background:none;touch-action:manipulation}
   async function load() {
     const pb = $('pb');
     const get = async (u, type) => { const r = await fetch(u, { cache: 'force-cache' }); if (!r.ok) throw new Error(u); return type === 'text' ? r.text() : r.arrayBuffer(); };
-    const [voc, emb, top] = await Promise.all([get('/ctx/vocab.txt?v=2', 'text').then((x) => { pb.style.width = '30%'; return x; }), get('/ctx/emb.bin?v=2').then((x) => { pb.style.width = '80%'; return x; }), get('/ctx/top.bin?v=2')]);
+    const [voc, emb, top] = await Promise.all([get('/ctx/vocab.txt?v=' + DV, 'text').then((x) => { pb.style.width = '30%'; return x; }), get('/ctx/emb.bin?v=' + DV).then((x) => { pb.style.width = '80%'; return x; }), get('/ctx/top.bin?v=' + DV)]);
     pb.style.width = '100%';
     WORDS = voc.split('\n'); N = WORDS.length;
     WORDS.forEach((w, i) => { const n = norm(w); if (!NMAP.has(n)) NMAP.set(n, i); });
@@ -114,14 +115,14 @@ button{cursor:pointer;border:none;background:none;touch-action:manipulation}
   const dailyId = () => ((today() * 7919) % NS + NS) % NS;
   function open(id) {
     id = ((id % NS) + NS) % NS;
-    const saved = store.get('hb2_' + id) || { guesses: [], hints: 0, done: false, gaveUp: false };
+    const saved = store.get('hb' + DV + '_' + id) || { guesses: [], hints: 0, done: false, gaveUp: false };
     const rk = rankFor(id);
     S = Object.assign({ id, ranks: rk.ranks, order: rk.order, last: null }, saved);
-    store.set('hb2_cur', id);
+    store.set('hb' + DV + '_cur', id);
     try { history.replaceState(null, '', location.pathname + location.search.replace(/([?&])w=\d+&?/, '$1').replace(/[?&]$/, '') + location.hash); } catch (e) { }
     render(); setTimeout(() => { const i = $('g'); if (i && !S.done) i.focus(); }, 50);
   }
-  function save() { store.set('hb2_' + S.id, { guesses: S.guesses, hints: S.hints, done: S.done, gaveUp: S.gaveUp, startAt: S.startAt || 0, doneAt: S.doneAt || 0 }); }
+  function save() { store.set('hb' + DV + '_' + S.id, { guesses: S.guesses, hints: S.hints, done: S.done, gaveUp: S.gaveUp, startAt: S.startAt || 0, doneAt: S.doneAt || 0 }); }
   const clock = (ms) => { const s = Math.max(0, Math.floor(ms / 1000)), h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60), x = s % 60; return AR((h ? h + ':' + String(m).padStart(2, '0') : m) + ':' + String(x).padStart(2, '0')); };
   const elapsed = () => (S.startAt ? (S.doneAt || Date.now()) - S.startAt : 0);
   setInterval(() => { const el = document.getElementById('tmr'); if (el && S && !S.done) el.textContent = clock(elapsed()); }, 1000);
@@ -231,9 +232,9 @@ button{cursor:pointer;border:none;background:none;touch-action:manipulation}
   });
   load().then(() => {
     const q = new URLSearchParams(location.search).get('w');
-    const cur = store.get('hb2_cur');
+    const cur = store.get('hb' + DV + '_cur');
     if (q && Number(q) >= 1) open(Number(q) - 1);
-    else if (cur !== null && cur !== undefined && !(store.get('hb2_' + cur) || {}).done) open(cur);
+    else if (cur !== null && cur !== undefined && !(store.get('hb' + DV + '_' + cur) || {}).done) open(cur);
     else open(dailyId());
     if (!store.get('hb_seen')) { store.set('hb_seen', 1); help(); }
   }).catch(() => { $('app').innerHTML = '<div class="load">ما قدرنا نحمّل القاموس 😕<br><br><button class="btn gold" onclick="location.reload()">حاول مرة ثانية</button></div>'; });
