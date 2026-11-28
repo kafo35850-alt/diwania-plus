@@ -55,7 +55,7 @@ button{cursor:pointer;border:none;background:none;touch-action:manipulation}
 <script>
 (function () {
   'use strict';
-  const DV = '3'; // نسخة القاموس: تتغير مع كل تحديث للبيانات
+  const DV = '4'; // نسخة القاموس: تتغير مع كل تحديث للبيانات
   const AR = (n) => String(n).replace(/\d/g, (d) => '٠١٢٣٤٥٦٧٨٩'[d]);
   const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const $ = (id) => document.getElementById(id);
